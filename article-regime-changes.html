@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regime Changes: When Your Strategy Stops Working | BroBillionaire</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="description" content="The strategy that made you rich will make you poor. Markets change. Regimes shift. What worked for a decade suddenly stops. How to detect, adapt, and survive when the game changes.">
+    <style>
+        /* Regime Shift Visual */
+        .regime-shift-visual {
+            background: linear-gradient(135deg, rgba(10, 10, 20, 0.95), rgba(15, 15, 30, 0.9));
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .shift-timeline {
+            position: relative;
+            height: 150px;
+            margin: 2rem 0;
+        }
+        .shift-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                #22c55e 0%, #22c55e 40%,
+                #C9A227 40%, #C9A227 50%,
+                #ef4444 50%, #ef4444 100%
+            );
+            border-radius: 2px;
+        }
+        .shift-marker {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 40px;
+            background: #fff;
+        }
+        .shift-marker.break {
+            left: 45%;
+            background: #C9A227;
+            box-shadow: 0 0 20px rgba(201, 162, 39, 0.5);
+        }
+        .shift-label {
+            position: absolute;
+            font-size: 0.85rem;
+            text-align: center;
+            width: 150px;
+        }
+        .shift-label.before {
+            left: 15%;
+            top: 10%;
+            color: #22c55e;
+        }
+        .shift-label.during {
+            left: 40%;
+            bottom: 10%;
+            color: #C9A227;
+        }
+        .shift-label.after {
+            right: 15%;
+            top: 10%;
+            color: #ef4444;
+        }
+        
+        /* Regime Cards */
+        .regime-era-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .regime-era {
+            background: linear-gradient(135deg, rgba(10, 10, 20, 0.95), rgba(15, 15, 30, 0.9));
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .era-period {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: linear-gradient(135deg, #C9A227, #a68520);
+            color: #000;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .era-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: #fff;
+            margin: 0.5rem 0;
+        }
+        .era-winner, .era-loser {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 10px;
+        }
+        .era-winner {
+            background: rgba(34, 197, 94, 0.1);
+            border-left: 3px solid #22c55e;
+        }
+        .era-loser {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 3px solid #ef4444;
+        }
+        .era-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            margin-bottom: 0.25rem;
+        }
+        .era-winner .era-label { color: #22c55e; }
+        .era-loser .era-label { color: #ef4444; }
+        .era-content {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+        
+        /* Warning Signs Grid */
+        .warning-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .warning-card {
+            background: linear-gradient(135deg, rgba(234, 179, 8, 0.1), rgba(234, 179, 8, 0.02));
+            border: 1px solid rgba(234, 179, 8, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            position: relative;
+        }
+        .warning-card::before {
+            content: '⚠️';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 1.5rem;
+        }
+        .warning-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #eab308;
+            margin: 0.5rem 0;
+        }
+        .warning-desc {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        /* Strategy Death Chart */
+        .death-chart {
+            background: linear-gradient(135deg, rgba(10, 10, 20, 0.95), rgba(15, 15, 30, 0.9));
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .death-stages {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .death-stage {
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+            padding: 1.5rem 1rem;
+            position: relative;
+        }
+        .death-stage:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #C9A227;
+            font-size: 1.5rem;
+        }
+        @media (max-width: 768px) {
+            .death-stage:not(:last-child)::after {
+                content: '↓';
+                right: 50%;
+                top: auto;
+                bottom: -20px;
+                transform: translateX(50%);
+            }
+        }
+        .stage-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .stage-name {
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+        .stage-desc {
+            color: #888;
+            font-size: 0.8rem;
+        }
+        
+        /* Adaptation Framework */
+        .adapt-box {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.02));
+            border: 2px solid rgba(139, 92, 246, 0.3);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            position: relative;
+        }
+        .adapt-box::before {
+            content: '🔄';
+            position: absolute;
+            top: -20px;
+            right: 30px;
+            font-size: 5rem;
+            opacity: 0.15;
+        }
+        .adapt-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #8b5cf6;
+            margin-bottom: 1rem;
+        }
+        .adapt-text {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+        }
+        
+        /* Before/After Comparison */
+        .era-comparison {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1.5rem;
+            align-items: start;
+            margin: 2rem 0;
+        }
+        @media (max-width: 768px) {
+            .era-comparison { 
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+        .era-side {
+            background: linear-gradient(135deg, rgba(10, 10, 20, 0.95), rgba(15, 15, 30, 0.9));
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+        .era-side.old { border: 1px solid rgba(239, 68, 68, 0.3); }
+        .era-side.new { border: 1px solid rgba(34, 197, 94, 0.3); }
+        .era-side h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            margin-bottom: 1rem;
+        }
+        .old h4 { color: #ef4444; }
+        .new h4 { color: #22c55e; }
+        .era-side ul {
+            list-style: none;
+            padding: 0;
+        }
+        .era-side li {
+            padding: 0.5rem 0;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        .old li::before { content: '✕'; color: #ef4444; }
+        .new li::before { content: '✓'; color: #22c55e; }
+        .era-arrow {
+            font-size: 2rem;
+            color: #C9A227;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 3rem;
+        }
+        
+        /* Case Studies */
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .case-card {
+            background: linear-gradient(135deg, rgba(10, 10, 20, 0.95), rgba(15, 15, 30, 0.9));
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .case-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), transparent);
+            border-bottom: 1px solid rgba(239, 68, 68, 0.2);
+        }
+        .case-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 0.25rem;
+        }
+        .case-period {
+            font-size: 0.85rem;
+            color: #C9A227;
+        }
+        .case-body {
+            padding: 1.5rem;
+        }
+        .case-what {
+            margin-bottom: 1rem;
+        }
+        .case-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            color: #888;
+            margin-bottom: 0.25rem;
+        }
+        .case-content {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .case-lesson {
+            background: rgba(201, 162, 39, 0.1);
+            border-left: 3px solid #C9A227;
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+        .case-lesson .case-label { color: #C9A227; }
+        
+        /* Survival Tactics */
+        .survival-tactics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .tactic-card {
+            background: linear-gradient(135deg, rgba(10, 10, 20, 0.95), rgba(15, 15, 30, 0.9));
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            position: relative;
+        }
+        .tactic-num {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: linear-gradient(135deg, #C9A227, #a68520);
+            color: #000;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+        .tactic-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #fff;
+            margin: 0.5rem 0;
+        }
+        .tactic-desc {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        /* Quote Special */
+        .darwin-quote {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.1), rgba(201, 162, 39, 0.02));
+            border: 2px solid rgba(201, 162, 39, 0.3);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+        .darwin-quote::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 40px;
+            font-size: 6rem;
+            color: rgba(201, 162, 39, 0.2);
+            font-family: 'Playfair Display', serif;
+        }
+        .darwin-text {
+            font-size: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .darwin-author {
+            color: #C9A227;
+            font-weight: 600;
+        }
+        .darwin-note {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* Checklist */
+        .regime-checklist {
+            background: linear-gradient(135deg, rgba(10, 10, 20, 0.95), rgba(15, 15, 30, 0.9));
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .checklist-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: #C9A227;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .checklist-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+        }
+        .check-box {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(201, 162, 39, 0.5);
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+        .check-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+    </style>
+
+    <!-- Additional SEO Enhancements -->
+    <meta name="revisit-after" content="1 days">
+    <meta name="geo.region" content="IN">
+    <meta name="distribution" content="Global">
+    <link rel="manifest" href="/manifest.json">
+</head>
+<body class="article-page">
+
+    <!-- Article Navigation -->
+    <nav class="article-nav">
+        <div class="article-nav-container">
+            <a href="articles.html" class="back-link" style="margin-right:15px;"><i class="fas fa-th-large"></i><span>All Articles</span></a><a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Home</span>
+            </a>
+            <div class="article-nav-center">
+                <img src="logo.jpg" alt="BroBillionaire" class="nav-logo-small">
+                <span class="nav-divider">|</span>
+                <span class="article-category-nav">Deep Theory</span>
+            </div>
+            <div class="article-share">
+                <button class="share-btn" onclick="shareArticle()">
+                    <i class="fas fa-share-alt"></i>
+                </button>
+            </div>
+        </div>
+        <div class="reading-progress-bar"></div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="article-hero">
+        <div class="article-hero-bg">
+            <div class="hero-gradient"></div>
+            <div class="hero-pattern"></div>
+        </div>
+        <div class="article-hero-content">
+            <div class="article-meta-top">
+                <span class="article-category-badge">
+                    <i class="fas fa-sync-alt"></i>
+                    Deep Theory
+                </span>
+                <span class="article-read-time">
+                    <i class="fas fa-clock"></i>
+                    21 min read
+                </span>
+            </div>
+            <h1 class="article-main-title serif">
+                Regime Changes: When Your Strategy 
+                <span class="gold-text italic">Stops Working</span>
+            </h1>
+            <p class="article-subtitle">
+                The strategy that made you rich will make you poor. Markets are not stationary — they evolve, 
+                shift, and transform. What worked for a decade suddenly fails. The rules change. 
+                This is how to detect it, adapt to it, and survive it.
+            </p>
+            <div class="article-hero-stats">
+                <div class="hero-stat">
+                    <span class="stat-value">10+</span>
+                    <span class="stat-label">Years Working</span>
+                </div>
+                <div class="hero-stat-arrow">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <div class="hero-stat featured">
+                    <span class="stat-value gold-text">0</span>
+                    <span class="stat-label">Warning</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="stat-value">💀</span>
+                    <span class="stat-label">Then Dead</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Article Content -->
+    <main class="article-main">
+        <article class="article-content-wrapper">
+            
+            <!-- Key Takeaways Box -->
+            <div class="key-takeaways-box">
+                <div class="takeaway-header">
+                    <i class="fas fa-sync-alt"></i>
+                    <h3>The Regime Reality</h3>
+                </div>
+                <ul class="takeaway-list">
+                    <li><strong>Markets have regimes</strong> — distinct periods with different rules and behaviors</li>
+                    <li><strong>Strategies are regime-dependent</strong> — what works in one regime fails in another</li>
+                    <li><strong>Regime changes are invisible at first</strong> — you realize too late</li>
+                    <li><strong>Past performance is regime-specific</strong> — not a promise for the future</li>
+                    <li><strong>Adaptation beats optimization</strong> — the best strategy is being able to change</li>
+                    <li><strong>Survival requires humility</strong> — assuming the regime can always change</li>
+                </ul>
+            </div>
+
+            <!-- Chapter 0: The Silent Shift -->
+            <section class="article-chapter">
+                <div class="chapter-number">00</div>
+                <h2 class="chapter-title">The Day the Music Changed</h2>
+                
+                <p class="article-text">You've been trading the same strategy for years. It works. Not every trade, but consistently. You've refined it, optimized it, trusted it with your capital.</p>
+                
+                <p class="article-text">Then something shifts.</p>
+                
+                <p class="article-text">At first, you think it's noise. A bad week. A tough month. "The strategy is still sound — just a drawdown."</p>
+                
+                <p class="article-text">But the drawdown deepens. The signals that used to work now fail. The patterns that used to print money now print losses.</p>
+                
+                <p class="article-text"><span class="gold-text">The regime has changed. And you didn't get the memo.</span></p>
+
+                <div class="regime-shift-visual">
+                    <div class="shift-timeline">
+                        <div class="shift-line"></div>
+                        <div class="shift-marker break"></div>
+                        <div class="shift-label before">
+                            <strong>Old Regime</strong><br>
+                            Your strategy thrives
+                        </div>
+                        <div class="shift-label during">
+                            <strong>Transition</strong><br>
+                            ⚠️ Invisible shift
+                        </div>
+                        <div class="shift-label after">
+                            <strong>New Regime</strong><br>
+                            Your strategy dies
+                        </div>
+                    </div>
+                </div>
+
+                <p class="article-text">This isn't bad luck. This is the fundamental nature of markets: <strong>they are non-stationary.</strong> The rules change. The game evolves. Strategies that exploit one regime become victims of the next.</p>
+            </section>
+
+            <!-- Chapter 1: What is a Regime -->
+            <section class="article-chapter">
+                <div class="chapter-number">01</div>
+                <h2 class="chapter-title">What Is a Market Regime?</h2>
+                
+                <p class="article-text">A regime is a distinct market environment with its own rules, behaviors, and winning strategies.</p>
+                
+                <p class="article-text">Different regimes favor different approaches:</p>
+
+                <div class="regime-era-grid">
+                    <div class="regime-era">
+                        <div class="era-period">2009 - 2021</div>
+                        <h4 class="era-title">The QE Bull Market</h4>
+                        <div class="era-winner">
+                            <div class="era-label">Winners</div>
+                            <div class="era-content">Buy the dip. Long tech. Growth over value. Low vol selling. "Stocks only go up."</div>
+                        </div>
+                        <div class="era-loser">
+                            <div class="era-label">Losers</div>
+                            <div class="era-content">Value investors. Bears. Gold bugs. Those waiting for "fair value."</div>
+                        </div>
+                    </div>
+                    
+                    <div class="regime-era">
+                        <div class="era-period">2000 - 2009</div>
+                        <h4 class="era-title">The Lost Decade</h4>
+                        <div class="era-winner">
+                            <div class="era-label">Winners</div>
+                            <div class="era-content">Bonds. Commodities. Emerging markets. Value stocks. Short sellers (in 2008).</div>
+                        </div>
+                        <div class="era-loser">
+                            <div class="era-label">Losers</div>
+                            <div class="era-content">US growth stocks. Buy and hold S&P. Tech investors. Anyone who thought 1990s rules still applied.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="regime-era">
+                        <div class="era-period">2022+</div>
+                        <h4 class="era-title">The Inflation Era</h4>
+                        <div class="era-winner">
+                            <div class="era-label">Winners</div>
+                            <div class="era-content">Energy. Value. Commodities. Cash. Those who adapted from QE playbook.</div>
+                        </div>
+                        <div class="era-loser">
+                            <div class="era-label">Losers</div>
+                            <div class="era-content">ARK/growth. Crypto. SPACs. "Buy the dip" traders. Those still playing 2021 rules.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="article-text">Notice: The winners of one regime often become the losers of the next. <span class="gold-text">The very success of a strategy plants the seeds of its failure.</span></p>
+            </section>
+
+            <!-- Chapter 2: Why Regimes Change -->
+            <section class="article-chapter">
+                <div class="chapter-number">02</div>
+                <h2 class="chapter-title">Why Regimes Change</h2>
+                
+                <p class="article-text">Several forces cause regime shifts:</p>
+
+                <div class="warning-grid">
+                    <div class="warning-card">
+                        <h4 class="warning-title">Monetary Policy Shifts</h4>
+                        <p class="warning-desc">From QE to QT. From ZIRP to rate hikes. Central bank policy is the single biggest regime driver. When the Fed pivots, everything changes.</p>
+                    </div>
+                    <div class="warning-card">
+                        <h4 class="warning-title">Crowded Trade Exhaustion</h4>
+                        <p class="warning-desc">When too many people discover a strategy, it stops working. The edge gets arbitraged away. The "dumb money" becomes the exit liquidity.</p>
+                    </div>
+                    <div class="warning-card">
+                        <h4 class="warning-title">Structural Market Changes</h4>
+                        <p class="warning-desc">New regulations. New market participants. Algorithmic trading. Passive flows. The plumbing of markets changes, and old patterns break.</p>
+                    </div>
+                    <div class="warning-card">
+                        <h4 class="warning-title">Macro Cycle Turns</h4>
+                        <p class="warning-desc">From expansion to recession. From low inflation to high. From globalization to deglobalization. The macro backdrop defines what works.</p>
+                    </div>
+                    <div class="warning-card">
+                        <h4 class="warning-title">Black Swan Events</h4>
+                        <p class="warning-desc">COVID. 9/11. Lehman. A single shock can permanently alter market behavior and end strategies that worked for years.</p>
+                    </div>
+                    <div class="warning-card">
+                        <h4 class="warning-title">Generational Turnover</h4>
+                        <p class="warning-desc">New traders who never experienced pain. Old lessons forgotten. Risk appetite cycles. The human element shifts over decades.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chapter 3: The Death of a Strategy -->
+            <section class="article-chapter">
+                <div class="chapter-number">03</div>
+                <h2 class="chapter-title">How Strategies Die</h2>
+                
+                <p class="article-text">Every strategy death follows a similar pattern:</p>
+
+                <div class="death-chart">
+                    <div class="death-stages">
+                        <div class="death-stage">
+                            <div class="stage-icon">🌟</div>
+                            <div class="stage-name">Discovery</div>
+                            <div class="stage-desc">Edge is found. Few use it. Returns are exceptional.</div>
+                        </div>
+                        <div class="death-stage">
+                            <div class="stage-icon">📈</div>
+                            <div class="stage-name">Exploitation</div>
+                            <div class="stage-desc">Word spreads. More capital flows in. Still works well.</div>
+                        </div>
+                        <div class="death-stage">
+                            <div class="stage-icon">🤖</div>
+                            <div class="stage-name">Crowding</div>
+                            <div class="stage-desc">Everyone knows. Strategy is commoditized. Edge shrinks.</div>
+                        </div>
+                        <div class="death-stage">
+                            <div class="stage-icon">⚠️</div>
+                            <div class="stage-name">Decay</div>
+                            <div class="stage-desc">Returns diminish. Believers double down. Warning signs ignored.</div>
+                        </div>
+                        <div class="death-stage">
+                            <div class="stage-icon">💀</div>
+                            <div class="stage-name">Death</div>
+                            <div class="stage-desc">Regime shifts. Strategy implodes. Capital destroyed.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <blockquote class="article-quote">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p>Any strategy that can be articulated can be arbitraged. The very act of sharing a profitable strategy begins its destruction.</p>
+                    <cite>— Market Wisdom</cite>
+                </blockquote>
+            </section>
+
+            <!-- Chapter 4: Case Studies -->
+            <section class="article-chapter">
+                <div class="chapter-number">04</div>
+                <h2 class="chapter-title">Case Studies: Strategies That Died</h2>
+
+                <div class="case-grid">
+                    <div class="case-card">
+                        <div class="case-header">
+                            <h4 class="case-name">XIV: Short Volatility</h4>
+                            <div class="case-period">Worked: 2012-2017 • Died: February 2018</div>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-what">
+                                <div class="case-label">The Strategy</div>
+                                <div class="case-content">Sell VIX futures. Collect the "roll yield" as contango decayed. Steady 30%+ annual returns.</div>
+                            </div>
+                            <div class="case-what">
+                                <div class="case-label">The Death</div>
+                                <div class="case-content">Volmageddon. VIX spiked. XIV lost 96% in a single day. Product terminated. Billions wiped out.</div>
+                            </div>
+                            <div class="case-lesson">
+                                <div class="case-label">The Lesson</div>
+                                <div class="case-content">Steady returns from selling tail risk = picking up pennies in front of a steamroller. Works until it kills.</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="case-card">
+                        <div class="case-header">
+                            <h4 class="case-name">ARK: Innovation at Any Price</h4>
+                            <div class="case-period">Worked: 2017-2021 • Died: 2022</div>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-what">
+                                <div class="case-label">The Strategy</div>
+                                <div class="case-content">Buy disruptive innovation. Ignore valuation. Long-term vision. Tesla, genomics, fintech.</div>
+                            </div>
+                            <div class="case-what">
+                                <div class="case-label">The Death</div>
+                                <div class="case-content">Fed raised rates. Discount rates crushed growth valuations. ARKK fell 75%+ from peak. Still hasn't recovered.</div>
+                            </div>
+                            <div class="case-lesson">
+                                <div class="case-label">The Lesson</div>
+                                <div class="case-content">Zero rates made any growth story work. When rates rose, the regime ended. Valuation matters in some regimes.</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="case-card">
+                        <div class="case-header">
+                            <h4 class="case-name">60/40: The Balanced Portfolio</h4>
+                            <div class="case-period">Worked: 1980-2021 • Struggled: 2022</div>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-what">
+                                <div class="case-label">The Strategy</div>
+                                <div class="case-content">60% stocks, 40% bonds. When stocks fall, bonds rise. Diversification through negative correlation.</div>
+                            </div>
+                            <div class="case-what">
+                                <div class="case-label">The Pain</div>
+                                <div class="case-content">2022: Stocks down 20%+. Bonds down 15%+. Both fell together. Worst year in 100+ years for 60/40.</div>
+                            </div>
+                            <div class="case-lesson">
+                                <div class="case-label">The Lesson</div>
+                                <div class="case-content">Stock-bond correlation isn't fixed. In inflation regimes, both can fall together. 40 years of data was one regime.</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="case-card">
+                        <div class="case-header">
+                            <h4 class="case-name">Quant Value: The Fama-French Factor</h4>
+                            <div class="case-period">Worked: 1963-2006 • Struggled: 2007-2020</div>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-what">
+                                <div class="case-label">The Strategy</div>
+                                <div class="case-content">Buy cheap stocks, short expensive ones. Academic research proved value premium existed.</div>
+                            </div>
+                            <div class="case-what">
+                                <div class="case-label">The Pain</div>
+                                <div class="case-content">Value underperformed growth for 15 years. Legendary value investors closed funds. Many declared value "dead."</div>
+                            </div>
+                            <div class="case-lesson">
+                                <div class="case-label">The Lesson</div>
+                                <div class="case-content">Even "proven" academic factors can go dormant for longer than you can stay solvent. Regime matters.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chapter 5: Warning Signs -->
+            <section class="article-chapter">
+                <div class="chapter-number">05</div>
+                <h2 class="chapter-title">Warning Signs of Regime Change</h2>
+                
+                <p class="article-text">How do you know when the regime is shifting? Watch for these signals:</p>
+
+                <div class="regime-checklist">
+                    <h4 class="checklist-title"><i class="fas fa-exclamation-triangle"></i> Regime Change Warning Signals</h4>
+                    <div class="checklist-items">
+                        <div class="check-item">
+                            <div class="check-box"></div>
+                            <div class="check-text">Your strategy's Sharpe ratio is declining over rolling periods</div>
+                        </div>
+                        <div class="check-item">
+                            <div class="check-box"></div>
+                            <div class="check-text">Drawdowns are deeper and/or longer than historical norms</div>
+                        </div>
+                        <div class="check-item">
+                            <div class="check-box"></div>
+                            <div class="check-text">Patterns that used to work are failing more frequently</div>
+                        </div>
+                        <div class="check-item">
+                            <div class="check-box"></div>
+                            <div class="check-text">Everyone is now using your strategy (YouTube tutorials, etc.)</div>
+                        </div>
+                        <div class="check-item">
+                            <div class="check-box"></div>
+                            <div class="check-text">Central bank policy has materially changed</div>
+                        </div>
+                        <div class="check-item">
+                            <div class="check-box"></div>
+                            <div class="check-text">Correlations are behaving differently than expected</div>
+                        </div>
+                        <div class="check-item">
+                            <div class="check-box"></div>
+                            <div class="check-text">Market structure has changed (new participants, regulations)</div>
+                        </div>
+                        <div class="check-item">
+                            <div class="check-box"></div>
+                            <div class="check-text">Your "edge" can now be explained in simple terms to anyone</div>
+                        </div>
+                        <div class="check-item">
+                            <div class="check-box"></div>
+                            <div class="check-text">Macro environment has fundamentally shifted (inflation, rates, etc.)</div>
+                        </div>
+                        <div class="check-item">
+                            <div class="check-box"></div>
+                            <div class="check-text">The narrative that drove your strategy is being questioned</div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="article-text">The challenge: <span class="gold-text">By the time you're certain the regime has changed, it's too late.</span> The damage is done. The best traders act on early signals, not confirmation.</p>
+            </section>
+
+            <!-- Chapter 6: Adaptation Framework -->
+            <section class="article-chapter">
+                <div class="chapter-number">06</div>
+                <h2 class="chapter-title">The Adaptation Framework</h2>
+
+                <div class="darwin-quote">
+                    <p class="darwin-text">It is not the strongest of the species that survives, nor the most intelligent. It is the one most adaptable to change.</p>
+                    <div class="darwin-author">Charles Darwin</div>
+                    <div class="darwin-note">(Often misattributed, but the wisdom applies perfectly to trading)</div>
+                </div>
+
+                <p class="article-text">How do you survive regime changes?</p>
+
+                <div class="survival-tactics">
+                    <div class="tactic-card">
+                        <div class="tactic-num">1</div>
+                        <h4 class="tactic-title">Never Marry a Strategy</h4>
+                        <p class="tactic-desc">Your strategy is a tool, not your identity. Be willing to abandon what worked. Loyalty to a strategy is a death sentence when regimes shift.</p>
+                    </div>
+                    <div class="tactic-card">
+                        <div class="tactic-num">2</div>
+                        <h4 class="tactic-title">Diversify Across Regimes</h4>
+                        <p class="tactic-desc">Own strategies that work in different regimes. Trend-following for trends. Mean-reversion for ranges. Tail hedges for crashes. Not all at once — rotate.</p>
+                    </div>
+                    <div class="tactic-card">
+                        <div class="tactic-num">3</div>
+                        <h4 class="tactic-title">Size for Survival</h4>
+                        <p class="tactic-desc">Never bet so big that a regime change kills you. If your strategy stops working for 2 years, can you survive? If not, you're too leveraged to it.</p>
+                    </div>
+                    <div class="tactic-card">
+                        <div class="tactic-num">4</div>
+                        <h4 class="tactic-title">Monitor Your Edge Constantly</h4>
+                        <p class="tactic-desc">Track your strategy's performance in real-time. Rolling Sharpe. Win rate trends. Drawdown patterns. Don't wait for a blowup to notice decay.</p>
+                    </div>
+                    <div class="tactic-card">
+                        <div class="tactic-num">5</div>
+                        <h4 class="tactic-title">Study Multiple Regimes</h4>
+                        <p class="tactic-desc">Don't just backtest in recent history. Study 1970s inflation. 2000-2010 sideways. Japanese deflation. Know what different regimes look like.</p>
+                    </div>
+                    <div class="tactic-card">
+                        <div class="tactic-num">6</div>
+                        <h4 class="tactic-title">Build Adaptation Into Your Process</h4>
+                        <p class="tactic-desc">Have predefined rules for reducing exposure when performance degrades. Don't rely on real-time judgment when your strategy is bleeding.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chapter 7: Old vs New Thinking -->
+            <section class="article-chapter">
+                <div class="chapter-number">07</div>
+                <h2 class="chapter-title">The Old Way vs. The Adaptive Way</h2>
+
+                <div class="era-comparison">
+                    <div class="era-side old">
+                        <h4>❌ Fragile Thinking</h4>
+                        <ul>
+                            <li>"My strategy has worked for 10 years"</li>
+                            <li>"This drawdown is just noise"</li>
+                            <li>"The fundamentals haven't changed"</li>
+                            <li>"I'll average down — it always comes back"</li>
+                            <li>"The market is wrong, not me"</li>
+                            <li>"I've backtested this extensively"</li>
+                        </ul>
+                    </div>
+                    <div class="era-arrow">→</div>
+                    <div class="era-side new">
+                        <h4>✓ Adaptive Thinking</h4>
+                        <ul>
+                            <li>"Past performance was in a specific regime"</li>
+                            <li>"This drawdown might be a regime signal"</li>
+                            <li>"The environment I optimized for might be ending"</li>
+                            <li>"I'll reduce size until I understand what's changed"</li>
+                            <li>"Maybe I'm optimized for a regime that ended"</li>
+                            <li>"Backtests only capture historical regimes"</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="adapt-box">
+                    <h4 class="adapt-title">The Meta-Strategy</h4>
+                    <p class="adapt-text">The best strategy is not any single approach — it's the ability to recognize when your current approach has stopped working, and the flexibility to change. <strong>Adaptability is the only durable edge.</strong></p>
+                </div>
+            </section>
+
+            <!-- Final Chapter -->
+            <section class="article-chapter">
+                <div class="chapter-number">∞</div>
+                <h2 class="chapter-title">The Only Constant</h2>
+                
+                <p class="article-text">Markets are a living, evolving system. What works today might not work tomorrow. The strategy that made the last decade's winners will make the next decade's losers.</p>
+                
+                <p class="article-text">The traders who survive decades are not the ones with the best strategies. They're the ones who recognize when their strategy has stopped working — and have the humility and flexibility to change.</p>
+                
+                <p class="article-text"><span class="gold-text">The moment you believe you've "figured out" the market is the moment the market starts preparing your funeral.</span></p>
+                
+                <p class="article-text">Regimes change. Rules change. Winners become losers.</p>
+                
+                <p class="article-text">The only constant is change itself. Trade accordingly.</p>
+
+                <div class="darwin-quote">
+                    <p class="darwin-text">The mark of a great trader is not that they found the perfect strategy. It's that they survived long enough to change strategies many times.</p>
+                    <div class="darwin-author">The Regime Reality</div>
+                </div>
+
+                <div class="chapter-intro" style="margin-top: 3rem;">
+                    <strong>What worked yesterday won't work forever. What works tomorrow is unknowable.</strong><br>
+                    <span style="color: #C9A227;">The only skill that endures is the ability to adapt.</span>
+                </div>
+            </section>
+
+            <!-- Related Articles -->
+            <section class="related-articles">
+                <h3 class="related-title">Continue Your Journey</h3>
+                <div class="related-grid">
+                    <a href="article-correlation-enemy.html" class="related-card">
+                        <span class="related-category">Deep Theory</span>
+                        <h4>Why Correlation Is The Enemy</h4>
+                        <span class="related-read-time"><i class="fas fa-clock"></i> 20 min read</span>
+                    </a>
+                    <a href="article-fat-tails.html" class="related-card">
+                        <span class="related-category">Deep Theory</span>
+                        <h4>Fat Tails: Why Markets Break More Often Than Models Say</h4>
+                        <span class="related-read-time"><i class="fas fa-clock"></i> 23 min read</span>
+                    </a>
+                    <a href="article-reflexivity.html" class="related-card">
+                        <span class="related-category">Deep Theory</span>
+                        <h4>Reflexivity: Why Prices Create Their Own Fundamentals</h4>
+                        <span class="related-read-time"><i class="fas fa-clock"></i> 25 min read</span>
+                    </a>
+                </div>
+            </section>
+
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="article-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="logo.jpg" alt="BroBillionaire">
+                <span>BroBillionaire</span>
+            </div>
+            <p class="footer-disclaimer">
+                This article is for educational purposes only. Trading involves substantial risk of loss. 
+                Past performance is not indicative of future results.
+            </p>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#daily-reads">All Articles</a>
+                <a href="index.html#philosophy">Philosophy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function shareArticle() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Regime Changes: When Your Strategy Stops Working | BroBillionaire',
+                    text: 'The strategy that made you rich will make you poor. How to detect, adapt, and survive when the game changes.',
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('Link copied to clipboard!');
+            }
+        }
+    </script>
+    <script src="seo-injector.js" defer></script>
+</body>
+</html>
