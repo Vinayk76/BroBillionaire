@@ -10751,3 +10751,1208 @@ div.footer-disclaimer p {
         padding: 15px 20px;
     }
 }
+
+/* ============================================
+   COMPREHENSIVE RESPONSIVE STYLES
+   Ensures all pages are fully responsive
+   ============================================ */
+
+/* ===== GLOBAL RESPONSIVE UTILITIES ===== */
+@media (max-width: 1400px) {
+    .section-container,
+    .container {
+        max-width: 100%;
+        padding: 0 30px;
+    }
+}
+
+@media (max-width: 1200px) {
+    /* Reduce section padding on tablets */
+    .section-padding,
+    section {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+}
+
+@media (max-width: 992px) {
+    /* Medium devices - tablets */
+    section {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+    
+    /* Ensure all grids stack properly */
+    .grid-2-col,
+    .two-column,
+    .split-layout {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Small devices - landscape phones */
+    section {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+    
+    .section-container,
+    .container {
+        padding: 0 16px;
+    }
+    
+    /* Typography adjustments */
+    h1 { font-size: clamp(1.75rem, 5vw, 2.5rem) !important; }
+    h2 { font-size: clamp(1.5rem, 4vw, 2rem) !important; }
+    h3 { font-size: clamp(1.25rem, 3vw, 1.5rem) !important; }
+}
+
+@media (max-width: 576px) {
+    /* Extra small devices - phones */
+    section {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+    
+    .section-container,
+    .container {
+        padding: 0 12px;
+    }
+}
+
+/* ===== MARKET TICKER RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .market-ticker {
+        height: 35px;
+    }
+    
+    .ticker-item {
+        padding: 0 12px;
+    }
+    
+    .ticker-symbol {
+        font-size: 0.65rem;
+    }
+    
+    .ticker-price {
+        font-size: 0.7rem;
+    }
+    
+    .ticker-change {
+        font-size: 0.6rem;
+        padding: 1px 6px;
+    }
+    
+    .ticker-live-badge {
+        padding: 3px 8px;
+        right: 10px;
+    }
+    
+    .ticker-live-badge span:last-child {
+        font-size: 0.55rem;
+    }
+    
+    .live-dot {
+        width: 6px;
+        height: 6px;
+    }
+    
+    body {
+        padding-top: 35px;
+    }
+    
+    .navbar {
+        top: 35px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .market-ticker {
+        height: 32px;
+    }
+    
+    .ticker-live-badge {
+        display: none;
+    }
+}
+
+/* ===== NAVBAR RESPONSIVE ENHANCEMENTS ===== */
+@media (max-width: 992px) {
+    .navbar {
+        padding: 15px 0;
+    }
+    
+    .nav-container {
+        padding: 0 16px;
+    }
+    
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(13, 13, 13, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 20px;
+        border-bottom: 1px solid var(--border-color);
+        gap: 0;
+    }
+    
+    .nav-links.active,
+    .nav-links.mobile-open {
+        display: flex;
+    }
+    
+    .nav-links .nav-link {
+        padding: 15px;
+        border-bottom: 1px solid var(--border-color);
+        text-align: center;
+    }
+    
+    .mobile-menu {
+        display: flex;
+    }
+    
+    .navbar .cta-btn.gold-btn {
+        padding: 10px 16px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .logo-text {
+        font-size: 1rem;
+    }
+    
+    .logo-img {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .navbar .cta-btn.gold-btn {
+        padding: 8px 12px;
+        font-size: 0.75rem;
+    }
+}
+
+/* ===== HERO SECTION RESPONSIVE ===== */
+@media (max-width: 992px) {
+    .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+        min-height: auto;
+        padding: 80px 20px 60px;
+    }
+    
+    .hero-content {
+        order: 1;
+    }
+    
+    .hero-visual {
+        order: 0;
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .hero-features {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 60px 16px 50px;
+    }
+    
+    .hero-title {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        line-height: 1.2;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.95rem;
+    }
+    
+    .hero-badge {
+        padding: 6px 12px;
+        font-size: 0.7rem;
+    }
+    
+    .hero-feature {
+        padding: 12px 14px;
+    }
+    
+    .feature-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero {
+        padding: 50px 12px 40px;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .hero-buttons .cta-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .hero-features {
+        gap: 10px;
+    }
+}
+
+/* ===== ARTICLE PAGE RESPONSIVE ENHANCEMENTS ===== */
+@media (max-width: 1200px) {
+    .article-main {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .article-sidebar {
+        display: none;
+    }
+    
+    .article-content-wrapper {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 992px) {
+    .article-nav-container {
+        padding: 0 16px;
+    }
+    
+    .article-hero {
+        padding: 100px 20px 60px;
+        min-height: auto;
+    }
+    
+    .article-main-title {
+        font-size: clamp(1.75rem, 5vw, 2.5rem);
+    }
+    
+    .article-hero-stats {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    
+    .hero-stat {
+        padding: 12px 16px;
+        flex: 1 1 auto;
+        min-width: 120px;
+    }
+}
+
+@media (max-width: 768px) {
+    .article-nav {
+        height: 60px;
+    }
+    
+    .article-nav-container {
+        padding: 0 12px;
+    }
+    
+    .back-link span {
+        display: none;
+    }
+    
+    .article-category-nav {
+        font-size: 0.7rem;
+    }
+    
+    .nav-logo-small {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .share-btn {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .article-hero {
+        padding: 80px 16px 50px;
+    }
+    
+    .article-main-title {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+        line-height: 1.3;
+    }
+    
+    .article-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 30px;
+    }
+    
+    .article-meta-top {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .article-category-badge {
+        padding: 6px 12px;
+        font-size: 0.7rem;
+    }
+    
+    .hero-stat .stat-value {
+        font-size: 1.2rem;
+    }
+    
+    .hero-stat .stat-label {
+        font-size: 0.65rem;
+    }
+    
+    .hero-stat-arrow {
+        display: none;
+    }
+    
+    .article-main {
+        padding: 40px 16px;
+    }
+    
+    .chapter-number {
+        font-size: 3rem;
+        margin-bottom: -15px;
+    }
+    
+    .chapter-title {
+        font-size: 1.35rem;
+    }
+    
+    .article-text {
+        font-size: 1rem;
+        line-height: 1.75;
+    }
+    
+    .article-quote {
+        padding: 25px 20px;
+        margin: 25px 0;
+    }
+    
+    .article-quote p {
+        font-size: 1.1rem;
+        padding-left: 30px;
+    }
+    
+    .article-quote cite {
+        padding-left: 30px;
+        font-size: 0.85rem;
+    }
+    
+    .article-quote .quote-icon {
+        font-size: 1.5rem;
+        top: 20px;
+        left: 15px;
+    }
+    
+    .key-takeaways-box {
+        padding: 25px 20px;
+        margin-bottom: 40px;
+    }
+    
+    .takeaway-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .takeaway-list li {
+        font-size: 0.9rem;
+    }
+    
+    .info-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .info-card {
+        padding: 20px;
+    }
+    
+    .transformation-visual {
+        flex-direction: column;
+        padding: 25px 15px;
+        gap: 20px;
+    }
+    
+    .transform-box {
+        width: 100%;
+        padding: 20px;
+    }
+    
+    .transform-amount {
+        font-size: 1.5rem;
+    }
+    
+    .transform-arrow {
+        transform: rotate(90deg);
+    }
+    
+    .arrow-line {
+        width: 40px;
+    }
+    
+    .rules-premium-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .rule-premium-card {
+        padding: 25px 20px;
+    }
+    
+    .pattern-showcase {
+        grid-template-columns: 1fr;
+        padding: 20px 15px;
+    }
+    
+    .achievement-badge {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        padding: 25px 20px;
+    }
+    
+    .highlight-box {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+    }
+    
+    .legacy-box {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+    }
+    
+    .mega-stat-box {
+        padding: 35px 20px;
+    }
+    
+    .mega-stat-value {
+        font-size: 2.5rem;
+    }
+    
+    .mega-stat-label {
+        font-size: 1rem;
+    }
+    
+    .secret-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-showcase {
+        grid-template-columns: 1fr;
+    }
+    
+    .comparison-box {
+        padding: 25px 20px;
+    }
+    
+    .philanthropy-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .article-hero {
+        padding: 70px 12px 40px;
+    }
+    
+    .article-main {
+        padding: 30px 12px;
+    }
+    
+    .chapter-number {
+        font-size: 2.5rem;
+    }
+    
+    .chapter-title {
+        font-size: 1.2rem;
+    }
+    
+    .article-chapter {
+        margin-bottom: 40px;
+    }
+    
+    .article-quote {
+        padding: 20px 15px;
+    }
+    
+    .article-quote p {
+        font-size: 1rem;
+        padding-left: 25px;
+    }
+    
+    .key-takeaways-box {
+        padding: 20px 15px;
+    }
+    
+    .info-card {
+        padding: 15px;
+    }
+    
+    .info-card-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .info-card h4 {
+        font-size: 0.95rem;
+    }
+    
+    .info-card p {
+        font-size: 0.85rem;
+    }
+}
+
+/* ===== ARTICLE VISUAL COMPONENTS RESPONSIVE ===== */
+@media (max-width: 768px) {
+    /* Bank Losses Grid */
+    .bank-losses-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .bank-loss-card {
+        padding: 18px 12px;
+    }
+    
+    .bank-name {
+        font-size: 0.9rem;
+    }
+    
+    .bank-loss-amount {
+        font-size: 1.3rem;
+    }
+    
+    .bank-flag {
+        font-size: 1.2rem;
+    }
+    
+    /* Countdown Visual */
+    .countdown-visual {
+        padding: 30px 20px;
+    }
+    
+    .countdown-display {
+        flex-wrap: wrap;
+    }
+    
+    .countdown-item {
+        flex: 1 1 45%;
+    }
+    
+    .countdown-number {
+        font-size: 2rem;
+    }
+    
+    .countdown-unit {
+        font-size: 0.8rem;
+    }
+    
+    /* Position Stack */
+    .position-stack {
+        padding: 20px 15px;
+    }
+    
+    .stack-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    .stack-stock {
+        gap: 10px;
+    }
+    
+    .stock-ticker {
+        width: 40px;
+        height: 40px;
+        font-size: 0.65rem;
+    }
+    
+    .position-value {
+        font-size: 1.1rem;
+    }
+    
+    /* Fire Sale */
+    .fire-sale-visual {
+        padding: 40px 20px;
+    }
+    
+    .fire-sale-visual::before,
+    .fire-sale-visual::after {
+        font-size: 40px;
+    }
+    
+    .fire-sale-title {
+        font-size: 1.5rem;
+    }
+    
+    /* Race Track */
+    .race-track {
+        gap: 12px;
+    }
+    
+    .race-bank {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+    }
+    
+    .race-name {
+        width: auto;
+        text-align: left;
+        font-size: 0.85rem;
+    }
+    
+    .race-bar-container {
+        width: 100%;
+        height: 30px;
+    }
+    
+    .race-result {
+        width: auto;
+    }
+    
+    /* Domino Effect */
+    .domino-effect {
+        padding: 25px 15px;
+        gap: 8px;
+    }
+    
+    .domino {
+        min-width: 60px;
+        padding: 12px 8px;
+    }
+    
+    .domino-number {
+        font-size: 1.2rem;
+    }
+    
+    .domino-text {
+        font-size: 0.65rem;
+    }
+    
+    .domino-arrow {
+        font-size: 1rem;
+    }
+    
+    /* Stealth Meter */
+    .stealth-meter {
+        padding: 25px 15px;
+    }
+    
+    .stealth-title {
+        font-size: 1.1rem;
+    }
+    
+    .stealth-items {
+        grid-template-columns: 1fr;
+    }
+    
+    .stealth-item {
+        padding: 15px;
+    }
+    
+    /* Charts */
+    .viacom-chart,
+    .price-chart {
+        padding: 25px 15px;
+    }
+    
+    .chart-title {
+        font-size: 1rem;
+    }
+    
+    .chart-line {
+        height: 150px;
+    }
+    
+    .chart-bar {
+        width: 25px;
+    }
+    
+    /* Genius Grid */
+    .genius-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .genius-card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .bank-losses-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .countdown-item {
+        flex: 1 1 100%;
+    }
+    
+    .countdown-number {
+        font-size: 1.8rem;
+    }
+    
+    .domino-effect {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 10px;
+    }
+    
+    .domino {
+        flex-shrink: 0;
+    }
+}
+
+/* ===== RELATED ARTICLES RESPONSIVE ===== */
+@media (max-width: 992px) {
+    .related-articles-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .related-articles-section {
+        padding: 50px 16px;
+    }
+    
+    .related-title {
+        font-size: 1.3rem;
+        margin-bottom: 30px;
+    }
+    
+    .related-article-card {
+        padding: 25px 20px;
+        min-height: auto;
+    }
+    
+    .related-article-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .related-article-card p {
+        font-size: 0.85rem;
+    }
+}
+
+/* ===== ARTICLE CTA SECTION RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .article-cta-section {
+        padding: 50px 16px;
+    }
+    
+    .article-cta-section h2 {
+        font-size: 1.5rem;
+    }
+    
+    .article-cta-section p {
+        font-size: 1rem;
+    }
+}
+
+/* ===== FOOTER RESPONSIVE ===== */
+@media (max-width: 992px) {
+    .footer-top {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .footer-links {
+        grid-template-columns: repeat(2, 1fr);
+        text-align: center;
+    }
+    
+    .footer-brand-section {
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 50px 16px 30px;
+    }
+    
+    .footer-container {
+        padding: 0;
+    }
+    
+    .footer-nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .footer-links {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .footer-disclaimer {
+        font-size: 0.75rem;
+        padding: 12px;
+    }
+}
+
+/* ===== TOOLS PAGE RESPONSIVE ===== */
+@media (max-width: 992px) {
+    .tools-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .tools-header {
+        padding: 50px 16px 30px;
+    }
+    
+    .tools-header h1 {
+        font-size: 1.75rem;
+    }
+    
+    .tools-header p {
+        font-size: 0.95rem;
+    }
+    
+    .tools-container {
+        padding: 30px 16px 60px;
+    }
+    
+    .tools-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .tool-card {
+        padding: 20px;
+    }
+    
+    .tool-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+    
+    .back-btn {
+        top: 15px;
+        left: 15px;
+        padding: 8px 14px;
+        font-size: 0.8rem;
+    }
+}
+
+/* ===== ARTICLES HUB PAGE RESPONSIVE ===== */
+@media (max-width: 992px) {
+    .articles-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .articles-hub {
+        padding: 100px 16px 50px;
+    }
+    
+    .hub-header {
+        margin-bottom: 40px;
+    }
+    
+    .hub-header h1 {
+        font-size: 1.75rem;
+    }
+    
+    .hub-header p {
+        font-size: 0.95rem;
+    }
+    
+    .category-section {
+        margin-bottom: 35px;
+    }
+    
+    .category-header {
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+    }
+    
+    .category-icon {
+        font-size: 1.4rem;
+    }
+    
+    .category-title {
+        font-size: 1.3rem;
+    }
+    
+    .articles-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .article-link {
+        padding: 15px;
+    }
+    
+    .article-link h3 {
+        font-size: 0.95rem;
+    }
+    
+    .back-home {
+        padding: 12px 18px;
+        font-size: 0.85rem;
+        bottom: 20px;
+        right: 20px;
+    }
+}
+
+/* ===== DAILY ARTICLES SECTION RESPONSIVE ===== */
+@media (max-width: 992px) {
+    .daily-articles-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .daily-articles {
+        padding: 60px 16px;
+    }
+    
+    .daily-article-card {
+        padding: 20px;
+    }
+    
+    .article-number {
+        font-size: 3rem;
+    }
+    
+    .article-badge {
+        padding: 4px 10px;
+        font-size: 0.65rem;
+    }
+    
+    .article-title {
+        font-size: 1.15rem;
+    }
+    
+    .article-excerpt {
+        font-size: 0.9rem;
+    }
+    
+    .article-insights {
+        padding: 12px;
+    }
+    
+    .article-cta {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 20px;
+    }
+    
+    .view-all-btn {
+        padding: 14px 30px;
+        font-size: 0.95rem;
+    }
+    
+    .daily-refresh-note {
+        padding: 12px 16px;
+        font-size: 0.8rem;
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* ===== QUOTES SECTION RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .quotes-section {
+        padding: 50px 0 60px;
+    }
+    
+    .quotes-header {
+        margin-bottom: 30px;
+    }
+    
+    .quotes-section .quote-card {
+        width: 260px;
+        padding: 20px;
+    }
+    
+    .quotes-fade-left,
+    .quotes-fade-right {
+        width: 30px;
+    }
+}
+
+/* ===== NEWSLETTER SECTION RESPONSIVE ===== */
+@media (max-width: 992px) {
+    .newsletter-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .newsletter-section {
+        padding: 50px 16px;
+    }
+    
+    .newsletter-form-wrapper {
+        padding: 20px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== STORY SECTION RESPONSIVE ===== */
+@media (max-width: 992px) {
+    .story-showcase {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .story-title {
+        font-size: 1.35rem;
+    }
+    
+    .story-intro {
+        font-size: 0.9rem;
+    }
+    
+    .story-point {
+        padding: 12px;
+    }
+    
+    .story-quote {
+        padding: 16px;
+    }
+    
+    .story-quote p {
+        font-size: 0.95rem;
+    }
+}
+
+/* ===== PHILOSOPHY SECTION RESPONSIVE ===== */
+@media (max-width: 992px) {
+    .philosophy-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .philosophy-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .philosophy-card {
+        padding: 20px;
+    }
+    
+    .philosophy-card h3 {
+        font-size: 1.05rem;
+    }
+}
+
+/* ===== SCROLL & ANIMATION RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .scroll-indicator {
+        display: none;
+    }
+    
+    /* Reduce animation complexity on mobile */
+    .floating-dots {
+        display: none;
+    }
+    
+    /* Simplify hover effects on touch devices */
+    @media (hover: none) {
+        .daily-article-card:hover,
+        .article-link:hover,
+        .tool-card:hover,
+        .related-article-card:hover {
+            transform: none;
+        }
+    }
+}
+
+/* ===== INTERACTIVE WEATHER PLAY PAGE RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .weather-play-container {
+        padding: 16px;
+    }
+    
+    .play-card {
+        padding: 20px;
+    }
+    
+    .scenario-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    .navbar,
+    .market-ticker,
+    .footer,
+    .article-sidebar,
+    .related-articles-section,
+    .article-cta-section,
+    .back-btn,
+    .share-btn,
+    .floating-dots,
+    .reading-progress-bar {
+        display: none !important;
+    }
+    
+    body {
+        padding-top: 0;
+        background: white;
+        color: black;
+    }
+    
+    .article-hero {
+        padding: 20px;
+        min-height: auto;
+    }
+    
+    .article-main {
+        padding: 20px;
+        display: block;
+    }
+    
+    .article-content-wrapper {
+        max-width: 100%;
+    }
+}
