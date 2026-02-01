@@ -57,7 +57,7 @@ function enhanceMetaTags(filename) {
         enhancements.push('<meta name="distribution" content="Global">');
     }
     if (!content.includes('rel="manifest"')) {
-        enhancements.push('<link rel="manifest" href="/manifest.json">');
+        enhancements.push('<link rel="manifest" href="manifest.json">');
     }
     
     if (enhancements.length > 0 && content.includes('</head>')) {
