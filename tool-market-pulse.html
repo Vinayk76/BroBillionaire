@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Market Pulse Analyzer - Real-Time Trading Signals & Sentiment | BroBillionaire</title>
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Market Pulse Analyzer - Real-Time Trading Signals & Sentiment | BroBillionaire">
+    <meta name="description" content="Free Market Pulse Analyzer tool - Get real-time market sentiment, fear & greed signals, trading session alerts, and personalized trade setups. Essential for Nifty, Bank Nifty, and Options traders.">
+    <meta name="keywords" content="market pulse analyzer, trading signals, market sentiment indicator, fear greed index, trading session timer, Nifty analysis, Bank Nifty signals, options trading tool, intraday trading signals, market strength indicator, trading dashboard, free trading tool India">
+    <meta name="author" content="BroBillionaire">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://brobillionaire.com/tool-market-pulse.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://brobillionaire.com/tool-market-pulse.html">
+    <meta property="og:title" content="Market Pulse Analyzer - Real-Time Trading Signals | BroBillionaire">
+    <meta property="og:description" content="Free tool to analyze market sentiment, trading sessions, and get personalized trade setups. Perfect for Indian market traders.">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    <meta property="og:site_name" content="BroBillionaire">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://brobillionaire.com/tool-market-pulse.html">
+    <meta name="twitter:title" content="Market Pulse Analyzer - Real-Time Trading Signals | BroBillionaire">
+    <meta name="twitter:description" content="Free tool to analyze market sentiment, trading sessions, and get personalized trade setups.">
+    <meta name="twitter:image" content="https://brobillionaire.com/og-image.jpg">
+    
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Market Pulse Analyzer",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        },
+        "description": "Real-time market sentiment analyzer and trading session timer for Indian market traders",
+        "featureList": [
+            "Real-time Session Timer",
+            "Fear & Greed Meter",
+            "Trade Setup Generator",
+            "Position Size Calculator",
+            "Multi-timeframe Analysis"
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "BroBillionaire"
+        }
+    }
+    </script>
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #161616;
+            --bg-tertiary: #1a1a1a;
+            --gold: #C9A227;
+            --gold-light: #e6c54d;
+            --gold-dark: #a68a1f;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-gold: rgba(201, 162, 39, 0.3);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.5);
+            --green: #22c55e;
+            --green-soft: rgba(34, 197, 94, 0.15);
+            --red: #ef4444;
+            --red-soft: rgba(239, 68, 68, 0.15);
+            --blue: #3b82f6;
+            --blue-soft: rgba(59, 130, 246, 0.15);
+            --orange: #f97316;
+            --orange-soft: rgba(249, 115, 22, 0.15);
+            --purple: #a855f7;
+            --purple-soft: rgba(168, 85, 247, 0.15);
+            --gold-gradient: linear-gradient(135deg, #C9A227 0%, #e6c54d 50%, #C9A227 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .gold-text {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Back Button */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            color: var(--gold);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            z-index: 100;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: var(--gold);
+            color: var(--bg-primary);
+            transform: translateX(-5px);
+        }
+
+        /* Header */
+        .pulse-header {
+            text-align: center;
+            padding: 80px 20px 40px;
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pulse-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(201, 162, 39, 0.03) 0%, transparent 50%);
+            animation: pulse-bg 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse-bg {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .pulse-header h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .pulse-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--green-soft);
+            color: var(--green);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Main Container */
+        .pulse-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--border-gold);
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-title i {
+            color: var(--gold);
+        }
+
+        /* Session Timer Card */
+        .session-card {
+            grid-column: span 4;
+        }
+
+        .session-status {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .session-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .session-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin: 15px 0;
+        }
+
+        .session-progress {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .session-progress-bar {
+            height: 100%;
+            background: var(--gold-gradient);
+            border-radius: 10px;
+            transition: width 1s linear;
+        }
+
+        .session-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-tertiary);
+        }
+
+        .session-phases {
+            display: flex;
+            gap: 8px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .phase-tag {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .phase-tag.active {
+            background: var(--gold-gradient);
+            color: var(--bg-primary);
+            border-color: transparent;
+        }
+
+        /* Fear & Greed Meter */
+        .fear-greed-card {
+            grid-column: span 4;
+        }
+
+        .meter-container {
+            position: relative;
+            width: 200px;
+            height: 100px;
+            margin: 20px auto;
+        }
+
+        .meter-bg {
+            position: absolute;
+            width: 200px;
+            height: 100px;
+            border-radius: 100px 100px 0 0;
+            background: conic-gradient(
+                from 180deg,
+                var(--red) 0deg,
+                var(--orange) 36deg,
+                #fbbf24 72deg,
+                var(--green) 108deg,
+                #10b981 144deg,
+                var(--green) 180deg
+            );
+            overflow: hidden;
+        }
+
+        .meter-bg::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140px;
+            height: 70px;
+            background: var(--bg-card);
+            border-radius: 100px 100px 0 0;
+        }
+
+        .meter-needle {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            height: 80px;
+            background: var(--text-primary);
+            transform-origin: bottom center;
+            transform: translateX(-50%) rotate(-90deg);
+            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border-radius: 4px;
+            z-index: 2;
+        }
+
+        .meter-needle::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background: var(--text-primary);
+            border-radius: 50%;
+        }
+
+        .meter-value {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .meter-score {
+            font-size: 2.5rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .meter-label {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .meter-scale {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: var(--text-tertiary);
+            margin-top: 10px;
+            padding: 0 10px;
+        }
+
+        /* Volatility Card */
+        .volatility-card {
+            grid-column: span 4;
+        }
+
+        .vol-meter {
+            display: flex;
+            gap: 4px;
+            height: 60px;
+            align-items: flex-end;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .vol-bar {
+            width: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            transition: all 0.5s ease;
+        }
+
+        .vol-bar.active {
+            background: var(--gold);
+        }
+
+        .vol-bar.high {
+            background: var(--red);
+        }
+
+        .vol-reading {
+            text-align: center;
+        }
+
+        .vol-value {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .vol-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        /* Trade Setup Generator */
+        .setup-card {
+            grid-column: span 6;
+        }
+
+        .setup-form {
+            display: grid;
+            gap: 15px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .input-group label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .input-group input,
+        .input-group select {
+            padding: 12px 16px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-family: 'JetBrains Mono', monospace;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.1);
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .generate-btn {
+            padding: 14px 24px;
+            background: var(--gold-gradient);
+            border: none;
+            border-radius: 10px;
+            color: var(--bg-primary);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .generate-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(201, 162, 39, 0.35);
+        }
+
+        .generate-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .generate-btn:hover i {
+            transform: rotate(180deg);
+        }
+
+        /* Setup Result */
+        .setup-result {
+            grid-column: span 6;
+            display: none;
+        }
+
+        .setup-result.visible {
+            display: block;
+        }
+
+        .result-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .result-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .result-icon.bullish {
+            background: var(--green-soft);
+            color: var(--green);
+        }
+
+        .result-icon.bearish {
+            background: var(--red-soft);
+            color: var(--red);
+        }
+
+        .result-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .result-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .levels-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .level-box {
+            background: var(--bg-tertiary);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .level-label {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .level-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .level-box.entry .level-value { color: var(--blue); }
+        .level-box.target .level-value { color: var(--green); }
+        .level-box.stoploss .level-value { color: var(--red); }
+
+        .rr-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(201, 162, 39, 0.05) 100%);
+            border-radius: 10px;
+            border: 1px solid var(--border-gold);
+        }
+
+        .rr-item {
+            text-align: center;
+        }
+
+        .rr-label {
+            font-size: 0.7rem;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+        }
+
+        .rr-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .setup-notes {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(201, 162, 39, 0.08);
+            border-left: 3px solid var(--gold);
+            border-radius: 0 10px 10px 0;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .setup-notes strong {
+            color: var(--gold);
+        }
+
+        /* Market Indices */
+        .indices-card {
+            grid-column: span 12;
+        }
+
+        .indices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .index-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .index-item:hover {
+            border-color: var(--border-gold);
+            transform: translateY(-2px);
+        }
+
+        .index-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .index-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .index-change {
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+
+        .index-change.positive {
+            background: var(--green-soft);
+            color: var(--green);
+        }
+
+        .index-change.negative {
+            background: var(--red-soft);
+            color: var(--red);
+        }
+
+        /* Quick Actions */
+        .actions-card {
+            grid-column: span 12;
+        }
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .action-btn:hover {
+            border-color: var(--gold);
+            background: rgba(201, 162, 39, 0.05);
+            transform: translateY(-3px);
+        }
+
+        .action-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .action-icon.calc { background: var(--blue-soft); color: var(--blue); }
+        .action-icon.learn { background: var(--green-soft); color: var(--green); }
+        .action-icon.risk { background: var(--orange-soft); color: var(--orange); }
+        .action-icon.options { background: var(--purple-soft); color: var(--purple); }
+
+        .action-text h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .action-text p {
+            font-size: 0.8rem;
+            color: var(--text-tertiary);
+        }
+
+        /* Checklist Card */
+        .checklist-card {
+            grid-column: span 6;
+        }
+
+        .checklist {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .check-item:hover {
+            border-color: var(--border-gold);
+        }
+
+        .check-item.checked {
+            background: var(--green-soft);
+            border-color: rgba(34, 197, 94, 0.3);
+        }
+
+        .check-box {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .check-item.checked .check-box {
+            background: var(--green);
+            border-color: var(--green);
+        }
+
+        .check-box i {
+            color: white;
+            font-size: 0.75rem;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s ease;
+        }
+
+        .check-item.checked .check-box i {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .check-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .check-item.checked .check-text {
+            color: var(--green);
+        }
+
+        /* Quote Card */
+        .quote-card {
+            grid-column: span 6;
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(201, 162, 39, 0.05) 100%);
+            border-color: var(--border-gold);
+        }
+
+        .quote-content {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .quote-icon {
+            font-size: 2rem;
+            color: var(--gold);
+            opacity: 0.5;
+            margin-bottom: 15px;
+        }
+
+        .quote-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .quote-author {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        .new-quote-btn {
+            margin-top: 15px;
+            padding: 8px 16px;
+            background: transparent;
+            border: 1px solid var(--border-gold);
+            border-radius: 20px;
+            color: var(--gold);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .new-quote-btn:hover {
+            background: var(--gold);
+            color: var(--bg-primary);
+        }
+
+        /* Footer */
+        .pulse-footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .pulse-footer p {
+            color: var(--text-tertiary);
+            font-size: 0.9rem;
+        }
+
+        .pulse-footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .session-card,
+            .fear-greed-card,
+            .volatility-card {
+                grid-column: span 6;
+            }
+
+            .setup-card,
+            .setup-result {
+                grid-column: span 12;
+            }
+
+            .checklist-card,
+            .quote-card {
+                grid-column: span 12;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pulse-header {
+                padding: 70px 16px 30px;
+            }
+
+            .pulse-header h1 {
+                font-size: 1.75rem;
+            }
+
+            .pulse-container {
+                padding: 25px 16px 60px;
+            }
+
+            .dashboard-grid {
+                gap: 15px;
+            }
+
+            .session-card,
+            .fear-greed-card,
+            .volatility-card,
+            .setup-card,
+            .setup-result,
+            .indices-card,
+            .actions-card,
+            .checklist-card,
+            .quote-card {
+                grid-column: span 12;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .input-row {
+                grid-template-columns: 1fr;
+            }
+
+            .levels-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .session-time {
+                font-size: 2rem;
+            }
+
+            .meter-container {
+                width: 160px;
+                height: 80px;
+            }
+
+            .meter-bg {
+                width: 160px;
+                height: 80px;
+            }
+
+            .meter-bg::after {
+                width: 110px;
+                height: 55px;
+            }
+
+            .meter-needle {
+                height: 60px;
+            }
+
+            .back-btn {
+                top: 12px;
+                left: 12px;
+                padding: 8px 14px;
+                font-size: 0.8rem;
+            }
+
+            .indices-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .actions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="tools.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i>
+        Back to Tools
+    </a>
+
+    <header class="pulse-header">
+        <div class="live-badge">
+            <span class="live-dot"></span>
+            LIVE TOOL
+        </div>
+        <h1>Market <span class="gold-text">Pulse</span> Analyzer</h1>
+        <p>Real-time market sentiment, session timing, and personalized trade setups for smarter decisions</p>
+    </header>
+
+    <div class="pulse-container">
+        <div class="dashboard-grid">
+            <!-- Session Timer -->
+            <div class="card session-card">
+                <div class="card-header">
+                    <span class="card-title"><i class="fas fa-clock"></i> Trading Session</span>
+                </div>
+                <div class="session-status">
+                    <div class="session-name" id="sessionName">Loading...</div>
+                    <div class="session-time" id="sessionTime">--:--:--</div>
+                    <div class="session-progress">
+                        <div class="session-progress-bar" id="sessionProgress" style="width: 0%"></div>
+                    </div>
+                    <div class="session-info">
+                        <span id="sessionStart">--:--</span>
+                        <span id="sessionEnd">--:--</span>
+                    </div>
+                    <div class="session-phases">
+                        <span class="phase-tag" id="phasePremarket">Pre-Market</span>
+                        <span class="phase-tag" id="phaseOpening">Opening</span>
+                        <span class="phase-tag" id="phaseMidDay">Mid-Day</span>
+                        <span class="phase-tag" id="phaseClosing">Closing</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fear & Greed Meter -->
+            <div class="card fear-greed-card">
+                <div class="card-header">
+                    <span class="card-title"><i class="fas fa-brain"></i> Fear & Greed Meter</span>
+                </div>
+                <div class="meter-container">
+                    <div class="meter-bg"></div>
+                    <div class="meter-needle" id="fearGreedNeedle"></div>
+                </div>
+                <div class="meter-value">
+                    <div class="meter-score" id="fearGreedScore">--</div>
+                    <div class="meter-label" id="fearGreedLabel">Calculating...</div>
+                </div>
+                <div class="meter-scale">
+                    <span>Extreme Fear</span>
+                    <span>Neutral</span>
+                    <span>Extreme Greed</span>
+                </div>
+            </div>
+
+            <!-- Volatility Meter -->
+            <div class="card volatility-card">
+                <div class="card-header">
+                    <span class="card-title"><i class="fas fa-bolt"></i> Volatility Index</span>
+                </div>
+                <div class="vol-meter" id="volMeter">
+                    <div class="vol-bar" style="height: 20%"></div>
+                    <div class="vol-bar" style="height: 35%"></div>
+                    <div class="vol-bar" style="height: 50%"></div>
+                    <div class="vol-bar" style="height: 65%"></div>
+                    <div class="vol-bar" style="height: 80%"></div>
+                    <div class="vol-bar" style="height: 100%"></div>
+                </div>
+                <div class="vol-reading">
+                    <div class="vol-value" id="volValue">--</div>
+                    <div class="vol-label" id="volLabel">India VIX Level</div>
+                </div>
+            </div>
+
+            <!-- Trade Setup Generator -->
+            <div class="card setup-card">
+                <div class="card-header">
+                    <span class="card-title"><i class="fas fa-magic"></i> Trade Setup Generator</span>
+                </div>
+                <div class="setup-form">
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>Instrument</label>
+                            <select id="instrument">
+                                <option value="nifty">NIFTY 50</option>
+                                <option value="banknifty">BANK NIFTY</option>
+                                <option value="finnifty">FINNIFTY</option>
+                                <option value="sensex">SENSEX</option>
+                                <option value="custom">Custom</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Current Price</label>
+                            <input type="number" id="currentPrice" placeholder="22500">
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>Trade Direction</label>
+                            <select id="tradeDirection">
+                                <option value="bullish">📈 Bullish (Long)</option>
+                                <option value="bearish">📉 Bearish (Short)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Risk Appetite</label>
+                            <select id="riskAppetite">
+                                <option value="conservative">Conservative (1:2 R:R)</option>
+                                <option value="moderate">Moderate (1:2.5 R:R)</option>
+                                <option value="aggressive">Aggressive (1:3 R:R)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>Account Size (₹)</label>
+                            <input type="number" id="accountSize" placeholder="100000">
+                        </div>
+                        <div class="input-group">
+                            <label>Risk Per Trade (%)</label>
+                            <input type="number" id="riskPercent" placeholder="2" max="5">
+                        </div>
+                    </div>
+                    <button class="generate-btn" onclick="generateSetup()">
+                        <i class="fas fa-wand-magic-sparkles"></i>
+                        Generate Trade Setup
+                    </button>
+                </div>
+            </div>
+
+            <!-- Setup Result -->
+            <div class="card setup-result" id="setupResult">
+                <div class="card-header">
+                    <span class="card-title"><i class="fas fa-chart-line"></i> Your Trade Setup</span>
+                </div>
+                <div class="result-header">
+                    <div class="result-icon bullish" id="resultIcon">
+                        <i class="fas fa-arrow-trend-up"></i>
+                    </div>
+                    <div>
+                        <div class="result-title" id="resultTitle">Bullish Setup</div>
+                        <div class="result-subtitle" id="resultSubtitle">NIFTY 50</div>
+                    </div>
+                </div>
+                <div class="levels-grid">
+                    <div class="level-box entry">
+                        <div class="level-label">Entry</div>
+                        <div class="level-value" id="entryLevel">--</div>
+                    </div>
+                    <div class="level-box target">
+                        <div class="level-label">Target</div>
+                        <div class="level-value" id="targetLevel">--</div>
+                    </div>
+                    <div class="level-box stoploss">
+                        <div class="level-label">Stop Loss</div>
+                        <div class="level-value" id="stoplossLevel">--</div>
+                    </div>
+                </div>
+                <div class="rr-display">
+                    <div class="rr-item">
+                        <div class="rr-label">Risk:Reward</div>
+                        <div class="rr-value" id="rrRatio">1:2.5</div>
+                    </div>
+                    <div class="rr-item">
+                        <div class="rr-label">Max Risk</div>
+                        <div class="rr-value" id="maxRisk">₹2,000</div>
+                    </div>
+                    <div class="rr-item">
+                        <div class="rr-label">Position Size</div>
+                        <div class="rr-value" id="posSize">1 Lot</div>
+                    </div>
+                </div>
+                <div class="setup-notes" id="setupNotes">
+                    <strong>⚡ Pro Tip:</strong> Wait for price to confirm your entry level with a bullish candle before entering. Use trailing stop loss after 50% of target is achieved.
+                </div>
+            </div>
+
+            <!-- Pre-Trade Checklist -->
+            <div class="card checklist-card">
+                <div class="card-header">
+                    <span class="card-title"><i class="fas fa-clipboard-check"></i> Pre-Trade Checklist</span>
+                </div>
+                <div class="checklist">
+                    <div class="check-item" onclick="toggleCheck(this)">
+                        <div class="check-box"><i class="fas fa-check"></i></div>
+                        <span class="check-text">Checked overall market trend (Nifty/Bank Nifty direction)</span>
+                    </div>
+                    <div class="check-item" onclick="toggleCheck(this)">
+                        <div class="check-box"><i class="fas fa-check"></i></div>
+                        <span class="check-text">Identified key support and resistance levels</span>
+                    </div>
+                    <div class="check-item" onclick="toggleCheck(this)">
+                        <div class="check-box"><i class="fas fa-check"></i></div>
+                        <span class="check-text">Reviewed economic calendar for major events</span>
+                    </div>
+                    <div class="check-item" onclick="toggleCheck(this)">
+                        <div class="check-box"><i class="fas fa-check"></i></div>
+                        <span class="check-text">Set clear entry, stop loss, and target levels</span>
+                    </div>
+                    <div class="check-item" onclick="toggleCheck(this)">
+                        <div class="check-box"><i class="fas fa-check"></i></div>
+                        <span class="check-text">Calculated position size based on risk management</span>
+                    </div>
+                    <div class="check-item" onclick="toggleCheck(this)">
+                        <div class="check-box"><i class="fas fa-check"></i></div>
+                        <span class="check-text">Mentally prepared - no revenge or FOMO trading today</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trading Quote -->
+            <div class="card quote-card">
+                <div class="card-header">
+                    <span class="card-title"><i class="fas fa-lightbulb"></i> Trader's Wisdom</span>
+                </div>
+                <div class="quote-content">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="quote-text" id="quoteText">"The goal of a successful trader is to make the best trades. Money is secondary."</p>
+                    <div class="quote-author" id="quoteAuthor">— Alexander Elder</div>
+                    <button class="new-quote-btn" onclick="newQuote()">
+                        <i class="fas fa-refresh"></i> New Quote
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="card actions-card">
+                <div class="card-header">
+                    <span class="card-title"><i class="fas fa-bolt"></i> Quick Actions</span>
+                </div>
+                <div class="actions-grid">
+                    <a href="tools.html" class="action-btn">
+                        <div class="action-icon calc"><i class="fas fa-calculator"></i></div>
+                        <div class="action-text">
+                            <h4>Position Calculator</h4>
+                            <p>Calculate optimal position size</p>
+                        </div>
+                    </a>
+                    <a href="article-best-trading-books.html" class="action-btn">
+                        <div class="action-icon learn"><i class="fas fa-book"></i></div>
+                        <div class="action-text">
+                            <h4>Trading Books</h4>
+                            <p>Best books for traders</p>
+                        </div>
+                    </a>
+                    <a href="article-fo-margin-explained.html" class="action-btn">
+                        <div class="action-icon risk"><i class="fas fa-shield-alt"></i></div>
+                        <div class="action-text">
+                            <h4>Margin Guide</h4>
+                            <p>F&O margin explained</p>
+                        </div>
+                    </a>
+                    <a href="article-beginner-options.html" class="action-btn">
+                        <div class="action-icon options"><i class="fas fa-chart-area"></i></div>
+                        <div class="action-text">
+                            <h4>Options Basics</h4>
+                            <p>Learn options trading</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="pulse-footer">
+        <p>Market Pulse Analyzer by <a href="index.html">BroBillionaire</a> • Free trading education for everyone</p>
+    </footer>
+
+    <script>
+        // Trading Quotes
+        const quotes = [
+            { text: "The goal of a successful trader is to make the best trades. Money is secondary.", author: "Alexander Elder" },
+            { text: "In trading, it's not about how much you make but how much you don't lose.", author: "Bernard Baruch" },
+            { text: "The markets are the same now as they were five to ten years ago because they keep changing.", author: "Ed Seykota" },
+            { text: "Win or lose, everybody gets what they want from the market.", author: "Ed Seykota" },
+            { text: "The key to trading success is emotional discipline. Making money has nothing to do with intelligence.", author: "Victor Sperandeo" },
+            { text: "It's not whether you're right or wrong that's important, but how much money you make when you're right and how much you lose when you're wrong.", author: "George Soros" },
+            { text: "Throughout my career, I've often had big profits by playing an extremely conservative game.", author: "Jesse Livermore" },
+            { text: "Risk comes from not knowing what you're doing.", author: "Warren Buffett" },
+            { text: "The trend is your friend until the end when it bends.", author: "Ed Seykota" },
+            { text: "Cut short your losses; let your profits run on.", author: "David Ricardo" },
+            { text: "Never risk more than 1% of your total equity in any one trade.", author: "Larry Hite" },
+            { text: "The market can remain irrational longer than you can remain solvent.", author: "John Maynard Keynes" },
+            { text: "Plan your trade and trade your plan.", author: "Trading Wisdom" },
+            { text: "Patience is the key to success in trading.", author: "Trading Wisdom" },
+            { text: "The best traders have no ego. You have to swallow your pride and get out of losses.", author: "Tom Baldwin" }
+        ];
+
+        // Session timing (IST)
+        const sessions = {
+            premarket: { start: 9, end: 9.25, name: "Pre-Market" },
+            opening: { start: 9.25, end: 10.5, name: "Opening Hour" },
+            midday: { start: 10.5, end: 14.5, name: "Mid-Day Session" },
+            closing: { start: 14.5, end: 15.5, name: "Closing Hour" },
+            afterhours: { start: 15.5, end: 24, name: "After Hours" },
+            preopen: { start: 0, end: 9, name: "Market Closed" }
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateSession();
+            updateFearGreed();
+            updateVolatility();
+            setInterval(updateSession, 1000);
+            newQuote();
+        });
+
+        function updateSession() {
+            const now = new Date();
+            const hours = now.getHours() + now.getMinutes() / 60;
+            let currentSession = null;
+            let sessionStart = 0;
+            let sessionEnd = 0;
+
+            // Determine current session
+            if (hours >= 9 && hours < 9.25) {
+                currentSession = sessions.premarket;
+                sessionStart = 9;
+                sessionEnd = 9.25;
+                document.getElementById('phasePremarket').classList.add('active');
+            } else if (hours >= 9.25 && hours < 10.5) {
+                currentSession = sessions.opening;
+                sessionStart = 9.25;
+                sessionEnd = 10.5;
+                document.getElementById('phaseOpening').classList.add('active');
+            } else if (hours >= 10.5 && hours < 14.5) {
+                currentSession = sessions.midday;
+                sessionStart = 10.5;
+                sessionEnd = 14.5;
+                document.getElementById('phaseMidDay').classList.add('active');
+            } else if (hours >= 14.5 && hours < 15.5) {
+                currentSession = sessions.closing;
+                sessionStart = 14.5;
+                sessionEnd = 15.5;
+                document.getElementById('phaseClosing').classList.add('active');
+            } else if (hours >= 15.5) {
+                currentSession = sessions.afterhours;
+            } else {
+                currentSession = sessions.preopen;
+            }
+
+            // Update display
+            document.getElementById('sessionName').textContent = currentSession.name;
+            
+            // Format time
+            const timeStr = now.toLocaleTimeString('en-IN', { hour12: false });
+            document.getElementById('sessionTime').textContent = timeStr;
+
+            // Calculate progress
+            if (sessionStart && sessionEnd) {
+                const progress = ((hours - sessionStart) / (sessionEnd - sessionStart)) * 100;
+                document.getElementById('sessionProgress').style.width = Math.min(100, Math.max(0, progress)) + '%';
+                
+                const startTime = formatTime(sessionStart);
+                const endTime = formatTime(sessionEnd);
+                document.getElementById('sessionStart').textContent = startTime;
+                document.getElementById('sessionEnd').textContent = endTime;
+            }
+
+            // Reset active phases
+            document.querySelectorAll('.phase-tag').forEach(el => el.classList.remove('active'));
+            if (hours >= 9 && hours < 9.25) document.getElementById('phasePremarket').classList.add('active');
+            else if (hours >= 9.25 && hours < 10.5) document.getElementById('phaseOpening').classList.add('active');
+            else if (hours >= 10.5 && hours < 14.5) document.getElementById('phaseMidDay').classList.add('active');
+            else if (hours >= 14.5 && hours < 15.5) document.getElementById('phaseClosing').classList.add('active');
+        }
+
+        function formatTime(hours) {
+            const h = Math.floor(hours);
+            const m = Math.round((hours - h) * 60);
+            return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+        }
+
+        function updateFearGreed() {
+            // Simulated fear & greed based on time and randomization
+            // In production, this would connect to real market data
+            const baseScore = 45 + Math.random() * 30;
+            const score = Math.round(baseScore);
+            
+            let label = '';
+            let color = '';
+            
+            if (score <= 20) { label = 'Extreme Fear'; color = '#ef4444'; }
+            else if (score <= 40) { label = 'Fear'; color = '#f97316'; }
+            else if (score <= 60) { label = 'Neutral'; color = '#fbbf24'; }
+            else if (score <= 80) { label = 'Greed'; color = '#22c55e'; }
+            else { label = 'Extreme Greed'; color = '#10b981'; }
+
+            document.getElementById('fearGreedScore').textContent = score;
+            document.getElementById('fearGreedScore').style.color = color;
+            document.getElementById('fearGreedLabel').textContent = label;
+            document.getElementById('fearGreedLabel').style.color = color;
+            
+            // Needle rotation: -90deg (0) to 90deg (100)
+            const rotation = (score / 100) * 180 - 90;
+            document.getElementById('fearGreedNeedle').style.transform = `translateX(-50%) rotate(${rotation}deg)`;
+        }
+
+        function updateVolatility() {
+            // Simulated India VIX
+            const vix = (12 + Math.random() * 10).toFixed(2);
+            document.getElementById('volValue').textContent = vix;
+            
+            let label = '';
+            const vixNum = parseFloat(vix);
+            
+            if (vixNum < 13) label = 'Low Volatility - Calm Market';
+            else if (vixNum < 18) label = 'Normal Volatility';
+            else if (vixNum < 25) label = 'Elevated Volatility';
+            else label = 'High Volatility - Caution!';
+            
+            document.getElementById('volLabel').textContent = label;
+            
+            // Update bars
+            const bars = document.querySelectorAll('.vol-bar');
+            const activeBars = Math.ceil((vixNum / 30) * 6);
+            
+            bars.forEach((bar, i) => {
+                if (i < activeBars) {
+                    bar.classList.add('active');
+                    if (vixNum > 20 && i >= 4) bar.classList.add('high');
+                } else {
+                    bar.classList.remove('active', 'high');
+                }
+            });
+        }
+
+        function generateSetup() {
+            const instrument = document.getElementById('instrument').value;
+            const currentPrice = parseFloat(document.getElementById('currentPrice').value) || 22500;
+            const direction = document.getElementById('tradeDirection').value;
+            const riskApp = document.getElementById('riskAppetite').value;
+            const accountSize = parseFloat(document.getElementById('accountSize').value) || 100000;
+            const riskPercent = parseFloat(document.getElementById('riskPercent').value) || 2;
+
+            // Calculate R:R ratio based on risk appetite
+            let rrRatio = 2;
+            if (riskApp === 'moderate') rrRatio = 2.5;
+            if (riskApp === 'aggressive') rrRatio = 3;
+
+            // Calculate levels
+            const riskAmount = (accountSize * riskPercent) / 100;
+            const stopDistance = currentPrice * 0.005; // 0.5% stop loss
+            
+            let entry, target, stoploss;
+            
+            if (direction === 'bullish') {
+                entry = currentPrice;
+                stoploss = currentPrice - stopDistance;
+                target = currentPrice + (stopDistance * rrRatio);
+            } else {
+                entry = currentPrice;
+                stoploss = currentPrice + stopDistance;
+                target = currentPrice - (stopDistance * rrRatio);
+            }
+
+            // Calculate position size
+            const pointsRisk = Math.abs(entry - stoploss);
+            const lotSize = instrument === 'banknifty' ? 15 : (instrument === 'finnifty' ? 25 : 25);
+            const pointValue = lotSize;
+            const lotsCanAfford = Math.floor(riskAmount / (pointsRisk * pointValue));
+
+            // Update UI
+            document.getElementById('setupResult').classList.add('visible');
+            
+            const resultIcon = document.getElementById('resultIcon');
+            resultIcon.className = 'result-icon ' + direction;
+            resultIcon.innerHTML = direction === 'bullish' ? 
+                '<i class="fas fa-arrow-trend-up"></i>' : 
+                '<i class="fas fa-arrow-trend-down"></i>';
+            
+            document.getElementById('resultTitle').textContent = 
+                direction === 'bullish' ? 'Bullish Setup' : 'Bearish Setup';
+            
+            const instrumentNames = {
+                nifty: 'NIFTY 50',
+                banknifty: 'BANK NIFTY',
+                finnifty: 'FINNIFTY',
+                sensex: 'SENSEX',
+                custom: 'Custom Instrument'
+            };
+            document.getElementById('resultSubtitle').textContent = instrumentNames[instrument];
+
+            document.getElementById('entryLevel').textContent = entry.toFixed(2);
+            document.getElementById('targetLevel').textContent = target.toFixed(2);
+            document.getElementById('stoplossLevel').textContent = stoploss.toFixed(2);
+            document.getElementById('rrRatio').textContent = `1:${rrRatio}`;
+            document.getElementById('maxRisk').textContent = `₹${riskAmount.toLocaleString('en-IN')}`;
+            document.getElementById('posSize').textContent = `${Math.max(1, lotsCanAfford)} Lot${lotsCanAfford > 1 ? 's' : ''}`;
+
+            // Dynamic notes
+            const notes = direction === 'bullish' ? 
+                `<strong>⚡ Pro Tip:</strong> Wait for price to confirm entry with a bullish candle. Trail stop loss to breakeven after 1:1 is achieved. Book partial profits at first target.` :
+                `<strong>⚡ Pro Tip:</strong> Wait for rejection at resistance before shorting. Move stop loss to breakeven after 1:1 reward. Consider hedging with a call option.`;
+            document.getElementById('setupNotes').innerHTML = notes;
+
+            // Scroll to result
+            document.getElementById('setupResult').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function toggleCheck(element) {
+            element.classList.toggle('checked');
+        }
+
+        function newQuote() {
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById('quoteText').textContent = `"${randomQuote.text}"`;
+            document.getElementById('quoteAuthor').textContent = `— ${randomQuote.author}`;
+        }
+
+        // Refresh fear/greed and volatility every 30 seconds
+        setInterval(() => {
+            updateFearGreed();
+            updateVolatility();
+        }, 30000);
+    </script>
+</body>
+</html>

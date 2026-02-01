@@ -28,16 +28,35 @@
     <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
     
     <style>
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+        
         /* Navbar styles */
         .navbar {
             position: fixed;
-            top: 40px;
+            top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
             padding: 15px 0;
             background: rgba(13, 13, 13, 0.95);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
         
@@ -61,6 +80,7 @@
             width: 40px;
             height: 40px;
             border-radius: 10px;
+            object-fit: cover;
         }
         
         .logo-text {
@@ -78,6 +98,7 @@
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             font-size: 0.9rem;
+            font-weight: 400;
             transition: color 0.2s ease;
         }
         
@@ -86,9 +107,26 @@
             color: #C9A227;
         }
         
+        /* Mobile menu button */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+        }
+        
+        .mobile-menu span {
+            width: 22px;
+            height: 2px;
+            background: #fff;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        
         .press-hero {
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
-            padding: 160px 20px 100px;
+            padding: 140px 20px 80px;
             text-align: center;
             border-bottom: 1px solid rgba(201, 162, 39, 0.2);
         }
@@ -301,7 +339,6 @@
         /* Responsive Styles */
         @media (max-width: 768px) {
             .navbar {
-                top: 0;
                 padding: 12px 0;
             }
             
@@ -310,11 +347,29 @@
             }
             
             .nav-links {
-                gap: 20px;
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(13, 13, 13, 0.98);
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu {
+                display: flex;
             }
             
             .nav-link {
-                font-size: 0.8rem;
+                font-size: 1rem;
+                padding: 10px 0;
             }
             
             .logo-text {
@@ -322,7 +377,7 @@
             }
             
             .press-hero {
-                padding: 120px 20px 60px;
+                padding: 100px 20px 60px;
             }
             
             .press-hero h1 {
@@ -343,6 +398,7 @@
             
             .press-card h2 {
                 font-size: 1.4rem;
+                flex-wrap: wrap;
             }
             
             .stats-grid {
@@ -380,14 +436,11 @@
             
             .contact-email {
                 font-size: 1.1rem;
+                word-break: break-all;
             }
         }
         
         @media (max-width: 480px) {
-            .nav-links {
-                gap: 15px;
-            }
-            
             .stats-grid {
                 grid-template-columns: 1fr 1fr;
             }
@@ -399,6 +452,10 @@
             .stat-box .number {
                 font-size: 1.5rem;
             }
+            
+            .press-hero h1 {
+                font-size: 1.75rem;
+            }
         }
     </style>
 </head>
@@ -409,12 +466,17 @@
                 <img src="logo.jpg" alt="BroBillionaire Logo" class="logo-img">
                 <span class="logo-text">BroBillionaire</span>
             </a>
-            <div class="nav-links">
+            <div class="nav-links" id="navLinks">
                 <a href="index.html" class="nav-link">Home</a>
                 <a href="articles.html" class="nav-link">Articles</a>
                 <a href="tools.html" class="nav-link">Tools</a>
                 <a href="about.html" class="nav-link">About</a>
                 <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <div class="mobile-menu" onclick="document.getElementById('navLinks').classList.toggle('active')">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
     </nav>

@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Prediction Game - Can You Beat the Market? | BroBillionaire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <meta name="description" content="Test your market timing skills! Predict if the next move is UP or DOWN using real historical data. Compete for high scores and share your results!">
+    <meta name="keywords" content="market prediction game, trading game, stock market game, trading simulator, predict stocks, trading challenge">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://brobillionaire.com/market-prediction-game.html">
+    
+    <meta property="og:title" content="🎮 Market Prediction Game - Can You Beat the Market?">
+    <meta property="og:description" content="Think you can predict markets? Test your timing with real historical data!">
+    <meta property="og:url" content="https://brobillionaire.com/market-prediction-game.html">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    <link rel="icon" type="image/jpeg" href="logo.jpg">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --green: #22c55e;
+            --red: #ef4444;
+            --gold: #C9A227;
+            --bg: #0a0a0a;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Background */
+        .chart-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M0,50 Q25,30 50,50 T100,50' fill='none' stroke='%2322c55e' stroke-width='0.5'/%3E%3C/svg%3E");
+            background-size: 200px;
+            animation: moveChart 20s linear infinite;
+        }
+        
+        @keyframes moveChart {
+            0% { background-position: 0 0; }
+            100% { background-position: 200px 0; }
+        }
+        
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-img { width: 40px; height: 40px; border-radius: 10px; }
+        .logo-text { font-size: 1.25rem; font-weight: 700; color: #fff; }
+        
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 100px 20px 40px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Game Header */
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .stat-group {
+            text-align: center;
+        }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        
+        .stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .stat-value.green { color: var(--green); }
+        .stat-value.red { color: var(--red); }
+        .stat-value.gold { color: var(--gold); }
+        
+        .lives {
+            font-size: 1.5rem;
+        }
+        
+        /* Chart Container */
+        .chart-container {
+            background: linear-gradient(135deg, rgba(26,26,26,0.9) 0%, rgba(13,13,13,0.9) 100%);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 24px;
+            padding: 30px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chart-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .stock-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+        
+        .stock-price {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+        
+        .chart-canvas-container {
+            position: relative;
+            height: 300px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        #chartCanvas {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .hidden-section {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 30%;
+            background: linear-gradient(90deg, transparent, rgba(10,10,10,0.98) 30%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hidden-question {
+            font-size: 3rem;
+            color: var(--gold);
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+        }
+        
+        /* Prediction Buttons */
+        .prediction-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .predict-btn {
+            flex: 1;
+            max-width: 250px;
+            padding: 25px 40px;
+            border: none;
+            border-radius: 20px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .predict-btn.up {
+            background: linear-gradient(135deg, var(--green) 0%, #16a34a 100%);
+            color: #fff;
+        }
+        
+        .predict-btn.down {
+            background: linear-gradient(135deg, var(--red) 0%, #dc2626 100%);
+            color: #fff;
+        }
+        
+        .predict-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .predict-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .predict-btn .icon {
+            font-size: 2rem;
+        }
+        
+        /* Streak Indicator */
+        .streak-indicator {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(201, 162, 39, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(201, 162, 39, 0.2);
+        }
+        
+        .streak-fire {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .streak-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+        
+        .streak-multiplier {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        /* Result Overlay */
+        .result-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .result-overlay.active { display: flex; }
+        
+        .result-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            border: 2px solid var(--gold);
+            border-radius: 30px;
+            padding: 50px;
+            text-align: center;
+            max-width: 500px;
+            margin: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(201, 162, 39, 0.1), transparent 30%);
+            animation: rotate 10s linear infinite;
+        }
+        
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+        
+        .result-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .result-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+        
+        .result-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        
+        .result-score {
+            font-size: 4rem;
+            font-weight: 800;
+            margin: 20px 0;
+            background: linear-gradient(135deg, var(--gold) 0%, #e8d5a3 50%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .result-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .result-stat {
+            text-align: center;
+        }
+        
+        .result-stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .result-stat-label {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.8rem;
+        }
+        
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .share-btn {
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .share-btn:hover { transform: scale(1.05); }
+        .share-btn.twitter { background: #1DA1F2; color: #fff; }
+        .share-btn.whatsapp { background: #25D366; color: #fff; }
+        .share-btn.retry { background: var(--gold); color: #000; }
+        
+        .watermark {
+            margin-top: 25px;
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        /* Round Result */
+        .round-result {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1500;
+            animation: popIn 0.3s ease;
+        }
+        
+        .round-result.active { display: block; }
+        
+        @keyframes popIn {
+            0% { transform: translate(-50%, -50%) scale(0); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+        
+        .round-badge {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: 800;
+        }
+        
+        .round-badge.correct {
+            background: linear-gradient(135deg, var(--green) 0%, #16a34a 100%);
+            box-shadow: 0 0 60px rgba(34, 197, 94, 0.5);
+        }
+        
+        .round-badge.wrong {
+            background: linear-gradient(135deg, var(--red) 0%, #dc2626 100%);
+            box-shadow: 0 0 60px rgba(239, 68, 68, 0.5);
+        }
+        
+        .round-points {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+        
+        /* Start Screen */
+        .start-screen {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .game-icon {
+            font-size: 5rem;
+            margin-bottom: 30px;
+        }
+        
+        .start-screen h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, var(--gold) 50%, #fff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .start-screen p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            max-width: 500px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+        
+        .how-to-play {
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+        
+        .how-to-play h3 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .rule {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .rule:last-child { border-bottom: none; }
+        
+        .rule-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(201, 162, 39, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .start-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 60px;
+            background: linear-gradient(135deg, var(--gold) 0%, #a68b1e 100%);
+            border: none;
+            border-radius: 60px;
+            color: #000;
+            font-size: 1.3rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 40px rgba(201, 162, 39, 0.3);
+        }
+        
+        .start-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .high-scores {
+            margin-top: 50px;
+            padding: 25px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+        }
+        
+        .high-scores h4 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .score-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 10px;
+            margin-bottom: 8px;
+        }
+        
+        .score-rank { color: var(--gold); font-weight: 700; }
+        .score-name { flex: 1; margin-left: 15px; }
+        .score-points { font-family: 'Orbitron', sans-serif; color: var(--green); }
+        
+        /* Game Area (Hidden initially) */
+        .game-area {
+            display: none;
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .game-header { flex-wrap: wrap; gap: 15px; }
+            .stat-group { flex: 1; min-width: 80px; }
+            .chart-canvas-container { height: 200px; }
+            .prediction-buttons { flex-direction: column; }
+            .predict-btn { max-width: 100%; }
+            .result-score { font-size: 3rem; }
+            .start-screen h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="chart-bg"></div>
+    
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                <span class="logo-text">BroBillionaire</span>
+            </a>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <!-- Start Screen -->
+        <div class="start-screen" id="startScreen">
+            <div class="game-icon">📈📉</div>
+            <h1>MARKET PREDICTION GAME</h1>
+            <p>Think you can predict the market? Look at the chart and guess if the next candle goes UP or DOWN. Build streaks, earn multipliers, compete for high scores!</p>
+            
+            <div class="how-to-play">
+                <h3>🎮 How To Play</h3>
+                <div class="rule">
+                    <div class="rule-icon">👀</div>
+                    <div>Look at the chart showing real historical price action</div>
+                </div>
+                <div class="rule">
+                    <div class="rule-icon">🤔</div>
+                    <div>Predict whether the next hidden candle goes UP ⬆️ or DOWN ⬇️</div>
+                </div>
+                <div class="rule">
+                    <div class="rule-icon">🔥</div>
+                    <div>Build streaks for score multipliers (2x, 3x, 5x!)</div>
+                </div>
+                <div class="rule">
+                    <div class="rule-icon">❤️</div>
+                    <div>You have 3 lives - game over when you run out!</div>
+                </div>
+            </div>
+            
+            <button class="start-btn" onclick="startGame()">
+                <i class="fas fa-play"></i>
+                Start Game
+            </button>
+            
+            <div class="high-scores">
+                <h4><i class="fas fa-trophy"></i> Today's High Scores</h4>
+                <div class="score-row">
+                    <span class="score-rank">🥇</span>
+                    <span class="score-name">@ChartMaster</span>
+                    <span class="score-points">4,850</span>
+                </div>
+                <div class="score-row">
+                    <span class="score-rank">🥈</span>
+                    <span class="score-name">@NiftyPro</span>
+                    <span class="score-points">3,920</span>
+                </div>
+                <div class="score-row">
+                    <span class="score-rank">🥉</span>
+                    <span class="score-name">@TrendTrader</span>
+                    <span class="score-points">3,450</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Game Area -->
+        <div class="game-area" id="gameArea">
+            <div class="game-header">
+                <div class="stat-group">
+                    <div class="stat-label">Score</div>
+                    <div class="stat-value gold" id="scoreValue">0</div>
+                </div>
+                <div class="stat-group">
+                    <div class="stat-label">Round</div>
+                    <div class="stat-value" id="roundValue">1</div>
+                </div>
+                <div class="stat-group">
+                    <div class="stat-label">Streak</div>
+                    <div class="stat-value green" id="streakValue">0</div>
+                </div>
+                <div class="stat-group">
+                    <div class="stat-label">Lives</div>
+                    <div class="stat-value lives" id="livesValue">❤️❤️❤️</div>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <div class="chart-info">
+                    <div class="stock-name" id="stockName">NIFTY 50</div>
+                    <div class="stock-price" id="stockPrice">₹22,450</div>
+                </div>
+                
+                <div class="chart-canvas-container">
+                    <canvas id="chartCanvas"></canvas>
+                    <div class="hidden-section">
+                        <div class="hidden-question">?</div>
+                    </div>
+                </div>
+                
+                <div class="prediction-buttons" id="predictionButtons">
+                    <button class="predict-btn up" onclick="makePrediction('up')">
+                        <span class="icon">⬆️</span>
+                        <span>UP</span>
+                    </button>
+                    <button class="predict-btn down" onclick="makePrediction('down')">
+                        <span class="icon">⬇️</span>
+                        <span>DOWN</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="streak-indicator" id="streakIndicator" style="display: none;">
+                <div class="streak-fire">🔥</div>
+                <div class="streak-text" id="streakText">3 STREAK!</div>
+                <div class="streak-multiplier" id="multiplierText">2x Score Multiplier Active!</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Round Result -->
+    <div class="round-result" id="roundResult">
+        <div class="round-badge" id="roundBadge">
+            <span id="roundIcon">✓</span>
+            <span class="round-points" id="roundPoints">+100</span>
+        </div>
+    </div>
+    
+    <!-- Game Over Overlay -->
+    <div class="result-overlay" id="resultOverlay">
+        <div class="result-card">
+            <div class="result-content">
+                <div class="result-icon">🎮</div>
+                <div class="result-title">GAME OVER!</div>
+                <div class="result-score" id="finalScore">2,450</div>
+                <div style="color: rgba(255,255,255,0.6);">FINAL SCORE</div>
+                
+                <div class="result-stats">
+                    <div class="result-stat">
+                        <div class="result-stat-value" style="color: var(--green);" id="correctPredictions">12</div>
+                        <div class="result-stat-label">Correct</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="result-stat-value" style="color: var(--gold);" id="maxStreak">5</div>
+                        <div class="result-stat-label">Best Streak</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="result-stat-value" style="color: #3b82f6;" id="accuracy">75%</div>
+                        <div class="result-stat-label">Accuracy</div>
+                    </div>
+                </div>
+                
+                <div class="share-buttons">
+                    <button class="share-btn twitter" onclick="shareTwitter()">
+                        <i class="fab fa-twitter"></i> Share on X
+                    </button>
+                    <button class="share-btn whatsapp" onclick="shareWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </button>
+                    <button class="share-btn retry" onclick="restartGame()">
+                        <i class="fas fa-redo"></i> Play Again
+                    </button>
+                </div>
+                
+                <div class="watermark">brobillionaire.com</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Game State
+        let score = 0;
+        let round = 1;
+        let streak = 0;
+        let maxStreak = 0;
+        let lives = 3;
+        let correctPredictions = 0;
+        let totalPredictions = 0;
+        let currentChartData = [];
+        let hiddenValue = 0;
+        let canvas, ctx;
+        
+        // Sample historical data patterns
+        const stockNames = ['NIFTY 50', 'BANK NIFTY', 'RELIANCE', 'TCS', 'HDFC BANK', 'INFOSYS'];
+        
+        function generateChartData() {
+            const data = [];
+            let price = 20000 + Math.random() * 5000;
+            const volatility = 50 + Math.random() * 100;
+            
+            for (let i = 0; i < 20; i++) {
+                const change = (Math.random() - 0.5) * volatility;
+                const open = price;
+                const close = price + change;
+                const high = Math.max(open, close) + Math.random() * volatility * 0.5;
+                const low = Math.min(open, close) - Math.random() * volatility * 0.5;
+                
+                data.push({ open, high, low, close });
+                price = close;
+            }
+            
+            // Generate hidden candle
+            const lastPrice = data[data.length - 1].close;
+            const hiddenChange = (Math.random() - 0.5) * volatility;
+            const hiddenClose = lastPrice + hiddenChange;
+            
+            hiddenValue = hiddenClose > lastPrice ? 'up' : 'down';
+            
+            data.push({
+                open: lastPrice,
+                close: hiddenClose,
+                high: Math.max(lastPrice, hiddenClose) + Math.random() * volatility * 0.3,
+                low: Math.min(lastPrice, hiddenClose) - Math.random() * volatility * 0.3,
+                hidden: true
+            });
+            
+            return data;
+        }
+        
+        function drawChart() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const visibleData = currentChartData.slice(0, -1);
+            const padding = 20;
+            const chartWidth = canvas.width * 0.7 - padding * 2;
+            const chartHeight = canvas.height - padding * 2;
+            
+            // Calculate price range
+            let minPrice = Infinity;
+            let maxPrice = -Infinity;
+            visibleData.forEach(candle => {
+                minPrice = Math.min(minPrice, candle.low);
+                maxPrice = Math.max(maxPrice, candle.high);
+            });
+            
+            const priceRange = maxPrice - minPrice;
+            const candleWidth = chartWidth / visibleData.length * 0.8;
+            const candleGap = chartWidth / visibleData.length * 0.2;
+            
+            // Draw grid lines
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 5; i++) {
+                const y = padding + (chartHeight / 5) * i;
+                ctx.beginPath();
+                ctx.moveTo(padding, y);
+                ctx.lineTo(padding + chartWidth, y);
+                ctx.stroke();
+            }
+            
+            // Draw candles
+            visibleData.forEach((candle, i) => {
+                const x = padding + (i * (candleWidth + candleGap)) + candleWidth / 2;
+                const isGreen = candle.close >= candle.open;
+                
+                const openY = padding + ((maxPrice - candle.open) / priceRange) * chartHeight;
+                const closeY = padding + ((maxPrice - candle.close) / priceRange) * chartHeight;
+                const highY = padding + ((maxPrice - candle.high) / priceRange) * chartHeight;
+                const lowY = padding + ((maxPrice - candle.low) / priceRange) * chartHeight;
+                
+                // Wick
+                ctx.strokeStyle = isGreen ? '#22c55e' : '#ef4444';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(x, highY);
+                ctx.lineTo(x, lowY);
+                ctx.stroke();
+                
+                // Body
+                ctx.fillStyle = isGreen ? '#22c55e' : '#ef4444';
+                const bodyTop = Math.min(openY, closeY);
+                const bodyHeight = Math.abs(closeY - openY) || 1;
+                ctx.fillRect(x - candleWidth / 2, bodyTop, candleWidth, bodyHeight);
+            });
+        }
+        
+        function startGame() {
+            score = 0;
+            round = 1;
+            streak = 0;
+            maxStreak = 0;
+            lives = 3;
+            correctPredictions = 0;
+            totalPredictions = 0;
+            
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('gameArea').style.display = 'block';
+            document.getElementById('resultOverlay').classList.remove('active');
+            
+            canvas = document.getElementById('chartCanvas');
+            ctx = canvas.getContext('2d');
+            
+            // Set canvas size
+            const container = canvas.parentElement;
+            canvas.width = container.offsetWidth;
+            canvas.height = container.offsetHeight;
+            
+            newRound();
+        }
+        
+        function newRound() {
+            updateDisplay();
+            
+            const buttons = document.querySelectorAll('.predict-btn');
+            buttons.forEach(btn => btn.disabled = false);
+            
+            currentChartData = generateChartData();
+            
+            const stockName = stockNames[Math.floor(Math.random() * stockNames.length)];
+            const lastPrice = currentChartData[currentChartData.length - 2].close;
+            
+            document.getElementById('stockName').textContent = stockName;
+            document.getElementById('stockPrice').textContent = '₹' + lastPrice.toFixed(2);
+            
+            drawChart();
+        }
+        
+        function updateDisplay() {
+            document.getElementById('scoreValue').textContent = score.toLocaleString();
+            document.getElementById('roundValue').textContent = round;
+            document.getElementById('streakValue').textContent = streak;
+            
+            let livesHtml = '';
+            for (let i = 0; i < lives; i++) livesHtml += '❤️';
+            for (let i = lives; i < 3; i++) livesHtml += '🖤';
+            document.getElementById('livesValue').innerHTML = livesHtml;
+            
+            // Streak indicator
+            const streakIndicator = document.getElementById('streakIndicator');
+            if (streak >= 3) {
+                streakIndicator.style.display = 'block';
+                document.getElementById('streakText').textContent = streak + ' STREAK!';
+                
+                let multiplier = 1;
+                if (streak >= 10) multiplier = 5;
+                else if (streak >= 5) multiplier = 3;
+                else if (streak >= 3) multiplier = 2;
+                
+                document.getElementById('multiplierText').textContent = multiplier + 'x Score Multiplier Active!';
+            } else {
+                streakIndicator.style.display = 'none';
+            }
+        }
+        
+        function makePrediction(prediction) {
+            const buttons = document.querySelectorAll('.predict-btn');
+            buttons.forEach(btn => btn.disabled = true);
+            
+            totalPredictions++;
+            
+            const isCorrect = prediction === hiddenValue;
+            
+            // Show round result
+            const roundResult = document.getElementById('roundResult');
+            const roundBadge = document.getElementById('roundBadge');
+            const roundIcon = document.getElementById('roundIcon');
+            const roundPoints = document.getElementById('roundPoints');
+            
+            if (isCorrect) {
+                correctPredictions++;
+                streak++;
+                if (streak > maxStreak) maxStreak = streak;
+                
+                let multiplier = 1;
+                if (streak >= 10) multiplier = 5;
+                else if (streak >= 5) multiplier = 3;
+                else if (streak >= 3) multiplier = 2;
+                
+                const points = 100 * multiplier;
+                score += points;
+                
+                roundBadge.className = 'round-badge correct';
+                roundIcon.textContent = '✓';
+                roundPoints.textContent = '+' + points;
+            } else {
+                streak = 0;
+                lives--;
+                
+                roundBadge.className = 'round-badge wrong';
+                roundIcon.textContent = '✗';
+                roundPoints.textContent = '-1 ❤️';
+            }
+            
+            roundResult.classList.add('active');
+            
+            setTimeout(() => {
+                roundResult.classList.remove('active');
+                
+                if (lives <= 0) {
+                    gameOver();
+                } else {
+                    round++;
+                    newRound();
+                }
+            }, 1000);
+        }
+        
+        function gameOver() {
+            document.getElementById('gameArea').style.display = 'none';
+            document.getElementById('resultOverlay').classList.add('active');
+            
+            document.getElementById('finalScore').textContent = score.toLocaleString();
+            document.getElementById('correctPredictions').textContent = correctPredictions;
+            document.getElementById('maxStreak').textContent = maxStreak;
+            document.getElementById('accuracy').textContent = Math.round((correctPredictions / totalPredictions) * 100) + '%';
+        }
+        
+        function restartGame() {
+            startGame();
+        }
+        
+        function shareTwitter() {
+            const text = `🎮 Market Prediction Game\n\n📊 Score: ${score.toLocaleString()}\n✅ ${correctPredictions} Correct\n🔥 ${maxStreak} Best Streak\n\nCan you beat my score? 👇\n\n`;
+            const url = 'https://brobillionaire.com/market-prediction-game.html';
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+        }
+        
+        function shareWhatsApp() {
+            const text = `🎮 *Market Prediction Game*\n\n📊 Score: ${score.toLocaleString()}\n✅ ${correctPredictions} Correct\n🔥 ${maxStreak} Best Streak\n\nCan you beat my score?\n\nhttps://brobillionaire.com/market-prediction-game.html`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+        }
+        
+        // Handle resize
+        window.addEventListener('resize', () => {
+            if (canvas) {
+                const container = canvas.parentElement;
+                canvas.width = container.offsetWidth;
+                canvas.height = container.offsetHeight;
+                if (currentChartData.length > 0) {
+                    drawChart();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

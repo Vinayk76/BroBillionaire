@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30-Day Trading Challenge | Build Discipline | BroBillionaire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/jpeg" href="logo.jpg">
+    
+    <meta name="description" content="Join the 30-day trading discipline challenge! Track your habits, build consistency, and share your progress with the trading community.">
+    <link rel="canonical" href="https://brobillionaire.com/30-day-challenge.html">
+    
+    <meta property="og:title" content="🔥 30-Day Trading Challenge - Build Discipline">
+    <meta property="og:description" content="Join 10,000+ traders building consistent habits. Track your streak. Share your progress!">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --gold: #C9A227;
+            --green: #22c55e;
+            --red: #ef4444;
+            --blue: #3b82f6;
+            --purple: #a855f7;
+            --orange: #f97316;
+            --bg: #0a0a0a;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: #fff;
+            min-height: 100vh;
+        }
+        
+        /* Background */
+        .bg-effect {
+            position: fixed;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse at 10% 20%, rgba(249, 115, 22, 0.1) 0%, transparent 40%),
+                radial-gradient(ellipse at 90% 80%, rgba(34, 197, 94, 0.08) 0%, transparent 40%);
+            pointer-events: none;
+        }
+        
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-img { width: 40px; height: 40px; border-radius: 10px; }
+        .logo-text { font-size: 1.25rem; font-weight: 700; color: #fff; }
+        
+        .nav-links { display: flex; gap: 30px; }
+        .nav-link {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .nav-link:hover { color: var(--gold); }
+        
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 100px 20px 60px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Header */
+        .page-header {
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .challenge-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 25px;
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.2) 0%, rgba(239, 68, 68, 0.2) 100%);
+            border: 1px solid rgba(249, 115, 22, 0.4);
+            border-radius: 30px;
+            margin-bottom: 25px;
+            animation: glow 2s infinite;
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(249, 115, 22, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(249, 115, 22, 0.5); }
+        }
+        
+        .challenge-badge span {
+            background: linear-gradient(90deg, var(--orange), var(--red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        
+        .page-header h1 .fire {
+            background: linear-gradient(135deg, var(--orange), var(--red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .page-header p {
+            color: rgba(255,255,255,0.6);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 25px 15px;
+            text-align: center;
+        }
+        
+        .stat-item .icon {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .stat-item .value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+        
+        .stat-item .label {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+        
+        /* Challenge Grid */
+        .challenge-section {
+            background: linear-gradient(135deg, rgba(26,26,26,0.9) 0%, rgba(13,13,13,0.95) 100%);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .challenge-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+        
+        .day-cell {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            background: rgba(255,255,255,0.03);
+            position: relative;
+        }
+        
+        .day-cell:hover {
+            transform: scale(1.1);
+            z-index: 10;
+        }
+        
+        .day-cell.future {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        
+        .day-cell.completed {
+            background: rgba(34, 197, 94, 0.15);
+            border-color: var(--green);
+        }
+        
+        .day-cell.missed {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: var(--red);
+        }
+        
+        .day-cell.today {
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(201, 162, 39, 0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(201, 162, 39, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(201, 162, 39, 0.6); }
+        }
+        
+        .day-cell .day-num {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        
+        .day-cell .day-icon {
+            font-size: 0.9rem;
+            margin-top: 3px;
+        }
+        
+        .day-cell.completed .day-icon { color: var(--green); }
+        .day-cell.missed .day-icon { color: var(--red); }
+        
+        /* Today's Tasks */
+        .tasks-section {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(13,13,13,0.95) 100%);
+            border: 2px solid rgba(249, 115, 22, 0.3);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .tasks-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .task-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .task-item:hover {
+            background: rgba(0,0,0,0.5);
+            border-color: var(--gold);
+        }
+        
+        .task-item.completed {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: var(--green);
+        }
+        
+        .task-checkbox {
+            width: 28px;
+            height: 28px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+        
+        .task-item.completed .task-checkbox {
+            background: var(--green);
+            border-color: var(--green);
+        }
+        
+        .task-checkbox i {
+            color: #fff;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        
+        .task-item.completed .task-checkbox i {
+            opacity: 1;
+        }
+        
+        .task-content {
+            flex: 1;
+        }
+        
+        .task-content h4 {
+            font-size: 1rem;
+            margin-bottom: 3px;
+        }
+        
+        .task-content p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+        
+        .task-item.completed .task-content h4 {
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+        
+        .task-points {
+            padding: 5px 12px;
+            background: rgba(201, 162, 39, 0.15);
+            border-radius: 20px;
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+        
+        /* Complete Day Button */
+        .complete-day-btn {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--green), #16a34a);
+            border: none;
+            border-radius: 15px;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .complete-day-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.3);
+        }
+        
+        .complete-day-btn:disabled {
+            background: rgba(255,255,255,0.1);
+            cursor: not-allowed;
+        }
+        
+        /* Progress Milestones */
+        .milestones-section {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .milestones-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .milestones-track {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            padding: 0 30px;
+        }
+        
+        .milestones-track::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 60px;
+            right: 60px;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+        }
+        
+        .milestones-track .progress-fill {
+            position: absolute;
+            top: 30px;
+            left: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--green), var(--gold));
+            border-radius: 2px;
+            transition: width 0.5s;
+        }
+        
+        .milestone {
+            text-align: center;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .milestone .circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: 3px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 10px;
+            transition: all 0.3s;
+        }
+        
+        .milestone.achieved .circle {
+            background: var(--green);
+            border-color: var(--green);
+        }
+        
+        .milestone.current .circle {
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(201, 162, 39, 0.4);
+        }
+        
+        .milestone .days {
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 3px;
+        }
+        
+        .milestone .reward {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.8rem;
+        }
+        
+        /* Share Section */
+        .share-section {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, rgba(13,13,13,0.9) 100%);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .share-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .share-section p {
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 25px;
+        }
+        
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .share-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .share-btn:hover { transform: scale(1.05); }
+        
+        .share-btn.twitter {
+            background: #000;
+            border: 1px solid #333;
+            color: #fff;
+        }
+        
+        .share-btn.whatsapp {
+            background: #25D366;
+            color: #fff;
+        }
+        
+        .share-btn.instagram {
+            background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: #fff;
+        }
+        
+        /* Celebration Modal */
+        .celebration-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .celebration-modal.active { display: flex; }
+        
+        .celebration-content {
+            background: linear-gradient(135deg, rgba(26,26,26,0.95) 0%, rgba(13,13,13,0.98) 100%);
+            border: 2px solid var(--gold);
+            border-radius: 24px;
+            padding: 50px;
+            text-align: center;
+            max-width: 450px;
+            animation: scaleIn 0.5s;
+        }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .celebration-content .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        
+        .celebration-content h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--gold);
+        }
+        
+        .celebration-content p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 30px;
+        }
+        
+        .celebration-content button {
+            padding: 15px 40px;
+            background: var(--gold);
+            border: none;
+            border-radius: 12px;
+            color: #000;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: 60px;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .footer p { color: rgba(255,255,255,0.5); }
+        .footer a { color: var(--gold); text-decoration: none; }
+        
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            top: -10px;
+            z-index: 3000;
+            pointer-events: none;
+            animation: fall 3s linear forwards;
+        }
+        
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 2rem; }
+            .stats-row { grid-template-columns: repeat(2, 1fr); }
+            .days-grid { grid-template-columns: repeat(5, 1fr); }
+            .milestones-track { flex-direction: column; gap: 20px; }
+            .milestones-track::before, .milestones-track .progress-fill { display: none; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-effect"></div>
+    
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                <span class="logo-text">BroBillionaire</span>
+            </a>
+            <div class="nav-links">
+                <a href="viral-tools-hub.html" class="nav-link">Viral Tools</a>
+                <a href="articles.html" class="nav-link">Articles</a>
+                <a href="community.html" class="nav-link">Community</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <!-- Header -->
+        <section class="page-header">
+            <div class="challenge-badge">
+                <i class="fas fa-fire"></i>
+                <span>30-Day Challenge</span>
+            </div>
+            <h1>Build <span class="fire">Discipline</span>.<br>Become Profitable.</h1>
+            <p>Complete daily trading habits for 30 days. Track your progress, build consistency, and share your journey.</p>
+        </section>
+        
+        <!-- Stats -->
+        <div class="stats-row">
+            <div class="stat-item">
+                <div class="icon">🔥</div>
+                <div class="value" id="currentStreak">0</div>
+                <div class="label">Current Streak</div>
+            </div>
+            <div class="stat-item">
+                <div class="icon">📈</div>
+                <div class="value" id="totalDays">0</div>
+                <div class="label">Days Completed</div>
+            </div>
+            <div class="stat-item">
+                <div class="icon">⭐</div>
+                <div class="value" id="totalPoints">0</div>
+                <div class="label">Total Points</div>
+            </div>
+            <div class="stat-item">
+                <div class="icon">🏆</div>
+                <div class="value" id="progressPercent">0%</div>
+                <div class="label">Progress</div>
+            </div>
+        </div>
+        
+        <!-- 30-Day Grid -->
+        <section class="challenge-section">
+            <h2>📅 Your 30-Day Journey</h2>
+            <div class="days-grid" id="daysGrid"></div>
+        </section>
+        
+        <!-- Today's Tasks -->
+        <section class="tasks-section">
+            <h2>✅ Today's Trading Habits</h2>
+            <div class="task-list" id="taskList">
+                <div class="task-item" data-task="journal" onclick="toggleTask(this)">
+                    <div class="task-checkbox"><i class="fas fa-check"></i></div>
+                    <div class="task-content">
+                        <h4>Write in Trading Journal</h4>
+                        <p>Log your trades, emotions, and lessons learned</p>
+                    </div>
+                    <div class="task-points">+20 pts</div>
+                </div>
+                
+                <div class="task-item" data-task="plan" onclick="toggleTask(this)">
+                    <div class="task-checkbox"><i class="fas fa-check"></i></div>
+                    <div class="task-content">
+                        <h4>Create Trading Plan</h4>
+                        <p>Prepare watchlist and setup for tomorrow</p>
+                    </div>
+                    <div class="task-points">+15 pts</div>
+                </div>
+                
+                <div class="task-item" data-task="review" onclick="toggleTask(this)">
+                    <div class="task-checkbox"><i class="fas fa-check"></i></div>
+                    <div class="task-content">
+                        <h4>Review Market</h4>
+                        <p>Study charts and analyze price action</p>
+                    </div>
+                    <div class="task-points">+15 pts</div>
+                </div>
+                
+                <div class="task-item" data-task="learn" onclick="toggleTask(this)">
+                    <div class="task-checkbox"><i class="fas fa-check"></i></div>
+                    <div class="task-content">
+                        <h4>Learn Something New</h4>
+                        <p>Read an article, watch a video, or study a concept</p>
+                    </div>
+                    <div class="task-points">+10 pts</div>
+                </div>
+                
+                <div class="task-item" data-task="rules" onclick="toggleTask(this)">
+                    <div class="task-checkbox"><i class="fas fa-check"></i></div>
+                    <div class="task-content">
+                        <h4>Follow Your Rules</h4>
+                        <p>Stick to stop loss, position sizing, and risk limits</p>
+                    </div>
+                    <div class="task-points">+25 pts</div>
+                </div>
+            </div>
+            
+            <button class="complete-day-btn" id="completeDayBtn" onclick="completeDay()">
+                <i class="fas fa-check-circle"></i>
+                Complete Today's Challenge
+            </button>
+        </section>
+        
+        <!-- Milestones -->
+        <section class="milestones-section">
+            <h2>🎯 Milestones & Rewards</h2>
+            <div class="milestones-track">
+                <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+                
+                <div class="milestone" data-day="7">
+                    <div class="circle">🌟</div>
+                    <div class="days">Day 7</div>
+                    <div class="reward">Starter Badge</div>
+                </div>
+                
+                <div class="milestone" data-day="14">
+                    <div class="circle">⚡</div>
+                    <div class="days">Day 14</div>
+                    <div class="reward">Momentum Badge</div>
+                </div>
+                
+                <div class="milestone" data-day="21">
+                    <div class="circle">🔥</div>
+                    <div class="days">Day 21</div>
+                    <div class="reward">Discipline Badge</div>
+                </div>
+                
+                <div class="milestone" data-day="30">
+                    <div class="circle">👑</div>
+                    <div class="days">Day 30</div>
+                    <div class="reward">Legend Badge</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Share -->
+        <section class="share-section">
+            <h2>📢 Share Your Progress</h2>
+            <p>Inspire others and stay accountable by sharing your streak!</p>
+            <div class="share-buttons">
+                <a href="#" class="share-btn twitter" id="twitterShare" target="_blank">
+                    <i class="fab fa-x-twitter"></i> Share on X
+                </a>
+                <a href="#" class="share-btn whatsapp" id="whatsappShare" target="_blank">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+                <a href="#" class="share-btn instagram" id="instagramShare" onclick="copyForInstagram(); return false;">
+                    <i class="fab fa-instagram"></i> Copy for IG
+                </a>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Made with 💛 by <a href="index.html">BroBillionaire</a></p>
+        </footer>
+    </div>
+    
+    <!-- Celebration Modal -->
+    <div class="celebration-modal" id="celebrationModal">
+        <div class="celebration-content">
+            <div class="icon" id="celebrationIcon">🎉</div>
+            <h2 id="celebrationTitle">Day Complete!</h2>
+            <p id="celebrationMessage">You've completed Day 1! Keep the streak going!</p>
+            <button onclick="closeCelebration()">Keep Going!</button>
+        </div>
+    </div>
+    
+    <script>
+        // Challenge State
+        let challengeState = {
+            startDate: null,
+            days: {},
+            currentStreak: 0,
+            longestStreak: 0,
+            totalPoints: 0,
+            todayTasks: []
+        };
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadState();
+            renderDaysGrid();
+            updateStats();
+            updateShareLinks();
+            updateMilestones();
+        });
+        
+        function loadState() {
+            const saved = localStorage.getItem('challengeState30');
+            if (saved) {
+                challengeState = JSON.parse(saved);
+            } else {
+                // Start new challenge
+                challengeState.startDate = new Date().toISOString().split('T')[0];
+            }
+            
+            // Load today's tasks
+            const today = new Date().toISOString().split('T')[0];
+            const todayData = challengeState.days[today];
+            if (todayData && todayData.tasks) {
+                todayData.tasks.forEach(taskId => {
+                    const taskEl = document.querySelector(`[data-task="${taskId}"]`);
+                    if (taskEl) taskEl.classList.add('completed');
+                });
+            }
+            
+            updateCompleteButton();
+        }
+        
+        function saveState() {
+            localStorage.setItem('challengeState30', JSON.stringify(challengeState));
+        }
+        
+        function renderDaysGrid() {
+            const grid = document.getElementById('daysGrid');
+            grid.innerHTML = '';
+            
+            const startDate = new Date(challengeState.startDate);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            for (let i = 1; i <= 30; i++) {
+                const dayDate = new Date(startDate);
+                dayDate.setDate(startDate.getDate() + i - 1);
+                const dateStr = dayDate.toISOString().split('T')[0];
+                
+                const cell = document.createElement('div');
+                cell.className = 'day-cell';
+                cell.dataset.day = i;
+                cell.dataset.date = dateStr;
+                
+                const dayNum = document.createElement('div');
+                dayNum.className = 'day-num';
+                dayNum.textContent = i;
+                cell.appendChild(dayNum);
+                
+                const dayIcon = document.createElement('div');
+                dayIcon.className = 'day-icon';
+                cell.appendChild(dayIcon);
+                
+                // Check day status
+                if (dayDate > today) {
+                    cell.classList.add('future');
+                } else if (dayDate.getTime() === today.getTime()) {
+                    cell.classList.add('today');
+                    if (challengeState.days[dateStr]?.completed) {
+                        cell.classList.add('completed');
+                        dayIcon.innerHTML = '<i class="fas fa-check"></i>';
+                    }
+                } else {
+                    // Past day
+                    if (challengeState.days[dateStr]?.completed) {
+                        cell.classList.add('completed');
+                        dayIcon.innerHTML = '<i class="fas fa-check"></i>';
+                    } else {
+                        cell.classList.add('missed');
+                        dayIcon.innerHTML = '<i class="fas fa-times"></i>';
+                    }
+                }
+                
+                grid.appendChild(cell);
+            }
+        }
+        
+        function toggleTask(taskEl) {
+            taskEl.classList.toggle('completed');
+            updateCompleteButton();
+        }
+        
+        function updateCompleteButton() {
+            const completedTasks = document.querySelectorAll('.task-item.completed').length;
+            const totalTasks = document.querySelectorAll('.task-item').length;
+            const btn = document.getElementById('completeDayBtn');
+            
+            const today = new Date().toISOString().split('T')[0];
+            const alreadyCompleted = challengeState.days[today]?.completed;
+            
+            if (alreadyCompleted) {
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-check-circle"></i> Today Completed!';
+            } else if (completedTasks < 3) {
+                btn.disabled = true;
+                btn.innerHTML = `<i class="fas fa-lock"></i> Complete ${3 - completedTasks} more tasks`;
+            } else {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-check-circle"></i> Complete Today\'s Challenge';
+            }
+        }
+        
+        function completeDay() {
+            const today = new Date().toISOString().split('T')[0];
+            
+            // Get completed tasks
+            const completedTasks = [];
+            document.querySelectorAll('.task-item.completed').forEach(task => {
+                completedTasks.push(task.dataset.task);
+            });
+            
+            // Calculate points
+            let points = 0;
+            completedTasks.forEach(task => {
+                const taskEl = document.querySelector(`[data-task="${task}"]`);
+                const pointsText = taskEl.querySelector('.task-points').textContent;
+                points += parseInt(pointsText.match(/\d+/)[0]);
+            });
+            
+            // Streak bonus
+            if (challengeState.currentStreak > 0) {
+                const bonus = Math.min(challengeState.currentStreak * 5, 50);
+                points += bonus;
+            }
+            
+            // Save day
+            challengeState.days[today] = {
+                completed: true,
+                tasks: completedTasks,
+                points: points
+            };
+            
+            // Update streak
+            challengeState.currentStreak++;
+            if (challengeState.currentStreak > challengeState.longestStreak) {
+                challengeState.longestStreak = challengeState.currentStreak;
+            }
+            
+            // Update total points
+            challengeState.totalPoints += points;
+            
+            saveState();
+            renderDaysGrid();
+            updateStats();
+            updateCompleteButton();
+            updateShareLinks();
+            updateMilestones();
+            
+            // Celebrate!
+            showCelebration();
+            launchConfetti();
+            
+            // Track event
+            if (typeof gtag === 'function') {
+                gtag('event', 'complete_day', { 
+                    day: Object.keys(challengeState.days).filter(d => challengeState.days[d].completed).length,
+                    points: points
+                });
+            }
+        }
+        
+        function updateStats() {
+            const completedDays = Object.keys(challengeState.days).filter(d => challengeState.days[d].completed).length;
+            
+            document.getElementById('currentStreak').textContent = challengeState.currentStreak;
+            document.getElementById('totalDays').textContent = completedDays;
+            document.getElementById('totalPoints').textContent = challengeState.totalPoints;
+            document.getElementById('progressPercent').textContent = Math.round((completedDays / 30) * 100) + '%';
+        }
+        
+        function updateMilestones() {
+            const completedDays = Object.keys(challengeState.days).filter(d => challengeState.days[d].completed).length;
+            
+            document.querySelectorAll('.milestone').forEach(m => {
+                const day = parseInt(m.dataset.day);
+                m.classList.remove('achieved', 'current');
+                
+                if (completedDays >= day) {
+                    m.classList.add('achieved');
+                } else if (completedDays >= day - 7 && completedDays < day) {
+                    m.classList.add('current');
+                }
+            });
+            
+            // Update progress bar
+            const progressPercent = (completedDays / 30) * 100;
+            document.getElementById('progressFill').style.width = `calc(${progressPercent}% - 60px)`;
+        }
+        
+        function updateShareLinks() {
+            const completedDays = Object.keys(challengeState.days).filter(d => challengeState.days[d].completed).length;
+            const streak = challengeState.currentStreak;
+            
+            const shareText = `🔥 Day ${completedDays}/30 of my Trading Discipline Challenge!
+
+📈 Current Streak: ${streak} days
+⭐ Total Points: ${challengeState.totalPoints}
+
+Building discipline, one day at a time. Join me at brobillionaire.com/30-day-challenge.html
+
+#TradingChallenge #Discipline #BroBillionaire`;
+            
+            document.getElementById('twitterShare').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
+            document.getElementById('whatsappShare').href = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+        }
+        
+        function copyForInstagram() {
+            const completedDays = Object.keys(challengeState.days).filter(d => challengeState.days[d].completed).length;
+            
+            const text = `🔥 Day ${completedDays}/30 of my Trading Discipline Challenge!
+
+📈 Current Streak: ${challengeState.currentStreak} days
+⭐ Total Points: ${challengeState.totalPoints}
+
+Building discipline, one day at a time.
+
+Join the challenge: brobillionaire.com/30-day-challenge.html
+
+#TradingChallenge #DisciplineChallenge #Trading #Trader #StockMarket #ForexTrader #OptionsTrading #TradingDiscipline #BroBillionaire`;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copied! Now paste it in your Instagram caption 📸');
+            });
+        }
+        
+        function showCelebration() {
+            const completedDays = Object.keys(challengeState.days).filter(d => challengeState.days[d].completed).length;
+            
+            let icon = '🎉';
+            let title = 'Day Complete!';
+            let message = `You've completed Day ${completedDays}! Keep the streak going!`;
+            
+            if (completedDays === 7) {
+                icon = '🌟';
+                title = 'First Milestone!';
+                message = 'You\'ve unlocked the Starter Badge! 7 days of discipline!';
+            } else if (completedDays === 14) {
+                icon = '⚡';
+                title = 'Momentum Achieved!';
+                message = 'You\'ve unlocked the Momentum Badge! 14 days strong!';
+            } else if (completedDays === 21) {
+                icon = '🔥';
+                title = 'Discipline Master!';
+                message = 'You\'ve unlocked the Discipline Badge! 21 days - habits are forming!';
+            } else if (completedDays === 30) {
+                icon = '👑';
+                title = 'LEGEND STATUS!';
+                message = 'You did it! 30 days of pure discipline! You are a LEGEND!';
+            }
+            
+            document.getElementById('celebrationIcon').textContent = icon;
+            document.getElementById('celebrationTitle').textContent = title;
+            document.getElementById('celebrationMessage').textContent = message;
+            document.getElementById('celebrationModal').classList.add('active');
+        }
+        
+        function closeCelebration() {
+            document.getElementById('celebrationModal').classList.remove('active');
+        }
+        
+        function launchConfetti() {
+            const colors = ['#C9A227', '#22c55e', '#f97316', '#a855f7', '#ef4444'];
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.width = Math.random() * 10 + 5 + 'px';
+                    confetti.style.height = Math.random() * 10 + 5 + 'px';
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 50);
+            }
+        }
+        
+        // Reset challenge (for testing - can be called from console)
+        function resetChallenge() {
+            if (confirm('Are you sure you want to reset the challenge? This cannot be undone!')) {
+                localStorage.removeItem('challengeState30');
+                location.reload();
+            }
+        }
+    </script>
+</body>
+</html>
