@@ -277,7 +277,7 @@ ${'-'.repeat(40)}
 [Your Name]
 BroBillionaire | Free Trading Education
 🌐 brobillionaire.com
-📧 contact@brobillionaire.com
+📧 brobillionaire1@gmail.com
 ${'-'.repeat(40)}
 `);
 }
