@@ -14,6 +14,7 @@
     <title>Referral Leaderboard | Share & Win Rewards | BroBillionaire</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="responsive.css">
     <link rel="icon" type="image/jpeg" href="logo.jpg">
     
     <meta name="description" content="Share BroBillionaire and climb the leaderboard! Top referrers get exclusive rewards, premium access, and recognition.">
@@ -635,8 +636,21 @@
                 <a href="articles.html" class="nav-link">Articles</a>
                 <a href="community.html" class="nav-link">Community</a>
             </div>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
+    <div class="mobile-nav-dropdown" id="mobileNavDropdown">
+        <a href="index.html">Home</a>
+        <a href="articles.html">Articles</a>
+        <a href="tools.html">Calculators</a>
+        <a href="viral-tools-hub.html">Viral Tools</a>
+        <a href="community.html">Community</a>
+        <a href="about.html">About</a>
+    </div>
     
     <div class="container">
         <!-- Header -->
@@ -951,6 +965,26 @@
                     this.classList.add('active');
                 });
             });
+        });
+        
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            const dropdown = document.getElementById('mobileNavDropdown');
+            if (toggle && dropdown) {
+                toggle.classList.toggle('active');
+                dropdown.classList.toggle('active');
+            }
+        }
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            const dropdown = document.getElementById('mobileNavDropdown');
+            if (toggle && dropdown && !toggle.contains(e.target) && !dropdown.contains(e.target)) {
+                toggle.classList.remove('active');
+                dropdown.classList.remove('active');
+            }
         });
     </script>
 </body>

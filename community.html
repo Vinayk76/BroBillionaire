@@ -14,6 +14,7 @@
     <title>Free Trading Resources Hub | Join 50,000+ Traders - BroBillionaire</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="responsive.css">
     
     <meta name="description" content="Join 50,000+ traders! Get free trading resources, daily market updates, expert insights, and community support. WhatsApp, Telegram, Discord communities available.">
     <meta name="keywords" content="trading community, free trading group, trading telegram, trading whatsapp, trading discord, trading education community">
@@ -525,8 +526,21 @@
                 <a href="tools.html" class="nav-link">Tools</a>
                 <a href="viral-reach-toolkit.html" class="nav-link">Viral Tools</a>
             </div>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
+    <div class="mobile-nav-dropdown" id="mobileNavDropdown">
+        <a href="index.html">Home</a>
+        <a href="articles.html">Articles</a>
+        <a href="tools.html">Calculators</a>
+        <a href="viral-tools-hub.html">Viral Tools</a>
+        <a href="community.html">Community</a>
+        <a href="about.html">About</a>
+    </div>
     
     <!-- Hero -->
     <section class="hero">
@@ -774,6 +788,39 @@
             alert('🎉 Welcome aboard!\n\nYou\'ve been subscribed to BroBillionaire\'s weekly trading digest.\n\nCheck your inbox for a confirmation email.');
             document.getElementById('emailInput').value = '';
         }
+    </script>
+
+    <script>
+    function toggleMobileMenu() {
+        const toggle = document.querySelector('.mobile-menu-toggle');
+        const dropdown = document.getElementById('mobileNavDropdown');
+        if (toggle && dropdown) {
+            toggle.classList.toggle('active');
+            dropdown.classList.toggle('active');
+        }
+    }
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        const toggle = document.querySelector('.mobile-menu-toggle');
+        const dropdown = document.getElementById('mobileNavDropdown');
+        if (toggle && dropdown && !toggle.contains(e.target) && !dropdown.contains(e.target)) {
+            toggle.classList.remove('active');
+            dropdown.classList.remove('active');
+        }
+    });
+    
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.mobile-nav-dropdown a').forEach(link => {
+        link.addEventListener('click', () => {
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            const dropdown = document.getElementById('mobileNavDropdown');
+            if (toggle && dropdown) {
+                toggle.classList.remove('active');
+                dropdown.classList.remove('active');
+            }
+        });
+    });
     </script>
 </body>
 </html>

@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="responsive.css">
     
     <meta name="description" content="Home Loan EMI Calculator 2026: Calculate monthly EMI, total interest, eligibility, and prepayment benefits. Compare SBI, HDFC, ICICI home loan rates. Free housing loan calculator with amortization schedule.">
     <meta name="keywords" content="home loan EMI calculator, home loan calculator 2026, housing loan EMI calculator, home loan interest calculator, SBI home loan calculator, HDFC home loan EMI, home loan eligibility calculator, mortgage calculator India, home loan prepayment calculator">
@@ -975,8 +976,21 @@
                 <a href="sip-calculator.html" class="nav-link">SIP Calculator</a>
                 <a href="home-loan-calculator.html" class="nav-link active">Home Loan</a>
             </div>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
+    <div class="mobile-nav-dropdown" id="mobileNavDropdown">
+        <a href="index.html">Home</a>
+        <a href="articles.html">Articles</a>
+        <a href="tools.html">Calculators</a>
+        <a href="viral-tools-hub.html">Viral Tools</a>
+        <a href="community.html">Community</a>
+        <a href="about.html">About</a>
+    </div>
 
     <!-- Hero Section -->
     <section class="calc-hero">
@@ -1621,6 +1635,39 @@
         // Initialize
         window.addEventListener('load', updateCalculator);
         window.addEventListener('resize', updateCalculator);
+    </script>
+
+    <script>
+    function toggleMobileMenu() {
+        const toggle = document.querySelector('.mobile-menu-toggle');
+        const dropdown = document.getElementById('mobileNavDropdown');
+        if (toggle && dropdown) {
+            toggle.classList.toggle('active');
+            dropdown.classList.toggle('active');
+        }
+    }
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        const toggle = document.querySelector('.mobile-menu-toggle');
+        const dropdown = document.getElementById('mobileNavDropdown');
+        if (toggle && dropdown && !toggle.contains(e.target) && !dropdown.contains(e.target)) {
+            toggle.classList.remove('active');
+            dropdown.classList.remove('active');
+        }
+    });
+    
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.mobile-nav-dropdown a').forEach(link => {
+        link.addEventListener('click', () => {
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            const dropdown = document.getElementById('mobileNavDropdown');
+            if (toggle && dropdown) {
+                toggle.classList.remove('active');
+                dropdown.classList.remove('active');
+            }
+        });
+    });
     </script>
 </body>
 </html>

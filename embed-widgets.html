@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="responsive.css">
     
     <meta name="description" content="Embed our free trading statistics widgets on your blog or website. Get stunning trading stats widgets with auto-backlink to BroBillionaire.">
     <meta name="keywords" content="trading statistics widget, embed trading stats, free trading widget, stock market widget, trading blog widget">
@@ -250,8 +251,21 @@
                 <a href="tools.html">Tools</a>
                 <a href="about.html">About</a>
             </div>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
+    <div class="mobile-nav-dropdown" id="mobileNavDropdown">
+        <a href="index.html">Home</a>
+        <a href="articles.html">Articles</a>
+        <a href="tools.html">Calculators</a>
+        <a href="viral-tools-hub.html">Viral Tools</a>
+        <a href="community.html">Community</a>
+        <a href="about.html">About</a>
+    </div>
 
     <section class="widgets-hero">
         <h1>📊 Free Embeddable Widgets</h1>
@@ -483,6 +497,39 @@
                 }, 2000);
             });
         }
+    </script>
+
+    <script>
+    function toggleMobileMenu() {
+        const toggle = document.querySelector('.mobile-menu-toggle');
+        const dropdown = document.getElementById('mobileNavDropdown');
+        if (toggle && dropdown) {
+            toggle.classList.toggle('active');
+            dropdown.classList.toggle('active');
+        }
+    }
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        const toggle = document.querySelector('.mobile-menu-toggle');
+        const dropdown = document.getElementById('mobileNavDropdown');
+        if (toggle && dropdown && !toggle.contains(e.target) && !dropdown.contains(e.target)) {
+            toggle.classList.remove('active');
+            dropdown.classList.remove('active');
+        }
+    });
+    
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.mobile-nav-dropdown a').forEach(link => {
+        link.addEventListener('click', () => {
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            const dropdown = document.getElementById('mobileNavDropdown');
+            if (toggle && dropdown) {
+                toggle.classList.remove('active');
+                dropdown.classList.remove('active');
+            }
+        });
+    });
     </script>
 </body>
 </html>

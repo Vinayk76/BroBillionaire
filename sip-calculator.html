@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="responsive.css">
     
     <meta name="description" content="SIP Calculator 2026: Calculate your mutual fund SIP returns, wealth growth, and future value. Free SIP calculator with step-up SIP, lumpsum comparison, and goal planning. Updated with latest return estimates.">
     <meta name="keywords" content="SIP calculator, SIP calculator 2026, mutual fund calculator, SIP return calculator, SIP investment calculator India, step up SIP calculator, lumpsum vs SIP, SIP maturity calculator, monthly SIP calculator, SIP interest calculator">
@@ -821,8 +822,21 @@
                 <a href="sip-calculator.html" class="nav-link active">SIP Calculator</a>
                 <a href="about.html" class="nav-link">About</a>
             </div>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
+    <div class="mobile-nav-dropdown" id="mobileNavDropdown">
+        <a href="index.html">Home</a>
+        <a href="articles.html">Articles</a>
+        <a href="tools.html">Calculators</a>
+        <a href="viral-tools-hub.html">Viral Tools</a>
+        <a href="community.html">Community</a>
+        <a href="about.html">About</a>
+    </div>
 
     <!-- Hero Section -->
     <section class="calc-hero">
@@ -1364,6 +1378,39 @@
             const yearlyData = getYearlyBreakdown(monthlyAmount, annualRate, years);
             drawJourneyChart(yearlyData);
         });
+    </script>
+
+    <script>
+    function toggleMobileMenu() {
+        const toggle = document.querySelector('.mobile-menu-toggle');
+        const dropdown = document.getElementById('mobileNavDropdown');
+        if (toggle && dropdown) {
+            toggle.classList.toggle('active');
+            dropdown.classList.toggle('active');
+        }
+    }
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        const toggle = document.querySelector('.mobile-menu-toggle');
+        const dropdown = document.getElementById('mobileNavDropdown');
+        if (toggle && dropdown && !toggle.contains(e.target) && !dropdown.contains(e.target)) {
+            toggle.classList.remove('active');
+            dropdown.classList.remove('active');
+        }
+    });
+    
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.mobile-nav-dropdown a').forEach(link => {
+        link.addEventListener('click', () => {
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            const dropdown = document.getElementById('mobileNavDropdown');
+            if (toggle && dropdown) {
+                toggle.classList.remove('active');
+                dropdown.classList.remove('active');
+            }
+        });
+    });
     </script>
 </body>
 </html>

@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="responsive.css">
     
     <meta name="description" content="NPS Calculator 2026: Calculate your National Pension Scheme corpus, monthly pension, tax benefits under 80CCD. Free NPS return calculator with Tier 1 & Tier 2 options. Plan your retirement today.">
     <meta name="keywords" content="NPS calculator, NPS calculator 2026, National Pension Scheme calculator, NPS return calculator, NPS pension calculator, NPS tax benefit calculator, 80CCD calculator, NPS Tier 1 calculator, NPS corpus calculator, retirement calculator India">
@@ -513,8 +514,21 @@
                 <a href="tools.html">Calculators</a>
                 <a href="about.html">About</a>
             </div>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
+    <div class="mobile-nav-dropdown" id="mobileNavDropdown">
+        <a href="index.html">Home</a>
+        <a href="articles.html">Articles</a>
+        <a href="tools.html">Calculators</a>
+        <a href="viral-tools-hub.html">Viral Tools</a>
+        <a href="community.html">Community</a>
+        <a href="about.html">About</a>
+    </div>
 
     <div class="page-content">
         <section class="calc-hero">
@@ -952,6 +966,39 @@
             el.addEventListener('input', calculateNPS);
             el.addEventListener('change', calculateNPS);
         });
+    </script>
+
+    <script>
+    function toggleMobileMenu() {
+        const toggle = document.querySelector('.mobile-menu-toggle');
+        const dropdown = document.getElementById('mobileNavDropdown');
+        if (toggle && dropdown) {
+            toggle.classList.toggle('active');
+            dropdown.classList.toggle('active');
+        }
+    }
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        const toggle = document.querySelector('.mobile-menu-toggle');
+        const dropdown = document.getElementById('mobileNavDropdown');
+        if (toggle && dropdown && !toggle.contains(e.target) && !dropdown.contains(e.target)) {
+            toggle.classList.remove('active');
+            dropdown.classList.remove('active');
+        }
+    });
+    
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.mobile-nav-dropdown a').forEach(link => {
+        link.addEventListener('click', () => {
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            const dropdown = document.getElementById('mobileNavDropdown');
+            if (toggle && dropdown) {
+                toggle.classList.remove('active');
+                dropdown.classList.remove('active');
+            }
+        });
+    });
     </script>
 </body>
 </html>
