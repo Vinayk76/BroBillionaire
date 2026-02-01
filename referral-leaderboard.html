@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referral Leaderboard | Share & Win Rewards | BroBillionaire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/jpeg" href="logo.jpg">
+    
+    <meta name="description" content="Share BroBillionaire and climb the leaderboard! Top referrers get exclusive rewards, premium access, and recognition.">
+    <link rel="canonical" href="https://brobillionaire.com/referral-leaderboard.html">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --gold: #C9A227;
+            --green: #22c55e;
+            --red: #ef4444;
+            --blue: #3b82f6;
+            --purple: #a855f7;
+            --bg: #0a0a0a;
+            --card: #111;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: #fff;
+            min-height: 100vh;
+        }
+        
+        /* Background */
+        .bg-effect {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(201, 162, 39, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.08) 0%, transparent 40%);
+            pointer-events: none;
+        }
+        
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-img { width: 40px; height: 40px; border-radius: 10px; }
+        .logo-text { font-size: 1.25rem; font-weight: 700; color: #fff; }
+        
+        .nav-links { display: flex; gap: 30px; }
+        .nav-link {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .nav-link:hover { color: var(--gold); }
+        
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 100px 20px 60px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Header */
+        .page-header {
+            text-align: center;
+            padding: 50px 0;
+        }
+        
+        .crown-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        
+        .page-header h1 span {
+            background: linear-gradient(135deg, var(--gold), #e8d5a3);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .page-header p {
+            color: rgba(255,255,255,0.6);
+            font-size: 1.2rem;
+        }
+        
+        /* Referral Card */
+        .referral-card {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.15) 0%, rgba(13,13,13,0.9) 100%);
+            border: 2px solid rgba(201, 162, 39, 0.3);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .referral-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .name-input-section {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .name-input-section input {
+            flex: 1;
+            padding: 16px 20px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+        }
+        
+        .name-input-section button {
+            padding: 16px 30px;
+            background: linear-gradient(135deg, var(--gold), #a68b1e);
+            border: none;
+            border-radius: 12px;
+            color: #000;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .name-input-section button:hover {
+            transform: scale(1.05);
+        }
+        
+        .referral-link-box {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            display: none;
+        }
+        
+        .referral-link-box.active {
+            display: block;
+        }
+        
+        .referral-link-box label {
+            display: block;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .link-copy-row {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .link-copy-row input {
+            flex: 1;
+            padding: 14px 16px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 10px;
+            color: var(--gold);
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        
+        .link-copy-row button {
+            padding: 14px 24px;
+            background: rgba(201, 162, 39, 0.2);
+            border: 1px solid var(--gold);
+            border-radius: 10px;
+            color: var(--gold);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .link-copy-row button:hover {
+            background: var(--gold);
+            color: #000;
+        }
+        
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .share-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .share-btn:hover { transform: scale(1.05); }
+        
+        .share-btn.twitter {
+            background: #000;
+            border: 1px solid #333;
+            color: #fff;
+        }
+        
+        .share-btn.whatsapp {
+            background: #25D366;
+            color: #fff;
+        }
+        
+        .share-btn.telegram {
+            background: #0088cc;
+            color: #fff;
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .stat-box .number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+        
+        .stat-box .label {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* Rewards Section */
+        .rewards-section {
+            margin-bottom: 50px;
+        }
+        
+        .rewards-section h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+        
+        .rewards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .reward-tier {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .reward-tier.achieved {
+            border-color: var(--gold);
+            background: rgba(201, 162, 39, 0.1);
+        }
+        
+        .reward-tier .check {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 24px;
+            height: 24px;
+            background: var(--green);
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+        
+        .reward-tier.achieved .check { display: flex; }
+        
+        .reward-tier .tier-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .reward-tier h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .reward-tier .referrals-needed {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .reward-tier .reward-desc {
+            color: var(--gold);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        /* Leaderboard */
+        .leaderboard-section {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 40px;
+        }
+        
+        .leaderboard-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .leaderboard-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .leaderboard-tab {
+            padding: 10px 25px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 30px;
+            color: rgba(255,255,255,0.7);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .leaderboard-tab.active,
+        .leaderboard-tab:hover {
+            background: rgba(201, 162, 39, 0.15);
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        
+        /* Top 3 */
+        .top-3 {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 20px;
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+        
+        .top-3-item {
+            text-align: center;
+            flex: 1;
+            max-width: 180px;
+        }
+        
+        .top-3-item.first { order: 2; }
+        .top-3-item.second { order: 1; }
+        .top-3-item.third { order: 3; }
+        
+        .top-3-item .podium {
+            border-radius: 12px 12px 0 0;
+            padding: 20px 15px;
+            margin-top: 10px;
+        }
+        
+        .top-3-item.first .podium {
+            background: linear-gradient(180deg, rgba(201, 162, 39, 0.3) 0%, rgba(201, 162, 39, 0.1) 100%);
+            border: 1px solid var(--gold);
+            border-bottom: none;
+            height: 130px;
+        }
+        
+        .top-3-item.second .podium {
+            background: linear-gradient(180deg, rgba(192, 192, 192, 0.2) 0%, rgba(100, 100, 100, 0.1) 100%);
+            border: 1px solid rgba(192, 192, 192, 0.5);
+            border-bottom: none;
+            height: 100px;
+        }
+        
+        .top-3-item.third .podium {
+            background: linear-gradient(180deg, rgba(205, 127, 50, 0.2) 0%, rgba(139, 69, 19, 0.1) 100%);
+            border: 1px solid rgba(205, 127, 50, 0.5);
+            border-bottom: none;
+            height: 80px;
+        }
+        
+        .top-3-item .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            position: relative;
+        }
+        
+        .top-3-item.first .avatar { 
+            background: linear-gradient(135deg, var(--gold), #a68b1e);
+            color: #000;
+            width: 70px;
+            height: 70px;
+            font-size: 1.8rem;
+        }
+        
+        .top-3-item.second .avatar { 
+            background: linear-gradient(135deg, #c0c0c0, #808080);
+            color: #000;
+        }
+        
+        .top-3-item.third .avatar { 
+            background: linear-gradient(135deg, #cd7f32, #8b4513);
+            color: #fff;
+        }
+        
+        .top-3-item .crown {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+        }
+        
+        .top-3-item .name {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .top-3-item .referrals {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        
+        .top-3-item .rank {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-top: 10px;
+        }
+        
+        .top-3-item.first .rank { color: var(--gold); }
+        .top-3-item.second .rank { color: #c0c0c0; }
+        .top-3-item.third .rank { color: #cd7f32; }
+        
+        /* Leaderboard List */
+        .leaderboard-list {
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            padding: 18px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: background 0.2s;
+        }
+        
+        .leaderboard-item:hover {
+            background: rgba(255,255,255,0.03);
+        }
+        
+        .leaderboard-item.you {
+            background: rgba(201, 162, 39, 0.1);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 12px;
+            margin: 10px 0;
+        }
+        
+        .leaderboard-item .rank-num {
+            width: 40px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            color: rgba(255,255,255,0.5);
+        }
+        
+        .leaderboard-item .user-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--purple), var(--blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-right: 15px;
+        }
+        
+        .leaderboard-item .user-info {
+            flex: 1;
+        }
+        
+        .leaderboard-item .user-name {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        
+        .leaderboard-item .user-name .badge {
+            display: inline-block;
+            margin-left: 8px;
+            padding: 2px 8px;
+            background: var(--gold);
+            color: #000;
+            border-radius: 5px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+        
+        .leaderboard-item .user-tier {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+        
+        .leaderboard-item .user-referrals {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--green);
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: 60px;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .footer p {
+            color: rgba(255,255,255,0.5);
+        }
+        
+        .footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 2rem; }
+            .stats-section { grid-template-columns: 1fr; }
+            .name-input-section { flex-direction: column; }
+            .top-3 { flex-wrap: wrap; }
+            .top-3-item { max-width: 100%; flex: 1 1 100%; order: unset !important; }
+            .top-3-item .podium { height: auto !important; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-effect"></div>
+    
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                <span class="logo-text">BroBillionaire</span>
+            </a>
+            <div class="nav-links">
+                <a href="viral-tools-hub.html" class="nav-link">Viral Tools</a>
+                <a href="articles.html" class="nav-link">Articles</a>
+                <a href="community.html" class="nav-link">Community</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <!-- Header -->
+        <section class="page-header">
+            <div class="crown-icon">👑</div>
+            <h1>Referral <span>Leaderboard</span></h1>
+            <p>Share. Invite. Win Rewards. Climb the Ranks!</p>
+        </section>
+        
+        <!-- Referral Card -->
+        <div class="referral-card">
+            <h2>🔗 Get Your Unique Referral Link</h2>
+            
+            <div class="name-input-section">
+                <input type="text" id="userName" placeholder="Enter your name / trading handle..." maxlength="30">
+                <button onclick="generateReferralLink()">
+                    <i class="fas fa-link"></i> Generate Link
+                </button>
+            </div>
+            
+            <div class="referral-link-box" id="referralLinkBox">
+                <label>Your Unique Referral Link:</label>
+                <div class="link-copy-row">
+                    <input type="text" id="referralLink" readonly>
+                    <button onclick="copyLink()">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                
+                <div class="share-buttons">
+                    <a href="#" class="share-btn twitter" id="twitterShare" target="_blank">
+                        <i class="fab fa-x-twitter"></i> Share on X
+                    </a>
+                    <a href="#" class="share-btn whatsapp" id="whatsappShare" target="_blank">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="#" class="share-btn telegram" id="telegramShare" target="_blank">
+                        <i class="fab fa-telegram"></i> Telegram
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Your Stats -->
+        <div class="stats-section">
+            <div class="stat-box">
+                <div class="number" id="yourReferrals">0</div>
+                <div class="label">Your Referrals</div>
+            </div>
+            <div class="stat-box">
+                <div class="number" id="yourRank">#—</div>
+                <div class="label">Your Rank</div>
+            </div>
+            <div class="stat-box">
+                <div class="number" id="nextReward">5</div>
+                <div class="label">Until Next Reward</div>
+            </div>
+        </div>
+        
+        <!-- Rewards -->
+        <section class="rewards-section">
+            <h2>🎁 Rewards & Tiers</h2>
+            
+            <div class="rewards-grid">
+                <div class="reward-tier" data-tier="5">
+                    <div class="check"><i class="fas fa-check"></i></div>
+                    <div class="tier-icon">🌱</div>
+                    <h4>Starter</h4>
+                    <div class="referrals-needed">5 Referrals</div>
+                    <div class="reward-desc">Exclusive Discord Role</div>
+                </div>
+                
+                <div class="reward-tier" data-tier="15">
+                    <div class="check"><i class="fas fa-check"></i></div>
+                    <div class="tier-icon">⭐</div>
+                    <h4>Rising Star</h4>
+                    <div class="referrals-needed">15 Referrals</div>
+                    <div class="reward-desc">Free Trading eBook</div>
+                </div>
+                
+                <div class="reward-tier" data-tier="30">
+                    <div class="check"><i class="fas fa-check"></i></div>
+                    <div class="tier-icon">🔥</div>
+                    <h4>Hot Trader</h4>
+                    <div class="referrals-needed">30 Referrals</div>
+                    <div class="reward-desc">1-on-1 Strategy Call</div>
+                </div>
+                
+                <div class="reward-tier" data-tier="50">
+                    <div class="check"><i class="fas fa-check"></i></div>
+                    <div class="tier-icon">💎</div>
+                    <h4>Diamond</h4>
+                    <div class="referrals-needed">50 Referrals</div>
+                    <div class="reward-desc">Premium Membership</div>
+                </div>
+                
+                <div class="reward-tier" data-tier="100">
+                    <div class="check"><i class="fas fa-check"></i></div>
+                    <div class="tier-icon">👑</div>
+                    <h4>Legend</h4>
+                    <div class="referrals-needed">100 Referrals</div>
+                    <div class="reward-desc">Cash Reward + Merch</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Leaderboard -->
+        <section class="leaderboard-section">
+            <h2>🏆 Top Referrers</h2>
+            
+            <div class="leaderboard-tabs">
+                <div class="leaderboard-tab active">All Time</div>
+                <div class="leaderboard-tab">This Month</div>
+                <div class="leaderboard-tab">This Week</div>
+            </div>
+            
+            <!-- Top 3 -->
+            <div class="top-3">
+                <div class="top-3-item second">
+                    <div class="avatar">R</div>
+                    <div class="name">Rahul_Trades</div>
+                    <div class="referrals">87 referrals</div>
+                    <div class="podium">
+                        <div class="rank">#2</div>
+                    </div>
+                </div>
+                
+                <div class="top-3-item first">
+                    <div class="avatar">
+                        <span class="crown">👑</span>
+                        A
+                    </div>
+                    <div class="name">Arjun_FnO</div>
+                    <div class="referrals">143 referrals</div>
+                    <div class="podium">
+                        <div class="rank">#1</div>
+                    </div>
+                </div>
+                
+                <div class="top-3-item third">
+                    <div class="avatar">P</div>
+                    <div class="name">PriyaScalps</div>
+                    <div class="referrals">62 referrals</div>
+                    <div class="podium">
+                        <div class="rank">#3</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Leaderboard List -->
+            <div class="leaderboard-list">
+                <div class="leaderboard-item">
+                    <div class="rank-num">4</div>
+                    <div class="user-avatar">V</div>
+                    <div class="user-info">
+                        <div class="user-name">Vikram_Nifty</div>
+                        <div class="user-tier">💎 Diamond Tier</div>
+                    </div>
+                    <div class="user-referrals">58</div>
+                </div>
+                
+                <div class="leaderboard-item">
+                    <div class="rank-num">5</div>
+                    <div class="user-avatar">S</div>
+                    <div class="user-info">
+                        <div class="user-name">SachinOptions</div>
+                        <div class="user-tier">🔥 Hot Trader</div>
+                    </div>
+                    <div class="user-referrals">45</div>
+                </div>
+                
+                <div class="leaderboard-item">
+                    <div class="rank-num">6</div>
+                    <div class="user-avatar">D</div>
+                    <div class="user-info">
+                        <div class="user-name">DeepakSwing</div>
+                        <div class="user-tier">🔥 Hot Trader</div>
+                    </div>
+                    <div class="user-referrals">38</div>
+                </div>
+                
+                <div class="leaderboard-item">
+                    <div class="rank-num">7</div>
+                    <div class="user-avatar">N</div>
+                    <div class="user-info">
+                        <div class="user-name">NeerajTrader</div>
+                        <div class="user-tier">🔥 Hot Trader</div>
+                    </div>
+                    <div class="user-referrals">32</div>
+                </div>
+                
+                <div class="leaderboard-item">
+                    <div class="rank-num">8</div>
+                    <div class="user-avatar">M</div>
+                    <div class="user-info">
+                        <div class="user-name">MayankBanknifty</div>
+                        <div class="user-tier">⭐ Rising Star</div>
+                    </div>
+                    <div class="user-referrals">24</div>
+                </div>
+                
+                <div class="leaderboard-item">
+                    <div class="rank-num">9</div>
+                    <div class="user-avatar">K</div>
+                    <div class="user-info">
+                        <div class="user-name">KavitaFnO</div>
+                        <div class="user-tier">⭐ Rising Star</div>
+                    </div>
+                    <div class="user-referrals">19</div>
+                </div>
+                
+                <div class="leaderboard-item">
+                    <div class="rank-num">10</div>
+                    <div class="user-avatar">A</div>
+                    <div class="user-info">
+                        <div class="user-name">AnkitDaytrader</div>
+                        <div class="user-tier">⭐ Rising Star</div>
+                    </div>
+                    <div class="user-referrals">16</div>
+                </div>
+                
+                <div class="leaderboard-item you" id="yourPosition" style="display: none;">
+                    <div class="rank-num" id="yourLeaderboardRank">—</div>
+                    <div class="user-avatar" id="yourAvatar">?</div>
+                    <div class="user-info">
+                        <div class="user-name"><span id="yourNameDisplay">You</span> <span class="badge">YOU</span></div>
+                        <div class="user-tier">🌱 New Referrer</div>
+                    </div>
+                    <div class="user-referrals">0</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Made with 💛 by <a href="index.html">BroBillionaire</a></p>
+            <p style="margin-top: 10px; font-size: 0.85rem;">Share more, climb higher, win rewards!</p>
+        </footer>
+    </div>
+    
+    <script>
+        function generateReferralLink() {
+            const name = document.getElementById('userName').value.trim();
+            if (!name) {
+                alert('Please enter your name or trading handle!');
+                return;
+            }
+            
+            // Create a unique referral code
+            const code = name.toLowerCase().replace(/[^a-z0-9]/g, '') + '_' + Math.random().toString(36).substr(2, 6);
+            const link = `https://brobillionaire.com?ref=${code}`;
+            
+            document.getElementById('referralLink').value = link;
+            document.getElementById('referralLinkBox').classList.add('active');
+            
+            // Set up share buttons
+            const shareText = `🚀 Join me on BroBillionaire - The BEST trading education platform!\n\n📈 185+ Free Articles\n🧠 Trading Quizzes & Games\n🎯 Viral Content Generators\n\nSign up with my link: ${link}`;
+            
+            document.getElementById('twitterShare').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
+            document.getElementById('whatsappShare').href = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+            document.getElementById('telegramShare').href = `https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(shareText)}`;
+            
+            // Show user in leaderboard
+            document.getElementById('yourPosition').style.display = 'flex';
+            document.getElementById('yourAvatar').textContent = name.charAt(0).toUpperCase();
+            document.getElementById('yourNameDisplay').textContent = name;
+            
+            // Save to localStorage
+            localStorage.setItem('referralName', name);
+            localStorage.setItem('referralCode', code);
+            
+            // Track event
+            if (typeof gtag === 'function') {
+                gtag('event', 'generate_referral', { name: name });
+            }
+        }
+        
+        function copyLink() {
+            const linkInput = document.getElementById('referralLink');
+            linkInput.select();
+            document.execCommand('copy');
+            
+            const btn = event.target.closest('button');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            btn.style.background = '#22c55e';
+            btn.style.borderColor = '#22c55e';
+            btn.style.color = '#fff';
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.background = '';
+                btn.style.borderColor = '';
+                btn.style.color = '';
+            }, 2000);
+        }
+        
+        // Load saved data
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedName = localStorage.getItem('referralName');
+            const savedCode = localStorage.getItem('referralCode');
+            
+            if (savedName && savedCode) {
+                document.getElementById('userName').value = savedName;
+                generateReferralLink();
+            }
+            
+            // Add tab switching functionality
+            document.querySelectorAll('.leaderboard-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.leaderboard-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
