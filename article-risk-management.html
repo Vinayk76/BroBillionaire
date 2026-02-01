@@ -331,12 +331,28 @@
         .dial-arc {
             position: absolute;
             width: 280px;
-            height: 280px;
-            border-radius: 50%;
-            border: 20px solid;
-            border-color: #22c55e #f59e0b #ef4444 transparent;
-            transform: rotate(225deg);
-            clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+            height: 140px;
+            border-radius: 140px 140px 0 0;
+            background: linear-gradient(90deg, 
+                #22c55e 0%, 
+                #22c55e 25%, 
+                #f59e0b 25%, 
+                #f59e0b 60%, 
+                #ef4444 60%, 
+                #ef4444 100%
+            );
+            overflow: hidden;
+        }
+        
+        .dial-arc::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 0;
+            background: #0a0a0a;
+            border-radius: 120px 120px 0 0;
         }
         
         .dial-needle {
@@ -344,13 +360,14 @@
             bottom: 0;
             left: 50%;
             width: 4px;
-            height: 120px;
+            height: 100px;
             background: linear-gradient(to top, #C9A227, #fff);
             transform-origin: bottom center;
-            transform: translateX(-50%) rotate(-45deg);
+            transform: translateX(-50%) rotate(0deg);
             border-radius: 4px;
             transition: transform 0.5s ease;
             box-shadow: 0 0 10px rgba(201, 162, 39, 0.5);
+            z-index: 2;
         }
         
         .dial-center {
@@ -363,47 +380,51 @@
             background: #C9A227;
             border-radius: 50%;
             box-shadow: 0 0 20px rgba(201, 162, 39, 0.5);
+            z-index: 3;
         }
         
         .dial-labels {
             position: absolute;
-            bottom: -50px;
+            bottom: -60px;
             left: 0;
             right: 0;
             display: flex;
             justify-content: space-between;
-            padding: 0 20px;
+            padding: 0 10px;
         }
         
         .dial-label {
             font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
+            text-align: center;
+            line-height: 1.4;
         }
         
         .dial-label.safe { color: #22c55e; }
         .dial-label.caution { color: #f59e0b; }
         .dial-label.danger { color: #ef4444; }
         
-        /* Rule Cards */
-        .rules-grid {
+        /* Rule Cards - Risk Management Specific */
+        .article-content-wrapper .rules-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 25px;
             margin: 40px 0;
         }
         
-        .rule-card {
+        .article-content-wrapper .rule-card {
             background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-            border: 1px solid rgba(201, 162, 39, 0.2);
+            border: 1px solid rgba(201, 162, 39, 0.3);
             border-radius: 16px;
             padding: 30px;
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
+            display: block;
         }
         
-        .rule-card::before {
+        .article-content-wrapper .rule-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -413,23 +434,30 @@
             background: linear-gradient(90deg, #C9A227, #8B6914);
         }
         
-        .rule-card:hover {
+        .article-content-wrapper .rule-card:hover {
             transform: translateY(-5px);
             border-color: #C9A227;
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
         
-        .rule-number {
+        .article-content-wrapper .rule-number {
             position: absolute;
-            top: 20px;
+            top: 15px;
             right: 20px;
-            font-size: 48px;
+            width: 40px;
+            height: 40px;
+            background: rgba(201, 162, 39, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
             font-weight: 900;
-            color: rgba(201, 162, 39, 0.15);
+            color: rgba(201, 162, 39, 0.8);
             line-height: 1;
         }
         
-        .rule-icon {
+        .article-content-wrapper .rule-icon {
             width: 60px;
             height: 60px;
             background: linear-gradient(135deg, #C9A227, #8B6914);
@@ -442,14 +470,14 @@
             margin-bottom: 20px;
         }
         
-        .rule-title {
+        .article-content-wrapper .rule-title {
             font-size: 18px;
             font-weight: 700;
             color: #fff;
             margin-bottom: 12px;
         }
         
-        .rule-description {
+        .article-content-wrapper .rule-description {
             color: #aaa;
             font-size: 14px;
             line-height: 1.7;
@@ -612,17 +640,19 @@
             border-radius: 20px;
             padding: 40px;
             margin: 50px 0;
+            border: 1px solid rgba(201, 162, 39, 0.2);
         }
         
         .anatomy-chart {
             position: relative;
             height: 300px;
             margin: 30px 0;
+            padding-left: 120px;
         }
         
         .price-line {
             position: absolute;
-            left: 80px;
+            left: 120px;
             right: 20px;
             height: 3px;
             display: flex;
@@ -631,22 +661,47 @@
         
         .price-line::after {
             content: '';
-            flex: 1;
-            height: 100%;
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 3px;
             background: currentColor;
         }
         
-        .price-line.entry { top: 50%; background: #3b82f6; }
-        .price-line.stop { top: 75%; background: #ef4444; }
-        .price-line.target { top: 20%; background: #22c55e; }
+        .price-line.entry { 
+            top: 50%; 
+            color: #3b82f6;
+        }
+        .price-line.entry::after {
+            background: #3b82f6;
+        }
+        
+        .price-line.stop { 
+            top: 75%; 
+            color: #ef4444;
+        }
+        .price-line.stop::after {
+            background: #ef4444;
+        }
+        
+        .price-line.target { 
+            top: 20%; 
+            color: #22c55e;
+        }
+        .price-line.target::after {
+            background: #22c55e;
+        }
         
         .price-label {
             position: absolute;
-            left: 0;
+            left: -120px;
             font-size: 12px;
             font-weight: 600;
             text-transform: uppercase;
             white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .price-line.entry .price-label { color: #3b82f6; }
@@ -957,6 +1012,36 @@
             .battlefield-grid {
                 grid-template-columns: repeat(5, 1fr);
             }
+            .anatomy-chart {
+                padding-left: 100px;
+            }
+            .price-line {
+                left: 100px;
+            }
+            .price-label {
+                left: -100px;
+                font-size: 10px;
+            }
+            .dial-container {
+                padding: 40px 10px 80px;
+            }
+            .risk-dial {
+                width: 240px;
+            }
+            .dial-arc {
+                width: 240px;
+                height: 120px;
+                border-radius: 120px 120px 0 0;
+            }
+            .dial-needle {
+                height: 80px;
+            }
+            .dial-labels {
+                bottom: -70px;
+            }
+            .dial-label {
+                font-size: 9px;
+            }
         }
     </style>
 
@@ -997,8 +1082,8 @@
         </div>
         <div class="article-hero-content">
             <div class="article-meta-top">
-                <span class="article-category-badge">
-                    <i class="fas fa-shield-alt"></i>
+                <span class="article-category-badge premium-badge">
+                    <i class="fas fa-crown"></i>
                     Risk Management
                 </span>
                 <span class="article-read-time">
@@ -1757,24 +1842,26 @@
                 <i class="fas fa-arrow-right"></i>
             </a>
         </div>
-    </section>
-
-    <!-- Footer -->
+    </section>    <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
-            <div class="footer-bottom">
-                <p>&copy; 2026 BroBillionaire. All rights reserved. Free trading education.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.youtube.com/@RealBroBillionaire" target="_blank"><i class="fab fa-youtube"></i></a>
-                    <a href="#"><i class="fab fa-discord"></i></a>
+            <div class="footer-brand-section">
+                <div class="logo">
+                    <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                    <span class="logo-text">BroBillionaire</span>
                 </div>
+                <p class="tagline">Making Wall Street wisdom accessible to every trader.</p>
             </div>
+            <nav class="footer-nav">
+                <a href="index.html">Home</a>
+                <a href="tools.html">Tools</a>
+                <a href="about.html">About</a>
+            </nav>
         </div>
     </footer>
-
-    <script src="script.js"></script>
+    <div class="footer-disclaimer">
+        <p>For educational purposes only. Not financial advice. Trading options involves substantial risk of loss.</p>
+    </div><script src="script.js"></script>
     <script>
         // Reading progress bar
         window.addEventListener('scroll', () => {

@@ -114,6 +114,557 @@
     <meta name="geo.region" content="IN">
     <meta name="distribution" content="Global">
     <link rel="manifest" href="/manifest.json">
+    
+    <style>
+        /* ============================================
+           🌦️ WEATHER COMMODITIES - CREATIVE CSS
+           ============================================ */
+        
+        /* === ROOT VARIABLES === */
+        :root {
+            --extreme-color: #ff4444;
+            --extreme-glow: rgba(255, 68, 68, 0.4);
+            --high-color: #22c55e;
+            --high-glow: rgba(34, 197, 94, 0.4);
+            --moderate-color: #eab308;
+            --moderate-glow: rgba(234, 179, 8, 0.4);
+            --card-bg: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+        }
+
+        /* === WEATHER HERO VISUAL === */
+        .weather-hero-visual {
+            position: relative;
+            padding: 60px 40px;
+            background: linear-gradient(135deg, #0a1628 0%, #0d0d0d 50%, #1a0a0a 100%);
+            border-radius: 24px;
+            margin: 40px 0;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .weather-hero-visual::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(239, 68, 68, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(234, 179, 8, 0.05) 0%, transparent 50%);
+            animation: weather-ambient 15s ease-in-out infinite;
+        }
+
+        @keyframes weather-ambient {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+        }
+
+        .weather-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .weather-icons-float {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .weather-icon-item {
+            font-size: 3rem;
+            animation: float-random 3s ease-in-out infinite;
+        }
+
+        .weather-icon-item:nth-child(1) { animation-delay: 0s; }
+        .weather-icon-item:nth-child(2) { animation-delay: 0.3s; }
+        .weather-icon-item:nth-child(3) { animation-delay: 0.6s; }
+        .weather-icon-item:nth-child(4) { animation-delay: 0.9s; }
+        .weather-icon-item:nth-child(5) { animation-delay: 1.2s; }
+
+        @keyframes float-random {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(-5deg); }
+            75% { transform: translateY(-8px) rotate(5deg); }
+        }
+
+        .weather-hero-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .weather-hero-subtitle {
+            color: #888;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* === SENSITIVITY LEGEND === */
+        .sensitivity-legend {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 25px;
+            background: var(--glass-bg);
+            border-radius: 16px;
+            margin: 40px 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .legend-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .legend-dot.extreme {
+            background: var(--extreme-color);
+            box-shadow: 0 0 20px var(--extreme-glow);
+            animation: pulse-extreme 2s ease-in-out infinite;
+        }
+
+        .legend-dot.high {
+            background: var(--high-color);
+            box-shadow: 0 0 15px var(--high-glow);
+        }
+
+        .legend-dot.moderate {
+            background: var(--moderate-color);
+            box-shadow: 0 0 10px var(--moderate-glow);
+        }
+
+        @keyframes pulse-extreme {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px var(--extreme-glow); }
+            50% { transform: scale(1.2); box-shadow: 0 0 30px var(--extreme-glow); }
+        }
+
+        .legend-text {
+            color: #aaa;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* === COMMODITY SENSITIVITY CARDS GRID === */
+        .commodity-sensitivity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        /* === COMMODITY SENSITIVITY CARD === */
+        .commodity-sensitivity-card {
+            position: relative;
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 0;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .commodity-sensitivity-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .commodity-sensitivity-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--card-accent), transparent);
+        }
+
+        .commodity-sensitivity-card.extreme { --card-accent: var(--extreme-color); }
+        .commodity-sensitivity-card.high { --card-accent: var(--high-color); }
+        .commodity-sensitivity-card.moderate { --card-accent: var(--moderate-color); }
+
+        .commodity-sensitivity-card.extreme:hover {
+            border-color: var(--extreme-color);
+            box-shadow: 0 25px 50px rgba(255, 68, 68, 0.15);
+        }
+
+        .commodity-sensitivity-card.high:hover {
+            border-color: var(--high-color);
+            box-shadow: 0 25px 50px rgba(34, 197, 94, 0.15);
+        }
+
+        .commodity-sensitivity-card.moderate:hover {
+            border-color: var(--moderate-color);
+            box-shadow: 0 25px 50px rgba(234, 179, 8, 0.15);
+        }
+
+        /* Card Header */
+        .sensitivity-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 25px 25px 15px;
+        }
+
+        .card-icon-wrapper {
+            position: relative;
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            display: block;
+        }
+
+        .card-icon-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            filter: blur(20px);
+            opacity: 0.4;
+            z-index: -1;
+        }
+
+        .commodity-sensitivity-card.extreme .card-icon-glow { background: var(--extreme-color); }
+        .commodity-sensitivity-card.high .card-icon-glow { background: var(--high-color); }
+        .commodity-sensitivity-card.moderate .card-icon-glow { background: var(--moderate-color); }
+
+        .sensitivity-badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sensitivity-badge.extreme {
+            background: rgba(255, 68, 68, 0.15);
+            color: var(--extreme-color);
+            border: 1px solid rgba(255, 68, 68, 0.3);
+            animation: badge-pulse 2s ease-in-out infinite;
+        }
+
+        .sensitivity-badge.high {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--high-color);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .sensitivity-badge.moderate {
+            background: rgba(234, 179, 8, 0.15);
+            color: var(--moderate-color);
+            border: 1px solid rgba(234, 179, 8, 0.3);
+        }
+
+        @keyframes badge-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Card Body */
+        .sensitivity-card-body {
+            padding: 0 25px 25px;
+        }
+
+        .commodity-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        /* Weather Event Section */
+        .weather-event-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .weather-event-icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .weather-event-content h4 {
+            color: #C9A227;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .weather-event-content p {
+            color: #aaa;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Sensitivity Meter */
+        .sensitivity-meter {
+            margin-top: 20px;
+        }
+
+        .meter-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .meter-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .meter-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 1s ease-out;
+        }
+
+        .commodity-sensitivity-card.extreme .meter-fill {
+            width: 100%;
+            background: linear-gradient(90deg, var(--extreme-color), #ff6b6b);
+            animation: meter-glow-extreme 2s ease-in-out infinite;
+        }
+
+        .commodity-sensitivity-card.high .meter-fill {
+            width: 75%;
+            background: linear-gradient(90deg, var(--high-color), #4ade80);
+        }
+
+        .commodity-sensitivity-card.moderate .meter-fill {
+            width: 50%;
+            background: linear-gradient(90deg, var(--moderate-color), #fde047);
+        }
+
+        @keyframes meter-glow-extreme {
+            0%, 100% { box-shadow: 0 0 10px var(--extreme-glow); }
+            50% { box-shadow: 0 0 20px var(--extreme-glow); }
+        }
+
+        /* === ENHANCED COMPARISON TABLE === */
+        .weather-comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 40px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .weather-comparison-table thead {
+            background: linear-gradient(90deg, rgba(201, 162, 39, 0.2), rgba(201, 162, 39, 0.05));
+        }
+
+        .weather-comparison-table th {
+            padding: 20px 20px;
+            text-align: left;
+            color: #C9A227;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .weather-comparison-table td {
+            padding: 18px 20px;
+            color: #ccc;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .weather-comparison-table tbody tr {
+            transition: all 0.3s ease;
+        }
+
+        .weather-comparison-table tbody tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+            transform: scale(1.01);
+        }
+
+        .weather-comparison-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table-commodity-cell {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .table-emoji {
+            font-size: 1.8rem;
+        }
+
+        .table-name {
+            color: #fff;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .table-sensitivity-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .table-sensitivity-badge.extreme {
+            background: rgba(255, 68, 68, 0.2);
+            color: #ff4444;
+            border: 1px solid rgba(255, 68, 68, 0.4);
+        }
+
+        .table-sensitivity-badge.high {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.4);
+        }
+
+        .table-sensitivity-badge.moderate {
+            background: rgba(234, 179, 8, 0.2);
+            color: #eab308;
+            border: 1px solid rgba(234, 179, 8, 0.4);
+        }
+
+        .table-weather-event {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .table-weather-event i {
+            color: #60a5fa;
+            font-size: 1rem;
+        }
+
+        /* === PRO TIP BOX === */
+        .weather-pro-tip {
+            display: grid;
+            grid-template-columns: 70px 1fr;
+            gap: 20px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
+            border-radius: 16px;
+            margin: 40px 0;
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            align-items: center;
+        }
+
+        .pro-tip-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #C9A227, #FFD700);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 10px 30px rgba(201, 162, 39, 0.3);
+        }
+
+        .pro-tip-content h4 {
+            color: #C9A227;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pro-tip-content p {
+            color: #aaa;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            .weather-hero-visual {
+                padding: 40px 25px;
+            }
+
+            .weather-hero-title {
+                font-size: 1.5rem;
+            }
+
+            .weather-icons-float {
+                gap: 15px;
+            }
+
+            .weather-icon-item {
+                font-size: 2rem;
+            }
+
+            .sensitivity-legend {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+
+            .commodity-sensitivity-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .weather-pro-tip {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .pro-tip-icon {
+                margin: 0 auto;
+            }
+
+            .weather-comparison-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        /* === ANIMATION ON SCROLL === */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body class="article-page">
 
@@ -146,8 +697,8 @@
         </div>
         <div class="article-hero-content">
             <div class="article-meta-top">
-                <span class="article-category-badge">
-                    <i class="fas fa-cloud-sun-rain"></i>
+                <span class="article-category-badge premium-badge">
+                    <i class="fas fa-crown"></i>
                     Weather Trading
                 </span>
                 <span class="article-read-time">
@@ -241,51 +792,430 @@
                 
                 <p class="article-text">Not all commodities care about weather equally. Here's the <span class="gold-text">weather sensitivity ranking</span>:</p>
 
-                <div class="comparison-table">
-                    <div class="comparison-header">
-                        <div class="comparison-col">Commodity</div>
-                        <div class="comparison-col">Weather Sensitivity</div>
-                        <div class="comparison-col">Key Weather Event</div>
+                <!-- Weather Hero Visual -->
+                <div class="weather-hero-visual">
+                    <div class="weather-hero-content">
+                        <div class="weather-icons-float">
+                            <span class="weather-icon-item">❄️</span>
+                            <span class="weather-icon-item">🌡️</span>
+                            <span class="weather-icon-item">🌧️</span>
+                            <span class="weather-icon-item">☀️</span>
+                            <span class="weather-icon-item">🌪️</span>
+                        </div>
+                        <h2 class="weather-hero-title">Weather Sensitivity Index</h2>
+                        <p class="weather-hero-subtitle">From crops to energy — understanding which commodities move on weather forecasts</p>
                     </div>
-                    <div class="comparison-row">
-                        <div class="comparison-col"><strong>🍊 Orange Juice</strong></div>
-                        <div class="comparison-col" style="color: #ef4444;">EXTREME</div>
-                        <div class="comparison-col">Florida frost (Dec-Feb)</div>
+                </div>
+
+                <!-- Sensitivity Legend -->
+                <div class="sensitivity-legend">
+                    <div class="legend-item">
+                        <div class="legend-dot extreme"></div>
+                        <span class="legend-text">EXTREME Sensitivity</span>
                     </div>
-                    <div class="comparison-row">
-                        <div class="comparison-col"><strong>⛽ Natural Gas</strong></div>
-                        <div class="comparison-col" style="color: #ef4444;">EXTREME</div>
-                        <div class="comparison-col">Polar vortex, heatwaves</div>
+                    <div class="legend-item">
+                        <div class="legend-dot high"></div>
+                        <span class="legend-text">HIGH Sensitivity</span>
                     </div>
-                    <div class="comparison-row">
-                        <div class="comparison-col"><strong>☕ Coffee</strong></div>
-                        <div class="comparison-col" style="color: #fbbf24;">HIGH</div>
-                        <div class="comparison-col">Brazil frost (July-Aug)</div>
+                    <div class="legend-item">
+                        <div class="legend-dot moderate"></div>
+                        <span class="legend-text">MODERATE Sensitivity</span>
                     </div>
-                    <div class="comparison-row">
-                        <div class="comparison-col"><strong>🌾 Wheat</strong></div>
-                        <div class="comparison-col" style="color: #fbbf24;">HIGH</div>
-                        <div class="comparison-col">Drought, excessive rain</div>
+                </div>
+
+                <!-- Commodity Sensitivity Cards -->
+                <div class="commodity-sensitivity-grid">
+                    
+                    <!-- Orange Juice - EXTREME -->
+                    <div class="commodity-sensitivity-card extreme animate-on-scroll">
+                        <div class="sensitivity-card-header">
+                            <div class="card-icon-wrapper">
+                                <span class="card-icon">🍊</span>
+                                <div class="card-icon-glow"></div>
+                            </div>
+                            <span class="sensitivity-badge extreme">EXTREME</span>
+                        </div>
+                        <div class="sensitivity-card-body">
+                            <h3 class="commodity-name">Orange Juice</h3>
+                            <div class="weather-event-box">
+                                <span class="weather-event-icon">❄️</span>
+                                <div class="weather-event-content">
+                                    <h4>Key Weather Event</h4>
+                                    <p>Florida frost (Dec-Feb) can devastate citrus crops overnight, causing 50%+ price spikes</p>
+                                </div>
+                            </div>
+                            <div class="sensitivity-meter">
+                                <div class="meter-label">
+                                    <span>Sensitivity</span>
+                                    <span>100%</span>
+                                </div>
+                                <div class="meter-bar">
+                                    <div class="meter-fill"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="comparison-row">
-                        <div class="comparison-col"><strong>🌽 Corn</strong></div>
-                        <div class="comparison-col" style="color: #fbbf24;">HIGH</div>
-                        <div class="comparison-col">Midwest drought (pollination)</div>
+
+                    <!-- Natural Gas - EXTREME -->
+                    <div class="commodity-sensitivity-card extreme animate-on-scroll">
+                        <div class="sensitivity-card-header">
+                            <div class="card-icon-wrapper">
+                                <span class="card-icon">🔥</span>
+                                <div class="card-icon-glow"></div>
+                            </div>
+                            <span class="sensitivity-badge extreme">EXTREME</span>
+                        </div>
+                        <div class="sensitivity-card-body">
+                            <h3 class="commodity-name">Natural Gas</h3>
+                            <div class="weather-event-box">
+                                <span class="weather-event-icon">🌡️</span>
+                                <div class="weather-event-content">
+                                    <h4>Key Weather Event</h4>
+                                    <p>Polar vortex & heatwaves drive extreme demand. Winter forecasts move prices 10%+ daily</p>
+                                </div>
+                            </div>
+                            <div class="sensitivity-meter">
+                                <div class="meter-label">
+                                    <span>Sensitivity</span>
+                                    <span>100%</span>
+                                </div>
+                                <div class="meter-bar">
+                                    <div class="meter-fill"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="comparison-row">
-                        <div class="comparison-col"><strong>🫘 Soybeans</strong></div>
-                        <div class="comparison-col" style="color: #fbbf24;">HIGH</div>
-                        <div class="comparison-col">Argentina/Brazil drought</div>
+
+                    <!-- Coffee - HIGH -->
+                    <div class="commodity-sensitivity-card high animate-on-scroll">
+                        <div class="sensitivity-card-header">
+                            <div class="card-icon-wrapper">
+                                <span class="card-icon">☕</span>
+                                <div class="card-icon-glow"></div>
+                            </div>
+                            <span class="sensitivity-badge high">HIGH</span>
+                        </div>
+                        <div class="sensitivity-card-body">
+                            <h3 class="commodity-name">Coffee</h3>
+                            <div class="weather-event-box">
+                                <span class="weather-event-icon">🥶</span>
+                                <div class="weather-event-content">
+                                    <h4>Key Weather Event</h4>
+                                    <p>Brazil frost (July-Aug) threatens 40% of global supply. A single frost night = +30% prices</p>
+                                </div>
+                            </div>
+                            <div class="sensitivity-meter">
+                                <div class="meter-label">
+                                    <span>Sensitivity</span>
+                                    <span>75%</span>
+                                </div>
+                                <div class="meter-bar">
+                                    <div class="meter-fill"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="comparison-row">
-                        <div class="comparison-col"><strong>🍬 Sugar</strong></div>
-                        <div class="comparison-col" style="color: #22c55e;">MODERATE</div>
-                        <div class="comparison-col">Brazilian rain during harvest</div>
+
+                    <!-- Wheat - HIGH -->
+                    <div class="commodity-sensitivity-card high animate-on-scroll">
+                        <div class="sensitivity-card-header">
+                            <div class="card-icon-wrapper">
+                                <span class="card-icon">🌾</span>
+                                <div class="card-icon-glow"></div>
+                            </div>
+                            <span class="sensitivity-badge high">HIGH</span>
+                        </div>
+                        <div class="sensitivity-card-body">
+                            <h3 class="commodity-name">Wheat</h3>
+                            <div class="weather-event-box">
+                                <span class="weather-event-icon">🏜️</span>
+                                <div class="weather-event-content">
+                                    <h4>Key Weather Event</h4>
+                                    <p>Drought or excessive rain during growing season. Kansas & Ukraine conditions are critical</p>
+                                </div>
+                            </div>
+                            <div class="sensitivity-meter">
+                                <div class="meter-label">
+                                    <span>Sensitivity</span>
+                                    <span>75%</span>
+                                </div>
+                                <div class="meter-bar">
+                                    <div class="meter-fill"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="comparison-row">
-                        <div class="comparison-col"><strong>🛢️ Crude Oil</strong></div>
-                        <div class="comparison-col" style="color: #22c55e;">MODERATE</div>
-                        <div class="comparison-col">Hurricanes (Gulf of Mexico)</div>
+
+                    <!-- Corn - HIGH -->
+                    <div class="commodity-sensitivity-card high animate-on-scroll">
+                        <div class="sensitivity-card-header">
+                            <div class="card-icon-wrapper">
+                                <span class="card-icon">🌽</span>
+                                <div class="card-icon-glow"></div>
+                            </div>
+                            <span class="sensitivity-badge high">HIGH</span>
+                        </div>
+                        <div class="sensitivity-card-body">
+                            <h3 class="commodity-name">Corn</h3>
+                            <div class="weather-event-box">
+                                <span class="weather-event-icon">☀️</span>
+                                <div class="weather-event-content">
+                                    <h4>Key Weather Event</h4>
+                                    <p>Midwest drought during pollination (July). Two weeks of heat can cut yields 30%</p>
+                                </div>
+                            </div>
+                            <div class="sensitivity-meter">
+                                <div class="meter-label">
+                                    <span>Sensitivity</span>
+                                    <span>75%</span>
+                                </div>
+                                <div class="meter-bar">
+                                    <div class="meter-fill"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Soybeans - HIGH -->
+                    <div class="commodity-sensitivity-card high animate-on-scroll">
+                        <div class="sensitivity-card-header">
+                            <div class="card-icon-wrapper">
+                                <span class="card-icon">🌾</span>
+                                <div class="card-icon-glow"></div>
+                            </div>
+                            <span class="sensitivity-badge high">HIGH</span>
+                        </div>
+                        <div class="sensitivity-card-body">
+                            <h3 class="commodity-name">Soybeans</h3>
+                            <div class="weather-event-box">
+                                <span class="weather-event-icon">🌧️</span>
+                                <div class="weather-event-content">
+                                    <h4>Key Weather Event</h4>
+                                    <p>Argentina/Brazil drought during growing season (Dec-Mar). La Niña years are dangerous</p>
+                                </div>
+                            </div>
+                            <div class="sensitivity-meter">
+                                <div class="meter-label">
+                                    <span>Sensitivity</span>
+                                    <span>75%</span>
+                                </div>
+                                <div class="meter-bar">
+                                    <div class="meter-fill"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sugar - MODERATE -->
+                    <div class="commodity-sensitivity-card moderate animate-on-scroll">
+                        <div class="sensitivity-card-header">
+                            <div class="card-icon-wrapper">
+                                <span class="card-icon">🍬</span>
+                                <div class="card-icon-glow"></div>
+                            </div>
+                            <span class="sensitivity-badge moderate">MODERATE</span>
+                        </div>
+                        <div class="sensitivity-card-body">
+                            <h3 class="commodity-name">Sugar</h3>
+                            <div class="weather-event-box">
+                                <span class="weather-event-icon">🌧️</span>
+                                <div class="weather-event-content">
+                                    <h4>Key Weather Event</h4>
+                                    <p>Brazilian rain during harvest season delays crushing and reduces sucrose content</p>
+                                </div>
+                            </div>
+                            <div class="sensitivity-meter">
+                                <div class="meter-label">
+                                    <span>Sensitivity</span>
+                                    <span>50%</span>
+                                </div>
+                                <div class="meter-bar">
+                                    <div class="meter-fill"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Crude Oil - MODERATE -->
+                    <div class="commodity-sensitivity-card moderate animate-on-scroll">
+                        <div class="sensitivity-card-header">
+                            <div class="card-icon-wrapper">
+                                <span class="card-icon">🛢️</span>
+                                <div class="card-icon-glow"></div>
+                            </div>
+                            <span class="sensitivity-badge moderate">MODERATE</span>
+                        </div>
+                        <div class="sensitivity-card-body">
+                            <h3 class="commodity-name">Crude Oil</h3>
+                            <div class="weather-event-box">
+                                <span class="weather-event-icon">🌀</span>
+                                <div class="weather-event-content">
+                                    <h4>Key Weather Event</h4>
+                                    <p>Hurricanes in Gulf of Mexico (Aug-Oct). Storm disruptions can spike prices 5-10%</p>
+                                </div>
+                            </div>
+                            <div class="sensitivity-meter">
+                                <div class="meter-label">
+                                    <span>Sensitivity</span>
+                                    <span>50%</span>
+                                </div>
+                                <div class="meter-bar">
+                                    <div class="meter-fill"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Enhanced Comparison Table -->
+                <table class="weather-comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Commodity</th>
+                            <th>Sensitivity</th>
+                            <th>Key Weather Event</th>
+                            <th>Critical Period</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="table-commodity-cell">
+                                    <span class="table-emoji">🍊</span>
+                                    <span class="table-name">Orange Juice</span>
+                                </div>
+                            </td>
+                            <td><span class="table-sensitivity-badge extreme">EXTREME</span></td>
+                            <td>
+                                <div class="table-weather-event">
+                                    <i class="fas fa-snowflake"></i>
+                                    Florida frost
+                                </div>
+                            </td>
+                            <td>Dec - Feb</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="table-commodity-cell">
+                                    <span class="table-emoji">🔥</span>
+                                    <span class="table-name">Natural Gas</span>
+                                </div>
+                            </td>
+                            <td><span class="table-sensitivity-badge extreme">EXTREME</span></td>
+                            <td>
+                                <div class="table-weather-event">
+                                    <i class="fas fa-temperature-low"></i>
+                                    Polar vortex, heatwaves
+                                </div>
+                            </td>
+                            <td>Year-round</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="table-commodity-cell">
+                                    <span class="table-emoji">☕</span>
+                                    <span class="table-name">Coffee</span>
+                                </div>
+                            </td>
+                            <td><span class="table-sensitivity-badge high">HIGH</span></td>
+                            <td>
+                                <div class="table-weather-event">
+                                    <i class="fas fa-icicles"></i>
+                                    Brazil frost
+                                </div>
+                            </td>
+                            <td>July - Aug</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="table-commodity-cell">
+                                    <span class="table-emoji">🌾</span>
+                                    <span class="table-name">Wheat</span>
+                                </div>
+                            </td>
+                            <td><span class="table-sensitivity-badge high">HIGH</span></td>
+                            <td>
+                                <div class="table-weather-event">
+                                    <i class="fas fa-sun"></i>
+                                    Drought, excessive rain
+                                </div>
+                            </td>
+                            <td>Apr - Jul</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="table-commodity-cell">
+                                    <span class="table-emoji">🌽</span>
+                                    <span class="table-name">Corn</span>
+                                </div>
+                            </td>
+                            <td><span class="table-sensitivity-badge high">HIGH</span></td>
+                            <td>
+                                <div class="table-weather-event">
+                                    <i class="fas fa-thermometer-full"></i>
+                                    Midwest drought
+                                </div>
+                            </td>
+                            <td>July (pollination)</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="table-commodity-cell">
+                                    <span class="table-emoji">🌾</span>
+                                    <span class="table-name">Soybeans</span>
+                                </div>
+                            </td>
+                            <td><span class="table-sensitivity-badge high">HIGH</span></td>
+                            <td>
+                                <div class="table-weather-event">
+                                    <i class="fas fa-cloud-rain"></i>
+                                    Argentina/Brazil drought
+                                </div>
+                            </td>
+                            <td>Dec - Mar</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="table-commodity-cell">
+                                    <span class="table-emoji">🍬</span>
+                                    <span class="table-name">Sugar</span>
+                                </div>
+                            </td>
+                            <td><span class="table-sensitivity-badge moderate">MODERATE</span></td>
+                            <td>
+                                <div class="table-weather-event">
+                                    <i class="fas fa-cloud-showers-heavy"></i>
+                                    Brazilian rain during harvest
+                                </div>
+                            </td>
+                            <td>Apr - Nov</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="table-commodity-cell">
+                                    <span class="table-emoji">🛢️</span>
+                                    <span class="table-name">Crude Oil</span>
+                                </div>
+                            </td>
+                            <td><span class="table-sensitivity-badge moderate">MODERATE</span></td>
+                            <td>
+                                <div class="table-weather-event">
+                                    <i class="fas fa-hurricane"></i>
+                                    Gulf hurricanes
+                                </div>
+                            </td>
+                            <td>Aug - Oct</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Pro Tip -->
+                <div class="weather-pro-tip">
+                    <div class="pro-tip-icon">💡</div>
+                    <div class="pro-tip-content">
+                        <h4><i class="fas fa-lightbulb"></i> Pro Trading Tip</h4>
+                        <p>Weather-sensitive commodities often move on <strong>forecasts</strong>, not actual weather. The key is positioning 7-14 days before expected weather events. By the time frost hits, the trade is over.</p>
                     </div>
                 </div>
             </section>
@@ -576,24 +1506,26 @@
                 <i class="fas fa-arrow-right"></i>
             </a>
         </div>
-    </section>
-
-    <!-- Footer -->
+    </section>    <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
-            <div class="footer-bottom">
-                <p>&copy; 2026 BroBillionaire. All rights reserved. Free trading education.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.youtube.com/@RealBroBillionaire" target="_blank"><i class="fab fa-youtube"></i></a>
-                    <a href="#"><i class="fab fa-discord"></i></a>
+            <div class="footer-brand-section">
+                <div class="logo">
+                    <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                    <span class="logo-text">BroBillionaire</span>
                 </div>
+                <p class="tagline">Making Wall Street wisdom accessible to every trader.</p>
             </div>
+            <nav class="footer-nav">
+                <a href="index.html">Home</a>
+                <a href="tools.html">Tools</a>
+                <a href="about.html">About</a>
+            </nav>
         </div>
     </footer>
-
-    <script src="script.js"></script>
+    <div class="footer-disclaimer">
+        <p>For educational purposes only. Not financial advice. Trading options involves substantial risk of loss.</p>
+    </div><script src="script.js"></script>
     <script>
         // Reading progress bar
         window.addEventListener('scroll', () => {
@@ -616,6 +1548,27 @@
                 alert('Link copied to clipboard!');
             }
         }
+
+        // Animate on scroll for commodity cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    // Add staggered delay for each card
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
     </script>
     <script src="seo-injector.js" defer></script>
 </body>

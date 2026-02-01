@@ -10,6 +10,88 @@
     <meta name="description" content="Browse all 185+ free trading education articles. Legendary traders, market crashes, options mastery, futures trading, risk management and more.">
     <link rel="canonical" href="https://brobillionaire.com/articles.html">
     <style>
+        /* Navbar fix for this page */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none !important;
+        }
+        a.logo, a.logo:hover, a.logo:visited {
+            text-decoration: none !important;
+            border-bottom: none !important;
+        }
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+        .nav-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: color 0.2s ease;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #C9A227;
+        }
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+        }
+        .mobile-menu span {
+            width: 22px;
+            height: 2px;
+            background: #fff;
+            border-radius: 2px;
+        }
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+            .mobile-menu {
+                display: flex;
+            }
+            .cta-btn.gold-btn {
+                padding: 10px 20px;
+                font-size: 0.85rem;
+            }
+        }
+        
         .articles-hub {
             padding: 120px 20px 60px;
             max-width: 1400px;
@@ -129,8 +211,17 @@
             </a>
             <div class="nav-links">
                 <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#why" class="nav-link">Why Us</a>
+                <a href="index.html#insights" class="nav-link">Insights</a>
                 <a href="articles.html" class="nav-link active">All Articles</a>
                 <a href="index.html#philosophy" class="nav-link">Philosophy</a>
+                <a href="tools.html" class="nav-link">Tools</a>
+            </div>
+            <a href="articles.html" class="cta-btn gold-btn">Read Free</a>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
     </nav>
@@ -482,7 +573,7 @@
                     <span class="read-more">Read article <i class="fas fa-arrow-right"></i></span>
                 </a>
                 <a href="article-volatility-options.html" class="article-link">
-                    <h3>The Secret Life of Volatility: Options-Geek Heaven</h3>
+                    <h3>The Secret Life of Volatility: Options Mastery</h3>
                     <span class="read-more">Read article <i class="fas fa-arrow-right"></i></span>
                 </a>
                 <a href="article-beginner-options.html" class="article-link">

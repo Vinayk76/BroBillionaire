@@ -144,9 +144,37 @@
         }
         
         .ghost-emoji {
-            font-size: 80px;
+            font-size: 60px;
             margin-bottom: 20px;
             animation: float 3s ease-in-out infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .ghost-emoji i {
+            background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.4));
+        }
+        
+        .ghost-emoji i:nth-child(2) {
+            background: linear-gradient(135deg, #C9A227 0%, #FFD700 50%, #B8860B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 20px rgba(201, 162, 39, 0.4));
+        }
+        
+        .ghost-emoji i:nth-child(3) {
+            background: linear-gradient(135deg, #64748b 0%, #94a3b8 50%, #475569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 20px rgba(100, 116, 139, 0.4));
         }
         
         @keyframes float {
@@ -200,6 +228,26 @@
         .swap-icon {
             font-size: 2.5rem;
             margin-bottom: 15px;
+        }
+        
+        .swap-icon i {
+            display: inline-block;
+        }
+        
+        .swap-box.investor .swap-icon i {
+            background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 12px rgba(139, 92, 246, 0.5));
+        }
+        
+        .swap-box.bank .swap-icon i {
+            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.5));
         }
         
         .swap-label {
@@ -403,21 +451,20 @@
         }
         
         .fire-sale-visual::before {
-            content: '🔥';
+            content: '';
             position: absolute;
-            top: -20px;
-            left: 20px;
-            font-size: 60px;
-            animation: fire-flicker 0.5s ease-in-out infinite alternate;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 20%, rgba(239, 68, 68, 0.15) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 20%, rgba(249, 115, 22, 0.15) 0%, transparent 40%);
+            animation: fire-ambient 3s ease-in-out infinite alternate;
         }
         
-        .fire-sale-visual::after {
-            content: '🔥';
-            position: absolute;
-            top: -20px;
-            right: 20px;
-            font-size: 60px;
-            animation: fire-flicker 0.5s ease-in-out infinite alternate-reverse;
+        @keyframes fire-ambient {
+            0% { opacity: 0.5; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.1); }
         }
         
         @keyframes fire-flicker {
@@ -436,6 +483,25 @@
             color: #ef4444;
             font-weight: 700;
             margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .fire-sale-title i {
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #ef4444 0%, #f97316 50%, #fbbf24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 15px rgba(239, 68, 68, 0.6));
+            animation: fire-glow 1s ease-in-out infinite alternate;
+        }
+        
+        @keyframes fire-glow {
+            0% { filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.4)); }
+            100% { filter: drop-shadow(0 0 25px rgba(249, 115, 22, 0.8)); }
         }
         
         .fire-sale-subtitle {
@@ -470,6 +536,25 @@
             border-radius: 20px;
             overflow: hidden;
             position: relative;
+        }
+        
+        .race-indicator {
+            width: 16px;
+            height: 32px;
+            border-radius: 0 16px 16px 0;
+            flex-shrink: 0;
+        }
+        
+        .race-indicator.green {
+            background: linear-gradient(90deg, #22c55e, #4ade80);
+        }
+        
+        .race-indicator.yellow {
+            background: linear-gradient(90deg, #eab308, #facc15);
+        }
+        
+        .race-indicator.red {
+            background: linear-gradient(90deg, #ef4444, #f87171);
         }
         
         .race-bar {
@@ -527,6 +612,12 @@
             align-items: center;
             justify-content: center;
             font-size: 60px;
+            box-shadow: 0 0 30px rgba(201, 162, 39, 0.3);
+        }
+        
+        .hwang-avatar i {
+            color: #0d0d0d;
+            font-size: 55px;
         }
         
         .hwang-bio h3 {
@@ -676,6 +767,19 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .irony-label i {
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, #C9A227 0%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 8px rgba(201, 162, 39, 0.4));
         }
         
         .irony-text {
@@ -757,6 +861,761 @@
                 padding: 20px 0;
             }
         }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           💥 EPIC BLOWUP VISUALIZATIONS - Creative CSS Components
+           ═══════════════════════════════════════════════════════════════════ */
+
+        /* Money Evaporation Animation */
+        .money-evaporate {
+            position: relative;
+            padding: 60px 40px;
+            background: linear-gradient(180deg, #0d0d0d 0%, #1a0a2a 50%, #0d0d0d 100%);
+            border-radius: 24px;
+            margin: 50px 0;
+            overflow: hidden;
+            border: 1px solid rgba(139, 92, 246, 0.4);
+        }
+
+        .money-evaporate::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(201, 162, 39, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(239, 68, 68, 0.15) 0%, transparent 50%);
+            animation: ethereal-shift 8s ease-in-out infinite;
+        }
+
+        @keyframes ethereal-shift {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+
+        .evaporate-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .evaporate-particles span {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: money-rise 4s infinite;
+            opacity: 0;
+        }
+
+        .evaporate-particles span:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .evaporate-particles span:nth-child(2) { left: 25%; animation-delay: 0.7s; }
+        .evaporate-particles span:nth-child(3) { left: 40%; animation-delay: 1.4s; }
+        .evaporate-particles span:nth-child(4) { left: 55%; animation-delay: 2.1s; }
+        .evaporate-particles span:nth-child(5) { left: 70%; animation-delay: 2.8s; }
+        .evaporate-particles span:nth-child(6) { left: 85%; animation-delay: 3.5s; }
+
+        @keyframes money-rise {
+            0% { bottom: -50px; opacity: 0; transform: translateX(0) rotate(0deg); }
+            20% { opacity: 0.8; }
+            100% { bottom: 100%; opacity: 0; transform: translateX(30px) rotate(180deg); }
+        }
+
+        .evaporate-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .evaporate-amount {
+            font-size: 5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #C9A227, #ef4444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: value-pulse 2s ease-in-out infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes value-pulse {
+            0%, 100% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.02); filter: brightness(1.2); }
+        }
+
+        .evaporate-label {
+            color: #888;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        /* Leverage Meter - Danger Gauge */
+        .leverage-gauge {
+            position: relative;
+            padding: 50px 40px;
+            background: linear-gradient(145deg, #0d0d0d 0%, #1a0505 100%);
+            border-radius: 24px;
+            margin: 50px 0;
+            border: 2px solid rgba(239, 68, 68, 0.3);
+            overflow: hidden;
+        }
+
+        .leverage-gauge::before {
+            content: '⚠️ DANGER ZONE';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: #ef4444;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            animation: danger-blink 1.5s ease-in-out infinite;
+        }
+
+        @keyframes danger-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .gauge-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .gauge-title {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .gauge-visual {
+            position: relative;
+            width: 280px;
+            height: 150px;
+        }
+
+        .gauge-arc {
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 180deg,
+                #22c55e 0deg 30deg,
+                #84cc16 30deg 60deg,
+                #eab308 60deg 90deg,
+                #f97316 90deg 120deg,
+                #ef4444 120deg 150deg,
+                #dc2626 150deg 180deg,
+                transparent 180deg 360deg
+            );
+            clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+        }
+
+        .gauge-arc::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            right: 25px;
+            bottom: 25px;
+            background: #0d0d0d;
+            border-radius: 50%;
+        }
+
+        .gauge-needle {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            height: 100px;
+            background: linear-gradient(to top, #ef4444, #fff);
+            transform-origin: bottom center;
+            transform: translateX(-50%) rotate(75deg);
+            border-radius: 4px;
+            animation: needle-swing 3s ease-out forwards;
+        }
+
+        @keyframes needle-swing {
+            0% { transform: translateX(-50%) rotate(-90deg); }
+            50% { transform: translateX(-50%) rotate(85deg); }
+            100% { transform: translateX(-50%) rotate(75deg); }
+        }
+
+        .gauge-center {
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, #ef4444, #dc2626);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
+        }
+
+        .gauge-labels {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 300px;
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .gauge-value {
+            text-align: center;
+        }
+
+        .gauge-value-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #ef4444;
+            text-shadow: 0 0 30px rgba(239, 68, 68, 0.5);
+        }
+
+        .gauge-value-label {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        /* Burning Money Stack */
+        .burning-stack {
+            position: relative;
+            padding: 60px 40px;
+            background: linear-gradient(180deg, #0d0d0d 0%, #1a0a0a 100%);
+            border-radius: 24px;
+            margin: 50px 0;
+            overflow: hidden;
+        }
+
+        .flames-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .flame {
+            position: absolute;
+            bottom: -20px;
+            width: 30px;
+            height: 80px;
+            background: linear-gradient(to top, #ff6b00, #ffcc00, rgba(255, 255, 255, 0.8));
+            border-radius: 50% 50% 20% 20%;
+            animation: flame-dance 0.3s ease-in-out infinite alternate;
+            filter: blur(1px);
+        }
+
+        .flame:nth-child(odd) { animation-duration: 0.4s; }
+        .flame:nth-child(even) { animation-duration: 0.25s; }
+        
+        .flame:nth-child(1) { left: 5%; height: 70px; }
+        .flame:nth-child(2) { left: 15%; height: 90px; animation-delay: 0.1s; }
+        .flame:nth-child(3) { left: 25%; height: 75px; animation-delay: 0.05s; }
+        .flame:nth-child(4) { left: 35%; height: 85px; animation-delay: 0.15s; }
+        .flame:nth-child(5) { left: 45%; height: 95px; animation-delay: 0.08s; }
+        .flame:nth-child(6) { left: 55%; height: 80px; animation-delay: 0.12s; }
+        .flame:nth-child(7) { left: 65%; height: 90px; animation-delay: 0.03s; }
+        .flame:nth-child(8) { left: 75%; height: 75px; animation-delay: 0.18s; }
+        .flame:nth-child(9) { left: 85%; height: 85px; animation-delay: 0.07s; }
+        .flame:nth-child(10) { left: 95%; height: 70px; animation-delay: 0.14s; }
+
+        @keyframes flame-dance {
+            0% { transform: scaleY(1) skewX(-3deg); opacity: 0.9; }
+            100% { transform: scaleY(1.15) skewX(3deg); opacity: 1; }
+        }
+
+        .burning-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding-bottom: 40px;
+        }
+
+        /* Timeline Cascade */
+        .cascade-timeline {
+            position: relative;
+            padding: 40px 0;
+            margin: 50px 0;
+        }
+
+        .cascade-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #8b5cf6, #ef4444, #ef4444);
+            transform: translateX(-50%);
+        }
+
+        .cascade-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: cascade-appear 0.5s ease forwards;
+        }
+
+        .cascade-item:nth-child(1) { animation-delay: 0.1s; }
+        .cascade-item:nth-child(2) { animation-delay: 0.2s; }
+        .cascade-item:nth-child(3) { animation-delay: 0.3s; }
+        .cascade-item:nth-child(4) { animation-delay: 0.4s; }
+        .cascade-item:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes cascade-appear {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .cascade-item:nth-child(odd) {
+            justify-content: flex-start;
+            padding-right: calc(50% + 40px);
+            text-align: right;
+        }
+
+        .cascade-item:nth-child(even) {
+            justify-content: flex-end;
+            padding-left: calc(50% + 40px);
+            text-align: left;
+        }
+
+        .cascade-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #ef4444;
+            border-radius: 50%;
+            border: 4px solid #0d0d0d;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+        }
+
+        .cascade-card {
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            border: 1px solid #333;
+            border-radius: 16px;
+            padding: 25px;
+            max-width: 350px;
+            transition: all 0.3s ease;
+        }
+
+        .cascade-card:hover {
+            border-color: #ef4444;
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(239, 68, 68, 0.15);
+        }
+
+        .cascade-time {
+            color: #ef4444;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .cascade-title {
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .cascade-desc {
+            color: #888;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Ripple Impact Waves */
+        .impact-ripple {
+            position: relative;
+            padding: 80px 40px;
+            background: radial-gradient(ellipse at center, #1a0a2a 0%, #0d0d0d 70%);
+            border-radius: 24px;
+            margin: 50px 0;
+            overflow: hidden;
+        }
+
+        .ripple-waves {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .ripple-wave {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            border: 2px solid rgba(139, 92, 246, 0.5);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: ripple-expand 3s ease-out infinite;
+        }
+
+        .ripple-wave:nth-child(1) { animation-delay: 0s; }
+        .ripple-wave:nth-child(2) { animation-delay: 0.6s; }
+        .ripple-wave:nth-child(3) { animation-delay: 1.2s; }
+        .ripple-wave:nth-child(4) { animation-delay: 1.8s; }
+        .ripple-wave:nth-child(5) { animation-delay: 2.4s; }
+
+        @keyframes ripple-expand {
+            0% { width: 50px; height: 50px; opacity: 0.8; border-color: rgba(139, 92, 246, 0.8); }
+            100% { width: 500px; height: 500px; opacity: 0; border-color: rgba(239, 68, 68, 0.2); }
+        }
+
+        .ripple-center {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .ripple-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: impact-shake 0.5s ease-in-out infinite;
+        }
+
+        @keyframes impact-shake {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.05) rotate(-2deg); }
+            75% { transform: scale(1.05) rotate(2deg); }
+        }
+
+        .ripple-title {
+            font-size: 2rem;
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .ripple-subtitle {
+            color: #888;
+            font-size: 1rem;
+        }
+
+        /* Glitch Text Effect */
+        .glitch-container {
+            text-align: center;
+            padding: 40px 0;
+            margin: 30px 0;
+        }
+
+        .glitch-text {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #fff;
+            position: relative;
+            display: inline-block;
+        }
+
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch-text::before {
+            color: #ef4444;
+            animation: glitch-1 0.3s infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+            transform: translateX(-2px);
+        }
+
+        .glitch-text::after {
+            color: #22c55e;
+            animation: glitch-2 0.3s infinite;
+            clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+            transform: translateX(2px);
+        }
+
+        @keyframes glitch-1 {
+            0%, 100% { transform: translateX(-2px); }
+            20% { transform: translateX(2px); }
+            40% { transform: translateX(-2px); }
+            60% { transform: translateX(2px) skewX(5deg); }
+            80% { transform: translateX(-2px); }
+        }
+
+        @keyframes glitch-2 {
+            0%, 100% { transform: translateX(2px); }
+            20% { transform: translateX(-2px); }
+            40% { transform: translateX(2px) skewX(-3deg); }
+            60% { transform: translateX(-2px); }
+            80% { transform: translateX(2px); }
+        }
+
+        /* Falling Numbers Animation */
+        .falling-numbers {
+            position: relative;
+            height: 200px;
+            background: linear-gradient(to bottom, #0d0d0d, #1a0505);
+            border-radius: 20px;
+            margin: 40px 0;
+            overflow: hidden;
+        }
+
+        .falling-numbers::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60%;
+            background: linear-gradient(to top, rgba(239, 68, 68, 0.2), transparent);
+        }
+
+        .number-fall {
+            position: absolute;
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            color: #ef4444;
+            animation: fall-down 2s linear infinite;
+            opacity: 0.7;
+            text-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+        }
+
+        .number-fall:nth-child(1) { left: 5%; font-size: 1.5rem; animation-duration: 2.5s; animation-delay: 0s; }
+        .number-fall:nth-child(2) { left: 15%; font-size: 1.2rem; animation-duration: 3s; animation-delay: 0.3s; }
+        .number-fall:nth-child(3) { left: 25%; font-size: 1.8rem; animation-duration: 2.2s; animation-delay: 0.6s; }
+        .number-fall:nth-child(4) { left: 35%; font-size: 1.4rem; animation-duration: 2.8s; animation-delay: 0.9s; }
+        .number-fall:nth-child(5) { left: 45%; font-size: 2rem; animation-duration: 2s; animation-delay: 1.2s; }
+        .number-fall:nth-child(6) { left: 55%; font-size: 1.3rem; animation-duration: 3.2s; animation-delay: 0.2s; }
+        .number-fall:nth-child(7) { left: 65%; font-size: 1.6rem; animation-duration: 2.4s; animation-delay: 0.5s; }
+        .number-fall:nth-child(8) { left: 75%; font-size: 1.1rem; animation-duration: 2.7s; animation-delay: 0.8s; }
+        .number-fall:nth-child(9) { left: 85%; font-size: 1.9rem; animation-duration: 2.1s; animation-delay: 1.1s; }
+        .number-fall:nth-child(10) { left: 95%; font-size: 1.4rem; animation-duration: 2.6s; animation-delay: 0.4s; }
+
+        @keyframes fall-down {
+            0% { top: -50px; transform: rotate(0deg); }
+            100% { top: 100%; transform: rotate(360deg); }
+        }
+
+        /* Explosion Burst */
+        .explosion-visual {
+            position: relative;
+            padding: 80px 40px;
+            background: radial-gradient(circle at center, #1a0a0a 0%, #0d0d0d 100%);
+            border-radius: 24px;
+            margin: 50px 0;
+            overflow: hidden;
+        }
+
+        .explosion-center {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .explosion-burst {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .burst-ray {
+            position: absolute;
+            width: 3px;
+            height: 100px;
+            background: linear-gradient(to top, rgba(239, 68, 68, 0.8), transparent);
+            transform-origin: bottom center;
+            animation: burst-out 2s ease-out infinite;
+        }
+
+        .burst-ray:nth-child(1) { transform: rotate(0deg); animation-delay: 0s; }
+        .burst-ray:nth-child(2) { transform: rotate(30deg); animation-delay: 0.1s; }
+        .burst-ray:nth-child(3) { transform: rotate(60deg); animation-delay: 0.2s; }
+        .burst-ray:nth-child(4) { transform: rotate(90deg); animation-delay: 0.3s; }
+        .burst-ray:nth-child(5) { transform: rotate(120deg); animation-delay: 0.4s; }
+        .burst-ray:nth-child(6) { transform: rotate(150deg); animation-delay: 0.5s; }
+        .burst-ray:nth-child(7) { transform: rotate(180deg); animation-delay: 0.6s; }
+        .burst-ray:nth-child(8) { transform: rotate(210deg); animation-delay: 0.7s; }
+        .burst-ray:nth-child(9) { transform: rotate(240deg); animation-delay: 0.8s; }
+        .burst-ray:nth-child(10) { transform: rotate(270deg); animation-delay: 0.9s; }
+        .burst-ray:nth-child(11) { transform: rotate(300deg); animation-delay: 1.0s; }
+        .burst-ray:nth-child(12) { transform: rotate(330deg); animation-delay: 1.1s; }
+
+        @keyframes burst-out {
+            0% { height: 30px; opacity: 0; }
+            30% { height: 120px; opacity: 1; }
+            100% { height: 200px; opacity: 0; }
+        }
+
+        /* Shattered Glass Effect */
+        .shattered-card {
+            position: relative;
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            overflow: hidden;
+        }
+
+        .shattered-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.03) 45%, transparent 50%),
+                linear-gradient(-135deg, transparent 40%, rgba(255,255,255,0.03) 45%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .crack-line {
+            position: absolute;
+            width: 2px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent);
+            transform-origin: top center;
+            animation: crack-spread 0.5s ease-out forwards;
+        }
+
+        /* Mobile Responsive for new elements */
+        @media (max-width: 768px) {
+            .money-evaporate,
+            .leverage-gauge,
+            .burning-stack,
+            .impact-ripple,
+            .explosion-visual {
+                padding: 40px 20px;
+            }
+            
+            .evaporate-amount {
+                font-size: 3rem;
+            }
+            
+            .gauge-visual {
+                transform: scale(0.8);
+            }
+            
+            .glitch-text {
+                font-size: 2rem;
+            }
+            
+            .cascade-timeline::before {
+                left: 20px;
+            }
+            
+            .cascade-item:nth-child(odd),
+            .cascade-item:nth-child(even) {
+                padding-left: 60px;
+                padding-right: 20px;
+                text-align: left;
+                justify-content: flex-start;
+            }
+            
+            .cascade-dot {
+                left: 20px;
+            }
+            
+            .ripple-title {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Genius Grid - Final Score Section */
+        .genius-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .genius-card {
+            background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
+            border-radius: 16px;
+            padding: 30px;
+            border: 2px solid #333;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .genius-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: inherit;
+        }
+        
+        .genius-card[style*="#ef4444"]::before {
+            background: linear-gradient(90deg, #ef4444, #dc2626);
+        }
+        
+        .genius-card[style*="#eab308"]::before {
+            background: linear-gradient(90deg, #eab308, #facc15);
+        }
+        
+        .genius-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .genius-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #fff;
+        }
+        
+        .genius-name {
+            font-size: 1.3rem;
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .genius-title {
+            color: #C9A227;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .genius-fact {
+            color: #aaa;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .genius-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 
     <!-- Additional SEO Enhancements -->
@@ -796,8 +1655,8 @@
         </div>
         <div class="article-hero-content">
             <div class="article-meta-top">
-                <span class="article-category-badge" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
-                    <i class="fas fa-ghost"></i>
+                <span class="article-category-badge premium-badge">
+                    <i class="fas fa-crown"></i>
                     Epic Blowup
                 </span>
                 <span class="article-read-time">
@@ -860,7 +1719,7 @@
             <!-- Opening Ghost Visual -->
             <div class="ghost-visual">
                 <div class="ghost-content">
-                    <div class="ghost-emoji">👻💰💨</div>
+                    <div class="ghost-emoji"><i class="fas fa-ghost"></i><i class="fas fa-coins"></i><i class="fas fa-wind"></i></div>
                     <div class="ghost-title">The Invisible Whale</div>
                     <div class="ghost-subtitle">"Archegos" means "one who leads the way" in Greek. Bill Hwang led the way... right off a cliff.</div>
                 </div>
@@ -874,7 +1733,7 @@
                 <p class="article-text">Before we dive into the wreckage, you need to understand <strong>Bill Hwang</strong>.</p>
                 
                 <div class="hwang-profile">
-                    <div class="hwang-avatar">🐯</div>
+                    <div class="hwang-avatar"><i class="fas fa-user-tie"></i></div>
                     <div class="hwang-bio">
                         <h3>Sung Kook "Bill" Hwang</h3>
                         <div class="title">Former Tiger Cub • Family Office King • Now Defendant</div>
@@ -897,7 +1756,7 @@
                 <p class="article-text">No SEC filings. No 13F disclosures. No position limits. No one watching.</p>
                 
                 <div class="irony-card">
-                    <div class="irony-label">🎭 The Regulatory Loophole</div>
+                    <div class="irony-label"><i class="fas fa-theater-masks"></i> The Regulatory Loophole</div>
                     <div class="irony-text">A convicted insider trader was allowed to build a $36 billion leveraged empire because he technically wasn't managing "other people's money" anymore. Nobody was watching.</div>
                 </div>
             </section>
@@ -915,7 +1774,7 @@
 
                 <div class="swap-diagram">
                     <div class="swap-box investor">
-                        <div class="swap-icon">👤</div>
+                        <div class="swap-icon"><i class="fas fa-user-secret"></i></div>
                         <div class="swap-label">Archegos</div>
                         <div class="swap-title">Pays Interest + Any Losses</div>
                     </div>
@@ -930,7 +1789,7 @@
                         </div>
                     </div>
                     <div class="swap-box bank">
-                        <div class="swap-icon">🏦</div>
+                        <div class="swap-icon"><i class="fas fa-landmark"></i></div>
                         <div class="swap-label">Prime Broker (Bank)</div>
                         <div class="swap-title">Holds the Actual Stock</div>
                     </div>
@@ -1178,7 +2037,7 @@
                 
                 <div class="fire-sale-visual">
                     <div class="fire-sale-content">
-                        <div class="fire-sale-title">🔥 BLOCK TRADE APOCALYPSE 🔥</div>
+                        <div class="fire-sale-title"><i class="fas fa-fire"></i> BLOCK TRADE APOCALYPSE <i class="fas fa-fire"></i></div>
                         <div class="fire-sale-subtitle">$20+ billion in stock dumped in a single day. Nothing orderly. Pure chaos.</div>
                     </div>
                 </div>
@@ -1221,29 +2080,33 @@
                 <div class="race-track">
                     <div class="race-bank">
                         <div class="race-name">Goldman Sachs</div>
+                        <div class="race-indicator green"></div>
                         <div class="race-bar-container">
-                            <div class="race-bar winner" style="width: 95%;">Sold Fast</div>
+                            <div class="race-bar winner" style="width: 100%;"></div>
                         </div>
                         <div class="race-result win">~$0 Loss</div>
                     </div>
                     <div class="race-bank">
                         <div class="race-name">Morgan Stanley</div>
+                        <div class="race-indicator green"></div>
                         <div class="race-bar-container">
-                            <div class="race-bar winner" style="width: 85%;">Sold Quick</div>
+                            <div class="race-bar winner" style="width: 100%;"></div>
                         </div>
                         <div class="race-result win">~$900M Loss</div>
                     </div>
                     <div class="race-bank">
                         <div class="race-name">Nomura</div>
+                        <div class="race-indicator yellow"></div>
                         <div class="race-bar-container">
-                            <div class="race-bar slow" style="width: 45%;">Waited</div>
+                            <div class="race-bar slow" style="width: 60%;"></div>
                         </div>
                         <div class="race-result lose">$2.9B Loss</div>
                     </div>
                     <div class="race-bank">
                         <div class="race-name">Credit Suisse</div>
+                        <div class="race-indicator red"></div>
                         <div class="race-bar-container">
-                            <div class="race-bar loser" style="width: 15%;">Froze</div>
+                            <div class="race-bar loser" style="width: 40%;"></div>
                         </div>
                         <div class="race-result lose">$5.5B Loss</div>
                     </div>
@@ -1325,7 +2188,7 @@
                 </div>
                 
                 <div class="irony-card">
-                    <div class="irony-label">📊 By the Numbers</div>
+                    <div class="irony-label"><i class="fas fa-chart-bar"></i> By the Numbers</div>
                     <div class="irony-text">$36 billion ÷ 48 hours = <strong>$750 million lost per hour</strong><br>That's $12.5 million vanishing every single minute.</div>
                 </div>
             </section>
@@ -1467,7 +2330,7 @@
         <!-- Article Sidebar -->
         <aside class="article-sidebar">
             <div class="sidebar-card sticky-sidebar">
-                <h4>💀 Death Stats</h4>
+                <h4><i class="fas fa-skull-crossbones" style="color: #ef4444; margin-right: 8px;"></i>Death Stats</h4>
                 <div class="sidebar-stats">
                     <div class="sidebar-stat">
                         <span class="stat-label">Peak Fortune</span>
@@ -1491,7 +2354,7 @@
                     </div>
                 </div>
                 <hr class="sidebar-divider">
-                <h4>🏦 Prime Brokers Hit</h4>
+                <h4><i class="fas fa-landmark" style="color: #3b82f6; margin-right: 8px;"></i>Prime Brokers Hit</h4>
                 <ul class="sidebar-list">
                     <li><i class="fas fa-times" style="color: #ef4444;"></i> Credit Suisse ($5.5B)</li>
                     <li><i class="fas fa-times" style="color: #ef4444;"></i> Nomura ($2.9B)</li>
@@ -1500,7 +2363,7 @@
                     <li><i class="fas fa-check" style="color: #22c55e;"></i> Goldman Sachs (~$0)</li>
                 </ul>
                 <hr class="sidebar-divider">
-                <h4>⚠️ Red Flags Ignored</h4>
+                <h4><i class="fas fa-exclamation-triangle" style="color: #eab308; margin-right: 8px;"></i>Red Flags Ignored</h4>
                 <ul class="sidebar-list">
                     <li><i class="fas fa-exclamation-triangle" style="color: #eab308;"></i> Prior fraud conviction</li>
                     <li><i class="fas fa-exclamation-triangle" style="color: #eab308;"></i> Extreme concentration</li>
@@ -1543,24 +2406,26 @@
                 <i class="fas fa-arrow-right"></i>
             </a>
         </div>
-    </section>
-
-    <!-- Footer -->
+    </section>    <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
-            <div class="footer-bottom">
-                <p>&copy; 2026 BroBillionaire. All rights reserved. Free trading education.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.youtube.com/@RealBroBillionaire" target="_blank"><i class="fab fa-youtube"></i></a>
-                    <a href="#"><i class="fab fa-discord"></i></a>
+            <div class="footer-brand-section">
+                <div class="logo">
+                    <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                    <span class="logo-text">BroBillionaire</span>
                 </div>
+                <p class="tagline">Making Wall Street wisdom accessible to every trader.</p>
             </div>
+            <nav class="footer-nav">
+                <a href="index.html">Home</a>
+                <a href="tools.html">Tools</a>
+                <a href="about.html">About</a>
+            </nav>
         </div>
     </footer>
-
-    <script src="script.js"></script>
+    <div class="footer-disclaimer">
+        <p>For educational purposes only. Not financial advice. Trading options involves substantial risk of loss.</p>
+    </div><script src="script.js"></script>
     <script>
         // Reading progress bar
         window.addEventListener('scroll', () => {

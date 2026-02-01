@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Weather Option Play - Interactive Strategy Guide | BroBillionaire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #22c55e;
+            --primary-dark: #16a34a;
+            --primary-glow: rgba(34, 197, 94, 0.4);
+            --secondary: #3b82f6;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg-dark: #0a0a0a;
+            --bg-card: #111111;
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .weather-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(34, 197, 94, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(245, 158, 11, 0.05) 0%, transparent 70%);
+            animation: bgPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Rain Effect */
+        .rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .raindrop {
+            position: absolute;
+            width: 2px;
+            height: 20px;
+            background: linear-gradient(to bottom, transparent, rgba(34, 197, 94, 0.3), transparent);
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(15deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100vh) rotate(15deg); opacity: 0; }
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 0 30px var(--primary-glow);
+        }
+
+        .logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 2px;
+        }
+
+        .main-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(32px, 6vw, 56px);
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--primary) 50%, #ffffff 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% center; }
+            100% { background-position: -200% center; }
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Weather Icons Animation */
+        .weather-icons-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .weather-icon-item {
+            width: 70px;
+            height: 70px;
+            background: var(--bg-card);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            animation: float 3s ease-in-out infinite;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .weather-icon-item:nth-child(1) { animation-delay: 0s; color: #3b82f6; }
+        .weather-icon-item:nth-child(2) { animation-delay: 0.5s; color: #f59e0b; }
+        .weather-icon-item:nth-child(3) { animation-delay: 1s; color: #06b6d4; }
+        .weather-icon-item:nth-child(4) { animation-delay: 1.5s; color: #ef4444; }
+        .weather-icon-item:nth-child(5) { animation-delay: 2s; color: #8b5cf6; }
+
+        .weather-icon-item:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 30px currentColor;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Timeline Strategy */
+        .strategy-timeline {
+            position: relative;
+            margin: 60px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, 
+                transparent,
+                var(--primary) 20%,
+                var(--primary) 80%,
+                transparent
+            );
+            transform: translateX(-50%);
+        }
+
+        .timeline-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 60px;
+            opacity: 0;
+            animation: slideIn 0.8s ease forwards;
+        }
+
+        .timeline-step:nth-child(odd) { flex-direction: row; }
+        .timeline-step:nth-child(even) { flex-direction: row-reverse; }
+
+        .timeline-step:nth-child(1) { animation-delay: 0.2s; }
+        .timeline-step:nth-child(2) { animation-delay: 0.4s; }
+        .timeline-step:nth-child(3) { animation-delay: 0.6s; }
+        .timeline-step:nth-child(4) { animation-delay: 0.8s; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .timeline-content {
+            flex: 1;
+            max-width: 45%;
+            padding: 30px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .timeline-step:nth-child(odd) .timeline-content { margin-right: 50px; text-align: right; }
+        .timeline-step:nth-child(even) .timeline-content { margin-left: 50px; text-align: left; }
+
+        .timeline-content:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 40px var(--primary-glow);
+            transform: scale(1.02);
+        }
+
+        .timeline-node {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background: var(--bg-dark);
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            z-index: 5;
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .step-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            color: var(--primary);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .step-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .step-description {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .step-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        /* Key Insight Box */
+        .key-insight {
+            position: relative;
+            margin: 80px 0;
+            padding: 50px 40px;
+            background: linear-gradient(135deg, 
+                rgba(34, 197, 94, 0.15) 0%, 
+                rgba(34, 197, 94, 0.05) 50%,
+                rgba(34, 197, 94, 0.15) 100%
+            );
+            border: 2px solid var(--primary);
+            border-radius: 24px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .key-insight::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent,
+                rgba(34, 197, 94, 0.1),
+                transparent,
+                transparent
+            );
+            animation: rotate 8s linear infinite;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .key-insight-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .key-label {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--bg-dark);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .key-text {
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        .key-highlight {
+            color: var(--primary);
+            position: relative;
+        }
+
+        .key-subtext {
+            font-size: 18px;
+            color: var(--text-secondary);
+        }
+
+        /* Commodity Cards */
+        .commodity-section {
+            margin: 80px 0;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--text-primary);
+        }
+
+        .commodity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .commodity-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .commodity-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--card-accent), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .commodity-card:hover::before { opacity: 1; }
+
+        .commodity-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--card-accent);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .commodity-card.natural-gas { --card-accent: #3b82f6; }
+        .commodity-card.orange-juice { --card-accent: #f97316; }
+        .commodity-card.wheat { --card-accent: #eab308; }
+        .commodity-card.cotton { --card-accent: #f472b6; }
+
+        .commodity-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .commodity-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .commodity-trigger {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        .commodity-impact {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .impact-up { color: #22c55e; }
+        .impact-down { color: #ef4444; }
+
+        /* Interactive Forecast Meter */
+        .forecast-section {
+            margin: 80px 0;
+            text-align: center;
+        }
+
+        .forecast-meter {
+            position: relative;
+            width: 300px;
+            height: 150px;
+            margin: 40px auto;
+        }
+
+        .meter-arc {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 150px 150px 0 0;
+            background: conic-gradient(
+                from 180deg,
+                #22c55e 0deg 60deg,
+                #eab308 60deg 120deg,
+                #ef4444 120deg 180deg
+            );
+            mask: radial-gradient(circle at center bottom, transparent 60%, black 61%);
+            -webkit-mask: radial-gradient(circle at center bottom, transparent 60%, black 61%);
+        }
+
+        .meter-needle {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            height: 100px;
+            background: linear-gradient(to top, var(--primary), transparent);
+            transform-origin: bottom center;
+            transform: translateX(-50%) rotate(var(--needle-rotation, -45deg));
+            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border-radius: 2px;
+        }
+
+        .meter-center {
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .meter-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .meter-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 30px;
+        }
+
+        .meter-status {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-top: 10px;
+        }
+
+        /* CTA Button */
+        .cta-section {
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--bg-dark);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 30px var(--primary-glow);
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px var(--primary-glow);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 60px;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .footer-link {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .timeline-line { display: none; }
+            .timeline-step { flex-direction: column !important; }
+            .timeline-content { 
+                max-width: 100% !important; 
+                margin: 0 !important; 
+                text-align: center !important;
+            }
+            .timeline-node { 
+                position: relative; 
+                margin-bottom: 20px;
+            }
+            .weather-icons-row { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+    <div class="weather-bg"></div>
+    
+    <!-- Rain Effect -->
+    <div class="rain" id="rain"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">💡</div>
+                <span class="logo-text">BROBILLIONAIRE</span>
+            </a>
+            
+            <h1 class="main-title">The Weather Option Play</h1>
+            <p class="subtitle">Trade the forecast, not the weather. The sky is the ultimate market mover.</p>
+            
+            <div class="weather-icons-row">
+                <div class="weather-icon-item" title="Cold Snap"><i class="fas fa-snowflake"></i></div>
+                <div class="weather-icon-item" title="Heatwave"><i class="fas fa-sun"></i></div>
+                <div class="weather-icon-item" title="Hurricane"><i class="fas fa-wind"></i></div>
+                <div class="weather-icon-item" title="Drought"><i class="fas fa-temperature-high"></i></div>
+                <div class="weather-icon-item" title="Freeze"><i class="fas fa-icicles"></i></div>
+            </div>
+        </header>
+
+        <!-- Strategy Timeline -->
+        <div class="strategy-timeline">
+            <div class="timeline-line"></div>
+            
+            <div class="timeline-step">
+                <div class="timeline-content">
+                    <div class="step-icon">🔭</div>
+                    <div class="step-number">STEP 01</div>
+                    <div class="step-title">Scout the Horizon</div>
+                    <div class="step-description">Watch weather models 10-14 days out. GFS, ECMWF, and other models show you the future before markets price it in.</div>
+                </div>
+                <div class="timeline-node">01</div>
+            </div>
+
+            <div class="timeline-step">
+                <div class="timeline-content">
+                    <div class="step-icon">🎯</div>
+                    <div class="step-number">STEP 02</div>
+                    <div class="step-title">Position Cheap</div>
+                    <div class="step-description">When extreme event looks likely, buy OTM calls or puts. They're cheap because uncertainty is high. That's your edge.</div>
+                </div>
+                <div class="timeline-node">02</div>
+            </div>
+
+            <div class="timeline-step">
+                <div class="timeline-content">
+                    <div class="step-icon">📈</div>
+                    <div class="step-number">STEP 03</div>
+                    <div class="step-title">Watch It Build</div>
+                    <div class="step-description">If forecast solidifies, your position gains value even BEFORE the event. IV expansion is your friend.</div>
+                </div>
+                <div class="timeline-node">03</div>
+            </div>
+
+            <div class="timeline-step">
+                <div class="timeline-content">
+                    <div class="step-icon">💰</div>
+                    <div class="step-number">STEP 04</div>
+                    <div class="step-title">Exit Smart</div>
+                    <div class="step-description">Sell before or during the event — don't wait for aftermath. IV crush post-event will destroy your gains.</div>
+                </div>
+                <div class="timeline-node">04</div>
+            </div>
+        </div>
+
+        <!-- Key Insight -->
+        <div class="key-insight">
+            <div class="key-insight-content">
+                <div class="key-label">🔑 KEY INSIGHT</div>
+                <div class="key-text">
+                    You're trading the <span class="key-highlight">FORECAST</span>,<br>
+                    not the weather itself
+                </div>
+                <div class="key-subtext">The money is made in anticipation, not reaction.</div>
+            </div>
+        </div>
+
+        <!-- Forecast Meter -->
+        <div class="forecast-section">
+            <h2 class="section-title">Live Opportunity Meter</h2>
+            <div class="forecast-meter" id="forecast-meter">
+                <div class="meter-arc"></div>
+                <div class="meter-needle" id="meter-needle"></div>
+                <div class="meter-center"></div>
+            </div>
+            <div class="meter-labels">
+                <span>Low</span>
+                <span>Moderate</span>
+                <span>Extreme</span>
+            </div>
+            <div class="meter-value" id="meter-value">75%</div>
+            <div class="meter-status" id="meter-status">High Probability Setup</div>
+        </div>
+
+        <!-- Commodity Cards -->
+        <div class="commodity-section">
+            <h2 class="section-title">Weather-Sensitive Commodities</h2>
+            <div class="commodity-grid">
+                <div class="commodity-card natural-gas">
+                    <div class="commodity-icon">🔥</div>
+                    <div class="commodity-name">Natural Gas</div>
+                    <div class="commodity-trigger">Cold snap / Polar vortex</div>
+                    <div class="commodity-impact impact-up">
+                        <i class="fas fa-arrow-up"></i> +30-50% in days
+                    </div>
+                </div>
+                
+                <div class="commodity-card orange-juice">
+                    <div class="commodity-icon">🍊</div>
+                    <div class="commodity-name">Orange Juice</div>
+                    <div class="commodity-trigger">Florida freeze / Hurricane</div>
+                    <div class="commodity-impact impact-up">
+                        <i class="fas fa-arrow-up"></i> +20-100% volatility
+                    </div>
+                </div>
+                
+                <div class="commodity-card wheat">
+                    <div class="commodity-icon">🌾</div>
+                    <div class="commodity-name">Wheat / Grains</div>
+                    <div class="commodity-trigger">Drought / Excessive rain</div>
+                    <div class="commodity-impact impact-up">
+                        <i class="fas fa-arrow-up"></i> +15-40% moves
+                    </div>
+                </div>
+                
+                <div class="commodity-card cotton">
+                    <div class="commodity-icon">☁️</div>
+                    <div class="commodity-name">Cotton</div>
+                    <div class="commodity-trigger">Monsoon / Cyclone</div>
+                    <div class="commodity-impact impact-up">
+                        <i class="fas fa-arrow-up"></i> +10-25% swings
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-section">
+            <a href="article-weather-commodities.html" class="cta-button">
+                <i class="fas fa-book-open"></i>
+                Read Full Weather Trading Guide
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-text">
+                Part of the <a href="index.html" class="footer-link">BroBillionaire</a> Trading Knowledge Base
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Create rain effect
+        function createRain() {
+            const rain = document.getElementById('rain');
+            const drops = 50;
+            
+            for (let i = 0; i < drops; i++) {
+                const drop = document.createElement('div');
+                drop.className = 'raindrop';
+                drop.style.left = Math.random() * 100 + '%';
+                drop.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                drop.style.animationDelay = Math.random() * 3 + 's';
+                drop.style.opacity = Math.random() * 0.5 + 0.2;
+                rain.appendChild(drop);
+            }
+        }
+
+        // Animate forecast meter
+        function animateMeter() {
+            const needle = document.getElementById('meter-needle');
+            const valueEl = document.getElementById('meter-value');
+            const statusEl = document.getElementById('meter-status');
+            
+            const scenarios = [
+                { rotation: -60, value: '25%', status: 'Low Activity' },
+                { rotation: -30, value: '45%', status: 'Building Potential' },
+                { rotation: 0, value: '60%', status: 'Moderate Setup' },
+                { rotation: 30, value: '75%', status: 'High Probability' },
+                { rotation: 60, value: '92%', status: 'Extreme Event Likely!' }
+            ];
+            
+            let index = 0;
+            
+            setInterval(() => {
+                const scenario = scenarios[index];
+                needle.style.setProperty('--needle-rotation', scenario.rotation + 'deg');
+                valueEl.textContent = scenario.value;
+                statusEl.textContent = scenario.status;
+                
+                index = (index + 1) % scenarios.length;
+            }, 3000);
+        }
+
+        // Interactive card effects
+        function initCardEffects() {
+            const cards = document.querySelectorAll('.commodity-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) rotateY(5deg)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) rotateY(0)';
+                });
+            });
+        }
+
+        // Weather icon interactions
+        function initWeatherIcons() {
+            const icons = document.querySelectorAll('.weather-icon-item');
+            
+            icons.forEach(icon => {
+                icon.addEventListener('click', function() {
+                    this.style.animation = 'none';
+                    this.offsetHeight; // Trigger reflow
+                    this.style.animation = 'pulse 0.5s ease';
+                });
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            createRain();
+            animateMeter();
+            initCardEffects();
+            initWeatherIcons();
+        });
+    </script>
+</body>
+</html>
