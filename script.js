@@ -1025,6 +1025,41 @@ function initTimelineBarsAnimation() {
 }
 
 // ============================================
+// FAQ ACCORDION FUNCTIONALITY
+// ============================================
+function toggleFAQ(index) {
+    const faqItems = document.querySelectorAll('.faq-item');
+    const targetItem = faqItems[index];
+    
+    if (!targetItem) return;
+    
+    // Check if clicking on already active item
+    const isActive = targetItem.classList.contains('active');
+    
+    // Close all FAQ items
+    faqItems.forEach((item, i) => {
+        item.classList.remove('active');
+        const btn = item.querySelector('.faq-question');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+    });
+    
+    // If the clicked item wasn't active, open it
+    if (!isActive) {
+        targetItem.classList.add('active');
+        const btn = targetItem.querySelector('.faq-question');
+        if (btn) btn.setAttribute('aria-expanded', 'true');
+    }
+}
+
+// Alias for lowercase version (some pages use toggleFaq instead of toggleFAQ)
+function toggleFaq(element) {
+    // If called with element (this), toggle parent
+    if (element && element.parentElement) {
+        element.parentElement.classList.toggle('active');
+    }
+}
+
+// ============================================
 // CONSOLE BRANDING
 // ============================================
 console.log('%c💰 BroBillionaire', 'font-size: 24px; font-weight: bold; color: #C9A227;');
