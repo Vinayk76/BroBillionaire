@@ -8628,65 +8628,266 @@ a.logo:visited {
    Missing CSS Classes Added
    ============================================ */
 
-/* Timeline Modern Styles */
+/* ============================================
+   PREMIUM 3D FLOATING TIMELINE - Creative Edition
+   Inspired by luxury fintech aesthetics
+   ============================================ */
+
 .timeline-modern {
     position: relative;
-    padding: 20px 0;
-    margin: 30px 0;
+    padding: 60px 0;
+    margin: 40px 0;
+    perspective: 1000px;
 }
 
+/* The golden vertical spine */
 .timeline-modern::before {
     content: '';
     position: absolute;
-    left: 30px;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background: linear-gradient(to bottom, var(--gold), rgba(201, 162, 39, 0.3));
+    left: 45px;
+    top: 20px;
+    bottom: 20px;
+    width: 4px;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        var(--gold) 10%,
+        var(--gold) 90%,
+        transparent 100%
+    );
+    box-shadow: 
+        0 0 20px rgba(201, 162, 39, 0.4),
+        0 0 40px rgba(201, 162, 39, 0.2),
+        0 0 60px rgba(201, 162, 39, 0.1);
+    z-index: 1;
 }
 
 .timeline-modern .timeline-item {
     position: relative;
-    padding-left: 80px;
-    margin-bottom: 30px;
+    padding-left: 120px;
+    margin-bottom: 50px;
+    opacity: 0;
+    transform: translateX(30px);
+    animation: timelineFadeIn 0.6s ease forwards;
 }
 
+.timeline-modern .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+.timeline-modern .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+.timeline-modern .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+.timeline-modern .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+.timeline-modern .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+.timeline-modern .timeline-item:nth-child(6) { animation-delay: 0.6s; }
+.timeline-modern .timeline-item:nth-child(7) { animation-delay: 0.7s; }
+
+@keyframes timelineFadeIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* The 3D floating elliptical golden nodes */
 .timeline-modern .timeline-marker {
     position: absolute;
-    left: 10px;
-    top: 5px;
-    width: 40px;
-    height: 40px;
+    left: 8px;
+    top: 10px;
+    width: 75px;
+    height: 75px;
     border-radius: 50%;
-    background: var(--gold);
+    background: linear-gradient(
+        145deg,
+        #d4af37 0%,
+        #c9a227 30%,
+        #b8941e 60%,
+        #a68419 100%
+    );
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    color: var(--bg-primary);
-    font-size: 0.85rem;
-    box-shadow: 0 0 0 4px var(--bg-primary), 0 0 15px rgba(201, 162, 39, 0.3);
+    color: #0a0a0a;
+    font-size: 1.4rem;
+    z-index: 10;
+    transform: perspective(500px) rotateX(15deg) rotateY(-5deg);
+    transform-style: preserve-3d;
+    box-shadow: 
+        /* Inner light reflection */
+        inset 0 -5px 15px rgba(0, 0, 0, 0.3),
+        inset 0 5px 15px rgba(255, 255, 255, 0.2),
+        /* 3D depth shadow */
+        0 15px 30px rgba(0, 0, 0, 0.5),
+        0 5px 15px rgba(0, 0, 0, 0.3),
+        /* Golden glow */
+        0 0 25px rgba(201, 162, 39, 0.5),
+        0 0 50px rgba(201, 162, 39, 0.3);
+    /* Outer ring effect */
+    border: 3px solid rgba(0, 0, 0, 0.4);
+    outline: 3px solid rgba(201, 162, 39, 0.3);
+    outline-offset: 3px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+/* Glowing ring animation */
+.timeline-modern .timeline-marker::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 2px solid rgba(201, 162, 39, 0.4);
+    animation: pulseRing 2s ease-in-out infinite;
+}
+
+.timeline-modern .timeline-marker::after {
+    content: '';
+    position: absolute;
+    inset: -15px;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 162, 39, 0.2);
+    animation: pulseRing 2s ease-in-out infinite 0.5s;
+}
+
+@keyframes pulseRing {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(0.95);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.02);
+    }
+}
+
+/* Icon styling inside marker */
+.timeline-modern .timeline-marker i {
+    font-size: 1.5rem;
+    color: #0a0a0a;
+    filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.2));
+    position: relative;
+    z-index: 2;
+}
+
+/* Hover effects */
+.timeline-modern .timeline-item:hover .timeline-marker {
+    transform: perspective(500px) rotateX(5deg) rotateY(0deg) scale(1.08);
+    box-shadow: 
+        inset 0 -5px 15px rgba(0, 0, 0, 0.2),
+        inset 0 5px 20px rgba(255, 255, 255, 0.3),
+        0 20px 40px rgba(0, 0, 0, 0.6),
+        0 0 35px rgba(201, 162, 39, 0.7),
+        0 0 70px rgba(201, 162, 39, 0.4);
+}
+
+/* Content card styling */
 .timeline-modern .timeline-content {
-    background: linear-gradient(145deg, rgba(30, 30, 30, 0.8) 0%, rgba(20, 20, 20, 0.6) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 25px;
+    background: linear-gradient(
+        160deg,
+        rgba(25, 25, 28, 0.95) 0%,
+        rgba(18, 18, 20, 0.9) 50%,
+        rgba(12, 12, 14, 0.95) 100%
+    );
+    border: 1px solid rgba(201, 162, 39, 0.15);
+    border-radius: 16px;
+    padding: 28px 30px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.3),
+        0 0 1px rgba(201, 162, 39, 0.1);
+}
+
+/* Subtle golden top accent */
+.timeline-modern .timeline-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 30px;
+    right: 30px;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(201, 162, 39, 0.5) 50%,
+        transparent 100%
+    );
+}
+
+/* Arrow connecting node to content */
+.timeline-modern .timeline-content::after {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 28px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid rgba(201, 162, 39, 0.15);
+}
+
+.timeline-modern .timeline-item:hover .timeline-content {
+    border-color: rgba(201, 162, 39, 0.35);
+    transform: translateX(5px);
+    box-shadow: 
+        0 8px 30px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(201, 162, 39, 0.1);
 }
 
 .timeline-modern .timeline-content h4 {
     color: var(--text-primary);
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    font-family: 'Playfair Display', serif;
 }
 
 .timeline-modern .timeline-content p {
     color: var(--text-secondary);
     font-size: 0.95rem;
-    line-height: 1.6;
+    line-height: 1.7;
     margin: 0;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .timeline-modern {
+        padding: 40px 0;
+    }
+    
+    .timeline-modern::before {
+        left: 25px;
+        width: 3px;
+    }
+    
+    .timeline-modern .timeline-item {
+        padding-left: 75px;
+        margin-bottom: 35px;
+    }
+    
+    .timeline-modern .timeline-marker {
+        left: 0;
+        width: 50px;
+        height: 50px;
+        font-size: 1rem;
+        transform: perspective(500px) rotateX(10deg);
+    }
+    
+    .timeline-modern .timeline-marker i {
+        font-size: 1.1rem;
+    }
+    
+    .timeline-modern .timeline-marker::before,
+    .timeline-modern .timeline-marker::after {
+        display: none;
+    }
+    
+    .timeline-modern .timeline-content {
+        padding: 20px;
+    }
+    
+    .timeline-modern .timeline-content::after {
+        display: none;
+    }
 }
 
 /* Pro Tip Icon & Content */
@@ -8976,21 +9177,6 @@ a.logo:visited {
     
     .cycle-arrow {
         transform: rotate(90deg);
-    }
-    
-    .timeline-modern::before {
-        left: 20px;
-    }
-    
-    .timeline-modern .timeline-item {
-        padding-left: 60px;
-    }
-    
-    .timeline-modern .timeline-marker {
-        left: 0;
-        width: 35px;
-        height: 35px;
-        font-size: 0.75rem;
     }
     
     /* Matrix Table Mobile Fixes */
