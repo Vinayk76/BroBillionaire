@@ -50,6 +50,27 @@
     box-sizing: border-box;
 }
 
+/* Reset button and select styles */
+button {
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+button:focus {
+    outline: none;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 140px;
@@ -12016,6 +12037,10 @@ div.footer-disclaimer p {
     padding: 20px 24px;
     background: transparent;
     border: none;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     color: #fff;
     font-family: 'Inter', sans-serif;
     font-size: 1.1rem;
@@ -12027,10 +12052,21 @@ div.footer-disclaimer p {
     align-items: center;
     gap: 16px;
     transition: all 0.3s ease;
+    box-shadow: none;
 }
 
 .faq-question:hover {
     color: #C9A227;
+}
+
+.faq-question:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.faq-question:focus-visible {
+    outline: 2px solid rgba(201, 162, 39, 0.5);
+    outline-offset: -2px;
 }
 
 .faq-question span {
@@ -12043,6 +12079,11 @@ div.footer-disclaimer p {
     font-size: 1rem;
     transition: transform 0.3s ease;
     flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
 }
 
 .faq-item.active .faq-icon {
