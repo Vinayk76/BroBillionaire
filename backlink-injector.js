@@ -34,7 +34,6 @@
     }
     
     function initBacklinks() {
-        // injectBreadcrumbs(); // Removed breadcrumb navigation
         injectTopicClusterNav();
         injectEnhancedRelatedArticles();
         injectYouMayAlsoLike();
@@ -43,44 +42,6 @@
         injectPopularArticles();
         injectEnhancedSchema();
         injectInternalLinkingFooter();
-    }
-    
-    /**
-     * 1. BREADCRUMB NAVIGATION WITH SCHEMA
-     */
-    function injectBreadcrumbs() {
-        const articleHeader = document.querySelector('.article-header') || document.querySelector('header');
-        if (!articleHeader) return;
-        
-        const cluster = TOPIC_CLUSTERS[currentArticle.cluster];
-        const pillarPage = cluster ? cluster.pillar : null;
-        const pillarArticle = pillarPage ? ARTICLE_DATABASE[pillarPage] : null;
-        
-        const breadcrumbHTML = `
-        <nav class="seo-breadcrumbs" aria-label="Breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-            <ol class="breadcrumb-list">
-                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <a href="index.html" itemprop="item">
-                        <span itemprop="name"><i class="fas fa-home"></i> Home</span>
-                    </a>
-                    <meta itemprop="position" content="1" />
-                </li>
-                ${cluster ? `
-                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <a href="${pillarPage}" itemprop="item">
-                        <span itemprop="name">${cluster.name}</span>
-                    </a>
-                    <meta itemprop="position" content="2" />
-                </li>
-                ` : ''}
-                <li class="breadcrumb-item active" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" aria-current="page">
-                    <span itemprop="name">${currentArticle.shortTitle}</span>
-                    <meta itemprop="position" content="${cluster ? '3' : '2'}" />
-                </li>
-            </ol>
-        </nav>`;
-        
-        articleHeader.insertAdjacentHTML('afterbegin', breadcrumbHTML);
     }
     
     /**
