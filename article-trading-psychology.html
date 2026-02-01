@@ -44,526 +44,7 @@
     
     <meta name="theme-color" content="#C9A227">
     
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "Trading Psychology: The Mind Game That Separates Winners From Losers",
-        "description": "Your biggest enemy in trading isn't the market. It's the person staring back at you in the mirror. Master trading psychology or lose everything.",
-        "author": {"@type": "Organization", "name": "BroBillionaire"},
-        "publisher": {"@type": "Organization", "name": "BroBillionaire"},
-        "articleSection": "Trading Psychology",
-        "inLanguage": "en-US",
-        "timeRequired": "PT15M",
-        "datePublished": "2026-02-01",
-        "dateModified": "2026-02-01"
-    }
-    </script>
     
-    <style>
-        .brain-scan {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
-            border: 1px solid rgba(201, 162, 39, 0.3);
-            border-radius: 20px;
-            padding: 40px;
-            margin: 50px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .brain-scan::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(from 0deg, transparent, rgba(201, 162, 39, 0.1), transparent);
-            animation: scan-rotate 10s linear infinite;
-        }
-        
-        @keyframes scan-rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        .brain-scan-content {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .emotion-meter {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 30px 0;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 12px;
-        }
-        
-        .emotion-side {
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .emotion-icon {
-            font-size: 48px;
-            margin-bottom: 10px;
-        }
-        
-        .emotion-label {
-            font-size: 14px;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        
-        .emotion-track {
-            flex: 1;
-            height: 12px;
-            background: linear-gradient(90deg, #ef4444, #f97316, #eab308, #22c55e, #22c55e, #eab308, #f97316, #ef4444);
-            border-radius: 6px;
-            margin: 0 20px;
-            position: relative;
-        }
-        
-        .emotion-pointer {
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 24px;
-            animation: emotion-bounce 2s ease-in-out infinite;
-        }
-        
-        @keyframes emotion-bounce {
-            0%, 100% { left: 50%; }
-            25% { left: 30%; }
-            75% { left: 70%; }
-        }
-        
-        .monster-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin: 40px 0;
-        }
-        
-        .monster-card {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(0, 0, 0, 0.8));
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            border-radius: 16px;
-            padding: 30px;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .monster-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-        
-        .monster-card:hover::before {
-            left: 100%;
-        }
-        
-        .monster-card:hover {
-            transform: translateY(-10px);
-            border-color: #ef4444;
-            box-shadow: 0 20px 40px rgba(239, 68, 68, 0.2);
-        }
-        
-        .monster-icon {
-            font-size: 64px;
-            margin-bottom: 20px;
-        }
-        
-        .monster-name {
-            font-size: 22px;
-            font-weight: 700;
-            color: #ef4444;
-            margin-bottom: 15px;
-        }
-        
-        .monster-desc {
-            color: #aaa;
-            line-height: 1.7;
-        }
-        
-        .cycle-wheel {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            margin: 50px auto;
-            aspect-ratio: 1;
-        }
-        
-        .cycle-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #C9A227, #8B6914);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 48px;
-            z-index: 10;
-            box-shadow: 0 0 60px rgba(201, 162, 39, 0.5);
-        }
-        
-        .cycle-stage {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            font-size: 12px;
-            font-weight: 600;
-            text-align: center;
-            border: 2px solid;
-            transition: all 0.3s ease;
-        }
-        
-        .cycle-stage:hover {
-            transform: scale(1.15);
-            z-index: 20;
-        }
-        
-        .cycle-stage.hope { 
-            top: 0; left: 50%; transform: translateX(-50%);
-            background: rgba(34, 197, 94, 0.2);
-            border-color: #22c55e;
-            color: #22c55e;
-        }
-        .cycle-stage.greed { 
-            top: 15%; right: 5%;
-            background: rgba(234, 179, 8, 0.2);
-            border-color: #eab308;
-            color: #eab308;
-        }
-        .cycle-stage.denial { 
-            top: 50%; right: -5%; transform: translateY(-50%);
-            background: rgba(249, 115, 22, 0.2);
-            border-color: #f97316;
-            color: #f97316;
-        }
-        .cycle-stage.panic { 
-            bottom: 15%; right: 5%;
-            background: rgba(239, 68, 68, 0.2);
-            border-color: #ef4444;
-            color: #ef4444;
-        }
-        .cycle-stage.despair { 
-            bottom: 0; left: 50%; transform: translateX(-50%);
-            background: rgba(239, 68, 68, 0.3);
-            border-color: #dc2626;
-            color: #dc2626;
-        }
-        .cycle-stage.anger { 
-            bottom: 15%; left: 5%;
-            background: rgba(220, 38, 38, 0.2);
-            border-color: #dc2626;
-            color: #f87171;
-        }
-        .cycle-stage.acceptance { 
-            top: 50%; left: -5%; transform: translateY(-50%);
-            background: rgba(59, 130, 246, 0.2);
-            border-color: #3b82f6;
-            color: #3b82f6;
-        }
-        .cycle-stage.learning { 
-            top: 15%; left: 5%;
-            background: rgba(139, 92, 246, 0.2);
-            border-color: #8b5cf6;
-            color: #8b5cf6;
-        }
-        
-        .rule-blocks {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin: 40px 0;
-        }
-        
-        .rule-block {
-            background: linear-gradient(135deg, rgba(201, 162, 39, 0.1), rgba(0, 0, 0, 0.8));
-            border: 1px solid rgba(201, 162, 39, 0.3);
-            border-radius: 16px;
-            padding: 30px;
-            position: relative;
-        }
-        
-        .rule-number {
-            position: absolute;
-            top: -15px;
-            left: 25px;
-            background: linear-gradient(135deg, #C9A227, #8B6914);
-            color: #000;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 18px;
-        }
-        
-        .rule-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #fff;
-            margin: 15px 0 10px;
-        }
-        
-        .rule-desc {
-            color: #aaa;
-            line-height: 1.7;
-        }
-        
-        .journal-preview {
-            background: #faf9f5;
-            border-radius: 16px;
-            padding: 40px;
-            margin: 40px 0;
-            font-family: 'Courier New', monospace;
-            color: #333;
-            position: relative;
-            transform: rotate(-1deg);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        .journal-preview::before {
-            content: '📓';
-            position: absolute;
-            top: -20px;
-            right: 20px;
-            font-size: 48px;
-        }
-        
-        .journal-date {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 20px;
-            border-bottom: 1px dashed #ccc;
-            padding-bottom: 10px;
-        }
-        
-        .journal-entry {
-            line-height: 1.8;
-            font-size: 15px;
-        }
-        
-        .journal-highlight {
-            background: rgba(201, 162, 39, 0.3);
-            padding: 2px 5px;
-        }
-        
-        .mindset-compare {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin: 40px 0;
-        }
-        
-        .mindset-column {
-            padding: 30px;
-            border-radius: 16px;
-        }
-        
-        .mindset-column.loser {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(0, 0, 0, 0.8));
-            border: 1px solid rgba(239, 68, 68, 0.3);
-        }
-        
-        .mindset-column.winner {
-            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(0, 0, 0, 0.8));
-            border: 1px solid rgba(34, 197, 94, 0.3);
-        }
-        
-        .mindset-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-        
-        .mindset-icon {
-            font-size: 32px;
-        }
-        
-        .mindset-title {
-            font-size: 20px;
-            font-weight: 700;
-        }
-        
-        .loser .mindset-title { color: #ef4444; }
-        .winner .mindset-title { color: #22c55e; }
-        
-        .mindset-list {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .mindset-list li {
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .mindset-list li:last-child {
-            border-bottom: none;
-        }
-        
-        .loser .mindset-list li::before {
-            content: '✗';
-            color: #ef4444;
-            font-weight: bold;
-        }
-        
-        .winner .mindset-list li::before {
-            content: '✓';
-            color: #22c55e;
-            font-weight: bold;
-        }
-        
-        .breathing-box {
-            background: linear-gradient(135deg, #0a1a2e, #0a0a1a);
-            border: 2px solid rgba(59, 130, 246, 0.5);
-            border-radius: 20px;
-            padding: 50px;
-            text-align: center;
-            margin: 50px 0;
-        }
-        
-        .breathing-circle {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: rgba(59, 130, 246, 0.2);
-            border: 3px solid #3b82f6;
-            margin: 30px auto;
-            animation: breathe 8s ease-in-out infinite;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        @keyframes breathe {
-            0%, 100% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(1.3); opacity: 1; }
-        }
-        
-        .breathing-text {
-            font-size: 18px;
-            font-weight: 600;
-            color: #3b82f6;
-            animation: breathe-text 8s ease-in-out infinite;
-        }
-        
-        @keyframes breathe-text {
-            0%, 100% { opacity: 0.5; }
-            25% { opacity: 1; }
-            50% { opacity: 0.5; }
-            75% { opacity: 1; }
-        }
-        
-        .final-truth {
-            background: linear-gradient(135deg, rgba(201, 162, 39, 0.2), rgba(0, 0, 0, 0.9));
-            border: 2px solid #C9A227;
-            border-radius: 20px;
-            padding: 50px;
-            text-align: center;
-            margin: 50px 0;
-        }
-        
-        .final-icon {
-            font-size: 72px;
-            margin-bottom: 20px;
-        }
-        
-        .final-text {
-            font-size: 28px;
-            font-weight: 700;
-            color: #C9A227;
-            line-height: 1.4;
-        }
-        
-        @media (max-width: 768px) {
-            .monster-cards { grid-template-columns: 1fr; }
-            .mindset-compare { grid-template-columns: 1fr; }
-            .emotion-meter { flex-direction: column; gap: 20px; }
-            .emotion-track { width: 100%; margin: 20px 0; }
-            .cycle-wheel { transform: scale(0.8); }
-            .journal-preview { transform: rotate(0); padding: 25px; }
-        }
-    </style>
-
-    <!-- Additional SEO Enhancements -->
-    <meta name="revisit-after" content="1 days">
-    <meta name="geo.region" content="IN">
-    <meta name="distribution" content="Global">
-    <link rel="manifest" href="manifest.json">
-
-    <!-- FAQ Schema for Rich Snippets -->
-    <script type="application/ld+json">
-    {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-                    {
-                            "@type": "Question",
-                            "name": "Why do most traders lose money?",
-                            "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Most traders lose money due to emotional decision-making, overtrading, poor risk management, lack of a trading plan, and failing to cut losses quickly while letting winners run."
-                            }
-                    },
-                    {
-                            "@type": "Question",
-                            "name": "How can I improve my trading psychology?",
-                            "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Improve trading psychology by maintaining a trading journal, following strict risk management rules, accepting losses as part of trading, and developing a systematic approach rather than trading on emotions."
-                            }
-                    },
-                    {
-                            "@type": "Question",
-                            "name": "What are the biggest psychological mistakes in trading?",
-                            "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "The biggest psychological mistakes include revenge trading after losses, overconfidence after wins, FOMO (fear of missing out), and not sticking to your trading plan."
-                            }
-                    },
-                    {
-                            "@type": "Question",
-                            "name": "What will I learn from this article about Trading Psychology: The Mind Game That Separates Winners From Losers?",
-                            "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Trading psychology guide: How to control emotions while trading, stop revenge trading, overcome fear and greed, and develop the mindset of profitable traders. 90% of trading is mental. This comprehensive guide is part of BroBillionaire's free trading education covering 185+ topics."
-                            }
-                    }
-            ]
-    }
-    </script>
 
 
     <!-- Speakable Schema for Voice Search -->
@@ -1438,6 +919,52 @@
     </script>
     <script src="seo-injector.js" defer></script>
     <!-- Footer -->
+    
+    <!-- Enhanced FAQ Section for AEO (Answer Engine Optimization) -->
+    <section class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
+        <div class="faq-container">
+            <h2 class="faq-title"><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(0)" aria-expanded="false">
+                        <span itemprop="name">Why is trading psychology important?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-0" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Studies show 80% of trading success comes from psychology, not strategy. Even profitable strategies fail when traders can't control fear, greed, and revenge trading. Your mind is both your greatest edge and biggest obstacle. Most traders have winning strategies but lack the discipline to execute them.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(1)" aria-expanded="false">
+                        <span itemprop="name">How do I control emotions while trading?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-1" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Key techniques: (1) Have a written trading plan with exact entry, exit, and position size rules, (2) Set stop-losses before entering, (3) Risk only 1-2% per trade, (4) Take mandatory breaks after losses, (5) Maintain a trading journal, (6) Treat each trade as one of the next 1,000 - individual results don't matter.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(2)" aria-expanded="false">
+                        <span itemprop="name">What is revenge trading and how to stop it?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-2" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Revenge trading is taking impulsive, larger trades to recover losses quickly. It's driven by ego and frustration, not analysis. It typically leads to bigger losses. Stop it by: having daily loss limits, taking breaks after hitting limits, reducing size after losses (not increasing), and accepting losses as business expenses.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(3)" aria-expanded="false">
+                        <span itemprop="name">How long does it take to become a profitable trader?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-3" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Most successful traders take 2-3 years of consistent practice to become profitable. This includes: learning phase (6 months), paper trading (3 months), small real-money trading (6-12 months), and gradual size increase. Very few succeed in year one. Treat the first two years as 'tuition' paid to the market.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-brand-section">

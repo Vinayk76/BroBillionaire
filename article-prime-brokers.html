@@ -64,389 +64,7 @@
     <meta name="format-detection" content="telephone=no">
     
     <!-- Schema.org Article Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "How Prime Brokers Decide to Pull the Plug",
-        "description": "Every hedge fund lives at the mercy of their prime broker. Learn the exact triggers, warning signs, and internal processes that lead to the most feared call in finance: 'We're closing your positions.'",
-        "image": "https://brobillionaire.com/og-image.jpg",
-        "author": {
-            "@type": "Organization",
-            "name": "BroBillionaire",
-            "url": "https://brobillionaire.com"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "BroBillionaire",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://brobillionaire.com/logo.jpg"
-            }
-        },
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://brobillionaire.com/article-prime-brokers.html"
-        },
-        "articleSection": "Insider Secrets",
-        "inLanguage": "en-US",
-        "isAccessibleForFree": true,
-        "timeRequired": "PT20M",
-        "datePublished": "2026-02-01",
-        "dateModified": "2026-02-01"
-    }
-    </script>
     
-    <!-- BreadcrumbList Schema -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": "https://brobillionaire.com"
-            },
-            {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "Insider Secrets",
-                "item": "https://brobillionaire.com/#insider-secrets"
-            },
-            {
-                "@type": "ListItem",
-                "position": 3,
-                "name": "How Prime Brokers Decide to Pull the Plug",
-                "item": "https://brobillionaire.com/article-prime-brokers.html"
-            }
-        ]
-    }
-    </script>
-    <style>
-        .warning-banner {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(15, 15, 25, 0.95));
-            border: 1px solid rgba(239, 68, 68, 0.4);
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin: 2rem 0;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        .warning-icon {
-            font-size: 2rem;
-            color: #ef4444;
-        }
-        .warning-text {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-        .trigger-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        @media (max-width: 768px) {
-            .trigger-grid { grid-template-columns: 1fr; }
-        }
-        .trigger-card {
-            background: linear-gradient(135deg, rgba(15, 15, 25, 0.95), rgba(10, 10, 20, 0.9));
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 1.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-        .trigger-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-        }
-        .trigger-card.red::before { background: linear-gradient(90deg, #ef4444, #dc2626); }
-        .trigger-card.orange::before { background: linear-gradient(90deg, #f97316, #ea580c); }
-        .trigger-card.yellow::before { background: linear-gradient(90deg, #eab308, #ca8a04); }
-        .trigger-level {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1rem;
-            margin-bottom: 0.75rem;
-        }
-        .trigger-card.red .trigger-level { color: #ef4444; }
-        .trigger-card.orange .trigger-level { color: #f97316; }
-        .trigger-card.yellow .trigger-level { color: #eab308; }
-        .trigger-name {
-            color: #fff;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-        .trigger-desc {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-        .timeline-container {
-            position: relative;
-            padding-left: 30px;
-            margin: 2rem 0;
-        }
-        .timeline-container::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(180deg, #22c55e, #eab308, #f97316, #ef4444, #dc2626);
-            border-radius: 3px;
-        }
-        .timeline-event {
-            position: relative;
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: linear-gradient(135deg, rgba(15, 15, 25, 0.9), rgba(10, 10, 20, 0.8));
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .timeline-event::before {
-            content: '';
-            position: absolute;
-            left: -35px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            border: 2px solid;
-        }
-        .timeline-event.green::before { border-color: #22c55e; background: rgba(34, 197, 94, 0.3); }
-        .timeline-event.yellow::before { border-color: #eab308; background: rgba(234, 179, 8, 0.3); }
-        .timeline-event.orange::before { border-color: #f97316; background: rgba(249, 115, 22, 0.3); }
-        .timeline-event.red::before { border-color: #ef4444; background: rgba(239, 68, 68, 0.3); }
-        .timeline-event.dark-red::before { border-color: #dc2626; background: rgba(220, 38, 38, 0.3); }
-        .timeline-time {
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05rem;
-            margin-bottom: 0.5rem;
-        }
-        .timeline-event.green .timeline-time { color: #22c55e; }
-        .timeline-event.yellow .timeline-time { color: #eab308; }
-        .timeline-event.orange .timeline-time { color: #f97316; }
-        .timeline-event.red .timeline-time { color: #ef4444; }
-        .timeline-event.dark-red .timeline-time { color: #dc2626; }
-        .timeline-title {
-            color: #fff;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-        .timeline-desc {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-        .pb-hierarchy {
-            background: linear-gradient(135deg, #0a0a14, #0d0d18);
-            border-radius: 16px;
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-        .hierarchy-title {
-            color: #C9A227;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-        .hierarchy-levels {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        .hierarchy-level {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-        .hierarchy-level:hover {
-            transform: translateX(10px);
-        }
-        .level-rank {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-        .level-1 .level-rank { background: linear-gradient(135deg, #C9A227, #a68520); color: #000; }
-        .level-2 .level-rank { background: linear-gradient(135deg, #9ca3af, #6b7280); color: #000; }
-        .level-3 .level-rank { background: linear-gradient(135deg, #a16207, #854d0e); color: #fff; }
-        .level-info h4 { color: #fff; margin-bottom: 0.2rem; }
-        .level-info p { color: #888; font-size: 0.85rem; }
-        .margin-meter {
-            background: linear-gradient(135deg, #080812, #0a0a16);
-            border-radius: 16px;
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-        .meter-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-        }
-        .meter-label {
-            color: #888;
-            font-size: 0.9rem;
-        }
-        .meter-value {
-            color: #C9A227;
-            font-weight: 600;
-        }
-        .meter-bar {
-            height: 24px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
-        }
-        .meter-fill {
-            height: 100%;
-            border-radius: 12px;
-            transition: width 1s ease;
-        }
-        .meter-zones {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 0.5rem;
-            font-size: 0.75rem;
-            color: #666;
-        }
-        .internal-doc {
-            background: linear-gradient(135deg, rgba(201, 162, 39, 0.08), rgba(15, 15, 25, 0.95));
-            border: 1px solid rgba(201, 162, 39, 0.2);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            font-family: 'Courier New', monospace;
-        }
-        .doc-header {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #C9A227;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1rem;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px dashed rgba(201, 162, 39, 0.3);
-        }
-        .doc-content {
-            color: rgba(255, 255, 255, 0.85);
-            font-size: 0.9rem;
-            line-height: 1.8;
-        }
-        .doc-content strong {
-            color: #C9A227;
-        }
-        .call-transcript {
-            background: #080810;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            border-left: 3px solid #ef4444;
-        }
-        .transcript-header {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #ef4444;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1rem;
-            margin-bottom: 1rem;
-        }
-        .transcript-line {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .transcript-line:last-child { border-bottom: none; }
-        .speaker {
-            color: #C9A227;
-            font-weight: 600;
-            font-size: 0.85rem;
-        }
-        .dialogue {
-            color: rgba(255, 255, 255, 0.8);
-            font-style: italic;
-            margin-left: 1rem;
-            margin-top: 0.3rem;
-        }
-    </style>
-
-    <!-- Additional SEO Enhancements -->
-    <meta name="revisit-after" content="1 days">
-    <meta name="geo.region" content="IN">
-    <meta name="distribution" content="Global">
-    <link rel="manifest" href="manifest.json">
-
-    <!-- FAQ Schema for Rich Snippets -->
-    <script type="application/ld+json">
-    {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-                    {
-                            "@type": "Question",
-                            "name": "What are the best option strategies for beginners?",
-                            "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "The best option strategies for beginners include covered calls, cash-secured puts, and vertical spreads which offer defined risk and are easier to understand than complex strategies."
-                            }
-                    },
-                    {
-                            "@type": "Question",
-                            "name": "How do option Greeks affect my trades?",
-                            "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Option Greeks (Delta, Gamma, Theta, Vega) measure how option prices change based on underlying price movement, time decay, and volatility changes - essential for risk management."
-                            }
-                    },
-                    {
-                            "@type": "Question",
-                            "name": "Is options trading suitable for beginners?",
-                            "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Options trading can be suitable for beginners who start with basic strategies like covered calls, understand the risks, and practice with paper trading before using real money."
-                            }
-                    },
-                    {
-                            "@type": "Question",
-                            "name": "What will I learn from this article about How Prime Brokers Decide to Pull the Plug?",
-                            "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Every hedge fund lives at the mercy of their prime broker. Learn the exact triggers, warning signs, and internal processes that lead to the most feared call in finance: 'We're closing your positions.' This comprehensive guide is part of BroBillionaire's free trading education covering 185+ topics."
-                            }
-                    }
-            ]
-    }
-    </script>
 
 
     <!-- Speakable Schema for Voice Search -->
@@ -1122,6 +740,52 @@
     </script>
     <script src="seo-injector.js" defer></script>
     <!-- Footer -->
+    
+    <!-- Enhanced FAQ Section for AEO (Answer Engine Optimization) -->
+    <section class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
+        <div class="faq-container">
+            <h2 class="faq-title"><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(0)" aria-expanded="false">
+                        <span itemprop="name">Is trading gambling or a skill?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-0" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Trading with a proven edge, proper risk management, and emotional discipline is a skill, not gambling. The difference: gambling has negative expected value, skilled trading has positive expected value over time. However, trading without a plan, overleveraging, and following tips is gambling with worse odds than casinos.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(1)" aria-expanded="false">
+                        <span itemprop="name">How long does it take to become profitable in trading?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-1" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Most successful traders take 2-3 years of consistent practice to become profitable. This includes learning, paper trading, losing money on small positions, and developing a personalized system. Studies show only 1-3% of day traders are profitable after 5 years. Expect to pay 'tuition' to the market.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(2)" aria-expanded="false">
+                        <span itemprop="name">What percentage of retail traders make money?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-2" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Studies consistently show only 5-10% of retail traders are profitable long-term. SEBI's 2023 study found 93% of Indian F&O traders lost money with ₹1.81 lakh average loss. Day trading is harder - only 1% profitable. The odds improve for swing traders and investors with longer timeframes.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(3)" aria-expanded="false">
+                        <span itemprop="name">Should I quit my job to trade full-time?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-3" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Only consider full-time trading after: (1) 2+ years of consistent profitability, (2) 2 years of living expenses saved, (3) Proven track record through bull AND bear markets, (4) Passive income to cover basic needs. Most successful full-time traders started part-time while employed. Don't burn bridges until you've proved yourself.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-brand-section">

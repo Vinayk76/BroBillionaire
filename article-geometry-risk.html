@@ -64,531 +64,7 @@
     <meta name="format-detection" content="telephone=no">
     
     <!-- Schema.org Article Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "The Geometry of Risk",
-        "description": "Risk isn't a number. It's a shape — a multi-dimensional geometry that most traders can't see until it collapses on them. Learn to visualize what others feel only in their P&L.",
-        "image": "https://brobillionaire.com/og-image.jpg",
-        "author": {
-            "@type": "Organization",
-            "name": "BroBillionaire",
-            "url": "https://brobillionaire.com"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "BroBillionaire",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://brobillionaire.com/logo.jpg"
-            }
-        },
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://brobillionaire.com/article-geometry-risk.html"
-        },
-        "articleSection": "Ultra-High-Level Thought",
-        "inLanguage": "en-US",
-        "isAccessibleForFree": true,
-        "timeRequired": "PT20M",
-        "datePublished": "2026-02-01",
-        "dateModified": "2026-02-01"
-    }
-    </script>
     
-    <!-- BreadcrumbList Schema -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": "https://brobillionaire.com"
-            },
-            {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "Ultra-High-Level Thought",
-                "item": "https://brobillionaire.com/#ultra-high-level-thought"
-            },
-            {
-                "@type": "ListItem",
-                "position": 3,
-                "name": "The Geometry of Risk",
-                "item": "https://brobillionaire.com/article-geometry-risk.html"
-            }
-        ]
-    }
-    </script>
-    <style>
-        /* Geometric Visuals */
-        .geometry-hero {
-            position: relative;
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, #0a0a15 0%, #0d0515 50%, #0a0a15 100%);
-            border-radius: 20px;
-            margin: 2rem 0;
-            overflow: hidden;
-        }
-        .geo-shape {
-            position: absolute;
-            border: 2px solid rgba(201, 162, 39, 0.3);
-            animation: float 10s ease-in-out infinite;
-        }
-        .geo-triangle {
-            width: 100px;
-            height: 100px;
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            background: linear-gradient(135deg, rgba(201, 162, 39, 0.1), transparent);
-            border: none;
-            top: 20%;
-            left: 10%;
-        }
-        .geo-circle {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            top: 60%;
-            right: 15%;
-            animation-delay: 2s;
-        }
-        .geo-square {
-            width: 70px;
-            height: 70px;
-            top: 30%;
-            right: 25%;
-            transform: rotate(45deg);
-            animation-delay: 4s;
-        }
-        .geo-hexagon {
-            width: 90px;
-            height: 90px;
-            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), transparent);
-            border: none;
-            bottom: 20%;
-            left: 20%;
-            animation-delay: 6s;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
-            50% { transform: translateY(-20px) rotate(10deg); opacity: 1; }
-        }
-        .geometry-title {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            color: #C9A227;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-style: italic;
-        }
-
-        /* 3D Risk Cube */
-        .risk-cube-container {
-            perspective: 1000px;
-            height: 350px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 2rem 0;
-            background: #050508;
-            border-radius: 20px;
-            position: relative;
-        }
-        .cube {
-            width: 150px;
-            height: 150px;
-            position: relative;
-            transform-style: preserve-3d;
-            animation: rotate-cube 15s linear infinite;
-        }
-        @keyframes rotate-cube {
-            0% { transform: rotateX(-20deg) rotateY(0deg); }
-            100% { transform: rotateX(-20deg) rotateY(360deg); }
-        }
-        .cube-face {
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Playfair Display', serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-align: center;
-            color: #fff;
-            border: 2px solid rgba(201, 162, 39, 0.5);
-            backdrop-filter: blur(5px);
-        }
-        .cube-face.front { transform: rotateY(0deg) translateZ(75px); background: rgba(201, 162, 39, 0.1); }
-        .cube-face.back { transform: rotateY(180deg) translateZ(75px); background: rgba(139, 92, 246, 0.1); }
-        .cube-face.right { transform: rotateY(90deg) translateZ(75px); background: rgba(34, 197, 94, 0.1); }
-        .cube-face.left { transform: rotateY(-90deg) translateZ(75px); background: rgba(239, 68, 68, 0.1); }
-        .cube-face.top { transform: rotateX(90deg) translateZ(75px); background: rgba(59, 130, 246, 0.1); }
-        .cube-face.bottom { transform: rotateX(-90deg) translateZ(75px); background: rgba(245, 158, 11, 0.1); }
-        .cube-label {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #C9A227;
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 1.1rem;
-        }
-
-        /* Dimension Cards */
-        .dimension-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        @media (max-width: 768px) {
-            .dimension-grid { grid-template-columns: 1fr; }
-        }
-        .dimension-card {
-            background: linear-gradient(135deg, rgba(10, 10, 20, 0.95), rgba(15, 10, 25, 0.9));
-            border-radius: 16px;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(201, 162, 39, 0.2);
-            transition: all 0.4s ease;
-        }
-        .dimension-card:hover {
-            border-color: rgba(201, 162, 39, 0.5);
-            transform: translateY(-5px);
-        }
-        .dimension-axis {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(201, 162, 39, 0.2);
-            color: #C9A227;
-            padding: 0.3rem 0.7rem;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1rem;
-        }
-        .dimension-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, rgba(201, 162, 39, 0.2), rgba(201, 162, 39, 0.05));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-        }
-        .dimension-icon i {
-            font-size: 1.5rem;
-            color: #C9A227;
-        }
-        .dimension-card h4 {
-            color: #fff;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-        .dimension-card p {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* Risk Polygon Visual */
-        .polygon-container {
-            background: #050508;
-            border-radius: 20px;
-            padding: 3rem;
-            margin: 2rem 0;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .polygon-radar {
-            position: relative;
-            width: 300px;
-            height: 300px;
-        }
-        .radar-axis {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 120px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.3));
-            transform-origin: left center;
-        }
-        .radar-axis:nth-child(1) { transform: rotate(0deg); }
-        .radar-axis:nth-child(2) { transform: rotate(60deg); }
-        .radar-axis:nth-child(3) { transform: rotate(120deg); }
-        .radar-axis:nth-child(4) { transform: rotate(180deg); }
-        .radar-axis:nth-child(5) { transform: rotate(240deg); }
-        .radar-axis:nth-child(6) { transform: rotate(300deg); }
-        .radar-label {
-            position: absolute;
-            color: #888;
-            font-size: 0.8rem;
-            text-align: center;
-        }
-        .radar-label.size { top: -10px; left: 50%; transform: translateX(-50%); }
-        .radar-label.time { top: 20%; right: -30px; }
-        .radar-label.liquidity { bottom: 20%; right: -30px; }
-        .radar-label.correlation { bottom: -10px; left: 50%; transform: translateX(-50%); }
-        .radar-label.leverage { bottom: 20%; left: -30px; }
-        .radar-label.direction { top: 20%; left: -40px; }
-        .polygon-shape {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 180px;
-            height: 180px;
-            background: rgba(201, 162, 39, 0.15);
-            clip-path: polygon(50% 5%, 95% 25%, 95% 75%, 50% 95%, 5% 75%, 5% 25%);
-            border: 2px solid rgba(201, 162, 39, 0.5);
-            animation: pulse-polygon 4s ease-in-out infinite;
-        }
-        @keyframes pulse-polygon {
-            0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
-        }
-        .polygon-legend {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #888;
-            font-size: 0.85rem;
-        }
-        .legend-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-        .legend-dot.current { background: rgba(201, 162, 39, 0.8); }
-        .legend-dot.max { background: rgba(239, 68, 68, 0.8); }
-
-        /* Topology Section */
-        .topology-box {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(139, 92, 246, 0.02));
-            border-left: 4px solid #8b5cf6;
-            padding: 1.5rem 2rem;
-            margin: 2rem 0;
-            border-radius: 0 12px 12px 0;
-        }
-        .topology-box h4 {
-            color: #8b5cf6;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-        .topology-box p {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.05rem;
-            line-height: 1.7;
-        }
-
-        /* Shape Morphing */
-        .shape-morph-container {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            gap: 2rem;
-            align-items: center;
-            margin: 2rem 0;
-            padding: 2rem;
-            background: #0a0a12;
-            border-radius: 16px;
-        }
-        @media (max-width: 768px) {
-            .shape-morph-container { grid-template-columns: 1fr; text-align: center; }
-        }
-        .morph-shape {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
-        .shape-visual {
-            width: 120px;
-            height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .shape-visual.circle-shape {
-            border: 3px solid #22c55e;
-            border-radius: 50%;
-            background: rgba(34, 197, 94, 0.1);
-        }
-        .shape-visual.spike-shape {
-            background: rgba(239, 68, 68, 0.15);
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            border: none;
-        }
-        .morph-label {
-            color: #fff;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-        }
-        .morph-sublabel {
-            color: #888;
-            font-size: 0.85rem;
-        }
-        .morph-arrow {
-            font-size: 2rem;
-            color: #C9A227;
-        }
-
-        /* Blind Spots Grid */
-        .blindspot-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        @media (max-width: 768px) {
-            .blindspot-grid { grid-template-columns: 1fr; }
-        }
-        .blindspot-card {
-            background: linear-gradient(135deg, rgba(15, 10, 25, 0.9), rgba(20, 15, 30, 0.8));
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            position: relative;
-        }
-        .blindspot-icon {
-            position: absolute;
-            top: -15px;
-            left: 20px;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #ef4444, #b91c1c);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .blindspot-icon i {
-            color: #fff;
-            font-size: 1rem;
-        }
-        .blindspot-card h4 {
-            color: #ef4444;
-            font-family: 'Playfair Display', serif;
-            margin-top: 1rem;
-            margin-bottom: 0.5rem;
-        }
-        .blindspot-card p {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        /* Visualization Matrix */
-        .viz-matrix {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-        @media (max-width: 768px) {
-            .viz-matrix { grid-template-columns: repeat(2, 1fr); }
-        }
-        .viz-cell {
-            background: linear-gradient(135deg, rgba(10, 10, 20, 0.9), rgba(15, 15, 25, 0.8));
-            border: 1px solid rgba(201, 162, 39, 0.2);
-            border-radius: 12px;
-            padding: 1.5rem 1rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        .viz-cell:hover {
-            border-color: rgba(201, 162, 39, 0.5);
-            transform: scale(1.03);
-        }
-        .viz-cell .icon {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-        }
-        .viz-cell.positive .icon { color: #22c55e; }
-        .viz-cell.negative .icon { color: #ef4444; }
-        .viz-cell.neutral .icon { color: #C9A227; }
-        .viz-cell.warning .icon { color: #f59e0b; }
-        .viz-cell h5 {
-            color: #fff;
-            font-size: 0.9rem;
-            margin-bottom: 0.3rem;
-        }
-        .viz-cell p {
-            color: #888;
-            font-size: 0.75rem;
-        }
-    </style>
-
-    <!-- Additional SEO Enhancements -->
-    <meta name="revisit-after" content="1 days">
-    <meta name="geo.region" content="IN">
-    <meta name="distribution" content="Global">
-    <link rel="manifest" href="manifest.json">
-
-    <!-- FAQ Schema for Rich Snippets -->
-    <script type="application/ld+json">
-    {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-                    {
-                            "@type": "Question",
-                            "name": "What is risk management in trading?",
-                            "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Risk management in trading involves limiting potential losses through position sizing, stop-loss orders, diversification, and never risking more than a small percentage of your capital on any single trade."
-                            }
-                    },
-                    {
-                            "@type": "Question",
-                            "name": "How much should I risk per trade?",
-                            "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Professional traders typically risk 1-2% of their trading capital per trade. This ensures that even a series of losing trades won't significantly damage your account."
-                            }
-                    },
-                    {
-                            "@type": "Question",
-                            "name": "What is a stop-loss and why is it important?",
-                            "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "A stop-loss is an order to automatically exit a trade at a predetermined price to limit losses. It's essential for protecting capital and removing emotion from exit decisions."
-                            }
-                    },
-                    {
-                            "@type": "Question",
-                            "name": "What will I learn from this article about The Geometry of Risk?",
-                            "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Risk isn't a number. It's a shape — a multi-dimensional geometry that most traders can't see until it collapses on them. Learn to visualize what others feel only in their P&L. This comprehensive guide is part of BroBillionaire's free trading education covering 185+ topics."
-                            }
-                    }
-            ]
-    }
-    </script>
 
 
     <!-- Speakable Schema for Voice Search -->
@@ -1252,6 +728,52 @@
             </div>
         </aside>
     </main>
+
+    
+    <!-- Enhanced FAQ Section for AEO (Answer Engine Optimization) -->
+    <section class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
+        <div class="faq-container">
+            <h2 class="faq-title"><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(0)" aria-expanded="false">
+                        <span itemprop="name">What are Option Greeks and why do they matter?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-0" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Option Greeks measure how option prices change with different factors: Delta (price sensitivity), Gamma (delta's rate of change), Theta (time decay), Vega (volatility sensitivity), Rho (interest rate sensitivity). Understanding Greeks is essential for risk management and strategy selection.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(1)" aria-expanded="false">
+                        <span itemprop="name">What is a good delta for buying options?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-1" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">For directional trades, buy options with 0.40-0.60 delta (ATM or slightly ITM). These have good probability of profit and reasonable premium. Avoid low delta (<0.20) OTM options - they're cheap but rarely profitable. For hedging, use 0.30-0.40 delta puts.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(2)" aria-expanded="false">
+                        <span itemprop="name">How does theta decay work in options?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-2" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Theta is the daily loss in option value due to time passing. ATM options have highest theta. Decay accelerates exponentially - an option loses more value in its last week than in its first month. Weekly options have brutal theta, making buying them very difficult to profit from.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(3)" aria-expanded="false">
+                        <span itemprop="name">What is gamma risk and why is it dangerous?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-3" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Gamma measures how fast delta changes. High gamma means small price moves cause large P&L swings. Gamma is highest for ATM options near expiry. On expiry day, gamma can cause options to swing from worthless to valuable (or vice versa) within minutes. Market makers fear 'gamma squeeze' events.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Related Articles -->
     <section class="related-articles-section">

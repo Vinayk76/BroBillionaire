@@ -64,305 +64,7 @@
     <meta name="format-detection" content="telephone=no">
     
     <!-- Schema.org Article Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "The Five Horsemen of Options: Mastering the Greeks",
-        "description": "Meet Delta, Gamma, Theta, Vega, and Rho — the five invisible forces that control every option trade.",
-        "image": "https://brobillionaire.com/og-image.jpg",
-        "author": {
-            "@type": "Organization",
-            "name": "BroBillionaire",
-            "url": "https://brobillionaire.com"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "BroBillionaire",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://brobillionaire.com/logo.jpg"
-            }
-        },
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://brobillionaire.com/article-option-greeks.html"
-        },
-        "articleSection": "Options Mastery",
-        "inLanguage": "en-US",
-        "isAccessibleForFree": true,
-        "timeRequired": "PT18M",
-        "datePublished": "2026-02-01",
-        "dateModified": "2026-02-01"
-    }
-    </script>
     
-    <!-- BreadcrumbList Schema -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": "https://brobillionaire.com"
-            },
-            {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "Options Mastery",
-                "item": "https://brobillionaire.com/#options-mastery"
-            },
-            {
-                "@type": "ListItem",
-                "position": 3,
-                "name": "The Five Horsemen of Options: Mastering the Greeks",
-                "item": "https://brobillionaire.com/article-option-greeks.html"
-            }
-        ]
-    }
-    </script>
-
-    <style>
-        .greek-card {
-            background: linear-gradient(145deg, rgba(30,30,30,0.9), rgba(20,20,20,0.95));
-            border: 1px solid rgba(201,162,39,0.3);
-            border-radius: 16px;
-            padding: 2rem;
-            margin: 2rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-        .greek-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #C9A227, #FFD700, #C9A227);
-        }
-        .greek-symbol {
-            font-size: 4rem;
-            font-weight: 700;
-            color: #C9A227;
-            margin-bottom: 1rem;
-            font-family: 'Times New Roman', serif;
-        }
-        .greek-nickname {
-            font-size: 0.9rem;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 0.5rem;
-        }
-        .greek-title {
-            font-size: 1.8rem;
-            color: #fff;
-            margin-bottom: 1rem;
-        }
-        .personality-box {
-            background: rgba(201,162,39,0.1);
-            border-left: 3px solid #C9A227;
-            padding: 1rem 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 0 8px 8px 0;
-        }
-        .personality-box h5 {
-            color: #C9A227;
-            margin-bottom: 0.5rem;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .battle-scenario {
-            background: linear-gradient(135deg, rgba(40,40,40,0.8), rgba(25,25,25,0.9));
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .battle-scenario h4 {
-            color: #C9A227;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .formula-display {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 1rem 1.5rem;
-            font-family: 'Courier New', monospace;
-            font-size: 1.1rem;
-            color: #C9A227;
-            text-align: center;
-            margin: 1rem 0;
-        }
-        .greek-meter {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-        .meter-label {
-            width: 120px;
-            font-size: 0.9rem;
-            color: #888;
-        }
-        .meter-bar {
-            flex: 1;
-            height: 8px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        .meter-fill {
-            height: 100%;
-            border-radius: 4px;
-            transition: width 0.5s ease;
-        }
-        .meter-fill.danger { background: linear-gradient(90deg, #ef4444, #dc2626); }
-        .meter-fill.warning { background: linear-gradient(90deg, #f59e0b, #d97706); }
-        .meter-fill.success { background: linear-gradient(90deg, #22c55e, #16a34a); }
-        .meter-fill.gold { background: linear-gradient(90deg, #C9A227, #FFD700); }
-        
-        .greek-interaction-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-        .interaction-card {
-            background: rgba(30,30,30,0.8);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 10px;
-            padding: 1.2rem;
-            text-align: center;
-        }
-        .interaction-card i {
-            font-size: 1.5rem;
-            color: #C9A227;
-            margin-bottom: 0.5rem;
-        }
-        .interaction-card h5 {
-            color: #fff;
-            font-size: 0.95rem;
-            margin-bottom: 0.5rem;
-        }
-        .interaction-card p {
-            color: #888;
-            font-size: 0.85rem;
-        }
-        
-        .story-scene {
-            background: linear-gradient(135deg, rgba(201,162,39,0.05), rgba(0,0,0,0.3));
-            border: 1px solid rgba(201,162,39,0.2);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            position: relative;
-        }
-        .scene-icon {
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #C9A227;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #000;
-            font-size: 1.2rem;
-        }
-        
-        .analogy-box {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-            background: rgba(40,40,40,0.5);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-        }
-        .analogy-icon {
-            font-size: 3rem;
-            color: #C9A227;
-        }
-        .analogy-content h4 {
-            color: #fff;
-            margin-bottom: 0.5rem;
-        }
-        .analogy-content p {
-            color: #aaa;
-            font-size: 0.95rem;
-        }
-        
-        @media (max-width: 768px) {
-            .analogy-box {
-                flex-direction: column;
-                text-align: center;
-            }
-            .greek-symbol {
-                font-size: 3rem;
-            }
-        }
-    </style>
-
-    <!-- Additional SEO Enhancements -->
-    <meta name="revisit-after" content="1 days">
-    <meta name="geo.region" content="IN">
-    <meta name="distribution" content="Global">
-    <link rel="manifest" href="manifest.json">
-
-    <!-- FAQ Schema for Rich Snippets -->
-    <script type="application/ld+json">
-    {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-                    {
-                            "@type": "Question",
-                            "name": "What are the best option strategies for beginners?",
-                            "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "The best option strategies for beginners include covered calls, cash-secured puts, and vertical spreads which offer defined risk and are easier to understand than complex strategies."
-                            }
-                    },
-                    {
-                            "@type": "Question",
-                            "name": "How do option Greeks affect my trades?",
-                            "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Option Greeks (Delta, Gamma, Theta, Vega) measure how option prices change based on underlying price movement, time decay, and volatility changes - essential for risk management."
-                            }
-                    },
-                    {
-                            "@type": "Question",
-                            "name": "Is options trading suitable for beginners?",
-                            "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Options trading can be suitable for beginners who start with basic strategies like covered calls, understand the risks, and practice with paper trading before using real money."
-                            }
-                    },
-                    {
-                            "@type": "Question",
-                            "name": "What will I learn from this article about The Five Horsemen of Options: Mastering the Greeks?",
-                            "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Option Greeks explained simply: Delta, Gamma, Theta, Vega & Rho with examples. Learn how Greeks affect option prices, which Greek matters most, and how to use Greeks for better trading decisions. This comprehensive guide is part of BroBillionaire's free trading education covering 185+ topics."
-                            }
-                    }
-            ]
-    }
-    </script>
 
 
     <!-- Speakable Schema for Voice Search -->
@@ -1275,6 +977,52 @@
             </div>
         </aside>
     </main>
+
+    
+    <!-- Enhanced FAQ Section for AEO (Answer Engine Optimization) -->
+    <section class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
+        <div class="faq-container">
+            <h2 class="faq-title"><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(0)" aria-expanded="false">
+                        <span itemprop="name">What is the best time to trade Bank Nifty options?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-0" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Best trading windows: 9:30-10:30 AM (after opening volatility settles, trend emerges) and 2:00-3:15 PM (clear trend, less noise). Avoid first 15 minutes (gap volatility) and 12-1 PM (low volume). On expiry days, 2-3 PM often sees the biggest moves.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(1)" aria-expanded="false">
+                        <span itemprop="name">How much money is needed to trade Bank Nifty options?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-1" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Option buying: Premium cost only (₹5,000-50,000 per lot). Option selling: SPAN + Exposure margin = ₹1-1.5 lakh per lot. Recommended minimum capital: ₹2-5 lakhs to trade safely with proper position sizing. Never trade with money you can't afford to lose.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(2)" aria-expanded="false">
+                        <span itemprop="name">Why is Bank Nifty more volatile than Nifty?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-2" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Bank Nifty consists only of banking stocks which are highly sensitive to: RBI policy changes, interest rate decisions, credit growth data, and global banking news. It has higher FII participation and narrower breadth (12 stocks vs Nifty's 50), making it move faster and further.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(3)" aria-expanded="false">
+                        <span itemprop="name">What happens to Bank Nifty options on expiry day?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-3" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">On expiry day: theta decay is maximum (options lose value rapidly), gamma risk is highest (small moves cause big premium changes), ITM options settle at intrinsic value, OTM options expire worthless. Many traders avoid expiry day due to unpredictable moves. Wednesday is Bank Nifty weekly expiry.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Related Articles -->
     <section class="related-articles-section">

@@ -64,454 +64,7 @@
     <meta name="format-detection" content="telephone=no">
     
     <!-- Schema.org Article Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "Anatomy of a Market Panic: The 4 Stages of Financial Terror",
-        "description": "From whispered rumor to full-blown collapse — dissecting the precise anatomy of how market panics unfold, freeze, and ultimately get rescued by central banks.",
-        "image": "https://brobillionaire.com/og-image.jpg",
-        "author": {
-            "@type": "Organization",
-            "name": "BroBillionaire",
-            "url": "https://brobillionaire.com"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "BroBillionaire",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://brobillionaire.com/logo.jpg"
-            }
-        },
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://brobillionaire.com/article-market-panic.html"
-        },
-        "articleSection": "Market Psychology",
-        "inLanguage": "en-US",
-        "isAccessibleForFree": true,
-        "timeRequired": "PT15M",
-        "datePublished": "2026-02-01",
-        "dateModified": "2026-02-01"
-    }
-    </script>
     
-    <!-- BreadcrumbList Schema -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": "https://brobillionaire.com"
-            },
-            {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "Market Psychology",
-                "item": "https://brobillionaire.com/#market-psychology"
-            },
-            {
-                "@type": "ListItem",
-                "position": 3,
-                "name": "Anatomy of a Market Panic: The 4 Stages of Financial Terror",
-                "item": "https://brobillionaire.com/article-market-panic.html"
-            }
-        ]
-    }
-    </script>
-    <style>
-        /* Article-specific styles for the panic timeline */
-        .panic-timeline {
-            position: relative;
-            padding: 60px 0;
-            margin: 60px 0;
-        }
-        
-        .panic-timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(to bottom, 
-                #22c55e 0%, 
-                #f59e0b 25%, 
-                #ef4444 50%, 
-                #7c3aed 75%, 
-                #22c55e 100%);
-            border-radius: 2px;
-        }
-        
-        .panic-phase {
-            display: flex;
-            align-items: center;
-            margin: 80px 0;
-            position: relative;
-        }
-        
-        .panic-phase:nth-child(odd) {
-            flex-direction: row-reverse;
-        }
-        
-        .panic-phase:nth-child(odd) .phase-content {
-            text-align: right;
-            padding-right: 60px;
-            padding-left: 0;
-        }
-        
-        .panic-phase:nth-child(even) .phase-content {
-            padding-left: 60px;
-        }
-        
-        .phase-content {
-            flex: 1;
-        }
-        
-        .phase-icon {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            z-index: 10;
-            box-shadow: 0 0 30px rgba(0,0,0,0.3);
-        }
-        
-        .phase-icon.rumor { background: linear-gradient(135deg, #22c55e, #16a34a); }
-        .phase-icon.selloff { background: linear-gradient(135deg, #f59e0b, #d97706); }
-        .phase-icon.freeze { background: linear-gradient(135deg, #ef4444, #dc2626); }
-        .phase-icon.rescue { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
-        
-        .phase-number {
-            font-size: 0.875rem;
-            font-weight: 700;
-            color: #C9A227;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 10px;
-        }
-        
-        .phase-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            margin-bottom: 15px;
-            color: #fff;
-        }
-        
-        .phase-desc {
-            color: rgba(255,255,255,0.7);
-            line-height: 1.8;
-            font-size: 1.1rem;
-        }
-        
-        .heartbeat-monitor {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            border-radius: 20px;
-            padding: 40px;
-            margin: 40px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .heartbeat-title {
-            text-align: center;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            color: #C9A227;
-        }
-        
-        .heartbeat-svg {
-            width: 100%;
-            height: 150px;
-        }
-        
-        .pulse-line {
-            stroke: #ef4444;
-            stroke-width: 3;
-            fill: none;
-            animation: pulse-animation 3s ease-in-out infinite;
-        }
-        
-        @keyframes pulse-animation {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        
-        .fear-meter {
-            background: #1a1a2e;
-            border-radius: 15px;
-            padding: 30px;
-            margin: 40px 0;
-        }
-        
-        .fear-meter-title {
-            text-align: center;
-            font-size: 1.25rem;
-            color: #C9A227;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-        
-        .fear-bar {
-            height: 40px;
-            background: linear-gradient(to right, #22c55e, #84cc16, #eab308, #f97316, #ef4444, #dc2626);
-            border-radius: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .fear-indicator {
-            position: absolute;
-            top: -10px;
-            bottom: -10px;
-            width: 6px;
-            background: #fff;
-            border-radius: 3px;
-            box-shadow: 0 0 20px rgba(255,255,255,0.8);
-            transition: left 0.5s ease;
-        }
-        
-        .fear-labels {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-            font-size: 0.875rem;
-            color: rgba(255,255,255,0.6);
-        }
-        
-        .contagion-visual {
-            text-align: center;
-            padding: 40px;
-            background: radial-gradient(ellipse at center, rgba(239,68,68,0.1), transparent 70%);
-            margin: 40px 0;
-        }
-        
-        .contagion-circles {
-            position: relative;
-            width: 300px;
-            height: 300px;
-            margin: 0 auto;
-        }
-        
-        .contagion-ring {
-            position: absolute;
-            border-radius: 50%;
-            border: 2px solid rgba(239,68,68,0.3);
-            animation: ripple 3s ease-out infinite;
-        }
-        
-        .contagion-ring:nth-child(1) { width: 60px; height: 60px; top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: 0s; }
-        .contagion-ring:nth-child(2) { width: 120px; height: 120px; top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: 0.5s; }
-        .contagion-ring:nth-child(3) { width: 180px; height: 180px; top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: 1s; }
-        .contagion-ring:nth-child(4) { width: 240px; height: 240px; top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: 1.5s; }
-        .contagion-ring:nth-child(5) { width: 300px; height: 300px; top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: 2s; }
-        
-        @keyframes ripple {
-            0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); }
-        }
-        
-        .contagion-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 40px;
-            height: 40px;
-            background: #ef4444;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
-            box-shadow: 0 0 30px rgba(239,68,68,0.6);
-        }
-        
-        .domino-cascade {
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            gap: 15px;
-            padding: 40px;
-            margin: 40px 0;
-        }
-        
-        .domino {
-            width: 30px;
-            height: 80px;
-            background: linear-gradient(135deg, #C9A227, #a78a1e);
-            border-radius: 4px;
-            transform-origin: bottom center;
-            animation: fall-domino 4s ease-in-out infinite;
-        }
-        
-        .domino:nth-child(1) { animation-delay: 0s; }
-        .domino:nth-child(2) { animation-delay: 0.2s; }
-        .domino:nth-child(3) { animation-delay: 0.4s; }
-        .domino:nth-child(4) { animation-delay: 0.6s; }
-        .domino:nth-child(5) { animation-delay: 0.8s; background: linear-gradient(135deg, #f97316, #ea580c); }
-        .domino:nth-child(6) { animation-delay: 1s; background: linear-gradient(135deg, #ef4444, #dc2626); }
-        .domino:nth-child(7) { animation-delay: 1.2s; background: linear-gradient(135deg, #dc2626, #b91c1c); }
-        
-        @keyframes fall-domino {
-            0%, 20% { transform: rotate(0deg); }
-            30%, 70% { transform: rotate(-70deg); }
-            80%, 100% { transform: rotate(0deg); }
-        }
-        
-        .rescue-helicopter {
-            text-align: center;
-            padding: 60px;
-            background: linear-gradient(180deg, rgba(124,58,237,0.1), transparent);
-            margin: 40px 0;
-            position: relative;
-        }
-        
-        .helicopter-icon {
-            font-size: 5rem;
-            color: #7c3aed;
-            animation: hover-helicopter 2s ease-in-out infinite;
-        }
-        
-        @keyframes hover-helicopter {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        .money-rain {
-            position: absolute;
-            top: 60%;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 2rem;
-            opacity: 0.3;
-        }
-        
-        .autopsy-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 40px 0;
-            background: #1a1a2e;
-            border-radius: 15px;
-            overflow: hidden;
-        }
-        
-        .autopsy-table th {
-            background: #C9A227;
-            color: #0a0a0a;
-            padding: 20px;
-            text-align: left;
-            font-weight: 600;
-        }
-        
-        .autopsy-table td {
-            padding: 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.8);
-        }
-        
-        .autopsy-table tr:last-child td {
-            border-bottom: none;
-        }
-        
-        .time-badge {
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-        
-        .time-badge.phase-1 { background: rgba(34,197,94,0.2); color: #22c55e; }
-        .time-badge.phase-2 { background: rgba(245,158,11,0.2); color: #f59e0b; }
-        .time-badge.phase-3 { background: rgba(239,68,68,0.2); color: #ef4444; }
-        .time-badge.phase-4 { background: rgba(124,58,237,0.2); color: #7c3aed; }
-        
-        @media (max-width: 768px) {
-            .panic-timeline::before {
-                left: 30px;
-            }
-            
-            .panic-phase,
-            .panic-phase:nth-child(odd) {
-                flex-direction: column;
-            }
-            
-            .phase-icon {
-                position: relative;
-                left: auto;
-                transform: none;
-                margin-bottom: 20px;
-            }
-            
-            .panic-phase:nth-child(odd) .phase-content,
-            .panic-phase:nth-child(even) .phase-content {
-                text-align: left;
-                padding: 0 20px;
-            }
-        }
-    </style>
-
-    <!-- Additional SEO Enhancements -->
-    <meta name="revisit-after" content="1 days">
-    <meta name="geo.region" content="IN">
-    <meta name="distribution" content="Global">
-    <link rel="manifest" href="manifest.json">
-
-    <!-- FAQ Schema for Rich Snippets -->
-    <script type="application/ld+json">
-    {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-                    {
-                            "@type": "Question",
-                            "name": "Why is studying market history important for traders?",
-                            "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Studying market history helps traders understand market cycles, recognize patterns that repeat, avoid common mistakes, and develop better strategies based on what has worked in the past."
-                            }
-                    },
-                    {
-                            "@type": "Question",
-                            "name": "What can we learn from market crashes?",
-                            "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Market crashes teach us about the importance of risk management, the dangers of leverage, how panic spreads, and why having cash reserves during volatile times is crucial."
-                            }
-                    },
-                    {
-                            "@type": "Question",
-                            "name": "Do market patterns repeat themselves?",
-                            "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "While exact patterns rarely repeat, market cycles and human behavioral patterns tend to rhyme. Understanding past bubbles and crashes helps traders recognize similar situations."
-                            }
-                    },
-                    {
-                            "@type": "Question",
-                            "name": "What will I learn from this article about Anatomy of a Market Panic: The 4 Stages of Financial Terror?",
-                            "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "From whispered rumor to full-blown collapse — dissecting the precise anatomy of how market panics unfold, freeze, and ultimately get rescued by central banks. This comprehensive guide is part of BroBillionaire's free trading education covering 185+ topics."
-                            }
-                    }
-            ]
-    }
-    </script>
 
 
     <!-- Speakable Schema for Voice Search -->
@@ -1513,6 +1066,52 @@
     </script>
     <script src="seo-injector.js" defer></script>
     <!-- Footer -->
+    
+    <!-- Enhanced FAQ Section for AEO (Answer Engine Optimization) -->
+    <section class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
+        <div class="faq-container">
+            <h2 class="faq-title"><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(0)" aria-expanded="false">
+                        <span itemprop="name">What caused Black Monday 1987?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-0" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">On October 19, 1987, the Dow dropped 22.6% in one day. Causes included: computerized portfolio insurance (automatic selling), overvaluation after 5-year bull run, rising interest rates, trade deficit concerns, and herding behavior. This led to creation of circuit breakers and 'too big to fail' concerns.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(1)" aria-expanded="false">
+                        <span itemprop="name">What are the warning signs of a market crash?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-1" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Warning signs include: extreme valuations (high P/E ratios), yield curve inversions, credit spread widening, excessive leverage in the system, VIX complacency (too low for too long), euphoric retail participation, IPO frenzy, and 'this time is different' narratives. Crashes usually come after extended calm periods.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(2)" aria-expanded="false">
+                        <span itemprop="name">How should I protect my portfolio from a crash?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-2" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Protection strategies: (1) Maintain 10-20% cash reserves, (2) Buy put options as insurance (costs premium), (3) Diversify across uncorrelated assets, (4) Have trailing stop-losses, (5) Reduce leverage before uncertain periods, (6) Don't panic sell at bottoms - have predetermined rules, (7) Consider inverse ETFs for hedging.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(3)" aria-expanded="false">
+                        <span itemprop="name">Are market crashes good buying opportunities?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-3" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Historically, buying during crashes has been very profitable for long-term investors. Every major crash (1987, 2008, 2020) was followed by new highs. However, timing the bottom is nearly impossible. Better approach: buy in tranches during crashes rather than trying to catch the exact bottom. Have a plan before the crash.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-brand-section">

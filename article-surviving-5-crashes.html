@@ -64,556 +64,7 @@
     <meta name="format-detection" content="telephone=no">
     
     <!-- Schema.org Article Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "What Surviving 5 Crashes Teaches You: Battle-Tested Wisdom",
-        "description": "Veterans who've survived multiple crashes see markets differently. These are the battle-tested lessons that only come from being in the trenches.",
-        "image": "https://brobillionaire.com/og-image.jpg",
-        "author": {
-            "@type": "Organization",
-            "name": "BroBillionaire",
-            "url": "https://brobillionaire.com"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "BroBillionaire",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://brobillionaire.com/logo.jpg"
-            }
-        },
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://brobillionaire.com/article-surviving-5-crashes.html"
-        },
-        "articleSection": "Battle-Tested Wisdom",
-        "inLanguage": "en-US",
-        "isAccessibleForFree": true,
-        "timeRequired": "PT17M",
-        "datePublished": "2026-02-01",
-        "dateModified": "2026-02-01"
-    }
-    </script>
     
-    <!-- BreadcrumbList Schema -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": "https://brobillionaire.com"
-            },
-            {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "Battle-Tested Wisdom",
-                "item": "https://brobillionaire.com/#battle-tested-wisdom"
-            },
-            {
-                "@type": "ListItem",
-                "position": 3,
-                "name": "What Surviving 5 Crashes Teaches You: Battle-Tested Wisdom",
-                "item": "https://brobillionaire.com/article-surviving-5-crashes.html"
-            }
-        ]
-    }
-    </script>
-    <style>
-        /* Veteran Badge */
-        .veteran-profile {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-            background: linear-gradient(135deg, rgba(201, 162, 39, 0.1), transparent);
-            border: 1px solid rgba(201, 162, 39, 0.3);
-            border-radius: 20px;
-            padding: 40px;
-            margin: 50px 0;
-        }
-        
-        .veteran-avatar {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #C9A227, #8B6914);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        
-        .veteran-avatar i {
-            font-size: 56px;
-            color: #000;
-        }
-        
-        .veteran-info h3 {
-            font-size: 24px;
-            margin-bottom: 8px;
-        }
-        
-        .veteran-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .crash-badge {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 14px;
-            background: rgba(0,0,0,0.3);
-            border-radius: 20px;
-            font-size: 12px;
-            color: #888;
-        }
-        
-        .crash-badge i {
-            color: #C9A227;
-        }
-
-        /* Crash Timeline */
-        .crash-history {
-            position: relative;
-            padding: 60px 0;
-        }
-        
-        .history-line {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            width: 6px;
-            background: linear-gradient(to bottom, 
-                #ef4444 0%, 
-                #f97316 20%, 
-                #ef4444 40%, 
-                #f97316 60%, 
-                #ef4444 80%, 
-                #22c55e 100%
-            );
-            transform: translateX(-50%);
-            border-radius: 3px;
-        }
-        
-        .crash-event {
-            display: flex;
-            margin: 60px 0;
-            position: relative;
-        }
-        
-        .crash-event:nth-child(odd) {
-            flex-direction: row;
-            padding-right: 55%;
-        }
-        
-        .crash-event:nth-child(even) {
-            flex-direction: row-reverse;
-            padding-left: 55%;
-        }
-        
-        .crash-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            border-radius: 16px;
-            padding: 30px;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        .crash-card:hover {
-            border-color: #C9A227;
-            transform: translateY(-5px);
-        }
-        
-        .crash-marker {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            z-index: 5;
-            border: 4px solid #0a0a0a;
-        }
-        
-        .crash-card.recovery .crash-marker {
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-        }
-        
-        .crash-year {
-            font-size: 48px;
-            font-weight: 900;
-            color: #ef4444;
-            line-height: 1;
-        }
-        
-        .crash-card.recovery .crash-year {
-            color: #22c55e;
-        }
-        
-        .crash-name {
-            font-size: 18px;
-            font-weight: 600;
-            margin: 10px 0;
-        }
-        
-        .crash-stats {
-            display: flex;
-            gap: 20px;
-            margin: 15px 0;
-        }
-        
-        .crash-stat {
-            font-size: 12px;
-        }
-        
-        .crash-stat strong {
-            color: #C9A227;
-        }
-        
-        .crash-lesson {
-            font-size: 14px;
-            color: #888;
-            line-height: 1.6;
-            padding-top: 15px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        /* Lesson Blocks */
-        .lesson-block {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-            border-left: 4px solid #C9A227;
-            border-radius: 0 16px 16px 0;
-            padding: 40px;
-            margin: 40px 0;
-            position: relative;
-        }
-        
-        .lesson-number {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 72px;
-            font-weight: 900;
-            color: rgba(201, 162, 39, 0.15);
-            line-height: 1;
-        }
-        
-        .lesson-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: #C9A227;
-        }
-        
-        .lesson-content {
-            font-size: 16px;
-            line-height: 1.8;
-            color: #ccc;
-        }
-
-        /* Scar Stories */
-        .scar-story {
-            display: grid;
-            grid-template-columns: 80px 1fr;
-            gap: 25px;
-            background: rgba(239, 68, 68, 0.05);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            border-radius: 16px;
-            padding: 30px;
-            margin: 30px 0;
-        }
-        
-        .scar-icon {
-            width: 80px;
-            height: 80px;
-            background: rgba(239, 68, 68, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-        }
-        
-        .scar-content h4 {
-            color: #ef4444;
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-        
-        .scar-content p {
-            color: #888;
-            line-height: 1.7;
-        }
-        
-        .scar-aftermath {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid rgba(239, 68, 68, 0.2);
-            font-size: 14px;
-        }
-        
-        .scar-aftermath strong {
-            color: #22c55e;
-        }
-
-        /* Survival Stats */
-        .survival-stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin: 50px 0;
-        }
-        
-        .survival-stat {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 30px 20px;
-            text-align: center;
-        }
-        
-        .stat-icon {
-            font-size: 32px;
-            margin-bottom: 15px;
-        }
-        
-        .stat-number {
-            font-size: 36px;
-            font-weight: 800;
-            color: #C9A227;
-            margin-bottom: 5px;
-        }
-        
-        .stat-label {
-            font-size: 12px;
-            color: #888;
-            text-transform: uppercase;
-        }
-
-        /* Before/After Mindset */
-        .mindset-evolution {
-            display: grid;
-            grid-template-columns: 1fr 80px 1fr;
-            gap: 20px;
-            align-items: stretch;
-            margin: 50px 0;
-        }
-        
-        .mindset-before, .mindset-after {
-            padding: 35px;
-            border-radius: 16px;
-        }
-        
-        .mindset-before {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), transparent);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-        }
-        
-        .mindset-after {
-            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), transparent);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-        }
-        
-        .mindset-label {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-        }
-        
-        .mindset-before .mindset-label { color: #ef4444; }
-        .mindset-after .mindset-label { color: #22c55e; }
-        
-        .mindset-list {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .mindset-list li {
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .mindset-before .mindset-list li i { color: #ef4444; }
-        .mindset-after .mindset-list li i { color: #22c55e; }
-        
-        .mindset-arrow {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            color: #C9A227;
-        }
-
-        /* War Room Quotes */
-        .war-room {
-            background: #0a0a0a;
-            border: 2px solid rgba(201, 162, 39, 0.3);
-            border-radius: 20px;
-            padding: 50px;
-            margin: 50px 0;
-            position: relative;
-        }
-        
-        .war-room::before {
-            content: 'WAR ROOM WISDOM';
-            position: absolute;
-            top: -12px;
-            left: 40px;
-            background: #0a0a0a;
-            padding: 0 20px;
-            font-size: 12px;
-            letter-spacing: 3px;
-            color: #C9A227;
-        }
-        
-        .war-quote {
-            display: grid;
-            grid-template-columns: 60px 1fr;
-            gap: 25px;
-            margin: 30px 0;
-            padding: 25px;
-            background: rgba(255,255,255,0.02);
-            border-radius: 12px;
-        }
-        
-        .war-quote-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #C9A227, #8B6914);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            color: #000;
-        }
-        
-        .war-quote-text {
-            font-size: 18px;
-            font-style: italic;
-            line-height: 1.6;
-            color: #ccc;
-        }
-        
-        .war-quote-source {
-            font-size: 13px;
-            color: #888;
-            margin-top: 10px;
-        }
-        
-        .war-quote-context {
-            font-size: 12px;
-            color: #C9A227;
-        }
-
-        @media (max-width: 768px) {
-            .veteran-profile {
-                flex-direction: column;
-                text-align: center;
-            }
-            .crash-event {
-                padding: 0 !important;
-                flex-direction: column !important;
-            }
-            .crash-card {
-                width: 100%;
-                margin-left: 40px;
-            }
-            .history-line {
-                left: 30px;
-            }
-            .crash-marker {
-                left: 30px;
-                top: 0;
-                transform: translate(-50%, 0);
-            }
-            .survival-stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .mindset-evolution {
-                grid-template-columns: 1fr;
-            }
-            .mindset-arrow {
-                transform: rotate(90deg);
-            }
-            .war-quote {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .war-quote-icon {
-                margin: 0 auto;
-            }
-        }
-    </style>
-
-    <!-- Additional SEO Enhancements -->
-    <meta name="revisit-after" content="1 days">
-    <meta name="geo.region" content="IN">
-    <meta name="distribution" content="Global">
-    <link rel="manifest" href="manifest.json">
-
-    <!-- FAQ Schema for Rich Snippets -->
-    <script type="application/ld+json">
-    {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-                    {
-                            "@type": "Question",
-                            "name": "What are the best option strategies for beginners?",
-                            "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "The best option strategies for beginners include covered calls, cash-secured puts, and vertical spreads which offer defined risk and are easier to understand than complex strategies."
-                            }
-                    },
-                    {
-                            "@type": "Question",
-                            "name": "How do option Greeks affect my trades?",
-                            "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Option Greeks (Delta, Gamma, Theta, Vega) measure how option prices change based on underlying price movement, time decay, and volatility changes - essential for risk management."
-                            }
-                    },
-                    {
-                            "@type": "Question",
-                            "name": "Is options trading suitable for beginners?",
-                            "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Options trading can be suitable for beginners who start with basic strategies like covered calls, understand the risks, and practice with paper trading before using real money."
-                            }
-                    },
-                    {
-                            "@type": "Question",
-                            "name": "What will I learn from this article about What Surviving 5 Crashes Teaches You: Battle-Tested Wisdom?",
-                            "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Veterans who've survived multiple crashes see markets differently. These are the battle-tested lessons that only come from being in the trenches. This comprehensive guide is part of BroBillionaire's free trading education covering 185+ topics."
-                            }
-                    }
-            ]
-    }
-    </script>
 
 
     <!-- Speakable Schema for Voice Search -->
@@ -1287,6 +738,52 @@
             </div>
         </aside>
     </main>
+
+    
+    <!-- Enhanced FAQ Section for AEO (Answer Engine Optimization) -->
+    <section class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
+        <div class="faq-container">
+            <h2 class="faq-title"><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(0)" aria-expanded="false">
+                        <span itemprop="name">What caused Black Monday 1987?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-0" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">On October 19, 1987, the Dow dropped 22.6% in one day. Causes included: computerized portfolio insurance (automatic selling), overvaluation after 5-year bull run, rising interest rates, trade deficit concerns, and herding behavior. This led to creation of circuit breakers and 'too big to fail' concerns.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(1)" aria-expanded="false">
+                        <span itemprop="name">What are the warning signs of a market crash?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-1" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Warning signs include: extreme valuations (high P/E ratios), yield curve inversions, credit spread widening, excessive leverage in the system, VIX complacency (too low for too long), euphoric retail participation, IPO frenzy, and 'this time is different' narratives. Crashes usually come after extended calm periods.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(2)" aria-expanded="false">
+                        <span itemprop="name">How should I protect my portfolio from a crash?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-2" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Protection strategies: (1) Maintain 10-20% cash reserves, (2) Buy put options as insurance (costs premium), (3) Diversify across uncorrelated assets, (4) Have trailing stop-losses, (5) Reduce leverage before uncertain periods, (6) Don't panic sell at bottoms - have predetermined rules, (7) Consider inverse ETFs for hedging.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(3)" aria-expanded="false">
+                        <span itemprop="name">Are market crashes good buying opportunities?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-3" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Historically, buying during crashes has been very profitable for long-term investors. Every major crash (1987, 2008, 2020) was followed by new highs. However, timing the bottom is nearly impossible. Better approach: buy in tranches during crashes rather than trying to catch the exact bottom. Have a plan before the crash.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Related Articles -->
     <section class="related-articles-section">
