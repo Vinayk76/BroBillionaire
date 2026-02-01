@@ -1067,38 +1067,5 @@
             el.addEventListener('change', calculate);
         });
     </script>
-
-    <script>
-    function toggleMobileMenu() {
-        const toggle = document.querySelector('.mobile-menu-toggle');
-        const dropdown = document.getElementById('mobileNavDropdown');
-        if (toggle && dropdown) {
-            toggle.classList.toggle('active');
-            dropdown.classList.toggle('active');
-        }
-    }
-    
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', function(e) {
-        const toggle = document.querySelector('.mobile-menu-toggle');
-        const dropdown = document.getElementById('mobileNavDropdown');
-        if (toggle && dropdown && !toggle.contains(e.target) && !dropdown.contains(e.target)) {
-            toggle.classList.remove('active');
-            dropdown.classList.remove('active');
-        }
-    });
-    
-    // Close mobile menu when clicking a link
-    document.querySelectorAll('.mobile-nav-dropdown a').forEach(link => {
-        link.addEventListener('click', () => {
-            const toggle = document.querySelector('.mobile-menu-toggle');
-            const dropdown = document.getElementById('mobileNavDropdown');
-            if (toggle && dropdown) {
-                toggle.classList.remove('active');
-                dropdown.classList.remove('active');
-            }
-        });
-    });
-    </script>
 </body>
 </html>
