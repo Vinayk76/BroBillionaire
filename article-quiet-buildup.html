@@ -18,6 +18,612 @@
     <link rel="stylesheet" href="responsive.css">
     <meta name="description" content="Warning signs before market crash: How to spot buildup before blowup, hidden risk accumulation, early warning indicators. Nifty crash warning signs to watch.">
     <meta name="keywords" content="warning signs before market crash, market crash early warning, hidden risk buildup, Nifty crash warning signs, how to predict market crash, crisis warning indicators, market top signals, FII selling warning, pre-crash indicators India">
+    <style>
+        /* Quiet Build-Up Theme - Pressure Gauge Aesthetics */
+        
+        /* Pressure Building Background */
+        .pressure-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(239, 68, 68, 0.03) 100%);
+            animation: pressure-build 10s ease-in-out infinite;
+        }
+        
+        @keyframes pressure-build {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+        
+        /* Pressure Gauge Visual */
+        .pressure-gauge {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            margin: 50px auto;
+        }
+        
+        .gauge-body {
+            width: 300px;
+            height: 150px;
+            border-radius: 150px 150px 0 0;
+            background: linear-gradient(180deg, #1a1a1a, #0d0d0d);
+            border: 4px solid #333;
+            border-bottom: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gauge-zones {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .gauge-zone {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            transform-origin: bottom center;
+            border-radius: 2px;
+        }
+        
+        .gauge-needle {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 6px;
+            height: 120px;
+            background: linear-gradient(180deg, #ef4444, #dc2626);
+            transform-origin: bottom center;
+            transform: translateX(-50%) rotate(-60deg);
+            border-radius: 3px;
+            transition: transform 2s ease-out;
+            z-index: 10;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+        }
+        
+        .gauge-center {
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #C9A227, #a68520);
+            border-radius: 50%;
+            z-index: 11;
+        }
+        
+        .gauge-labels {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 20px 0;
+        }
+        
+        .gauge-label {
+            font-size: 0.8rem;
+            color: #888;
+        }
+        
+        /* Timeline Visual */
+        .buildup-timeline {
+            position: relative;
+            padding: 60px 0;
+            margin: 50px 0;
+        }
+        
+        .buildup-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: linear-gradient(180deg, 
+                #22c55e 0%, 
+                #84cc16 20%,
+                #eab308 40%,
+                #f97316 60%,
+                #ef4444 80%,
+                #7f1d1d 100%);
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+        
+        .buildup-phase {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+        
+        .buildup-phase:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+        
+        .buildup-phase:nth-child(odd) .phase-content {
+            text-align: right;
+            padding-right: 80px;
+            padding-left: 0;
+        }
+        
+        .buildup-phase:nth-child(even) .phase-content {
+            padding-left: 80px;
+        }
+        
+        .phase-content {
+            flex: 1;
+            max-width: 42%;
+        }
+        
+        .phase-marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            z-index: 2;
+            border: 4px solid #0d0d0d;
+        }
+        
+        .phase-marker.calm { background: linear-gradient(135deg, #22c55e, #16a34a); }
+        .phase-marker.building { background: linear-gradient(135deg, #84cc16, #65a30d); }
+        .phase-marker.tension { background: linear-gradient(135deg, #eab308, #ca8a04); }
+        .phase-marker.stress { background: linear-gradient(135deg, #f97316, #ea580c); }
+        .phase-marker.crisis { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .phase-marker.collapse { background: linear-gradient(135deg, #7f1d1d, #450a0a); }
+        
+        .phase-time {
+            font-size: 0.85rem;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+        
+        .phase-title {
+            font-size: 1.4rem;
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .phase-desc {
+            color: #aaa;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        .phase-signs {
+            margin-top: 15px;
+            padding: 12px 15px;
+            background: rgba(201, 162, 39, 0.1);
+            border-left: 3px solid #C9A227;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.85rem;
+            color: #C9A227;
+        }
+        
+        /* Warning Signal Cards */
+        .signal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+        }
+        
+        .signal-card {
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            border-radius: 20px;
+            padding: 35px;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .signal-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(201, 162, 39, 0.3);
+        }
+        
+        .signal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+        
+        .signal-card.early::before { background: linear-gradient(90deg, #22c55e, #84cc16); }
+        .signal-card.middle::before { background: linear-gradient(90deg, #eab308, #f97316); }
+        .signal-card.late::before { background: linear-gradient(90deg, #ef4444, #dc2626); }
+        
+        .signal-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .signal-card.early .signal-icon { background: rgba(34, 197, 94, 0.15); }
+        .signal-card.middle .signal-icon { background: rgba(234, 179, 8, 0.15); }
+        .signal-card.late .signal-icon { background: rgba(239, 68, 68, 0.15); }
+        
+        .signal-timing {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        .signal-card.early .signal-timing { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
+        .signal-card.middle .signal-timing { background: rgba(234, 179, 8, 0.1); color: #eab308; }
+        .signal-card.late .signal-timing { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+        
+        .signal-card h4 {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+        
+        .signal-card p {
+            color: #888;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        /* Case Study Boxes */
+        .case-study-box {
+            background: linear-gradient(135deg, #0d0d0d, #0a0a1a);
+            border-radius: 24px;
+            padding: 50px;
+            margin: 50px 0;
+            border: 2px solid rgba(201, 162, 39, 0.2);
+        }
+        
+        .case-header {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .case-year-badge {
+            background: linear-gradient(135deg, #C9A227, #a68520);
+            padding: 15px 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .case-year-badge .year {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #000;
+        }
+        
+        .case-year-badge .crisis {
+            font-size: 0.75rem;
+            color: rgba(0, 0, 0, 0.7);
+            text-transform: uppercase;
+        }
+        
+        .case-title-block h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .case-title-block p {
+            color: #888;
+            font-size: 0.95rem;
+        }
+        
+        .case-timeline-mini {
+            display: flex;
+            gap: 0;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .mini-phase {
+            flex: 1;
+            min-width: 150px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .mini-phase::after {
+            content: '→';
+            position: absolute;
+            right: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 1.5rem;
+        }
+        
+        .mini-phase:last-child::after {
+            display: none;
+        }
+        
+        .mini-phase.quiet { background: rgba(34, 197, 94, 0.1); border-left: 3px solid #22c55e; }
+        .mini-phase.buildup { background: rgba(234, 179, 8, 0.1); border-left: 3px solid #eab308; }
+        .mini-phase.trigger { background: rgba(249, 115, 22, 0.1); border-left: 3px solid #f97316; }
+        .mini-phase.explosion { background: rgba(239, 68, 68, 0.1); border-left: 3px solid #ef4444; }
+        
+        .mini-phase h5 {
+            color: #fff;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .mini-phase p {
+            color: #888;
+            font-size: 0.75rem;
+        }
+        
+        /* Volcano Visual */
+        .volcano-visual {
+            position: relative;
+            height: 400px;
+            margin: 50px 0;
+            background: linear-gradient(180deg, #0a0505 0%, #1a0a0a 100%);
+            border-radius: 24px;
+            overflow: hidden;
+        }
+        
+        .volcano-mountain {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 200px solid transparent;
+            border-right: 200px solid transparent;
+            border-bottom: 300px solid #333;
+        }
+        
+        .volcano-crater {
+            position: absolute;
+            bottom: 280px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 40px;
+            background: linear-gradient(180deg, #7f1d1d, #ef4444);
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(239, 68, 68, 0.5);
+            animation: crater-glow 2s infinite;
+        }
+        
+        @keyframes crater-glow {
+            0%, 100% { box-shadow: 0 0 30px rgba(239, 68, 68, 0.3); }
+            50% { box-shadow: 0 0 60px rgba(239, 68, 68, 0.7); }
+        }
+        
+        .volcano-label {
+            position: absolute;
+            padding: 10px 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+        
+        .label-quiet {
+            bottom: 50px;
+            left: 30px;
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+        
+        .label-pressure {
+            bottom: 150px;
+            left: 80px;
+            color: #eab308;
+            border: 1px solid rgba(234, 179, 8, 0.3);
+        }
+        
+        .label-magma {
+            bottom: 250px;
+            left: 150px;
+            color: #f97316;
+            border: 1px solid rgba(249, 115, 22, 0.3);
+        }
+        
+        .label-eruption {
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        
+        /* Checklist */
+        .buildup-checklist {
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            border-radius: 24px;
+            padding: 50px;
+            margin: 50px 0;
+            border: 1px solid #333;
+        }
+        
+        .checklist-title {
+            text-align: center;
+            color: #C9A227;
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+        }
+        
+        .checklist-items {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 20px 0;
+            border-bottom: 1px solid #333;
+        }
+        
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+        
+        .checklist-box {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #C9A227;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .checklist-box:hover {
+            background: rgba(201, 162, 39, 0.2);
+        }
+        
+        .checklist-box.checked {
+            background: #C9A227;
+            color: #000;
+        }
+        
+        .checklist-text h4 {
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .checklist-text p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        /* Finale */
+        .quiet-finale {
+            background: radial-gradient(ellipse at center, rgba(234, 179, 8, 0.1) 0%, #0a0a0a 70%);
+            border-radius: 24px;
+            padding: 80px 40px;
+            margin: 50px 0;
+            text-align: center;
+        }
+        
+        .finale-pressure-gauge {
+            width: 200px;
+            height: 120px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+        
+        .finale-gauge-arc {
+            width: 200px;
+            height: 100px;
+            border-radius: 100px 100px 0 0;
+            border: 8px solid;
+            border-bottom: none;
+            border-image: linear-gradient(90deg, #22c55e, #eab308, #ef4444) 1;
+        }
+        
+        .finale-needle {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            height: 80px;
+            background: #fff;
+            transform-origin: bottom center;
+            transform: translateX(-50%) rotate(60deg);
+            border-radius: 2px;
+        }
+        
+        .finale-title {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+        
+        .finale-subtitle {
+            color: #C9A227;
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .buildup-timeline::before {
+                left: 20px;
+            }
+            
+            .buildup-phase,
+            .buildup-phase:nth-child(odd) {
+                flex-direction: column;
+            }
+            
+            .phase-content,
+            .buildup-phase:nth-child(odd) .phase-content {
+                max-width: 100%;
+                padding: 0 0 0 60px;
+                text-align: left;
+            }
+            
+            .phase-marker {
+                left: 20px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .case-timeline-mini {
+                flex-direction: column;
+            }
+            
+            .mini-phase::after {
+                content: '↓';
+                right: auto;
+                left: 50%;
+                top: auto;
+                bottom: -15px;
+                transform: translateX(-50%);
+            }
+            
+            .volcano-mountain {
+                border-left-width: 150px;
+                border-right-width: 150px;
+                border-bottom-width: 220px;
+            }
+            
+            .volcano-crater {
+                bottom: 200px;
+            }
+        }
+    </style>
 
     <!-- Additional SEO Enhancements -->
     <meta name="revisit-after" content="1 days">
@@ -30,6 +636,105 @@
 
     <meta name="word_count" content="1566">
 
+    <style>
+    /* Table of Contents Styles */
+    .article-toc {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, rgba(0,0,0,0.3) 100%);
+        border: 1px solid rgba(201, 162, 39, 0.3);
+        border-radius: 12px;
+        padding: 24px;
+        margin: 30px 0;
+        position: relative;
+    }
+    .article-toc::before {
+        content: '📑';
+        position: absolute;
+        top: -15px;
+        left: 20px;
+        background: #0a0a0a;
+        padding: 0 10px;
+        font-size: 24px;
+    }
+    .article-toc h2 {
+        color: #C9A227;
+        font-size: 1.2rem;
+        margin-bottom: 16px;
+        font-family: 'Playfair Display', serif;
+    }
+    .article-toc ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .article-toc li {
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .article-toc li:last-child {
+        border-bottom: none;
+    }
+    .article-toc a {
+        color: rgba(255,255,255,0.8);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .article-toc a:hover {
+        color: #C9A227;
+        padding-left: 10px;
+    }
+    .article-toc a::before {
+        content: '→';
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    .article-toc a:hover::before {
+        opacity: 1;
+    }
+    .toc-number {
+        background: rgba(201, 162, 39, 0.2);
+        color: #C9A227;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    /* Reading Progress Bar */
+    .reading-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 4px;
+        background: linear-gradient(90deg, #C9A227, #FFD700);
+        z-index: 9999;
+        transition: width 0.1s ease;
+    }
+    /* Article Rating Widget */
+    .article-rating-widget {
+        background: rgba(201, 162, 39, 0.1);
+        border: 1px solid rgba(201, 162, 39, 0.3);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 30px 0;
+        text-align: center;
+    }
+    .rating-stars {
+        font-size: 24px;
+        color: #C9A227;
+        margin: 10px 0;
+    }
+    .rating-text {
+        color: rgba(255,255,255,0.7);
+        font-size: 14px;
+    }
+    </style>
 <!-- SEO Nuclear Upgrade: seo-nuclear-upgrade v1.0 -->
 
     <script type="application/ld+json">

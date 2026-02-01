@@ -18,6 +18,529 @@
     <link rel="stylesheet" href="responsive.css">
     <meta name="description" content="Leverage trading India: True cost of margin trading explained. Why leverage destroys accounts. F&O margin requirements SEBI 2025. Hidden risks of leveraged trading.">
     <meta name="keywords" content="leverage trading India, margin trading risk, F&O leverage explained, SEBI margin requirements 2025, intraday leverage Zerodha, how leverage kills accounts, margin funding risk, leveraged trading losses">
+    <style>
+        /* Leverage Amplifier Visual */
+        .amplifier-container {
+            background: linear-gradient(135deg, #0a0a15 0%, #150515 50%, #0a0a15 100%);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .amp-visual {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 3rem;
+            height: 200px;
+            margin-bottom: 2rem;
+        }
+        .amp-bar {
+            width: 80px;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding-bottom: 1rem;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+        .amp-bar.base {
+            height: 60px;
+            background: linear-gradient(180deg, #22c55e, #15803d);
+        }
+        .amp-bar.lev2x {
+            height: 120px;
+            background: linear-gradient(180deg, #eab308, #a16207);
+        }
+        .amp-bar.lev5x {
+            height: 180px;
+            background: linear-gradient(180deg, #f97316, #c2410c);
+        }
+        .amp-bar.lev10x {
+            height: 200px;
+            background: linear-gradient(180deg, #ef4444, #b91c1c);
+            animation: pulse-danger 2s ease-in-out infinite;
+        }
+        @keyframes pulse-danger {
+            0%, 100% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(239, 68, 68, 0.6); }
+        }
+        .amp-label {
+            position: absolute;
+            bottom: -30px;
+            color: #888;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+        .amp-value {
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .amp-title {
+            text-align: center;
+            color: #C9A227;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        .amp-subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Double-Edged Sword */
+        .sword-container {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: #050508;
+            border-radius: 20px;
+            align-items: center;
+        }
+        @media (max-width: 768px) {
+            .sword-container { grid-template-columns: 1fr; text-align: center; }
+        }
+        .sword-side {
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+        .sword-side.gain {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.02));
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+        .sword-side.loss {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.02));
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        .sword-side h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        .sword-side.gain h4 { color: #22c55e; }
+        .sword-side.loss h4 { color: #ef4444; }
+        .sword-side p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        .sword-percent {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+        .sword-side.gain .sword-percent { color: #22c55e; }
+        .sword-side.loss .sword-percent { color: #ef4444; }
+        .sword-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .sword-icon {
+            font-size: 3rem;
+            color: #C9A227;
+        }
+        .sword-lev {
+            color: #C9A227;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Cost Breakdown */
+        .cost-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        @media (max-width: 768px) {
+            .cost-grid { grid-template-columns: 1fr; }
+        }
+        .cost-card {
+            background: linear-gradient(135deg, rgba(15, 10, 25, 0.9), rgba(20, 15, 30, 0.8));
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .cost-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ef4444, #f97316);
+        }
+        .cost-number {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .cost-icon {
+            font-size: 2rem;
+            color: #f97316;
+            margin-bottom: 1rem;
+        }
+        .cost-card h4 {
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        .cost-card p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Decay Visualization */
+        .decay-container {
+            background: #050508;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .decay-title {
+            text-align: center;
+            color: #C9A227;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .decay-chart {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            height: 200px;
+            padding: 0 1rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 1rem;
+        }
+        .decay-bar-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .decay-bars {
+            display: flex;
+            gap: 0.5rem;
+            align-items: flex-end;
+        }
+        .decay-bar {
+            width: 25px;
+            border-radius: 4px 4px 0 0;
+            transition: all 0.3s ease;
+        }
+        .decay-bar.index { background: linear-gradient(180deg, #22c55e, #15803d); }
+        .decay-bar.leveraged { background: linear-gradient(180deg, #ef4444, #b91c1c); }
+        .decay-label {
+            color: #888;
+            font-size: 0.75rem;
+        }
+        .decay-legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: #888;
+        }
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+        .legend-dot.index { background: #22c55e; }
+        .legend-dot.leveraged { background: #ef4444; }
+
+        /* Wipeout Calculator */
+        .wipeout-box {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.02));
+            border: 2px solid rgba(239, 68, 68, 0.4);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .wipeout-title {
+            color: #ef4444;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .wipeout-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+        @media (max-width: 768px) {
+            .wipeout-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        .wipeout-cell {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem 1rem;
+        }
+        .wipeout-lev {
+            color: #C9A227;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .wipeout-percent {
+            color: #ef4444;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        .wipeout-label {
+            color: #888;
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+        }
+
+        /* Time Decay Meter */
+        .time-decay-meter {
+            background: #0a0a12;
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .meter-title {
+            color: #888;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .meter-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .meter-label {
+            width: 80px;
+            color: #C9A227;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .meter-bar-bg {
+            flex: 1;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .meter-bar-fill {
+            height: 100%;
+            border-radius: 12px;
+            transition: width 0.5s ease;
+        }
+        .meter-bar-fill.daily { 
+            background: linear-gradient(90deg, #22c55e, #15803d); 
+            width: 10%;
+        }
+        .meter-bar-fill.weekly { 
+            background: linear-gradient(90deg, #84cc16, #65a30d); 
+            width: 35%;
+        }
+        .meter-bar-fill.monthly { 
+            background: linear-gradient(90deg, #eab308, #ca8a04); 
+            width: 65%;
+        }
+        .meter-bar-fill.yearly { 
+            background: linear-gradient(90deg, #ef4444, #dc2626); 
+            width: 100%;
+        }
+        .meter-value {
+            width: 60px;
+            color: #888;
+            font-size: 0.85rem;
+            text-align: right;
+        }
+
+        /* Leverage Spectrum */
+        .spectrum-container {
+            background: #050508;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .spectrum-title {
+            text-align: center;
+            color: #C9A227;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+        }
+        .spectrum-bar {
+            height: 50px;
+            background: linear-gradient(90deg, 
+                #22c55e 0%, 
+                #84cc16 20%,
+                #eab308 40%,
+                #f97316 60%,
+                #ef4444 80%,
+                #7f1d1d 100%);
+            border-radius: 25px;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+        .spectrum-markers {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+        }
+        .spectrum-marker {
+            text-align: center;
+        }
+        .spectrum-marker span {
+            display: block;
+        }
+        .spectrum-marker .lev {
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .spectrum-marker .desc {
+            color: #888;
+            font-size: 0.75rem;
+        }
+
+        /* Margin Call Animation */
+        .margin-call-box {
+            background: linear-gradient(135deg, rgba(127, 29, 29, 0.3), rgba(127, 29, 29, 0.1));
+            border: 2px solid rgba(239, 68, 68, 0.5);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .margin-call-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                rgba(239, 68, 68, 0) 0%,
+                rgba(239, 68, 68, 0.1) 50%,
+                rgba(239, 68, 68, 0) 100%);
+            animation: warning-flash 2s ease-in-out infinite;
+        }
+        @keyframes warning-flash {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+        .margin-call-icon {
+            font-size: 3rem;
+            color: #ef4444;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 10;
+        }
+        .margin-call-title {
+            color: #ef4444;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 10;
+        }
+        .margin-call-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Recovery Math */
+        .recovery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        @media (max-width: 768px) {
+            .recovery-grid { grid-template-columns: 1fr; }
+        }
+        .recovery-card {
+            background: linear-gradient(135deg, rgba(10, 10, 20, 0.95), rgba(15, 10, 25, 0.9));
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .recovery-loss {
+            color: #ef4444;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .recovery-arrow {
+            color: #888;
+            font-size: 1.5rem;
+            margin: 0.5rem 0;
+        }
+        .recovery-gain {
+            color: #22c55e;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .recovery-label {
+            color: #888;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Leverage Box */
+        .leverage-insight-box {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.15), rgba(201, 162, 39, 0.02));
+            border-left: 4px solid #C9A227;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+        .leverage-insight-box h4 {
+            color: #C9A227;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        .leverage-insight-box p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+    </style>
 
     <!-- Additional SEO Enhancements -->
     <meta name="revisit-after" content="1 days">
@@ -30,6 +553,105 @@
 
     <meta name="word_count" content="1454">
 
+    <style>
+    /* Table of Contents Styles */
+    .article-toc {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, rgba(0,0,0,0.3) 100%);
+        border: 1px solid rgba(201, 162, 39, 0.3);
+        border-radius: 12px;
+        padding: 24px;
+        margin: 30px 0;
+        position: relative;
+    }
+    .article-toc::before {
+        content: '📑';
+        position: absolute;
+        top: -15px;
+        left: 20px;
+        background: #0a0a0a;
+        padding: 0 10px;
+        font-size: 24px;
+    }
+    .article-toc h2 {
+        color: #C9A227;
+        font-size: 1.2rem;
+        margin-bottom: 16px;
+        font-family: 'Playfair Display', serif;
+    }
+    .article-toc ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .article-toc li {
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .article-toc li:last-child {
+        border-bottom: none;
+    }
+    .article-toc a {
+        color: rgba(255,255,255,0.8);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .article-toc a:hover {
+        color: #C9A227;
+        padding-left: 10px;
+    }
+    .article-toc a::before {
+        content: '→';
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    .article-toc a:hover::before {
+        opacity: 1;
+    }
+    .toc-number {
+        background: rgba(201, 162, 39, 0.2);
+        color: #C9A227;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    /* Reading Progress Bar */
+    .reading-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 4px;
+        background: linear-gradient(90deg, #C9A227, #FFD700);
+        z-index: 9999;
+        transition: width 0.1s ease;
+    }
+    /* Article Rating Widget */
+    .article-rating-widget {
+        background: rgba(201, 162, 39, 0.1);
+        border: 1px solid rgba(201, 162, 39, 0.3);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 30px 0;
+        text-align: center;
+    }
+    .rating-stars {
+        font-size: 24px;
+        color: #C9A227;
+        margin: 10px 0;
+    }
+    .rating-text {
+        color: rgba(255,255,255,0.7);
+        font-size: 14px;
+    }
+    </style>
 <!-- SEO Nuclear Upgrade: seo-nuclear-upgrade v1.0 -->
 
     <script type="application/ld+json">

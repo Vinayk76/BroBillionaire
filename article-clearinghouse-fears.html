@@ -18,6 +18,295 @@
     <link rel="stylesheet" href="responsive.css">
     <meta name="description" content="Clearinghouse systemic risk India: What NSCCL, ICCL fear most. How clearing corporations can fail. Why concentrated risk threatens Indian F&O market stability.">
     <meta name="keywords" content="clearinghouse systemic risk, NSCCL risk, ICCL clearing risk, clearing corporation failure, too big to fail CCP, systemic financial risk, central counterparty risk, clearing member concentration">
+    <style>
+        .nightmare-card {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(15, 15, 30, 0.95));
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .nightmare-card::before {
+            content: '😱';
+            position: absolute;
+            top: -15px;
+            right: 30px;
+            font-size: 2rem;
+            background: #0a0a14;
+            padding: 0 0.5rem;
+        }
+        .nightmare-title {
+            color: #8b5cf6;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+        .nightmare-content {
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.7;
+        }
+        .waterfall-container {
+            background: linear-gradient(180deg, #0a0a14, #0d0d18);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .waterfall-title {
+            color: #C9A227;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .waterfall-level {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        .waterfall-level::after {
+            content: '↓';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(201, 162, 39, 0.5);
+            font-size: 1.2rem;
+        }
+        .waterfall-level:last-child::after { display: none; }
+        .level-bar {
+            flex: 1;
+            height: 50px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 0 1rem;
+        }
+        .level-1 { background: linear-gradient(90deg, #22c55e, #16a34a); }
+        .level-2 { background: linear-gradient(90deg, #3b82f6, #2563eb); width: 85%; margin: 0 auto; }
+        .level-3 { background: linear-gradient(90deg, #eab308, #ca8a04); width: 70%; margin: 0 auto; }
+        .level-4 { background: linear-gradient(90deg, #f97316, #ea580c); width: 55%; margin: 0 auto; }
+        .level-5 { background: linear-gradient(90deg, #ef4444, #dc2626); width: 40%; margin: 0 auto; }
+        .level-nuclear { background: linear-gradient(90deg, #7f1d1d, #450a0a); width: 25%; margin: 0 auto; animation: pulse-nuclear 2s infinite; }
+        @keyframes pulse-nuclear {
+            0%, 100% { box-shadow: 0 0 10px rgba(239, 68, 68, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(239, 68, 68, 0.6); }
+        }
+        .domino-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, #080810, #0a0a14);
+            border-radius: 16px;
+        }
+        @media (max-width: 768px) {
+            .domino-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        .domino {
+            background: rgba(201, 162, 39, 0.1);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .domino.fallen {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.5);
+            transform: rotate(-5deg);
+        }
+        .domino-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+        }
+        .domino-name {
+            font-size: 0.7rem;
+            color: #888;
+        }
+        .stress-meter {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #080810;
+            border-radius: 12px;
+        }
+        .stress-segment {
+            flex: 1;
+            height: 40px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #000;
+            transition: all 0.3s ease;
+        }
+        .stress-segment:nth-child(1) { background: #22c55e; }
+        .stress-segment:nth-child(2) { background: #84cc16; }
+        .stress-segment:nth-child(3) { background: #eab308; }
+        .stress-segment:nth-child(4) { background: #f97316; }
+        .stress-segment:nth-child(5) { background: #ef4444; }
+        .stress-segment:nth-child(6) { background: #dc2626; }
+        .stress-segment:nth-child(7) { background: #7f1d1d; color: #fff; }
+        .vault-visual {
+            background: radial-gradient(circle at center, rgba(201, 162, 39, 0.1), transparent 70%), 
+                        linear-gradient(135deg, #0a0a14, #080810);
+            border-radius: 16px;
+            padding: 3rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .vault-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        .vault-amount {
+            font-size: 2.5rem;
+            font-family: 'Playfair Display', serif;
+            color: #C9A227;
+            margin-bottom: 0.5rem;
+        }
+        .vault-label {
+            color: #888;
+            font-size: 1rem;
+        }
+        .fear-ranking {
+            counter-reset: fear-counter;
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+        }
+        .fear-item {
+            counter-increment: fear-counter;
+            background: linear-gradient(135deg, rgba(15, 15, 25, 0.9), rgba(10, 10, 20, 0.8));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-left: 3px solid;
+            border-radius: 0 12px 12px 0;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 4rem;
+        }
+        .fear-item::before {
+            content: counter(fear-counter);
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+        }
+        .fear-item:nth-child(1) { border-left-color: #ef4444; }
+        .fear-item:nth-child(1)::before { color: #ef4444; }
+        .fear-item:nth-child(2) { border-left-color: #f97316; }
+        .fear-item:nth-child(2)::before { color: #f97316; }
+        .fear-item:nth-child(3) { border-left-color: #eab308; }
+        .fear-item:nth-child(3)::before { color: #eab308; }
+        .fear-item:nth-child(4) { border-left-color: #3b82f6; }
+        .fear-item:nth-child(4)::before { color: #3b82f6; }
+        .fear-item:nth-child(5) { border-left-color: #8b5cf6; }
+        .fear-item:nth-child(5)::before { color: #8b5cf6; }
+        .fear-title {
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        .fear-desc {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .systemic-diagram {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 1rem;
+            align-items: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #0a0a14, #080810);
+            border-radius: 16px;
+            margin: 2rem 0;
+        }
+        @media (max-width: 768px) {
+            .systemic-diagram { 
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+        .systemic-node {
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .input-node {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+        .center-node {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.2), rgba(201, 162, 39, 0.05));
+            border: 2px solid rgba(201, 162, 39, 0.5);
+            padding: 2rem;
+        }
+        .output-node {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        .node-title {
+            color: #C9A227;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .node-desc {
+            color: #888;
+            font-size: 0.85rem;
+        }
+        .historical-case {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.08), rgba(15, 15, 25, 0.95));
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .case-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+        }
+        .case-year {
+            background: linear-gradient(135deg, #C9A227, #a68520);
+            color: #000;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .case-title {
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+        }
+        .case-content {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+        }
+    </style>
 
     <!-- Additional SEO Enhancements -->
     <meta name="revisit-after" content="1 days">
@@ -30,6 +319,105 @@
 
     <meta name="word_count" content="1738">
 
+    <style>
+    /* Table of Contents Styles */
+    .article-toc {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, rgba(0,0,0,0.3) 100%);
+        border: 1px solid rgba(201, 162, 39, 0.3);
+        border-radius: 12px;
+        padding: 24px;
+        margin: 30px 0;
+        position: relative;
+    }
+    .article-toc::before {
+        content: '📑';
+        position: absolute;
+        top: -15px;
+        left: 20px;
+        background: #0a0a0a;
+        padding: 0 10px;
+        font-size: 24px;
+    }
+    .article-toc h2 {
+        color: #C9A227;
+        font-size: 1.2rem;
+        margin-bottom: 16px;
+        font-family: 'Playfair Display', serif;
+    }
+    .article-toc ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .article-toc li {
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .article-toc li:last-child {
+        border-bottom: none;
+    }
+    .article-toc a {
+        color: rgba(255,255,255,0.8);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .article-toc a:hover {
+        color: #C9A227;
+        padding-left: 10px;
+    }
+    .article-toc a::before {
+        content: '→';
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    .article-toc a:hover::before {
+        opacity: 1;
+    }
+    .toc-number {
+        background: rgba(201, 162, 39, 0.2);
+        color: #C9A227;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    /* Reading Progress Bar */
+    .reading-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 4px;
+        background: linear-gradient(90deg, #C9A227, #FFD700);
+        z-index: 9999;
+        transition: width 0.1s ease;
+    }
+    /* Article Rating Widget */
+    .article-rating-widget {
+        background: rgba(201, 162, 39, 0.1);
+        border: 1px solid rgba(201, 162, 39, 0.3);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 30px 0;
+        text-align: center;
+    }
+    .rating-stars {
+        font-size: 24px;
+        color: #C9A227;
+        margin: 10px 0;
+    }
+    .rating-text {
+        color: rgba(255,255,255,0.7);
+        font-size: 14px;
+    }
+    </style>
 <!-- SEO Nuclear Upgrade: seo-nuclear-upgrade v1.0 -->
 
     <script type="application/ld+json">

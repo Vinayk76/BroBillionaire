@@ -18,6 +18,370 @@
     <link rel="stylesheet" href="responsive.css">
     <meta name="description" content="Reflexivity theory explained: George Soros trading philosophy, how prices create reality, feedback loops in markets. Why efficient market hypothesis fails in Nifty.">
     <meta name="keywords" content="reflexivity theory explained, George Soros trading philosophy, prices create reality, feedback loops markets, efficient market hypothesis wrong, Soros reflexivity, self fulfilling prophecy trading, market feedback loops, reflexivity Nifty Bank Nifty, behavioral finance India">
+    <style>
+        /* Mirror Visual Effects */
+        .mirror-container {
+            position: relative;
+            padding: 3rem;
+            margin: 2rem 0;
+            background: linear-gradient(135deg, rgba(10, 10, 20, 0.95), rgba(15, 15, 30, 0.9));
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .mirror-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, #C9A227, transparent);
+        }
+        .mirror-sides {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+        @media (max-width: 768px) {
+            .mirror-sides { grid-template-columns: 1fr; gap: 2rem; }
+            .mirror-container::before { display: none; }
+        }
+        .mirror-side {
+            padding: 1.5rem;
+        }
+        .mirror-side.reality { text-align: right; }
+        .mirror-side.perception { text-align: left; }
+        .mirror-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+            color: #C9A227;
+            margin-bottom: 1rem;
+        }
+        .mirror-content {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.7;
+        }
+        
+        /* Feedback Loop Animation */
+        .loop-container {
+            position: relative;
+            height: 400px;
+            margin: 3rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .loop-circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid rgba(201, 162, 39, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .loop-1 { width: 350px; height: 350px; animation: pulse-ring 4s infinite; }
+        .loop-2 { width: 280px; height: 280px; animation: pulse-ring 4s infinite 1s; }
+        .loop-3 { width: 210px; height: 210px; animation: pulse-ring 4s infinite 2s; }
+        .loop-4 { width: 140px; height: 140px; animation: pulse-ring 4s infinite 3s; }
+        .loop-center {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #C9A227, #a68520);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #000;
+            font-weight: 700;
+            z-index: 10;
+        }
+        @keyframes pulse-ring {
+            0%, 100% { transform: scale(1); opacity: 0.3; border-color: rgba(201, 162, 39, 0.3); }
+            50% { transform: scale(1.05); opacity: 1; border-color: rgba(201, 162, 39, 0.8); }
+        }
+        .loop-nodes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .loop-node {
+            position: absolute;
+            background: rgba(15, 15, 25, 0.95);
+            border: 1px solid rgba(201, 162, 39, 0.5);
+            padding: 0.8rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: #fff;
+            white-space: nowrap;
+            animation: float-node 6s infinite;
+        }
+        .loop-node:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); animation-delay: 0s; }
+        .loop-node:nth-child(2) { top: 25%; right: 0; animation-delay: 1.5s; }
+        .loop-node:nth-child(3) { bottom: 25%; right: 0; animation-delay: 3s; }
+        .loop-node:nth-child(4) { bottom: 0; left: 50%; transform: translateX(-50%); animation-delay: 4.5s; }
+        .loop-node:nth-child(5) { bottom: 25%; left: 0; animation-delay: 6s; }
+        .loop-node:nth-child(6) { top: 25%; left: 0; animation-delay: 7.5s; }
+        @keyframes float-node {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; box-shadow: 0 0 20px rgba(201, 162, 39, 0.3); }
+        }
+        
+        /* Soros Quote Special */
+        .soros-quote {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.15), rgba(201, 162, 39, 0.02));
+            border: 2px solid rgba(201, 162, 39, 0.3);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            position: relative;
+            text-align: center;
+        }
+        .soros-quote::before {
+            content: '"';
+            position: absolute;
+            top: -30px;
+            left: 30px;
+            font-size: 8rem;
+            color: rgba(201, 162, 39, 0.2);
+            font-family: 'Playfair Display', serif;
+            line-height: 1;
+        }
+        .soros-text {
+            font-size: 1.6rem;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        .soros-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .soros-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #C9A227, #a68520);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        .soros-name {
+            color: #C9A227;
+            font-weight: 600;
+        }
+        .soros-title {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        /* Case Study Boxes */
+        .case-study {
+            background: linear-gradient(135deg, rgba(10, 10, 20, 0.95), rgba(15, 15, 30, 0.9));
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 4px solid;
+        }
+        .case-study.boom { border-left-color: #22c55e; }
+        .case-study.bust { border-left-color: #ef4444; }
+        .case-study-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .case-study-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        .boom .case-study-icon { background: rgba(34, 197, 94, 0.15); color: #22c55e; }
+        .bust .case-study-icon { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
+        .case-study-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: #fff;
+        }
+        .case-study-content {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+        }
+        .case-study-flow {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+        }
+        .flow-step {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #fff;
+        }
+        .boom .flow-step { background: rgba(34, 197, 94, 0.2); }
+        .bust .flow-step { background: rgba(239, 68, 68, 0.2); }
+        .flow-arrow {
+            color: #C9A227;
+            font-size: 1.2rem;
+        }
+        
+        /* Traditional vs Reflexive */
+        .vs-container {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 2rem;
+            margin: 3rem 0;
+            align-items: stretch;
+        }
+        @media (max-width: 768px) {
+            .vs-container { 
+                grid-template-columns: 1fr; 
+                gap: 1rem;
+            }
+            .vs-divider { 
+                transform: rotate(90deg);
+                margin: 1rem auto;
+            }
+        }
+        .vs-box {
+            background: linear-gradient(135deg, rgba(10, 10, 20, 0.95), rgba(15, 15, 30, 0.9));
+            border-radius: 16px;
+            padding: 2rem;
+        }
+        .vs-box.old { border: 1px solid rgba(255, 255, 255, 0.1); }
+        .vs-box.new { border: 1px solid rgba(201, 162, 39, 0.3); }
+        .vs-box h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        .vs-box.old h4 { color: #888; }
+        .vs-box.new h4 { color: #C9A227; }
+        .vs-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .vs-box li {
+            padding: 0.5rem 0;
+            color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        .vs-box.old li::before { content: '✕'; color: #ef4444; }
+        .vs-box.new li::before { content: '✓'; color: #22c55e; }
+        .vs-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .vs-text {
+            background: linear-gradient(135deg, #C9A227, #a68520);
+            color: #000;
+            font-weight: 700;
+            padding: 1rem;
+            border-radius: 50%;
+            font-size: 1.2rem;
+        }
+        
+        /* Equation Box */
+        .equation-box {
+            background: #0a0a12;
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .equation-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15rem;
+            color: #C9A227;
+            margin-bottom: 1rem;
+        }
+        .equation-main {
+            font-size: 2rem;
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+        .equation-explain {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+        }
+        
+        /* Timeline */
+        .reflexivity-timeline {
+            position: relative;
+            padding-left: 30px;
+            margin: 2rem 0;
+        }
+        .reflexivity-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #22c55e, #C9A227, #ef4444);
+        }
+        .timeline-phase {
+            position: relative;
+            padding: 1.5rem;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+            background: rgba(10, 10, 20, 0.6);
+            border-radius: 0 12px 12px 0;
+        }
+        .timeline-phase::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #C9A227;
+            border: 3px solid #0a0a12;
+        }
+        .phase-name {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            color: #C9A227;
+            margin-bottom: 0.5rem;
+        }
+        .phase-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+        .phase-desc {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+    </style>
 
     <!-- Additional SEO Enhancements -->
     <meta name="revisit-after" content="1 days">
@@ -30,6 +394,105 @@
 
     <meta name="word_count" content="1625">
 
+    <style>
+    /* Table of Contents Styles */
+    .article-toc {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, rgba(0,0,0,0.3) 100%);
+        border: 1px solid rgba(201, 162, 39, 0.3);
+        border-radius: 12px;
+        padding: 24px;
+        margin: 30px 0;
+        position: relative;
+    }
+    .article-toc::before {
+        content: '📑';
+        position: absolute;
+        top: -15px;
+        left: 20px;
+        background: #0a0a0a;
+        padding: 0 10px;
+        font-size: 24px;
+    }
+    .article-toc h2 {
+        color: #C9A227;
+        font-size: 1.2rem;
+        margin-bottom: 16px;
+        font-family: 'Playfair Display', serif;
+    }
+    .article-toc ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .article-toc li {
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .article-toc li:last-child {
+        border-bottom: none;
+    }
+    .article-toc a {
+        color: rgba(255,255,255,0.8);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .article-toc a:hover {
+        color: #C9A227;
+        padding-left: 10px;
+    }
+    .article-toc a::before {
+        content: '→';
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    .article-toc a:hover::before {
+        opacity: 1;
+    }
+    .toc-number {
+        background: rgba(201, 162, 39, 0.2);
+        color: #C9A227;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    /* Reading Progress Bar */
+    .reading-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 4px;
+        background: linear-gradient(90deg, #C9A227, #FFD700);
+        z-index: 9999;
+        transition: width 0.1s ease;
+    }
+    /* Article Rating Widget */
+    .article-rating-widget {
+        background: rgba(201, 162, 39, 0.1);
+        border: 1px solid rgba(201, 162, 39, 0.3);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 30px 0;
+        text-align: center;
+    }
+    .rating-stars {
+        font-size: 24px;
+        color: #C9A227;
+        margin: 10px 0;
+    }
+    .rating-text {
+        color: rgba(255,255,255,0.7);
+        font-size: 14px;
+    }
+    </style>
 <!-- SEO Nuclear Upgrade: seo-nuclear-upgrade v1.0 -->
 
     <script type="application/ld+json">

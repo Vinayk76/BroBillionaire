@@ -29,6 +29,931 @@
     <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
     <link rel="icon" type="image/jpeg" href="logo.jpg">
     
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+        }
+        
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 40px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+        }
+        
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: #C9A227;
+        }
+        
+        /* Hero Section */
+        .calc-hero {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            padding: 160px 20px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .calc-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(201, 162, 39, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(201, 162, 39, 0.15);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: #C9A227;
+            margin-bottom: 25px;
+        }
+        
+        .calc-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: #fff;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .calc-hero h1 span {
+            color: #C9A227;
+        }
+        
+        .calc-hero p {
+            font-size: 1.2rem;
+            color: #888;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Main Calculator Section */
+        .calculator-section {
+            padding: 60px 20px 100px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .calculator-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+        
+        /* Input Panel */
+        .input-panel {
+            background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 24px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .input-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(201, 162, 39, 0.08) 0%, transparent 70%);
+        }
+        
+        .panel-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.4rem;
+            color: #C9A227;
+            margin-bottom: 35px;
+        }
+        
+        .panel-title i {
+            background: rgba(201, 162, 39, 0.2);
+            padding: 12px;
+            border-radius: 12px;
+        }
+        
+        .input-group {
+            margin-bottom: 35px;
+        }
+        
+        .input-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .input-label span {
+            color: #aaa;
+            font-size: 0.95rem;
+        }
+        
+        .input-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        
+        .input-value.highlight {
+            color: #C9A227;
+        }
+        
+        /* Custom Range Slider */
+        .slider-container {
+            position: relative;
+            padding: 10px 0;
+        }
+        
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: linear-gradient(to right, #C9A227 0%, #C9A227 var(--progress), #333 var(--progress), #333 100%);
+            outline: none;
+            cursor: pointer;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #C9A227, #a8861f);
+            border: 3px solid #fff;
+            box-shadow: 0 4px 15px rgba(201, 162, 39, 0.4);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(201, 162, 39, 0.6);
+        }
+        
+        input[type="range"]::-moz-range-thumb {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #C9A227, #a8861f);
+            border: 3px solid #fff;
+            box-shadow: 0 4px 15px rgba(201, 162, 39, 0.4);
+            cursor: pointer;
+        }
+        
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        /* Quick Amount Buttons */
+        .quick-amounts {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .quick-btn {
+            background: rgba(201, 162, 39, 0.1);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            color: #C9A227;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .quick-btn:hover {
+            background: rgba(201, 162, 39, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* Results Panel */
+        .results-panel {
+            background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 24px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .results-panel::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background: radial-gradient(ellipse at bottom, rgba(201, 162, 39, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        /* EMI Display */
+        .emi-display {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.15) 0%, rgba(201, 162, 39, 0.05) 100%);
+            border: 2px solid rgba(201, 162, 39, 0.3);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .emi-display::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(201, 162, 39, 0.1) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .emi-label {
+            color: #888;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .emi-amount {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #C9A227;
+            position: relative;
+        }
+        
+        .emi-period {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 8px;
+            position: relative;
+        }
+        
+        /* Circular Progress Chart */
+        .chart-container {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            margin: 0 auto 30px;
+        }
+        
+        .chart-svg {
+            transform: rotate(-90deg);
+        }
+        
+        .chart-bg {
+            fill: none;
+            stroke: #222;
+            stroke-width: 20;
+        }
+        
+        .chart-principal {
+            fill: none;
+            stroke: #22c55e;
+            stroke-width: 20;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.8s ease;
+        }
+        
+        .chart-interest {
+            fill: none;
+            stroke: #C9A227;
+            stroke-width: 20;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.8s ease;
+        }
+        
+        .chart-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        
+        .chart-center .label {
+            color: #888;
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .chart-center .amount {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        
+        /* Legend */
+        .chart-legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 25px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: #888;
+        }
+        
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .legend-dot.principal { background: #22c55e; }
+        .legend-dot.interest { background: #C9A227; }
+        
+        /* Results Breakdown */
+        .results-breakdown {
+            display: grid;
+            gap: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 14px;
+            border-left: 4px solid;
+        }
+        
+        .result-item.principal {
+            border-left-color: #22c55e;
+        }
+        
+        .result-item.interest {
+            border-left-color: #C9A227;
+        }
+        
+        .result-item.total {
+            border-left-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.08);
+        }
+        
+        .result-item .label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #aaa;
+        }
+        
+        .result-item .label i {
+            font-size: 1.1rem;
+        }
+        
+        .result-item .value {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        
+        .result-item.principal .label i { color: #22c55e; }
+        .result-item.principal .value { color: #22c55e; }
+        
+        .result-item.interest .label i { color: #C9A227; }
+        .result-item.interest .value { color: #C9A227; }
+        
+        .result-item.total .label i { color: #3b82f6; }
+        .result-item.total .value { color: #3b82f6; }
+        
+        /* Amortization Section */
+        .amortization-section {
+            margin-top: 60px;
+            background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 24px;
+            padding: 40px;
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.4rem;
+            color: #C9A227;
+            margin-bottom: 30px;
+        }
+        
+        .section-title i {
+            background: rgba(201, 162, 39, 0.2);
+            padding: 12px;
+            border-radius: 12px;
+        }
+        
+        /* Yearly Breakdown Chart */
+        .yearly-chart {
+            position: relative;
+            height: 300px;
+            margin-bottom: 30px;
+        }
+        
+        .yearly-canvas {
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Year Cards */
+        .year-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .year-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(201, 162, 39, 0.15);
+            border-radius: 16px;
+            padding: 25px;
+            transition: all 0.3s;
+        }
+        
+        .year-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(201, 162, 39, 0.4);
+        }
+        
+        .year-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .year-label {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #C9A227;
+        }
+        
+        .year-balance {
+            font-size: 0.85rem;
+            color: #888;
+        }
+        
+        .year-balance strong {
+            color: #fff;
+        }
+        
+        .year-details {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .year-detail {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+        
+        .year-detail .label {
+            color: #888;
+        }
+        
+        .year-detail .value {
+            font-weight: 600;
+        }
+        
+        .year-detail.principal .value { color: #22c55e; }
+        .year-detail.interest .value { color: #C9A227; }
+        
+        /* Progress bar in year card */
+        .year-progress {
+            margin-top: 15px;
+            height: 8px;
+            background: #222;
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+        }
+        
+        .progress-principal {
+            background: #22c55e;
+            height: 100%;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-interest {
+            background: #C9A227;
+            height: 100%;
+            transition: width 0.5s ease;
+        }
+        
+        /* Comparison Cards */
+        .comparison-section {
+            margin-top: 60px;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .comparison-card {
+            background: linear-gradient(145deg, rgba(201, 162, 39, 0.08) 0%, rgba(201, 162, 39, 0.02) 100%);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 16px;
+            padding: 30px;
+            display: flex;
+            gap: 20px;
+            transition: all 0.3s;
+        }
+        
+        .comparison-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(201, 162, 39, 0.4);
+        }
+        
+        .comparison-icon {
+            width: 55px;
+            height: 55px;
+            background: rgba(201, 162, 39, 0.2);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: #C9A227;
+            flex-shrink: 0;
+        }
+        
+        .comparison-content h4 {
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        
+        .comparison-content p {
+            color: #888;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        /* Prepayment Calculator */
+        .prepayment-section {
+            margin-top: 60px;
+            background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 24px;
+            padding: 40px;
+        }
+        
+        .prepayment-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .prepayment-input {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 25px;
+        }
+        
+        .prepayment-results {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .savings-card {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(34, 197, 94, 0.05) 100%);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .savings-card .label {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .savings-card .amount {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #22c55e;
+        }
+        
+        .savings-card .sub {
+            color: #666;
+            font-size: 0.85rem;
+            margin-top: 8px;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            margin-top: 60px;
+            background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 24px;
+            padding: 40px;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 20px 0;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            color: #fff;
+            font-weight: 500;
+        }
+        
+        .faq-question i {
+            color: #C9A227;
+            transition: transform 0.3s;
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-answer.open {
+            max-height: 200px;
+        }
+        
+        .faq-answer p {
+            padding-top: 15px;
+            color: #888;
+            line-height: 1.7;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        /* Footer CTA */
+        .footer-cta {
+            margin-top: 60px;
+            text-align: center;
+            padding: 50px;
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.15) 0%, rgba(201, 162, 39, 0.05) 100%);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 24px;
+        }
+        
+        .footer-cta h3 {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+        
+        .footer-cta p {
+            color: #888;
+            margin-bottom: 25px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #C9A227 0%, #a8861f 100%);
+            color: #000;
+            padding: 16px 35px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.05rem;
+            transition: all 0.3s;
+        }
+        
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(201, 162, 39, 0.3);
+        }
+        
+        .cta-btn.secondary {
+            background: transparent;
+            border: 2px solid rgba(201, 162, 39, 0.5);
+            color: #C9A227;
+        }
+        
+        .cta-btn.secondary:hover {
+            background: rgba(201, 162, 39, 0.1);
+            border-color: #C9A227;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .calculator-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .prepayment-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                top: 0;
+                padding: 12px 0;
+            }
+            
+            .nav-container {
+                padding: 0 20px;
+            }
+            
+            .nav-links {
+                gap: 20px;
+            }
+            
+            .logo-text {
+                display: none;
+            }
+            
+            .calc-hero {
+                padding: 120px 20px 50px;
+            }
+            
+            .calc-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .calc-hero p {
+                font-size: 1rem;
+            }
+            
+            .calculator-section {
+                padding: 40px 15px 60px;
+            }
+            
+            .input-panel,
+            .results-panel {
+                padding: 25px 20px;
+            }
+            
+            .emi-amount {
+                font-size: 2.2rem;
+            }
+            
+            .chart-container {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .amortization-section,
+            .prepayment-section,
+            .faq-section {
+                padding: 25px 20px;
+            }
+            
+            .year-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .comparison-icon {
+                margin: 0 auto;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .quick-amounts {
+                justify-content: center;
+            }
+            
+            .chart-legend {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .footer-cta {
+                padding: 30px 20px;
+            }
+            
+            .footer-cta h3 {
+                font-size: 1.4rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Top Announcement Bar -->

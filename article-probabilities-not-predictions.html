@@ -18,6 +18,492 @@
     <link rel="stylesheet" href="responsive.css">
     <meta name="description" content="Probabilistic thinking in trading India: Expected value calculation, risk reward ratio, why predictions fail. How hedge funds think about probability F&O trading.">
     <meta name="keywords" content="probabilistic trading India, expected value trading, risk reward calculation Nifty, why predictions fail trading, probability trading F&O, edge in trading India, win rate vs risk reward, thinking in probabilities Hindi, trading expectancy calculation, hedge fund thinking India 2025">
+    <style>
+        /* Probability Distribution Visual */
+        .prob-distribution {
+            background: #0a0a0a;
+            border: 2px solid rgba(201, 162, 39, 0.3);
+            border-radius: 24px;
+            padding: 50px 40px;
+            margin: 50px 0;
+            position: relative;
+        }
+        
+        .dist-title {
+            text-align: center;
+            font-size: 18px;
+            color: #C9A227;
+            margin-bottom: 40px;
+        }
+        
+        .bell-curve {
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .curve-bar {
+            width: 20px;
+            background: linear-gradient(to top, rgba(201, 162, 39, 0.3), #C9A227);
+            border-radius: 4px 4px 0 0;
+            transition: all 0.3s ease;
+        }
+        
+        .curve-bar:hover {
+            transform: scaleY(1.1);
+            background: linear-gradient(to top, rgba(201, 162, 39, 0.5), #FFD700);
+        }
+        
+        .curve-bar.tail-left { background: linear-gradient(to top, rgba(239, 68, 68, 0.2), #ef4444); }
+        .curve-bar.tail-right { background: linear-gradient(to top, rgba(34, 197, 94, 0.2), #22c55e); }
+        
+        .curve-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #888;
+            padding: 0 20px;
+        }
+        
+        /* Expected Value Calculator */
+        .ev-calculator {
+            background: linear-gradient(135deg, #0a1a0a 0%, #0a0a0a 50%, #1a0a0a 100%);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 50px 0;
+        }
+        
+        .ev-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .ev-formula {
+            background: #0a0a0a;
+            padding: 25px;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 20px;
+            text-align: center;
+            color: #C9A227;
+            margin-bottom: 30px;
+            border: 1px solid rgba(201, 162, 39, 0.2);
+        }
+        
+        .ev-breakdown {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .ev-component {
+            background: rgba(255,255,255,0.02);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .ev-component.positive {
+            border-color: rgba(34, 197, 94, 0.3);
+            background: rgba(34, 197, 94, 0.05);
+        }
+        
+        .ev-component.negative {
+            border-color: rgba(239, 68, 68, 0.3);
+            background: rgba(239, 68, 68, 0.05);
+        }
+        
+        .ev-component.result {
+            border-color: rgba(201, 162, 39, 0.5);
+            background: rgba(201, 162, 39, 0.1);
+        }
+        
+        .ev-label {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        
+        .ev-value {
+            font-size: 32px;
+            font-weight: 800;
+        }
+        
+        .positive .ev-value { color: #22c55e; }
+        .negative .ev-value { color: #ef4444; }
+        .result .ev-value { color: #C9A227; }
+        
+        .ev-sub {
+            font-size: 14px;
+            color: #aaa;
+            margin-top: 5px;
+        }
+
+        /* Prediction vs Probability Comparison */
+        .thinking-comparison {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 30px;
+            margin: 50px 0;
+            align-items: stretch;
+        }
+        
+        .thinking-card {
+            padding: 40px;
+            border-radius: 20px;
+            position: relative;
+        }
+        
+        .thinking-card.amateur {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, transparent 100%);
+            border: 2px solid rgba(239, 68, 68, 0.3);
+        }
+        
+        .thinking-card.pro {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, transparent 100%);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+        }
+        
+        .thinking-badge {
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .amateur .thinking-badge {
+            background: #ef4444;
+            color: #fff;
+        }
+        
+        .pro .thinking-badge {
+            background: #22c55e;
+            color: #000;
+        }
+        
+        .thinking-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+        
+        .thinking-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .thinking-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 14px;
+        }
+        
+        .thinking-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .amateur .thinking-list li i { color: #ef4444; }
+        .pro .thinking-list li i { color: #22c55e; }
+        
+        .vs-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .vs-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #C9A227, #FFD700);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 18px;
+            color: #000;
+        }
+
+        /* Probability Dial */
+        .probability-dial {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #ef4444 0deg 72deg,
+                #f97316 72deg 108deg,
+                #eab308 108deg 180deg,
+                #22c55e 180deg 270deg,
+                #15803d 270deg 360deg
+            );
+            margin: 40px auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .dial-inner {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: #0a0a0a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .dial-value {
+            font-size: 48px;
+            font-weight: 800;
+            color: #C9A227;
+        }
+        
+        .dial-label {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        /* Scenario Matrix */
+        .scenario-matrix {
+            background: #0a0a0a;
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 50px 0;
+        }
+        
+        .matrix-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            background: rgba(201, 162, 39, 0.1);
+            padding: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .matrix-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            padding: 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            align-items: center;
+        }
+        
+        .matrix-row:hover {
+            background: rgba(255,255,255,0.02);
+        }
+        
+        .scenario-name {
+            font-weight: 500;
+        }
+        
+        .probability-cell {
+            font-size: 14px;
+            color: #888;
+        }
+        
+        .outcome-cell {
+            font-weight: 600;
+        }
+        
+        .outcome-cell.positive { color: #22c55e; }
+        .outcome-cell.negative { color: #ef4444; }
+        
+        .ev-cell {
+            font-weight: 700;
+        }
+        
+        .matrix-footer {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            padding: 20px;
+            background: rgba(201, 162, 39, 0.1);
+            font-weight: 700;
+        }
+        
+        .matrix-footer .ev-cell {
+            color: #C9A227;
+            font-size: 18px;
+        }
+
+        /* Mindset Shift */
+        .mindset-shift {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            margin: 60px 0;
+            flex-wrap: wrap;
+        }
+        
+        .mindset-box {
+            padding: 30px 40px;
+            border-radius: 16px;
+            text-align: center;
+            min-width: 250px;
+        }
+        
+        .mindset-box.old {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid rgba(239, 68, 68, 0.3);
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+        
+        .mindset-box.new {
+            background: rgba(34, 197, 94, 0.1);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+        }
+        
+        .mindset-text {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .mindset-arrow {
+            font-size: 40px;
+            color: #C9A227;
+        }
+
+        /* Casino Edge Visual */
+        .casino-comparison {
+            background: linear-gradient(135deg, #0a1a0a 0%, #0a0a0a 100%);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 24px;
+            padding: 50px 40px;
+            margin: 50px 0;
+            text-align: center;
+        }
+        
+        .casino-title {
+            font-size: 20px;
+            color: #22c55e;
+            margin-bottom: 10px;
+        }
+        
+        .casino-subtitle {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 40px;
+        }
+        
+        .house-edge-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+        
+        .edge-item {
+            text-align: center;
+        }
+        
+        .edge-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+        
+        .edge-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .edge-percent {
+            font-size: 24px;
+            font-weight: 800;
+            color: #22c55e;
+        }
+
+        /* Framework Cards */
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .framework-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .framework-card:hover {
+            border-color: rgba(201, 162, 39, 0.5);
+            transform: translateY(-3px);
+        }
+        
+        .framework-number {
+            font-size: 48px;
+            font-weight: 800;
+            color: rgba(201, 162, 39, 0.2);
+            line-height: 1;
+            margin-bottom: 15px;
+        }
+        
+        .framework-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+        
+        .framework-desc {
+            font-size: 14px;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .ev-breakdown {
+                grid-template-columns: 1fr;
+            }
+            .thinking-comparison {
+                grid-template-columns: 1fr;
+            }
+            .vs-divider {
+                padding: 20px 0;
+            }
+            .vs-circle {
+                transform: rotate(90deg);
+            }
+            .framework-grid {
+                grid-template-columns: 1fr;
+            }
+            .house-edge-visual {
+                flex-direction: column;
+            }
+            .matrix-header, .matrix-row, .matrix-footer {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+    </style>
 
     <!-- Additional SEO Enhancements -->
     <meta name="revisit-after" content="1 days">
@@ -29,6 +515,105 @@
 
     <meta name="word_count" content="1439">
 
+    <style>
+    /* Table of Contents Styles */
+    .article-toc {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, rgba(0,0,0,0.3) 100%);
+        border: 1px solid rgba(201, 162, 39, 0.3);
+        border-radius: 12px;
+        padding: 24px;
+        margin: 30px 0;
+        position: relative;
+    }
+    .article-toc::before {
+        content: '📑';
+        position: absolute;
+        top: -15px;
+        left: 20px;
+        background: #0a0a0a;
+        padding: 0 10px;
+        font-size: 24px;
+    }
+    .article-toc h2 {
+        color: #C9A227;
+        font-size: 1.2rem;
+        margin-bottom: 16px;
+        font-family: 'Playfair Display', serif;
+    }
+    .article-toc ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .article-toc li {
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .article-toc li:last-child {
+        border-bottom: none;
+    }
+    .article-toc a {
+        color: rgba(255,255,255,0.8);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .article-toc a:hover {
+        color: #C9A227;
+        padding-left: 10px;
+    }
+    .article-toc a::before {
+        content: '→';
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    .article-toc a:hover::before {
+        opacity: 1;
+    }
+    .toc-number {
+        background: rgba(201, 162, 39, 0.2);
+        color: #C9A227;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    /* Reading Progress Bar */
+    .reading-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 4px;
+        background: linear-gradient(90deg, #C9A227, #FFD700);
+        z-index: 9999;
+        transition: width 0.1s ease;
+    }
+    /* Article Rating Widget */
+    .article-rating-widget {
+        background: rgba(201, 162, 39, 0.1);
+        border: 1px solid rgba(201, 162, 39, 0.3);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 30px 0;
+        text-align: center;
+    }
+    .rating-stars {
+        font-size: 24px;
+        color: #C9A227;
+        margin: 10px 0;
+    }
+    .rating-text {
+        color: rgba(255,255,255,0.7);
+        font-size: 14px;
+    }
+    </style>
 <!-- SEO Nuclear Upgrade: seo-nuclear-upgrade v1.0 -->
 
     <script type="application/ld+json">

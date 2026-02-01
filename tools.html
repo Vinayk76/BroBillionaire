@@ -95,6 +95,583 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="responsive.css">
+    <style>
+        /* Tools Page Specific Styles */
+        .tools-page {
+            min-height: 100vh;
+            padding-top: 60px;
+        }
+
+        .tools-header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+        }
+
+        .tools-header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .tools-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            color: var(--gold);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            z-index: 100;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: var(--gold);
+            color: var(--bg-primary);
+            transform: translateX(-5px);
+        }
+
+        .tools-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .tool-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gold-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--border-gold);
+            box-shadow: 0 20px 40px rgba(201, 162, 39, 0.1);
+        }
+
+        .tool-card:hover::before {
+            opacity: 1;
+        }
+
+        .tool-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.2) 0%, rgba(201, 162, 39, 0.05) 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+
+        .tool-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .tool-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .tool-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gold);
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .tool-link:hover {
+            gap: 12px;
+        }
+
+        .tool-link i {
+            transition: transform 0.3s ease;
+        }
+
+        .tool-card:hover .tool-link i {
+            transform: translateX(5px);
+        }
+
+        .tool-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(201, 162, 39, 0.15);
+            color: var(--gold);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tools-category {
+            margin-bottom: 50px;
+        }
+
+        .category-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .category-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border-gold), transparent);
+        }
+
+        /* Calculator Tools Section */
+        .calculator-section {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 50px;
+            border: 1px solid var(--border-color);
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .calc-box {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid var(--border-color);
+        }
+
+        .calc-box h4 {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+
+        .calc-input-group {
+            margin-bottom: 15px;
+        }
+
+        .calc-input-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .calc-input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+            transition: border-color 0.3s ease;
+        }
+
+        .calc-input-group input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .calc-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--gold-gradient);
+            border: none;
+            border-radius: 10px;
+            color: var(--bg-primary);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .calc-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(201, 162, 39, 0.3);
+        }
+
+        .calc-result {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(201, 162, 39, 0.1);
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-gold);
+        }
+
+        .calc-result span {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+        }
+
+        .calc-result p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        /* Footer */
+        .tools-footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
+        }
+
+        .tools-footer p {
+            color: var(--text-tertiary);
+            font-size: 0.9rem;
+        }
+
+        .tools-footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        /* Insight Tools Styling */
+        .insight-box {
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(201, 162, 39, 0.03) 100%);
+            border: 1px solid rgba(201, 162, 39, 0.15);
+        }
+
+        .insight-box:hover {
+            border-color: var(--border-gold);
+        }
+
+        .insight-result {
+            text-align: left;
+        }
+
+        .insight-message {
+            margin-top: 15px;
+            padding: 12px 15px;
+            background: rgba(201, 162, 39, 0.08);
+            border-left: 3px solid var(--gold);
+            border-radius: 0 8px 8px 0;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .insight-message strong {
+            color: var(--gold);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .stat-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-item .stat-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--gold);
+            display: block;
+        }
+
+        .stat-item .stat-label {
+            font-size: 0.7rem;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--gold-gradient);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .sentiment-option {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 12px;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .sentiment-option:hover {
+            background: rgba(201, 162, 39, 0.1);
+        }
+
+        .sentiment-option input:checked + span {
+            color: var(--gold);
+        }
+
+        .observation-item {
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 0.8rem;
+        }
+
+        .observation-item .obs-time {
+            font-size: 0.7rem;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+
+        .observation-item .obs-sentiment {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            margin-top: 5px;
+        }
+
+        .obs-sentiment.bullish { background: rgba(74, 222, 128, 0.2); color: var(--green); }
+        .obs-sentiment.bearish { background: rgba(239, 68, 68, 0.2); color: var(--red); }
+        .obs-sentiment.neutral { background: rgba(255, 255, 255, 0.1); color: var(--text-secondary); }
+
+        /* Featured Tool Responsive */
+        .tool-card[style*="span 2"] {
+            grid-column: span 2;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .tools-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .calc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .tool-card[style*="span 2"] {
+                grid-column: span 1 !important;
+            }
+
+            .tools-header {
+                padding: 80px 16px 30px;
+            }
+            
+            .tools-header h1 {
+                font-size: 1.75rem;
+            }
+            
+            .tools-header p {
+                font-size: 0.95rem;
+            }
+            
+            .tools-container {
+                padding: 30px 16px 60px;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            .tool-card {
+                padding: 20px;
+            }
+            
+            .tool-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.25rem;
+                margin-bottom: 15px;
+            }
+            
+            .tool-card h3 {
+                font-size: 1.05rem;
+            }
+            
+            .tool-card p {
+                font-size: 0.85rem;
+                margin-bottom: 15px;
+            }
+            
+            .tool-tag {
+                padding: 3px 8px;
+                font-size: 0.6rem;
+            }
+
+            .calculator-section {
+                padding: 25px 15px;
+                border-radius: 16px;
+            }
+            
+            .calc-grid {
+                gap: 20px;
+            }
+            
+            .calc-box {
+                padding: 20px 15px;
+            }
+            
+            .calc-box h4 {
+                font-size: 0.95rem;
+            }
+            
+            .calc-input-group label {
+                font-size: 0.8rem;
+            }
+            
+            .calc-input-group input {
+                padding: 10px 12px;
+                font-size: 0.95rem;
+            }
+            
+            .calc-btn {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+            
+            .calc-result span {
+                font-size: 1.3rem;
+            }
+            
+            .category-title {
+                font-size: 1.1rem;
+            }
+
+            .back-btn {
+                top: 15px;
+                left: 15px;
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .back-btn i {
+                font-size: 0.75rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tools-footer {
+                padding: 30px 16px;
+            }
+            
+            .tools-footer p {
+                font-size: 0.8rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .tools-header {
+                padding: 70px 12px 25px;
+            }
+            
+            .tools-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .tools-container {
+                padding: 25px 12px 50px;
+            }
+            
+            .calculator-section {
+                padding: 20px 12px;
+                margin-top: 30px;
+            }
+            
+            .calc-box {
+                padding: 16px 12px;
+            }
+            
+            .back-btn {
+                padding: 6px 10px;
+                font-size: 0.75rem;
+                top: 12px;
+                left: 12px;
+            }
+        }
+    </style>
 </head>
 <body>
     <main class="tools-page">
