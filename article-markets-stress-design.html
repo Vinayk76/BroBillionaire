@@ -98,7 +98,9 @@
         position: relative;
     }
     .article-toc::before {
-        content: '📑';
+        content: '\f0c9';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
         position: absolute;
         top: -15px;
         left: 20px;
@@ -832,38 +834,38 @@
             <div class="faq-list">
                 <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
                     <button class="faq-question" onclick="toggleFAQ(0)" aria-expanded="false">
-                        <span itemprop="name">What is implied volatility (IV) in options?</span>
+                        <span itemprop="name">Why do stock markets crash and are crashes normal?</span>
                         <i class="fas fa-chevron-down faq-icon"></i>
                     </button>
                     <div class="faq-answer" id="faq-answer-0" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                        <p itemprop="text">Implied volatility represents the market's expectation of future price movement, derived from current option prices. High IV means options are expensive (big move expected). Low IV means options are cheap (calm expected). IV is expressed as annual percentage - IV of 20% means market expects ~20% annual move.</p>
+                        <p itemprop="text">Stock market crashes are a normal and necessary part of how markets function. They serve as the market's immune system—purging overleveraged traders, exposing fraud, forcing price discovery, and reallocating capital from weak to strong hands. Since 1900, there have been 47+ major crashes, and every single one was followed by a full recovery. Crashes aren't system failures; they're stress tests that strengthen the market long-term.</p>
                     </div>
                 </div>
                 <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
                     <button class="faq-question" onclick="toggleFAQ(1)" aria-expanded="false">
-                        <span itemprop="name">What is IV crush and how to avoid it?</span>
+                        <span itemprop="name">What does antifragile mean in trading and investing?</span>
                         <i class="fas fa-chevron-down faq-icon"></i>
                     </button>
                     <div class="faq-answer" id="faq-answer-1" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                        <p itemprop="text">IV crush is the rapid drop in implied volatility after an anticipated event (earnings, budget, RBI policy). Even if the stock moves your way, option prices can collapse because IV drops. Avoid by: not buying options before events, using spreads to hedge vega, or selling options to benefit from IV crush.</p>
+                        <p itemprop="text">Antifragile is a concept from Nassim Taleb meaning something that actually benefits from stress, volatility, and disorder—going beyond just being resilient. In trading, an antifragile approach means positioning to profit from crashes rather than just survive them. This includes keeping cash reserves to buy dips, using tail-risk hedges, sizing positions for survival, and viewing market chaos as opportunity rather than threat.</p>
                     </div>
                 </div>
                 <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
                     <button class="faq-question" onclick="toggleFAQ(2)" aria-expanded="false">
-                        <span itemprop="name">What is a good IV percentile for trading options?</span>
+                        <span itemprop="name">Do stock markets always recover after a crash?</span>
                         <i class="fas fa-chevron-down faq-icon"></i>
                     </button>
                     <div class="faq-answer" id="faq-answer-2" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                        <p itemprop="text">Buy options when IV Percentile is below 30% (options are historically cheap). Sell options when IV Percentile is above 70% (options are historically expensive). IV Percentile shows where current IV stands relative to the past year. Check platforms like Sensibull for Indian IV data.</p>
+                        <p itemprop="text">Yes, historically every major market crash has been followed by a full recovery—100% of the time over 125 years. The Great Depression (-89%) recovered in 25 years. Black Monday 1987 (-22% in one day) recovered in 2 years. The 2008 Financial Crisis (-57%) recovered in 5 years. The COVID crash of 2020 (-34%) recovered in just 6 months. Markets recover because they represent human innovation, productivity, and value creation.</p>
                     </div>
                 </div>
                 <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
                     <button class="faq-question" onclick="toggleFAQ(3)" aria-expanded="false">
-                        <span itemprop="name">How does India VIX affect option prices?</span>
+                        <span itemprop="name">How can I prepare my portfolio for a market crash?</span>
                         <i class="fas fa-chevron-down faq-icon"></i>
                     </button>
                     <div class="faq-answer" id="faq-answer-3" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                        <p itemprop="text">India VIX measures Nifty's implied volatility. When VIX rises, Nifty/Bank Nifty option premiums increase. When VIX falls, premiums drop. VIX above 20 indicates fear (expensive options), below 15 indicates complacency (cheap options). VIX typically spikes during market falls and drops during rallies.</p>
+                        <p itemprop="text">To prepare for market crashes: 1) Keep dry powder (cash reserves) specifically for buying opportunities during crashes. 2) Size positions for survival—never bet so big a crash wipes you out. 3) Think in decades, not days—crashes are barely visible on 30-year charts. 4) Before every position, stress test: "What if this drops 50% tomorrow?" 5) Focus on quality assets that go on sale during indiscriminate selling. The goal is to be a buyer when everyone else is forced to sell.</p>
                     </div>
                 </div>
             </div>
@@ -956,5 +958,31 @@
     </script>
     <script src="seo-injector.js" defer></script>
     <script src="social-share-buttons.js" defer></script>
-<script src="article-backlinks-data.js" defer></script><script src="backlink-injector.js" defer></script></body>
+<script src="article-backlinks-data.js" defer></script><script src="backlink-injector.js" defer></script><script>
+    // FAQ Toggle Function
+    function toggleFAQ(index) {
+        const items = document.querySelectorAll('.faq-section .faq-item');
+        if (!items || !items[index]) {
+            console.error('FAQ item not found at index:', index);
+            return;
+        }
+        const item = items[index];
+        const wasActive = item.classList.contains('active');
+        
+        // Close all FAQs
+        items.forEach(faq => {
+            faq.classList.remove('active');
+            const btn = faq.querySelector('.faq-question');
+            if (btn) btn.setAttribute('aria-expanded', 'false');
+        });
+        
+        // Open clicked one if it wasn't already open
+        if (!wasActive) {
+            item.classList.add('active');
+            const btn = item.querySelector('.faq-question');
+            if (btn) btn.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+</body>
 </html>

@@ -98,7 +98,9 @@
         position: relative;
     }
     .article-toc::before {
-        content: '📑';
+        content: '\f0c9';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
         position: absolute;
         top: -15px;
         left: 20px;
@@ -184,6 +186,315 @@
     .rating-text {
         color: rgba(255,255,255,0.7);
         font-size: 14px;
+    }
+
+    /* Panic Timeline */
+    .panic-timeline {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        margin: 40px 0;
+        padding: 30px;
+        background: rgba(0,0,0,0.3);
+        border-radius: 16px;
+        border: 1px solid rgba(201, 162, 39, 0.2);
+    }
+    .panic-phase {
+        display: flex;
+        gap: 25px;
+        align-items: flex-start;
+    }
+    .phase-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        flex-shrink: 0;
+    }
+    .phase-icon.rumor {
+        background: rgba(34, 197, 94, 0.2);
+        border: 2px solid #22c55e;
+        color: #22c55e;
+    }
+    .phase-icon.selloff {
+        background: rgba(245, 158, 11, 0.2);
+        border: 2px solid #f59e0b;
+        color: #f59e0b;
+    }
+    .phase-icon.freeze {
+        background: rgba(239, 68, 68, 0.2);
+        border: 2px solid #ef4444;
+        color: #ef4444;
+    }
+    .phase-icon.rescue {
+        background: rgba(124, 58, 237, 0.2);
+        border: 2px solid #7c3aed;
+        color: #7c3aed;
+    }
+    .phase-content {
+        flex: 1;
+    }
+    .phase-number {
+        font-size: 0.75rem;
+        color: #C9A227;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+    .phase-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.3rem;
+        color: #fff;
+        margin-bottom: 10px;
+    }
+    .phase-desc {
+        color: rgba(255,255,255,0.7);
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* Domino Cascade */
+    .domino-cascade {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        perspective: 1000px;
+    }
+    .domino-cascade .domino {
+        width: 25px;
+        height: 60px;
+        background: linear-gradient(135deg, #C9A227, #8B7355);
+        border-radius: 4px;
+        transform-origin: bottom center;
+        animation: domino-fall 2s ease-in-out infinite;
+    }
+    .domino-cascade .domino:nth-child(1) { animation-delay: 0s; }
+    .domino-cascade .domino:nth-child(2) { animation-delay: 0.15s; }
+    .domino-cascade .domino:nth-child(3) { animation-delay: 0.3s; }
+    .domino-cascade .domino:nth-child(4) { animation-delay: 0.45s; }
+    .domino-cascade .domino:nth-child(5) { animation-delay: 0.6s; }
+    .domino-cascade .domino:nth-child(6) { animation-delay: 0.75s; }
+    .domino-cascade .domino:nth-child(7) { animation-delay: 0.9s; }
+    @keyframes domino-fall {
+        0%, 40% { transform: rotateX(0deg); }
+        50% { transform: rotateX(60deg); }
+        100% { transform: rotateX(60deg); }
+    }
+
+    /* Contagion Visual */
+    .contagion-visual {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+        margin: 30px 0;
+    }
+    .contagion-circles {
+        position: relative;
+        width: 280px;
+        height: 280px;
+    }
+    .contagion-ring {
+        position: absolute;
+        border-radius: 50%;
+        border: 2px solid rgba(239, 68, 68, 0.3);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: ripple 3s ease-out infinite;
+    }
+    .contagion-ring:nth-child(1) { width: 60px; height: 60px; animation-delay: 0s; border-color: rgba(239, 68, 68, 0.8); }
+    .contagion-ring:nth-child(2) { width: 110px; height: 110px; animation-delay: 0.4s; }
+    .contagion-ring:nth-child(3) { width: 160px; height: 160px; animation-delay: 0.8s; }
+    .contagion-ring:nth-child(4) { width: 210px; height: 210px; animation-delay: 1.2s; }
+    .contagion-ring:nth-child(5) { width: 260px; height: 260px; animation-delay: 1.6s; }
+    .contagion-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 28px;
+        color: #ef4444;
+        z-index: 10;
+    }
+    @keyframes ripple {
+        0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        100% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); }
+    }
+
+    /* Fear Meter */
+    .fear-meter {
+        background: rgba(0,0,0,0.4);
+        border: 1px solid rgba(201, 162, 39, 0.3);
+        border-radius: 12px;
+        padding: 25px;
+        margin: 30px 0;
+    }
+    .fear-meter-title {
+        text-align: center;
+        color: #C9A227;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+    .fear-bar {
+        height: 24px;
+        background: linear-gradient(90deg, #22c55e 0%, #f59e0b 35%, #ef4444 65%, #7c3aed 100%);
+        border-radius: 12px;
+        position: relative;
+        margin-bottom: 15px;
+    }
+    .fear-indicator {
+        position: absolute;
+        top: -8px;
+        width: 6px;
+        height: 40px;
+        background: #fff;
+        border-radius: 3px;
+        box-shadow: 0 0 15px rgba(255,255,255,0.5);
+        transform: translateX(-50%);
+        transition: left 0.5s ease;
+    }
+    .fear-labels {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.75rem;
+        color: rgba(255,255,255,0.6);
+    }
+
+    /* Heartbeat Monitor */
+    .heartbeat-monitor {
+        background: rgba(0,0,0,0.5);
+        border: 1px solid rgba(201, 162, 39, 0.3);
+        border-radius: 12px;
+        padding: 30px;
+        margin: 30px 0;
+        text-align: center;
+    }
+    .heartbeat-title {
+        color: #ef4444;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+    .heartbeat-svg {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+    }
+    .pulse-line {
+        stroke-dasharray: 300;
+        stroke-dashoffset: 300;
+        animation: draw-pulse 3s ease-in-out infinite;
+    }
+    @keyframes draw-pulse {
+        0% { stroke-dashoffset: 300; }
+        50% { stroke-dashoffset: 0; }
+        100% { stroke-dashoffset: 0; }
+    }
+
+    /* Rescue Helicopter */
+    .rescue-helicopter {
+        text-align: center;
+        padding: 40px 20px;
+        margin: 30px 0;
+        background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(0,0,0,0.3));
+        border-radius: 16px;
+        position: relative;
+        overflow: hidden;
+    }
+    .helicopter-icon {
+        font-size: 60px;
+        color: #7c3aed;
+        animation: helicopter-hover 2s ease-in-out infinite;
+    }
+    @keyframes helicopter-hover {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+    }
+    .money-rain {
+        font-size: 24px;
+        margin-top: 20px;
+        animation: money-fall 1.5s ease-in-out infinite;
+    }
+    @keyframes money-fall {
+        0%, 100% { opacity: 0.5; transform: translateY(0); }
+        50% { opacity: 1; transform: translateY(15px); }
+    }
+
+    /* Time Badges */
+    .time-badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+    .time-badge.phase-1 {
+        background: rgba(34, 197, 94, 0.2);
+        color: #22c55e;
+    }
+    .time-badge.phase-2 {
+        background: rgba(245, 158, 11, 0.2);
+        color: #f59e0b;
+    }
+    .time-badge.phase-3 {
+        background: rgba(239, 68, 68, 0.2);
+        color: #ef4444;
+    }
+    .time-badge.phase-4 {
+        background: rgba(124, 58, 237, 0.2);
+        color: #7c3aed;
+    }
+
+    /* Pattern Showcase SVG */
+    .pattern-showcase {
+        margin: 30px 0;
+    }
+    .pattern-visual-large {
+        background: rgba(0,0,0,0.4);
+        border-radius: 12px;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+    }
+    .pattern-svg-large {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .panic-phase {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .phase-icon {
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+        }
+        .fear-labels {
+            font-size: 0.65rem;
+        }
+        .fear-labels span {
+            text-align: center;
+        }
+        .contagion-circles {
+            width: 200px;
+            height: 200px;
+        }
+        .contagion-ring:nth-child(1) { width: 40px; height: 40px; }
+        .contagion-ring:nth-child(2) { width: 75px; height: 75px; }
+        .contagion-ring:nth-child(3) { width: 110px; height: 110px; }
+        .contagion-ring:nth-child(4) { width: 145px; height: 145px; }
+        .contagion-ring:nth-child(5) { width: 180px; height: 180px; }
     }
     </style>
 <!-- SEO Nuclear Upgrade: seo-nuclear-upgrade v1.0 -->
@@ -1000,35 +1311,6 @@
         </article>
     </main>
 
-    <!-- Footer -->
-    <footer class="article-footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Continue Reading</h4>
-                <div class="related-articles">
-                    <a href="article-flash-crash.html" class="related-article-card">
-                        <span class="related-category">Market History</span>
-                        <h5>The Flash Crash of 2010</h5>
-                        <p>When robots broke Wall Street in 36 minutes</p>
-                    </a>
-                    <a href="article-ltcm.html" class="related-article-card">
-                        <span class="related-category">Blowups</span>
-                        <h5>LTCM: The $4.6B Collapse</h5>
-                        <p>When geniuses learned markets can stay irrational</p>
-                    </a>
-                    <a href="article-black-monday.html" class="related-article-card">
-                        <span class="related-category">Market History</span>
-                        <h5>Black Monday 1987</h5>
-                        <p>The 22% crash that changed everything</p>
-                    </a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 BroBillionaire. Master the markets. Build your empire.</p>
-            </div>
-        </div>
-    </footer>
-
     <script src="script.js"></script>
     <script>
         // Share functionality
@@ -1066,7 +1348,6 @@
         });
     </script>
     <script src="seo-injector.js" defer></script>
-    <!-- Footer -->
     
     <!-- Enhanced FAQ Section for AEO (Answer Engine Optimization) -->
     <section class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
@@ -1132,5 +1413,31 @@
     </div>
 
     <script src="social-share-buttons.js" defer></script>
-<script src="article-backlinks-data.js" defer></script><script src="backlink-injector.js" defer></script></body>
+<script src="article-backlinks-data.js" defer></script><script src="backlink-injector.js" defer></script><script>
+    // FAQ Toggle Function
+    function toggleFAQ(index) {
+        const items = document.querySelectorAll('.faq-section .faq-item');
+        if (!items || !items[index]) {
+            console.error('FAQ item not found at index:', index);
+            return;
+        }
+        const item = items[index];
+        const wasActive = item.classList.contains('active');
+        
+        // Close all FAQs
+        items.forEach(faq => {
+            faq.classList.remove('active');
+            const btn = faq.querySelector('.faq-question');
+            if (btn) btn.setAttribute('aria-expanded', 'false');
+        });
+        
+        // Open clicked one if it wasn't already open
+        if (!wasActive) {
+            item.classList.add('active');
+            const btn = item.querySelector('.faq-question');
+            if (btn) btn.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+</body>
 </html>

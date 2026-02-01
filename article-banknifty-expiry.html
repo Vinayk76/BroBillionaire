@@ -98,7 +98,9 @@
         position: relative;
     }
     .article-toc::before {
-        content: '📑';
+        content: '\f0c9';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
         position: absolute;
         top: -15px;
         left: 20px;
@@ -184,6 +186,453 @@
     .rating-text {
         color: rgba(255,255,255,0.7);
         font-size: 14px;
+    }
+    
+    /* Stats Visualization - Progress Bars */
+    .stats-visualization {
+        margin: 30px 0;
+    }
+    .stat-bar-container {
+        margin-bottom: 25px;
+    }
+    .stat-bar-label {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.95rem;
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+    .stat-bar {
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+        position: relative;
+    }
+    .stat-bar-fill {
+        height: 100%;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        padding-left: 15px;
+        transition: width 1s ease;
+    }
+    .stat-bar-fill.red {
+        background: linear-gradient(90deg, #C9A227, #b8941f);
+    }
+    .stat-bar-fill.green {
+        background: linear-gradient(90deg, #C9A227, #b8941f);
+    }
+    .stat-bar-value {
+        color: #000;
+        font-weight: 700;
+        font-size: 0.95rem;
+    }
+    .stat-bar-sublabel {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.85rem;
+        margin-top: 8px;
+        font-weight: 500;
+    }
+    
+    /* Commandments List */
+    .commandments-list {
+        margin: 30px 0;
+    }
+    .commandment {
+        display: flex;
+        gap: 20px;
+        padding: 20px;
+        margin-bottom: 15px;
+        background: linear-gradient(145deg, rgba(30, 30, 30, 0.8) 0%, rgba(20, 20, 20, 0.6) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+    .commandment:hover {
+        border-color: #C9A227;
+        transform: translateX(5px);
+    }
+    .commandment-number {
+        flex-shrink: 0;
+        width: 45px;
+        height: 45px;
+        background: linear-gradient(135deg, #C9A227, #b8941f);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #000;
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
+    .commandment-text h4 {
+        color: #fff;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 0 0 8px 0;
+    }
+    .commandment-text p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin: 0;
+    }
+    
+    /* Story Box Win/Loss variants */
+    .story-header.win i {
+        color: #22c55e;
+    }
+    .story-header.loss i {
+        color: #ef4444;
+    }
+    .story-content {
+        padding: 0;
+    }
+    .story-content p {
+        font-style: italic;
+        margin-bottom: 15px;
+    }
+    .story-content cite {
+        color: #C9A227;
+        font-style: normal;
+        font-size: 0.9rem;
+    }
+    
+    /* Final Insights Grid */
+    .final-insights {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        margin: 40px 0;
+    }
+    .insight-card {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, rgba(201, 162, 39, 0.05) 100%);
+        border: 1px solid rgba(201, 162, 39, 0.3);
+        border-radius: 16px;
+        padding: 30px;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+    .insight-card:hover {
+        transform: translateY(-5px);
+        border-color: #C9A227;
+    }
+    .insight-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #C9A227, #b8941f);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+    }
+    .insight-icon i {
+        font-size: 1.5rem;
+        color: #000;
+    }
+    .insight-card h4 {
+        color: #C9A227;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin: 0 0 15px 0;
+    }
+    .insight-card p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin: 0;
+    }
+    
+    /* Strategy Cards */
+    .strategy-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        margin: 30px 0;
+    }
+    .strategy-card {
+        background: linear-gradient(135deg, rgba(30, 30, 30, 0.9) 0%, rgba(20, 20, 20, 0.7) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 30px;
+        transition: all 0.3s ease;
+    }
+    .strategy-card:hover {
+        border-color: #C9A227;
+        transform: translateY(-5px);
+    }
+    .strategy-card.featured {
+        border-color: #C9A227;
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.15) 0%, rgba(30, 30, 30, 0.9) 100%);
+    }
+    .strategy-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #C9A227, #b8941f);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    .strategy-icon i {
+        font-size: 1.3rem;
+        color: #000;
+    }
+    .strategy-card h4 {
+        color: #fff;
+        font-size: 1.15rem;
+        font-weight: 600;
+        margin: 0 0 15px 0;
+    }
+    .strategy-details p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin: 0 0 15px 0;
+    }
+    .strategy-requirement {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 0.85rem;
+    }
+    .requirement-label {
+        color: #C9A227;
+        font-weight: 600;
+        margin-right: 8px;
+    }
+    .strategy-requirement span:not(.requirement-label) {
+        color: rgba(255, 255, 255, 0.7);
+    }
+    
+    /* Pattern Showcase for SVG Graphics */
+    .pattern-showcase {
+        background: linear-gradient(135deg, rgba(30, 30, 30, 0.9) 0%, rgba(20, 20, 20, 0.7) 100%);
+        border: 1px solid rgba(201, 162, 39, 0.3);
+        border-radius: 16px;
+        padding: 30px;
+        margin: 30px 0;
+    }
+    .pattern-visual-large {
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    .pattern-svg-large {
+        width: 100%;
+        height: auto;
+        max-height: 300px;
+    }
+    .pattern-description h4 {
+        color: #C9A227;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin: 0 0 12px 0;
+    }
+    .pattern-description p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin: 0;
+    }
+    
+    /* Timeline Section */
+    .timeline-section {
+        position: relative;
+        margin: 40px 0;
+        padding-left: 30px;
+    }
+    .timeline-section::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(180deg, #C9A227, rgba(201, 162, 39, 0.3));
+        border-radius: 3px;
+    }
+    .timeline-item {
+        position: relative;
+        padding: 25px 0 25px 30px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .timeline-item:last-child {
+        border-bottom: none;
+    }
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -34px;
+        top: 32px;
+        width: 12px;
+        height: 12px;
+        background: #C9A227;
+        border-radius: 50%;
+        border: 3px solid #0a0a0a;
+    }
+    .timeline-item.featured::before {
+        width: 16px;
+        height: 16px;
+        left: -36px;
+        box-shadow: 0 0 15px rgba(201, 162, 39, 0.6);
+    }
+    .timeline-marker {
+        margin-bottom: 12px;
+    }
+    .time-badge {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.9);
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+    .time-badge.gold {
+        background: linear-gradient(135deg, #C9A227, #b8941f);
+        color: #000;
+    }
+    .time-badge.red {
+        background: linear-gradient(135deg, #ef4444, #dc2626);
+        color: #fff;
+    }
+    .timeline-content h4 {
+        color: #fff;
+        font-size: 1.15rem;
+        font-weight: 600;
+        margin: 0 0 10px 0;
+    }
+    .timeline-content p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin: 0;
+    }
+    .timeline-item.featured {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, transparent 100%);
+        border-radius: 12px;
+        margin-left: -15px;
+        padding-left: 45px;
+    }
+    
+    /* Example Box */
+    .example-box {
+        background: linear-gradient(135deg, rgba(30, 30, 30, 0.9) 0%, rgba(20, 20, 20, 0.7) 100%);
+        border: 1px solid rgba(201, 162, 39, 0.3);
+        border-radius: 16px;
+        overflow: hidden;
+        margin: 30px 0;
+    }
+    .example-header {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.2) 0%, rgba(201, 162, 39, 0.1) 100%);
+        padding: 18px 25px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+    }
+    .example-header i {
+        color: #C9A227;
+        font-size: 1.2rem;
+    }
+    .example-header h4 {
+        color: #C9A227;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 0;
+    }
+    .example-content {
+        padding: 25px;
+    }
+    .example-scenario {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    .example-scenario p {
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 0.95rem;
+        margin: 8px 0;
+    }
+    .example-scenario p:first-child {
+        margin-top: 0;
+    }
+    .example-scenario p:last-child {
+        margin-bottom: 0;
+    }
+    .example-result {
+        border-radius: 10px;
+        padding: 20px;
+    }
+    .example-result.bad {
+        background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(239, 68, 68, 0.05) 100%);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+    .example-result.good {
+        background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(34, 197, 94, 0.05) 100%);
+        border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+    .example-result p {
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 0.95rem;
+        margin: 8px 0;
+    }
+    .example-result p:first-child {
+        margin-top: 0;
+    }
+    .example-result p:last-child {
+        margin-bottom: 0;
+        font-weight: 600;
+        color: #ef4444;
+    }
+    .example-result.good p:last-child {
+        color: #22c55e;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .commandment {
+            flex-direction: column;
+            text-align: center;
+        }
+        .commandment-number {
+            margin: 0 auto;
+        }
+        .strategy-cards,
+        .final-insights {
+            grid-template-columns: 1fr;
+        }
+        .stat-bar {
+            height: 35px;
+        }
+        .stat-bar-value {
+            font-size: 0.85rem;
+        }
+        .timeline-section {
+            padding-left: 20px;
+        }
+        .timeline-item {
+            padding-left: 20px;
+        }
+        .timeline-item::before {
+            left: -24px;
+        }
+        .timeline-item.featured {
+            margin-left: -10px;
+            padding-left: 30px;
+        }
+        .example-content {
+            padding: 15px;
+        }
+        .example-scenario,
+        .example-result {
+            padding: 15px;
+        }
     }
     </style>
 <!-- SEO Nuclear Upgrade: seo-nuclear-upgrade v1.0 -->
@@ -1041,24 +1490,6 @@
     </main>
 
     <!-- Footer -->
-    <footer class="article-footer">
-        <div class="footer-content">
-            <div class="footer-logo">
-                <img src="logo.jpg" alt="BroBillionaire">
-                <p>Trading knowledge that actually matters</p>
-            </div>
-            <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="articles.html">Articles</a>
-            </div>
-            <div class="footer-disclaimer">
-                <p><strong>Disclaimer:</strong> This content is for educational purposes only. Trading involves substantial risk of loss. Past performance is not indicative of future results.</p>
-            </div>
-            <div class="footer-copyright">
-                <p>&copy; 2025 BroBillionaire. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
 
     <script src="script.js"></script>
     <script>
@@ -1118,5 +1549,31 @@
     </div>
 
     <script src="social-share-buttons.js" defer></script>
-<script src="article-backlinks-data.js" defer></script><script src="backlink-injector.js" defer></script></body>
+<script src="article-backlinks-data.js" defer></script><script src="backlink-injector.js" defer></script><script>
+    // FAQ Toggle Function
+    function toggleFAQ(index) {
+        const items = document.querySelectorAll('.faq-section .faq-item');
+        if (!items || !items[index]) {
+            console.error('FAQ item not found at index:', index);
+            return;
+        }
+        const item = items[index];
+        const wasActive = item.classList.contains('active');
+        
+        // Close all FAQs
+        items.forEach(faq => {
+            faq.classList.remove('active');
+            const btn = faq.querySelector('.faq-question');
+            if (btn) btn.setAttribute('aria-expanded', 'false');
+        });
+        
+        // Open clicked one if it wasn't already open
+        if (!wasActive) {
+            item.classList.add('active');
+            const btn = item.querySelector('.faq-question');
+            if (btn) btn.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+</body>
 </html>

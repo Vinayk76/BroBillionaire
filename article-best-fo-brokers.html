@@ -142,7 +142,542 @@
     <meta name="word_count" content="1832">
 
     <style>
-    /* Table of Contents Styles */
+    /* ===== BROKER CARDS STYLES ===== */
+    .broker-card {
+        background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+        border: 1px solid rgba(201, 162, 39, 0.2);
+        border-radius: 20px;
+        padding: 2rem;
+        margin: 2rem 0;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
+    }
+    
+    .broker-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(201, 162, 39, 0.5);
+        box-shadow: 0 20px 40px rgba(201, 162, 39, 0.1);
+    }
+    
+    .broker-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, #C9A227, #FFD700);
+    }
+    
+    .broker-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .broker-title-area h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.8rem;
+        color: #C9A227;
+        margin: 0 0 0.3rem 0;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .broker-tagline {
+        color: #888;
+        font-size: 0.95rem;
+        font-style: italic;
+        margin: 0;
+    }
+    
+    .broker-badge {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.2), rgba(201, 162, 39, 0.1));
+        border: 1px solid rgba(201, 162, 39, 0.4);
+        color: #C9A227;
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        white-space: nowrap;
+    }
+    
+    .crown-icon {
+        color: #FFD700;
+        font-size: 0.9em;
+    }
+    
+    /* Weapon Class Tags */
+    .weapon-class {
+        display: inline-block;
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-right: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .weapon-class.tank {
+        background: rgba(59, 130, 246, 0.2);
+        color: #60a5fa;
+        border: 1px solid rgba(59, 130, 246, 0.4);
+    }
+    
+    .weapon-class.balanced {
+        background: rgba(34, 197, 94, 0.2);
+        color: #22c55e;
+        border: 1px solid rgba(34, 197, 94, 0.4);
+    }
+    
+    .weapon-class.sniper {
+        background: rgba(168, 85, 247, 0.2);
+        color: #a855f7;
+        border: 1px solid rgba(168, 85, 247, 0.4);
+    }
+    
+    .weapon-class.speedster {
+        background: rgba(251, 146, 60, 0.2);
+        color: #fb923c;
+        border: 1px solid rgba(251, 146, 60, 0.4);
+    }
+    
+    /* Broker Stats Grid */
+    .broker-stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+        margin: 1.5rem 0;
+        padding: 1.5rem;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 12px;
+    }
+    
+    .broker-stat {
+        text-align: center;
+        padding: 0.5rem;
+    }
+    
+    .broker-stat-value {
+        display: block;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #C9A227;
+        margin-bottom: 0.3rem;
+    }
+    
+    .broker-stat-label {
+        font-size: 0.75rem;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    /* Broker Features List */
+    .broker-features {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+        margin: 1.5rem 0;
+    }
+    
+    .broker-feature {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6rem;
+        font-size: 0.95rem;
+        color: #ccc;
+        line-height: 1.4;
+    }
+    
+    .broker-feature i {
+        color: #22c55e;
+        margin-top: 3px;
+        flex-shrink: 0;
+    }
+    
+    .broker-feature.con i {
+        color: #ef4444;
+    }
+    
+    /* Broker Verdict */
+    .broker-verdict {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.15), rgba(0, 0, 0, 0.4));
+        border: 1px solid rgba(201, 162, 39, 0.3);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+    }
+    
+    .broker-verdict h4 {
+        font-family: 'Playfair Display', serif;
+        color: #C9A227;
+        font-size: 1.1rem;
+        margin: 0 0 0.8rem 0;
+    }
+    
+    .broker-verdict p {
+        color: #ccc;
+        line-height: 1.7;
+        margin: 0;
+        font-size: 0.95rem;
+    }
+    
+    /* ===== ARENA METAPHOR BOX ===== */
+    .arena-metaphor {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.1), rgba(0, 0, 0, 0.4));
+        border: 1px solid rgba(201, 162, 39, 0.25);
+        border-radius: 16px;
+        padding: 1.8rem;
+        margin: 2rem 0;
+        position: relative;
+    }
+    
+    .arena-metaphor::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 4px;
+        background: linear-gradient(180deg, #C9A227, #FFD700);
+        border-radius: 4px 0 0 4px;
+    }
+    
+    .arena-metaphor h3 {
+        font-family: 'Playfair Display', serif;
+        color: #C9A227;
+        font-size: 1.3rem;
+        margin: 0 0 1rem 0;
+    }
+    
+    .arena-metaphor p {
+        color: #ccc;
+        line-height: 1.8;
+        margin: 0;
+        font-size: 1rem;
+    }
+    
+    /* ===== COMPARISON TABLE ===== */
+    .comparison-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        margin: 2rem 0;
+        font-size: 0.95rem;
+        table-layout: auto;
+    }
+    
+    .comparison-table thead {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.2), rgba(201, 162, 39, 0.1));
+    }
+    
+    .comparison-table th {
+        padding: 1rem;
+        text-align: left;
+        color: #C9A227;
+        font-weight: 600;
+        border-bottom: 2px solid rgba(201, 162, 39, 0.4);
+        white-space: normal;
+        min-width: 100px;
+    }
+    
+    .comparison-table th:first-child {
+        min-width: 130px;
+    }
+    
+    .comparison-table th:nth-child(2) {
+        min-width: 120px;
+    }
+    
+    .comparison-table th:nth-child(4),
+    .comparison-table th:nth-child(5) {
+        min-width: 140px;
+    }
+    
+    .comparison-table td {
+        padding: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        color: #ccc;
+        vertical-align: middle;
+        white-space: normal;
+        word-wrap: break-word;
+    }
+    
+    .comparison-table tbody tr {
+        transition: background 0.3s ease;
+    }
+    
+    .comparison-table tbody tr:hover {
+        background: rgba(201, 162, 39, 0.08);
+    }
+    
+    .comparison-table td.broker-name {
+        color: #C9A227;
+        font-weight: 600;
+        font-family: 'Playfair Display', serif;
+        font-size: 1rem;
+        white-space: nowrap;
+    }
+    
+    /* ===== INFO CARDS GRID ===== */
+    .info-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+    }
+    
+    .info-card {
+        background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+        border: 1px solid rgba(201, 162, 39, 0.15);
+        border-radius: 16px;
+        padding: 1.5rem;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+    
+    .info-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(201, 162, 39, 0.4);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .info-card-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.2), rgba(201, 162, 39, 0.1));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem;
+    }
+    
+    .info-card-icon i {
+        font-size: 1.5rem;
+        color: #C9A227;
+    }
+    
+    .info-card h4 {
+        color: #fff;
+        font-size: 1.1rem;
+        margin: 0 0 0.5rem 0;
+    }
+    
+    .info-card p {
+        color: #888;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin: 0;
+    }
+    
+    /* ===== WARNING BOX ===== */
+    .warning-box {
+        display: flex;
+        gap: 1.2rem;
+        background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(0, 0, 0, 0.4));
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 2rem 0;
+        align-items: flex-start;
+    }
+    
+    .warning-icon {
+        width: 50px;
+        height: 50px;
+        background: rgba(239, 68, 68, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    
+    .warning-icon i {
+        font-size: 1.3rem;
+        color: #ef4444;
+    }
+    
+    .warning-content h4 {
+        color: #ef4444;
+        font-size: 1.1rem;
+        margin: 0 0 0.5rem 0;
+    }
+    
+    .warning-content p {
+        color: #ccc;
+        line-height: 1.6;
+        margin: 0;
+        font-size: 0.95rem;
+    }
+    
+    /* ===== ACHIEVEMENT BADGES ===== */
+    .achievement-badge {
+        display: flex;
+        gap: 1.2rem;
+        background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+        border: 1px solid rgba(201, 162, 39, 0.2);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        align-items: flex-start;
+        transition: all 0.3s ease;
+    }
+    
+    .achievement-badge:hover {
+        border-color: rgba(201, 162, 39, 0.5);
+        transform: translateX(5px);
+    }
+    
+    .achievement-badge .badge-icon {
+        width: 55px;
+        height: 55px;
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.2), rgba(201, 162, 39, 0.1));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    
+    .achievement-badge .badge-icon i {
+        font-size: 1.4rem;
+        color: #C9A227;
+    }
+    
+    .achievement-badge .badge-content h4 {
+        color: #fff;
+        font-size: 1rem;
+        margin: 0 0 0.5rem 0;
+    }
+    
+    .achievement-badge .badge-content p {
+        color: #ccc;
+        line-height: 1.6;
+        margin: 0;
+        font-size: 0.95rem;
+    }
+    
+    /* ===== PATTERN SHOWCASE ===== */
+    .pattern-showcase {
+        background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+        border: 1px solid rgba(201, 162, 39, 0.2);
+        border-radius: 16px;
+        padding: 1.8rem;
+        margin: 1.5rem 0;
+        transition: all 0.3s ease;
+    }
+    
+    .pattern-showcase:hover {
+        border-color: rgba(201, 162, 39, 0.4);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .pattern-description h4 {
+        color: #C9A227;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.2rem;
+        margin: 0 0 0.8rem 0;
+    }
+    
+    .pattern-description p {
+        color: #ccc;
+        line-height: 1.7;
+        margin: 0;
+        font-size: 0.95rem;
+    }
+    
+    /* ===== FINAL SUMMARY BOX ===== */
+    .final-summary {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.15), rgba(0, 0, 0, 0.5));
+        border: 2px solid rgba(201, 162, 39, 0.4);
+    }
+    
+    /* ===== RESPONSIVE STYLES ===== */
+    @media (max-width: 768px) {
+        .broker-header {
+            flex-direction: column;
+        }
+        
+        .broker-stats {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .broker-features {
+            grid-template-columns: 1fr;
+        }
+        
+        .info-cards-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .warning-box,
+        .achievement-badge {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .warning-icon,
+        .achievement-badge .badge-icon {
+            margin: 0 auto;
+        }
+        
+        .comparison-table {
+            font-size: 0.85rem;
+            min-width: 650px;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 0.7rem 0.5rem;
+        }
+        
+        .comparison-table th {
+            min-width: 80px;
+        }
+        
+        .comparison-table th:first-child {
+            min-width: 100px;
+        }
+        
+        .broker-title-area h3 {
+            font-size: 1.5rem;
+        }
+        
+        .broker-stat-value {
+            font-size: 1.2rem;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .broker-card {
+            padding: 1.5rem;
+        }
+        
+        .broker-stats {
+            padding: 1rem;
+            gap: 0.8rem;
+        }
+        
+        .weapon-class {
+            font-size: 0.7rem;
+            padding: 0.3rem 0.8rem;
+        }
+    }
+    
+    /* ===== TABLE OF CONTENTS STYLES ===== */
     .article-toc {
         background: linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, rgba(0,0,0,0.3) 100%);
         border: 1px solid rgba(201, 162, 39, 0.3);
@@ -152,7 +687,9 @@
         position: relative;
     }
     .article-toc::before {
-        content: '📑';
+        content: '\f0c9';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
         position: absolute;
         top: -15px;
         left: 20px;
@@ -210,7 +747,8 @@
         font-size: 12px;
         font-weight: 600;
     }
-    /* Reading Progress Bar */
+    
+    /* ===== READING PROGRESS BAR ===== */
     .reading-progress {
         position: fixed;
         top: 0;
@@ -221,7 +759,8 @@
         z-index: 9999;
         transition: width 0.1s ease;
     }
-    /* Article Rating Widget */
+    
+    /* ===== ARTICLE RATING WIDGET ===== */
     .article-rating-widget {
         background: rgba(201, 162, 39, 0.1);
         border: 1px solid rgba(201, 162, 39, 0.3);
@@ -238,6 +777,96 @@
     .rating-text {
         color: rgba(255,255,255,0.7);
         font-size: 14px;
+    }
+    
+    /* ===== FAQ SECTION ===== */
+    .faq-section {
+        padding: 4rem 2rem;
+        background: linear-gradient(180deg, #0a0a0a 0%, #111 100%);
+    }
+    
+    .faq-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .faq-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2rem;
+        color: #C9A227;
+        text-align: center;
+        margin-bottom: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.8rem;
+    }
+    
+    .faq-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .faq-item {
+        background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+        border: 1px solid rgba(201, 162, 39, 0.15);
+        border-radius: 12px;
+        overflow: hidden;
+        transition: border-color 0.3s ease;
+    }
+    
+    .faq-item:hover {
+        border-color: rgba(201, 162, 39, 0.4);
+    }
+    
+    .faq-question {
+        width: 100%;
+        padding: 1.25rem 1.5rem;
+        background: transparent;
+        border: none;
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 500;
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        transition: color 0.3s ease;
+    }
+    
+    .faq-question:hover {
+        color: #C9A227;
+    }
+    
+    .faq-icon {
+        color: #C9A227;
+        transition: transform 0.3s ease;
+        flex-shrink: 0;
+    }
+    
+    .faq-question[aria-expanded="true"] .faq-icon {
+        transform: rotate(180deg);
+    }
+    
+    .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+    
+    .faq-answer.active {
+        max-height: 500px;
+        padding: 0 1.5rem 1.25rem;
+    }
+    
+    .faq-answer p {
+        color: #ccc;
+        line-height: 1.7;
+        margin: 0;
+        font-size: 0.95rem;
     }
     </style>
 <!-- SEO Nuclear Upgrade: seo-nuclear-upgrade v1.0 -->
@@ -1178,6 +1807,26 @@
             } else {
                 navigator.clipboard.writeText(window.location.href);
                 alert('Link copied to clipboard!');
+            }
+        }
+
+        // FAQ Toggle function
+        function toggleFAQ(index) {
+            const answer = document.getElementById('faq-answer-' + index);
+            const question = answer.previousElementSibling;
+            const isExpanded = question.getAttribute('aria-expanded') === 'true';
+            
+            // Close all FAQ answers first
+            document.querySelectorAll('.faq-answer').forEach((item, i) => {
+                item.classList.remove('active');
+                const btn = document.querySelectorAll('.faq-question')[i];
+                if (btn) btn.setAttribute('aria-expanded', 'false');
+            });
+            
+            // Toggle the clicked one
+            if (!isExpanded) {
+                answer.classList.add('active');
+                question.setAttribute('aria-expanded', 'true');
             }
         }
     </script>

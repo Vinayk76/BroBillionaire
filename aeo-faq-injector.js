@@ -298,7 +298,7 @@ function generateFAQCSS() {
 }
 
 .faq-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Playfair Display', serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     font-size: 2rem;
     color: #C9A227;
     text-align: center;
@@ -339,7 +339,7 @@ function generateFAQCSS() {
     background: transparent;
     border: none;
     color: #fff;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     font-size: 1.1rem;
     font-weight: 500;
     text-align: left;

@@ -97,15 +97,6 @@
         margin: 30px 0;
         position: relative;
     }
-    .article-toc::before {
-        content: '📑';
-        position: absolute;
-        top: -15px;
-        left: 20px;
-        background: #0a0a0a;
-        padding: 0 10px;
-        font-size: 24px;
-    }
     .article-toc h2 {
         color: #C9A227;
         font-size: 1.2rem;
@@ -184,6 +175,149 @@
     .rating-text {
         color: rgba(255,255,255,0.7);
         font-size: 14px;
+    }
+    
+    /* Footer Disclaimer Fix */
+    .footer-disclaimer {
+        background: #0a0a0a;
+        padding: 20px;
+        text-align: center;
+        border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .footer-disclaimer p {
+        color: rgba(255,255,255,0.4);
+        font-size: 0.85rem;
+        margin: 0;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    /* Pattern Showcase Mobile Fix */
+    @media (max-width: 768px) {
+        .pattern-showcase {
+            grid-template-columns: 1fr !important;
+            padding: 20px !important;
+        }
+        .pattern-visual-large {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .pattern-visual-large svg {
+            min-width: 350px;
+        }
+        .article-hero {
+            padding-top: 100px !important;
+            min-height: auto !important;
+        }
+        .article-meta-top {
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 10px !important;
+        }
+        .hero-stat {
+            padding: 12px 18px !important;
+            flex: 1 1 auto !important;
+            min-width: 120px !important;
+        }
+        .hero-stat .stat-value {
+            font-size: 1.2rem !important;
+        }
+        .hero-stat .stat-label {
+            font-size: 0.65rem !important;
+        }
+        .transformation-visual {
+            padding: 20px !important;
+            gap: 20px !important;
+        }
+        .transform-box {
+            padding: 15px 20px !important;
+            min-width: auto !important;
+            width: 100% !important;
+        }
+        .transform-arrow {
+            transform: rotate(90deg) !important;
+        }
+        .achievement-badge {
+            flex-direction: column !important;
+            text-align: center !important;
+        }
+        .rules-premium-grid {
+            grid-template-columns: 1fr !important;
+        }
+        .rule-premium-card {
+            padding: 25px 20px !important;
+            padding-top: 30px !important;
+        }
+        .final-message-box {
+            padding: 25px !important;
+        }
+        .final-message-box p {
+            font-size: 1.1rem !important;
+        }
+        .key-takeaways-box {
+            padding: 25px 20px !important;
+        }
+    }
+    
+    /* Small mobile fixes */
+    @media (max-width: 480px) {
+        .article-hero-stats {
+            gap: 10px !important;
+        }
+        .hero-stat {
+            padding: 10px 12px !important;
+            min-width: 100px !important;
+        }
+        .hero-stat .stat-value {
+            font-size: 1rem !important;
+        }
+        .chapter-number {
+            font-size: 2.5rem !important;
+        }
+        .chapter-title {
+            font-size: 1.25rem !important;
+        }
+        .article-text {
+            font-size: 0.95rem !important;
+        }
+        .article-quote {
+            padding: 15px !important;
+        }
+        .article-quote p {
+            font-size: 0.95rem !important;
+            padding-left: 20px !important;
+        }
+        .article-quote .quote-icon {
+            font-size: 1.5rem !important;
+            top: 15px !important;
+            left: 15px !important;
+        }
+        .info-card {
+            padding: 15px !important;
+        }
+        .info-card-icon {
+            width: 40px !important;
+            height: 40px !important;
+        }
+    }
+    
+    /* Fix for rule-number-badge with longer text (times like "9:45 AM") */
+    .rule-premium-card {
+        padding-top: 40px !important;
+    }
+    
+    .rule-number-badge {
+        top: -14px !important;
+        min-width: auto !important;
+        padding: 6px 14px !important;
+        height: auto !important;
+        font-size: 0.8rem !important;
+        border-radius: 16px !important;
+        z-index: 1;
+    }
+    
+    .rule-premium-card h4 {
+        margin-top: 0 !important;
     }
     </style>
 <!-- SEO Nuclear Upgrade: seo-nuclear-upgrade v1.0 -->
@@ -819,6 +953,27 @@
             const scrollPercent = (scrollTop / docHeight) * 100;
             document.querySelector('.reading-progress-bar').style.width = scrollPercent + '%';
         });
+
+        // FAQ Toggle Function
+        function toggleFAQ(index) {
+            const faqItems = document.querySelectorAll('.faq-item');
+            const currentItem = faqItems[index];
+            const isActive = currentItem.classList.contains('active');
+            
+            // Close all FAQ items
+            faqItems.forEach((item, i) => {
+                item.classList.remove('active');
+                const btn = item.querySelector('.faq-question');
+                if (btn) btn.setAttribute('aria-expanded', 'false');
+            });
+            
+            // If the clicked item wasn't active, open it
+            if (!isActive) {
+                currentItem.classList.add('active');
+                const btn = currentItem.querySelector('.faq-question');
+                if (btn) btn.setAttribute('aria-expanded', 'true');
+            }
+        }
 
         // Share function
         function shareArticle() {

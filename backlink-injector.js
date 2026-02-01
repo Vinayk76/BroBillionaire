@@ -34,7 +34,7 @@
     }
     
     function initBacklinks() {
-        injectBreadcrumbs();
+        // injectBreadcrumbs(); // Removed breadcrumb navigation
         injectTopicClusterNav();
         injectEnhancedRelatedArticles();
         injectYouMayAlsoLike();
@@ -133,12 +133,13 @@
             </div>
         </div>`;
         
-        // Insert after first major section or TOC
+        // Insert after first major section or TOC - use more specific selectors
         const insertPoint = document.querySelector('.article-toc') || 
-                           document.querySelector('.article-content > p:nth-of-type(3)') ||
-                           document.querySelector('article > p:nth-of-type(3)');
+                           document.querySelector('.key-takeaways-box') ||
+                           document.querySelector('.article-chapter:first-of-type');
         
-        if (insertPoint) {
+        // Only insert if we found a valid insertion point inside the article content
+        if (insertPoint && insertPoint.closest('article, .article-content-wrapper, .article-main')) {
             insertPoint.insertAdjacentHTML('afterend', clusterNavHTML);
         }
     }

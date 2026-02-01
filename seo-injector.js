@@ -458,7 +458,7 @@
                     const tocContainer = document.createElement('nav');
                     tocContainer.className = 'article-toc';
                     tocContainer.setAttribute('aria-label', 'Table of Contents');
-                    tocContainer.innerHTML = '<h4 style="margin-bottom: 10px; color: ' + CONFIG.themeColor + ';">📑 Quick Navigation</h4>';
+                    tocContainer.innerHTML = '<h4 style="margin-bottom: 10px; color: ' + CONFIG.themeColor + ';"><i class="fas fa-list-ul"></i> Quick Navigation</h4>';
                     
                     const tocList = document.createElement('ul');
                     tocList.style.cssText = 'list-style: none; padding: 0; margin: 0;';

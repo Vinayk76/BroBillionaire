@@ -86,6 +86,29 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* Global Emoji Support - Ensures emojis are visible everywhere */
+@font-face {
+    font-family: 'Emoji';
+    src: local('Apple Color Emoji'),
+         local('Segoe UI Emoji'),
+         local('Segoe UI Symbol'),
+         local('Noto Color Emoji'),
+         local('Android Emoji'),
+         local('EmojiOne Color'),
+         local('Twemoji Mozilla');
+    unicode-range: U+1F300-1F9FF, U+2600-26FF, U+2700-27BF, U+FE00-FE0F, U+1F100-1F1FF, U+1F200-1F2FF, U+E000-F8FF, U+200D;
+}
+
+/* Apply emoji font to all elements */
+*, *::before, *::after {
+    font-family: inherit, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* Ensure emojis display correctly in headings and text */
+h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, div, label, button {
+    font-family: inherit, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
 /* Container Utility Class */
 .container {
     max-width: var(--container-max);

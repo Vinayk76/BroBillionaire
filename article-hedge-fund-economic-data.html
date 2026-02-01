@@ -637,7 +637,9 @@
         position: relative;
     }
     .article-toc::before {
-        content: '📑';
+        content: '\f0c9';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
         position: absolute;
         top: -15px;
         left: 20px;
@@ -1612,22 +1614,6 @@
     </main>
 
     <!-- Footer -->
-    <footer class="article-footer">
-        <div class="footer-content">
-            <div class="footer-logo">
-                <img src="logo.jpg" alt="BroBillionaire">
-                <span>BroBillionaire</span>
-            </div>
-            <p class="footer-tagline">Building wealth through knowledge. Always free.</p>
-            <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="#daily-reads">Articles</a>
-            </div>
-            <p class="footer-disclaimer">
-                Educational content only. Not financial advice. Always do your own research.
-            </p>
-        </div>
-    </footer>
 
     <script src="script.js"></script>
     <script>
@@ -1703,5 +1689,31 @@
     </div>
 
     <script src="social-share-buttons.js" defer></script>
-<script src="article-backlinks-data.js" defer></script><script src="backlink-injector.js" defer></script></body>
+<script src="article-backlinks-data.js" defer></script><script src="backlink-injector.js" defer></script><script>
+    // FAQ Toggle Function
+    function toggleFAQ(index) {
+        const items = document.querySelectorAll('.faq-section .faq-item');
+        if (!items || !items[index]) {
+            console.error('FAQ item not found at index:', index);
+            return;
+        }
+        const item = items[index];
+        const wasActive = item.classList.contains('active');
+        
+        // Close all FAQs
+        items.forEach(faq => {
+            faq.classList.remove('active');
+            const btn = faq.querySelector('.faq-question');
+            if (btn) btn.setAttribute('aria-expanded', 'false');
+        });
+        
+        // Open clicked one if it wasn't already open
+        if (!wasActive) {
+            item.classList.add('active');
+            const btn = item.querySelector('.faq-question');
+            if (btn) btn.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+</body>
 </html>

@@ -378,7 +378,9 @@ const TOC_STYLES = `
         position: relative;
     }
     .article-toc::before {
-        content: '📑';
+        content: '\f0c9';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
         position: absolute;
         top: -15px;
         left: 20px;
@@ -390,7 +392,7 @@ const TOC_STYLES = `
         color: #C9A227;
         font-size: 1.2rem;
         margin-bottom: 16px;
-        font-family: 'Playfair Display', serif;
+        font-family: 'Playfair Display', serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     }
     .article-toc ul {
         list-style: none;
