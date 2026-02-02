@@ -12,6 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Viral Trading Tools | Games, Quizzes & Shareable Content | BroBillionaire</title>
+    <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="responsive.css">
@@ -28,23 +29,7 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        :root {
-            --gold: #C9A227;
-            --green: #22c55e;
-            --red: #ef4444;
-            --blue: #3b82f6;
-            --purple: #a855f7;
-            --bg: #0a0a0a;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg);
-            color: #fff;
-            min-height: 100vh;
-        }
+        /* Page Specific Styles */
         
         /* Animated Background */
         .bg-animated {
@@ -56,6 +41,7 @@
                 radial-gradient(ellipse at 50% 50%, rgba(34, 197, 94, 0.05) 0%, transparent 50%);
             animation: bgPulse 10s ease-in-out infinite;
             pointer-events: none;
+            z-index: 0;
         }
         
         @keyframes bgPulse {
@@ -63,58 +49,17 @@
             50% { opacity: 0.6; }
         }
         
-        /* Navbar */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 15px 0;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(201, 162, 39, 0.2);
-        }
-        
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-        
-        .logo-img { width: 40px; height: 40px; border-radius: 10px; }
-        .logo-text { font-size: 1.25rem; font-weight: 700; color: #fff; }
-        
-        .nav-links { display: flex; gap: 30px; }
-        .nav-link {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.2s;
-        }
-        .nav-link:hover { color: var(--gold); }
-        
         /* Container */
-        .container {
+        .page-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 100px 20px 60px;
+            padding: 120px 20px 60px;
             position: relative;
             z-index: 10;
         }
         
         /* Hero */
-        .hero {
+        .tools-hero {
             text-align: center;
             padding: 60px 0;
         }
@@ -137,26 +82,28 @@
         }
         
         .hero-badge span {
-            background: linear-gradient(90deg, var(--red), var(--purple));
+            background: linear-gradient(90deg, #ef4444, #a855f7);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 700;
         }
         
-        .hero h1 {
+        .tools-hero h1 {
+            font-family: 'Playfair Display', serif;
             font-size: 4rem;
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 20px;
+            color: #fff;
         }
         
-        .hero h1 .gold {
-            background: linear-gradient(135deg, var(--gold) 0%, #e8d5a3 50%, var(--gold) 100%);
+        .tools-hero h1 .gold {
+            background: linear-gradient(135deg, #C9A227 0%, #e8d5a3 50%, #C9A227 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         
-        .hero p {
+        .tools-hero p {
             font-size: 1.3rem;
             color: rgba(255,255,255,0.7);
             max-width: 700px;
@@ -172,6 +119,7 @@
             padding: 30px;
             background: rgba(255,255,255,0.03);
             border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
             flex-wrap: wrap;
         }
         
@@ -182,7 +130,7 @@
         .stat-number {
             font-size: 2.5rem;
             font-weight: 800;
-            color: var(--gold);
+            color: #C9A227;
         }
         
         .stat-label {
@@ -213,8 +161,8 @@
         .category-tab:hover,
         .category-tab.active {
             background: rgba(201, 162, 39, 0.15);
-            border-color: var(--gold);
-            color: var(--gold);
+            border-color: #C9A227;
+            color: #C9A227;
         }
         
         /* Tools Grid */
@@ -243,7 +191,7 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            background: linear-gradient(90deg, transparent, #C9A227, transparent);
             opacity: 0;
             transition: opacity 0.3s;
         }
@@ -274,11 +222,11 @@
             flex-shrink: 0;
         }
         
-        .tool-icon.gold { background: linear-gradient(135deg, var(--gold), #a68b1e); }
-        .tool-icon.green { background: linear-gradient(135deg, var(--green), #16a34a); }
-        .tool-icon.purple { background: linear-gradient(135deg, var(--purple), #7c3aed); }
-        .tool-icon.blue { background: linear-gradient(135deg, var(--blue), #2563eb); }
-        .tool-icon.red { background: linear-gradient(135deg, var(--red), #dc2626); }
+        .tool-icon.gold { background: linear-gradient(135deg, #C9A227, #a68b1e); }
+        .tool-icon.green { background: linear-gradient(135deg, #22c55e, #16a34a); }
+        .tool-icon.purple { background: linear-gradient(135deg, #a855f7, #7c3aed); }
+        .tool-icon.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        .tool-icon.red { background: linear-gradient(135deg, #ef4444, #dc2626); }
         
         .tool-title {
             flex: 1;
@@ -301,17 +249,17 @@
         
         .tool-badge.hot {
             background: rgba(239, 68, 68, 0.2);
-            color: var(--red);
+            color: #ef4444;
         }
         
         .tool-badge.new {
             background: rgba(34, 197, 94, 0.2);
-            color: var(--green);
+            color: #22c55e;
         }
         
         .tool-badge.popular {
             background: rgba(168, 85, 247, 0.2);
-            color: var(--purple);
+            color: #a855f7;
         }
         
         .tool-card p {
@@ -346,14 +294,14 @@
             padding: 10px 20px;
             background: rgba(201, 162, 39, 0.15);
             border-radius: 10px;
-            color: var(--gold);
+            color: #C9A227;
             font-weight: 600;
             font-size: 0.9rem;
             transition: all 0.3s;
         }
         
         .tool-card:hover .tool-cta {
-            background: var(--gold);
+            background: #C9A227;
             color: #000;
         }
         
@@ -368,8 +316,10 @@
         }
         
         .cta-section h2 {
+            font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
             margin-bottom: 20px;
+            color: #fff;
         }
         
         .cta-section p {
@@ -385,7 +335,7 @@
             flex-wrap: wrap;
         }
         
-        .cta-btn {
+        .cta-btn-primary {
             display: inline-flex;
             align-items: center;
             gap: 10px;
@@ -395,83 +345,69 @@
             font-size: 1rem;
             text-decoration: none;
             transition: all 0.3s;
-        }
-        
-        .cta-btn.primary {
-            background: linear-gradient(135deg, var(--gold), #a68b1e);
+            background: linear-gradient(135deg, #C9A227, #a68b1e);
             color: #000;
         }
         
-        .cta-btn.secondary {
+        .cta-btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 40px;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s;
             background: rgba(255,255,255,0.1);
             color: #fff;
             border: 1px solid rgba(255,255,255,0.2);
         }
         
-        .cta-btn:hover {
+        .cta-btn-primary:hover,
+        .cta-btn-secondary:hover {
             transform: scale(1.05);
-        }
-        
-        /* Footer */
-        .footer {
-            margin-top: 80px;
-            padding: 40px 20px;
-            text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-        
-        .footer p {
-            color: rgba(255,255,255,0.5);
-        }
-        
-        .footer a {
-            color: var(--gold);
-            text-decoration: none;
         }
         
         /* Mobile */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
+            .tools-hero h1 { font-size: 2.5rem; }
             .tools-grid { grid-template-columns: 1fr; }
             .stats-bar { gap: 30px; }
-            .nav-links { display: none; }
+            .page-container { padding: 100px 15px 40px; }
+            .cta-section { padding: 40px 20px; }
+            .cta-section h2 { font-size: 1.8rem; }
         }
     </style>
 </head>
-<body>
+<body class="article-page">
     <div class="bg-animated"></div>
     
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
-                <span class="logo-text">BroBillionaire</span>
+    <!-- Article Navigation (matching article-what-is-margin.html) -->
+    <nav class="article-nav">
+        <div class="article-nav-container">
+            <a href="tools.html" class="back-link" style="margin-right:15px;"><i class="fas fa-th-large"></i><span>Tools</span></a>
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Home</span>
             </a>
-            <div class="nav-links">
-                <a href="articles.html" class="nav-link">Articles</a>
-                <a href="tools.html" class="nav-link">Calculators</a>
-                <a href="community.html" class="nav-link">Community</a>
+            <div class="article-nav-center">
+                <img src="logo.jpg" alt="BroBillionaire" class="nav-logo-small">
+                <span class="nav-divider">|</span>
+                <span class="article-category-nav">🚀 Viral Tools</span>
             </div>
-            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+            <div class="article-share">
+                <button class="share-btn" onclick="shareArticle()">
+                    <i class="fas fa-share-alt"></i>
+                </button>
+            </div>
         </div>
+        <div class="reading-progress-bar"></div>
     </nav>
-    <div class="mobile-nav-dropdown" id="mobileNavDropdown">
-        <a href="index.html">Home</a>
-        <a href="articles.html">Articles</a>
-        <a href="tools.html">Calculators</a>
-        <a href="viral-tools-hub.html">Viral Tools</a>
-        <a href="community.html">Community</a>
-        <a href="about.html">About</a>
-    </div>
-    
-    <div class="container">
+
+    <div class="page-container">
         <!-- Hero -->
-        <section class="hero">
+        <section class="tools-hero">
             <div class="hero-badge">
                 <i class="fas fa-fire"></i>
                 <span>Viral Trading Tools</span>
@@ -728,21 +664,39 @@
             <h2>Ready to Go Viral? 🚀</h2>
             <p>Join 50,000+ traders creating content and growing their audience with our tools.</p>
             <div class="cta-buttons">
-                <a href="community.html" class="cta-btn primary">
+                <a href="community.html" class="cta-btn-primary">
                     <i class="fas fa-users"></i> Join Community
                 </a>
-                <a href="articles.html" class="cta-btn secondary">
+                <a href="articles.html" class="cta-btn-secondary">
                     <i class="fas fa-book"></i> Read Articles
                 </a>
             </div>
         </section>
-        
-        <!-- Footer -->
-        <footer class="footer">
-            <p>Made with 💛 by <a href="index.html">BroBillionaire</a> | <a href="tools.html">Calculators</a> | <a href="about.html">About</a></p>
-        </footer>
+    </div>
+
+    <!-- Footer (matching article-what-is-margin.html) -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand-section">
+                <div class="logo">
+                    <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                    <span class="logo-text">BroBillionaire</span>
+                </div>
+                <p class="tagline">Making Wall Street wisdom accessible to every trader.</p>
+            </div>
+            <nav class="footer-nav">
+                <a href="index.html">Home</a>
+                <a href="articles.html">Articles</a>
+                <a href="tools.html">Tools</a>
+                <a href="about.html">About</a>
+            </nav>
+        </div>
+    </footer>
+    <div class="footer-disclaimer">
+        <p>For educational purposes only. Not financial advice. Trading options involves substantial risk of loss.</p>
     </div>
     
+    <script src="script.js"></script>
     <script>
         function filterTools(category) {
             // Update active tab
@@ -760,39 +714,20 @@
                 }
             });
         }
-    </script>
-
-    <script>
-    function toggleMobileMenu() {
-        const toggle = document.querySelector('.mobile-menu-toggle');
-        const dropdown = document.getElementById('mobileNavDropdown');
-        if (toggle && dropdown) {
-            toggle.classList.toggle('active');
-            dropdown.classList.toggle('active');
-        }
-    }
-    
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', function(e) {
-        const toggle = document.querySelector('.mobile-menu-toggle');
-        const dropdown = document.getElementById('mobileNavDropdown');
-        if (toggle && dropdown && !toggle.contains(e.target) && !dropdown.contains(e.target)) {
-            toggle.classList.remove('active');
-            dropdown.classList.remove('active');
-        }
-    });
-    
-    // Close mobile menu when clicking a link
-    document.querySelectorAll('.mobile-nav-dropdown a').forEach(link => {
-        link.addEventListener('click', () => {
-            const toggle = document.querySelector('.mobile-menu-toggle');
-            const dropdown = document.getElementById('mobileNavDropdown');
-            if (toggle && dropdown) {
-                toggle.classList.remove('active');
-                dropdown.classList.remove('active');
+        
+        // Share function
+        function shareArticle() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Viral Trading Tools - BroBillionaire',
+                    text: 'Create viral trading content! Games, quizzes, generators & more.',
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('Link copied to clipboard!');
             }
-        });
-    });
+        }
     </script>
 </body>
 </html>

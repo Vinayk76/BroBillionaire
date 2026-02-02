@@ -84,7 +84,8 @@
                     transform: scale(1.15);
                     box-shadow: 0 4px 20px rgba(0,0,0,0.3);
                 }
-                #bro-share-bar .share-btn.twitter { background: linear-gradient(135deg, #1DA1F2, #0d8ecf); }
+                #bro-share-bar .share-btn.twitter { background: linear-gradient(135deg, #000000, #1a1a1a); }
+                #bro-share-bar .share-btn.twitter svg { width: 20px; height: 20px; fill: white; }
                 #bro-share-bar .share-btn.facebook { background: linear-gradient(135deg, #4267B2, #365899); }
                 #bro-share-bar .share-btn.linkedin { background: linear-gradient(135deg, #0077B5, #005885); }
                 #bro-share-bar .share-btn.whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); }
