@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <title>Inflation Calculator FREE - Future Value & Purchasing Power Calculator 2026 | BroBillionaire</title>
+    <meta name="description" content="FREE Inflation Calculator - Calculate future value of money, purchasing power erosion, and real returns. See how inflation affects your investments and savings over time.">
+    <meta name="keywords" content="inflation calculator, inflation impact calculator, purchasing power calculator, future value calculator, real returns calculator, inflation adjusted calculator, money value calculator india, inflation rate calculator 2026">
+    <meta name="author" content="BroBillionaire">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://brobillionaire.com/tool-inflation-calculator.html">
+    
+    <meta property="og:title" content="FREE Inflation Calculator - Purchasing Power Tool">
+    <meta property="og:description" content="Calculate how inflation erodes your money's value over time.">
+    <meta property="og:url" content="https://brobillionaire.com/tool-inflation-calculator.html">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="responsive.css">
+    
+    <style>
+        .tool-container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+        .tool-header {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 50%, var(--bg-secondary) 100%);
+            padding: 140px 20px 80px; text-align: center; border-bottom: 1px solid var(--border-gold);
+        }
+        .tool-category {
+            display: inline-block; background: rgba(201, 162, 39, 0.15); color: var(--gold);
+            padding: 8px 20px; border-radius: 25px; font-size: 0.8rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 1.5rem; border: 1px solid var(--border-gold);
+        }
+        .tool-title {
+            font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-bottom: 20px; font-weight: 700;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .tool-subtitle { font-size: 1.15rem; color: var(--text-secondary); max-width: 800px; margin: 0 auto; line-height: 1.8; }
+        .main-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 60px 40px; }
+        .calculator-section, .results-section {
+            background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 40px;
+        }
+        .section-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 30px; color: var(--text-primary); }
+        .input-group { margin-bottom: 25px; }
+        label { display: block; font-weight: 600; margin-bottom: 10px; color: var(--text-primary); }
+        .label-info { font-weight: 400; color: var(--text-tertiary); font-size: 0.85rem; display: block; margin-top: 3px; }
+        input, select {
+            width: 100%; padding: 14px 18px; border: 1px solid var(--border-color); border-radius: 8px;
+            background: var(--bg-tertiary); color: var(--text-primary); font-family: 'Inter', sans-serif;
+        }
+        input:focus, select:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.1); }
+        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .result-card {
+            background: var(--bg-tertiary); padding: 25px; border-radius: 12px;
+            border: 1px solid var(--border-color); margin-bottom: 20px;
+        }
+        .result-main {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.05));
+            border: 2px solid rgba(239, 68, 68, 0.5);
+        }
+        .result-label { font-size: 0.85rem; font-weight: 700; color: var(--text-tertiary); margin-bottom: 8px; text-transform: uppercase; }
+        .result-value {
+            font-size: 3rem; font-weight: 800;
+            background: linear-gradient(135deg, #ef4444, #f87171);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .stat-card { background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 10px; padding: 20px; text-align: center; }
+        .stat-title { font-size: 0.8rem; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; color: var(--text-tertiary); }
+        .stat-value { font-size: 1.8rem; font-weight: 800; color: var(--text-primary); }
+        .btn-primary {
+            padding: 14px 32px; border: none; border-radius: 8px; font-weight: 600;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--bg-primary); width: 100%; margin-top: 20px; cursor: pointer;
+            font-family: 'Inter', sans-serif; transition: all 0.3s;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(201, 162, 39, 0.4); }
+        .tips-section { background: var(--bg-secondary); padding: 80px 40px; }
+        .tips-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
+        .tip-card { background: var(--bg-card); padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); transition: all 0.3s; }
+        .tip-card:hover { transform: translateY(-5px); border-color: var(--border-gold); }
+        .tip-icon { font-size: 2.5rem; margin-bottom: 20px; }
+        .tip-title { font-weight: 700; margin-bottom: 12px; color: var(--gold); }
+        .tip-text { color: var(--text-secondary); line-height: 1.7; }
+        .erosion-viz {
+            width: 100%; height: 150px; background: linear-gradient(to right, #4ade80, #f59e0b, #ef4444);
+            border-radius: 12px; position: relative; margin: 20px 0; overflow: hidden;
+        }
+        .erosion-marker {
+            position: absolute; height: 100%; width: 3px; background: white;
+            box-shadow: 0 0 10px rgba(255,255,255,0.8);
+        }
+        @media (max-width: 968px) {
+            .main-content, .tips-grid, .input-row, .stats-grid { grid-template-columns: 1fr; }
+            .tool-title { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                <span class="logo-text">BroBillionaire</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="articles.html" class="nav-link">Articles</a>
+                <a href="tools.html" class="nav-link active">Tools</a>
+                <a href="about.html" class="nav-link">About</a>
+            </div>
+            <button class="cta-btn gold-btn" onclick="window.location.href='articles.html'">Read Free</button>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+    <div class="mobile-nav-dropdown" id="mobileNavDropdown">
+        <a href="index.html">Home</a><a href="articles.html">Articles</a>
+        <a href="tools.html">Tools</a><a href="about.html">About</a>
+    </div>
+
+    <header class="tool-header">
+        <div class="tool-container">
+            <div class="tool-category">📉 FREE PLANNING TOOL</div>
+            <h1 class="tool-title">Inflation Calculator</h1>
+            <p class="tool-subtitle">Calculate how inflation erodes purchasing power over time. See the real value of your money, investments, and understand why you must beat inflation to build wealth.</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="tool-container">
+            <div class="main-content">
+                <div class="calculator-section">
+                    <h2 class="section-title">💰 Money Value Analysis</h2>
+
+                    <div class="input-group">
+                        <label for="currentAmount">
+                            Current Amount (₹)
+                            <span class="label-info">Today's value</span>
+                        </label>
+                        <input type="number" id="currentAmount" value="100000" min="100" step="1000">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="inflationRate">
+                            Inflation Rate (%)
+                            <span class="label-info">India average: 5-7% annually</span>
+                        </label>
+                        <input type="number" id="inflationRate" value="6" min="0" max="20" step="0.1">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="years">
+                            Time Period (Years)
+                            <span class="label-info">Future time horizon</span>
+                        </label>
+                        <input type="number" id="years" value="10" min="1" max="50" step="1">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="investmentReturn">
+                            Your Investment Return (%)
+                            <span class="label-info">Expected annual return on investments</span>
+                        </label>
+                        <input type="number" id="investmentReturn" value="12" min="-10" max="50" step="0.5">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="scenario">Quick Scenario</label>
+                        <select id="scenario" onchange="loadScenario()">
+                            <option value="custom">Custom</option>
+                            <option value="savings">Bank Savings (4% vs 6% inflation)</option>
+                            <option value="fd">FD (7% vs 6% inflation)</option>
+                            <option value="equity">Equity (15% vs 6% inflation)</option>
+                            <option value="gold">Gold (8% vs 6% inflation)</option>
+                            <option value="realestate">Real Estate (10% vs 6% inflation)</option>
+                        </select>
+                    </div>
+
+                    <button class="btn-primary" onclick="calculate()">Calculate Impact</button>
+                </div>
+
+                <div class="results-section">
+                    <h2 class="section-title">📊 Inflation Impact</h2>
+
+                    <div class="result-card result-main">
+                        <div class="result-label">PURCHASING POWER AFTER <span id="yearsLabel">10</span> YEARS</div>
+                        <div class="result-value" id="futureValue">₹0</div>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 10px;">
+                            Worth in today's money
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-title">Nominal Value</div>
+                            <div class="stat-value" id="nominalValue">₹0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-title">Value Lost</div>
+                            <div class="stat-value" id="valueLost">₹0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-title">Real Return</div>
+                            <div class="stat-value" id="realReturn">0%</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-title">Erosion %</div>
+                            <div class="stat-value" id="erosionPercent">0%</div>
+                        </div>
+                    </div>
+
+                    <div style="background: var(--bg-tertiary); padding: 25px; border-radius: 12px; margin-top: 20px; border: 1px solid var(--border-color);">
+                        <h3 style="margin-bottom: 15px; color: var(--text-primary);">📈 Purchasing Power Over Time</h3>
+                        <div class="erosion-viz" id="erosionViz">
+                            <div class="erosion-marker" id="erosionMarker" style="left: 0%;"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; color: var(--text-secondary); font-size: 0.85rem;">
+                            <span>Full Value</span>
+                            <span id="currentPosition">Current</span>
+                            <span>Zero Value</span>
+                        </div>
+                    </div>
+
+                    <div style="background: var(--bg-tertiary); padding: 25px; border-radius: 12px; margin-top: 20px; border: 1px solid var(--border-color);">
+                        <h3 style="margin-bottom: 15px; color: var(--text-primary);">🎯 Price Comparison</h3>
+                        <table style="width: 100%; color: var(--text-primary);">
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <th style="padding: 10px; text-align: left;">Item</th>
+                                <th style="padding: 10px; text-align: right;">Future Cost</th>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 10px;">₹100 Item Today</td>
+                                <td style="padding: 10px; text-align: right;" id="item100">₹0</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 10px;">₹10,000 Item Today</td>
+                                <td style="padding: 10px; text-align: right;" id="item10k">₹0</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px;">₹1,00,000 Item Today</td>
+                                <td style="padding: 10px; text-align: right;" id="item1l">₹0</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tips-section">
+            <div class="tool-container">
+                <h2 class="section-title">🎓 Understanding Inflation</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <div class="tip-icon">💸</div>
+                        <div class="tip-title">Silent Wealth Killer</div>
+                        <div class="tip-text">At 6% inflation, money loses 50% value in 12 years, 75% in 24 years. ₹1 crore today = ₹50 lakhs purchasing power in 12 years. Inflation destroys wealth silently while you sleep.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">📉</div>
+                        <div class="tip-title">Real vs Nominal Returns</div>
+                        <div class="tip-text">10% return - 6% inflation = 4% real return. Bank FD at 7% - 6% inflation - 30% tax = -0.3% real return. You're losing money in "safe" investments after inflation and taxes!</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">🎯</div>
+                        <div class="tip-title">Minimum Return Target</div>
+                        <div class="tip-text">Must beat inflation + taxes to build wealth. At 6% inflation, need minimum 8-9% pre-tax returns to preserve purchasing power. Target 12-15% for real wealth creation. Equity becomes necessity, not choice.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">🏠</div>
+                        <div class="tip-title">Real Estate Math</div>
+                        <div class="tip-text">House at ₹1 crore today needs ₹3.2 crore in 20 years (6% inflation). Planning child's education in 18 years? ₹50L today = ₹1.43 crore needed. Plan for inflated costs, not today's prices.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">💰</div>
+                        <div class="tip-title">Retirement Nightmare</div>
+                        <div class="tip-text">Need ₹50k/month today? In 30 years, need ₹2.87 lakhs/month for same lifestyle (6% inflation). ₹1 crore corpus seems huge today, will feel tiny in 30 years. Factor inflation in retirement planning!</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">⚡</div>
+                        <div class="tip-title">Action Steps</div>
+                        <div class="tip-text">1) Move emergency fund to liquid funds (6-7%) vs savings (4%) 2) Invest for long-term in equity (12-15%) 3) Avoid cash hoarding 4) Regular investments beat inflation through compounding 5) Reassess inflation assumption yearly.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand-section">
+                <div class="logo">
+                    <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                    <span class="logo-text">BroBillionaire</span>
+                </div>
+                <p class="tagline">Master the markets with free trading education.</p>
+            </div>
+            <nav class="footer-nav">
+                <a href="index.html">Home</a>
+                <a href="articles.html">Articles</a>
+                <a href="tools.html">Tools</a>
+                <a href="about.html">About</a>
+            </nav>
+        </div>
+    </footer>
+    <div class="footer-disclaimer">
+        <p>&copy; 2026 BroBillionaire. Inflation rates are estimates. Plan accordingly.</p>
+    </div>
+
+    <script>
+        function loadScenario() {
+            const scenario = document.getElementById('scenario').value;
+            const scenarios = {
+                'savings': { return: 4, inflation: 6 },
+                'fd': { return: 7, inflation: 6 },
+                'equity': { return: 15, inflation: 6 },
+                'gold': { return: 8, inflation: 6 },
+                'realestate': { return: 10, inflation: 6 }
+            };
+            if (scenarios[scenario]) {
+                document.getElementById('investmentReturn').value = scenarios[scenario].return;
+                document.getElementById('inflationRate').value = scenarios[scenario].inflation;
+                calculate();
+            }
+        }
+
+        document.querySelectorAll('input, select').forEach(el => {
+            el.addEventListener('input', () => {
+                document.getElementById('scenario').value = 'custom';
+                calculate();
+            });
+        });
+        calculate();
+
+        function calculate() {
+            const current = parseFloat(document.getElementById('currentAmount').value) || 0;
+            const inflation = parseFloat(document.getElementById('inflationRate').value) || 0;
+            const years = parseFloat(document.getElementById('years').value) || 0;
+            const returnRate = parseFloat(document.getElementById('investmentReturn').value) || 0;
+
+            // Nominal value after returns
+            const nominalValue = current * Math.pow(1 + returnRate / 100, years);
+            
+            // Future value adjusted for inflation (purchasing power)
+            const futureValue = current / Math.pow(1 + inflation / 100, years);
+            
+            // Real value of investment
+            const realValue = nominalValue / Math.pow(1 + inflation / 100, years);
+            
+            // Value lost to inflation
+            const valueLost = current - futureValue;
+            
+            // Real return
+            const realReturn = ((Math.pow(1 + returnRate / 100, 1) / Math.pow(1 + inflation / 100, 1)) - 1) * 100;
+            
+            // Erosion percentage
+            const erosionPercent = ((current - futureValue) / current) * 100;
+            
+            // Price inflation factor
+            const inflationFactor = Math.pow(1 + inflation / 100, years);
+
+            document.getElementById('yearsLabel').textContent = years;
+            document.getElementById('futureValue').textContent = '₹' + futureValue.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('nominalValue').textContent = '₹' + nominalValue.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('valueLost').textContent = '₹' + valueLost.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('realReturn').textContent = realReturn.toFixed(2) + '%';
+            document.getElementById('erosionPercent').textContent = erosionPercent.toFixed(1) + '%';
+
+            // Erosion visualization
+            const erosionPos = Math.min(100, erosionPercent);
+            document.getElementById('erosionMarker').style.left = erosionPos + '%';
+            document.getElementById('currentPosition').textContent = `${erosionPos.toFixed(0)}% Eroded`;
+
+            // Price comparisons
+            document.getElementById('item100').textContent = '₹' + (100 * inflationFactor).toFixed(0);
+            document.getElementById('item10k').textContent = '₹' + (10000 * inflationFactor).toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('item1l').textContent = '₹' + (100000 * inflationFactor).toLocaleString('en-IN', {maximumFractionDigits: 0});
+
+            // Color coding based on real return
+            const valueElement = document.getElementById('futureValue');
+            if (realReturn > 3) {
+                valueElement.style.background = 'linear-gradient(135deg, #4ade80, #22c55e)';
+            } else if (realReturn > 0) {
+                valueElement.style.background = 'linear-gradient(135deg, var(--gold), var(--gold-light))';
+            } else {
+                valueElement.style.background = 'linear-gradient(135deg, #ef4444, #f87171)';
+            }
+            valueElement.style['-webkit-background-clip'] = 'text';
+            valueElement.style['-webkit-text-fill-color'] = 'transparent';
+        }
+
+        function toggleMobileMenu() {
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            const dropdown = document.getElementById('mobileNavDropdown');
+            if (toggle && dropdown) {
+                toggle.classList.toggle('active');
+                dropdown.classList.toggle('active');
+            }
+        }
+    </script>
+</body>
+</html>

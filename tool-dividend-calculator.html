@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dividend Calculator - Dividend Yield Calculator India 2026</title>
+    <meta name="description" content="Calculate dividend yield, annual dividend income & dividend payout ratio. Plan your passive income with our free dividend calculator for Indian stocks.">
+    <meta name="keywords" content="dividend calculator, dividend yield calculator, dividend income calculator, stock dividend calculator, dividend payout calculator">
+    <link rel="canonical" href="https://brobillionaire.com/tool-dividend-calculator.html">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); color: #e0e0e0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .header { text-align: center; padding: 3rem; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); border-radius: 20px; margin-bottom: 2rem; }
+        .header h1 { font-size: 3rem; color: #fff; }
+        .calc-card { background: #1e1e2f; padding: 2.5rem; border-radius: 15px; }
+        .input-group { margin-bottom: 1.5rem; }
+        .input-group label { display: block; margin-bottom: 0.5rem; color: #a0a0b0; font-weight: 600; }
+        .input-group input { width: 100%; padding: 1rem; background: #16161f; border: 2px solid #333; border-radius: 10px; color: #fff; font-size: 1.1rem; }
+        .btn { padding: 1.2rem; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 1rem; }
+        .result-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 2rem; }
+        .result-box { background: #16161f; padding: 2rem; border-radius: 12px; text-align: center; }
+        .result-value { font-size: 2rem; font-weight: 700; color: #f59e0b; margin-top: 0.5rem; }
+        @media (max-width: 768px) { .result-grid { grid-template-columns: 1fr; } }
+    </style>
+
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://brobillionaire.com/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Tools",
+            "item": "https://brobillionaire.com/tools.html"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Dividend Calculator - Dividend Yield Calculator India",
+            "item": "https://brobillionaire.com/tool-dividend-calculator.html"
+        }
+    ]
+}
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💰 Dividend Calculator</h1>
+            <p>Calculate your dividend yield & passive income from stocks</p>
+        </div>
+        <div class="calc-card">
+            <h2>📊 Stock Details</h2>
+            <div class="input-group">
+                <label>Number of Shares</label>
+                <input type="number" id="shares" value="1000">
+            </div>
+            <div class="input-group">
+                <label>Current Stock Price (₹)</label>
+                <input type="number" id="price" value="500" step="0.01">
+            </div>
+            <div class="input-group">
+                <label>Annual Dividend Per Share (₹)</label>
+                <input type="number" id="dividend" value="25" step="0.01">
+            </div>
+            <button class="btn" onclick="calculateDividend()">Calculate Dividend</button>
+            <div class="result-grid">
+                <div class="result-box">
+                    <div style="color: #888;">Dividend Yield</div>
+                    <div class="result-value" id="yield">0%</div>
+                </div>
+                <div class="result-box">
+                    <div style="color: #888;">Annual Dividend Income</div>
+                    <div class="result-value" id="income">₹0</div>
+                </div>
+                <div class="result-box">
+                    <div style="color: #888;">Total Investment</div>
+                    <div class="result-value" id="investment">₹0</div>
+                </div>
+                <div class="result-box">
+                    <div style="color: #888;">Monthly Passive Income</div>
+                    <div class="result-value" id="monthly">₹0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function calculateDividend() {
+            const shares = parseFloat(document.getElementById('shares').value);
+            const price = parseFloat(document.getElementById('price').value);
+            const dividend = parseFloat(document.getElementById('dividend').value);
+            const totalInvestment = shares * price;
+            const annualIncome = shares * dividend;
+            const dividendYield = (dividend / price) * 100;
+            const monthlyIncome = annualIncome / 12;
+            document.getElementById('yield').textContent = dividendYield.toFixed(2) + '%';
+            document.getElementById('income').textContent = '₹' + annualIncome.toLocaleString('en-IN');
+            document.getElementById('investment').textContent = '₹' + totalInvestment.toLocaleString('en-IN');
+            document.getElementById('monthly').textContent = '₹' + monthlyIncome.toLocaleString('en-IN', {maximumFractionDigits: 0});
+        }
+        calculateDividend();
+    </script>
+</body>
+</html>

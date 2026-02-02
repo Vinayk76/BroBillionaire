@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Options & Futures Margin Calculator - NSE F&O SPAN Margin Calculator India 2026</title>
+    <meta name="title" content="Options & Futures Margin Calculator - NSE F&O SPAN Margin Calculator India 2026">
+    <meta name="description" content="Calculate exact margin requirements for NSE Options & Futures trading in India. SPAN margin calculator with real-time rates for Nifty, Bank Nifty, Stocks. Find margins for hedged & unhedged positions, spread strategies, and total capital needed including brokerage charges.">
+    <meta name="keywords" content="margin calculator, option margin calculator, futures margin calculator, SPAN margin calculator, NSE margin calculator, option margin, futures margin, nifty option margin, bank nifty margin, margin requirement calculator, trading margin calculator India, F&O margin calculator, derivatives margin calculator, hedged margin calculator, spread margin calculator, option selling margin, option buying margin">
+    <meta name="author" content="BroBillionaire">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://brobillionaire.com/tool-margin-calculator.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://brobillionaire.com/tool-margin-calculator.html">
+    <meta property="og:title" content="Options & Futures Margin Calculator - NSE F&O SPAN Margin Calculator India">
+    <meta property="og:description" content="Calculate exact margin requirements for NSE F&O trading. SPAN margin calculator with hedged positions, spread strategies & total capital analysis.">
+    <meta property="og:image" content="https://brobillionaire.com/og-image-margin-calculator.jpg">
+    <meta property="og:site_name" content="BroBillionaire">
+    <meta property="og:locale" content="en_IN">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://brobillionaire.com/tool-margin-calculator.html">
+    <meta property="twitter:title" content="Options & Futures Margin Calculator - NSE F&O SPAN Margin">
+    <meta property="twitter:description" content="Calculate exact margin requirements for NSE Options & Futures. Free SPAN margin calculator for Indian traders.">
+    <meta property="twitter:image" content="https://brobillionaire.com/og-image-margin-calculator.jpg">
+    <meta property="twitter:creator" content="@BroBillionaire">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Options & Futures Margin Calculator",
+        "url": "https://brobillionaire.com/tool-margin-calculator.html",
+        "description": "Professional margin calculator for NSE F&O trading with SPAN margin calculation for options and futures",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "BroBillionaire",
+            "url": "https://brobillionaire.com"
+        }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://brobillionaire.com/"
+        }, {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Trading Tools",
+            "item": "https://brobillionaire.com/tools.html"
+        }, {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Margin Calculator",
+            "item": "https://brobillionaire.com/tool-margin-calculator.html"
+        }]
+    }
+    </script>
+
+    <style>
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Tool-specific styles */
+        .tool-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .tool-header {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .tool-category {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .tool-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .tool-subtitle {
+            font-size: 1.25rem;
+            color: #b8d4ff;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .calc-section {
+            background: linear-gradient(135deg, #1e1e2f 0%, #2a2a3f 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .calc-section h2 {
+            font-size: 1.8rem;
+            color: #4da6ff;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #a0a0b0;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            background: #16161f;
+            border: 2px solid #333;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: #4da6ff;
+            box-shadow: 0 0 0 3px rgba(77, 166, 255, 0.1);
+        }
+
+        .input-prefix {
+            position: absolute;
+            left: 15px;
+            color: #888;
+            font-weight: 600;
+            pointer-events: none;
+        }
+
+        .input-group input.with-prefix {
+            padding-left: 2.5rem;
+        }
+
+        .input-suffix {
+            position: absolute;
+            right: 15px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-secondary {
+            background: #2a2a3f;
+            color: #fff;
+            border: 2px solid #444;
+        }
+
+        .btn-secondary:hover {
+            background: #333;
+            border-color: #555;
+        }
+
+        .results-section {
+            background: linear-gradient(135deg, #1e1e2f 0%, #2a2a3f 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            display: none;
+        }
+
+        .results-section.active {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .results-header h2 {
+            font-size: 2rem;
+            color: #4da6ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .result-card {
+            background: #16161f;
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 2px solid #333;
+            transition: all 0.3s ease;
+        }
+
+        .result-card:hover {
+            border-color: #4da6ff;
+            transform: translateY(-2px);
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #4da6ff;
+        }
+
+        .result-value.highlight {
+            color: #f59e0b;
+        }
+
+        .result-value.success {
+            color: #10b981;
+        }
+
+        .result-value.danger {
+            color: #ef4444;
+        }
+
+        .breakdown-section {
+            background: #16161f;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        .breakdown-section h3 {
+            font-size: 1.5rem;
+            color: #4da6ff;
+            margin-bottom: 1.5rem;
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid #2a2a3f;
+        }
+
+        .breakdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .breakdown-label {
+            color: #a0a0b0;
+            font-weight: 600;
+        }
+
+        .breakdown-value {
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .info-box {
+            background: rgba(77, 166, 255, 0.1);
+            border-left: 4px solid #4da6ff;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        .info-box h4 {
+            color: #4da6ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-box p {
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+
+        .strategy-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .strategy-tab {
+            padding: 1rem 2rem;
+            background: #2a2a3f;
+            border: 2px solid #333;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .strategy-tab:hover {
+            border-color: #4da6ff;
+        }
+
+        .strategy-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: #667eea;
+            color: white;
+        }
+
+        .educational-section {
+            background: linear-gradient(135deg, #1e1e2f 0%, #2a2a3f 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            margin-top: 3rem;
+            border: 1px solid #333;
+        }
+
+        .educational-section h2 {
+            font-size: 2rem;
+            color: #4da6ff;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: #16161f;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: #4da6ff;
+        }
+
+        .faq-question {
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            color: #b0b0b0;
+            margin-top: 1rem;
+            line-height: 1.8;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            color: #4da6ff;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tool-title {
+                font-size: 2rem;
+            }
+
+            .tool-subtitle {
+                font-size: 1rem;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+
+        .highlight-banner {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .highlight-banner h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-banner p {
+            color: #fff;
+            opacity: 0.9;
+        }
+
+        .comparison-table {
+            width: 100%;
+            margin-top: 2rem;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        .comparison-table th {
+            background: #2a2a3f;
+            color: #4da6ff;
+            font-weight: 700;
+        }
+
+        .comparison-table td {
+            color: #b0b0b0;
+        }
+
+        .chart-container {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: #16161f;
+            border-radius: 15px;
+        }
+
+        .margin-bar {
+            width: 100%;
+            height: 40px;
+            background: #2a2a3f;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            margin-top: 1rem;
+        }
+
+        .margin-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #059669);
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <header class="tool-header">
+        <div class="tool-container">
+            <div class="tool-category">💰 FREE MARGIN CALCULATOR</div>
+            <h1 class="tool-title">Options & Futures Margin Calculator</h1>
+            <p class="tool-subtitle">Calculate exact margin requirements for NSE F&O trading in India. Get SPAN margins for Nifty, Bank Nifty, stocks with hedged & unhedged positions. Know your exact capital requirement before placing any trade.</p>
+        </div>
+    </header>
+
+    <main class="tool-container">
+        <div class="highlight-banner">
+            <h3>🎯 Calculate Margins Before You Trade</h3>
+            <p>Know your exact margin requirement • Avoid margin shortfall penalties • Plan your capital efficiently</p>
+        </div>
+
+        <div class="strategy-tabs">
+            <div class="strategy-tab active" data-strategy="futures">📈 Futures</div>
+            <div class="strategy-tab" data-strategy="option-buy">🟢 Option Buying</div>
+            <div class="strategy-tab" data-strategy="option-sell">🔴 Option Selling</div>
+            <div class="strategy-tab" data-strategy="spread">🔄 Spreads</div>
+            <div class="strategy-tab" data-strategy="straddle">⚡ Straddle/Strangle</div>
+        </div>
+
+        <div class="calculator-grid">
+            <div class="calc-section">
+                <h2>📊 Trade Details</h2>
+                <div class="input-group">
+                    <label for="instrument">Select Instrument</label>
+                    <select id="instrument">
+                        <option value="nifty">NIFTY 50</option>
+                        <option value="banknifty">BANK NIFTY</option>
+                        <option value="finnifty">FIN NIFTY</option>
+                        <option value="midcpnifty">MIDCAP NIFTY</option>
+                        <option value="sensex">SENSEX</option>
+                        <option value="stock">Stock Futures/Options</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="spotPrice">Spot Price / Current Price</label>
+                    <div class="input-wrapper">
+                        <span class="input-prefix">₹</span>
+                        <input type="number" id="spotPrice" class="with-prefix" placeholder="23450" value="23450">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="strikePrice">Strike Price (For Options)</label>
+                    <div class="input-wrapper">
+                        <span class="input-prefix">₹</span>
+                        <input type="number" id="strikePrice" class="with-prefix" placeholder="23500" value="23500">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="optionType">Option Type (If Applicable)</label>
+                    <select id="optionType">
+                        <option value="ce">Call (CE)</option>
+                        <option value="pe">Put (PE)</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="quantity">Quantity (Lots)</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="quantity" placeholder="1" value="1" min="1">
+                        <span class="input-suffix">Lots</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="lotSize">Lot Size</label>
+                    <input type="number" id="lotSize" placeholder="50" value="50">
+                </div>
+            </div>
+
+            <div class="calc-section">
+                <h2>⚙️ Margin Parameters</h2>
+                
+                <div class="input-group">
+                    <label for="spanMargin">SPAN Margin (%)</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="spanMargin" placeholder="10" value="10" step="0.1">
+                        <span class="input-suffix">%</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="exposureMargin">Exposure Margin (%)</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="exposureMargin" placeholder="3" value="3" step="0.1">
+                        <span class="input-suffix">%</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="premium">Option Premium (Per Share)</label>
+                    <div class="input-wrapper">
+                        <span class="input-prefix">₹</span>
+                        <input type="number" id="premium" class="with-prefix" placeholder="150" value="150" step="0.05">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="hedged">Is Position Hedged?</label>
+                    <select id="hedged">
+                        <option value="no">No (Unhedged/Naked)</option>
+                        <option value="yes">Yes (Hedged Position)</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="broker">Broker Type</label>
+                    <select id="broker">
+                        <option value="discount">Discount Broker (Zerodha, Upstox)</option>
+                        <option value="fullservice">Full Service Broker</option>
+                    </select>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="calculateMargin()">Calculate Margin</button>
+                    <button class="btn btn-secondary" onclick="resetCalculator()">Reset</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="resultsSection" class="results-section">
+            <div class="results-header">
+                <h2>💰 Margin Requirement Analysis</h2>
+                <p style="color: #888; margin-top: 0.5rem;">Complete breakdown of your margin requirements</p>
+            </div>
+
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="result-label">Total Margin Required</div>
+                    <div class="result-value highlight" id="totalMargin">₹0</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-label">SPAN Margin</div>
+                    <div class="result-value" id="spanMarginValue">₹0</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-label">Exposure Margin</div>
+                    <div class="result-value" id="exposureMarginValue">₹0</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-label">Premium Amount</div>
+                    <div class="result-value success" id="premiumAmount">₹0</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3 style="color: #4da6ff; margin-bottom: 1rem;">Capital Allocation Breakdown</h3>
+                <div class="margin-bar">
+                    <div class="margin-fill" id="marginBar">0%</div>
+                </div>
+            </div>
+
+            <div class="breakdown-section">
+                <h3>📋 Detailed Breakdown</h3>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Contract Value</span>
+                    <span class="breakdown-value" id="contractValue">₹0</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Total Quantity</span>
+                    <span class="breakdown-value" id="totalQuantity">0 shares</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">SPAN Margin Required</span>
+                    <span class="breakdown-value" id="spanDetail">₹0</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Exposure Margin Required</span>
+                    <span class="breakdown-value" id="exposureDetail">₹0</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Premium Payable/Receivable</span>
+                    <span class="breakdown-value" id="premiumDetail">₹0</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Brokerage (Est.)</span>
+                    <span class="breakdown-value" id="brokerageDetail">₹0</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Transaction Charges</span>
+                    <span class="breakdown-value" id="transactionDetail">₹0</span>
+                </div>
+                <div class="breakdown-item" style="border-top: 2px solid #4da6ff; padding-top: 1.5rem; margin-top: 1rem;">
+                    <span class="breakdown-label" style="font-size: 1.2rem; color: #4da6ff;">Total Capital Needed</span>
+                    <span class="breakdown-value" style="font-size: 1.5rem; color: #f59e0b;" id="totalCapital">₹0</span>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4>💡 Important Notes</h4>
+                <p id="marginNote">Margins are indicative and may vary based on market volatility and broker policies. Always maintain extra buffer capital for intraday volatility. For hedged positions, margin benefit is usually provided by the broker automatically.</p>
+            </div>
+        </div>
+
+        <div class="educational-section">
+            <h2>📚 Understanding Margin Requirements</h2>
+            
+            <div class="faq-container">
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <span>What is SPAN Margin?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        SPAN (Standard Portfolio Analysis of Risk) Margin is the minimum margin required by exchanges (NSE/BSE) to hold an F&O position overnight. It's calculated based on the worst-case loss scenario using sophisticated risk models. SPAN margin typically ranges from 8% to 20% of the contract value depending on the instrument's volatility.
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <span>What is Exposure Margin?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Exposure margin is an additional margin charged by exchanges over and above SPAN margin as an extra cushion against potential losses. For equity F&O, it's typically 3% of the contract value. This margin is mandatory and is separate from SPAN margin. Total margin = SPAN Margin + Exposure Margin.
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <span>How does hedged position reduce margin?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        When you take opposite positions (like buying and selling options at different strikes), exchanges recognize the reduced risk and provide margin benefit. For example, in a Bull Call Spread (buy lower strike call, sell higher strike call), the maximum loss is limited, so margin requirement is significantly lower than a naked position. Margin benefit can be 60-80% in many spread strategies.
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <span>Do I need margin for buying options?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        No, you don't need margin to buy options (calls or puts). You only need to pay the premium amount upfront. For example, if you buy 1 lot of Nifty 23500 CE at ₹150 premium, and lot size is 50, you need ₹7,500 (150 × 50) plus brokerage. Margin is required only when selling/writing options or trading futures.
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <span>Why is Bank Nifty margin higher than Nifty?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Bank Nifty is more volatile than Nifty 50, which means higher risk and potential for larger price swings. Exchanges calculate margins based on volatility - higher volatility means higher margin requirements. Bank Nifty SPAN margin is typically 12-15% while Nifty is around 10-12%. Additionally, Bank Nifty has higher contract value which also increases absolute margin amount.
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <span>What happens if I don't have sufficient margin?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        If you don't have sufficient margin, you cannot place the order - it will be rejected by your broker. If margin falls below required levels after taking a position (due to MTM losses), you'll receive a margin call to add funds. If you don't add margin, your broker can square off your position to limit risk. SEBI also imposes margin penalties ranging from 0.5% to 5% per day for shortfall, which can add up quickly.
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <span>How to calculate margin for multiple positions?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        For multiple positions, exchanges use portfolio-level margining. If positions are in the same underlying and form a recognized spread strategy, you get margin benefits. Use SPAN calculators on NSE/broker websites for accurate multi-leg strategy margins. Generally: Naked positions = Sum of individual margins, Hedged positions = Significantly lower due to portfolio margining benefits.
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <span>What's the difference between intraday and overnight margin?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Intraday margin (MIS - Margin Intraday Square-off) is lower as positions must be squared off by end of day. Brokers typically offer 3-5x leverage for intraday F&O trades. Overnight margin (NRML - Normal) requires full SPAN + Exposure margin as you hold positions overnight, exposing them to gap risk and overnight volatility. Always use NRML margins for position planning to avoid surprises.
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <span>How often do margins change?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Margins are dynamic and can change daily based on market volatility. NSE/BSE review and update SPAN parameters regularly. During high volatility events (like results, policy decisions, global crises), exchanges can increase margins intraday. Brokers also have the discretion to charge higher margins than exchange minimums. Always check current margin files on NSE/broker websites before trading.
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <span>Can I use stocks as collateral for margin?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! You can pledge your stock holdings as collateral margin with your broker. Approved stocks get haircut-based margin value (typically 50-85% of stock value depending on liquidity). This allows you to trade F&O without keeping cash idle. However, if your positions go against you and pledge value falls below required margin, you'll still need to add cash or stocks. Check your broker's approved collateral list and haircut percentages.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="educational-section">
+            <h2>🎯 Margin Comparison: Popular Strategies</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Strategy</th>
+                        <th>Margin Type</th>
+                        <th>Approx. Margin (₹)</th>
+                        <th>Risk Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nifty Future (1 Lot)</td>
+                        <td>SPAN + Exposure</td>
+                        <td>₹1,40,000 - ₹1,60,000</td>
+                        <td>🔴 High</td>
+                    </tr>
+                    <tr>
+                        <td>Bank Nifty Future (1 Lot)</td>
+                        <td>SPAN + Exposure</td>
+                        <td>₹1,80,000 - ₹2,20,000</td>
+                        <td>🔴 Very High</td>
+                    </tr>
+                    <tr>
+                        <td>ATM Option Selling (Naked)</td>
+                        <td>SPAN + Exposure</td>
+                        <td>₹1,00,000 - ₹1,40,000</td>
+                        <td>🔴 Very High</td>
+                    </tr>
+                    <tr>
+                        <td>Option Buying</td>
+                        <td>Premium Only</td>
+                        <td>₹5,000 - ₹15,000</td>
+                        <td>🟢 Limited Risk</td>
+                    </tr>
+                    <tr>
+                        <td>Bull Call Spread</td>
+                        <td>Net Debit</td>
+                        <td>₹20,000 - ₹40,000</td>
+                        <td>🟡 Medium</td>
+                    </tr>
+                    <tr>
+                        <td>Iron Condor</td>
+                        <td>Spread Margin</td>
+                        <td>₹50,000 - ₹80,000</td>
+                        <td>🟡 Medium</td>
+                    </tr>
+                    <tr>
+                        <td>Covered Call</td>
+                        <td>Stock Value + Margin</td>
+                        <td>₹3,00,000 - ₹5,00,000</td>
+                        <td>🟢 Low</td>
+                    </tr>
+                    <tr>
+                        <td>Short Straddle</td>
+                        <td>SPAN + Exposure (Both)</td>
+                        <td>₹1,80,000 - ₹2,50,000</td>
+                        <td>🔴 Very High</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="color: #888; margin-top: 1rem; text-align: center; font-size: 0.9rem;">
+                * Margins are approximate and vary based on volatility, strikes selected, and broker policies. Always verify current margins before trading.
+            </p>
+        </div>
+
+        <div class="info-box" style="margin-top: 3rem;">
+            <h4>⚠️ Risk Disclaimer</h4>
+            <p>This calculator provides indicative margin requirements based on standard parameters. Actual margins may vary based on market volatility, broker policies, and regulatory changes. Margin requirements can change intraday during extreme market conditions. Always maintain adequate buffer capital beyond minimum margin requirements. F&O trading involves substantial risk of loss. Please consult with your broker for exact margin requirements before trading.</p>
+        </div>
+    </main>
+
+    <script>
+        // Instrument data with typical margin percentages
+        const instrumentData = {
+            nifty: { name: 'NIFTY 50', lotSize: 50, spanMargin: 10, exposureMargin: 3 },
+            banknifty: { name: 'BANK NIFTY', lotSize: 15, spanMargin: 12, exposureMargin: 3 },
+            finnifty: { name: 'FIN NIFTY', lotSize: 40, spanMargin: 11, exposureMargin: 3 },
+            midcpnifty: { name: 'MIDCAP NIFTY', lotSize: 75, spanMargin: 11, exposureMargin: 3 },
+            sensex: { name: 'SENSEX', lotSize: 10, spanMargin: 10, exposureMargin: 3 },
+            stock: { name: 'Stock F&O', lotSize: 100, spanMargin: 15, exposureMargin: 5 }
+        };
+
+        // Update instrument parameters
+        document.getElementById('instrument').addEventListener('change', function() {
+            const instrument = instrumentData[this.value];
+            document.getElementById('lotSize').value = instrument.lotSize;
+            document.getElementById('spanMargin').value = instrument.spanMargin;
+            document.getElementById('exposureMargin').value = instrument.exposureMargin;
+        });
+
+        // Strategy tabs
+        document.querySelectorAll('.strategy-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.strategy-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                const strategy = this.dataset.strategy;
+                updateForStrategy(strategy);
+            });
+        });
+
+        function updateForStrategy(strategy) {
+            const strikeInput = document.getElementById('strikePrice');
+            const premiumInput = document.getElementById('premium');
+            const optionTypeSelect = document.getElementById('optionType');
+            
+            switch(strategy) {
+                case 'futures':
+                    strikeInput.disabled = true;
+                    premiumInput.disabled = true;
+                    optionTypeSelect.disabled = true;
+                    break;
+                case 'option-buy':
+                case 'option-sell':
+                    strikeInput.disabled = false;
+                    premiumInput.disabled = false;
+                    optionTypeSelect.disabled = false;
+                    break;
+                default:
+                    strikeInput.disabled = false;
+                    premiumInput.disabled = false;
+                    optionTypeSelect.disabled = false;
+            }
+        }
+
+        function calculateMargin() {
+            // Get input values
+            const spotPrice = parseFloat(document.getElementById('spotPrice').value) || 0;
+            const strikePrice = parseFloat(document.getElementById('strikePrice').value) || spotPrice;
+            const quantity = parseInt(document.getElementById('quantity').value) || 1;
+            const lotSize = parseInt(document.getElementById('lotSize').value) || 50;
+            const spanMarginPct = parseFloat(document.getElementById('spanMargin').value) || 10;
+            const exposureMarginPct = parseFloat(document.getElementById('exposureMargin').value) || 3;
+            const premium = parseFloat(document.getElementById('premium').value) || 0;
+            const isHedged = document.getElementById('hedged').value === 'yes';
+            const broker = document.getElementById('broker').value;
+            
+            const strategy = document.querySelector('.strategy-tab.active').dataset.strategy;
+            
+            // Calculate values
+            const totalQty = quantity * lotSize;
+            let contractValue = spotPrice * totalQty;
+            
+            // Calculate margins based on strategy
+            let spanMargin = 0;
+            let exposureMargin = 0;
+            let premiumAmount = 0;
+            let totalMargin = 0;
+            
+            if (strategy === 'futures') {
+                spanMargin = (contractValue * spanMarginPct) / 100;
+                exposureMargin = (contractValue * exposureMarginPct) / 100;
+                totalMargin = spanMargin + exposureMargin;
+            } else if (strategy === 'option-buy') {
+                // Option buying - only premium required
+                premiumAmount = premium * totalQty;
+                totalMargin = premiumAmount;
+                spanMargin = 0;
+                exposureMargin = 0;
+            } else if (strategy === 'option-sell') {
+                // Option selling - full margin required
+                spanMargin = (contractValue * spanMarginPct) / 100;
+                exposureMargin = (contractValue * exposureMarginPct) / 100;
+                premiumAmount = premium * totalQty; // Received
+                totalMargin = spanMargin + exposureMargin - premiumAmount;
+            } else {
+                // Spread strategies
+                spanMargin = (contractValue * spanMarginPct) / 100;
+                exposureMargin = (contractValue * exposureMarginPct) / 100;
+                premiumAmount = premium * totalQty;
+                totalMargin = spanMargin + exposureMargin;
+                
+                // Apply hedging benefit (40-60% reduction)
+                if (isHedged) {
+                    totalMargin *= 0.5;
+                    spanMargin *= 0.5;
+                    exposureMargin *= 0.5;
+                }
+            }
+            
+            // Calculate charges
+            const brokerage = broker === 'discount' ? 20 * quantity : contractValue * 0.0003;
+            const transactionCharges = contractValue * 0.00053;
+            const totalCharges = brokerage + transactionCharges;
+            
+            // Total capital needed
+            const totalCapitalNeeded = Math.max(totalMargin, 0) + totalCharges;
+            
+            // Display results
+            document.getElementById('totalMargin').textContent = `₹${formatNumber(Math.round(totalMargin))}`;
+            document.getElementById('spanMarginValue').textContent = `₹${formatNumber(Math.round(spanMargin))}`;
+            document.getElementById('exposureMarginValue').textContent = `₹${formatNumber(Math.round(exposureMargin))}`;
+            document.getElementById('premiumAmount').textContent = `₹${formatNumber(Math.round(premiumAmount))}`;
+            
+            // Breakdown
+            document.getElementById('contractValue').textContent = `₹${formatNumber(Math.round(contractValue))}`;
+            document.getElementById('totalQuantity').textContent = `${totalQty} shares`;
+            document.getElementById('spanDetail').textContent = `₹${formatNumber(Math.round(spanMargin))}`;
+            document.getElementById('exposureDetail').textContent = `₹${formatNumber(Math.round(exposureMargin))}`;
+            document.getElementById('premiumDetail').textContent = strategy === 'option-sell' 
+                ? `₹${formatNumber(Math.round(premiumAmount))} (Received)` 
+                : `₹${formatNumber(Math.round(premiumAmount))}`;
+            document.getElementById('brokerageDetail').textContent = `₹${formatNumber(Math.round(brokerage))}`;
+            document.getElementById('transactionDetail').textContent = `₹${formatNumber(Math.round(transactionCharges))}`;
+            document.getElementById('totalCapital').textContent = `₹${formatNumber(Math.round(totalCapitalNeeded))}`;
+            
+            // Update margin bar
+            const marginPercent = ((totalMargin / contractValue) * 100).toFixed(1);
+            document.getElementById('marginBar').style.width = `${Math.min(marginPercent, 100)}%`;
+            document.getElementById('marginBar').textContent = `${marginPercent}% of Contract Value`;
+            
+            // Update info note
+            let noteText = '';
+            if (strategy === 'option-buy') {
+                noteText = 'Option buying requires only premium payment. No margin blocked. Risk limited to premium paid.';
+            } else if (strategy === 'option-sell') {
+                noteText = 'Option selling requires full margin. Premium received reduces net margin requirement. Risk is unlimited for naked positions.';
+            } else if (isHedged) {
+                noteText = 'Hedged position detected. Margin benefit applied (~50% reduction). Actual benefit may vary based on strike selection.';
+            } else {
+                noteText = 'Margins shown are for overnight positions (NRML). Intraday margins (MIS) may be lower but require square-off by EOD.';
+            }
+            document.getElementById('marginNote').textContent = noteText;
+            
+            // Show results section
+            document.getElementById('resultsSection').classList.add('active');
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function resetCalculator() {
+            document.getElementById('spotPrice').value = '23450';
+            document.getElementById('strikePrice').value = '23500';
+            document.getElementById('quantity').value = '1';
+            document.getElementById('lotSize').value = '50';
+            document.getElementById('spanMargin').value = '10';
+            document.getElementById('exposureMargin').value = '3';
+            document.getElementById('premium').value = '150';
+            document.getElementById('hedged').value = 'no';
+            document.getElementById('broker').value = 'discount';
+            document.getElementById('instrument').value = 'nifty';
+            document.getElementById('resultsSection').classList.remove('active');
+        }
+
+        function formatNumber(num) {
+            return num.toLocaleString('en-IN');
+        }
+
+        function toggleFaq(element) {
+            const isActive = element.classList.contains('active');
+            
+            // Close all FAQs
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Open clicked FAQ if it wasn't active
+            if (!isActive) {
+                element.classList.add('active');
+            }
+        }
+
+        // Initialize with default strategy
+        updateForStrategy('futures');
+    </script>
+</body>
+</html>

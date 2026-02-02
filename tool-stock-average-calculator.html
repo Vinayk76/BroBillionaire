@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Average Calculator - Average Down Calculator India 2026</title>
+    <meta name="description" content="Calculate stock average price for averaging down or up positions. Find new average price, total investment & breakeven point after buying additional shares.">
+    <meta name="keywords" content="stock average calculator, average down calculator, average price calculator, stock averaging calculator, buy average calculator, averaging down stocks">
+    <link rel="canonical" href="https://brobillionaire.com/tool-stock-average-calculator.html">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); color: #e0e0e0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .header { text-align: center; padding: 3rem; background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); border-radius: 20px; margin-bottom: 2rem; }
+        .header h1 { font-size: 3rem; color: #fff; }
+        .calc-card { background: #1e1e2f; padding: 2.5rem; border-radius: 15px; margin-bottom: 2rem; }
+        .input-group { margin-bottom: 1.5rem; }
+        .input-group label { display: block; margin-bottom: 0.5rem; color: #a0a0b0; font-weight: 600; }
+        .input-group input { width: 100%; padding: 1rem; background: #16161f; border: 2px solid #333; border-radius: 10px; color: #fff; font-size: 1.1rem; }
+        .btn { padding: 1.2rem; background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; width: 100%; }
+        .result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+        .result-box { background: #16161f; padding: 2rem; border-radius: 12px; text-align: center; }
+        .result-label { color: #888; font-size: 0.9rem; }
+        .result-value { font-size: 2rem; font-weight: 700; color: #6366f1; margin-top: 0.5rem; }
+        @media (max-width: 768px) { .result-grid { grid-template-columns: 1fr; } }
+    </style>
+
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://brobillionaire.com/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Tools",
+            "item": "https://brobillionaire.com/tools.html"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Stock Average Calculator - Average Down Calculator India",
+            "item": "https://brobillionaire.com/tool-stock-average-calculator.html"
+        }
+    ]
+}
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Stock Average Calculator</h1>
+            <p>Calculate your new average price when averaging down or up</p>
+        </div>
+        <div class="calc-card">
+            <h2>🎯 First Purchase</h2>
+            <div class="input-group">
+                <label>Quantity Bought</label>
+                <input type="number" id="qty1" value="100">
+            </div>
+            <div class="input-group">
+                <label>Price Per Share (₹)</label>
+                <input type="number" id="price1" value="500" step="0.01">
+            </div>
+            <h2 style="margin-top: 2rem;">🎯 Additional Purchase</h2>
+            <div class="input-group">
+                <label>Additional Quantity</label>
+                <input type="number" id="qty2" value="50">
+            </div>
+            <div class="input-group">
+                <label>Additional Price Per Share (₹)</label>
+                <input type="number" id="price2" value="450" step="0.01">
+            </div>
+            <button class="btn" onclick="calculateAverage()">Calculate Average Price</button>
+            <div class="result-grid">
+                <div class="result-box">
+                    <div class="result-label">New Average Price</div>
+                    <div class="result-value" id="avgPrice">₹0</div>
+                </div>
+                <div class="result-box">
+                    <div class="result-label">Total Shares</div>
+                    <div class="result-value" id="totalShares">0</div>
+                </div>
+                <div class="result-box">
+                    <div class="result-label">Total Investment</div>
+                    <div class="result-value" id="totalInvest">₹0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function calculateAverage() {
+            const qty1 = parseFloat(document.getElementById('qty1').value);
+            const price1 = parseFloat(document.getElementById('price1').value);
+            const qty2 = parseFloat(document.getElementById('qty2').value);
+            const price2 = parseFloat(document.getElementById('price2').value);
+            const totalShares = qty1 + qty2;
+            const totalInvest = (qty1 * price1) + (qty2 * price2);
+            const avgPrice = totalInvest / totalShares;
+            document.getElementById('avgPrice').textContent = '₹' + avgPrice.toFixed(2);
+            document.getElementById('totalShares').textContent = totalShares;
+            document.getElementById('totalInvest').textContent = '₹' + totalInvest.toLocaleString('en-IN', {maximumFractionDigits: 0});
+        }
+        calculateAverage();
+    </script>
+</body>
+</html>

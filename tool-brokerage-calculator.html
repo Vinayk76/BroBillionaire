@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brokerage Calculator - Trading Charges Calculator India 2026</title>
+    <meta name="description" content="Calculate brokerage, STT, exchange charges, GST for equity, F&O trades. Compare charges across Zerodha, Upstox, Angel One, ICICI brokers.">
+    <meta name="keywords" content="brokerage calculator, trading charges calculator India, brokerage calculator India, zerodha brokerage calculator, upstox charges calculator, trading cost calculator">
+    <link rel="canonical" href="https://brobillionaire.com/tool-brokerage-calculator.html">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); color: #e0e0e0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .header { text-align: center; padding: 3rem; background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); border-radius: 20px; margin-bottom: 2rem; }
+        .header h1 { font-size: 3rem; color: #fff; }
+        .calc-card { background: #1e1e2f; padding: 2.5rem; border-radius: 15px; }
+        .input-group { margin-bottom: 1.5rem; }
+        .input-group label { display: block; margin-bottom: 0.5rem; color: #a0a0b0; font-weight: 600; }
+        .input-group input, .input-group select { width: 100%; padding: 1rem; background: #16161f; border: 2px solid #333; border-radius: 10px; color: #fff; font-size: 1.1rem; }
+        .btn { padding: 1.2rem; background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 1rem; }
+        .breakdown { background: #16161f; padding: 2rem; border-radius: 12px; margin-top: 2rem; }
+        .breakdown-item { display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid #2a2a3f; }
+        .total { font-size: 1.3rem; font-weight: 700; color: #8b5cf6; padding-top: 1rem; }
+    </style>
+
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://brobillionaire.com/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Tools",
+            "item": "https://brobillionaire.com/tools.html"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Brokerage Calculator - Trading Charges Calculator India",
+            "item": "https://brobillionaire.com/tool-brokerage-calculator.html"
+        }
+    ]
+}
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💼 Brokerage Calculator</h1>
+            <p>Calculate all trading charges including STT, GST & exchange fees</p>
+        </div>
+        <div class="calc-card">
+            <h2>📊 Trade Details</h2>
+            <div class="input-group">
+                <label>Trade Type</label>
+                <select id="tradeType">
+                    <option value="equity-delivery">Equity Delivery</option>
+                    <option value="equity-intraday">Equity Intraday</option>
+                    <option value="futures">Futures</option>
+                    <option value="options">Options</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Broker</label>
+                <select id="broker">
+                    <option value="zerodha">Zerodha</option>
+                    <option value="upstox">Upstox</option>
+                    <option value="angelone">Angel One</option>
+                    <option value="icici">ICICI Direct</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Buy Price (₹)</label>
+                <input type="number" id="buyPrice" value="500" step="0.01">
+            </div>
+            <div class="input-group">
+                <label>Sell Price (₹)</label>
+                <input type="number" id="sellPrice" value="520" step="0.01">
+            </div>
+            <div class="input-group">
+                <label>Quantity</label>
+                <input type="number" id="quantity" value="100">
+            </div>
+            <button class="btn" onclick="calculateBrokerage()">Calculate Charges</button>
+            <div class="breakdown">
+                <h3 style="color: #8b5cf6; margin-bottom: 1rem;">Charge Breakdown</h3>
+                <div class="breakdown-item">
+                    <span>Brokerage</span>
+                    <span id="brokerage">₹0</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>STT/CTT</span>
+                    <span id="stt">₹0</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>Exchange Charges</span>
+                    <span id="exchange">₹0</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>SEBI Charges</span>
+                    <span id="sebi">₹0</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>GST (18%)</span>
+                    <span id="gst">₹0</span>
+                </div>
+                <div class="breakdown-item total">
+                    <span>Total Charges</span>
+                    <span id="total">₹0</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>Net Profit/Loss</span>
+                    <span id="netPL">₹0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function calculateBrokerage() {
+            const buyPrice = parseFloat(document.getElementById('buyPrice').value);
+            const sellPrice = parseFloat(document.getElementById('sellPrice').value);
+            const qty = parseFloat(document.getElementById('quantity').value);
+            const tradeType = document.getElementById('tradeType').value;
+            const broker = document.getElementById('broker').value;
+            
+            const buyValue = buyPrice * qty;
+            const sellValue = sellPrice * qty;
+            const turnover = buyValue + sellValue;
+            
+            let brokerage = 0;
+            if (broker === 'zerodha' || broker === 'upstox') {
+                brokerage = tradeType === 'equity-delivery' ? Math.min(turnover * 0.0001, 40) : 40;
+            } else if (broker === 'icici') {
+                brokerage = turnover * 0.0055;
+            } else {
+                brokerage = 40;
+            }
+            
+            const stt = tradeType === 'equity-delivery' ? sellValue * 0.001 : turnover * 0.00025;
+            const exchangeCharges = turnover * 0.0000325;
+            const sebiCharges = turnover * 0.00001;
+            const gst = (brokerage + exchangeCharges + sebiCharges) * 0.18;
+            
+            const totalCharges = brokerage + stt + exchangeCharges + sebiCharges + gst;
+            const grossPL = (sellPrice - buyPrice) * qty;
+            const netPL = grossPL - totalCharges;
+            
+            document.getElementById('brokerage').textContent = '₹' + brokerage.toFixed(2);
+            document.getElementById('stt').textContent = '₹' + stt.toFixed(2);
+            document.getElementById('exchange').textContent = '₹' + exchangeCharges.toFixed(2);
+            document.getElementById('sebi').textContent = '₹' + sebiCharges.toFixed(2);
+            document.getElementById('gst').textContent = '₹' + gst.toFixed(2);
+            document.getElementById('total').textContent = '₹' + totalCharges.toFixed(2);
+            document.getElementById('netPL').textContent = '₹' + netPL.toFixed(2);
+        }
+        calculateBrokerage();
+    </script>
+</body>
+</html>

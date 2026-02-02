@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!-- Primary Title & Meta Tags -->
+    <title>Risk Reward Ratio Calculator FREE - Win Rate & Expectancy Calculator 2026 | BroBillionaire</title>
+    <meta name="title" content="Risk Reward Ratio Calculator FREE - Win Rate & Expectancy Calculator 2026">
+    <meta name="description" content="FREE Risk Reward Ratio Calculator with win rate analysis, expectancy calculation & visual charts. Calculate optimal R:R ratio, breakeven win rate & trading expectancy. Professional tool for traders!">
+    <meta name="keywords" content="risk reward calculator, risk reward ratio calculator, win rate calculator, trading expectancy calculator, R:R calculator, risk to reward calculator, breakeven win rate calculator, profit factor calculator, trading calculator, risk management calculator, position sizing calculator, expectancy formula, win rate analysis, trading edge calculator, free risk reward calculator 2026">
+    <meta name="author" content="BroBillionaire">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://brobillionaire.com/tool-risk-reward-calculator.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://brobillionaire.com/tool-risk-reward-calculator.html">
+    <meta property="og:title" content="FREE Risk Reward Ratio Calculator - Trading Edge Calculator">
+    <meta property="og:description" content="Calculate your trading edge! Risk-reward ratio, win rate & expectancy analysis with visual charts. Free professional tool!">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://brobillionaire.com/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Tools",
+                "item": "https://brobillionaire.com/tools.html"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Risk Reward Calculator",
+                "item": "https://brobillionaire.com/tool-risk-reward-calculator.html"
+            }
+        ]
+    }
+    </script>
+    
+    <style>
+        .tool-container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        .tool-header {
+            text-align: center; padding: 3rem 0;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-bottom: 3px solid #C9A227; margin-bottom: 3rem;
+        }
+        .tool-category {
+            display: inline-block; background: linear-gradient(135deg, #C9A227, #a68b1e);
+            color: #000; padding: 0.5rem 1.5rem; border-radius: 50px;
+            font-size: 0.85rem; font-weight: 700; letter-spacing: 1px;
+            margin-bottom: 1rem; text-transform: uppercase;
+        }
+        .tool-title {
+            font-size: 3rem; color: #fff; margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif; font-weight: 700;
+        }
+        .tool-subtitle {
+            font-size: 1.2rem; color: #ccc; max-width: 800px;
+            margin: 0 auto; line-height: 1.6;
+        }
+        .calculator-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+        .calculator-card {
+            background: linear-gradient(145deg, #1a1a1a, #252525);
+            border: 1px solid #333; border-radius: 15px; padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        .card-header { margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 2px solid #C9A227; }
+        .card-header h2 { color: #C9A227; font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .input-group { margin-bottom: 1.5rem; }
+        .input-label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+        .input-label label { color: #fff; font-weight: 600; font-size: 0.95rem; }
+        .input-value { color: #C9A227; font-weight: 700; font-size: 1.1rem; }
+        .input-field {
+            width: 100%; background: #0d0d0d; border: 2px solid #333;
+            border-radius: 8px; padding: 1rem; color: #fff; font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            outline: none; border-color: #C9A227;
+            box-shadow: 0 0 0 3px rgba(201,162,39,0.1);
+        }
+        .input-wrapper { position: relative; }
+        .input-prefix {
+            position: absolute; left: 1rem; top: 50%; transform: translateY(-50%);
+            color: #888; font-weight: 600;
+        }
+        .input-field.with-prefix { padding-left: 2.5rem; }
+        input[type="range"] {
+            width: 100%; height: 6px; background: #333; border-radius: 5px;
+            outline: none; -webkit-appearance: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none; width: 20px; height: 20px;
+            background: linear-gradient(135deg, #C9A227, #a68b1e);
+            cursor: pointer; border-radius: 50%;
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 20px; height: 20px;
+            background: linear-gradient(135deg, #C9A227, #a68b1e);
+            cursor: pointer; border-radius: 50%; border: none;
+        }
+        .results-container {
+            background: linear-gradient(145deg, #0d0d0d, #1a1a1a);
+            border: 2px solid #C9A227; border-radius: 15px; padding: 2rem;
+        }
+        .results-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem; }
+        .result-item {
+            background: #1a1a1a; padding: 1.5rem; border-radius: 10px;
+            border: 1px solid #333; text-align: center;
+        }
+        .result-label {
+            color: #888; font-size: 0.85rem; margin-bottom: 0.5rem;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .result-value {
+            font-size: 2rem; font-weight: 700; font-family: 'Inter', sans-serif;
+        }
+        .result-value.positive { color: #22c55e; }
+        .result-value.negative { color: #ef4444; }
+        .result-value.neutral { color: #C9A227; }
+        .chart-container {
+            background: #0d0d0d; border-radius: 10px; padding: 2rem;
+            margin-top: 2rem; border: 1px solid #333;
+        }
+        .chart-wrapper { position: relative; height: 300px; }
+        .verdict-box {
+            background: linear-gradient(145deg, #1a1a1a, #252525);
+            border-left: 4px solid #C9A227; padding: 1.5rem;
+            margin-top: 2rem; border-radius: 4px;
+        }
+        .verdict-box h3 { color: #C9A227; margin-bottom: 1rem; font-size: 1.3rem; }
+        .verdict-box p { color: #ccc; line-height: 1.6; margin-bottom: 0.5rem; }
+        .scenario-table {
+            width: 100%; margin-top: 2rem; border-collapse: collapse;
+            background: #1a1a1a; border-radius: 10px; overflow: hidden;
+        }
+        .scenario-table th {
+            background: #0d0d0d; color: #C9A227; padding: 1rem;
+            text-align: left; font-weight: 600; border-bottom: 2px solid #C9A227;
+        }
+        .scenario-table td {
+            padding: 1rem; color: #ccc; border-bottom: 1px solid #333;
+        }
+        .scenario-table tr:hover { background: #252525; }
+        .info-section {
+            background: linear-gradient(145deg, #1a1a1a, #252525);
+            border: 1px solid #333; border-radius: 15px; padding: 2rem; margin-top: 3rem;
+        }
+        .info-section h2 { color: #C9A227; font-size: 2rem; margin-bottom: 1.5rem; }
+        .info-section h3 { color: #fff; font-size: 1.5rem; margin: 2rem 0 1rem; }
+        .info-section p { color: #ccc; line-height: 1.8; margin-bottom: 1rem; }
+        .info-section ul { color: #ccc; line-height: 1.8; margin-left: 2rem; margin-bottom: 1rem; }
+        .formula-box {
+            background: #0d0d0d; border-left: 4px solid #C9A227;
+            padding: 1.5rem; margin: 1.5rem 0; border-radius: 4px;
+        }
+        .formula-box code {
+            color: #C9A227; font-size: 1.1rem; font-family: 'Courier New', monospace;
+        }
+        @media (max-width: 968px) {
+            .calculator-grid { grid-template-columns: 1fr; }
+            .results-grid { grid-template-columns: 1fr; }
+            .tool-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="tool-header">
+        <div class="tool-container">
+            <div class="tool-category">⚖️ FREE TRADING TOOL</div>
+            <h1 class="tool-title">Risk Reward Calculator</h1>
+            <p class="tool-subtitle">Calculate your trading edge with risk-reward ratio, win rate analysis & expectancy. Understand your breakeven point and profit potential.</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="tool-container">
+            <div class="calculator-grid">
+                <!-- Input Section -->
+                <div class="calculator-card">
+                    <div class="card-header">
+                        <h2>Trade Parameters</h2>
+                        <p>Enter your trading setup details</p>
+                    </div>
+                    
+                    <div class="input-group">
+                        <div class="input-label">
+                            <label>Entry Price</label>
+                            <span class="input-value">₹<span id="entryValue">1000</span></span>
+                        </div>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">₹</span>
+                            <input type="number" id="entry" class="input-field with-prefix" value="1000" step="1" oninput="calculate()">
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <div class="input-label">
+                            <label>Stop Loss Price</label>
+                            <span class="input-value">₹<span id="stopLossValue">950</span></span>
+                        </div>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">₹</span>
+                            <input type="number" id="stopLoss" class="input-field with-prefix" value="950" step="1" oninput="calculate()">
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <div class="input-label">
+                            <label>Target Price</label>
+                            <span class="input-value">₹<span id="targetValue">1100</span></span>
+                        </div>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">₹</span>
+                            <input type="number" id="target" class="input-field with-prefix" value="1100" step="1" oninput="calculate()">
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <div class="input-label">
+                            <label>Win Rate (%)</label>
+                            <span class="input-value"><span id="winRateValue">50</span>%</span>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="range" id="winRate" class="input-field" min="0" max="100" step="1" value="50" oninput="calculate()">
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <div class="input-label">
+                            <label>Position Size (Capital Allocated)</label>
+                            <span class="input-value">₹<span id="positionSizeValue">50000</span></span>
+                        </div>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">₹</span>
+                            <input type="number" id="positionSize" class="input-field with-prefix" value="50000" step="1000" oninput="calculate()">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Results Section -->
+                <div class="calculator-card">
+                    <div class="results-container">
+                        <div class="results-grid">
+                            <div class="result-item">
+                                <div class="result-label">Risk:Reward Ratio</div>
+                                <div class="result-value neutral" id="rrRatio">0:0</div>
+                            </div>
+                            
+                            <div class="result-item">
+                                <div class="result-label">Breakeven Win Rate</div>
+                                <div class="result-value neutral" id="breakevenWR">0%</div>
+                            </div>
+                            
+                            <div class="result-item">
+                                <div class="result-label">Trading Expectancy</div>
+                                <div class="result-value neutral" id="expectancy">₹0</div>
+                            </div>
+                            
+                            <div class="result-item">
+                                <div class="result-label">Profit Factor</div>
+                                <div class="result-value neutral" id="profitFactor">0.00</div>
+                            </div>
+                        </div>
+                        
+                        <div class="results-grid">
+                            <div class="result-item">
+                                <div class="result-label">Risk Amount</div>
+                                <div class="result-value negative" id="riskAmount">₹0</div>
+                            </div>
+                            
+                            <div class="result-item">
+                                <div class="result-label">Reward Amount</div>
+                                <div class="result-value positive" id="rewardAmount">₹0</div>
+                            </div>
+                        </div>
+                        
+                        <div class="verdict-box" id="verdictBox">
+                            <h3 id="verdictTitle">Analysis</h3>
+                            <p id="verdictText"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Charts -->
+            <div class="calculator-grid">
+                <div class="calculator-card">
+                    <div class="chart-container">
+                        <h3 style="color: #fff; margin-bottom: 1rem;">Win Rate vs Expectancy</h3>
+                        <div class="chart-wrapper">
+                            <canvas id="expectancyChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="calculator-card">
+                    <div class="chart-container">
+                        <h3 style="color: #fff; margin-bottom: 1rem;">100 Trades Projection</h3>
+                        <div class="chart-wrapper">
+                            <canvas id="projectionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scenario Analysis -->
+            <div class="calculator-card">
+                <div class="card-header">
+                    <h2>Scenario Analysis - 100 Trades</h2>
+                    <p>See how different win rates affect your profitability</p>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table class="scenario-table" id="scenarioTable">
+                        <thead>
+                            <tr>
+                                <th>Win Rate</th>
+                                <th>Winning Trades</th>
+                                <th>Losing Trades</th>
+                                <th>Total Profit</th>
+                                <th>Total Loss</th>
+                                <th>Net P&L</th>
+                                <th>Expectancy/Trade</th>
+                            </tr>
+                        </thead>
+                        <tbody id="scenarioBody"></tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Information Section -->
+            <div class="info-section">
+                <h2>Understanding Risk-Reward Ratio</h2>
+                
+                <p>The Risk-Reward Ratio (R:R) is the cornerstone of profitable trading. It tells you how much profit you stand to gain for every rupee you risk. Combined with your win rate, it determines your trading edge and long-term profitability.</p>
+                
+                <h3>What is Risk-Reward Ratio?</h3>
+                <p>Risk-Reward Ratio compares the potential loss (risk) to potential profit (reward) on a trade.</p>
+                
+                <div class="formula-box">
+                    <strong>Formula:</strong><br>
+                    <code>R:R Ratio = (Target - Entry) / (Entry - Stop Loss)</code><br><br>
+                    Example: Entry ₹1000, Stop Loss ₹950, Target ₹1100<br>
+                    R:R = (1100-1000) / (1000-950) = 100/50 = 2:1<br>
+                    Meaning: For every ₹1 risked, you can gain ₹2
+                </div>
+                
+                <h3>Breakeven Win Rate</h3>
+                <p>This is the minimum win rate you need to just break even (not lose money) with your current R:R ratio.</p>
+                
+                <div class="formula-box">
+                    <strong>Formula:</strong><br>
+                    <code>Breakeven Win Rate = 100 / (R:R Ratio + 1)</code><br><br>
+                    For 1:2 R:R: Breakeven = 100 / (2+1) = 33.33%<br>
+                    For 1:1 R:R: Breakeven = 50%<br>
+                    For 2:1 R:R: Breakeven = 66.67%
+                </div>
+                
+                <p><strong>Key Insight:</strong> Higher R:R means you need lower win rate to be profitable! With 1:3 R:R, you only need 25% win rate to break even.</p>
+                
+                <h3>Trading Expectancy</h3>
+                <p>Expectancy tells you the average amount you can expect to win or lose per trade over many trades. Positive expectancy = profitable system.</p>
+                
+                <div class="formula-box">
+                    <strong>Formula:</strong><br>
+                    <code>Expectancy = (Win Rate × Avg Win) - (Loss Rate × Avg Loss)</code><br><br>
+                    Example: 50% win rate, Avg win ₹100, Avg loss ₹50<br>
+                    Expectancy = (0.5 × 100) - (0.5 × 50) = ₹25 per trade<br>
+                    Over 100 trades: 100 × ₹25 = ₹2,500 profit expected
+                </div>
+                
+                <h3>Profit Factor</h3>
+                <p>Ratio of gross profit to gross loss. Must be above 1.0 to be profitable.</p>
+                
+                <div class="formula-box">
+                    <strong>Formula:</strong><br>
+                    <code>Profit Factor = Gross Profit / Gross Loss</code><br><br>
+                    1.0 = Break even<br>
+                    1.5 = Good<br>
+                    2.0+ = Excellent<br>
+                    Below 1.0 = Losing money
+                </div>
+                
+                <h3>The Magic of R:R Ratio</h3>
+                
+                <p><strong>Example 1: Professional Trader</strong><br>
+                Entry: ₹1000 | Stop: ₹980 | Target: ₹1060<br>
+                Risk: ₹20 | Reward: ₹60 | R:R = 1:3<br>
+                Even with 40% win rate, they make money!<br>
+                10 trades: 4 wins (₹240) vs 6 losses (₹120) = ₹120 profit</p>
+                
+                <p><strong>Example 2: Amateur Trader</strong><br>
+                Entry: ₹1000 | Stop: ₹940 | Target: ₹1020<br>
+                Risk: ₹60 | Reward: ₹20 | R:R = 1:0.33<br>
+                Even with 60% win rate, they lose money!<br>
+                10 trades: 6 wins (₹120) vs 4 losses (₹240) = -₹120 loss</p>
+                
+                <h3>Ideal R:R Ratios by Trading Style</h3>
+                
+                <ul>
+                    <li><strong>Scalping (seconds to minutes):</strong> 1:1 to 1:1.5 - Need 55-60% win rate</li>
+                    <li><strong>Day Trading:</strong> 1:2 to 1:3 - Need 35-40% win rate</li>
+                    <li><strong>Swing Trading (days to weeks):</strong> 1:3 to 1:5 - Need 25-30% win rate</li>
+                    <li><strong>Position Trading (months):</strong> 1:5+ - Can work with 20% win rate</li>
+                </ul>
+                
+                <h3>Common R:R Mistakes</h3>
+                
+                <ul>
+                    <li><strong>Moving Stop Loss After Entry:</strong> Destroys your planned R:R ratio. Stick to your plan!</li>
+                    <li><strong>Taking Profit Too Early:</strong> Ruins your R:R. If you planned 1:3, don't exit at 1:1.5</li>
+                    <li><strong>Ignoring Win Rate:</strong> 1:10 R:R sounds great, but if you only win 5% of time, you'll lose money</li>
+                    <li><strong>Unrealistic Targets:</strong> Setting 1:10 R:R when market moves only 2% daily</li>
+                    <li><strong>No Stop Loss:</strong> Unlimited risk = Eventual account blow-up</li>
+                    <li><strong>Random R:R:</strong> Each trade needs proper R:R based on technical levels, not arbitrary numbers</li>
+                </ul>
+                
+                <h3>How to Improve Your R:R</h3>
+                
+                <ul>
+                    <li><strong>Enter Near Support/Resistance:</strong> Tight stop loss = Better R:R</li>
+                    <li><strong>Use Limit Orders:</strong> Get better entry price = Improved R:R</li>
+                    <li><strong>Scale In:</strong> Add to winning positions to improve average R:R</li>
+                    <li><strong>Trail Stop Loss:</strong> Lock profits while keeping reward potential</li>
+                    <li><strong>Wait for Setup:</strong> Don't force trades with poor R:R</li>
+                    <li><strong>Multi-Timeframe Analysis:</strong> Identify better entry/exit points</li>
+                </ul>
+                
+                <h3>R:R in Different Market Conditions</h3>
+                
+                <p><strong>Trending Market:</strong> Aim for 1:3 or better. Trends can run, so let profits run. Use trailing stops.</p>
+                
+                <p><strong>Range-Bound Market:</strong> Use 1:1.5 to 1:2. Take profits at resistance/support. Markets reverse quickly in ranges.</p>
+                
+                <p><strong>High Volatility:</strong> Wider stops needed. Maintain R:R by having proportionally wider targets.</p>
+                
+                <p><strong>Low Volatility:</strong> Tight stops possible. But targets also limited. Accept lower absolute gains.</p>
+                
+                <h3>Position Sizing with R:R</h3>
+                
+                <p>R:R ratio directly impacts position sizing. With better R:R, you can risk same 1-2% of capital but have much higher profit potential.</p>
+                
+                <div class="formula-box">
+                    <strong>Position Size Formula:</strong><br>
+                    <code>Position Size = (Account Risk %) / (Entry - Stop Loss)</code><br><br>
+                    Account: ₹5,00,000 | Risk per trade: 2% = ₹10,000<br>
+                    Entry: ₹1000 | Stop: ₹980 | Risk per share: ₹20<br>
+                    Position Size = ₹10,000 / ₹20 = 500 shares<br>
+                    If target ₹1060 hit: Profit = 500 × ₹60 = ₹30,000 (6% gain)
+                </div>
+                
+                <h3>Win Rate vs R:R: Finding Your Edge</h3>
+                
+                <p>You need EITHER high win rate OR high R:R. You rarely get both:</p>
+                
+                <ul>
+                    <li><strong>High Win Rate + Low R:R:</strong> Mean reversion, range trading, selling options. Consistent small wins, occasional big loss.</li>
+                    <li><strong>Low Win Rate + High R:R:</strong> Trend following, breakout trading, buying options. Many small losses, occasional huge win.</li>
+                    <li><strong>Both High:</strong> Holy grail, very difficult. Usually results from exceptional skill or favorable market conditions.</li>
+                    <li><strong>Both Low:</strong> Losing strategy, stop trading immediately!</li>
+                </ul>
+                
+                <h3>Real Trading Statistics</h3>
+                
+                <p><strong>Turtle Traders (Legendary Trend Followers):</strong><br>
+                Win Rate: ~40% | Average R:R: 1:10+<br>
+                Result: Turned $1M into $100M+ over years</p>
+                
+                <p><strong>Typical Retail Trader:</strong><br>
+                Win Rate: ~60% | Average R:R: 1:0.5<br>
+                Result: Slowly bleeds account despite winning more often!</p>
+                
+                <p><strong>Professional Day Trader:</strong><br>
+                Win Rate: 55% | Average R:R: 1:2<br>
+                Result: Consistent monthly profits</p>
+                
+                <h3>The Psychology Factor</h3>
+                
+                <p>Most traders struggle with R:R because:</p>
+                
+                <ul>
+                    <li><strong>Fear of Loss:</strong> Exit winners too early to "secure" profit</li>
+                    <li><strong>Hope of Recovery:</strong> Hold losers too long, turning 1R loss into 3R+ loss</li>
+                    <li><strong>Revenge Trading:</strong> Take low R:R trades to "win back" losses quickly</li>
+                    <li><strong>Overconfidence:</strong> Taking massive risk for small reward (selling naked options)</li>
+                </ul>
+                
+                <p>Solution: Pre-define your R:R before entry. Use alerts/orders to execute mechanically. Remove emotion.</p>
+                
+                <h3>Action Plan for Success</h3>
+                
+                <ol style="color: #ccc; line-height: 1.8; margin-left: 2rem;">
+                    <li>Track your last 50 trades - calculate actual R:R and win rate</li>
+                    <li>Calculate your current expectancy - is it positive?</li>
+                    <li>Identify why R:R was poor on losing streaks</li>
+                    <li>Set minimum R:R rule (e.g., never trade below 1:2)</li>
+                    <li>Use this calculator BEFORE every trade</li>
+                    <li>Journal each trade - did you follow your R:R plan?</li>
+                    <li>Review monthly - adjust strategy based on data</li>
+                </ol>
+                
+                <h3>Pro Tips</h3>
+                
+                <ul>
+                    <li>Aim for 1:2 minimum R:R on all trades</li>
+                    <li>With 1:2 R:R, you only need 35% win rate to profit</li>
+                    <li>Never adjust stop loss to "give trade more room" - plan it correctly initially</li>
+                    <li>If target is hit, consider scaling out and trailing remaining position</li>
+                    <li>Bad R:R trade = No trade. Wait for better setup</li>
+                    <li>Track your R:R over time - it's more important than win rate!</li>
+                    <li>One 1:10 winner can cover ten 1:1 losers</li>
+                </ul>
+                
+                <h3>Final Thoughts</h3>
+                
+                <p>Risk-Reward ratio is mathematics, not opinion. You cannot argue with math. A trader with 40% win rate and 1:3 R:R will outperform a trader with 60% win rate and 1:0.5 R:R over time. Focus on your R:R, and profits will follow. Trade smart, not just frequently!</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let expectancyChart = null;
+        let projectionChart = null;
+        
+        function formatCurrency(amount) {
+            return '₹' + Math.round(amount).toLocaleString('en-IN');
+        }
+        
+        function calculate() {
+            const entry = parseFloat(document.getElementById('entry').value);
+            const stopLoss = parseFloat(document.getElementById('stopLoss').value);
+            const target = parseFloat(document.getElementById('target').value);
+            const winRate = parseFloat(document.getElementById('winRate').value);
+            const positionSize = parseFloat(document.getElementById('positionSize').value);
+            
+            // Update display values
+            document.getElementById('entryValue').textContent = entry;
+            document.getElementById('stopLossValue').textContent = stopLoss;
+            document.getElementById('targetValue').textContent = target;
+            document.getElementById('winRateValue').textContent = winRate;
+            document.getElementById('positionSizeValue').textContent = positionSize;
+            
+            // Calculate risk and reward
+            const risk = Math.abs(entry - stopLoss);
+            const reward = Math.abs(target - entry);
+            
+            // Calculate R:R ratio
+            const rrRatio = reward / risk;
+            
+            // Calculate breakeven win rate
+            const breakevenWR = (1 / (1 + rrRatio)) * 100;
+            
+            // Calculate amounts
+            const quantity = Math.floor(positionSize / entry);
+            const riskAmount = risk * quantity;
+            const rewardAmount = reward * quantity;
+            
+            // Calculate expectancy
+            const lossRate = 100 - winRate;
+            const expectancyPerTrade = ((winRate/100) * rewardAmount) - ((lossRate/100) * riskAmount);
+            
+            // Calculate profit factor
+            const grossProfit = (winRate/100) * rewardAmount * 100;
+            const grossLoss = (lossRate/100) * riskAmount * 100;
+            const profitFactor = grossLoss > 0 ? grossProfit / grossLoss : 0;
+            
+            // Update results
+            document.getElementById('rrRatio').textContent = '1:' + rrRatio.toFixed(2);
+            document.getElementById('breakevenWR').textContent = breakevenWR.toFixed(1) + '%';
+            document.getElementById('expectancy').textContent = formatCurrency(expectancyPerTrade);
+            document.getElementById('profitFactor').textContent = profitFactor.toFixed(2);
+            document.getElementById('riskAmount').textContent = formatCurrency(riskAmount);
+            document.getElementById('rewardAmount').textContent = formatCurrency(rewardAmount);
+            
+            // Style expectancy
+            const expElement = document.getElementById('expectancy');
+            expElement.className = 'result-value ' + (expectancyPerTrade > 0 ? 'positive' : expectancyPerTrade < 0 ? 'negative' : 'neutral');
+            
+            // Style profit factor
+            const pfElement = document.getElementById('profitFactor');
+            pfElement.className = 'result-value ' + (profitFactor > 1 ? 'positive' : profitFactor < 1 ? 'negative' : 'neutral');
+            
+            // Update verdict
+            updateVerdict(rrRatio, winRate, breakevenWR, expectancyPerTrade, profitFactor);
+            
+            // Update charts
+            updateExpectancyChart(riskAmount, rewardAmount);
+            updateProjectionChart(winRate, riskAmount, rewardAmount);
+            
+            // Update scenario table
+            updateScenarioTable(riskAmount, rewardAmount);
+        }
+        
+        function updateVerdict(rrRatio, winRate, breakevenWR, expectancy, profitFactor) {
+            let title, text, color;
+            
+            if (expectancy > 0 && winRate > breakevenWR) {
+                if (rrRatio >= 2 && profitFactor >= 1.5) {
+                    title = '✅ Excellent Setup!';
+                    text = `This is a high-quality trade setup! Your R:R ratio of 1:${rrRatio.toFixed(2)} is excellent, and your ${winRate}% win rate is well above the ${breakevenWR.toFixed(1)}% breakeven. Your positive expectancy of ${formatCurrency(expectancy)} per trade means you have a strong edge. With a profit factor of ${profitFactor.toFixed(2)}, this strategy should be profitable over time.`;
+                    color = '#22c55e';
+                } else {
+                    title = '✓ Good Setup';
+                    text = `This is a profitable trade setup. Your ${winRate}% win rate exceeds the ${breakevenWR.toFixed(1)}% breakeven requirement. Positive expectancy of ${formatCurrency(expectancy)} per trade indicates you should be profitable over time. Consider improving your R:R ratio to ${rrRatio < 2 ? '1:2 or better' : 'even higher'} for better results.`;
+                    color = '#C9A227';
+                }
+            } else if (expectancy <= 0 || winRate <= breakevenWR) {
+                title = '⚠️ Poor Setup';
+                text = `Warning: This setup has negative or break-even expectancy. Your ${winRate}% win rate is ${winRate < breakevenWR ? 'below' : 'at'} the ${breakevenWR.toFixed(1)}% breakeven rate. With a profit factor of ${profitFactor.toFixed(2)}, this trade will likely lose money over time. ${rrRatio < 1 ? 'Your risk exceeds your reward - this is a very poor setup.' : 'Consider waiting for a better entry/exit to improve your R:R ratio.'} Don't take this trade!`;
+                color = '#ef4444';
+            }
+            
+            document.getElementById('verdictTitle').textContent = title;
+            document.getElementById('verdictTitle').style.color = color;
+            document.getElementById('verdictText').textContent = text;
+        }
+        
+        function updateExpectancyChart(riskAmount, rewardAmount) {
+            const ctx = document.getElementById('expectancyChart').getContext('2d');
+            
+            const winRates = [];
+            const expectancies = [];
+            
+            for (let wr = 0; wr <= 100; wr += 5) {
+                winRates.push(wr);
+                const lossRate = 100 - wr;
+                const exp = ((wr/100) * rewardAmount) - ((lossRate/100) * riskAmount);
+                expectancies.push(exp);
+            }
+            
+            if (expectancyChart) {
+                expectancyChart.destroy();
+            }
+            
+            expectancyChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: winRates,
+                    datasets: [{
+                        label: 'Expectancy per Trade',
+                        data: expectancies,
+                        borderColor: '#C9A227',
+                        backgroundColor: 'rgba(201,162,39,0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.1
+                    }, {
+                        label: 'Zero Line',
+                        data: Array(winRates.length).fill(0),
+                        borderColor: '#666',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        pointRadius: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Win Rate %', color: '#ccc' },
+                            grid: { color: '#333' },
+                            ticks: { color: '#ccc' }
+                        },
+                        y: {
+                            title: { display: true, text: 'Expectancy', color: '#ccc' },
+                            grid: { color: '#333' },
+                            ticks: {
+                                color: '#ccc',
+                                callback: function(value) {
+                                    return formatCurrency(value);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function updateProjectionChart(winRate, riskAmount, rewardAmount) {
+            const ctx = document.getElementById('projectionChart').getContext('2d');
+            
+            const numTrades = 100;
+            const winningTrades = Math.round((winRate / 100) * numTrades);
+            const losingTrades = numTrades - winningTrades;
+            const totalProfit = winningTrades * rewardAmount;
+            const totalLoss = losingTrades * riskAmount;
+            const netPL = totalProfit - totalLoss;
+            
+            if (projectionChart) {
+                projectionChart.destroy();
+            }
+            
+            projectionChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Total Profit', 'Total Loss', 'Net P&L'],
+                    datasets: [{
+                        data: [totalProfit, -totalLoss, netPL],
+                        backgroundColor: [
+                            'rgba(34, 197, 94, 0.8)',
+                            'rgba(239, 68, 68, 0.8)',
+                            netPL >= 0 ? 'rgba(201, 162, 39, 0.8)' : 'rgba(239, 68, 68, 0.8)'
+                        ],
+                        borderColor: [
+                            '#22c55e',
+                            '#ef4444',
+                            netPL >= 0 ? '#C9A227' : '#ef4444'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: '#333' },
+                            ticks: { color: '#ccc' }
+                        },
+                        y: {
+                            grid: { color: '#333' },
+                            ticks: {
+                                color: '#ccc',
+                                callback: function(value) {
+                                    return formatCurrency(value);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function updateScenarioTable(riskAmount, rewardAmount) {
+            const tbody = document.getElementById('scenarioBody');
+            tbody.innerHTML = '';
+            
+            for (let wr = 10; wr <= 90; wr += 10) {
+                const numTrades = 100;
+                const wins = Math.round((wr / 100) * numTrades);
+                const losses = numTrades - wins;
+                const totalProfit = wins * rewardAmount;
+                const totalLoss = losses * riskAmount;
+                const netPL = totalProfit - totalLoss;
+                const expectancy = netPL / numTrades;
+                
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td style="font-weight: 600;">${wr}%</td>
+                    <td>${wins}</td>
+                    <td>${losses}</td>
+                    <td style="color: #22c55e;">${formatCurrency(totalProfit)}</td>
+                    <td style="color: #ef4444;">${formatCurrency(totalLoss)}</td>
+                    <td style="color: ${netPL >= 0 ? '#22c55e' : '#ef4444'}; font-weight: 700;">${formatCurrency(netPL)}</td>
+                    <td style="color: ${expectancy >= 0 ? '#22c55e' : '#ef4444'};">${formatCurrency(expectancy)}</td>
+                `;
+            }
+        }
+        
+        // Initialize on page load
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

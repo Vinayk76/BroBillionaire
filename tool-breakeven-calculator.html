@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <title>Breakeven Calculator FREE - Options & Trading Breakeven Price Calculator 2026 | BroBillionaire</title>
+    <meta name="description" content="FREE Breakeven Calculator - Calculate breakeven prices for options, spreads, and trades. Includes commission costs, slippage. Essential for profitable trading.">
+    <meta name="keywords" content="breakeven calculator, breakeven price calculator, options breakeven calculator, trading breakeven calculator, breakeven point calculator trading, cost basis calculator, breakeven analysis trading, profit breakeven calculator india">
+    <meta name="author" content="BroBillionaire">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://brobillionaire.com/tool-breakeven-calculator.html">
+    
+    <meta property="og:title" content="FREE Breakeven Calculator - Trading Tool">
+    <meta property="og:description" content="Calculate breakeven prices for options and trades with commissions.">
+    <meta property="og:url" content="https://brobillionaire.com/tool-breakeven-calculator.html">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="responsive.css">
+    
+    <style>
+        .tool-container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+        .tool-header {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 50%, var(--bg-secondary) 100%);
+            padding: 140px 20px 80px; text-align: center; border-bottom: 1px solid var(--border-gold);
+        }
+        .tool-category {
+            display: inline-block; background: rgba(201, 162, 39, 0.15); color: var(--gold);
+            padding: 8px 20px; border-radius: 25px; font-size: 0.8rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 1.5rem; border: 1px solid var(--border-gold);
+        }
+        .tool-title {
+            font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-bottom: 20px; font-weight: 700;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .tool-subtitle { font-size: 1.15rem; color: var(--text-secondary); max-width: 800px; margin: 0 auto; line-height: 1.8; }
+        .main-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 60px 40px; }
+        .calculator-section, .results-section {
+            background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 40px;
+        }
+        .section-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 30px; color: var(--text-primary); }
+        .input-group { margin-bottom: 25px; }
+        label { display: block; font-weight: 600; margin-bottom: 10px; color: var(--text-primary); }
+        .label-info { font-weight: 400; color: var(--text-tertiary); font-size: 0.85rem; display: block; margin-top: 3px; }
+        input, select {
+            width: 100%; padding: 14px 18px; border: 1px solid var(--border-color); border-radius: 8px;
+            background: var(--bg-tertiary); color: var(--text-primary); font-family: 'Inter', sans-serif;
+        }
+        input:focus, select:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.1); }
+        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .result-card {
+            background: var(--bg-tertiary); padding: 25px; border-radius: 12px;
+            border: 1px solid var(--border-color); margin-bottom: 20px;
+        }
+        .result-main {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.2), rgba(201, 162, 39, 0.05));
+            border: 2px solid var(--border-gold);
+        }
+        .result-label { font-size: 0.85rem; font-weight: 700; color: var(--text-tertiary); margin-bottom: 8px; text-transform: uppercase; }
+        .result-value {
+            font-size: 3rem; font-weight: 800;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .stat-card { background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 10px; padding: 20px; text-align: center; }
+        .stat-title { font-size: 0.8rem; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; color: var(--text-tertiary); }
+        .stat-value { font-size: 1.8rem; font-weight: 800; color: var(--text-primary); }
+        .btn-primary {
+            padding: 14px 32px; border: none; border-radius: 8px; font-weight: 600;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--bg-primary); width: 100%; margin-top: 20px; cursor: pointer;
+            font-family: 'Inter', sans-serif; transition: all 0.3s;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(201, 162, 39, 0.4); }
+        .tips-section { background: var(--bg-secondary); padding: 80px 40px; }
+        .tips-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
+        .tip-card {
+            background: var(--bg-card); padding: 30px; border-radius: 12px;
+            border: 1px solid var(--border-color); transition: all 0.3s;
+        }
+        .tip-card:hover { transform: translateY(-5px); border-color: var(--border-gold); }
+        .tip-icon { font-size: 2.5rem; margin-bottom: 20px; }
+        .tip-title { font-weight: 700; margin-bottom: 12px; color: var(--gold); }
+        .tip-text { color: var(--text-secondary); line-height: 1.7; }
+        @media (max-width: 968px) {
+            .main-content, .tips-grid, .input-row, .stats-grid { grid-template-columns: 1fr; }
+            .tool-title { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                <span class="logo-text">BroBillionaire</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="articles.html" class="nav-link">Articles</a>
+                <a href="tools.html" class="nav-link active">Tools</a>
+                <a href="about.html" class="nav-link">About</a>
+            </div>
+            <button class="cta-btn gold-btn" onclick="window.location.href='articles.html'">Read Free</button>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+    <div class="mobile-nav-dropdown" id="mobileNavDropdown">
+        <a href="index.html">Home</a><a href="articles.html">Articles</a>
+        <a href="tools.html">Tools</a><a href="about.html">About</a>
+    </div>
+
+    <header class="tool-header">
+        <div class="tool-container">
+            <div class="tool-category">⚖️ FREE TRADING TOOL</div>
+            <h1 class="tool-title">Breakeven Calculator</h1>
+            <p class="tool-subtitle">Calculate accurate breakeven prices for stocks, options, and spreads. Factor in commissions, taxes, and slippage to know your true profit threshold.</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="tool-container">
+            <div class="main-content">
+                <div class="calculator-section">
+                    <h2 class="section-title">💼 Trade Details</h2>
+
+                    <div class="input-group">
+                        <label for="tradeType">Trade Type</label>
+                        <select id="tradeType" onchange="updateFields()">
+                            <option value="stock">Stock/Equity</option>
+                            <option value="futures">Futures</option>
+                            <option value="call">Call Option (Buy)</option>
+                            <option value="put">Put Option (Buy)</option>
+                            <option value="spread">Option Spread</option>
+                        </select>
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="entryPrice">
+                                Entry Price (₹)
+                                <span class="label-info">Purchase price per share/contract</span>
+                            </label>
+                            <input type="number" id="entryPrice" value="100" min="0" step="0.05">
+                        </div>
+                        <div class="input-group">
+                            <label for="quantity">
+                                Quantity
+                                <span class="label-info">Number of shares/contracts</span>
+                            </label>
+                            <input type="number" id="quantity" value="100" min="1" step="1">
+                        </div>
+                    </div>
+
+                    <div class="input-group" id="strikeGroup" style="display: none;">
+                        <label for="strikePrice">
+                            Strike Price (₹)
+                            <span class="label-info">For options only</span>
+                        </label>
+                        <input type="number" id="strikePrice" value="22500" min="0" step="0.05">
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="brokerage">
+                                Brokerage Per Trade (₹)
+                                <span class="label-info">Commission charges</span>
+                            </label>
+                            <input type="number" id="brokerage" value="20" min="0" step="1">
+                        </div>
+                        <div class="input-group">
+                            <label for="stt">
+                                STT (%)
+                                <span class="label-info">Securities Transaction Tax</span>
+                            </label>
+                            <input type="number" id="stt" value="0.025" min="0" max="1" step="0.001">
+                        </div>
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="otherCharges">
+                                Other Charges (₹)
+                                <span class="label-info">GST, stamp duty, etc.</span>
+                            </label>
+                            <input type="number" id="otherCharges" value="10" min="0" step="1">
+                        </div>
+                        <div class="input-group">
+                            <label for="slippage">
+                                Slippage (%)
+                                <span class="label-info">Expected execution slippage</span>
+                            </label>
+                            <input type="number" id="slippage" value="0.1" min="0" max="5" step="0.1">
+                        </div>
+                    </div>
+
+                    <button class="btn-primary" onclick="calculate()">Calculate Breakeven</button>
+                </div>
+
+                <div class="results-section">
+                    <h2 class="section-title">🎯 Breakeven Analysis</h2>
+
+                    <div class="result-card result-main">
+                        <div class="result-label">BREAKEVEN PRICE</div>
+                        <div class="result-value" id="breakevenPrice">₹0</div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-title">Entry Cost</div>
+                            <div class="stat-value" id="entryCost">₹0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-title">Exit Cost</div>
+                            <div class="stat-value" id="exitCost">₹0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-title">Total Charges</div>
+                            <div class="stat-value" id="totalCharges">₹0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-title">Move Needed</div>
+                            <div class="stat-value" id="moveNeeded">0%</div>
+                        </div>
+                    </div>
+
+                    <div style="background: var(--bg-tertiary); padding: 25px; border-radius: 12px; margin-top: 20px; border: 1px solid var(--border-color);">
+                        <h3 style="margin-bottom: 15px; color: var(--text-primary);">📊 Profit Scenarios</h3>
+                        <table style="width: 100%; color: var(--text-primary);">
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <th style="padding: 10px; text-align: left;">Exit Price</th>
+                                <th style="padding: 10px; text-align: right;">Net P&L</th>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 10px;" id="price1Label">₹0</td>
+                                <td style="padding: 10px; text-align: right;" id="profit1">₹0</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 10px;" id="price2Label">₹0</td>
+                                <td style="padding: 10px; text-align: right;" id="profit2">₹0</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 10px;" id="price3Label">₹0</td>
+                                <td style="padding: 10px; text-align: right;" id="profit3">₹0</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px;" id="price4Label">₹0</td>
+                                <td style="padding: 10px; text-align: right;" id="profit4">₹0</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div style="background: rgba(239, 68, 68, 0.1); padding: 20px; border-radius: 12px; margin-top: 20px; border: 1px solid rgba(239, 68, 68, 0.3);">
+                        <h4 style="color: var(--red); margin-bottom: 10px;">💡 Breakeven Insight</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;" id="insight">Enter trade details to see analysis.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tips-section">
+            <div class="tool-container">
+                <h2 class="section-title">🎓 Breakeven Trading Tips</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <div class="tip-icon">💰</div>
+                        <div class="tip-title">Hidden Costs</div>
+                        <div class="tip-text">Brokerage + STT + GST + Stamp Duty + Slippage = 0.3-0.7% per round trip. On ₹1L trade, you pay ₹300-700 before making any profit. Factor all costs or you'll overestimate returns.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">📊</div>
+                        <div class="tip-title">Options Breakeven</div>
+                        <div class="tip-text">Call breakeven = Strike + Premium + Costs. Put breakeven = Strike - Premium - Costs. 90% of options expire worthless partly because traders ignore breakeven threshold and costs.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">⚡</div>
+                        <div class="tip-title">Frequency Kills</div>
+                        <div class="tip-text">Day traders with 10 trades/day pay ₹200-300 in costs per trade = ₹2000-3000 daily. Need ₹60,000-90,000 monthly profit just to breakeven. High frequency = high costs.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">🎯</div>
+                        <div class="tip-title">Slippage Impact</div>
+                        <div class="tip-text">Market orders during volatility = 0.2-1% slippage. Illiquid stocks worse. On ₹10L trade, 0.5% slippage = ₹5000 gone instantly. Use limit orders and avoid high impact trades.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">💡</div>
+                        <div class="tip-title">Spread Math</div>
+                        <div class="tip-text">Options spreads have 2× costs (buy + sell legs). Bull call spread needs larger move to profit than naked call. Always calculate net breakeven including all four transaction costs.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">📈</div>
+                        <div class="tip-title">Target Above Breakeven</div>
+                        <div class="tip-text">Always set target at least 2× above breakeven. If breakeven is +2%, target should be +4%. This gives cushion for partial exits, unexpected costs, and risk:reward management.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand-section">
+                <div class="logo">
+                    <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                    <span class="logo-text">BroBillionaire</span>
+                </div>
+                <p class="tagline">Master the markets with free trading education.</p>
+            </div>
+            <nav class="footer-nav">
+                <a href="index.html">Home</a>
+                <a href="articles.html">Articles</a>
+                <a href="tools.html">Tools</a>
+                <a href="about.html">About</a>
+            </nav>
+        </div>
+    </footer>
+    <div class="footer-disclaimer">
+        <p>&copy; 2026 BroBillionaire. Always factor in all costs before trading.</p>
+    </div>
+
+    <script>
+        function updateFields() {
+            const type = document.getElementById('tradeType').value;
+            const strikeGroup = document.getElementById('strikeGroup');
+            if (type === 'call' || type === 'put' || type === 'spread') {
+                strikeGroup.style.display = 'block';
+            } else {
+                strikeGroup.style.display = 'none';
+            }
+            calculate();
+        }
+
+        document.querySelectorAll('input, select').forEach(el => {
+            el.addEventListener('input', calculate);
+        });
+        calculate();
+
+        function calculate() {
+            const entry = parseFloat(document.getElementById('entryPrice').value) || 0;
+            const qty = parseFloat(document.getElementById('quantity').value) || 0;
+            const brokerage = parseFloat(document.getElementById('brokerage').value) || 0;
+            const stt = parseFloat(document.getElementById('stt').value) || 0;
+            const otherCharges = parseFloat(document.getElementById('otherCharges').value) || 0;
+            const slippage = parseFloat(document.getElementById('slippage').value) || 0;
+
+            const entryCost = entry * qty;
+            const entryBrokerage = brokerage;
+            const entrySTT = (entryCost * stt) / 100;
+            const entrySlippage = (entryCost * slippage) / 100;
+            const totalEntryCost = entryCost + entryBrokerage + entrySTT + entrySlippage + otherCharges;
+
+            const exitBrokerage = brokerage;
+            const exitSTT = (entryCost * stt) / 100;
+            const exitSlippage = (entryCost * slippage) / 100;
+            const totalExitCost = exitBrokerage + exitSTT + exitSlippage + otherCharges;
+
+            const totalCharges = entryBrokerage + exitBrokerage + entrySTT + exitSTT + entrySlippage + exitSlippage + (otherCharges * 2);
+            const breakeven = (totalEntryCost + totalExitCost) / qty;
+            const moveNeeded = ((breakeven - entry) / entry) * 100;
+
+            document.getElementById('breakevenPrice').textContent = '₹' + breakeven.toFixed(2);
+            document.getElementById('entryCost').textContent = '₹' + totalEntryCost.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('exitCost').textContent = '₹' + totalExitCost.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('totalCharges').textContent = '₹' + totalCharges.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('moveNeeded').textContent = '+' + moveNeeded.toFixed(2) + '%';
+
+            // Profit scenarios
+            const scenarios = [
+                { price: entry * 0.95, label: '-5%' },
+                { price: breakeven, label: 'Breakeven' },
+                { price: entry * 1.05, label: '+5%' },
+                { price: entry * 1.10, label: '+10%' }
+            ];
+
+            scenarios.forEach((s, i) => {
+                const exitValue = s.price * qty;
+                const netPL = exitValue - totalEntryCost - totalExitCost;
+                document.getElementById(`price${i+1}Label`).textContent = '₹' + s.price.toFixed(2) + ' (' + s.label + ')';
+                document.getElementById(`profit${i+1}`).textContent = (netPL >= 0 ? '+' : '') + '₹' + netPL.toFixed(0);
+                document.getElementById(`profit${i+1}`).style.color = netPL >= 0 ? 'var(--green)' : 'var(--red)';
+            });
+
+            // Insight
+            const costPct = (totalCharges / entryCost) * 100;
+            let insight = `Total trading costs are ${costPct.toFixed(2)}% of your position. `;
+            if (costPct > 1) {
+                insight += 'High costs! Consider reducing trade frequency or increasing position size.';
+            } else if (moveNeeded > 3) {
+                insight += 'Price needs to move ' + moveNeeded.toFixed(1) + '% just to breakeven. Ensure your edge justifies this.';
+            } else {
+                insight += 'Reasonable cost structure for this trade size.';
+            }
+            document.getElementById('insight').textContent = insight;
+        }
+
+        function toggleMobileMenu() {
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            const dropdown = document.getElementById('mobileNavDropdown');
+            if (toggle && dropdown) {
+                toggle.classList.toggle('active');
+                dropdown.classList.toggle('active');
+            }
+        }
+    </script>
+</body>
+</html>

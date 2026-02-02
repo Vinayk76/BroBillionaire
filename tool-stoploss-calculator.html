@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Loss Calculator - Trailing Stop Loss Calculator India 2026</title>
+    <meta name="description" content="Calculate optimal stop loss levels for your trades. Find stop loss price based on percentage or ATR. Risk management tool for traders.">
+    <meta name="keywords" content="stop loss calculator, trailing stop loss calculator, stop loss calculator trading, SL calculator, risk management calculator">
+    <link rel="canonical" href="https://brobillionaire.com/tool-stoploss-calculator.html">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); color: #e0e0e0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .header { text-align: center; padding: 3rem; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); border-radius: 20px; margin-bottom: 2rem; }
+        .header h1 { font-size: 3rem; color: #fff; }
+        .calc-card { background: #1e1e2f; padding: 2.5rem; border-radius: 15px; }
+        .input-group { margin-bottom: 1.5rem; }
+        .input-group label { display: block; margin-bottom: 0.5rem; color: #a0a0b0; font-weight: 600; }
+        .input-group input, .input-group select { width: 100%; padding: 1rem; background: #16161f; border: 2px solid #333; border-radius: 10px; color: #fff; font-size: 1.1rem; }
+        .btn { padding: 1.2rem; background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 1rem; }
+        .result-box { background: #16161f; padding: 2rem; border-radius: 12px; margin-top: 2rem; text-align: center; }
+        .result-value { font-size: 2.5rem; font-weight: 700; color: #ef4444; margin: 1rem 0; }
+        .info-box { background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; padding: 1.5rem; border-radius: 10px; margin-top: 2rem; }
+    </style>
+
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://brobillionaire.com/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Tools",
+            "item": "https://brobillionaire.com/tools.html"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Stop Loss Calculator - Trailing Stop Loss Calculator India",
+            "item": "https://brobillionaire.com/tool-stoploss-calculator.html"
+        }
+    ]
+}
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛑 Stop Loss Calculator</h1>
+            <p>Calculate optimal stop loss levels to protect your capital</p>
+        </div>
+        <div class="calc-card">
+            <h2>📊 Trade Details</h2>
+            <div class="input-group">
+                <label>Position Type</label>
+                <select id="positionType">
+                    <option value="long">Long (Buy)</option>
+                    <option value="short">Short (Sell)</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Entry Price (₹)</label>
+                <input type="number" id="entry" value="500" step="0.01">
+            </div>
+            <div class="input-group">
+                <label>Stop Loss Type</label>
+                <select id="slType">
+                    <option value="percentage">Percentage Based</option>
+                    <option value="fixed">Fixed Points</option>
+                    <option value="atr">ATR Based</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Stop Loss Value (%/Points/ATR)</label>
+                <input type="number" id="slValue" value="2" step="0.1">
+            </div>
+            <div class="input-group">
+                <label>Quantity</label>
+                <input type="number" id="quantity" value="100">
+            </div>
+            <button class="btn" onclick="calculateSL()">Calculate Stop Loss</button>
+            <div class="result-box">
+                <p>Stop Loss Price</p>
+                <div class="result-value" id="slPrice">₹0</div>
+            </div>
+            <div class="result-box">
+                <p>Maximum Loss</p>
+                <div class="result-value" id="maxLoss">₹0</div>
+            </div>
+            <div class="info-box">
+                <strong>💡 Pro Tip:</strong> Always use stop loss to protect your capital. Risk only 1-2% of your portfolio per trade. Never move your stop loss against your position!
+            </div>
+        </div>
+    </div>
+    <script>
+        function calculateSL() {
+            const entry = parseFloat(document.getElementById('entry').value);
+            const slValue = parseFloat(document.getElementById('slValue').value);
+            const slType = document.getElementById('slType').value;
+            const position = document.getElementById('positionType').value;
+            const quantity = parseFloat(document.getElementById('quantity').value);
+            let slPrice = 0;
+            if (slType === 'percentage') {
+                slPrice = position === 'long' ? entry * (1 - slValue/100) : entry * (1 + slValue/100);
+            } else if (slType === 'fixed') {
+                slPrice = position === 'long' ? entry - slValue : entry + slValue;
+            } else {
+                slPrice = position === 'long' ? entry - (slValue * 2) : entry + (slValue * 2);
+            }
+            const maxLoss = Math.abs(entry - slPrice) * quantity;
+            document.getElementById('slPrice').textContent = '₹' + slPrice.toFixed(2);
+            document.getElementById('maxLoss').textContent = '₹' + maxLoss.toLocaleString('en-IN', {maximumFractionDigits: 0});
+        }
+        calculateSL();
+    </script>
+</body>
+</html>

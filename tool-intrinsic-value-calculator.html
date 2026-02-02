@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <title>Intrinsic Value Calculator FREE - DCF Stock Valuation Calculator 2026 | BroBillionaire</title>
+    <meta name="description" content="FREE Intrinsic Value Calculator - Calculate stock fair value using DCF method. Discounted cash flow analysis for fundamental stock valuation. Professional equity valuation tool.">
+    <meta name="keywords" content="intrinsic value calculator, dcf calculator, stock valuation calculator, fair value calculator, discounted cash flow calculator, fundamental analysis calculator, stock valuation tool india, equity valuation calculator">
+    <meta name="author" content="BroBillionaire">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://brobillionaire.com/tool-intrinsic-value-calculator.html">
+    
+    <meta property="og:title" content="FREE Intrinsic Value Calculator - DCF Valuation">
+    <meta property="og:description" content="Calculate stock intrinsic value using DCF method. Professional valuation tool.">
+    <meta property="og:url" content="https://brobillionaire.com/tool-intrinsic-value-calculator.html">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="responsive.css">
+    
+    <style>
+        .tool-container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+        .tool-header {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 50%, var(--bg-secondary) 100%);
+            padding: 140px 20px 80px; text-align: center; border-bottom: 1px solid var(--border-gold);
+        }
+        .tool-category {
+            display: inline-block; background: rgba(201, 162, 39, 0.15); color: var(--gold);
+            padding: 8px 20px; border-radius: 25px; font-size: 0.8rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 1.5rem; border: 1px solid var(--border-gold);
+        }
+        .tool-title {
+            font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-bottom: 20px; font-weight: 700;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .tool-subtitle { font-size: 1.15rem; color: var(--text-secondary); max-width: 800px; margin: 0 auto; line-height: 1.8; }
+        .main-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 60px 40px; }
+        .calculator-section, .results-section {
+            background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 40px;
+        }
+        .section-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 30px; color: var(--text-primary); }
+        .input-group { margin-bottom: 25px; }
+        label { display: block; font-weight: 600; margin-bottom: 10px; color: var(--text-primary); }
+        .label-info { font-weight: 400; color: var(--text-tertiary); font-size: 0.85rem; display: block; margin-top: 3px; }
+        input, select {
+            width: 100%; padding: 14px 18px; border: 1px solid var(--border-color); border-radius: 8px;
+            background: var(--bg-tertiary); color: var(--text-primary); font-family: 'Inter', sans-serif;
+        }
+        input:focus, select:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.1); }
+        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .result-card {
+            background: var(--bg-tertiary); padding: 25px; border-radius: 12px;
+            border: 1px solid var(--border-color); margin-bottom: 20px;
+        }
+        .result-main {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.2), rgba(201, 162, 39, 0.05));
+            border: 2px solid var(--border-gold);
+        }
+        .result-label { font-size: 0.85rem; font-weight: 700; color: var(--text-tertiary); margin-bottom: 8px; text-transform: uppercase; }
+        .result-value {
+            font-size: 3rem; font-weight: 800;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .stat-card { background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 10px; padding: 20px; text-align: center; }
+        .stat-title { font-size: 0.8rem; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; color: var(--text-tertiary); }
+        .stat-value { font-size: 1.8rem; font-weight: 800; color: var(--text-primary); }
+        .btn-primary {
+            padding: 14px 32px; border: none; border-radius: 8px; font-weight: 600;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--bg-primary); width: 100%; margin-top: 20px; cursor: pointer;
+            font-family: 'Inter', sans-serif; transition: all 0.3s;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(201, 162, 39, 0.4); }
+        .tips-section { background: var(--bg-secondary); padding: 80px 40px; }
+        .tips-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
+        .tip-card { background: var(--bg-card); padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); transition: all 0.3s; }
+        .tip-card:hover { transform: translateY(-5px); border-color: var(--border-gold); }
+        .tip-icon { font-size: 2.5rem; margin-bottom: 20px; }
+        .tip-title { font-weight: 700; margin-bottom: 12px; color: var(--gold); }
+        .tip-text { color: var(--text-secondary); line-height: 1.7; }
+        @media (max-width: 968px) {
+            .main-content, .tips-grid, .input-row, .stats-grid { grid-template-columns: 1fr; }
+            .tool-title { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                <span class="logo-text">BroBillionaire</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="articles.html" class="nav-link">Articles</a>
+                <a href="tools.html" class="nav-link active">Tools</a>
+                <a href="about.html" class="nav-link">About</a>
+            </div>
+            <button class="cta-btn gold-btn" onclick="window.location.href='articles.html'">Read Free</button>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+    <div class="mobile-nav-dropdown" id="mobileNavDropdown">
+        <a href="index.html">Home</a><a href="articles.html">Articles</a>
+        <a href="tools.html">Tools</a><a href="about.html">About</a>
+    </div>
+
+    <header class="tool-header">
+        <div class="tool-container">
+            <div class="tool-category">📊 FREE VALUATION TOOL</div>
+            <h1 class="tool-title">Intrinsic Value Calculator</h1>
+            <p class="tool-subtitle">Calculate stock intrinsic value using DCF (Discounted Cash Flow) method. Professional fundamental analysis tool for equity valuation and investment decisions.</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="tool-container">
+            <div class="main-content">
+                <div class="calculator-section">
+                    <h2 class="section-title">📈 Company Financials</h2>
+
+                    <div class="input-group">
+                        <label for="currentFCF">
+                            Free Cash Flow (₹ Cr)
+                            <span class="label-info">Latest annual FCF from cash flow statement</span>
+                        </label>
+                        <input type="number" id="currentFCF" value="1000" min="0" step="10">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="growthRate">
+                            Growth Rate (%)
+                            <span class="label-info">Expected FCF growth for next 10 years</span>
+                        </label>
+                        <input type="number" id="growthRate" value="15" min="-20" max="50" step="0.5">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="terminalGrowth">
+                            Terminal Growth Rate (%)
+                            <span class="label-info">Perpetual growth after 10 years (typically GDP growth)</span>
+                        </label>
+                        <input type="number" id="terminalGrowth" value="5" min="0" max="10" step="0.5">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="discountRate">
+                            Discount Rate / WACC (%)
+                            <span class="label-info">Weighted Average Cost of Capital</span>
+                        </label>
+                        <input type="number" id="discountRate" value="12" min="5" max="30" step="0.5">
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="sharesOutstanding">
+                                Shares Outstanding (Cr)
+                                <span class="label-info">Total number of shares</span>
+                            </label>
+                            <input type="number" id="sharesOutstanding" value="100" min="0.1" step="0.1">
+                        </div>
+                        <div class="input-group">
+                            <label for="currentPrice">
+                                Current Market Price (₹)
+                                <span class="label-info">Today's stock price</span>
+                            </label>
+                            <input type="number" id="currentPrice" value="2500" min="0" step="1">
+                        </div>
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="cash">Cash & Equivalents (₹ Cr)</label>
+                            <input type="number" id="cash" value="500" min="0" step="10">
+                        </div>
+                        <div class="input-group">
+                            <label for="debt">Total Debt (₹ Cr)</label>
+                            <input type="number" id="debt" value="200" min="0" step="10">
+                        </div>
+                    </div>
+
+                    <button class="btn-primary" onclick="calculate()">Calculate Fair Value</button>
+                </div>
+
+                <div class="results-section">
+                    <h2 class="section-title">💎 Valuation Results</h2>
+
+                    <div class="result-card result-main">
+                        <div class="result-label">INTRINSIC VALUE PER SHARE</div>
+                        <div class="result-value" id="intrinsicValue">₹0</div>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 10px;" id="recommendation">
+                            Calculating...
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-title">Current Price</div>
+                            <div class="stat-value" id="displayPrice">₹0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-title">Upside/Downside</div>
+                            <div class="stat-value" id="upside">0%</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-title">Enterprise Value</div>
+                            <div class="stat-value" id="enterpriseValue">₹0Cr</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-title">Equity Value</div>
+                            <div class="stat-value" id="equityValue">₹0Cr</div>
+                        </div>
+                    </div>
+
+                    <div style="background: var(--bg-tertiary); padding: 25px; border-radius: 12px; margin-top: 20px; border: 1px solid var(--border-color);">
+                        <h3 style="margin-bottom: 15px; color: var(--text-primary);">📊 10-Year FCF Projections</h3>
+                        <table style="width: 100%; color: var(--text-primary); font-size: 0.9rem;" id="fcfTable">
+                            <!-- Generated by JS -->
+                        </table>
+                    </div>
+
+                    <div style="background: rgba(201, 162, 39, 0.1); padding: 20px; border-radius: 12px; margin-top: 20px; border: 1px solid var(--border-gold);">
+                        <h4 style="color: var(--gold); margin-bottom: 10px;">💡 Valuation Note</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">DCF is highly sensitive to assumptions. Small changes in growth or discount rate dramatically impact valuation. Use margin of safety (buy at 30-40% below intrinsic value) to account for uncertainty.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tips-section">
+            <div class="tool-container">
+                <h2 class="section-title">🎓 DCF Valuation Guide</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <div class="tip-icon">📐</div>
+                        <div class="tip-title">DCF Formula</div>
+                        <div class="tip-text">Sum of (FCF × (1+g)^n / (1+r)^n) for 10 years + Terminal Value / (1+r)^10. Then subtract debt, add cash, divide by shares. Complex but most accurate valuation method for cash-generative businesses.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">💰</div>
+                        <div class="tip-title">Free Cash Flow</div>
+                        <div class="tip-text">FCF = Operating Cash Flow - CapEx. Find in cash flow statement. Use 3-year average for stability. Ignore one-time items. Positive & growing FCF = healthy business. Negative FCF = avoid or investigate deeply.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">📈</div>
+                        <div class="tip-title">Growth Rate Assumptions</div>
+                        <div class="tip-text">Use historical 5-10 year FCF CAGR as baseline. Adjust for industry prospects, competitive moat, management quality. Be conservative! 15%+ growth for 10 years is rare. Most companies can't sustain >10% forever.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">🎯</div>
+                        <div class="tip-title">Discount Rate (WACC)</div>
+                        <div class="tip-text">WACC = Cost of Equity × (E/V) + Cost of Debt × (D/V) × (1-Tax). Use 10-12% for stable large caps, 12-15% for mid caps, 15-20% for small caps/startups. Higher risk = higher discount rate.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">🛡️</div>
+                        <div class="tip-title">Margin of Safety</div>
+                        <div class="tip-text">Never buy at calculated fair value. Buy at 60-70% of intrinsic value (30-40% MOS). Accounts for model errors, unforeseen risks, human bias. Warren Buffett's golden rule for value investing.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">⚠️</div>
+                        <div class="tip-title">DCF Limitations</div>
+                        <div class="tip-text">Doesn't work for: Banks (use P/B), cyclical stocks, loss-making companies, asset-light tech. Sensitive to assumptions - 2% change in discount rate = 20-30% valuation swing. Use alongside other valuation methods.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand-section">
+                <div class="logo">
+                    <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                    <span class="logo-text">BroBillionaire</span>
+                </div>
+                <p class="tagline">Master the markets with free trading education.</p>
+            </div>
+            <nav class="footer-nav">
+                <a href="index.html">Home</a>
+                <a href="articles.html">Articles</a>
+                <a href="tools.html">Tools</a>
+                <a href="about.html">About</a>
+            </nav>
+        </div>
+    </footer>
+    <div class="footer-disclaimer">
+        <p>&copy; 2026 BroBillionaire. DCF is a model, not reality. Use margin of safety.</p>
+    </div>
+
+    <script>
+        document.querySelectorAll('input').forEach(el => {
+            el.addEventListener('input', calculate);
+        });
+        calculate();
+
+        function calculate() {
+            const fcf = parseFloat(document.getElementById('currentFCF').value) || 0;
+            const growthRate = parseFloat(document.getElementById('growthRate').value) / 100 || 0;
+            const terminalGrowth = parseFloat(document.getElementById('terminalGrowth').value) / 100 || 0;
+            const discountRate = parseFloat(document.getElementById('discountRate').value) / 100 || 0;
+            const shares = parseFloat(document.getElementById('sharesOutstanding').value) || 0;
+            const currentPrice = parseFloat(document.getElementById('currentPrice').value) || 0;
+            const cash = parseFloat(document.getElementById('cash').value) || 0;
+            const debt = parseFloat(document.getElementById('debt').value) || 0;
+
+            let presentValue = 0;
+            let lastFCF = fcf;
+            let tableHTML = '<tr style="border-bottom: 1px solid var(--border-color);"><th style="padding: 8px; text-align: left;">Year</th><th style="padding: 8px; text-align: right;">FCF</th><th style="padding: 8px; text-align: right;">PV</th></tr>';
+
+            // Project 10 years
+            for (let year = 1; year <= 10; year++) {
+                const projectedFCF = lastFCF * (1 + growthRate);
+                const pv = projectedFCF / Math.pow(1 + discountRate, year);
+                presentValue += pv;
+                lastFCF = projectedFCF;
+                
+                if (year <= 5 || year === 10) {
+                    tableHTML += `<tr style="border-bottom: 1px solid var(--border-color);"><td style="padding: 8px;">Year ${year}</td><td style="padding: 8px; text-align: right;">₹${projectedFCF.toFixed(0)}Cr</td><td style="padding: 8px; text-align: right;">₹${pv.toFixed(0)}Cr</td></tr>`;
+                } else if (year === 6) {
+                    tableHTML += `<tr style="border-bottom: 1px solid var(--border-color);"><td style="padding: 8px;" colspan="3" style="text-align: center; color: var(--text-tertiary);">...</td></tr>`;
+                }
+            }
+
+            // Terminal value
+            const terminalFCF = lastFCF * (1 + terminalGrowth);
+            const terminalValue = terminalFCF / (discountRate - terminalGrowth);
+            const terminalPV = terminalValue / Math.pow(1 + discountRate, 10);
+            presentValue += terminalPV;
+
+            tableHTML += `<tr style="border-top: 2px solid var(--border-color);"><td style="padding: 8px; font-weight: 700;">Terminal</td><td style="padding: 8px; text-align: right; font-weight: 700;">₹${terminalValue.toFixed(0)}Cr</td><td style="padding: 8px; text-align: right; font-weight: 700;">₹${terminalPV.toFixed(0)}Cr</td></tr>`;
+            document.getElementById('fcfTable').innerHTML = tableHTML;
+
+            // Enterprise to equity value
+            const enterpriseValue = presentValue;
+            const equityValue = enterpriseValue + cash - debt;
+            const intrinsicValuePerShare = equityValue / shares;
+            const upside = ((intrinsicValuePerShare - currentPrice) / currentPrice) * 100;
+
+            document.getElementById('intrinsicValue').textContent = '₹' + intrinsicValuePerShare.toFixed(2);
+            document.getElementById('displayPrice').textContent = '₹' + currentPrice;
+            document.getElementById('upside').textContent = (upside >= 0 ? '+' : '') + upside.toFixed(1) + '%';
+            document.getElementById('enterpriseValue').textContent = '₹' + enterpriseValue.toFixed(0) + 'Cr';
+            document.getElementById('equityValue').textContent = '₹' + equityValue.toFixed(0) + 'Cr';
+
+            // Recommendation
+            let rec = '';
+            if (upside > 40) {
+                rec = '🚀 Significantly Undervalued - Strong Buy';
+            } else if (upside > 20) {
+                rec = '✅ Undervalued - Buy';
+            } else if (upside > 0) {
+                rec = '⚖️ Fairly Valued - Hold';
+            } else if (upside > -20) {
+                rec = '⚠️ Slightly Overvalued - Caution';
+            } else {
+                rec = '🔴 Significantly Overvalued - Avoid';
+            }
+            document.getElementById('recommendation').textContent = rec;
+
+            // Color coding
+            const upsideEl = document.getElementById('upside');
+            upsideEl.style.color = upside >= 20 ? 'var(--green)' : upside >= 0 ? 'var(--gold)' : 'var(--red)';
+        }
+
+        function toggleMobileMenu() {
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            const dropdown = document.getElementById('mobileNavDropdown');
+            if (toggle && dropdown) {
+                toggle.classList.toggle('active');
+                dropdown.classList.toggle('active');
+            }
+        }
+    </script>
+</body>
+</html>

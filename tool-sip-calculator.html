@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIP Calculator - Mutual Fund SIP Return Calculator India 2026</title>
+    <meta name="description" content="Calculate SIP returns with our free mutual fund SIP calculator. Plan your investment goals with monthly, quarterly SIP calculations. Know exact returns, wealth accumulated & goal achievement timeline.">
+    <meta name="keywords" content="SIP calculator, mutual fund SIP calculator, SIP return calculator, systematic investment plan calculator, monthly SIP calculator, SIP calculator India, mutual fund calculator, SIP investment calculator">
+    <link rel="canonical" href="https://brobillionaire.com/tool-sip-calculator.html">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); color: #e0e0e0; line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .header { text-align: center; padding: 3rem 2rem; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 20px; margin-bottom: 3rem; }
+        .header h1 { font-size: 3rem; color: #fff; margin-bottom: 1rem; }
+        .header p { font-size: 1.2rem; color: #d1fae5; }
+        .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .calc-card { background: #1e1e2f; padding: 2rem; border-radius: 15px; }
+        .input-group { margin-bottom: 1.5rem; }
+        .input-group label { display: block; margin-bottom: 0.5rem; color: #a0a0b0; font-weight: 600; }
+        .input-group input, .input-group select { width: 100%; padding: 1rem; background: #16161f; border: 2px solid #333; border-radius: 10px; color: #fff; font-size: 1rem; }
+        .btn { padding: 1rem 2rem; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 1rem; }
+        .result-card { background: #16161f; padding: 2rem; border-radius: 15px; margin-top: 1rem; text-align: center; }
+        .result-value { font-size: 2.5rem; font-weight: 700; color: #10b981; margin: 1rem 0; }
+        .faq { background: #1e1e2f; padding: 2rem; border-radius: 15px; margin-top: 2rem; }
+        .faq h3 { color: #10b981; margin-bottom: 1rem; }
+        @media (max-width: 768px) { .calc-grid { grid-template-columns: 1fr; } }
+    </style>
+
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://brobillionaire.com/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Tools",
+            "item": "https://brobillionaire.com/tools.html"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "SIP Calculator - Mutual Fund SIP Return Calculator India",
+            "item": "https://brobillionaire.com/tool-sip-calculator.html"
+        }
+    ]
+}
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💰 SIP Calculator</h1>
+            <p>Calculate your mutual fund SIP returns & plan your financial goals</p>
+        </div>
+        <div class="calc-grid">
+            <div class="calc-card">
+                <h2>📊 SIP Details</h2>
+                <div class="input-group">
+                    <label>Monthly Investment (₹)</label>
+                    <input type="number" id="sipAmount" value="10000">
+                </div>
+                <div class="input-group">
+                    <label>Expected Return Rate (%)</label>
+                    <input type="number" id="returnRate" value="12" step="0.5">
+                </div>
+                <div class="input-group">
+                    <label>Time Period (Years)</label>
+                    <input type="number" id="timePeriod" value="10">
+                </div>
+                <button class="btn" onclick="calculateSIP()">Calculate Returns</button>
+            </div>
+            <div class="calc-card">
+                <h2>💎 Your Investment Results</h2>
+                <div class="result-card">
+                    <p>Total Invested</p>
+                    <div class="result-value" id="totalInvested">₹0</div>
+                </div>
+                <div class="result-card">
+                    <p>Expected Returns</p>
+                    <div class="result-value" id="returns">₹0</div>
+                </div>
+                <div class="result-card">
+                    <p>Maturity Value</p>
+                    <div class="result-value" id="maturity">₹0</div>
+                </div>
+            </div>
+        </div>
+        <div class="faq">
+            <h3>How SIP Works?</h3>
+            <p>SIP (Systematic Investment Plan) allows you to invest a fixed amount regularly in mutual funds. It helps in rupee cost averaging and builds wealth over time through the power of compounding. Start with as low as ₹500/month and build your financial future!</p>
+        </div>
+    </div>
+    <script>
+        function calculateSIP() {
+            const P = parseFloat(document.getElementById('sipAmount').value);
+            const r = parseFloat(document.getElementById('returnRate').value) / 100 / 12;
+            const n = parseFloat(document.getElementById('timePeriod').value) * 12;
+            const M = P * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
+            const totalInvested = P * n;
+            const returns = M - totalInvested;
+            document.getElementById('totalInvested').textContent = '₹' + totalInvested.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('returns').textContent = '₹' + returns.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('maturity').textContent = '₹' + M.toLocaleString('en-IN', {maximumFractionDigits: 0});
+        }
+        calculateSIP();
+    </script>
+</body>
+</html>

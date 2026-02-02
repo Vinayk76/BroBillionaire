@@ -300,7 +300,7 @@ function generateVideoSchema(title, description, filename) {
         "name": "${title.replace(/"/g, '\\"')} - Video Guide",
         "description": "${description.replace(/"/g, '\\"')}",
         "thumbnailUrl": "${BASE_URL}/og-image.jpg",
-        "uploadDate": "2026-02-01",
+        "uploadDate": "2026-02-01T00:00:00+00:00",
         "contentUrl": "${BASE_URL}/videos/${filename.replace('.html', '.mp4')}",
         "embedUrl": "https://www.youtube.com/embed/PLACEHOLDER",
         "duration": "PT10M",

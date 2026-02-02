@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Tax Calculator - Capital Gains Tax Calculator India 2026</title>
+    <meta name="description" content="Calculate STCG, LTCG tax on equity, F&O, intraday trading. Know exact tax liability with latest 2026 tax rates for Indian stock market traders.">
+    <meta name="keywords" content="trading tax calculator, capital gains tax calculator, STCG calculator, LTCG calculator, stock market tax calculator India, F&O tax calculator, intraday tax calculator">
+    <link rel="canonical" href="https://brobillionaire.com/tool-trading-tax-calculator.html">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); color: #e0e0e0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .header { text-align: center; padding: 3rem; background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); border-radius: 20px; margin-bottom: 2rem; }
+        .header h1 { font-size: 3rem; color: #fff; }
+        .calc-card { background: #1e1e2f; padding: 2.5rem; border-radius: 15px; }
+        .input-group { margin-bottom: 1.5rem; }
+        .input-group label { display: block; margin-bottom: 0.5rem; color: #a0a0b0; font-weight: 600; }
+        .input-group input, .input-group select { width: 100%; padding: 1rem; background: #16161f; border: 2px solid #333; border-radius: 10px; color: #fff; font-size: 1.1rem; }
+        .btn { padding: 1.2rem; background: linear-gradient(135deg, #dc2626, #991b1b); color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 1rem; }
+        .result-box { background: #16161f; padding: 2rem; border-radius: 12px; margin-top: 2rem; text-align: center; }
+        .result-value { font-size: 2.5rem; font-weight: 700; color: #dc2626; margin: 1rem 0; }
+        .breakdown { background: #16161f; padding: 1.5rem; border-radius: 10px; margin-top: 1rem; }
+        .breakdown-item { display: flex; justify-content: space-between; padding: 0.8rem 0; border-bottom: 1px solid #2a2a3f; }
+    </style>
+
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://brobillionaire.com/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Tools",
+            "item": "https://brobillionaire.com/tools.html"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Trading Tax Calculator - Capital Gains Tax Calculator India",
+            "item": "https://brobillionaire.com/tool-trading-tax-calculator.html"
+        }
+    ]
+}
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💸 Trading Tax Calculator</h1>
+            <p>Calculate your capital gains tax for equity & F&O trading in India</p>
+        </div>
+        <div class="calc-card">
+            <h2>📊 Trading Details</h2>
+            <div class="input-group">
+                <label>Trading Type</label>
+                <select id="tradingType">
+                    <option value="equity-delivery">Equity Delivery (STCG/LTCG)</option>
+                    <option value="intraday">Intraday Trading</option>
+                    <option value="fo">Futures & Options</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Total Profit (₹)</label>
+                <input type="number" id="profit" value="100000">
+            </div>
+            <div class="input-group">
+                <label>Holding Period (Days)</label>
+                <input type="number" id="holding" value="400">
+            </div>
+            <div class="input-group">
+                <label>Annual Income Slab</label>
+                <select id="taxSlab">
+                    <option value="0">Below ₹2.5 Lakhs</option>
+                    <option value="5">₹2.5L - ₹5L (5%)</option>
+                    <option value="20">₹5L - ₹10L (20%)</option>
+                    <option value="30">Above ₹10L (30%)</option>
+                </select>
+            </div>
+            <button class="btn" onclick="calculateTax()">Calculate Tax</button>
+            <div class="result-box">
+                <p>Tax Liability</p>
+                <div class="result-value" id="taxAmount">₹0</div>
+            </div>
+            <div class="breakdown">
+                <div class="breakdown-item">
+                    <span>Profit</span>
+                    <span id="profitDisplay">₹0</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>Tax Rate</span>
+                    <span id="taxRate">0%</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>Tax Amount</span>
+                    <span id="taxDisplay">₹0</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>Net Profit After Tax</span>
+                    <span id="netProfit">₹0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function calculateTax() {
+            const profit = parseFloat(document.getElementById('profit').value);
+            const holding = parseInt(document.getElementById('holding').value);
+            const tradingType = document.getElementById('tradingType').value;
+            const slab = parseInt(document.getElementById('taxSlab').value);
+            let taxRate = 0;
+            if (tradingType === 'equity-delivery') {
+                taxRate = holding > 365 ? 10 : 15; // LTCG: 10%, STCG: 15%
+            } else {
+                taxRate = slab; // Intraday/F&O: As per slab
+            }
+            const taxAmount = (profit * taxRate) / 100;
+            const netProfit = profit - taxAmount;
+            document.getElementById('profitDisplay').textContent = '₹' + profit.toLocaleString('en-IN');
+            document.getElementById('taxRate').textContent = taxRate + '%';
+            document.getElementById('taxAmount').textContent = '₹' + taxAmount.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('taxDisplay').textContent = '₹' + taxAmount.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('netProfit').textContent = '₹' + netProfit.toLocaleString('en-IN', {maximumFractionDigits: 0});
+        }
+        calculateTax();
+    </script>
+</body>
+</html>

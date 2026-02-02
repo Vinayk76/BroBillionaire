@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Target Price Calculator - Price Target Calculator Trading 2026</title>
+    <meta name="description" content="Calculate target price for stocks based on risk-reward ratio, Fibonacci levels, support-resistance. Perfect for swing & positional traders.">
+    <meta name="keywords" content="target price calculator, price target calculator, target calculator trading, profit target calculator, risk reward target calculator">
+    <link rel="canonical" href="https://brobillionaire.com/tool-target-calculator.html">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); color: #e0e0e0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .header { text-align: center; padding: 3rem; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 20px; margin-bottom: 2rem; }
+        .header h1 { font-size: 3rem; color: #fff; }
+        .calc-card { background: #1e1e2f; padding: 2.5rem; border-radius: 15px; }
+        .input-group { margin-bottom: 1.5rem; }
+        .input-group label { display: block; margin-bottom: 0.5rem; color: #a0a0b0; font-weight: 600; }
+        .input-group input, .input-group select { width: 100%; padding: 1rem; background: #16161f; border: 2px solid #333; border-radius: 10px; color: #fff; font-size: 1.1rem; }
+        .btn { padding: 1.2rem; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 1rem; }
+        .result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+        .result-box { background: #16161f; padding: 2rem; border-radius: 12px; text-align: center; }
+        .result-value { font-size: 2rem; font-weight: 700; color: #10b981; margin-top: 0.5rem; }
+        @media (max-width: 768px) { .result-grid { grid-template-columns: 1fr; } }
+    </style>
+
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://brobillionaire.com/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Tools",
+            "item": "https://brobillionaire.com/tools.html"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Target Price Calculator - Price Target Calculator Trading",
+            "item": "https://brobillionaire.com/tool-target-calculator.html"
+        }
+    ]
+}
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Target Price Calculator</h1>
+            <p>Calculate your profit target based on risk-reward ratio</p>
+        </div>
+        <div class="calc-card">
+            <h2>📊 Trade Setup</h2>
+            <div class="input-group">
+                <label>Entry Price (₹)</label>
+                <input type="number" id="entry" value="500" step="0.01">
+            </div>
+            <div class="input-group">
+                <label>Stop Loss Price (₹)</label>
+                <input type="number" id="sl" value="480" step="0.01">
+            </div>
+            <div class="input-group">
+                <label>Risk-Reward Ratio</label>
+                <select id="rrRatio">
+                    <option value="1">1:1</option>
+                    <option value="1.5">1:1.5</option>
+                    <option value="2" selected>1:2</option>
+                    <option value="2.5">1:2.5</option>
+                    <option value="3">1:3</option>
+                    <option value="4">1:4</option>
+                    <option value="5">1:5</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Quantity</label>
+                <input type="number" id="qty" value="100">
+            </div>
+            <button class="btn" onclick="calculateTarget()">Calculate Target</button>
+            <div class="result-grid">
+                <div class="result-box">
+                    <div style="color: #888;">Target Price</div>
+                    <div class="result-value" id="target">₹0</div>
+                </div>
+                <div class="result-box">
+                    <div style="color: #888;">Potential Profit</div>
+                    <div class="result-value" id="profit">₹0</div>
+                </div>
+                <div class="result-box">
+                    <div style="color: #888;">Maximum Risk</div>
+                    <div class="result-value" style="color: #ef4444;" id="risk">₹0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function calculateTarget() {
+            const entry = parseFloat(document.getElementById('entry').value);
+            const sl = parseFloat(document.getElementById('sl').value);
+            const rrRatio = parseFloat(document.getElementById('rrRatio').value);
+            const qty = parseFloat(document.getElementById('qty').value);
+            const risk = Math.abs(entry - sl);
+            const reward = risk * rrRatio;
+            const target = entry > sl ? entry + reward : entry - reward;
+            const potentialProfit = reward * qty;
+            const maxRisk = risk * qty;
+            document.getElementById('target').textContent = '₹' + target.toFixed(2);
+            document.getElementById('profit').textContent = '₹' + potentialProfit.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('risk').textContent = '₹' + maxRisk.toLocaleString('en-IN', {maximumFractionDigits: 0});
+        }
+        calculateTarget();
+    </script>
+</body>
+</html>
