@@ -608,6 +608,29 @@
             margin-bottom: 10px;
         }
         
+        .leaderboard-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .leaderboard-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .leaderboard-avatar i {
+            color: #000;
+            font-size: 1.2rem;
+        }
+        
         .leaderboard-rank {
             width: 30px;
             height: 30px;
@@ -670,11 +693,10 @@
             "name": "Home",
             "item": "https://brobillionaire.com/"
         },
-        {
+                {
             "@type": "ListItem",
             "position": 2,
-            "name": "Trader IQ Challenge - Test Your Trading Knowledge",
-            "item": "https://brobillionaire.com/trader-iq-challenge.html"
+            "name": "Trader IQ Challenge - Test Your Trading Knowledge"
         }
     ]
 }
@@ -847,22 +869,10 @@
             
             <div class="leaderboard-preview">
                 <div class="leaderboard-title">
-                    <i class="fas fa-trophy"></i> Today's Top Scores
+                    <i class="fas fa-trophy"></i> Top Scores
                 </div>
-                <div class="leaderboard-item">
-                    <div class="leaderboard-rank gold">1</div>
-                    <div class="leaderboard-name">@TraderVik</div>
-                    <div class="leaderboard-score">156</div>
-                </div>
-                <div class="leaderboard-item">
-                    <div class="leaderboard-rank">2</div>
-                    <div class="leaderboard-name">@NiftyKing</div>
-                    <div class="leaderboard-score">148</div>
-                </div>
-                <div class="leaderboard-item">
-                    <div class="leaderboard-rank">3</div>
-                    <div class="leaderboard-name">@OptionsQueen</div>
-                    <div class="leaderboard-score">145</div>
+                <div id="leaderboardList">
+                    <!-- Dynamic leaderboard will be populated here -->
                 </div>
             </div>
         </div>
@@ -870,7 +880,123 @@
     
     <div class="confetti" id="confetti"></div>
     
+    <!-- Name Input Modal -->
+    <div class="name-modal" id="nameModal">
+        <div class="name-content">
+            <h2>🎯 Join the Leaderboard!</h2>
+            <p>Enter your name to compete with other traders</p>
+            
+            <div class="profile-pic-upload">
+                <div class="profile-preview" id="profilePreview" onclick="document.getElementById('profileInput').click()">
+                    <i class="fas fa-user"></i>
+                </div>
+                <input type="file" id="profileInput" accept="image/*" onchange="handleProfileUpload(event)">
+                <label for="profileInput" class="profile-upload-btn">Add Photo (Optional)</label>
+            </div>
+            
+            <input 
+                type="text" 
+                class="name-input" 
+                id="nameInput" 
+                placeholder="Enter your name or @username" 
+                maxlength="20"
+            >
+            
+            <button class="cta-btn" onclick="saveNameAndStart()">Start Challenge <i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+    
     <script>
+        // User Data
+        let userName = '';
+        let userAvatar = '';
+        
+        // Leaderboard Management
+        function loadLeaderboard() {
+            const leaderboard = JSON.parse(localStorage.getItem('traderIQLeaderboard') || '[]');
+            return leaderboard.sort((a, b) => b.score - a.score).slice(0, 10);
+        }
+        
+        function saveToLeaderboard(name, score, avatar) {
+            const leaderboard = JSON.parse(localStorage.getItem('traderIQLeaderboard') || '[]');
+            
+            leaderboard.push({
+                name: name,
+                score: score,
+                avatar: avatar || '',
+                date: new Date().toISOString()
+            });
+            
+            // Keep only top 100 scores
+            const topScores = leaderboard.sort((a, b) => b.score - a.score).slice(0, 100);
+            localStorage.setItem('traderIQLeaderboard', JSON.stringify(topScores));
+            
+            updateLeaderboardDisplay();
+        }
+        
+        function updateLeaderboardDisplay() {
+            const leaderboard = loadLeaderboard();
+            const container = document.getElementById('leaderboardList');
+            
+            if (leaderboard.length === 0) {
+                container.innerHTML = '<div style="text-align: center; color: #666; padding: 20px;">Be the first to set a score!</div>';
+                return;
+            }
+            
+            container.innerHTML = leaderboard.slice(0, 5).map((entry, index) => {
+                const rankClass = index === 0 ? 'gold' : '';
+                const avatarHTML = entry.avatar 
+                    ? `<img src="${entry.avatar}" alt="${entry.name}">`
+                    : `<i class="fas fa-user"></i>`;
+                
+                return `
+                    <div class="leaderboard-item">
+                        <div class="leaderboard-rank ${rankClass}">${index + 1}</div>
+                        <div class="leaderboard-avatar">${avatarHTML}</div>
+                        <div class="leaderboard-name">${entry.name}</div>
+                        <div class="leaderboard-score">${entry.score}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // Profile Picture Upload
+        function handleProfileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            if (file.size > 2 * 1024 * 1024) {
+                alert('Image size must be less than 2MB');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                userAvatar = e.target.result;
+                document.getElementById('profilePreview').innerHTML = `<img src="${userAvatar}" alt="Profile">`;
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        // Save Name and Start Quiz
+        function saveNameAndStart() {
+            const name = document.getElementById('nameInput').value.trim();
+            
+            if (!name) {
+                alert('Please enter your name to continue!');
+                return;
+            }
+            
+            userName = name;
+            document.getElementById('nameModal').classList.remove('active');
+            actualStartQuiz();
+        }
+        
+        // Initialize leaderboard on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            updateLeaderboardDisplay();
+        });
+        
         // Questions Database
         const questions = [
             {
@@ -1013,6 +1139,10 @@
         }
         
         function startQuiz() {
+            document.getElementById('nameModal').classList.add('active');
+        }
+        
+        function actualStartQuiz() {
             shuffledQuestions = shuffleArray(questions).slice(0, 15);
             currentQuestion = 0;
             score = 0;
@@ -1162,6 +1292,9 @@
             const avgTime = (totalTime / answeredQuestions).toFixed(1);
             const percentile = Math.min(99, Math.round((iq - 80) / 80 * 100));
             
+            // Save to leaderboard
+            saveToLeaderboard(userName, iq, userAvatar);
+            
             document.getElementById('iqScore').textContent = iq;
             document.getElementById('correctCount').textContent = score;
             document.getElementById('avgTime').textContent = avgTime + 's';
@@ -1235,6 +1368,12 @@
         }
         
         function retryQuiz() {
+            // Reset user data for new attempt
+            userName = '';
+            userAvatar = '';
+            document.getElementById('nameInput').value = '';
+            document.getElementById('profilePreview').innerHTML = '<i class="fas fa-user"></i>';
+            
             document.getElementById('resultScreen').style.display = 'none';
             document.getElementById('startScreen').style.display = 'block';
         }
