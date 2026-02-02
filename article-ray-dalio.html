@@ -190,6 +190,80 @@
         color: rgba(255,255,255,0.7);
         font-size: 14px;
     }
+    
+    /* Four Economic Seasons - All Weather Visual */
+    .all-weather-visual {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, rgba(0,0,0,0.4) 100%);
+        border: 1px solid rgba(201, 162, 39, 0.3);
+        border-radius: 16px;
+        padding: 2rem;
+        margin: 2rem 0;
+    }
+    .weather-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+    @media (max-width: 600px) {
+        .weather-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    .weather-quadrant {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 1.5rem;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+    .weather-quadrant:hover {
+        transform: translateY(-4px);
+        border-color: rgba(201, 162, 39, 0.5);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+    .weather-quadrant i {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        display: block;
+    }
+    .weather-quadrant h5 {
+        color: #fff;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+    .weather-quadrant p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+        margin: 0;
+    }
+    /* Season-specific colors */
+    .weather-quadrant.growth-up i {
+        color: #22c55e;
+    }
+    .weather-quadrant.growth-up {
+        border-top: 3px solid #22c55e;
+    }
+    .weather-quadrant.growth-down i {
+        color: #3b82f6;
+    }
+    .weather-quadrant.growth-down {
+        border-top: 3px solid #3b82f6;
+    }
+    .weather-quadrant.inflation-up i {
+        color: #f97316;
+    }
+    .weather-quadrant.inflation-up {
+        border-top: 3px solid #f97316;
+    }
+    .weather-quadrant.inflation-down i {
+        color: #06b6d4;
+    }
+    .weather-quadrant.inflation-down {
+        border-top: 3px solid #06b6d4;
+    }
     </style>
 <!-- SEO Nuclear Upgrade: seo-nuclear-upgrade v1.0 -->
 

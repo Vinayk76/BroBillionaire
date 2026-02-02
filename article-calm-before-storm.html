@@ -276,19 +276,26 @@
         font-weight: 600;
         font-size: 0.85rem;
         transition: all 0.3s ease;
+        min-width: fit-content;
     }
     .compression-bar::after {
         content: attr(data-label);
         position: absolute;
-        right: 15px;
+        left: 15px;
+        right: auto;
         color: rgba(0,0,0,0.7);
+        white-space: nowrap;
+    }
+    .compression-bar.bar-week5::after,
+    .compression-bar.bar-week6::after {
+        color: rgba(255,255,255,0.9);
     }
     .compression-bar.bar-week1 { width: 100%; }
     .compression-bar.bar-week2 { width: 75%; }
     .compression-bar.bar-week3 { width: 55%; background: linear-gradient(90deg, #C9A227, #f59e0b); }
-    .compression-bar.bar-week4 { width: 35%; background: linear-gradient(90deg, #f59e0b, #ef4444); }
-    .compression-bar.bar-week5 { width: 20%; background: #ef4444; color: #fff; }
-    .compression-bar.bar-week6 { width: 10%; background: #dc2626; color: #fff; animation: pulse 1s infinite; }
+    .compression-bar.bar-week4 { width: 40%; background: linear-gradient(90deg, #f59e0b, #ef4444); }
+    .compression-bar.bar-week5 { width: 30%; background: #ef4444; color: #fff; }
+    .compression-bar.bar-week6 { width: 25%; background: #dc2626; color: #fff; animation: pulse 1s infinite; }
     .compression-label {
         display: flex;
         justify-content: space-between;
@@ -721,9 +728,16 @@
         .silence-text {
             font-size: 1.5rem;
         }
-        .compression-bar::after {
-            font-size: 0.7rem;
+        .compression-bar {
+            height: 36px;
+            font-size: 0.75rem;
         }
+        .compression-bar::after {
+            font-size: 0.75rem;
+        }
+        .compression-bar.bar-week4 { width: 50%; }
+        .compression-bar.bar-week5 { width: 40%; }
+        .compression-bar.bar-week6 { width: 35%; }
     }
     @media (max-width: 480px) {
         .forces-grid {
@@ -731,6 +745,27 @@
         }
         .position-heatmap {
             grid-template-columns: repeat(5, 1fr);
+        }
+        .compression-visual {
+            padding: 20px 15px;
+        }
+        .compression-bar {
+            height: 32px;
+            font-size: 0.7rem;
+            padding-left: 10px;
+        }
+        .compression-bar::after {
+            font-size: 0.7rem;
+            left: 10px;
+        }
+        .compression-bar.bar-week1 { width: 100%; }
+        .compression-bar.bar-week2 { width: 85%; }
+        .compression-bar.bar-week3 { width: 70%; }
+        .compression-bar.bar-week4 { width: 60%; }
+        .compression-bar.bar-week5 { width: 50%; }
+        .compression-bar.bar-week6 { width: 45%; }
+        .compression-label {
+            font-size: 0.75rem;
         }
     }
     </style>

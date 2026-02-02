@@ -88,14 +88,17 @@
         height: 100%;
         pointer-events: none;
         overflow: hidden;
-        z-index: 0;
+        z-index: -1;
     }
 
     .burning-particle {
         position: absolute;
+        top: 0;
         font-size: 1.5rem;
-        opacity: 0.15;
+        opacity: 0;
         animation: burnFall linear infinite;
+        will-change: transform, opacity;
+        display: inline-block;
     }
 
     @keyframes burnFall {
@@ -125,9 +128,10 @@
         justify-content: center;
         gap: 15px;
         border-bottom: 2px solid #ef4444;
-        margin-top: 60px;
+        margin-top: 70px;
         position: relative;
         overflow: hidden;
+        z-index: 1;
     }
 
     .blowup-warning::before {
@@ -169,6 +173,7 @@
         padding: 80px 40px 60px;
         text-align: center;
         position: relative;
+        z-index: 1;
         border-bottom: 1px solid rgba(201, 162, 39, 0.2);
     }
 
@@ -581,6 +586,8 @@
     .progression-section {
         padding: 80px 40px;
         background: linear-gradient(180deg, #0a0a0a, #111, #0a0a0a);
+        position: relative;
+        z-index: 1;
     }
 
     .progression-container {
@@ -646,6 +653,8 @@
     .confession-section {
         padding: 80px 40px;
         background: linear-gradient(135deg, #0d0d0d, #1a0505);
+        position: relative;
+        z-index: 1;
     }
 
     .confession-container {
@@ -724,6 +733,8 @@
         padding: 80px 40px;
         background: linear-gradient(135deg, #0a0a0a, #0d1a0d);
         text-align: center;
+        position: relative;
+        z-index: 1;
     }
 
     .resurrection-container {
@@ -948,17 +959,6 @@
         font-size: 12px;
         font-weight: 600;
     }
-    /* Reading Progress Bar */
-    .reading-progress {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 0%;
-        height: 4px;
-        background: linear-gradient(90deg, #C9A227, #FFD700);
-        z-index: 9999;
-        transition: width 0.1s ease;
-    }
     /* Article Rating Widget */
     .article-rating-widget {
         background: rgba(201, 162, 39, 0.1);
@@ -976,6 +976,16 @@
     .rating-text {
         color: rgba(255,255,255,0.7);
         font-size: 14px;
+    }
+    
+    /* Footer z-index fix */
+    .footer,
+    .article-cta-section,
+    .footer-disclaimer,
+    .faq-section,
+    .related-articles-section {
+        position: relative;
+        z-index: 1;
     }
     </style>
 <!-- SEO Nuclear Upgrade: seo-nuclear-upgrade v1.0 -->
@@ -1063,7 +1073,7 @@
     }
     </script>
 </head>
-<body>
+<body class="article-page">
     <!-- Reading Progress Bar -->
     <div class="reading-progress">
         <div class="reading-progress-bar"></div>

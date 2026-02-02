@@ -24,6 +24,32 @@
     <style>
         /* Quiet Build-Up Theme - Pressure Gauge Aesthetics */
         
+        /* Emoji Visibility Fix - Ensure all emojis display correctly */
+        .phase-marker,
+        .signal-icon,
+        .hero-stat .stat-value,
+        .volcano-label,
+        .phase-title,
+        .phase-signs,
+        .sidebar-card h4,
+        .checklist-title,
+        .highlight-box h4 {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif !important;
+        }
+        
+        /* Ensure emojis inherit proper rendering */
+        .phase-marker,
+        .signal-icon {
+            color: inherit;
+            -webkit-font-smoothing: auto;
+            text-rendering: optimizeLegibility;
+        }
+        
+        /* Hero stat emojis - prevent color override on emoji characters */
+        .hero-stat .stat-value {
+            font-family: 'Playfair Display', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', serif !important;
+        }
+        
         /* Pressure Building Background */
         .pressure-bg {
             position: fixed;
@@ -625,6 +651,28 @@
             .volcano-crater {
                 bottom: 200px;
             }
+        }
+        
+        /* Comprehensive Emoji Visibility - All emoji-containing elements */
+        .phase-marker,
+        .signal-icon,
+        .volcano-label,
+        .hero-stat .stat-value,
+        .sidebar-card h4,
+        .checklist-title,
+        .highlight-box h4,
+        .phase-title,
+        .phase-signs {
+            font-style: normal !important;
+            -webkit-background-clip: unset !important;
+            -webkit-text-fill-color: unset !important;
+            background-clip: unset !important;
+        }
+        
+        /* Ensure emoji characters don't get filtered or hidden */
+        .phase-marker::before,
+        .signal-icon::before {
+            content: none !important;
         }
     </style>
 

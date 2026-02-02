@@ -91,6 +91,396 @@
     <meta name="word_count" content="2503">
 
     <style>
+    /* Quantum Grid - Player Cards */
+    .quantum-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin: 30px 0;
+    }
+    
+    @media (max-width: 992px) {
+        .quantum-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .quantum-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    .quantum-card {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%);
+        border: 1px solid rgba(201, 162, 39, 0.3);
+        border-radius: 12px;
+        padding: 24px;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+    
+    .quantum-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(201, 162, 39, 0.6);
+        box-shadow: 0 10px 30px rgba(201, 162, 39, 0.15);
+    }
+    
+    .quantum-symbol {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.2) 0%, rgba(201, 162, 39, 0.05) 100%);
+        border: 1px solid rgba(201, 162, 39, 0.4);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 16px;
+        font-size: 24px;
+        color: #C9A227;
+    }
+    
+    .quantum-card h4 {
+        color: #fff;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    .quantum-card p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    /* Law Box Styles */
+    .law-box {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.15) 0%, rgba(0, 0, 0, 0.4) 100%);
+        border-left: 4px solid #C9A227;
+        border-radius: 0 12px 12px 0;
+        padding: 24px 28px;
+        margin: 30px 0;
+    }
+    .law-box h4 {
+        color: #C9A227;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 12px;
+        font-weight: 600;
+    }
+    .law-box p {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin: 0;
+        font-style: italic;
+    }
+
+    /* Network Visual */
+    .network-visual {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.08) 0%, rgba(0, 0, 0, 0.3) 100%);
+        border: 1px solid rgba(201, 162, 39, 0.2);
+        border-radius: 12px;
+        padding: 30px;
+        margin: 30px 0;
+    }
+
+    /* Wave Diagram - Signal Speed Visualization */
+    .wave-diagram {
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(201, 162, 39, 0.05) 100%);
+        border: 1px solid rgba(201, 162, 39, 0.2);
+        border-radius: 12px;
+        padding: 30px;
+        margin: 30px 0;
+    }
+    .wave-row {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 16px;
+    }
+    .wave-row:last-child {
+        margin-bottom: 0;
+    }
+    .wave-label {
+        width: 120px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.8);
+        flex-shrink: 0;
+    }
+    .wave-bar {
+        height: 32px;
+        border-radius: 6px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: 12px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: rgba(0, 0, 0, 0.8);
+    }
+    .wave-bar::after {
+        content: attr(data-speed);
+    }
+    .price-wave {
+        width: 25%;
+        background: linear-gradient(90deg, #ef4444, #f87171);
+    }
+    .risk-wave {
+        width: 50%;
+        background: linear-gradient(90deg, #f59e0b, #fbbf24);
+    }
+    .narrative-wave {
+        width: 70%;
+        background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    }
+    .liquidity-wave {
+        width: 100%;
+        background: linear-gradient(90deg, #22c55e, #4ade80);
+    }
+    @media (max-width: 576px) {
+        .wave-label {
+            width: 80px;
+            font-size: 0.8rem;
+        }
+        .wave-bar {
+            height: 28px;
+            font-size: 0.65rem;
+            padding-right: 8px;
+        }
+    }
+
+    /* Dark Matter Grid - Volatility Cards */
+    .dark-matter-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        margin: 30px 0;
+    }
+    @media (max-width: 576px) {
+        .dark-matter-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    .matter-card {
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 28px;
+        text-align: center;
+    }
+    .matter-card h5 {
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 16px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    .matter-card.visible-matter {
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+    .matter-card.visible-matter h5 {
+        color: rgba(255, 255, 255, 0.7);
+    }
+    .matter-card.dark-matter {
+        border-color: rgba(201, 162, 39, 0.4);
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
+    }
+    .matter-card.dark-matter h5 {
+        color: #C9A227;
+    }
+    .matter-stat {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 6px;
+        font-family: 'Playfair Display', serif;
+    }
+    .matter-label {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Silence Visual */
+    .silence-visual {
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 100%);
+        border: 1px solid rgba(201, 162, 39, 0.2);
+        border-radius: 12px;
+        padding: 50px 30px;
+        margin: 30px 0;
+        text-align: center;
+    }
+    .silence-text {
+        font-size: 1.5rem;
+        font-weight: 300;
+        letter-spacing: 8px;
+        color: rgba(201, 162, 39, 0.6);
+        font-family: 'Playfair Display', serif;
+    }
+
+    /* Transformation Visual - Liquidity Cycle */
+    .transformation-visual {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin: 40px 0;
+        flex-wrap: wrap;
+    }
+    .transform-box {
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 24px 30px;
+        text-align: center;
+        min-width: 180px;
+    }
+    .transform-box.start {
+        border-color: rgba(34, 197, 94, 0.4);
+    }
+    .transform-box.end {
+        border-color: rgba(239, 68, 68, 0.4);
+    }
+    .transform-amount {
+        display: block;
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 6px;
+    }
+    .transform-label {
+        display: block;
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 4px;
+    }
+    .transform-date {
+        display: block;
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.5);
+    }
+    .transform-arrow {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        color: #C9A227;
+    }
+    .transform-arrow i {
+        font-size: 1.5rem;
+    }
+    .arrow-line {
+        width: 60px;
+        height: 2px;
+        background: linear-gradient(90deg, rgba(201, 162, 39, 0.3), #C9A227, rgba(201, 162, 39, 0.3));
+    }
+    .arrow-duration {
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.5);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Axiom Card - Key Insights */
+    .axiom-card {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.12) 0%, rgba(0, 0, 0, 0.4) 100%);
+        border: 1px solid rgba(201, 162, 39, 0.3);
+        border-radius: 12px;
+        overflow: hidden;
+        margin: 30px 0;
+    }
+    .axiom-number {
+        background: rgba(201, 162, 39, 0.15);
+        color: #C9A227;
+        padding: 10px 20px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+    }
+    .axiom-content {
+        padding: 24px;
+    }
+    .axiom-content h4 {
+        color: #fff;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 12px;
+        font-family: 'Playfair Display', serif;
+    }
+    .axiom-content p {
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    /* Rules Premium Grid - The Synthesis Section */
+    .rules-premium-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin: 30px 0;
+    }
+    @media (max-width: 992px) {
+        .rules-premium-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    @media (max-width: 576px) {
+        .rules-premium-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    .rule-premium-card {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.08) 0%, rgba(0, 0, 0, 0.4) 100%);
+        border: 1px solid rgba(201, 162, 39, 0.2);
+        border-radius: 12px;
+        padding: 24px;
+        position: relative;
+        transition: all 0.3s ease;
+    }
+    .rule-premium-card:hover {
+        border-color: rgba(201, 162, 39, 0.5);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(201, 162, 39, 0.1);
+    }
+    .rule-number-badge {
+        position: absolute;
+        top: -12px;
+        left: 20px;
+        width: 36px;
+        height: 36px;
+        background: linear-gradient(135deg, #C9A227, #A68B1E);
+        color: #000;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1rem;
+        box-shadow: 0 4px 12px rgba(201, 162, 39, 0.3);
+    }
+    .rule-premium-card h4 {
+        color: #fff;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        margin-top: 8px;
+        font-family: 'Playfair Display', serif;
+    }
+    .rule-premium-card p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin: 0;
+    }
+
     /* Table of Contents Styles */
     .article-toc {
         background: linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, rgba(0,0,0,0.3) 100%);

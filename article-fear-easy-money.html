@@ -239,11 +239,13 @@
        STREAK DANGER ZONE / THERMOMETER
        ============================================= */
     .streak-danger-zone {
-        background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(30, 30, 30, 0.8) 100%);
-        border: 1px solid rgba(201, 162, 39, 0.3);
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(30, 30, 30, 0.9) 100%);
+        border: 1px solid rgba(201, 162, 39, 0.4);
         border-radius: 16px;
         padding: 30px;
         margin: 40px 0;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
     }
     .streak-thermometer {
         display: flex;
@@ -253,15 +255,18 @@
     }
     .streak-level {
         display: grid;
-        grid-template-columns: 60px 1fr 120px;
+        grid-template-columns: 60px minmax(150px, 1fr) 120px;
         align-items: center;
         gap: 20px;
         padding: 16px 20px;
         border-radius: 12px;
         transition: all 0.3s ease;
+        background: rgba(0, 0, 0, 0.3);
+        min-height: 70px;
     }
     .streak-level:hover {
         transform: translateX(5px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
     .streak-level.safe {
         background: linear-gradient(90deg, rgba(34, 197, 94, 0.15) 0%, rgba(34, 197, 94, 0.05) 100%);
@@ -303,6 +308,10 @@
         font-weight: 600;
         color: #fff;
         font-size: 15px;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+        display: flex;
+        align-items: center;
+        gap: 8px;
     }
     .streak-psychology {
         font-style: italic;
@@ -370,7 +379,7 @@
     }
     .dopamine-hits {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
         gap: 16px;
         margin-top: 25px;
     }
@@ -378,11 +387,12 @@
         display: flex;
         align-items: center;
         gap: 12px;
-        background: rgba(139, 92, 246, 0.1);
-        border: 1px solid rgba(139, 92, 246, 0.2);
+        background: rgba(139, 92, 246, 0.15);
+        border: 1px solid rgba(139, 92, 246, 0.3);
         border-radius: 10px;
         padding: 14px 18px;
         transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
     .dopamine-hit:hover {
         background: rgba(139, 92, 246, 0.2);
@@ -424,14 +434,17 @@
         align-items: center;
         gap: 8px;
         padding: 20px 25px;
-        background: rgba(0, 0, 0, 0.4);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.15);
         border-radius: 12px;
+        min-width: 100px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
     .equation-variable {
         font-size: 32px;
         font-weight: 700;
         color: #C9A227;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
     }
     .equation-label {
         font-size: 12px;
@@ -458,20 +471,22 @@
        EGO METER
        ============================================= */
     .ego-meter {
-        background: rgba(0, 0, 0, 0.4);
-        border: 1px solid rgba(201, 162, 39, 0.3);
+        background: rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(201, 162, 39, 0.4);
         border-radius: 16px;
         padding: 30px;
         margin: 40px 0;
         text-align: center;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
     .meter-container {
         position: relative;
-        height: 30px;
+        height: 35px;
         background: linear-gradient(90deg, #22c55e 0%, #eab308 25%, #f97316 50%, #ef4444 75%, #8b0000 100%);
-        border-radius: 15px;
-        margin: 20px 0;
+        border-radius: 18px;
+        margin: 30px 0 20px 0;
         overflow: visible;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
     }
     .meter-fill {
         position: absolute;
@@ -479,26 +494,29 @@
         left: 0;
         height: 100%;
         width: 70%;
-        border-radius: 15px;
+        border-radius: 18px;
     }
     .meter-pointer {
         position: absolute;
-        top: -25px;
+        top: -30px;
         left: 70%;
         transform: translateX(-50%);
-        font-size: 12px;
+        font-size: 13px;
         color: #C9A227;
-        font-weight: 600;
+        font-weight: 700;
         white-space: nowrap;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.5);
     }
     .meter-labels {
         display: flex;
         justify-content: space-between;
         margin-top: 10px;
+        padding: 0 5px;
     }
     .meter-label {
         font-size: 11px;
-        color: rgba(255, 255, 255, 0.5);
+        color: rgba(255, 255, 255, 0.6);
+        font-weight: 500;
     }
 
     /* =============================================
@@ -609,42 +627,48 @@
         padding-left: 52%;
     }
     .blowup-content {
-        background: rgba(0, 0, 0, 0.6);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(0, 0, 0, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.15);
         border-radius: 12px;
         padding: 20px;
         flex: 1;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
     .blowup-day {
         font-size: 14px;
         font-weight: 700;
         color: #C9A227;
         margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
     .blowup-action {
         font-size: 15px;
         color: #fff;
         margin-bottom: 6px;
+        font-weight: 500;
     }
     .blowup-thought {
         font-size: 13px;
-        color: rgba(255, 255, 255, 0.5);
+        color: rgba(255, 255, 255, 0.6);
         font-style: italic;
     }
     .blowup-dot {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        width: 40px;
-        height: 40px;
+        width: 44px;
+        height: 44px;
         background: #0d0d0d;
-        border: 3px solid rgba(201, 162, 39, 0.5);
+        border: 3px solid rgba(201, 162, 39, 0.6);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 18px;
         z-index: 2;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+        box-shadow: 0 2px 8px rgba(0,0,0,0.4);
     }
 
     /* =============================================
@@ -655,11 +679,12 @@
         grid-template-columns: 1fr auto 1fr;
         align-items: center;
         gap: 20px;
-        background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(30, 30, 30, 0.4) 100%);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(30, 30, 30, 0.5) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.15);
         border-radius: 16px;
         padding: 25px 30px;
         margin: 20px 0;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.25);
         transition: all 0.3s ease;
     }
     .hot-run-blowup:hover {
@@ -753,25 +778,29 @@
         display: flex;
         align-items: center;
         gap: 12px;
-        background: rgba(239, 68, 68, 0.08);
-        border: 1px solid rgba(239, 68, 68, 0.2);
+        background: rgba(239, 68, 68, 0.12);
+        border: 1px solid rgba(239, 68, 68, 0.3);
         border-radius: 10px;
         padding: 14px 18px;
         transition: all 0.3s ease;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
     .siren-sign:hover {
-        background: rgba(239, 68, 68, 0.15);
+        background: rgba(239, 68, 68, 0.2);
         transform: translateX(5px);
+        border-color: rgba(239, 68, 68, 0.5);
     }
     .siren-sign i {
         font-size: 16px;
         color: #ef4444;
         width: 24px;
         text-align: center;
+        flex-shrink: 0;
     }
     .siren-sign span {
-        color: rgba(255, 255, 255, 0.85);
+        color: rgba(255, 255, 255, 0.9);
         font-size: 14px;
+        line-height: 1.4;
     }
 
     /* =============================================
@@ -788,14 +817,15 @@
         padding: 30px;
         position: relative;
         overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.25);
     }
     .response-card.wrong {
-        background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(0, 0, 0, 0.6) 100%);
-        border: 1px solid rgba(239, 68, 68, 0.3);
+        background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(0, 0, 0, 0.7) 100%);
+        border: 1px solid rgba(239, 68, 68, 0.4);
     }
     .response-card.right {
-        background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(0, 0, 0, 0.6) 100%);
-        border: 1px solid rgba(34, 197, 94, 0.3);
+        background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(0, 0, 0, 0.7) 100%);
+        border: 1px solid rgba(34, 197, 94, 0.4);
     }
     .response-header {
         display: flex;
@@ -834,9 +864,9 @@
         display: flex;
         align-items: center;
         gap: 10px;
-        padding: 10px 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        color: rgba(255, 255, 255, 0.8);
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        color: rgba(255, 255, 255, 0.9);
         font-size: 14px;
     }
     .response-list li:last-child {
@@ -855,15 +885,17 @@
     .step-item {
         display: flex;
         gap: 20px;
-        background: rgba(0, 0, 0, 0.4);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.12);
         border-radius: 12px;
         padding: 25px;
         transition: all 0.3s ease;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
     .step-item:hover {
-        border-color: rgba(201, 162, 39, 0.3);
+        border-color: rgba(201, 162, 39, 0.4);
         transform: translateX(5px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
     .step-number {
         flex-shrink: 0;
@@ -931,9 +963,24 @@
         .streak-level {
             grid-template-columns: 50px 1fr;
             gap: 12px;
+            padding: 14px 16px;
+            min-height: auto;
+        }
+        .streak-wins {
+            font-size: 16px;
+        }
+        .streak-name {
+            font-size: 14px;
+        }
+        .streak-psychology {
+            font-size: 12px;
         }
         .streak-risk {
             display: none;
+        }
+        .streak-danger-zone {
+            padding: 20px 15px;
+            margin: 25px 0;
         }
         .equation-parts {
             flex-direction: column;
@@ -971,9 +1018,18 @@
         .hot-run-blowup {
             grid-template-columns: 1fr;
             text-align: center;
+            padding: 20px;
+            gap: 15px;
         }
         .hot-run-arrow {
             transform: rotate(90deg);
+            padding: 5px 0;
+        }
+        .hot-run-stat {
+            font-size: 20px;
+        }
+        .hot-run-label {
+            font-size: 11px;
         }
         .elite-response {
             grid-template-columns: 1fr;
@@ -990,6 +1046,92 @@
         }
         .dopamine-hits {
             grid-template-columns: 1fr;
+        }
+        .creep-percent {
+            font-size: 14px;
+        }
+        .creep-label {
+            font-size: 10px;
+        }
+        .brain-hijack {
+            padding: 25px 20px;
+        }
+        .overconfidence-equation {
+            padding: 25px 15px;
+        }
+        .ego-meter {
+            padding: 20px 15px;
+        }
+        .meter-labels {
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+        }
+        .meter-label {
+            font-size: 9px;
+        }
+        .meter-pointer {
+            font-size: 10px;
+        }
+        .siren-box {
+            padding: 20px 15px;
+        }
+        .siren-title {
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+        .risk-creep-visual {
+            padding: 20px 15px;
+        }
+        .rules-premium-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .streak-level {
+            grid-template-columns: 1fr;
+            gap: 8px;
+            text-align: center;
+        }
+        .streak-wins {
+            font-size: 18px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .streak-info {
+            align-items: center;
+        }
+        .creep-stages {
+            gap: 8px;
+        }
+        .creep-stage {
+            flex: 1 1 30%;
+            min-width: 60px;
+        }
+        .creep-bar-container {
+            height: 80px;
+        }
+        .blowup-event {
+            padding-left: 45px !important;
+        }
+        .blowup-dot {
+            left: 10px;
+            width: 25px;
+            height: 25px;
+            font-size: 12px;
+        }
+        .blowup-content {
+            padding: 15px;
+        }
+        .blowup-day {
+            font-size: 12px;
+        }
+        .blowup-action {
+            font-size: 13px;
+        }
+        .blowup-thought {
+            font-size: 11px;
         }
     }
     </style>

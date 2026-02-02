@@ -190,6 +190,402 @@
         color: rgba(255,255,255,0.7);
         font-size: 14px;
     }
+
+    /* Greek Card Styles */
+    .greek-card {
+        background: linear-gradient(135deg, rgba(15, 15, 25, 0.95), rgba(10, 10, 20, 0.9));
+        border: 1px solid rgba(201, 162, 39, 0.3);
+        border-radius: 16px;
+        padding: 2rem;
+        margin: 2rem 0;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    .greek-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #C9A227, #FFD700, #C9A227);
+    }
+    .greek-symbol {
+        font-size: 4rem;
+        color: #C9A227;
+        font-family: 'Times New Roman', serif;
+        font-style: italic;
+        text-shadow: 0 0 30px rgba(201, 162, 39, 0.3);
+        margin-bottom: 0.5rem;
+    }
+    .greek-nickname {
+        color: #888;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 0.5rem;
+    }
+    .greek-title {
+        color: #fff;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.5rem;
+        margin: 1rem 0;
+    }
+    .greek-card .article-text {
+        text-align: left;
+        margin: 1rem 0;
+    }
+
+    /* Formula Display */
+    .formula-display {
+        background: rgba(201, 162, 39, 0.1);
+        border: 1px solid rgba(201, 162, 39, 0.3);
+        border-radius: 8px;
+        padding: 1rem 1.5rem;
+        margin: 1.5rem 0;
+        font-family: 'Courier New', monospace;
+        font-size: 1.1rem;
+        color: #C9A227;
+        text-align: center;
+    }
+
+    /* Personality Box */
+    .personality-box {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.08), rgba(0, 0, 0, 0.3));
+        border-left: 4px solid #C9A227;
+        border-radius: 0 12px 12px 0;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        text-align: left;
+    }
+    .personality-box h5 {
+        color: #C9A227;
+        font-size: 1.1rem;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+    }
+    .personality-box p {
+        color: rgba(255, 255, 255, 0.85);
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    /* Analogy Box */
+    .analogy-box {
+        display: flex;
+        gap: 1.5rem;
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(15, 15, 30, 0.95));
+        border: 1px solid rgba(59, 130, 246, 0.2);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 2rem 0;
+        align-items: flex-start;
+    }
+    .analogy-icon {
+        font-size: 2rem;
+        color: #3b82f6;
+        flex-shrink: 0;
+    }
+    .analogy-content h4 {
+        color: #3b82f6;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.2rem;
+        margin-bottom: 0.75rem;
+    }
+    .analogy-content p {
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    /* Battle Scenario */
+    .battle-scenario {
+        background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(15, 15, 25, 0.95));
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        border-radius: 12px;
+        padding: 2rem;
+        margin: 2rem 0;
+    }
+    .battle-scenario h4 {
+        color: #ef4444;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .battle-scenario p {
+        color: rgba(255, 255, 255, 0.85);
+        line-height: 1.7;
+        margin: 0.5rem 0;
+    }
+
+    /* Story Scene */
+    .story-scene {
+        background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(15, 15, 25, 0.95));
+        border: 1px solid rgba(168, 85, 247, 0.3);
+        border-radius: 16px;
+        padding: 2rem;
+        margin: 2rem 0;
+        position: relative;
+    }
+    .scene-icon {
+        font-size: 2.5rem;
+        text-align: center;
+        color: rgba(168, 85, 247, 0.6);
+    }
+    .story-scene h4 {
+        color: #a855f7;
+        font-family: 'Playfair Display', serif;
+    }
+    .story-scene .article-text {
+        color: rgba(255, 255, 255, 0.85);
+    }
+
+    /* Greek Meter */
+    .greek-meter {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin: 1rem 0;
+        padding: 0.75rem;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 8px;
+    }
+    .meter-label {
+        color: #888;
+        font-size: 0.9rem;
+        min-width: 100px;
+    }
+    .meter-bar {
+        flex: 1;
+        height: 12px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 6px;
+        overflow: hidden;
+    }
+    .meter-fill {
+        height: 100%;
+        border-radius: 6px;
+        transition: width 0.5s ease;
+    }
+    .meter-fill.warning {
+        background: linear-gradient(90deg, #f59e0b, #fbbf24);
+    }
+    .meter-fill.danger {
+        background: linear-gradient(90deg, #ef4444, #f97316);
+    }
+    .meter-fill.success {
+        background: linear-gradient(90deg, #22c55e, #4ade80);
+    }
+    .meter-fill.gold {
+        background: linear-gradient(90deg, #C9A227, #FFD700);
+    }
+
+    /* Greek Interaction Grid */
+    .greek-interaction-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin: 2rem 0;
+    }
+    .interaction-card {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.08), rgba(0, 0, 0, 0.4));
+        border: 1px solid rgba(201, 162, 39, 0.2);
+        border-radius: 12px;
+        padding: 1.5rem;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+    .interaction-card:hover {
+        border-color: rgba(201, 162, 39, 0.5);
+        transform: translateY(-3px);
+    }
+    .interaction-card i {
+        font-size: 1.5rem;
+        color: #C9A227;
+        margin-bottom: 0.75rem;
+    }
+    .interaction-card h5 {
+        color: #fff;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    .interaction-card p {
+        color: #888;
+        font-size: 0.85rem;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    /* Rules Premium Grid */
+    .rules-premium-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+    }
+    .rule-premium-card {
+        background: linear-gradient(135deg, rgba(15, 15, 25, 0.95), rgba(10, 10, 20, 0.9));
+        border: 1px solid rgba(201, 162, 39, 0.2);
+        border-radius: 12px;
+        padding: 1.5rem;
+        position: relative;
+        transition: all 0.3s ease;
+    }
+    .rule-premium-card:hover {
+        border-color: rgba(201, 162, 39, 0.5);
+        transform: translateY(-3px);
+    }
+    .rule-number-badge {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #C9A227, #FFD700);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #000;
+        font-weight: 700;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        font-family: 'Times New Roman', serif;
+        font-style: italic;
+    }
+    .rule-premium-card h4 {
+        color: #fff;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.1rem;
+        margin-bottom: 0.75rem;
+    }
+    .rule-premium-card p {
+        color: #888;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* Final Message Box */
+    .final-message-box {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.15), rgba(0, 0, 0, 0.4));
+        border: 2px solid rgba(201, 162, 39, 0.4);
+        border-radius: 16px;
+        padding: 2rem;
+        margin: 2rem 0;
+        text-align: center;
+    }
+    .final-message-box p {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin: 0;
+    }
+
+    /* Highlight Text */
+    .highlight-text {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.1), rgba(0, 0, 0, 0.2));
+        border-left: 4px solid #C9A227;
+        padding: 1rem 1.5rem;
+        margin: 1.5rem 0;
+        border-radius: 0 8px 8px 0;
+    }
+
+    /* Featured Quote Enhancement */
+    .featured-quote {
+        border-color: rgba(201, 162, 39, 0.5);
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.1), rgba(0, 0, 0, 0.3));
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+        .greek-symbol {
+            font-size: 3rem;
+        }
+        .greek-card {
+            padding: 1.5rem;
+        }
+        .analogy-box {
+            flex-direction: column;
+            text-align: center;
+        }
+        .analogy-icon {
+            margin-bottom: 0.5rem;
+        }
+        .greek-meter {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.5rem;
+        }
+        .meter-label {
+            min-width: unset;
+        }
+        .interaction-card {
+            padding: 1rem;
+        }
+        .rules-premium-grid {
+            grid-template-columns: 1fr;
+        }
+        .battle-scenario,
+        .story-scene {
+            padding: 1.5rem;
+        }
+        .formula-display {
+            font-size: 0.95rem;
+            padding: 0.75rem 1rem;
+        }
+    }
+
+    /* Hero Stats for 5 Greeks */
+    .article-hero-stats {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .article-hero-stats .hero-stat {
+        flex: 1 1 calc(20% - 24px);
+        min-width: 140px;
+        max-width: 180px;
+        padding: 15px 20px;
+    }
+    .article-hero-stats .hero-stat .stat-value {
+        font-size: 1.3rem;
+        white-space: nowrap;
+    }
+    .article-hero-stats .hero-stat .stat-label {
+        font-size: 0.7rem;
+    }
+    @media (max-width: 1024px) {
+        .article-hero-stats .hero-stat {
+            flex: 1 1 calc(33.33% - 20px);
+            max-width: 200px;
+        }
+    }
+    @media (max-width: 768px) {
+        .article-hero-stats .hero-stat {
+            flex: 1 1 calc(50% - 15px);
+            max-width: none;
+            padding: 12px 15px;
+        }
+        .article-hero-stats .hero-stat .stat-value {
+            font-size: 1.1rem;
+        }
+    }
+    @media (max-width: 480px) {
+        .article-hero-stats .hero-stat {
+            flex: 1 1 100%;
+        }
+    }
+
+    /* Sidebar Enhancements */
+    .sidebar-card .sidebar-stat .stat-label {
+        font-family: 'Times New Roman', serif;
+        font-style: italic;
+        font-size: 1rem;
+    }
+    .sidebar-card .sidebar-list li i {
+        color: #C9A227;
+    }
     </style>
 <!-- SEO Nuclear Upgrade: seo-nuclear-upgrade v1.0 -->
 

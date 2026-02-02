@@ -133,7 +133,7 @@ function generateFAQSchema(category, title, description) {
         "name": `What will I learn from this article about ${title.split('|')[0].trim()}?`,
         "acceptedAnswer": {
             "@type": "Answer",
-            "text": description + " This comprehensive guide is part of BroBillionaire's free trading education covering 185+ topics."
+            "text": description + " This comprehensive guide is part of BroBillionaire's free trading education covering 195+ topics."
         }
     });
     
