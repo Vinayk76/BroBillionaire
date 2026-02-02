@@ -190,6 +190,102 @@
         color: rgba(255,255,255,0.7);
         font-size: 14px;
     }
+    
+    /* Battlefield Container */
+    .battlefield-container {
+        background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(20,20,20,0.8) 100%);
+        border: 1px solid rgba(201, 162, 39, 0.3);
+        border-radius: 16px;
+        padding: 30px;
+        margin: 40px 0;
+    }
+    .battlefield-header {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+    .battlefield-header h3 {
+        color: #C9A227;
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+        font-family: 'Playfair Display', serif;
+    }
+    .battlefield-header h3 i {
+        margin-right: 10px;
+    }
+    .battlefield-header p {
+        color: rgba(255,255,255,0.7);
+        font-size: 14px;
+    }
+    .battlefield-grid {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        gap: 8px;
+        max-width: 400px;
+        margin: 0 auto 25px;
+    }
+    .soldier {
+        width: 100%;
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        border-radius: 6px;
+        transition: transform 0.2s ease;
+    }
+    .soldier:hover {
+        transform: scale(1.2);
+    }
+    .soldier.alive {
+        color: #22c55e;
+        background: rgba(34, 197, 94, 0.1);
+    }
+    .soldier.dead {
+        color: #888;
+        background: rgba(255,255,255,0.05);
+    }
+    .battlefield-stats {
+        display: flex;
+        justify-content: center;
+        gap: 60px;
+    }
+    .battlefield-stat {
+        text-align: center;
+    }
+    .battlefield-stat-value {
+        display: block;
+        font-size: 36px;
+        font-weight: 700;
+    }
+    .battlefield-stat-value.alive-count {
+        color: #22c55e;
+    }
+    .battlefield-stat-value.dead-count {
+        color: #ef4444;
+    }
+    .battlefield-stat-label {
+        display: block;
+        font-size: 13px;
+        color: rgba(255,255,255,0.6);
+        margin-top: 4px;
+    }
+    
+    @media (max-width: 480px) {
+        .battlefield-grid {
+            grid-template-columns: repeat(10, 1fr);
+            gap: 4px;
+            max-width: 300px;
+        }
+        .soldier {
+            font-size: 14px;
+        }
+        .battlefield-stats {
+            gap: 30px;
+        }
+        .battlefield-stat-value {
+            font-size: 28px;
+        }
+    }
     </style>
 <!-- SEO Nuclear Upgrade: seo-nuclear-upgrade v1.0 -->
 

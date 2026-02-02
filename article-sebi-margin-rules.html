@@ -163,17 +163,24 @@
             position: relative;
         }
         
-        .timeline-phase:nth-child(odd) {
+        .timeline-phase:nth-of-type(odd) {
+            flex-direction: row;
+        }
+        
+        .timeline-phase:nth-of-type(odd) .phase-content {
+            text-align: right;
+            padding-right: 60px;
+            padding-left: 0;
+        }
+        
+        .timeline-phase:nth-of-type(even) {
             flex-direction: row-reverse;
         }
         
-        .timeline-phase:nth-child(odd) .phase-content {
-            text-align: right;
-            padding-right: 60px;
-        }
-        
-        .timeline-phase:nth-child(even) .phase-content {
+        .timeline-phase:nth-of-type(even) .phase-content {
+            text-align: left;
             padding-left: 60px;
+            padding-right: 0;
         }
         
         .phase-content {
@@ -523,8 +530,16 @@
         }
         
         .rule-content .highlight-text {
+            display: inline;
+            padding: 2px 8px;
+            background: rgba(201, 162, 39, 0.15);
+            border: 1px solid rgba(201, 162, 39, 0.4);
+            border-radius: 4px;
             color: #C9A227;
             font-weight: 500;
+            font-size: inherit;
+            text-align: inherit;
+            border-left: none;
         }
         
         /* Warning Banner */

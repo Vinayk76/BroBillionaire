@@ -244,6 +244,991 @@
         color: rgba(255,255,255,0.7);
         font-size: 14px;
     }
+
+    /* ============================================
+       SWING TRADING ARTICLE - SPECIFIC STYLES
+       ============================================ */
+
+    /* Wave Hero Styles */
+    .wave-hero {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .wave-lines {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 200px;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .wave-line {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 200%;
+        animation: waveMove 8s ease-in-out infinite;
+    }
+
+    .wave-line:nth-child(1) {
+        animation-delay: 0s;
+        opacity: 0.7;
+    }
+
+    .wave-line:nth-child(2) {
+        animation-delay: -2s;
+        opacity: 0.5;
+    }
+
+    .wave-line:nth-child(3) {
+        animation-delay: -4s;
+        opacity: 0.3;
+    }
+
+    .wave-line svg {
+        width: 100%;
+        height: 150px;
+    }
+
+    @keyframes waveMove {
+        0%, 100% {
+            transform: translateX(0);
+        }
+        50% {
+            transform: translateX(-25%);
+        }
+    }
+
+    /* Swing Cycle Box */
+    .swing-cycle-box {
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(201, 162, 39, 0.1) 100%);
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        border-radius: 20px;
+        padding: 40px;
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    .cycle-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 30px;
+        font-family: 'Playfair Display', serif;
+    }
+
+    .cycle-visual {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .cycle-step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        min-width: 100px;
+        transition: all 0.3s ease;
+    }
+
+    .cycle-step:hover {
+        border-color: var(--gold);
+        transform: translateY(-5px);
+    }
+
+    .cycle-step-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--gold) 0%, #E8D5A3 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #0a0a0a;
+        font-size: 1.2rem;
+    }
+
+    .cycle-step-label {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--gold);
+        letter-spacing: 1px;
+    }
+
+    .cycle-step-desc {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    .cycle-arrow {
+        color: rgba(255, 255, 255, 0.3);
+        font-size: 1.2rem;
+    }
+
+    /* Timeframe Grid */
+    .timeframe-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+        margin: 40px 0;
+    }
+
+    .timeframe-card {
+        background: var(--bg-tertiary);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 30px;
+        text-align: center;
+        position: relative;
+        transition: all 0.3s ease;
+    }
+
+    .timeframe-card:hover {
+        border-color: rgba(255, 255, 255, 0.2);
+        transform: translateY(-5px);
+    }
+
+    .timeframe-card.featured {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.15) 0%, rgba(201, 162, 39, 0.05) 100%);
+        border-color: var(--gold);
+        transform: scale(1.05);
+    }
+
+    .timeframe-card.featured:hover {
+        transform: scale(1.05) translateY(-5px);
+    }
+
+    .timeframe-badge {
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--gold);
+        color: #0a0a0a;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .timeframe-icon {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto 20px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .timeframe-card.featured .timeframe-icon {
+        background: rgba(201, 162, 39, 0.2);
+        color: var(--gold);
+    }
+
+    .timeframe-name {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 8px;
+    }
+
+    .timeframe-duration {
+        font-size: 0.9rem;
+        color: var(--gold);
+        margin-bottom: 20px;
+        font-weight: 500;
+    }
+
+    .timeframe-pros {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: left;
+    }
+
+    .timeframe-pros li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 0;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .timeframe-pros li:last-child {
+        border-bottom: none;
+    }
+
+    .timeframe-pros li i {
+        font-size: 0.8rem;
+        width: 16px;
+        text-align: center;
+    }
+
+    .timeframe-pros li i.fa-check {
+        color: #10b981;
+    }
+
+    .timeframe-pros li i.fa-times {
+        color: #ef4444;
+    }
+
+    /* Wave Pattern Container */
+    .wave-pattern-container {
+        background: var(--bg-tertiary);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 30px;
+        margin: 50px 0;
+        overflow: hidden;
+    }
+
+    .wave-pattern-title {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .wave-pattern-title h3 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 8px;
+    }
+
+    .wave-pattern-title span {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .wave-chart-svg {
+        width: 100%;
+        max-width: 700px;
+        margin: 0 auto;
+        display: block;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 12px;
+    }
+
+    /* Setup Cards */
+    .setup-cards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+        margin: 40px 0;
+    }
+
+    .setup-card {
+        background: var(--bg-tertiary);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 30px;
+        position: relative;
+        transition: all 0.3s ease;
+    }
+
+    .setup-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .setup-card.bullish {
+        border-left: 4px solid #10b981;
+    }
+
+    .setup-card.bearish {
+        border-left: 4px solid #ef4444;
+    }
+
+    .setup-card.golden {
+        border-left: 4px solid var(--gold);
+    }
+
+    .setup-card.neutral {
+        border-left: 4px solid #3b82f6;
+    }
+
+    .setup-number {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 2rem;
+        font-weight: 800;
+        color: rgba(255, 255, 255, 0.05);
+        font-family: 'Playfair Display', serif;
+    }
+
+    .setup-icon {
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
+
+    .setup-card.bullish .setup-icon {
+        color: #10b981;
+        background: rgba(16, 185, 129, 0.1);
+    }
+
+    .setup-card.bearish .setup-icon {
+        color: #ef4444;
+        background: rgba(239, 68, 68, 0.1);
+    }
+
+    .setup-card.golden .setup-icon {
+        color: var(--gold);
+        background: rgba(201, 162, 39, 0.1);
+    }
+
+    .setup-card.neutral .setup-icon {
+        color: #3b82f6;
+        background: rgba(59, 130, 246, 0.1);
+    }
+
+    .setup-name {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 12px;
+    }
+
+    .setup-desc {
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.6);
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .setup-criteria {
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 12px;
+        padding: 20px;
+    }
+
+    .setup-criteria-title {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--gold);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 12px;
+    }
+
+    .setup-criteria-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .setup-criteria-list li {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.7);
+        padding: 6px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .setup-criteria-list li:last-child {
+        border-bottom: none;
+    }
+
+    /* Risk Reward Box */
+    .risk-reward-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(201, 162, 39, 0.1) 100%);
+        border: 1px solid rgba(201, 162, 39, 0.3);
+        border-radius: 20px;
+        padding: 40px;
+        margin: 40px 0;
+    }
+
+    .rr-side {
+        text-align: center;
+    }
+
+    .rr-icon {
+        width: 50px;
+        height: 50px;
+        margin: 0 auto 15px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+    }
+
+    .rr-side.risk .rr-icon {
+        background: rgba(239, 68, 68, 0.2);
+        color: #ef4444;
+    }
+
+    .rr-side.reward .rr-icon {
+        background: rgba(16, 185, 129, 0.2);
+        color: #10b981;
+    }
+
+    .rr-value {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #fff;
+        font-family: 'Playfair Display', serif;
+    }
+
+    .rr-side.risk .rr-value {
+        color: #ef4444;
+    }
+
+    .rr-side.reward .rr-value {
+        color: #10b981;
+    }
+
+    .rr-label {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.6);
+        margin-top: 8px;
+    }
+
+    .rr-divider {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .rr-line {
+        width: 2px;
+        height: 30px;
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .rr-ratio {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--gold);
+        background: rgba(201, 162, 39, 0.2);
+        padding: 10px 20px;
+        border-radius: 10px;
+    }
+
+    /* Info Box */
+    .info-box {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 25px 30px;
+        background: var(--bg-tertiary);
+        border-radius: 16px;
+        border-left: 4px solid #3b82f6;
+        margin: 30px 0;
+    }
+
+    .info-icon {
+        width: 50px;
+        height: 50px;
+        background: rgba(59, 130, 246, 0.1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #3b82f6;
+        font-size: 1.3rem;
+        flex-shrink: 0;
+    }
+
+    .info-content {
+        flex: 1;
+    }
+
+    .info-content h4 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #3b82f6;
+        margin-bottom: 8px;
+    }
+
+    .info-content p {
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.7;
+    }
+
+    /* Highlight Box Override - Direct children support */
+    .highlight-box {
+        display: block;
+        padding: 25px 30px;
+        background: var(--bg-tertiary);
+        border-radius: 16px;
+        border-left: 4px solid var(--gold);
+        margin: 30px 0;
+    }
+
+    .highlight-box h4 {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--gold);
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .highlight-box h4 i {
+        font-size: 1.1rem;
+    }
+
+    .highlight-box p {
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    /* Warning Box List Styles */
+    .warning-box .warning-content ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .warning-box .warning-content ul li {
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(239, 68, 68, 0.15);
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.6;
+    }
+
+    .warning-box .warning-content ul li:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .warning-box .warning-content ul li strong {
+        color: #ef4444;
+    }
+
+    /* Swing Checklist */
+    .swing-checklist {
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        border-radius: 20px;
+        padding: 40px;
+        margin: 50px 0;
+    }
+
+    .checklist-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+    .checklist-header i {
+        font-size: 1.8rem;
+        color: #10b981;
+    }
+
+    .checklist-header h3 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #fff;
+    }
+
+    .checklist-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .checklist-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 15px 20px;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+
+    .checklist-item:hover {
+        background: rgba(0, 0, 0, 0.4);
+    }
+
+    .checklist-check {
+        width: 28px;
+        height: 28px;
+        background: rgba(16, 185, 129, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #10b981;
+        font-size: 0.8rem;
+        flex-shrink: 0;
+    }
+
+    .checklist-text {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.5;
+    }
+
+    .checklist-text strong {
+        color: #10b981;
+    }
+
+    /* Psychology Section */
+    .psychology-section {
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
+        border: 1px solid rgba(139, 92, 246, 0.3);
+        border-radius: 20px;
+        padding: 40px;
+        margin: 40px 0;
+    }
+
+    .psychology-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+    .psychology-header i {
+        font-size: 1.8rem;
+        color: #8b5cf6;
+    }
+
+    .psychology-header h3 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #fff;
+    }
+
+    .psychology-meters {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+
+    .psych-meter {
+        text-align: center;
+    }
+
+    .psych-meter-circle {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 15px;
+    }
+
+    .psych-meter-circle svg {
+        transform: rotate(-90deg);
+        width: 100%;
+        height: 100%;
+    }
+
+    .psych-meter-circle circle {
+        fill: none;
+        stroke-width: 8;
+        stroke-linecap: round;
+    }
+
+    .psych-meter-circle circle.bg {
+        stroke: rgba(255, 255, 255, 0.1);
+    }
+
+    .psych-meter-circle circle.progress {
+        stroke-dasharray: 283;
+        transition: stroke-dashoffset 1s ease;
+    }
+
+    .psych-meter-value {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.3rem;
+        font-weight: 700;
+    }
+
+    .psych-meter-label {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+        font-weight: 500;
+    }
+
+    /* Comparison Table Badges */
+    .comparison-badge {
+        display: inline-block;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    .comparison-badge.swing {
+        background: rgba(16, 185, 129, 0.2);
+        color: #10b981;
+    }
+
+    .comparison-badge.day {
+        background: rgba(239, 68, 68, 0.2);
+        color: #ef4444;
+    }
+
+    /* Comparison Table - Actual HTML Table */
+    table.comparison-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: var(--bg-tertiary);
+        border-radius: 16px;
+        overflow: hidden;
+        margin: 30px 0;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    table.comparison-table thead {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.2) 0%, rgba(201, 162, 39, 0.1) 100%);
+    }
+
+    table.comparison-table th {
+        padding: 18px 20px;
+        text-align: left;
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: var(--gold);
+        border-bottom: 2px solid rgba(201, 162, 39, 0.3);
+    }
+
+    table.comparison-table th:first-child {
+        border-radius: 16px 0 0 0;
+    }
+
+    table.comparison-table th:last-child {
+        border-radius: 0 16px 0 0;
+    }
+
+    table.comparison-table td {
+        padding: 16px 20px;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.8);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    table.comparison-table td:first-child {
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    table.comparison-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    table.comparison-table tr:hover td {
+        background: rgba(255, 255, 255, 0.03);
+    }
+
+    table.comparison-table td:nth-child(2) {
+        color: #10b981;
+    }
+
+    table.comparison-table td:nth-child(3) {
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Wisdom Box */
+    .wisdom-box {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.2) 0%, rgba(201, 162, 39, 0.05) 100%);
+        border: 2px solid var(--gold);
+        border-radius: 24px;
+        padding: 50px 40px;
+        text-align: center;
+        margin: 50px 0;
+        position: relative;
+    }
+
+    .wisdom-icon {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto 25px;
+        background: var(--gold);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #0a0a0a;
+        font-size: 1.5rem;
+    }
+
+    .wisdom-text {
+        font-size: 1.3rem;
+        font-weight: 500;
+        color: #fff;
+        line-height: 1.7;
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .wisdom-author {
+        font-size: 1rem;
+        color: var(--gold);
+        margin-top: 20px;
+        font-weight: 600;
+    }
+
+    /* Mobile Responsive for Swing Trading Article */
+    @media (max-width: 900px) {
+        .timeframe-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .timeframe-card.featured {
+            transform: none;
+            order: -1;
+        }
+
+        .setup-cards {
+            grid-template-columns: 1fr;
+        }
+
+        .checklist-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .risk-reward-box {
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .rr-divider {
+            flex-direction: row;
+        }
+
+        .rr-line {
+            width: 30px;
+            height: 2px;
+        }
+
+        .psychology-meters {
+            gap: 20px;
+        }
+
+        .psych-meter-circle {
+            width: 80px;
+            height: 80px;
+        }
+
+        .cycle-visual {
+            flex-direction: column;
+        }
+
+        .cycle-arrow {
+            transform: rotate(90deg);
+        }
+
+        /* Table responsive */
+        table.comparison-table {
+            display: block;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        table.comparison-table thead,
+        table.comparison-table tbody,
+        table.comparison-table tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .swing-cycle-box {
+            padding: 25px 20px;
+        }
+
+        .cycle-step {
+            min-width: 80px;
+            padding: 15px;
+        }
+
+        .wave-pattern-container {
+            padding: 20px 15px;
+        }
+
+        .wisdom-box {
+            padding: 35px 25px;
+        }
+
+        .wisdom-text {
+            font-size: 1.1rem;
+        }
+
+        .swing-checklist {
+            padding: 25px 20px;
+        }
+
+        .psychology-section {
+            padding: 25px 20px;
+        }
+
+        .info-box {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 1.1rem;
+        }
+
+        .highlight-box {
+            padding: 20px;
+        }
+
+        .rr-value {
+            font-size: 1.5rem;
+        }
+
+        .setup-card {
+            padding: 20px;
+        }
+
+        /* Responsive table */
+        table.comparison-table th,
+        table.comparison-table td {
+            padding: 12px 15px;
+            font-size: 0.85rem;
+        }
+    }
     </style>
 <!-- SEO Nuclear Upgrade: seo-nuclear-upgrade v1.0 -->
 
@@ -923,6 +1908,7 @@
                 <div class="chapter-number">07</div>
                 <h2 class="chapter-title">Swing Trading vs Day Trading: The Verdict</h2>
                 
+                <div style="overflow-x: auto;">
                 <table class="comparison-table">
                     <thead>
                         <tr>
@@ -974,6 +1960,7 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
             </section>
 
             <!-- Tools Chapter -->

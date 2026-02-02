@@ -7770,6 +7770,17 @@ span.highlight-text {
     margin: 0;
 }
 
+.warning-box .warning-content .article-list {
+    margin: 10px 0 0 0;
+    padding-left: 0;
+}
+
+.warning-box .warning-content .article-list li {
+    font-size: 0.95rem;
+    padding: 6px 0;
+    color: var(--text-secondary);
+}
+
 /* Pro Tip Box Styles */
 .pro-tip-box {
     display: flex;
@@ -7878,26 +7889,26 @@ span.highlight-text {
 
 /* Table-based comparison for actual <table> elements */
 table.comparison-table {
-    display: table;
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    margin: 2rem 0;
     font-size: 0.95rem;
-    table-layout: auto;
+    table-layout: fixed;
+}
+
+/* When inside wrapper, remove extra margin */
+.comparison-table-wrapper table.comparison-table {
+    margin: 0;
 }
 
 table.comparison-table thead {
-    display: table-header-group;
     background: linear-gradient(135deg, rgba(201, 162, 39, 0.2), rgba(201, 162, 39, 0.1));
 }
 
 table.comparison-table tbody {
-    display: table-row-group;
 }
 
 table.comparison-table tr {
-    display: table-row;
     transition: background 0.3s ease;
 }
 
@@ -7906,22 +7917,19 @@ table.comparison-table tbody tr:hover {
 }
 
 table.comparison-table th {
-    display: table-cell;
     padding: 1rem;
     text-align: left;
     color: var(--gold);
     font-weight: 600;
     border-bottom: 2px solid rgba(201, 162, 39, 0.4);
-    white-space: normal;
-    min-width: 100px;
+    white-space: nowrap;
 }
 
 table.comparison-table td {
-    display: table-cell;
     padding: 1rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     color: #ccc;
-    vertical-align: middle;
+    vertical-align: top;
     white-space: normal;
     word-wrap: break-word;
 }
@@ -7931,6 +7939,7 @@ table.comparison-table td:first-child {
     color: var(--gold);
     font-weight: 600;
     font-family: 'Playfair Display', serif;
+    white-space: nowrap;
 }
 
 /* Mobile responsive for table.comparison-table */
@@ -8499,6 +8508,96 @@ table.lot-table td:first-child {
     table.positioning-table td,
     table.lot-table th,
     table.lot-table td {
+        padding: 0.7rem 0.5rem;
+    }
+}
+
+/* Additional table types - weather, historical, data tables */
+table.weather-comparison-table,
+table.historical-table,
+table.data-table {
+    display: table;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 2rem 0;
+    font-size: 0.95rem;
+    table-layout: auto;
+}
+
+table.weather-comparison-table thead,
+table.historical-table thead,
+table.data-table thead {
+    display: table-header-group;
+    background: linear-gradient(135deg, rgba(201, 162, 39, 0.2), rgba(201, 162, 39, 0.1));
+}
+
+table.weather-comparison-table tbody,
+table.historical-table tbody,
+table.data-table tbody {
+    display: table-row-group;
+}
+
+table.weather-comparison-table tr,
+table.historical-table tr,
+table.data-table tr {
+    display: table-row;
+    transition: background 0.3s ease;
+}
+
+table.weather-comparison-table tbody tr:hover,
+table.historical-table tbody tr:hover,
+table.data-table tbody tr:hover {
+    background: rgba(201, 162, 39, 0.08);
+}
+
+table.weather-comparison-table th,
+table.historical-table th,
+table.data-table th {
+    display: table-cell;
+    padding: 1rem;
+    text-align: left;
+    color: var(--gold);
+    font-weight: 600;
+    border-bottom: 2px solid rgba(201, 162, 39, 0.4);
+    white-space: normal;
+    min-width: 80px;
+}
+
+table.weather-comparison-table td,
+table.historical-table td,
+table.data-table td {
+    display: table-cell;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    color: #ccc;
+    vertical-align: middle;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+table.weather-comparison-table td:first-child,
+table.historical-table td:first-child,
+table.data-table td:first-child {
+    color: var(--gold);
+    font-weight: 600;
+}
+
+/* Mobile responsive for additional table types */
+@media (max-width: 768px) {
+    table.weather-comparison-table,
+    table.historical-table,
+    table.data-table {
+        font-size: 0.85rem;
+        min-width: 500px;
+    }
+    
+    table.weather-comparison-table th,
+    table.weather-comparison-table td,
+    table.historical-table th,
+    table.historical-table td,
+    table.data-table th,
+    table.data-table td {
         padding: 0.7rem 0.5rem;
     }
 }

@@ -81,6 +81,7 @@
         .paradox-side {
             text-align: center;
             flex: 1;
+            min-width: 200px;
             max-width: 300px;
         }
         
@@ -144,6 +145,7 @@
             width: 350px;
             height: 350px;
             margin: 60px auto;
+            max-width: 100%;
         }
         
         .loop-circle {
@@ -260,7 +262,7 @@
         /* Mechanism Cards */
         .mechanism-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             margin: 50px 0;
         }
@@ -355,6 +357,7 @@
             padding: 50px;
             margin: 50px 0;
             border: 2px solid rgba(201, 162, 39, 0.2);
+            overflow: hidden;
         }
         
         .gamma-title {
@@ -381,6 +384,7 @@
             align-items: flex-end;
             justify-content: center;
             gap: 40px;
+            flex-wrap: wrap;
         }
         
         .gamma-bar-group {
@@ -388,6 +392,7 @@
             flex-direction: column;
             align-items: center;
             gap: 10px;
+            flex-shrink: 0;
         }
         
         .gamma-bar {
@@ -448,7 +453,7 @@
         /* Case Grid */
         .case-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 25px;
             margin: 50px 0;
         }
@@ -582,6 +587,7 @@
             padding: 50px;
             margin: 50px 0;
             border: 2px solid rgba(34, 197, 94, 0.2);
+            overflow: hidden;
         }
         
         .protocol-title {
@@ -601,7 +607,7 @@
         
         .protocol-steps {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 25px;
         }
         
@@ -646,6 +652,7 @@
             padding: 80px 40px;
             margin: 50px 0;
             text-align: center;
+            overflow: hidden;
         }
         
         .finale-mirror {
@@ -654,6 +661,7 @@
             align-items: center;
             gap: 30px;
             margin-bottom: 30px;
+            flex-wrap: wrap;
         }
         
         .finale-icon {
@@ -676,6 +684,34 @@
             font-style: italic;
         }
         
+        /* Tablet Responsive */
+        @media (max-width: 1024px) {
+            .mechanism-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .case-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .protocol-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .paradox-visual {
+                padding: 50px 25px;
+            }
+            
+            .gamma-trap {
+                padding: 35px 25px;
+            }
+            
+            .protection-protocol {
+                padding: 35px 25px;
+            }
+        }
+        
         @media (max-width: 768px) {
             .paradox-container {
                 flex-direction: column;
@@ -684,6 +720,25 @@
             
             .paradox-arrow {
                 transform: rotate(90deg);
+            }
+            
+            .paradox-side {
+                max-width: 100%;
+            }
+            
+            .paradox-icon {
+                width: 100px;
+                height: 100px;
+                font-size: 2.8rem;
+            }
+            
+            .paradox-title {
+                font-size: 1.3rem;
+            }
+            
+            .paradox-visual {
+                padding: 40px 20px;
+                margin: 30px 0;
             }
             
             .feedback-loop {
@@ -696,15 +751,368 @@
                 height: 80px;
             }
             
+            .loop-stage i {
+                font-size: 1.2rem;
+            }
+            
+            .loop-stage span {
+                font-size: 0.6rem;
+            }
+            
             .loop-center {
                 width: 100px;
                 height: 100px;
             }
             
+            .loop-center h4 {
+                font-size: 0.75rem;
+            }
+            
+            .mechanism-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .mechanism-card {
+                border-radius: 16px;
+            }
+            
+            .mechanism-header {
+                padding: 20px;
+            }
+            
+            .mechanism-body {
+                padding: 20px;
+            }
+            
+            .mechanism-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+                margin-bottom: 15px;
+            }
+            
+            .mechanism-title {
+                font-size: 1.15rem;
+            }
+            
+            .gamma-trap {
+                padding: 30px 20px;
+                margin: 30px 0;
+            }
+            
+            .gamma-title h3 {
+                font-size: 1.25rem;
+            }
+            
             .gamma-chart {
                 flex-wrap: wrap;
                 height: auto;
+                gap: 15px;
+                justify-content: center;
+            }
+            
+            .gamma-bar-group {
+                flex: 0 0 calc(50% - 10px);
+            }
+            
+            .gamma-bar {
+                width: 50px;
+            }
+            
+            .gamma-bar span {
+                font-size: 0.65rem;
+            }
+            
+            .gamma-label {
+                font-size: 0.7rem;
+            }
+            
+            .case-grid {
+                grid-template-columns: 1fr;
                 gap: 20px;
+            }
+            
+            .case-mini-card {
+                padding: 25px 20px;
+            }
+            
+            .case-mini-card h4 {
+                font-size: 1rem;
+            }
+            
+            .mirror-effect {
+                padding: 40px 20px;
+                margin: 30px 0;
+            }
+            
+            .mirror-text-top h3,
+            .mirror-text-bottom h3 {
+                font-size: 1.15rem;
+            }
+            
+            .mirror-text-top p,
+            .mirror-text-bottom p {
+                font-size: 0.85rem;
+            }
+            
+            .mirror-icon-center {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .protection-protocol {
+                padding: 30px 20px;
+                margin: 30px 0;
+            }
+            
+            .protocol-title h3 {
+                font-size: 1.2rem;
+            }
+            
+            .protocol-steps {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .protocol-step {
+                padding: 20px;
+                gap: 12px;
+            }
+            
+            .protocol-number {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+            
+            .protocol-content h4 {
+                font-size: 0.95rem;
+            }
+            
+            .protocol-content p {
+                font-size: 0.85rem;
+            }
+            
+            .paradox-finale {
+                padding: 50px 20px;
+                margin: 30px 0;
+            }
+            
+            .finale-mirror {
+                gap: 20px;
+            }
+            
+            .finale-icon {
+                font-size: 2rem;
+            }
+            
+            .paradox-finale h2 {
+                font-size: 1.5rem;
+            }
+            
+            .paradox-finale p {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Small Mobile */
+        @media (max-width: 480px) {
+            .paradox-visual {
+                padding: 30px 15px;
+                border-radius: 16px;
+            }
+            
+            .paradox-icon {
+                width: 80px;
+                height: 80px;
+                font-size: 2.2rem;
+            }
+            
+            .paradox-title {
+                font-size: 1.1rem;
+            }
+            
+            .paradox-desc {
+                font-size: 0.85rem;
+            }
+            
+            .feedback-loop {
+                width: 240px;
+                height: 240px;
+            }
+            
+            .loop-stage {
+                width: 65px;
+                height: 65px;
+            }
+            
+            .loop-stage i {
+                font-size: 1rem;
+                margin-bottom: 3px;
+            }
+            
+            .loop-stage span {
+                font-size: 0.55rem;
+            }
+            
+            .loop-stage.s1 {
+                top: -15px;
+            }
+            
+            .loop-stage.s2 {
+                right: -15px;
+            }
+            
+            .loop-stage.s3 {
+                bottom: -15px;
+            }
+            
+            .loop-stage.s4 {
+                left: -15px;
+            }
+            
+            .loop-center {
+                width: 85px;
+                height: 85px;
+            }
+            
+            .loop-center h4 {
+                font-size: 0.65rem;
+            }
+            
+            .mechanism-header {
+                padding: 18px;
+            }
+            
+            .mechanism-body {
+                padding: 18px;
+            }
+            
+            .mechanism-title {
+                font-size: 1.05rem;
+            }
+            
+            .mechanism-how h5 {
+                font-size: 0.8rem;
+            }
+            
+            .mechanism-how p {
+                font-size: 0.88rem;
+            }
+            
+            .mechanism-example {
+                padding: 15px;
+            }
+            
+            .mechanism-example h5 {
+                font-size: 0.8rem;
+            }
+            
+            .mechanism-example p {
+                font-size: 0.85rem;
+            }
+            
+            .gamma-trap {
+                padding: 25px 15px;
+                border-radius: 16px;
+            }
+            
+            .gamma-title h3 {
+                font-size: 1.1rem;
+            }
+            
+            .gamma-title p {
+                font-size: 0.85rem;
+            }
+            
+            .gamma-bar-group {
+                flex: 0 0 calc(50% - 8px);
+            }
+            
+            .gamma-bar {
+                width: 45px;
+            }
+            
+            .case-mini-card {
+                padding: 20px 15px;
+                border-radius: 12px;
+            }
+            
+            .case-mini-year {
+                padding: 4px 10px;
+                font-size: 0.75rem;
+            }
+            
+            .case-mini-card h4 {
+                font-size: 0.95rem;
+            }
+            
+            .case-mini-card p {
+                font-size: 0.85rem;
+            }
+            
+            .case-mini-stat span {
+                font-size: 0.8rem;
+            }
+            
+            .mirror-effect {
+                padding: 30px 15px;
+                border-radius: 16px;
+            }
+            
+            .mirror-text-top h3,
+            .mirror-text-bottom h3 {
+                font-size: 1rem;
+            }
+            
+            .mirror-icon-center {
+                width: 50px;
+                height: 50px;
+                font-size: 1.25rem;
+            }
+            
+            .protection-protocol {
+                padding: 25px 15px;
+                border-radius: 16px;
+            }
+            
+            .protocol-title h3 {
+                font-size: 1.1rem;
+            }
+            
+            .protocol-step {
+                padding: 15px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .protocol-number {
+                width: 30px;
+                height: 30px;
+                font-size: 0.85rem;
+            }
+            
+            .paradox-finale {
+                padding: 40px 15px;
+                border-radius: 16px;
+            }
+            
+            .finale-mirror {
+                gap: 15px;
+            }
+            
+            .finale-icon {
+                font-size: 1.5rem;
+            }
+            
+            .paradox-finale h2 {
+                font-size: 1.25rem;
+            }
+            
+            .paradox-finale p {
+                font-size: 0.9rem;
             }
         }
     </style>
