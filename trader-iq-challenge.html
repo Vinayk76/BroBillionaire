@@ -648,6 +648,146 @@
         .leaderboard-name { flex: 1; }
         .leaderboard-score { font-family: 'Orbitron', sans-serif; color: var(--correct); }
         
+        /* Name Modal */
+        .name-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .name-modal.active {
+            display: flex;
+        }
+        
+        .name-content {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            border: 2px solid var(--primary);
+            border-radius: 30px;
+            padding: 50px 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+        }
+        
+        .name-content h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .name-content p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 30px;
+        }
+        
+        .profile-pic-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .profile-preview {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(201, 162, 39, 0.2);
+            border: 3px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+        
+        .profile-preview:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+        
+        .profile-preview i {
+            font-size: 2.5rem;
+            color: var(--primary);
+        }
+        
+        .profile-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        #profileInput {
+            display: none;
+        }
+        
+        .profile-upload-btn {
+            color: var(--primary);
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-decoration: underline;
+            transition: opacity 0.3s;
+        }
+        
+        .profile-upload-btn:hover {
+            opacity: 0.7;
+        }
+        
+        .name-input {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            color: #fff;
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 25px;
+            transition: all 0.3s;
+        }
+        
+        .name-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(201, 162, 39, 0.05);
+        }
+        
+        .name-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+        
+        .name-content .cta-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--primary) 0%, #a68b1e 100%);
+            border: none;
+            border-radius: 15px;
+            color: #000;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .name-content .cta-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px var(--primary-glow);
+        }
+        
         /* Confetti */
         .confetti {
             position: fixed;
@@ -817,7 +957,7 @@
             <div class="result-card">
                 <div class="result-content">
                     <div class="result-badge" id="resultBadge">🏆</div>
-                    <div class="iq-score" id="iqScore">142</div>
+                    <div class="iq-score" id="iqScore">0</div>
                     <div class="iq-label">TRADER IQ SCORE</div>
                     <div class="result-title" id="resultTitle">Trading Genius!</div>
                     <div class="result-description" id="resultDescription">
@@ -826,16 +966,20 @@
                     
                     <div class="result-stats">
                         <div class="result-stat">
-                            <div class="result-stat-value green" id="correctCount">12</div>
+                            <div class="result-stat-value green" id="correctCount">0</div>
                             <div class="result-stat-label">Correct</div>
                         </div>
                         <div class="result-stat">
-                            <div class="result-stat-value gold" id="avgTime">8.5s</div>
+                            <div class="result-stat-value gold" id="avgTime">0s</div>
                             <div class="result-stat-label">Avg Time</div>
                         </div>
                         <div class="result-stat">
-                            <div class="result-stat-value blue" id="streakCount">5</div>
+                            <div class="result-stat-value blue" id="streakCount">0</div>
                             <div class="result-stat-label">Best Streak</div>
+                        </div>
+                        <div class="result-stat">
+                            <div class="result-stat-value" style="color: var(--primary);" id="userRank">#1</div>
+                            <div class="result-stat-label">Your Rank</div>
                         </div>
                     </div>
                     
@@ -846,8 +990,8 @@
                             <span>Genius</span>
                         </div>
                         <div class="percentile-track">
-                            <div class="percentile-fill" id="percentileFill" style="width: 100%"></div>
-                            <div class="percentile-marker" id="percentileMarker" style="left: 85%;">You</div>
+                            <div class="percentile-fill" id="percentileFill" style="width: 0%"></div>
+                            <div class="percentile-marker" id="percentileMarker" style="left: 0%;">You</div>
                         </div>
                     </div>
                     
@@ -958,6 +1102,21 @@
                     </div>
                 `;
             }).join('');
+        }
+        
+        function getUserRank(name, score) {
+            const leaderboard = JSON.parse(localStorage.getItem('traderIQLeaderboard') || '[]');
+            const sortedLeaderboard = leaderboard.sort((a, b) => b.score - a.score);
+            
+            // Find user's rank (considering ties)
+            const rank = sortedLeaderboard.findIndex(entry => 
+                entry.name === name && entry.score === score
+            ) + 1;
+            
+            return {
+                rank: rank || sortedLeaderboard.length,
+                total: sortedLeaderboard.length
+            };
         }
         
         // Profile Picture Upload
@@ -1295,10 +1454,21 @@
             // Save to leaderboard
             saveToLeaderboard(userName, iq, userAvatar);
             
+            // Get user's rank
+            const rankData = getUserRank(userName, iq);
+            
             document.getElementById('iqScore').textContent = iq;
             document.getElementById('correctCount').textContent = score;
             document.getElementById('avgTime').textContent = avgTime + 's';
             document.getElementById('streakCount').textContent = maxStreak;
+            
+            // Update rank display if it exists
+            if (document.getElementById('userRank')) {
+                document.getElementById('userRank').textContent = `#${rankData.rank}`;
+            }
+            if (document.getElementById('totalPlayers')) {
+                document.getElementById('totalPlayers').textContent = rankData.total;
+            }
             
             // Set result based on score
             let badge, title, description;
@@ -1356,14 +1526,16 @@
         
         function shareTwitterResult() {
             const iq = calculateIQ();
-            const text = `🧠 My Trader IQ Score: ${iq}\n\n✅ ${score}/15 Correct\n🔥 ${maxStreak} Best Streak\n\nCan you beat me? Take the challenge 👇\n\n`;
+            const rankData = getUserRank(userName, iq);
+            const text = `🧠 My Trader IQ Score: ${iq}\n\n✅ ${score}/15 Correct\n🔥 ${maxStreak} Best Streak\n🏆 Rank #${rankData.rank} of ${rankData.total}\n\nCan you beat me? Take the challenge 👇\n\n`;
             const url = 'https://brobillionaire.com/trader-iq-challenge.html';
             window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
         }
         
         function shareWhatsAppResult() {
             const iq = calculateIQ();
-            const text = `🧠 *My Trader IQ Score: ${iq}*\n\n✅ ${score}/15 Correct\n🔥 ${maxStreak} Best Streak\n\nCan you beat me? Take the challenge: https://brobillionaire.com/trader-iq-challenge.html`;
+            const rankData = getUserRank(userName, iq);
+            const text = `🧠 *My Trader IQ Score: ${iq}*\n\n✅ ${score}/15 Correct\n🔥 ${maxStreak} Best Streak\n🏆 Rank #${rankData.rank} of ${rankData.total}\n\nCan you beat me? Take the challenge: https://brobillionaire.com/trader-iq-challenge.html`;
             window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
         }
         
