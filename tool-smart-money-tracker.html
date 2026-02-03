@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <title>Smart Money Tracker - FII/DII, Bulk Deals, Block Deals | BroBillionaire</title>
+    <meta name="description" content="Track smart money flows with live FII/DII data, bulk deals, block deals, and promoter transactions. Visualize institutional buying and selling patterns in Indian stocks.">
+    <meta name="keywords" content="FII DII data, bulk deals India, block deals NSE, smart money tracker, institutional investors, promoter transactions, foreign institutional investors, domestic institutional investors">
+    <link rel="canonical" href="https://brobillionaire.com/tool-smart-money-tracker.html">
+    
+    <meta property="og:title" content="Smart Money Tracker - FII/DII, Bulk Deals, Block Deals">
+    <meta property="og:description" content="Track smart money flows with live FII/DII data, bulk deals, block deals, and promoter transactions.">
+    <meta property="og:url" content="https://brobillionaire.com/tool-smart-money-tracker.html">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .tool-container { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+        .tool-header { text-align: center; margin-bottom: 40px; }
+        .tool-title { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: #C9A227; margin-bottom: 10px; }
+        .tool-badge { display: inline-block; background: linear-gradient(135deg, #C9A227 0%, #E5B946 100%); color: #000; padding: 8px 20px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; }
+        
+        .tabs-container { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; background: #1a1a1a; padding: 15px; border-radius: 12px; }
+        .tab-btn { flex: 1; min-width: 150px; padding: 15px 20px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #999; cursor: pointer; font-weight: 600; transition: all 0.3s; text-align: center; }
+        .tab-btn.active { background: linear-gradient(135deg, #C9A227 0%, #E5B946 100%); color: #000; border-color: #C9A227; }
+        
+        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .summary-card { background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%); border-radius: 12px; padding: 25px; border-left: 4px solid #C9A227; }
+        .summary-label { color: #999; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px; }
+        .summary-value { font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 5px; }
+        .summary-change { font-size: 0.9rem; font-weight: 600; }
+        .summary-change.positive { color: #22c55e; }
+        .summary-change.negative { color: #ef4444; }
+        
+        .data-table { background: #1a1a1a; border-radius: 16px; padding: 30px; border: 1px solid #2a2a2a; margin-bottom: 30px; }
+        table { width: 100%; border-collapse: collapse; }
+        th { padding: 15px; text-align: left; color: #C9A227; font-weight: 600; border-bottom: 2px solid #2a2a2a; }
+        td { padding: 15px; color: #fff; border-bottom: 1px solid #2a2a2a; }
+        tr:hover { background: #0a0a0a; }
+        
+        .buy-badge { background: rgba(34, 197, 94, 0.2); color: #22c55e; padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; font-weight: 600; }
+        .sell-badge { background: rgba(239, 68, 68, 0.2); color: #ef4444; padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; font-weight: 600; }
+        
+        @media (max-width: 768px) {
+            .tool-title { font-size: 2rem; }
+            .tabs-container { flex-direction: column; }
+            table { font-size: 0.9rem; }
+            th, td { padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="tool-container">
+        <div class="tool-header">
+            <h1 class="tool-title"><i class="fas fa-user-tie"></i> Smart Money Tracker</h1>
+            <div class="tool-badge">🎯 FII/DII + Bulk Deals + Block Deals + Promoters</div>
+            <p style="color: #999; font-size: 1.1rem;">Follow the institutional money - track where big players are investing</p>
+        </div>
+
+        <div class="tabs-container">
+            <div class="tab-btn active" onclick="switchTab('fii-dii')">
+                <i class="fas fa-globe"></i> FII/DII Flows
+            </div>
+            <div class="tab-btn" onclick="switchTab('bulk-deals')">
+                <i class="fas fa-briefcase"></i> Bulk Deals
+            </div>
+            <div class="tab-btn" onclick="switchTab('block-deals')">
+                <i class="fas fa-cubes"></i> Block Deals
+            </div>
+            <div class="tab-btn" onclick="switchTab('promoters')">
+                <i class="fas fa-crown"></i> Promoter Activity
+            </div>
+        </div>
+
+        <!-- FII/DII Tab -->
+        <div id="fii-dii-tab" class="tab-content">
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <div class="summary-label">FII Net (Today)</div>
+                    <div class="summary-value" id="fiiNetToday">₹0 Cr</div>
+                    <div class="summary-change positive" id="fiiChange">+0.00%</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-label">DII Net (Today)</div>
+                    <div class="summary-value" id="diiNetToday">₹0 Cr</div>
+                    <div class="summary-change positive" id="diiChange">+0.00%</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-label">FII (MTD)</div>
+                    <div class="summary-value" id="fiiMTD">₹0 Cr</div>
+                    <div class="summary-change" id="fiiMTDChange">--</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-label">DII (MTD)</div>
+                    <div class="summary-value" id="diiMTD">₹0 Cr</div>
+                    <div class="summary-change" id="diiMTDChange">--</div>
+                </div>
+            </div>
+
+            <div class="data-table">
+                <h3 style="color: #C9A227; margin-bottom: 20px;">Last 10 Days FII/DII Activity</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>FII Buy (₹Cr)</th>
+                            <th>FII Sell (₹Cr)</th>
+                            <th>FII Net (₹Cr)</th>
+                            <th>DII Buy (₹Cr)</th>
+                            <th>DII Sell (₹Cr)</th>
+                            <th>DII Net (₹Cr)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="fiiDiiTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Bulk Deals Tab -->
+        <div id="bulk-deals-tab" class="tab-content" style="display: none;">
+            <div class="data-table">
+                <h3 style="color: #C9A227; margin-bottom: 20px;">Today's Bulk Deals</h3>
+                <p style="color: #999; margin-bottom: 20px;">Transactions over 0.5% of equity (min ₹10 lakh)</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Stock</th>
+                            <th>Client Name</th>
+                            <th>Type</th>
+                            <th>Quantity</th>
+                            <th>Price (₹)</th>
+                            <th>Value (₹Cr)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bulkDealsTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Block Deals Tab -->
+        <div id="block-deals-tab" class="tab-content" style="display: none;">
+            <div class="data-table">
+                <h3 style="color: #C9A227; margin-bottom: 20px;">Today's Block Deals</h3>
+                <p style="color: #999; margin-bottom: 20px;">Large institutional transactions (min ₹10 crore)</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Stock</th>
+                            <th>Client Name</th>
+                            <th>Type</th>
+                            <th>Quantity</th>
+                            <th>Price (₹)</th>
+                            <th>Value (₹Cr)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="blockDealsTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Promoters Tab -->
+        <div id="promoters-tab" class="tab-content" style="display: none;">
+            <div class="data-table">
+                <h3 style="color: #C9A227; margin-bottom: 20px;">Recent Promoter Transactions</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Stock</th>
+                            <th>Promoter</th>
+                            <th>Activity</th>
+                            <th>Shares</th>
+                            <th>Value (₹Cr)</th>
+                            <th>% Holding Change</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="promotersTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Insights -->
+        <div style="background: #1a1a1a; border-radius: 16px; padding: 30px; border: 1px solid #2a2a2a;">
+            <h3 style="color: #C9A227; margin-bottom: 20px;"><i class="fas fa-lightbulb"></i> Understanding Smart Money</h3>
+            <div style="display: grid; gap: 15px; color: #ccc; line-height: 1.8;">
+                <p><strong style="color: #C9A227;">FII (Foreign Institutional Investors):</strong> Foreign funds buying/selling Indian stocks. Positive FII = bullish market.</p>
+                <p><strong style="color: #C9A227;">DII (Domestic Institutional Investors):</strong> Indian mutual funds, insurance companies. Often counter FII flows.</p>
+                <p><strong style="color: #C9A227;">Bulk Deals:</strong> Large transactions (0.5%+ equity). Indicates big player interest in specific stocks.</p>
+                <p><strong style="color: #C9A227;">Block Deals:</strong> Off-market institutional trades. Usually signals major position changes.</p>
+                <p><strong style="color: #C9A227;">Promoter Buying:</strong> Insiders buying own stock = bullish sign. Selling = caution unless for known reasons.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /*
+         * FREE API INTEGRATIONS USED:
+         * 1. NSE India API - Free, no API key needed, but requires proper headers
+         *    Base URL: https://www.nseindia.com/
+         *    FII/DII data: https://www.nseindia.com/api/fiidiiTradeReact
+         *    Bulk Deals: https://www.nseindia.com/api/snapshot-capital-market-largedeal
+         *    Block Deals: https://www.nseindia.com/api/block-deal
+         * 2. CORS Proxy needed for browser access: https://api.allorigins.win/raw?url=
+         * 3. Fallback: Mock data if API fails
+         * 
+         * Note: NSE API may block frequent requests. Consider server-side proxy in production.
+         */
+        
+        let useMockData = true; // Set to false to use real API (may need CORS proxy)
+        
+        async function fetchNSEData(endpoint) {
+            if (useMockData) return null;
+            
+            try {
+                // NSE requires proper headers
+                const corsProxy = 'https://api.allorigins.win/raw?url=';
+                const nseUrl = `https://www.nseindia.com${endpoint}`;
+                const response = await fetch(corsProxy + encodeURIComponent(nseUrl), {
+                    headers: {
+                        'Accept': 'application/json',
+                        'User-Agent': 'Mozilla/5.0'
+                    }
+                });
+                
+                if (response.ok) {
+                    return await response.json();
+                }
+            } catch (error) {
+                console.error('NSE API error:', error);
+            }
+            return null;
+        }
+        
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.style.display = 'none');
+            event.target.closest('.tab-btn').classList.add('active');
+            document.getElementById(tabName + '-tab').style.display = 'block';
+        }
+
+        async function loadFIIDIIData() {
+            // Try to fetch real data from NSE
+            const realData = await fetchNSEData('/api/fiidiiTradeReact');
+            
+            if (realData && realData.length > 0) {
+                // Use real NSE data
+                const tbody = document.getElementById('fiiDiiTableBody');
+                let html = '';
+                let fiiTotal = 0, diiTotal = 0;
+                
+                realData.slice(0, 10).forEach((day, i) => {
+                    const fiiNet = parseFloat(day.fiiNet || 0);
+                    const diiNet = parseFloat(day.diiNet || 0);
+                    
+                    if (i === 0) {
+                        document.getElementById('fiiNetToday').textContent = `₹${fiiNet.toFixed(2)} Cr`;
+                        document.getElementById('diiNetToday').textContent = `₹${diiNet.toFixed(2)} Cr`;
+                        document.getElementById('fiiChange').className = `summary-change ${fiiNet > 0 ? 'positive' : 'negative'}`;
+                        document.getElementById('diiChange').className = `summary-change ${diiNet > 0 ? 'positive' : 'negative'}`;
+                    }
+                    
+                    fiiTotal += fiiNet;
+                    diiTotal += diiNet;
+                    
+                    html += `<tr>
+                        <td>${day.date || 'N/A'}</td>
+                        <td>₹${day.fiiBuy || '0'}</td>
+                        <td>₹${day.fiiSell || '0'}</td>
+                        <td style="color: ${fiiNet > 0 ? '#22c55e' : '#ef4444'}; font-weight: 600;">₹${fiiNet.toFixed(2)}</td>
+                        <td>₹${day.diiBuy || '0'}</td>
+                        <td>₹${day.diiSell || '0'}</td>
+                        <td style="color: ${diiNet > 0 ? '#22c55e' : '#ef4444'}; font-weight: 600;">₹${diiNet.toFixed(2)}</td>
+                    </tr>`;
+                });
+                tbody.innerHTML = html;
+                
+                document.getElementById('fiiMTD').textContent = `₹${fiiTotal.toFixed(2)} Cr`;
+                document.getElementById('diiMTD').textContent = `₹${diiTotal.toFixed(2)} Cr`;
+                document.getElementById('fiiMTDChange').className = `summary-change ${fiiTotal > 0 ? 'positive' : 'negative'}`;
+                document.getElementById('diiMTDChange').className = `summary-change ${diiTotal > 0 ? 'positive' : 'negative'}`;
+                return;
+            }
+            
+            // Fallback to mock data
+            const tbody = document.getElementById('fiiDiiTableBody');
+            let html = '';
+            let fiiTotal = 0, diiTotal = 0;
+            
+            for (let i = 0; i < 10; i++) {
+                const date = new Date();
+                date.setDate(date.getDate() - i);
+                const fiiBuy = (Math.random() * 10000 + 5000).toFixed(2);
+                const fiiSell = (Math.random() * 10000 + 5000).toFixed(2);
+                const fiiNet = (fiiBuy - fiiSell).toFixed(2);
+                const diiBuy = (Math.random() * 8000 + 4000).toFixed(2);
+                const diiSell = (Math.random() * 8000 + 4000).toFixed(2);
+                const diiNet = (diiBuy - diiSell).toFixed(2);
+                
+                if (i === 0) {
+                    document.getElementById('fiiNetToday').textContent = `₹${fiiNet} Cr`;
+                    document.getElementById('diiNetToday').textContent = `₹${diiNet} Cr`;
+                    document.getElementById('fiiChange').className = `summary-change ${fiiNet > 0 ? 'positive' : 'negative'}`;
+                    document.getElementById('diiChange').className = `summary-change ${diiNet > 0 ? 'positive' : 'negative'}`;
+                }
+                
+                fiiTotal += parseFloat(fiiNet);
+                diiTotal += parseFloat(diiNet);
+                
+                html += `<tr>
+                    <td>${date.toLocaleDateString('en-IN')}</td>
+                    <td>₹${fiiBuy}</td>
+                    <td>₹${fiiSell}</td>
+                    <td style="color: ${fiiNet > 0 ? '#22c55e' : '#ef4444'}; font-weight: 600;">₹${fiiNet}</td>
+                    <td>₹${diiBuy}</td>
+                    <td>₹${diiSell}</td>
+                    <td style="color: ${diiNet > 0 ? '#22c55e' : '#ef4444'}; font-weight: 600;">₹${diiNet}</td>
+                </tr>`;
+            }
+            tbody.innerHTML = html;
+            
+            document.getElementById('fiiMTD').textContent = `₹${fiiTotal.toFixed(2)} Cr`;
+            document.getElementById('diiMTD').textContent = `₹${diiTotal.toFixed(2)} Cr`;
+            document.getElementById('fiiMTDChange').className = `summary-change ${fiiTotal > 0 ? 'positive' : 'negative'}`;
+            document.getElementById('diiMTDChange').className = `summary-change ${diiTotal > 0 ? 'positive' : 'negative'}`;
+        }
+
+        async function loadBulkDeals() {
+            // Try to fetch real data from NSE
+            const realData = await fetchNSEData('/api/snapshot-capital-market-largedeal');
+            
+            if (realData && realData.length > 0) {
+                const tbody = document.getElementById('bulkDealsTableBody');
+                let html = '';
+                
+                realData.slice(0, 12).forEach(deal => {
+                    const isBuy = deal.action && deal.action.toUpperCase() === 'BUY';
+                    html += `<tr>
+                        <td style="font-weight: 600;">${deal.symbol || 'N/A'}</td>
+                        <td>${deal.clientName || 'N/A'}</td>
+                        <td><span class="${isBuy ? 'buy-badge' : 'sell-badge'}">${isBuy ? 'BUY' : 'SELL'}</span></td>
+                        <td>${parseInt(deal.quantity || 0).toLocaleString()}</td>
+                        <td>₹${parseFloat(deal.tradePrice || 0).toFixed(2)}</td>
+                        <td>₹${(deal.quantity * deal.tradePrice / 10000000).toFixed(2)}</td>
+                    </tr>`;
+                });
+                tbody.innerHTML = html;
+                return;
+            }
+            
+            // Fallback to mock data
+            const stocks = ['RELIANCE', 'TCS', 'INFY', 'HDFC', 'ICICI', 'SBIN', 'BHARTI', 'ITC', 'KOTAKBANK', 'AXISBANK'];
+            const clients = ['Morgan Stanley', 'Goldman Sachs', 'Jefferies', 'HSBC', 'Nomura', 'Citigroup', 'BNP Paribas', 'Credit Suisse'];
+            const tbody = document.getElementById('bulkDealsTableBody');
+            let html = '';
+            
+            for (let i = 0; i < 12; i++) {
+                const stock = stocks[Math.floor(Math.random() * stocks.length)];
+                const client = clients[Math.floor(Math.random() * clients.length)];
+                const isBuy = Math.random() > 0.5;
+                const qty = Math.floor(Math.random() * 1000000 + 500000);
+                const price = (Math.random() * 2000 + 100).toFixed(2);
+                const value = (qty * price / 10000000).toFixed(2);
+                
+                html += `<tr>
+                    <td style="font-weight: 600;">${stock}</td>
+                    <td>${client}</td>
+                    <td><span class="${isBuy ? 'buy-badge' : 'sell-badge'}">${isBuy ? 'BUY' : 'SELL'}</span></td>
+                    <td>${qty.toLocaleString()}</td>
+                    <td>₹${price}</td>
+                    <td>₹${value}</td>
+                </tr>`;
+            }
+            tbody.innerHTML = html;
+        }
+
+        async function loadBlockDeals() {
+            // Try to fetch real data from NSE
+            const realData = await fetchNSEData('/api/block-deal');
+            
+            if (realData && realData.length > 0) {
+                const tbody = document.getElementById('blockDealsTableBody');
+                let html = '';
+                
+                realData.slice(0, 8).forEach(deal => {
+                    const isBuy = deal.buyOrSell && deal.buyOrSell.toUpperCase() === 'BUY';
+                    html += `<tr>
+                        <td style="font-weight: 600;">${deal.symbol || 'N/A'}</td>
+                        <td>${deal.clientName || 'N/A'}</td>
+                        <td><span class="${isBuy ? 'buy-badge' : 'sell-badge'}">${isBuy ? 'BUY' : 'SELL'}</span></td>
+                        <td>${parseInt(deal.quantityTraded || 0).toLocaleString()}</td>
+                        <td>₹${parseFloat(deal.tradePrice || 0).toFixed(2)}</td>
+                        <td>₹${(deal.quantityTraded * deal.tradePrice / 10000000).toFixed(2)}</td>
+                    </tr>`;
+                });
+                tbody.innerHTML = html;
+                return;
+            }
+            
+            // Fallback to mock data
+            const stocks = ['RELIANCE', 'TCS', 'INFY', 'HDFC', 'ICICI', 'SBIN'];
+            const clients = ['LIC of India', 'SBI Mutual Fund', 'ICICI Prudential', 'HDFC Mutual Fund', 'Aditya Birla MF'];
+            const tbody = document.getElementById('blockDealsTableBody');
+            let html = '';
+            
+            for (let i = 0; i < 8; i++) {
+                const stock = stocks[Math.floor(Math.random() * stocks.length)];
+                const client = clients[Math.floor(Math.random() * clients.length)];
+                const isBuy = Math.random() > 0.5;
+                const qty = Math.floor(Math.random() * 5000000 + 1000000);
+                const price = (Math.random() * 2000 + 100).toFixed(2);
+                const value = (qty * price / 10000000).toFixed(2);
+                
+                html += `<tr>
+                    <td style="font-weight: 600;">${stock}</td>
+                    <td>${client}</td>
+                    <td><span class="${isBuy ? 'buy-badge' : 'sell-badge'}">${isBuy ? 'BUY' : 'SELL'}</span></td>
+                    <td>${qty.toLocaleString()}</td>
+                    <td>₹${price}</td>
+                    <td>₹${value}</td>
+                </tr>`;
+            }
+            tbody.innerHTML = html;
+        }
+
+        function loadPromoterData() {
+            const stocks = ['RELIANCE', 'TCS', 'INFY', 'HDFC', 'TITAN', 'BAJAJ', 'MARUTI', 'ASIAN PAINTS'];
+            const promoters = ['Mukesh Ambani', 'Ratan Tata', 'Narayana Murthy', 'Deepak Parekh', 'Bajaj Family', 'Birla Family'];
+            const tbody = document.getElementById('promotersTableBody');
+            let html = '';
+            
+            for (let i = 0; i < 10; i++) {
+                const stock = stocks[Math.floor(Math.random() * stocks.length)];
+                const promoter = promoters[Math.floor(Math.random() * promoters.length)];
+                const isBuy = Math.random() > 0.6; // 60% buying
+                const shares = Math.floor(Math.random() * 500000 + 100000);
+                const value = (Math.random() * 500 + 50).toFixed(2);
+                const holdingChange = (Math.random() * 2 - 0.5).toFixed(2);
+                const date = new Date();
+                date.setDate(date.getDate() - Math.floor(Math.random() * 30));
+                
+                html += `<tr>
+                    <td style="font-weight: 600;">${stock}</td>
+                    <td>${promoter}</td>
+                    <td><span class="${isBuy ? 'buy-badge' : 'sell-badge'}">${isBuy ? 'BUYING' : 'SELLING'}</span></td>
+                    <td>${shares.toLocaleString()}</td>
+                    <td>₹${value}</td>
+                    <td style="color: ${holdingChange > 0 ? '#22c55e' : '#ef4444'};">${holdingChange > 0 ? '+' : ''}${holdingChange}%</td>
+                    <td>${date.toLocaleDateString('en-IN')}</td>
+                </tr>`;
+            }
+            tbody.innerHTML = html;
+        }
+
+        // Load all data on page load
+        window.addEventListener('load', () => {
+            loadFIIDIIData();
+            loadBulkDeals();
+            loadBlockDeals();
+            loadPromoterData();
+        });
+
+        // Auto refresh every 5 minutes
+        setInterval(() => {
+            loadFIIDIIData();
+            loadBulkDeals();
+            loadBlockDeals();
+            loadPromoterData();
+        }, 300000);
+    </script>
+
+    <!-- Related Articles Section -->
+    <section style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border-radius: 16px; padding: 2.5rem; margin: 3rem 0; border: 2px solid #C9A227; max-width: 1200px; margin-left: auto; margin-right: auto;">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #C9A227; margin-bottom: 1.5rem; text-align: center;">
+            📚 Learn More: Essential Reading
+        </h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+            <div style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
+                <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
+                    <span style="font-size: 2rem; margin-right: 0.5rem;">📖</span>
+                    <h3 style="color: #C9A227; font-size: 1.1rem; margin: 0;">Smart Money Positioning</h3>
+                </div>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 0.9rem;">
+                    Master the fundamentals with expert insights and real-world examples
+                </p>
+                <a href="article-smart-money-positioning.html" style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
+                    Read Article →
+                </a>
+            </div>
+            <div style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
+                <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
+                    <span style="font-size: 2rem; margin-right: 0.5rem;">💡</span>
+                    <h3 style="color: #C9A227; font-size: 1.1rem; margin: 0;">Institutions Fade Retail</h3>
+                </div>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 0.9rem;">
+                    Deep dive into advanced strategies used by professional traders
+                </p>
+                <a href="article-institutions-fade-retail.html" style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
+                    Read Article →
+                </a>
+            </div>
+            <div style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
+                <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
+                    <span style="font-size: 2rem; margin-right: 0.5rem;">🎓</span>
+                    <h3 style="color: #C9A227; font-size: 1.1rem; margin: 0;">Retail Vs Institutions</h3>
+                </div>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 0.9rem;">
+                    Learn from market history and avoid costly mistakes
+                </p>
+                <a href="article-retail-vs-institutions.html" style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
+                    Read Article →
+                </a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

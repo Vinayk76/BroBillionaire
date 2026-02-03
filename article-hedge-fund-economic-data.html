@@ -843,7 +843,7 @@
     </script>
 </head>
 <body class="article-page">
-
+    
     <!-- Article Navigation -->
     <nav class="article-nav">
         <div class="article-nav-container">
@@ -853,8 +853,6 @@
             </a>
             <div class="article-nav-center">
                 <a href="index.html" style="display: inline-flex; align-items: center;"><img src="logo.jpg" alt="BroBillionaire" class="nav-logo-small"></a>
-                <span class="nav-divider">|</span>
-                <span class="article-category-nav">Professional Edge</span>
             </div>
             <div class="article-share">
                 <button class="share-btn" onclick="shareArticle()">
@@ -864,8 +862,7 @@
         </div>
         <div class="reading-progress-bar"></div>
     </nav>
-
-    <!-- Hero Section -->
+<!-- Hero Section -->
     <header class="article-hero">
         <div class="article-hero-bg">
             <div class="hero-gradient"></div>
@@ -1643,80 +1640,26 @@
         </article>
     </main>
 
-    <!-- Footer -->
-
-    <script src="script.js"></script>
-    <script>
-        // Reading progress bar
-        window.addEventListener('scroll', () => {
-            const article = document.querySelector('.article-main');
-            const progressBar = document.querySelector('.reading-progress-bar');
-            const scrollTop = window.scrollY;
-            const docHeight = article.offsetHeight - window.innerHeight;
-            const progress = (scrollTop / docHeight) * 100;
-            progressBar.style.width = Math.min(progress, 100) + '%';
-        });
-
-        function shareArticle() {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'What Hedge Funds Watch During Economic Data Releases',
-                    text: 'The exact playbook for NFP, CPI, Fed announcements, and market-moving data.',
-                    url: window.location.href
-                });
-            } else {
-                navigator.clipboard.writeText(window.location.href);
-                alert('Link copied to clipboard!');
-            }
-        }
-
-        // Simulated countdown (for demo)
-        function updateCountdown() {
-            const seconds = document.getElementById('seconds');
-            const minutes = document.getElementById('minutes');
-            const hours = document.getElementById('hours');
-            
-            let s = parseInt(seconds.textContent);
-            let m = parseInt(minutes.textContent);
-            let h = parseInt(hours.textContent);
-            
-            s--;
-            if (s < 0) {
-                s = 59;
-                m--;
-                if (m < 0) {
-                    m = 59;
-                    h--;
-                    if (h < 0) h = 23;
-                }
-            }
-            
-            seconds.textContent = s.toString().padStart(2, '0');
-            minutes.textContent = m.toString().padStart(2, '0');
-            hours.textContent = h.toString().padStart(2, '0');
-        }
-        
-        setInterval(updateCountdown, 1000);
-    </script>
-    <script src="seo-injector.js" defer></script>
-    <!-- Footer -->
-    <footer class="footer">
+        <!-- Footer -->
+    <footer class="site-footer">
         <div class="footer-container">
-            <div class="footer-brand-section">
-                <div class="logo">
-                    <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
-                    <span class="logo-text">BroBillionaire</span>
+            <div class="footer-content-centered">
+                <div class="footer-logo-section">
+                    <img src="logo.jpg" alt="BroBillionaire" class="footer-logo-img">
+                    <h3 class="footer-brand-name">BroBillionaire</h3>
                 </div>
-                <p class="tagline">Making Wall Street wisdom accessible to every trader.</p>
+                <p class="footer-tagline">Making Wall Street wisdom accessible to every trader.</p>
+                <div class="footer-quick-links">
+                    <a href="index.html" class="footer-link-home">Home</a>
+                </div>
             </div>
-            <nav class="footer-nav">
-                <a href="index.html">Home</a>
-            </nav>
+            <div class="footer-disclaimer">
+                <p>For educational purposes only. Not financial advice. Trading options involves substantial risk of loss.</p>
+            </div>
         </div>
     </footer>
-    <div class="footer-disclaimer">
-        <p>For educational purposes only. Not financial advice. Trading options involves substantial risk of loss.</p>
-    </div>
+
+    <script src="mobile-nav.js"></script>
 
     <script src="social-share-buttons.js" defer></script>
 <script src="article-backlinks-data.js" defer></script><script src="backlink-injector.js" defer></script><script>

@@ -304,7 +304,7 @@
     </script>
 </head>
 <body class="article-page">
-
+    
     <!-- Article Navigation -->
     <nav class="article-nav">
         <div class="article-nav-container">
@@ -314,8 +314,6 @@
             </a>
             <div class="article-nav-center">
                 <a href="index.html" style="display: inline-flex; align-items: center;"><img src="logo.jpg" alt="BroBillionaire" class="nav-logo-small"></a>
-                <span class="nav-divider">|</span>
-                <span class="article-category-nav">Trading Psychology</span>
             </div>
             <div class="article-share">
                 <button class="share-btn" onclick="shareArticle()">
@@ -325,8 +323,7 @@
         </div>
         <div class="reading-progress-bar"></div>
     </nav>
-
-    <!-- Hero Section -->
+<!-- Hero Section -->
     <header class="article-hero">
         <div class="article-hero-bg">
             <div class="hero-gradient"></div>
@@ -1066,107 +1063,26 @@
         </article>
     </main>
 
-    <!-- Footer -->
-
-    <script src="script.js"></script>
-    <script>
-        // Demon card hover effects
-        document.querySelectorAll('.demon-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
-            });
-        });
-        
-        // Animate battle squares on scroll
-        const battleSquares = document.querySelectorAll('.battle-square');
-        const battleObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'scale(1)';
-                    }, index * 50);
-                }
-            });
-        }, { threshold: 0.3 });
-        
-        battleSquares.forEach(square => {
-            square.style.opacity = '0';
-            square.style.transform = 'scale(0.8)';
-            square.style.transition = 'all 0.4s ease';
-            battleObserver.observe(square);
-        });
-        
-        // Voice message animation
-        const voiceMessages = document.querySelectorAll('.voice-message');
-        const voiceObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }, index * 300);
-                }
-            });
-        }, { threshold: 0.2 });
-        
-        voiceMessages.forEach(msg => {
-            msg.style.opacity = '0';
-            msg.style.transform = 'translateY(20px)';
-            msg.style.transition = 'all 0.5s ease';
-            voiceObserver.observe(msg);
-        });
-        
-        // Path stage animation
-        const pathStages = document.querySelectorAll('.path-stage');
-        const pathObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.querySelector('.path-content').style.opacity = '1';
-                    entry.target.querySelector('.path-content').style.transform = 'translateX(0)';
-                    entry.target.querySelector('.path-marker').style.transform = 'translateX(-50%) scale(1)';
-                }
-            });
-        }, { threshold: 0.3 });
-        
-        pathStages.forEach((stage, index) => {
-            const content = stage.querySelector('.path-content');
-            const marker = stage.querySelector('.path-marker');
-            
-            content.style.opacity = '0';
-            content.style.transform = index % 2 === 0 ? 'translateX(-30px)' : 'translateX(30px)';
-            content.style.transition = 'all 0.6s ease';
-            
-            marker.style.transform = 'translateX(-50%) scale(0)';
-            marker.style.transition = 'all 0.4s ease 0.3s';
-            
-            pathObserver.observe(stage);
-        });
-    </script>
-    <script src="seo-injector.js" defer></script>
-    <!-- Footer -->
-    <footer class="footer">
+        <!-- Footer -->
+    <footer class="site-footer">
         <div class="footer-container">
-            <div class="footer-brand-section">
-                <div class="logo">
-                    <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
-                    <span class="logo-text">BroBillionaire</span>
+            <div class="footer-content-centered">
+                <div class="footer-logo-section">
+                    <img src="logo.jpg" alt="BroBillionaire" class="footer-logo-img">
+                    <h3 class="footer-brand-name">BroBillionaire</h3>
                 </div>
-                <p class="tagline">Making Wall Street wisdom accessible to every trader.</p>
+                <p class="footer-tagline">Making Wall Street wisdom accessible to every trader.</p>
+                <div class="footer-quick-links">
+                    <a href="index.html" class="footer-link-home">Home</a>
+                </div>
             </div>
-            <nav class="footer-nav">
-                <a href="index.html">Home</a>
-            </nav>
+            <div class="footer-disclaimer">
+                <p>For educational purposes only. Not financial advice. Trading options involves substantial risk of loss.</p>
+            </div>
         </div>
     </footer>
-    <div class="footer-disclaimer">
-        <p>For educational purposes only. Not financial advice. Trading options involves substantial risk of loss.</p>
-    </div>
+
+    <script src="mobile-nav.js"></script>
 
     <script src="social-share-buttons.js" defer></script>
 <script src="article-backlinks-data.js" defer></script><script src="backlink-injector.js" defer></script><script>

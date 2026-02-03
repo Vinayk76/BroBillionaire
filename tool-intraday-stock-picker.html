@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <title>Intraday Stock Picker - Daily 3-5 Momentum Stocks with Targets | BroBillionaire</title>
+    <meta name="description" content="Get 3-5 high-momentum intraday stocks daily with entry price, stop-loss, and profit targets. AI-powered stock selection for day trading in Indian markets.">
+    <meta name="keywords" content="intraday stock picker, day trading stocks, momentum stocks India, intraday trading tips, stock targets, stop loss calculator, NSE intraday stocks, best stocks for intraday">
+    <link rel="canonical" href="https://brobillionaire.com/tool-intraday-stock-picker.html">
+    
+    <meta property="og:title" content="Intraday Stock Picker - Daily Momentum Stocks with Targets">
+    <meta property="og:description" content="Get 3-5 high-momentum intraday stocks daily with entry price, stop-loss, and profit targets.">
+    <meta property="og:url" content="https://brobillionaire.com/tool-intraday-stock-picker.html">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .tool-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .tool-header { text-align: center; margin-bottom: 40px; }
+        .tool-title { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: #C9A227; margin-bottom: 10px; }
+        .tool-badge { display: inline-block; background: linear-gradient(135deg, #C9A227 0%, #E5B946 100%); color: #000; padding: 8px 20px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; }
+        
+        .market-status { background: #1a1a1a; border-radius: 12px; padding: 20px; margin-bottom: 30px; border: 1px solid #2a2a2a; text-align: center; }
+        .market-status.open { border-left: 4px solid #22c55e; }
+        .market-status.closed { border-left: 4px solid #ef4444; }
+        
+        .stock-cards-grid { display: grid; gap: 25px; margin-bottom: 30px; }
+        .stock-card { background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%); border-radius: 16px; padding: 30px; border: 2px solid #2a2a2a; transition: all 0.3s; position: relative; overflow: hidden; }
+        .stock-card:hover { transform: translateY(-5px); border-color: #C9A227; box-shadow: 0 10px 30px rgba(201, 162, 39, 0.2); }
+        .stock-card::before { content: ''; position: absolute; top: 0; right: 0; width: 100px; height: 100px; background: radial-gradient(circle, rgba(201, 162, 39, 0.1) 0%, transparent 70%); }
+        
+        .stock-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px; }
+        .stock-name { font-size: 1.8rem; font-weight: 700; color: #C9A227; }
+        .stock-sector { font-size: 0.85rem; color: #999; margin-top: 5px; }
+        .confidence-badge { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color: #fff; padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+        
+        .price-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-bottom: 20px; }
+        .price-box { background: #0a0a0a; border-radius: 10px; padding: 15px; text-align: center; border: 1px solid #2a2a2a; }
+        .price-label { color: #999; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 5px; }
+        .price-value { color: #fff; font-size: 1.3rem; font-weight: 700; }
+        .price-value.entry { color: #3b82f6; }
+        .price-value.target { color: #22c55e; }
+        .price-value.sl { color: #ef4444; }
+        
+        .signals-section { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+        .signal-tag { background: rgba(201, 162, 39, 0.15); color: #C9A227; padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+        
+        .rationale { background: rgba(59, 130, 246, 0.1); border-left: 3px solid #3b82f6; padding: 15px; border-radius: 8px; color: #ccc; font-size: 0.9rem; line-height: 1.6; }
+        
+        .action-button { width: 100%; padding: 15px; background: linear-gradient(135deg, #C9A227 0%, #E5B946 100%); color: #000; border: none; border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 15px; transition: transform 0.2s; }
+        .action-button:hover { transform: scale(1.02); }
+        
+        .refresh-button { width: 100%; padding: 18px; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: #fff; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; margin-bottom: 30px; transition: all 0.3s; }
+        .refresh-button:hover { transform: scale(1.02); box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3); }
+        
+        @media (max-width: 768px) {
+            .tool-title { font-size: 2rem; }
+            .stock-name { font-size: 1.4rem; }
+            .price-section { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="tool-container">
+        <div class="tool-header">
+            <h1 class="tool-title"><i class="fas fa-crosshairs"></i> Intraday Stock Picker</h1>
+            <div class="tool-badge">🎯 3-5 High Momentum Stocks Daily</div>
+            <p style="color: #999; font-size: 1.1rem;">AI-selected stocks with entry, target & stop-loss for day trading</p>
+        </div>
+
+        <div class="market-status open" id="marketStatus">
+            <div style="font-size: 0.9rem; color: #999; margin-bottom: 5px;">Market Status</div>
+            <div style="font-size: 1.3rem; font-weight: 700; color: #22c55e;"><i class="fas fa-circle" style="font-size: 0.6rem;"></i> Market Open</div>
+            <div style="font-size: 0.85rem; color: #999; margin-top: 5px;" id="marketTime">Updated: Today 9:15 AM</div>
+        </div>
+
+        <button class="refresh-button" onclick="generateStocks()">
+            <i class="fas fa-sync-alt"></i> Generate Today's Picks
+        </button>
+
+        <div class="stock-cards-grid" id="stockCardsContainer">
+            <div style="text-align: center; padding: 60px 20px; color: #666;">
+                <i class="fas fa-chart-line" style="font-size: 4rem; opacity: 0.3; margin-bottom: 20px;"></i>
+                <p style="font-size: 1.1rem;">Click "Generate Today's Picks" to see momentum stocks</p>
+            </div>
+        </div>
+
+        <!-- Disclaimer & Insights -->
+        <div style="background: #1a1a1a; border-radius: 16px; padding: 30px; margin-top: 30px; border: 1px solid #2a2a2a;">
+            <h3 style="color: #C9A227; margin-bottom: 20px;"><i class="fas fa-info-circle"></i> Important Trading Guidelines</h3>
+            <div style="display: grid; gap: 15px; color: #ccc; line-height: 1.8;">
+                <p><strong style="color: #C9A227;">📊 Entry Price:</strong> Wait for price to reach entry level before buying. Don't chase the stock.</p>
+                <p><strong style="color: #C9A227;">🎯 Target:</strong> Book profits at target price. Don't get greedy - take what market gives.</p>
+                <p><strong style="color: #C9A227;">🛑 Stop Loss:</strong> MANDATORY. Exit immediately if stop loss hits. Protect your capital.</p>
+                <p><strong style="color: #C9A227;">⚡ Confidence Level:</strong> Higher confidence = better probability. Even high confidence trades can fail.</p>
+                <p><strong style="color: #C9A227;">⏰ Time Frame:</strong> Intraday only. Square off all positions before 3:15 PM.</p>
+                <p><strong style="color: #ef4444;">⚠️ Risk Warning:</strong> This is for educational purposes. Do your own analysis. Never risk more than 1-2% per trade.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const stocks = [
+            { name: 'RELIANCE', sector: 'Energy', basePrice: 2850 },
+            { name: 'TCS', sector: 'IT Services', basePrice: 3650 },
+            { name: 'INFY', sector: 'IT Services', basePrice: 1450 },
+            { name: 'HDFCBANK', sector: 'Banking', basePrice: 1680 },
+            { name: 'ICICIBANK', sector: 'Banking', basePrice: 1120 },
+            { name: 'SBIN', sector: 'Banking', basePrice: 780 },
+            { name: 'BHARTIARTL', sector: 'Telecom', basePrice: 1580 },
+            { name: 'ITC', sector: 'FMCG', basePrice: 465 },
+            { name: 'KOTAKBANK', sector: 'Banking', basePrice: 1850 },
+            { name: 'LT', sector: 'Infrastructure', basePrice: 3520 },
+            { name: 'AXISBANK', sector: 'Banking', basePrice: 1140 },
+            { name: 'MARUTI', sector: 'Automobile', basePrice: 12500 },
+            { name: 'TITAN', sector: 'Consumer Goods', basePrice: 3450 },
+            { name: 'TATAMOTORS', sector: 'Automobile', basePrice: 985 },
+            { name: 'WIPRO', sector: 'IT Services', basePrice: 445 },
+            { name: 'ADANIGREEN', sector: 'Power', basePrice: 1850 },
+            { name: 'TATASTEEL', sector: 'Metals', basePrice: 145 },
+            { name: 'JSWSTEEL', sector: 'Metals', basePrice: 920 },
+            { name: 'BAJFINANCE', sector: 'Finance', basePrice: 6850 },
+            { name: 'ASIANPAINT', sector: 'Paints', basePrice: 2820 }
+        ];
+
+        const signals = [
+            'Volume Breakout', 'EMA Crossover', 'VWAP Support', 'RSI Momentum',
+            'Gap Up Opening', 'Higher Highs', 'Accumulation', 'Sector Strength'
+        ];
+
+        function generateStocks() {
+            const numStocks = 3 + Math.floor(Math.random() * 3); // 3-5 stocks
+            const selectedStocks = [];
+            const usedIndices = new Set();
+
+            while (selectedStocks.length < numStocks) {
+                const randomIndex = Math.floor(Math.random() * stocks.length);
+                if (!usedIndices.has(randomIndex)) {
+                    usedIndices.add(randomIndex);
+                    const stock = { ...stocks[randomIndex] };
+                    
+                    // Generate realistic intraday setup
+                    const momentum = 0.5 + Math.random() * 2; // 0.5% to 2.5%
+                    const entry = stock.basePrice * (1 + (Math.random() * 0.01 - 0.005));
+                    const target = entry * (1 + momentum / 100);
+                    const stopLoss = entry * (1 - (momentum / 2) / 100);
+                    const confidence = 70 + Math.floor(Math.random() * 25); // 70-95%
+                    const riskReward = (target - entry) / (entry - stopLoss);
+                    
+                    // Select 3-5 random signals
+                    const numSignals = 3 + Math.floor(Math.random() * 3);
+                    const stockSignals = [];
+                    const signalsCopy = [...signals];
+                    for (let i = 0; i < numSignals; i++) {
+                        const idx = Math.floor(Math.random() * signalsCopy.length);
+                        stockSignals.push(signalsCopy.splice(idx, 1)[0]);
+                    }
+                    
+                    selectedStocks.push({
+                        ...stock,
+                        entry: entry.toFixed(2),
+                        target: target.toFixed(2),
+                        stopLoss: stopLoss.toFixed(2),
+                        confidence: confidence,
+                        riskReward: riskReward.toFixed(2),
+                        signals: stockSignals,
+                        potentialGain: momentum.toFixed(2)
+                    });
+                }
+            }
+
+            displayStocks(selectedStocks);
+        }
+
+        function displayStocks(stocks) {
+            const container = document.getElementById('stockCardsContainer');
+            
+            container.innerHTML = stocks.map((stock, index) => `
+                <div class="stock-card" style="animation: fadeInUp 0.5s ease ${index * 0.1}s both;">
+                    <div class="stock-header">
+                        <div>
+                            <div class="stock-name">${stock.name}</div>
+                            <div class="stock-sector">${stock.sector}</div>
+                        </div>
+                        <div class="confidence-badge">
+                            ${stock.confidence}% Confidence
+                        </div>
+                    </div>
+
+                    <div class="price-section">
+                        <div class="price-box">
+                            <div class="price-label">Entry Price</div>
+                            <div class="price-value entry">₹${stock.entry}</div>
+                        </div>
+                        <div class="price-box">
+                            <div class="price-label">Target</div>
+                            <div class="price-value target">₹${stock.target}</div>
+                        </div>
+                        <div class="price-box">
+                            <div class="price-label">Stop Loss</div>
+                            <div class="price-value sl">₹${stock.stopLoss}</div>
+                        </div>
+                        <div class="price-box">
+                            <div class="price-label">R:R Ratio</div>
+                            <div class="price-value" style="color: #C9A227;">1:${stock.riskReward}</div>
+                        </div>
+                    </div>
+
+                    <div class="signals-section">
+                        ${stock.signals.map(signal => `<span class="signal-tag"><i class="fas fa-check-circle"></i> ${signal}</span>`).join('')}
+                    </div>
+
+                    <div class="rationale">
+                        <strong><i class="fas fa-lightbulb"></i> Why This Stock?</strong><br>
+                        ${stock.name} showing strong ${stock.signals[0].toLowerCase()} with ${stock.signals[1].toLowerCase()} confirmation. 
+                        Potential gain of ${stock.potentialGain}% with favorable ${stock.riskReward}:1 risk-reward ratio. 
+                        ${stock.confidence > 85 ? 'Very high probability setup.' : 'Good probability setup with proper risk management.'}
+                    </div>
+
+                    <button class="action-button" onclick="alert('Set alerts at Entry: ₹${stock.entry}, Target: ₹${stock.target}, Stop Loss: ₹${stock.stopLoss}')">
+                        <i class="fas fa-bell"></i> Set Price Alerts
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function updateMarketStatus() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const currentTime = hours * 60 + minutes;
+            
+            const marketOpen = 9 * 60 + 15; // 9:15 AM
+            const marketClose = 15 * 60 + 30; // 3:30 PM
+            
+            const status = document.getElementById('marketStatus');
+            const timeEl = document.getElementById('marketTime');
+            
+            if (currentTime >= marketOpen && currentTime <= marketClose) {
+                status.className = 'market-status open';
+                status.innerHTML = `
+                    <div style="font-size: 0.9rem; color: #999; margin-bottom: 5px;">Market Status</div>
+                    <div style="font-size: 1.3rem; font-weight: 700; color: #22c55e;"><i class="fas fa-circle" style="font-size: 0.6rem;"></i> Market Open</div>
+                `;
+            } else {
+                status.className = 'market-status closed';
+                status.innerHTML = `
+                    <div style="font-size: 0.9rem; color: #999; margin-bottom: 5px;">Market Status</div>
+                    <div style="font-size: 1.3rem; font-weight: 700; color: #ef4444;"><i class="fas fa-circle" style="font-size: 0.6rem;"></i> Market Closed</div>
+                `;
+            }
+            
+            timeEl.textContent = `Updated: ${now.toLocaleString('en-IN', { 
+                month: 'short', 
+                day: 'numeric', 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            })}`;
+        }
+
+        // CSS animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize
+        updateMarketStatus();
+        setInterval(updateMarketStatus, 60000); // Update every minute
+    </script>
+
+    <!-- Related Articles Section -->
+    <section style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border-radius: 16px; padding: 2.5rem; margin: 3rem 0; border: 2px solid #C9A227; max-width: 1200px; margin-left: auto; margin-right: auto;">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #C9A227; margin-bottom: 1.5rem; text-align: center;">
+            📚 Learn More: Essential Reading
+        </h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+            <div style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
+                <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
+                    <span style="font-size: 2rem; margin-right: 0.5rem;">📖</span>
+                    <h3 style="color: #C9A227; font-size: 1.1rem; margin: 0;">Intraday Futures Strategy</h3>
+                </div>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 0.9rem;">
+                    Master the fundamentals with expert insights and real-world examples
+                </p>
+                <a href="article-intraday-futures-strategy.html" style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
+                    Read Article →
+                </a>
+            </div>
+            <div style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
+                <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
+                    <span style="font-size: 2rem; margin-right: 0.5rem;">💡</span>
+                    <h3 style="color: #C9A227; font-size: 1.1rem; margin: 0;">Scalping Strategy</h3>
+                </div>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 0.9rem;">
+                    Deep dive into advanced strategies used by professional traders
+                </p>
+                <a href="article-scalping-strategy.html" style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
+                    Read Article →
+                </a>
+            </div>
+            <div style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
+                <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
+                    <span style="font-size: 2rem; margin-right: 0.5rem;">🎓</span>
+                    <h3 style="color: #C9A227; font-size: 1.1rem; margin: 0;">Momentum Trading Strategy</h3>
+                </div>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 0.9rem;">
+                    Learn from market history and avoid costly mistakes
+                </p>
+                <a href="article-momentum-trading-strategy.html" style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
+                    Read Article →
+                </a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

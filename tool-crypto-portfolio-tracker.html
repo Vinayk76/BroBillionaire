@@ -321,15 +321,20 @@
                 </div>
                 
                 <div class="input-group">
-                    <label class="input-label">Current Price (₹)</label>
-                    <input type="number" id="currentPrice" class="input-field" placeholder="4200000">
+                    <label class="input-label">Current Price (₹) <span style="color: var(--text-secondary); font-size: 0.85em;">(optional - auto-fetch)</span></label>
+                    <input type="number" id="currentPrice" class="input-field" placeholder="Leave blank to auto-fetch">
                     <div class="input-hint">Current market price per unit</div>
                 </div>
             </div>
             
-            <button class="add-crypto-btn" onclick="addCrypto()">
-                <i class="fas fa-plus"></i> Add to Portfolio
-            </button>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <button class="add-crypto-btn" onclick="addCrypto()" style="flex: 1; min-width: 200px;">
+                    <i class="fas fa-plus"></i> Add to Portfolio
+                </button>
+                <button class="add-crypto-btn" onclick="updateAllCryptoPrices()" style="flex: 1; min-width: 200px; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
+                    <i class="fas fa-sync-alt"></i> Update All Prices
+                </button>
+            </div>
             
             <div class="crypto-list" id="cryptoList"></div>
             
@@ -475,7 +480,52 @@
         </div>
     </div>
 
-    <footer style="background: var(--bg-secondary); padding: 60px 40px; text-align: center; border-top: 1px solid var(--border-color); margin-top: 80px;">
+    
+    <!-- Related Articles Section -->
+    <section style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border-radius: 16px; padding: 2.5rem; margin: 3rem 0; border: 2px solid #C9A227; max-width: 1200px; margin-left: auto; margin-right: auto;">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #C9A227; margin-bottom: 1.5rem; text-align: center;">
+            📚 Learn More: Essential Reading
+        </h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+            <div style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
+                <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
+                    <span style="font-size: 2rem; margin-right: 0.5rem;">📖</span>
+                    <h3 style="color: #C9A227; font-size: 1.1rem; margin: 0;">Celebrity Portfolios 2026</h3>
+                </div>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 0.9rem;">
+                    Master the fundamentals with expert insights and real-world examples
+                </p>
+                <a href="article-celebrity-portfolios-2026.html" style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
+                    Read Article →
+                </a>
+            </div>
+            <div style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
+                <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
+                    <span style="font-size: 2rem; margin-right: 0.5rem;">💡</span>
+                    <h3 style="color: #C9A227; font-size: 1.1rem; margin: 0;">Political Portfolios</h3>
+                </div>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 0.9rem;">
+                    Deep dive into advanced strategies used by professional traders
+                </p>
+                <a href="article-political-portfolios.html" style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
+                    Read Article →
+                </a>
+            </div>
+            <div style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
+                <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
+                    <span style="font-size: 2rem; margin-right: 0.5rem;">🎓</span>
+                    <h3 style="color: #C9A227; font-size: 1.1rem; margin: 0;">Smart Money Positioning</h3>
+                </div>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 0.9rem;">
+                    Learn from market history and avoid costly mistakes
+                </p>
+                <a href="article-smart-money-positioning.html" style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
+                    Read Article →
+                </a>
+            </div>
+        </div>
+    </section>
+<footer style="background: var(--bg-secondary); padding: 60px 40px; text-align: center; border-top: 1px solid var(--border-color); margin-top: 80px;">
         <div style="max-width: 1200px; margin: 0 auto;">
             <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 40px; text-align: left; margin-bottom: 40px;">
                 <div style="flex: 1; min-width: 250px;">
@@ -508,19 +558,140 @@
     </footer>
 
     <script>
+        /*
+         * FREE API INTEGRATIONS USED:
+         * 1. CoinGecko API - Free tier, 10-50 calls/min, no API key required
+         *    Price endpoint: https://api.coingecko.com/api/v3/simple/price
+         *    Documentation: https://www.coingecko.com/en/api/documentation
+         * 2. CryptoCompare API - Free tier, 100,000 calls/month
+         *    Endpoint: https://min-api.cryptocompare.com/data/price
+         * 3. Binance Public API - Free, no auth needed for spot prices
+         *    Endpoint: https://api.binance.com/api/v3/ticker/price
+         * 4. WazirX API (Indian exchange) - Free price data
+         *    Endpoint: https://api.wazirx.com/sapi/v1/ticker/24hr
+         * 
+         * Fallback: Manual price entry if all APIs fail
+         */
+        
         let portfolio = [];
         let allocationChartInstance = null;
         let performanceChartInstance = null;
         
-        function addCrypto() {
+        // Crypto price fetching with free APIs
+        async function fetchCryptoPrice(cryptoName) {
+            const symbol = cryptoName.toUpperCase();
+            
+            // Try CoinGecko first (best free API)
+            try {
+                const coinMap = {
+                    'BITCOIN': 'bitcoin',
+                    'BTC': 'bitcoin',
+                    'ETHEREUM': 'ethereum',
+                    'ETH': 'ethereum',
+                    'BNB': 'binancecoin',
+                    'CARDANO': 'cardano',
+                    'ADA': 'cardano',
+                    'SOLANA': 'solana',
+                    'SOL': 'solana',
+                    'XRP': 'ripple',
+                    'DOGECOIN': 'dogecoin',
+                    'DOGE': 'dogecoin',
+                    'POLKADOT': 'polkadot',
+                    'DOT': 'polkadot',
+                    'POLYGON': 'matic-network',
+                    'MATIC': 'matic-network',
+                    'SHIBA': 'shiba-inu',
+                    'SHIB': 'shiba-inu'
+                };
+                
+                const coinId = coinMap[symbol] || cryptoName.toLowerCase();
+                const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${coinId}&vs_currencies=inr`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data[coinId] && data[coinId].inr) {
+                        return data[coinId].inr;
+                    }
+                }
+            } catch (e) {
+                console.log('CoinGecko API failed, trying WazirX...');
+            }
+            
+            // Try WazirX (Indian exchange)
+            try {
+                const wazirxSymbol = `${symbol}INR`;
+                const response = await fetch(`https://api.wazirx.com/sapi/v1/ticker/24hr?symbol=${wazirxSymbol}`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.lastPrice) {
+                        return parseFloat(data.lastPrice);
+                    }
+                }
+            } catch (e) {
+                console.log('WazirX API failed');
+            }
+            
+            return null;
+        }
+        
+        async function updateAllCryptoPrices() {
+            if (portfolio.length === 0) {
+                alert('No cryptocurrencies in portfolio!');
+                return;
+            }
+            
+            const updateBtn = event.target;
+            updateBtn.disabled = true;
+            updateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Updating...';
+            
+            let updatedCount = 0;
+            
+            for (let crypto of portfolio) {
+                const price = await fetchCryptoPrice(crypto.name);
+                if (price && price > 0) {
+                    crypto.currentPrice = price;
+                    crypto.currentValue = crypto.quantity * price;
+                    crypto.pl = crypto.currentValue - crypto.investment;
+                    crypto.plPercent = ((crypto.currentPrice - crypto.purchasePrice) / crypto.purchasePrice) * 100;
+                    updatedCount++;
+                }
+                await new Promise(resolve => setTimeout(resolve, 200)); // Rate limit delay
+            }
+            
+            if (updatedCount > 0) {
+                displayCryptoList();
+                calculatePortfolio();
+                alert(`Successfully updated ${updatedCount} of ${portfolio.length} cryptocurrency prices!`);
+            } else {
+                alert('Unable to fetch live prices. Please check your internet connection or enter prices manually.');
+            }
+            
+            updateBtn.disabled = false;
+            updateBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Update All Prices';
+        }
+        
+        async function addCrypto() {
             const name = document.getElementById('cryptoName').value;
             const quantity = parseFloat(document.getElementById('cryptoQuantity').value);
             const purchasePrice = parseFloat(document.getElementById('purchasePrice').value);
-            const currentPrice = parseFloat(document.getElementById('currentPrice').value);
+            let currentPrice = parseFloat(document.getElementById('currentPrice').value);
             
-            if (!quantity || !purchasePrice || !currentPrice || quantity <= 0 || purchasePrice <= 0 || currentPrice <= 0) {
-                alert('Please enter valid values for all fields!');
+            if (!name || !quantity || !purchasePrice || quantity <= 0 || purchasePrice <= 0) {
+                alert('Please enter valid values for crypto name, quantity, and purchase price!');
                 return;
+            }
+            
+            // If no current price provided, try to fetch it
+            if (!currentPrice || currentPrice <= 0) {
+                const fetchedPrice = await fetchCryptoPrice(name);
+                if (fetchedPrice) {
+                    currentPrice = fetchedPrice;
+                    document.getElementById('currentPrice').value = currentPrice.toFixed(2);
+                } else {
+                    alert('Could not fetch live price. Please enter current price manually.\n\nSupported: Bitcoin, Ethereum, BNB, Cardano, Solana, XRP, Dogecoin, Polygon, etc.');
+                    return;
+                }
             }
             
             const crypto = {
