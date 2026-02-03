@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Allocation Calculator - Asset Allocation Tool | BroBillionaire</title>
+    <meta name="description" content="Calculate optimal portfolio allocation across different asset classes. Balance risk and return with strategic asset allocation for your investment portfolio.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .calculator-container { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+        .calculator-card { background: #1a1a1a; border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid #2a2a2a; }
+        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 10px; }
+        .calculator-subtitle { color: #999; font-size: 1.1rem; margin-bottom: 40px; }
+        .input-group { margin-bottom: 25px; }
+        .input-label { display: block; color: #C9A227; font-weight: 600; margin-bottom: 10px; }
+        .input-field { width: 100%; padding: 15px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #fff; font-size: 1rem; }
+        .calculate-btn { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; font-weight: 700; padding: 18px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; }
+        .asset-row { display: grid; grid-template-columns: 2fr 1fr 1fr 50px; gap: 15px; margin-bottom: 15px; align-items: end; }
+        .add-asset-btn { background: #2a2a2a; color: #C9A227; padding: 12px 20px; border: 2px solid #3a3a3a; border-radius: 8px; cursor: pointer; margin-top: 10px; }
+        .add-asset-btn:hover { border-color: #C9A227; }
+        .remove-btn { background: #e74c3c; color: #fff; border: none; border-radius: 8px; padding: 15px; cursor: pointer; }
+        .results-section { display: none; margin-top: 40px; }
+        .allocation-card { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 25px; border-radius: 12px; margin-bottom: 15px; border-left: 4px solid #C9A227; }
+        .allocation-bar { height: 40px; background: #0a0a0a; border-radius: 8px; overflow: hidden; margin-top: 20px; display: flex; }
+        .allocation-segment { height: 100%; display: flex; align-items: center; justify-content: center; color: #000; font-weight: 700; font-size: 0.9rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .preset-btn { padding: 12px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; cursor: pointer; text-align: center; color: #C9A227; }
+        .preset-btn:hover { border-color: #C9A227; }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-card">
+            <h1 class="calculator-title">Portfolio Allocation Calculator</h1>
+            <p class="calculator-subtitle">Calculate optimal portfolio allocation and visualize asset distribution.</p>
+            
+            <div class="input-group">
+                <label class="input-label">Total Portfolio Value (₹)</label>
+                <input type="number" id="totalValue" class="input-field" placeholder="1000000" value="1000000">
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <label class="input-label">Asset Allocations</label>
+                <div id="assetContainer">
+                    <div class="asset-row">
+                        <input type="text" class="input-field asset-name" placeholder="Asset Name (e.g., Indian Stocks)" value="Indian Stocks">
+                        <input type="number" class="input-field asset-percent" placeholder="%" value="40" min="0" max="100">
+                        <input type="number" class="input-field asset-expected-return" placeholder="Expected %" value="12">
+                        <button class="remove-btn" onclick="removeAsset(this)"><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="asset-row">
+                        <input type="text" class="input-field asset-name" placeholder="Asset Name" value="Bonds">
+                        <input type="number" class="input-field asset-percent" placeholder="%" value="30" min="0" max="100">
+                        <input type="number" class="input-field asset-expected-return" placeholder="Expected %" value="7">
+                        <button class="remove-btn" onclick="removeAsset(this)"><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="asset-row">
+                        <input type="text" class="input-field asset-name" placeholder="Asset Name" value="Gold">
+                        <input type="number" class="input-field asset-percent" placeholder="%" value="20" min="0" max="100">
+                        <input type="number" class="input-field asset-expected-return" placeholder="Expected %" value="8">
+                        <button class="remove-btn" onclick="removeAsset(this)"><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="asset-row">
+                        <input type="text" class="input-field asset-name" placeholder="Asset Name" value="Cash">
+                        <input type="number" class="input-field asset-percent" placeholder="%" value="10" min="0" max="100">
+                        <input type="number" class="input-field asset-expected-return" placeholder="Expected %" value="6">
+                        <button class="remove-btn" onclick="removeAsset(this)"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+                <button class="add-asset-btn" onclick="addAsset()"><i class="fas fa-plus"></i> Add Asset Class</button>
+            </div>
+            
+            <div style="margin-top: 30px;">
+                <label class="input-label">Preset Allocations</label>
+                <div class="grid-3">
+                    <button class="preset-btn" onclick="applyPreset('conservative')">Conservative<br><small>(Low Risk)</small></button>
+                    <button class="preset-btn" onclick="applyPreset('balanced')">Balanced<br><small>(Moderate Risk)</small></button>
+                    <button class="preset-btn" onclick="applyPreset('aggressive')">Aggressive<br><small>(High Risk)</small></button>
+                </div>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculateAllocation()">
+                <i class="fas fa-calculator"></i> Calculate Allocation
+            </button>
+        </div>
+        
+        <div class="results-section" id="resultsSection">
+            <div class="calculator-card">
+                <h2 style="color: #C9A227; margin-bottom: 30px; font-family: 'Playfair Display', serif;">Portfolio Allocation</h2>
+                
+                <div id="allocationBar" class="allocation-bar"></div>
+                
+                <div style="margin-top: 30px;" id="allocationDetails"></div>
+                
+                <div class="grid-3" style="margin-top: 30px;">
+                    <div class="allocation-card">
+                        <div style="color: #C9A227; font-weight: 600;">Total Allocation</div>
+                        <div style="color: #fff; font-size: 2rem; font-weight: 700; margin-top: 10px;" id="totalAllocation">-</div>
+                    </div>
+                    <div class="allocation-card">
+                        <div style="color: #C9A227; font-weight: 600;">Weighted Return</div>
+                        <div style="color: #fff; font-size: 2rem; font-weight: 700; margin-top: 10px;" id="weightedReturn">-</div>
+                    </div>
+                    <div class="allocation-card">
+                        <div style="color: #C9A227; font-weight: 600;">Risk Profile</div>
+                        <div style="color: #fff; font-size: 2rem; font-weight: 700; margin-top: 10px;" id="riskProfile">-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const colors = ['#3498db', '#e74c3c', '#f39c12', '#2ecc71', '#9b59b6', '#1abc9c', '#e67e22', '#34495e', '#c0392b', '#16a085'];
+        
+        function addAsset() {
+            const container = document.getElementById('assetContainer');
+            const div = document.createElement('div');
+            div.className = 'asset-row';
+            div.innerHTML = `
+                <input type="text" class="input-field asset-name" placeholder="Asset Name">
+                <input type="number" class="input-field asset-percent" placeholder="%" min="0" max="100">
+                <input type="number" class="input-field asset-expected-return" placeholder="Expected %">
+                <button class="remove-btn" onclick="removeAsset(this)"><i class="fas fa-times"></i></button>
+            `;
+            container.appendChild(div);
+        }
+        
+        function removeAsset(btn) {
+            const rows = document.querySelectorAll('.asset-row');
+            if (rows.length > 1) {
+                btn.parentElement.remove();
+            } else {
+                alert('You must have at least one asset');
+            }
+        }
+        
+        function applyPreset(type) {
+            const container = document.getElementById('assetContainer');
+            container.innerHTML = '';
+            
+            let presets = [];
+            if (type === 'conservative') {
+                presets = [
+                    {name: 'Bonds/FDs', percent: 50, return: 7},
+                    {name: 'Large Cap Stocks', percent: 25, return: 10},
+                    {name: 'Gold', percent: 15, return: 8},
+                    {name: 'Cash', percent: 10, return: 6}
+                ];
+            } else if (type === 'balanced') {
+                presets = [
+                    {name: 'Stocks', percent: 50, return: 12},
+                    {name: 'Bonds', percent: 30, return: 7},
+                    {name: 'Gold', percent: 15, return: 8},
+                    {name: 'Cash', percent: 5, return: 6}
+                ];
+            } else {
+                presets = [
+                    {name: 'Stocks', percent: 70, return: 14},
+                    {name: 'Mid/Small Cap', percent: 15, return: 16},
+                    {name: 'International', percent: 10, return: 12},
+                    {name: 'Gold', percent: 5, return: 8}
+                ];
+            }
+            
+            presets.forEach(preset => {
+                const div = document.createElement('div');
+                div.className = 'asset-row';
+                div.innerHTML = `
+                    <input type="text" class="input-field asset-name" value="${preset.name}">
+                    <input type="number" class="input-field asset-percent" value="${preset.percent}">
+                    <input type="number" class="input-field asset-expected-return" value="${preset.return}">
+                    <button class="remove-btn" onclick="removeAsset(this)"><i class="fas fa-times"></i></button>
+                `;
+                container.appendChild(div);
+            });
+        }
+        
+        function calculateAllocation() {
+            const totalValue = parseFloat(document.getElementById('totalValue').value);
+            const assets = [];
+            let totalPercent = 0;
+            
+            document.querySelectorAll('.asset-row').forEach(row => {
+                const name = row.querySelector('.asset-name').value;
+                const percent = parseFloat(row.querySelector('.asset-percent').value) || 0;
+                const expectedReturn = parseFloat(row.querySelector('.asset-expected-return').value) || 0;
+                
+                if (name && percent > 0) {
+                    assets.push({ name, percent, expectedReturn });
+                    totalPercent += percent;
+                }
+            });
+            
+            if (assets.length === 0) {
+                alert('Please add at least one asset');
+                return;
+            }
+            
+            // Create allocation bar
+            let barHTML = '';
+            assets.forEach((asset, idx) => {
+                const color = colors[idx % colors.length];
+                barHTML += `<div class="allocation-segment" style="width: ${asset.percent}%; background: ${color};">${asset.percent}%</div>`;
+            });
+            document.getElementById('allocationBar').innerHTML = barHTML;
+            
+            // Create allocation details
+            let detailsHTML = '';
+            let weightedReturn = 0;
+            assets.forEach((asset, idx) => {
+                const amount = (totalValue * asset.percent) / 100;
+                const color = colors[idx % colors.length];
+                weightedReturn += (asset.percent / 100) * asset.expectedReturn;
+                
+                detailsHTML += `
+                    <div class="allocation-card" style="border-left-color: ${color};">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="color: #C9A227; font-weight: 600; font-size: 1.2rem;">${asset.name}</div>
+                                <div style="color: #999; margin-top: 5px;">${asset.percent}% | Expected Return: ${asset.expectedReturn}%</div>
+                            </div>
+                            <div style="color: #fff; font-size: 1.8rem; font-weight: 700;">₹${amount.toLocaleString('en-IN', {maximumFractionDigits: 0})}</div>
+                        </div>
+                    </div>
+                `;
+            });
+            document.getElementById('allocationDetails').innerHTML = detailsHTML;
+            
+            // Summary
+            document.getElementById('totalAllocation').textContent = totalPercent.toFixed(1) + '%';
+            document.getElementById('weightedReturn').textContent = weightedReturn.toFixed(2) + '%';
+            
+            let risk = 'Unknown';
+            if (totalPercent < 95 || totalPercent > 105) {
+                risk = 'Unbalanced';
+            } else {
+                const equityPercent = assets.filter(a => a.name.toLowerCase().includes('stock') || a.name.toLowerCase().includes('equity')).reduce((sum, a) => sum + a.percent, 0);
+                if (equityPercent < 30) risk = 'Conservative';
+                else if (equityPercent < 60) risk = 'Moderate';
+                else risk = 'Aggressive';
+            }
+            document.getElementById('riskProfile').textContent = risk;
+            
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

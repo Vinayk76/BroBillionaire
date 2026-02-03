@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sharpe Ratio Calculator - Risk-Adjusted Returns | BroBillionaire</title>
+    <meta name="description" content="Calculate Sharpe Ratio to measure risk-adjusted returns of your portfolio or trading strategy. Compare performance across different investments.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .calculator-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .calculator-card { background: #1a1a1a; border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid #2a2a2a; }
+        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 10px; }
+        .calculator-subtitle { color: #999; font-size: 1.1rem; margin-bottom: 40px; }
+        .input-group { margin-bottom: 25px; }
+        .input-label { display: block; color: #C9A227; font-weight: 600; margin-bottom: 10px; }
+        .input-field { width: 100%; padding: 15px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #fff; font-size: 1rem; }
+        .calculate-btn { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; font-weight: 700; padding: 18px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; }
+        .results-section { display: none; margin-top: 40px; }
+        .result-card { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 30px; border-radius: 12px; text-align: center; border-left: 4px solid; }
+        .sharpe-excellent { border-left-color: #2ecc71; }
+        .sharpe-good { border-left-color: #3498db; }
+        .sharpe-acceptable { border-left-color: #f39c12; }
+        .sharpe-poor { border-left-color: #e74c3c; }
+        .result-value { color: #fff; font-size: 4rem; font-weight: 700; margin: 20px 0; }
+        .rating-text { color: #C9A227; font-size: 1.5rem; font-weight: 600; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; }
+        .metric-card { background: #0a0a0a; padding: 20px; border-radius: 12px; border: 1px solid #2a2a2a; }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-card">
+            <h1 class="calculator-title">Sharpe Ratio Calculator</h1>
+            <p class="calculator-subtitle">Measure risk-adjusted returns of your investment or trading strategy.</p>
+            
+            <div class="input-group">
+                <label class="input-label">Portfolio/Strategy Return (%)</label>
+                <input type="number" id="portfolioReturn" class="input-field" placeholder="25" step="0.01">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Annual return percentage</div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Risk-Free Rate (%)</label>
+                <input type="number" id="riskFreeRate" class="input-field" placeholder="6.5" value="6.5" step="0.01">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Current fixed deposit rate or government bond yield (India: ~6-7%)</div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Standard Deviation (%)</label>
+                <input type="number" id="stdDev" class="input-field" placeholder="15" step="0.01">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Volatility/risk of returns (higher = more volatile)</div>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculateSharpe()">
+                <i class="fas fa-calculator"></i> Calculate Sharpe Ratio
+            </button>
+        </div>
+        
+        <div class="results-section" id="resultsSection">
+            <div class="calculator-card">
+                <h2 style="color: #C9A227; margin-bottom: 30px; font-family: 'Playfair Display', serif;">Sharpe Ratio Analysis</h2>
+                
+                <div class="result-card" id="mainResult">
+                    <div style="color: #999; font-size: 1.1rem;">Sharpe Ratio</div>
+                    <div class="result-value" id="sharpeValue">-</div>
+                    <div class="rating-text" id="sharpeRating">-</div>
+                </div>
+                
+                <div class="grid-3">
+                    <div class="metric-card">
+                        <div style="color: #C9A227; font-weight: 600; margin-bottom: 10px;">Excess Return</div>
+                        <div style="color: #fff; font-size: 1.5rem; font-weight: 700;" id="excessReturn">-</div>
+                        <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Return above risk-free rate</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div style="color: #C9A227; font-weight: 600; margin-bottom: 10px;">Risk Level</div>
+                        <div style="color: #fff; font-size: 1.5rem; font-weight: 700;" id="riskLevel">-</div>
+                        <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Based on standard deviation</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div style="color: #C9A227; font-weight: 600; margin-bottom: 10px;">Return per Unit Risk</div>
+                        <div style="color: #fff; font-size: 1.5rem; font-weight: 700;" id="returnPerRisk">-</div>
+                        <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Efficiency of returns</div>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(52, 152, 219, 0.1); border: 2px solid #3498db; padding: 20px; border-radius: 12px; margin-top: 30px;">
+                    <strong><i class="fas fa-info-circle"></i> Sharpe Ratio Guide:</strong>
+                    <ul style="margin: 10px 0 0 20px; color: #999;">
+                        <li>> 3.0: Excellent - Outstanding risk-adjusted returns</li>
+                        <li>2.0-3.0: Very Good - Strong performance</li>
+                        <li>1.0-2.0: Good - Acceptable for most investors</li>
+                        <li>0-1.0: Suboptimal - Consider alternatives</li>
+                        <li>< 0: Poor - Underperforming risk-free rate</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function calculateSharpe() {
+            const portfolioReturn = parseFloat(document.getElementById('portfolioReturn').value);
+            const riskFreeRate = parseFloat(document.getElementById('riskFreeRate').value);
+            const stdDev = parseFloat(document.getElementById('stdDev').value);
+            
+            if (isNaN(portfolioReturn) || isNaN(riskFreeRate) || isNaN(stdDev)) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            if (stdDev === 0) {
+                alert('Standard deviation cannot be zero');
+                return;
+            }
+            
+            const excessReturn = portfolioReturn - riskFreeRate;
+            const sharpeRatio = excessReturn / stdDev;
+            
+            document.getElementById('sharpeValue').textContent = sharpeRatio.toFixed(3);
+            document.getElementById('excessReturn').textContent = excessReturn.toFixed(2) + '%';
+            
+            // Risk level assessment
+            let riskLevel;
+            if (stdDev < 10) riskLevel = 'Low';
+            else if (stdDev < 20) riskLevel = 'Moderate';
+            else if (stdDev < 30) riskLevel = 'High';
+            else riskLevel = 'Very High';
+            document.getElementById('riskLevel').textContent = riskLevel;
+            
+            document.getElementById('returnPerRisk').textContent = (portfolioReturn / stdDev).toFixed(3);
+            
+            // Rating and color
+            const mainResult = document.getElementById('mainResult');
+            const sharpeRating = document.getElementById('sharpeRating');
+            
+            mainResult.className = 'result-card';
+            if (sharpeRatio >= 3) {
+                mainResult.classList.add('sharpe-excellent');
+                sharpeRating.textContent = 'Excellent Performance';
+            } else if (sharpeRatio >= 2) {
+                mainResult.classList.add('sharpe-good');
+                sharpeRating.textContent = 'Very Good Performance';
+            } else if (sharpeRatio >= 1) {
+                mainResult.classList.add('sharpe-good');
+                sharpeRating.textContent = 'Good Performance';
+            } else if (sharpeRatio >= 0) {
+                mainResult.classList.add('sharpe-acceptable');
+                sharpeRating.textContent = 'Suboptimal Performance';
+            } else {
+                mainResult.classList.add('sharpe-poor');
+                sharpeRating.textContent = 'Poor Performance';
+            }
+            
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

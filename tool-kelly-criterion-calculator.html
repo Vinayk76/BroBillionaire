@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelly Criterion Calculator - Optimal Position Sizing | BroBillionaire</title>
+    <meta name="description" content="Calculate optimal bet size using Kelly Criterion formula. Maximize long-term growth rate while managing risk in trading and investing.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .calculator-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .calculator-card { background: #1a1a1a; border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid #2a2a2a; }
+        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 10px; }
+        .calculator-subtitle { color: #999; font-size: 1.1rem; margin-bottom: 40px; }
+        .input-group { margin-bottom: 25px; }
+        .input-label { display: block; color: #C9A227; font-weight: 600; margin-bottom: 10px; }
+        .input-field { width: 100%; padding: 15px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #fff; font-size: 1rem; }
+        .calculate-btn { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; font-weight: 700; padding: 18px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; }
+        .results-section { display: none; margin-top: 40px; }
+        .result-card { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 30px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid #C9A227; }
+        .result-value { color: #fff; font-size: 2.5rem; font-weight: 700; }
+        .warning-box { background: rgba(231, 76, 60, 0.1); border: 2px solid #e74c3c; padding: 20px; border-radius: 12px; margin-top: 20px; }
+        .info-box { background: rgba(52, 152, 219, 0.1); border: 2px solid #3498db; padding: 20px; border-radius: 12px; margin-top: 20px; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-card">
+            <h1 class="calculator-title">Kelly Criterion Calculator</h1>
+            <p class="calculator-subtitle">Calculate optimal position size using Kelly Criterion for maximum long-term growth.</p>
+            
+            <div class="input-group">
+                <label class="input-label">Win Probability (%)</label>
+                <input type="number" id="winProb" class="input-field" placeholder="55" min="0" max="100" step="0.1">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Historical win rate of your strategy</div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Average Win (₹)</label>
+                <input type="number" id="avgWin" class="input-field" placeholder="1000" step="0.01">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Average profit per winning trade</div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Average Loss (₹)</label>
+                <input type="number" id="avgLoss" class="input-field" placeholder="500" step="0.01">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Average loss per losing trade (positive number)</div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Account Size (₹)</label>
+                <input type="number" id="accountSize" class="input-field" placeholder="100000" step="1">
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Kelly Fraction (%)</label>
+                <input type="number" id="kellyFraction" class="input-field" placeholder="50" value="50" min="1" max="100" step="1">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Use fractional Kelly to reduce risk (50% = Half Kelly recommended)</div>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculateKelly()">
+                <i class="fas fa-calculator"></i> Calculate Kelly %
+            </button>
+        </div>
+        
+        <div class="results-section" id="resultsSection">
+            <div class="calculator-card">
+                <h2 style="color: #C9A227; margin-bottom: 30px; font-family: 'Playfair Display', serif;">Kelly Criterion Results</h2>
+                
+                <div class="grid-2">
+                    <div class="result-card">
+                        <div style="color: #C9A227; font-weight: 600; margin-bottom: 10px;">Full Kelly %</div>
+                        <div class="result-value" id="fullKelly">-</div>
+                        <div style="color: #666; margin-top: 5px;">Theoretical optimal size</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div style="color: #C9A227; font-weight: 600; margin-bottom: 10px;">Recommended Position</div>
+                        <div class="result-value" id="recommendedKelly">-</div>
+                        <div style="color: #666; margin-top: 5px;">Fractional Kelly size</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div style="color: #C9A227; font-weight: 600; margin-bottom: 10px;">Position Size</div>
+                        <div class="result-value" id="positionSize">-</div>
+                        <div style="color: #666; margin-top: 5px;">Amount to risk</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div style="color: #C9A227; font-weight: 600; margin-bottom: 10px;">Expected Value</div>
+                        <div class="result-value" id="expectedValue">-</div>
+                        <div style="color: #666; margin-top: 5px;">Per trade expectancy</div>
+                    </div>
+                </div>
+                
+                <div id="warningBox" style="display: none;" class="warning-box">
+                    <strong><i class="fas fa-exclamation-triangle"></i> Warning:</strong> <span id="warningText"></span>
+                </div>
+                
+                <div class="info-box">
+                    <strong><i class="fas fa-info-circle"></i> Important:</strong> Kelly Criterion assumes you know your exact win probability and win/loss ratios. Always use fractional Kelly (25-50%) to account for estimation errors and reduce volatility.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function calculateKelly() {
+            const winProb = parseFloat(document.getElementById('winProb').value) / 100;
+            const avgWin = parseFloat(document.getElementById('avgWin').value);
+            const avgLoss = parseFloat(document.getElementById('avgLoss').value);
+            const accountSize = parseFloat(document.getElementById('accountSize').value);
+            const kellyFraction = parseFloat(document.getElementById('kellyFraction').value) / 100;
+            
+            if (!winProb || !avgWin || !avgLoss || !accountSize) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            const lossProb = 1 - winProb;
+            const winLossRatio = avgWin / avgLoss;
+            
+            // Kelly Formula: K = W - (L / R) where W = win prob, L = loss prob, R = win/loss ratio
+            const fullKellyPercent = ((winProb * winLossRatio) - lossProb) / winLossRatio * 100;
+            const recommendedKellyPercent = fullKellyPercent * kellyFraction;
+            const positionSize = (accountSize * recommendedKellyPercent) / 100;
+            
+            // Expected Value
+            const expectedValue = (winProb * avgWin) - (lossProb * avgLoss);
+            
+            document.getElementById('fullKelly').textContent = fullKellyPercent.toFixed(2) + '%';
+            document.getElementById('recommendedKelly').textContent = recommendedKellyPercent.toFixed(2) + '%';
+            document.getElementById('positionSize').textContent = '₹' + positionSize.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('expectedValue').textContent = '₹' + expectedValue.toFixed(2);
+            
+            // Show warnings
+            const warningBox = document.getElementById('warningBox');
+            const warningText = document.getElementById('warningText');
+            
+            if (fullKellyPercent < 0) {
+                warningBox.style.display = 'block';
+                warningText.textContent = 'Negative Kelly % indicates negative expected value. This strategy is not profitable in the long run.';
+            } else if (fullKellyPercent > 20) {
+                warningBox.style.display = 'block';
+                warningText.textContent = 'Full Kelly exceeds 20%. Consider using fractional Kelly (25-50%) to reduce volatility and account for estimation errors.';
+            } else if (expectedValue <= 0) {
+                warningBox.style.display = 'block';
+                warningText.textContent = 'Negative expected value. Do not trade this strategy.';
+            } else {
+                warningBox.style.display = 'none';
+            }
+            
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

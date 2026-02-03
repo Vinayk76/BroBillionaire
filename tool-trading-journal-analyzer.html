@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Journal Analyzer - Performance Tracker | BroBillionaire</title>
+    <meta name="description" content="Analyze trading performance with comprehensive journal analytics. Track win rate, expectancy, drawdown, and improve trading results.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .calculator-container { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+        .calculator-card { background: #1a1a1a; border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid #2a2a2a; }
+        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 10px; }
+        .calculator-subtitle { color: #999; font-size: 1.1rem; margin-bottom: 40px; }
+        .trade-row { display: grid; grid-template-columns: 150px 1fr 1fr 1fr 1fr 50px; gap: 15px; margin-bottom: 15px; align-items: end; }
+        .input-field { width: 100%; padding: 12px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #fff; font-size: 0.95rem; }
+        .add-trade-btn { background: #2a2a2a; color: #C9A227; padding: 12px 20px; border: 2px solid #3a3a3a; border-radius: 8px; cursor: pointer; margin-top: 10px; }
+        .remove-btn { background: #e74c3c; color: #fff; border: none; border-radius: 8px; padding: 12px; cursor: pointer; }
+        .calculate-btn { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; font-weight: 700; padding: 18px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; }
+        .results-section { display: none; margin-top: 40px; }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .stat-card { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 25px; border-radius: 12px; border-left: 4px solid #C9A227; }
+        .stat-value { color: #fff; font-size: 2.5rem; font-weight: 700; margin: 10px 0; }
+        .equity-curve { background: #0a0a0a; padding: 30px; border-radius: 12px; margin: 30px 0; min-height: 300px; position: relative; }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-card">
+            <h1 class="calculator-title">Trading Journal Analyzer</h1>
+            <p class="calculator-subtitle">Add your trades and analyze your trading performance comprehensively.</p>
+            
+            <div style="color: #C9A227; font-weight: 600; margin-bottom: 15px;">Add Trades</div>
+            <div style="display: grid; grid-template-columns: 150px 1fr 1fr 1fr 1fr 50px; gap: 15px; margin-bottom: 10px;">
+                <div style="color: #999; font-size: 0.9rem;">Date</div>
+                <div style="color: #999; font-size: 0.9rem;">Symbol</div>
+                <div style="color: #999; font-size: 0.9rem;">Entry ₹</div>
+                <div style="color: #999; font-size: 0.9rem;">Exit ₹</div>
+                <div style="color: #999; font-size: 0.9rem;">Quantity</div>
+                <div></div>
+            </div>
+            
+            <div id="tradeContainer">
+                <div class="trade-row">
+                    <input type="date" class="input-field trade-date">
+                    <input type="text" class="input-field trade-symbol" placeholder="NIFTY">
+                    <input type="number" class="input-field trade-entry" placeholder="50000" step="0.01">
+                    <input type="number" class="input-field trade-exit" placeholder="50500" step="0.01">
+                    <input type="number" class="input-field trade-qty" placeholder="25" min="1">
+                    <button class="remove-btn" onclick="removeTrade(this)"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            <button class="add-trade-btn" onclick="addTrade()"><i class="fas fa-plus"></i> Add Trade</button>
+            
+            <button class="calculate-btn" onclick="analyzeJournal()">
+                <i class="fas fa-chart-line"></i> Analyze Trading Performance
+            </button>
+        </div>
+        
+        <div class="results-section" id="resultsSection">
+            <div class="calculator-card">
+                <h2 style="color: #C9A227; margin-bottom: 30px; font-family: 'Playfair Display', serif;">Performance Metrics</h2>
+                
+                <div class="stat-grid">
+                    <div class="stat-card" style="border-left-color: #2ecc71;">
+                        <div style="color: #2ecc71; font-weight: 600;">Total Profit/Loss</div>
+                        <div class="stat-value" id="totalPnL">-</div>
+                    </div>
+                    
+                    <div class="stat-card" style="border-left-color: #3498db;">
+                        <div style="color: #3498db; font-weight: 600;">Win Rate</div>
+                        <div class="stat-value" id="winRate">-</div>
+                    </div>
+                    
+                    <div class="stat-card" style="border-left-color: #f39c12;">
+                        <div style="color: #f39c12; font-weight: 600;">Profit Factor</div>
+                        <div class="stat-value" id="profitFactor">-</div>
+                    </div>
+                    
+                    <div class="stat-card" style="border-left-color: #C9A227;">
+                        <div style="color: #C9A227; font-weight: 600;">Expectancy</div>
+                        <div class="stat-value" id="expectancy">-</div>
+                    </div>
+                </div>
+                
+                <div class="stat-grid" style="margin-top: 20px;">
+                    <div class="stat-card">
+                        <div style="color: #C9A227; font-weight: 600;">Total Trades</div>
+                        <div class="stat-value" id="totalTrades">-</div>
+                        <div style="color: #666; margin-top: 5px;"><span id="winTrades">-</span> wins | <span id="lossTrades">-</span> losses</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div style="color: #C9A227; font-weight: 600;">Avg Win</div>
+                        <div style="color: #2ecc71; font-size: 1.8rem; font-weight: 700; margin: 10px 0;" id="avgWin">-</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div style="color: #C9A227; font-weight: 600;">Avg Loss</div>
+                        <div style="color: #e74c3c; font-size: 1.8rem; font-weight: 700; margin: 10px 0;" id="avgLoss">-</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div style="color: #C9A227; font-weight: 600;">Largest Win</div>
+                        <div style="color: #2ecc71; font-size: 1.8rem; font-weight: 700; margin: 10px 0;" id="largestWin">-</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div style="color: #C9A227; font-weight: 600;">Largest Loss</div>
+                        <div style="color: #e74c3c; font-size: 1.8rem; font-weight: 700; margin: 10px 0;" id="largestLoss">-</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div style="color: #C9A227; font-weight: 600;">Win/Loss Ratio</div>
+                        <div class="stat-value" id="winLossRatio">-</div>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(52, 152, 219, 0.1); border: 2px solid #3498db; padding: 20px; border-radius: 12px; margin-top: 30px;" id="performanceInsight">
+                    <strong><i class="fas fa-chart-line"></i> Performance Insight:</strong>
+                    <p style="color: #999; margin-top: 10px;" id="insightText">-</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function addTrade() {
+            const container = document.getElementById('tradeContainer');
+            const div = document.createElement('div');
+            div.className = 'trade-row';
+            div.innerHTML = `
+                <input type="date" class="input-field trade-date">
+                <input type="text" class="input-field trade-symbol" placeholder="Symbol">
+                <input type="number" class="input-field trade-entry" placeholder="Entry" step="0.01">
+                <input type="number" class="input-field trade-exit" placeholder="Exit" step="0.01">
+                <input type="number" class="input-field trade-qty" placeholder="Qty" min="1">
+                <button class="remove-btn" onclick="removeTrade(this)"><i class="fas fa-times"></i></button>
+            `;
+            container.appendChild(div);
+        }
+        
+        function removeTrade(btn) {
+            const rows = document.querySelectorAll('.trade-row');
+            if (rows.length > 1) {
+                btn.parentElement.remove();
+            }
+        }
+        
+        function analyzeJournal() {
+            const trades = [];
+            
+            document.querySelectorAll('.trade-row').forEach(row => {
+                const entry = parseFloat(row.querySelector('.trade-entry').value);
+                const exit = parseFloat(row.querySelector('.trade-exit').value);
+                const qty = parseFloat(row.querySelector('.trade-qty').value) || 1;
+                
+                if (entry && exit) {
+                    const pnl = (exit - entry) * qty;
+                    trades.push({ entry, exit, qty, pnl, isWin: pnl > 0 });
+                }
+            });
+            
+            if (trades.length === 0) {
+                alert('Please add at least one trade');
+                return;
+            }
+            
+            const totalTrades = trades.length;
+            const winningTrades = trades.filter(t => t.isWin);
+            const losingTrades = trades.filter(t => !t.isWin);
+            
+            const totalWins = winningTrades.length;
+            const totalLosses = losingTrades.length;
+            const winRate = (totalWins / totalTrades) * 100;
+            
+            const totalPnL = trades.reduce((sum, t) => sum + t.pnl, 0);
+            const totalGains = winningTrades.reduce((sum, t) => sum + t.pnl, 0);
+            const totalLosses = Math.abs(losingTrades.reduce((sum, t) => sum + t.pnl, 0));
+            
+            const avgWin = totalWins > 0 ? totalGains / totalWins : 0;
+            const avgLoss = totalLosses > 0 ? totalLosses / losingTrades.length : 0;
+            
+            const largestWin = winningTrades.length > 0 ? Math.max(...winningTrades.map(t => t.pnl)) : 0;
+            const largestLoss = losingTrades.length > 0 ? Math.min(...losingTrades.map(t => t.pnl)) : 0;
+            
+            const profitFactor = totalLosses > 0 ? totalGains / totalLosses : totalGains;
+            const expectancy = (winRate / 100 * avgWin) - ((100 - winRate) / 100 * avgLoss);
+            const winLossRatio = avgLoss > 0 ? avgWin / avgLoss : avgWin;
+            
+            document.getElementById('totalPnL').textContent = (totalPnL >= 0 ? '+' : '') + '₹' + totalPnL.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('winRate').textContent = winRate.toFixed(1) + '%';
+            document.getElementById('profitFactor').textContent = profitFactor.toFixed(2);
+            document.getElementById('expectancy').textContent = '₹' + expectancy.toFixed(2);
+            
+            document.getElementById('totalTrades').textContent = totalTrades;
+            document.getElementById('winTrades').textContent = totalWins;
+            document.getElementById('lossTrades').textContent = totalLosses;
+            document.getElementById('avgWin').textContent = '+₹' + avgWin.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('avgLoss').textContent = '-₹' + avgLoss.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('largestWin').textContent = '+₹' + largestWin.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('largestLoss').textContent = '₹' + largestLoss.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('winLossRatio').textContent = winLossRatio.toFixed(2) + ':1';
+            
+            // Generate insight
+            let insight = '';
+            if (profitFactor > 2 && winRate >= 50) {
+                insight = '🎯 Excellent performance! Your profit factor exceeds 2.0 and win rate is above 50%. You have a strong edge. Focus on consistency and position sizing.';
+            } else if (profitFactor > 1.5) {
+                insight = '✅ Good performance. You have a positive edge with a profit factor above 1.5. Work on improving win rate or risk-reward ratio for better results.';
+            } else if (profitFactor > 1) {
+                insight = '⚠️ Marginally profitable. Your profit factor is above 1 but there\'s room for improvement. Focus on cutting losses quicker and letting winners run.';
+            } else if (expectancy > 0) {
+                insight = '📊 Break-even to slightly positive. While expectancy is positive, profit factor suggests you\'re giving back profits. Review your strategy and risk management.';
+            } else {
+                insight = '❌ Net negative performance. Your current strategy needs revision. Consider: 1) Better entries/exits, 2) Stricter risk management, 3) Strategy back-testing, 4) Reducing trade frequency.';
+            }
+            
+            document.getElementById('insightText').textContent = insight;
+            
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

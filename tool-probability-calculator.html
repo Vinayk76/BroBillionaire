@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Probability Calculator - Win Rate & Success Probability | BroBillionaire</title>
+    <meta name="description" content="Calculate trade probability and success rate. Analyze win rates, expectancy, and probability of reaching profit targets in trading.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .calculator-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .calculator-card { background: #1a1a1a; border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid #2a2a2a; }
+        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 10px; }
+        .calculator-subtitle { color: #999; font-size: 1.1rem; margin-bottom: 40px; }
+        .input-group { margin-bottom: 25px; }
+        .input-label { display: block; color: #C9A227; font-weight: 600; margin-bottom: 10px; }
+        .input-field { width: 100%; padding: 15px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #fff; font-size: 1rem; }
+        .calculate-btn { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; font-weight: 700; padding: 18px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; }
+        .results-section { display: none; margin-top: 40px; }
+        .result-card { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 30px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid; text-align: center; }
+        .prob-high { border-left-color: #2ecc71; }
+        .prob-moderate { border-left-color: #f39c12; }
+        .prob-low { border-left-color: #e74c3c; }
+        .result-value { color: #fff; font-size: 4rem; font-weight: 700; margin: 15px 0; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .probability-bar { height: 60px; background: linear-gradient(to right, #e74c3c 0%, #f39c12 50%, #2ecc71 100%); border-radius: 12px; position: relative; margin: 30px 0; }
+        .prob-marker { position: absolute; top: -10px; width: 4px; height: 80px; background: #C9A227; transition: left 0.5s; }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-card">
+            <h1 class="calculator-title">Trade Probability Calculator</h1>
+            <p class="calculator-subtitle">Calculate probability of success and analyze your trading edge.</p>
+            
+            <div class="input-group">
+                <label class="input-label">Entry Price (₹)</label>
+                <input type="number" id="entryPrice" class="input-field" placeholder="50000" step="0.01">
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Target Price (₹)</label>
+                <input type="number" id="targetPrice" class="input-field" placeholder="51000" step="0.01">
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Stop Loss Price (₹)</label>
+                <input type="number" id="stopLoss" class="input-field" placeholder="49500" step="0.01">
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Historical Win Rate (%)</label>
+                <input type="number" id="winRate" class="input-field" placeholder="60" min="0" max="100" step="0.1">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Your strategy's historical success rate</div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Days to Target (Optional)</label>
+                <input type="number" id="daysToTarget" class="input-field" placeholder="5" min="1">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Expected time to reach target</div>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculateProbability()">
+                <i class="fas fa-calculator"></i> Calculate Probability
+            </button>
+        </div>
+        
+        <div class="results-section" id="resultsSection">
+            <div class="calculator-card">
+                <h2 style="color: #C9A227; margin-bottom: 30px; font-family: 'Playfair Display', serif;">Probability Analysis</h2>
+                
+                <div class="result-card" id="mainResult">
+                    <div style="color: #C9A227; font-size: 1.2rem; font-weight: 600;">Win Probability</div>
+                    <div class="result-value" id="winProbability">-</div>
+                    <div style="color: #999; font-size: 1.1rem;" id="probDescription">-</div>
+                </div>
+                
+                <div class="probability-bar">
+                    <div class="prob-marker" id="probMarker"></div>
+                </div>
+                <div style="text-align: center; color: #C9A227; font-weight: 600; margin-bottom: 30px;" id="probLabel">-</div>
+                
+                <div class="grid-3">
+                    <div class="result-card prob-high">
+                        <div style="color: #2ecc71; font-weight: 600;">Risk-Reward Ratio</div>
+                        <div style="color: #fff; font-size: 2.5rem; font-weight: 700; margin-top: 10px;" id="riskReward">-</div>
+                        <div style="color: #666; margin-top: 5px;">Reward/Risk</div>
+                    </div>
+                    
+                    <div class="result-card prob-moderate">
+                        <div style="color: #f39c12; font-weight: 600;">Expected Value</div>
+                        <div style="color: #fff; font-size: 2.5rem; font-weight: 700; margin-top: 10px;" id="expectedValue">-</div>
+                        <div style="color: #666; margin-top: 5px;">Per trade expectancy</div>
+                    </div>
+                    
+                    <div class="result-card prob-low">
+                        <div style="color: #e74c3c; font-weight: 600;">Breakeven Win Rate</div>
+                        <div style="color: #fff; font-size: 2.5rem; font-weight: 700; margin-top: 10px;" id="breakevenWinRate">-</div>
+                        <div style="color: #666; margin-top: 5px;">Minimum to profit</div>
+                    </div>
+                </div>
+                
+                <div class="grid-3">
+                    <div class="result-card">
+                        <div style="color: #C9A227; font-weight: 600;">Potential Profit</div>
+                        <div style="color: #2ecc71; font-size: 2rem; font-weight: 700; margin-top: 10px;" id="potentialProfit">-</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div style="color: #C9A227; font-weight: 600;">Potential Loss</div>
+                        <div style="color: #e74c3c; font-size: 2rem; font-weight: 700; margin-top: 10px;" id="potentialLoss">-</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div style="color: #C9A227; font-weight: 600;">Trade Quality</div>
+                        <div style="color: #fff; font-size: 2rem; font-weight: 700; margin-top: 10px;" id="tradeQuality">-</div>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(52, 152, 219, 0.1); border: 2px solid #3498db; padding: 20px; border-radius: 12px; margin-top: 30px;">
+                    <strong><i class="fas fa-info-circle"></i> Trading Edge:</strong>
+                    <p style="color: #999; margin-top: 10px;" id="edgeAnalysis">-</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function calculateProbability() {
+            const entry = parseFloat(document.getElementById('entryPrice').value);
+            const target = parseFloat(document.getElementById('targetPrice').value);
+            const stopLoss = parseFloat(document.getElementById('stopLoss').value);
+            const winRate = parseFloat(document.getElementById('winRate').value);
+            
+            if (!entry || !target || !stopLoss || !winRate) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            const isLong = target > entry;
+            const potentialProfit = Math.abs(target - entry);
+            const potentialLoss = Math.abs(entry - stopLoss);
+            const riskRewardRatio = potentialProfit / potentialLoss;
+            
+            // Breakeven win rate calculation
+            const breakevenWinRate = (1 / (1 + riskRewardRatio)) * 100;
+            
+            // Expected value per trade
+            const expectedValue = (winRate / 100 * potentialProfit) - ((100 - winRate) / 100 * potentialLoss);
+            
+            // Trade probability (simplified)
+            const tradeProbability = winRate;
+            
+            document.getElementById('winProbability').textContent = tradeProbability.toFixed(1) + '%';
+            document.getElementById('riskReward').textContent = '1:' + riskRewardRatio.toFixed(2);
+            document.getElementById('expectedValue').textContent = (expectedValue >= 0 ? '+' : '') + '₹' + expectedValue.toFixed(2);
+            document.getElementById('breakevenWinRate').textContent = breakevenWinRate.toFixed(1) + '%';
+            document.getElementById('potentialProfit').textContent = '+₹' + potentialProfit.toFixed(2);
+            document.getElementById('potentialLoss').textContent = '-₹' + potentialLoss.toFixed(2);
+            
+            // Quality assessment
+            let quality;
+            if (riskRewardRatio >= 3 && winRate >= 50) quality = 'Excellent';
+            else if (riskRewardRatio >= 2 && winRate >= 50) quality = 'Good';
+            else if (riskRewardRatio >= 1.5 && winRate >= 40) quality = 'Fair';
+            else quality = 'Poor';
+            document.getElementById('tradeQuality').textContent = quality;
+            
+            // Probability description
+            let probDescription, edgeAnalysis;
+            const mainResult = document.getElementById('mainResult');
+            mainResult.className = 'result-card';
+            
+            if (tradeProbability >= 70) {
+                probDescription = 'High Probability Trade';
+                mainResult.classList.add('prob-high');
+            } else if (tradeProbability >= 50) {
+                probDescription = 'Moderate Probability Trade';
+                mainResult.classList.add('prob-moderate');
+            } else {
+                probDescription = 'Low Probability Trade';
+                mainResult.classList.add('prob-low');
+            }
+            document.getElementById('probDescription').textContent = probDescription;
+            
+            // Edge analysis
+            if (winRate > breakevenWinRate && expectedValue > 0) {
+                edgeAnalysis = `✅ You have a positive trading edge! Your win rate (${winRate.toFixed(1)}%) exceeds the breakeven rate (${breakevenWinRate.toFixed(1)}%), and expected value is positive (₹${expectedValue.toFixed(2)}). This trade setup has favorable odds.`;
+            } else if (winRate > breakevenWinRate) {
+                edgeAnalysis = `⚠️ Win rate exceeds breakeven but edge is marginal. Consider improving your risk-reward ratio or wait for better setups.`;
+            } else {
+                edgeAnalysis = `❌ No trading edge. Your win rate (${winRate.toFixed(1)}%) is below the breakeven rate (${breakevenWinRate.toFixed(1)}%). This trade has negative expectancy and should be avoided.`;
+            }
+            document.getElementById('edgeAnalysis').textContent = edgeAnalysis;
+            
+            // Position probability marker
+            document.getElementById('probMarker').style.left = tradeProbability + '%';
+            document.getElementById('probLabel').textContent = `Success Probability: ${tradeProbability.toFixed(1)}%`;
+            
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futures Calculator - Fair Value & Basis Calculator | BroBillionaire</title>
+    <meta name="description" content="Calculate futures fair value, cost of carry, basis, and expected futures price. Essential tool for futures trading in India.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .calculator-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .calculator-card { background: #1a1a1a; border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid #2a2a2a; }
+        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 10px; }
+        .calculator-subtitle { color: #999; font-size: 1.1rem; margin-bottom: 40px; }
+        .input-group { margin-bottom: 25px; }
+        .input-label { display: block; color: #C9A227; font-weight: 600; margin-bottom: 10px; }
+        .input-field { width: 100%; padding: 15px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #fff; font-size: 1rem; }
+        .calculate-btn { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; font-weight: 700; padding: 18px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; }
+        .results-section { display: none; margin-top: 40px; }
+        .result-card { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 30px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid #C9A227; text-align: center; }
+        .result-value { color: #fff; font-size: 3rem; font-weight: 700; margin: 15px 0; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .premium-card { border-left-color: #2ecc71; }
+        .discount-card { border-left-color: #e74c3c; }
+        .fair-card { border-left-color: #3498db; }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-card">
+            <h1 class="calculator-title">Futures Fair Value Calculator</h1>
+            <p class="calculator-subtitle">Calculate theoretical futures price, basis, and cost of carry for index and stock futures.</p>
+            
+            <div class="input-group">
+                <label class="input-label">Spot Price (₹)</label>
+                <input type="number" id="spotPrice" class="input-field" placeholder="50000" step="0.01">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Current index/stock price</div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Actual Futures Price (₹)</label>
+                <input type="number" id="futuresPrice" class="input-field" placeholder="50150" step="0.01">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Current futures contract price</div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Days to Expiry</label>
+                <input type="number" id="daysToExpiry" class="input-field" placeholder="15" min="1">
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Risk-Free Rate (%)</label>
+                <input type="number" id="riskFreeRate" class="input-field" placeholder="6.5" value="6.5" step="0.01">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Annual interest rate (India: ~6-7%)</div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Dividend Yield (%) - Optional</label>
+                <input type="number" id="dividendYield" class="input-field" placeholder="0" value="0" step="0.01">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Expected dividend during contract period (0 for indices)</div>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculateFutures()">
+                <i class="fas fa-calculator"></i> Calculate Fair Value
+            </button>
+        </div>
+        
+        <div class="results-section" id="resultsSection">
+            <div class="calculator-card">
+                <h2 style="color: #C9A227; margin-bottom: 30px; font-family: 'Playfair Display', serif;">Futures Valuation</h2>
+                
+                <div class="result-card fair-card">
+                    <div style="color: #3498db; font-size: 1.2rem; font-weight: 600;">Theoretical Fair Value</div>
+                    <div class="result-value" id="fairValue">-</div>
+                    <div style="color: #999;">Expected futures price</div>
+                </div>
+                
+                <div class="grid-2">
+                    <div class="result-card">
+                        <div style="color: #C9A227; font-weight: 600;">Basis</div>
+                        <div style="color: #fff; font-size: 2.5rem; font-weight: 700; margin-top: 10px;" id="basis">-</div>
+                        <div style="color: #666; margin-top: 5px;">Futures - Spot</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div style="color: #C9A227; font-weight: 600;">Cost of Carry</div>
+                        <div style="color: #fff; font-size: 2.5rem; font-weight: 700; margin-top: 10px;" id="costOfCarry">-</div>
+                        <div style="color: #666; margin-top: 5px;">Theoretical basis</div>
+                    </div>
+                    
+                    <div class="result-card" id="misPricingCard">
+                        <div style="color: #C9A227; font-weight: 600;">Mis-Pricing</div>
+                        <div style="color: #fff; font-size: 2.5rem; font-weight: 700; margin-top: 10px;" id="misPricing">-</div>
+                        <div style="color: #666; margin-top: 5px;">Actual vs Fair value</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div style="color: #C9A227; font-weight: 600;">Premium/Discount</div>
+                        <div style="color: #fff; font-size: 2.5rem; font-weight: 700; margin-top: 10px;" id="premiumDiscount">-</div>
+                        <div style="color: #666; margin-top: 5px;">% over/under spot</div>
+                    </div>
+                </div>
+                
+                <div style="padding: 20px; border-radius: 12px; margin-top: 30px;" id="arbitrageBox">
+                    <strong><i class="fas fa-info-circle"></i> <span id="arbitrageTitle">Market Analysis</span></strong>
+                    <p style="color: #999; margin-top: 10px;" id="arbitrageText">-</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function calculateFutures() {
+            const spot = parseFloat(document.getElementById('spotPrice').value);
+            const futuresPrice = parseFloat(document.getElementById('futuresPrice').value);
+            const days = parseFloat(document.getElementById('daysToExpiry').value);
+            const rate = parseFloat(document.getElementById('riskFreeRate').value) / 100;
+            const dividend = parseFloat(document.getElementById('dividendYield').value) / 100;
+            
+            if (!spot || !futuresPrice || !days || isNaN(rate)) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            const T = days / 365;
+            
+            // Fair Value = Spot * e^((r - d) * T)
+            const fairValue = spot * Math.exp((rate - dividend) * T);
+            
+            // Cost of Carry = Fair Value - Spot
+            const costOfCarry = fairValue - spot;
+            
+            // Basis = Actual Futures - Spot
+            const basis = futuresPrice - spot;
+            
+            // Mis-pricing = Actual Futures - Fair Value
+            const misPricing = futuresPrice - fairValue;
+            
+            // Premium/Discount %
+            const premiumDiscount = ((futuresPrice - spot) / spot) * 100;
+            
+            document.getElementById('fairValue').textContent = '₹' + fairValue.toFixed(2);
+            document.getElementById('basis').textContent = (basis >= 0 ? '+' : '') + '₹' + basis.toFixed(2);
+            document.getElementById('costOfCarry').textContent = '₹' + costOfCarry.toFixed(2);
+            document.getElementById('misPricing').textContent = (misPricing >= 0 ? '+' : '') + '₹' + misPricing.toFixed(2);
+            document.getElementById('premiumDiscount').textContent = (premiumDiscount >= 0 ? '+' : '') + premiumDiscount.toFixed(3) + '%';
+            
+            // Colorize mis-pricing card
+            const misPricingCard = document.getElementById('misPricingCard');
+            misPricingCard.className = 'result-card';
+            if (Math.abs(misPricing) < spot * 0.002) {
+                misPricingCard.classList.add('fair-card');
+            } else if (misPricing > 0) {
+                misPricingCard.classList.add('premium-card');
+            } else {
+                misPricingCard.classList.add('discount-card');
+            }
+            
+            // Arbitrage analysis
+            const arbitrageBox = document.getElementById('arbitrageBox');
+            const arbitrageTitle = document.getElementById('arbitrageTitle');
+            const arbitrageText = document.getElementById('arbitrageText');
+            
+            const misPricingPercent = (misPricing / spot) * 100;
+            
+            if (Math.abs(misPricingPercent) < 0.2) {
+                arbitrageBox.style.background = 'rgba(52, 152, 219, 0.1)';
+                arbitrageBox.style.border = '2px solid #3498db';
+                arbitrageTitle.textContent = '✅ Fair Pricing';
+                arbitrageText.textContent = `Futures are fairly priced relative to spot. Mis-pricing is ${Math.abs(misPricingPercent).toFixed(3)}%, which is within normal trading ranges. No significant arbitrage opportunity.`;
+            } else if (misPricing > 0) {
+                arbitrageBox.style.background = 'rgba(46, 204, 113, 0.1)';
+                arbitrageBox.style.border = '2px solid #2ecc71';
+                arbitrageTitle.textContent = '📈 Futures at Premium';
+                arbitrageText.textContent = `Futures are trading ${Math.abs(misPricingPercent).toFixed(3)}% above fair value. This indicates bullish sentiment. Potential cash-futures arbitrage: Sell futures + Buy spot if spread is wide enough to cover transaction costs.`;
+            } else {
+                arbitrageBox.style.background = 'rgba(231, 76, 60, 0.1)';
+                arbitrageBox.style.border = '2px solid #e74c3c';
+                arbitrageTitle.textContent = '📉 Futures at Discount';
+                arbitrageText.textContent = `Futures are trading ${Math.abs(misPricingPercent).toFixed(3)}% below fair value. This indicates bearish sentiment. Potential cash-futures arbitrage: Buy futures + Sell spot if spread is wide enough to cover transaction costs.`;
+            }
+            
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

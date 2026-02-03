@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pivot Points Calculator - Intraday Support & Resistance Levels | BroBillionaire</title>
+    <meta name="description" content="Calculate pivot points, support and resistance levels for intraday trading. Classic, Fibonacci, Woodie's, Camarilla, and DeMark pivot point methods.">
+    <link rel="canonical" href="https://brobillionaire.com/tool-pivot-points-calculator.html">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .calculator-container { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+        .calculator-card { background: #1a1a1a; border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid #2a2a2a; }
+        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 10px; }
+        .calculator-subtitle { color: #999; font-size: 1.1rem; margin-bottom: 40px; }
+        .input-group { margin-bottom: 25px; }
+        .input-label { display: block; color: #C9A227; font-weight: 600; margin-bottom: 10px; }
+        .input-field { width: 100%; padding: 15px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #fff; font-size: 1rem; }
+        .input-field:focus { outline: none; border-color: #C9A227; }
+        .calculate-btn { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; font-weight: 700; padding: 18px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .results-section { display: none; margin-top: 40px; }
+        .level-card { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 25px; border-radius: 12px; border-left: 4px solid; }
+        .resistance-card { border-left-color: #e74c3c; }
+        .pivot-card { border-left-color: #C9A227; }
+        .support-card { border-left-color: #2ecc71; }
+        .level-label { color: #999; font-size: 0.9rem; margin-bottom: 5px; }
+        .level-price { color: #fff; font-size: 1.8rem; font-weight: 700; }
+        .method-tabs { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+        .method-tab { padding: 12px 20px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #666; cursor: pointer; transition: all 0.3s; }
+        .method-tab.active { background: #C9A227; color: #000; border-color: #C9A227; font-weight: 700; }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-card">
+            <h1 class="calculator-title">Pivot Points Calculator</h1>
+            <p class="calculator-subtitle">Calculate pivot points, support, and resistance levels for intraday trading using multiple methods.</p>
+            
+            <div class="grid-3">
+                <div class="input-group">
+                    <label class="input-label">Previous High (₹)</label>
+                    <input type="number" id="prevHigh" class="input-field" placeholder="50500" step="0.01">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Previous Low (₹)</label>
+                    <input type="number" id="prevLow" class="input-field" placeholder="50000" step="0.01">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Previous Close (₹)</label>
+                    <input type="number" id="prevClose" class="input-field" placeholder="50300" step="0.01">
+                </div>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculatePivots()">
+                <i class="fas fa-calculator"></i> Calculate All Pivot Points
+            </button>
+        </div>
+        
+        <div class="results-section" id="resultsSection">
+            <div class="calculator-card">
+                <h2 style="color: #C9A227; margin-bottom: 20px; font-family: 'Playfair Display', serif;">Pivot Point Results</h2>
+                
+                <div class="method-tabs">
+                    <button class="method-tab active" onclick="showMethod('classic')" id="classicTab">Classic</button>
+                    <button class="method-tab" onclick="showMethod('fibonacci')" id="fibonacciTab">Fibonacci</button>
+                    <button class="method-tab" onclick="showMethod('woodie')" id="woodieTab">Woodie's</button>
+                    <button class="method-tab" onclick="showMethod('camarilla')" id="camarillaTab">Camarilla</button>
+                    <button class="method-tab" onclick="showMethod('demark')" id="demarkTab">DeMark</button>
+                </div>
+                
+                <div id="classic" class="method-content">
+                    <h3 style="color: #C9A227; margin-bottom: 20px;">Classic Pivot Points</h3>
+                    <div class="grid-3" id="classicLevels"></div>
+                </div>
+                
+                <div id="fibonacci" class="method-content" style="display:none;">
+                    <h3 style="color: #C9A227; margin-bottom: 20px;">Fibonacci Pivot Points</h3>
+                    <div class="grid-3" id="fibonacciLevels"></div>
+                </div>
+                
+                <div id="woodie" class="method-content" style="display:none;">
+                    <h3 style="color: #C9A227; margin-bottom: 20px;">Woodie's Pivot Points</h3>
+                    <div class="grid-3" id="woodieLevels"></div>
+                </div>
+                
+                <div id="camarilla" class="method-content" style="display:none;">
+                    <h3 style="color: #C9A227; margin-bottom: 20px;">Camarilla Pivot Points</h3>
+                    <div class="grid-3" id="camarillaLevels"></div>
+                </div>
+                
+                <div id="demark" class="method-content" style="display:none;">
+                    <h3 style="color: #C9A227; margin-bottom: 20px;">DeMark Pivot Points</h3>
+                    <div class="grid-3" id="demarkLevels"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let pivotData = {};
+        
+        function showMethod(method) {
+            document.querySelectorAll('.method-tab').forEach(tab => tab.classList.remove('active'));
+            document.getElementById(method + 'Tab').classList.add('active');
+            document.querySelectorAll('.method-content').forEach(content => content.style.display = 'none');
+            document.getElementById(method).style.display = 'block';
+        }
+        
+        function calculatePivots() {
+            const high = parseFloat(document.getElementById('prevHigh').value);
+            const low = parseFloat(document.getElementById('prevLow').value);
+            const close = parseFloat(document.getElementById('prevClose').value);
+            
+            if (!high || !low || !close) {
+                alert('Please enter all values');
+                return;
+            }
+            
+            // Classic Pivot Points
+            const pivot = (high + low + close) / 3;
+            const classicLevels = {
+                r3: high + 2 * (pivot - low),
+                r2: pivot + (high - low),
+                r1: 2 * pivot - low,
+                pp: pivot,
+                s1: 2 * pivot - high,
+                s2: pivot - (high - low),
+                s3: low - 2 * (high - pivot)
+            };
+            
+            // Fibonacci Pivot Points
+            const range = high - low;
+            const fibLevels = {
+                r3: pivot + range * 1.000,
+                r2: pivot + range * 0.618,
+                r1: pivot + range * 0.382,
+                pp: pivot,
+                s1: pivot - range * 0.382,
+                s2: pivot - range * 0.618,
+                s3: pivot - range * 1.000
+            };
+            
+            // Woodie's Pivot Points
+            const woodiePivot = (high + low + 2 * close) / 4;
+            const woodieLevels = {
+                r2: woodiePivot + (high - low),
+                r1: 2 * woodiePivot - low,
+                pp: woodiePivot,
+                s1: 2 * woodiePivot - high,
+                s2: woodiePivot - (high - low)
+            };
+            
+            // Camarilla Pivot Points
+            const camarillaLevels = {
+                r4: close + range * 1.1 / 2,
+                r3: close + range * 1.1 / 4,
+                r2: close + range * 1.1 / 6,
+                r1: close + range * 1.1 / 12,
+                pp: (high + low + close) / 3,
+                s1: close - range * 1.1 / 12,
+                s2: close - range * 1.1 / 6,
+                s3: close - range * 1.1 / 4,
+                s4: close - range * 1.1 / 2
+            };
+            
+            // DeMark Pivot Points
+            let x;
+            if (close < low) x = high + 2 * low + close;
+            else if (close > high) x = 2 * high + low + close;
+            else x = high + low + 2 * close;
+            const demarkPivot = x / 4;
+            const demarkLevels = {
+                r1: x / 2 - low,
+                pp: demarkPivot,
+                s1: x / 2 - high
+            };
+            
+            renderLevels('classic', classicLevels);
+            renderLevels('fibonacci', fibLevels);
+            renderLevels('woodie', woodieLevels);
+            renderLevels('camarilla', camarillaLevels);
+            renderLevels('demark', demarkLevels);
+            
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function renderLevels(method, levels) {
+            let html = '';
+            const order = ['r4', 'r3', 'r2', 'r1', 'pp', 's1', 's2', 's3', 's4'];
+            
+            order.forEach(level => {
+                if (levels[level] !== undefined) {
+                    const label = level.startsWith('r') ? `R${level[1]}` : 
+                                 level.startsWith('s') ? `S${level[1]}` : 'Pivot Point';
+                    const cardClass = level.startsWith('r') ? 'resistance-card' : 
+                                     level.startsWith('s') ? 'support-card' : 'pivot-card';
+                    
+                    html += `
+                        <div class="level-card ${cardClass}">
+                            <div class="level-label">${label}</div>
+                            <div class="level-price">₹${levels[level].toFixed(2)}</div>
+                        </div>
+                    `;
+                }
+            });
+            
+            document.getElementById(method + 'Levels').innerHTML = html;
+        }
+    </script>
+</body>
+</html>

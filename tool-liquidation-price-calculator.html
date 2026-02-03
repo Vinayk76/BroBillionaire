@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquidation Price Calculator - Leverage Trading Tool | BroBillionaire</title>
+    <meta name="description" content="Calculate liquidation price for leveraged trading positions. Know your margin call price and manage risk in futures and margin trading.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .calculator-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .calculator-card { background: #1a1a1a; border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid #2a2a2a; }
+        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 10px; }
+        .calculator-subtitle { color: #999; font-size: 1.1rem; margin-bottom: 40px; }
+        .input-group { margin-bottom: 25px; }
+        .input-label { display: block; color: #C9A227; font-weight: 600; margin-bottom: 10px; }
+        .input-field { width: 100%; padding: 15px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #fff; font-size: 1rem; }
+        .calculate-btn { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; font-weight: 700; padding: 18px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; }
+        .results-section { display: none; margin-top: 40px; }
+        .result-card { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 30px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid; text-align: center; }
+        .danger-card { border-left-color: #e74c3c; }
+        .warning-card { border-left-color: #f39c12; }
+        .info-card { border-left-color: #3498db; }
+        .result-value { color: #fff; font-size: 3rem; font-weight: 700; margin: 15px 0; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .position-toggle { display: flex; gap: 10px; margin-bottom: 20px; }
+        .position-btn { flex: 1; padding: 15px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #666; cursor: pointer; }
+        .position-btn.active { background: #C9A227; color: #000; border-color: #C9A227; font-weight: 700; }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-card">
+            <h1 class="calculator-title">Liquidation Price Calculator</h1>
+            <p class="calculator-subtitle">Calculate liquidation price for leveraged positions and manage margin risk effectively.</p>
+            
+            <div class="position-toggle">
+                <button class="position-btn active" onclick="setPosition('long')" id="longBtn">
+                    <i class="fas fa-arrow-up"></i> Long Position
+                </button>
+                <button class="position-btn" onclick="setPosition('short')" id="shortBtn">
+                    <i class="fas fa-arrow-down"></i> Short Position
+                </button>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Entry Price (₹)</label>
+                <input type="number" id="entryPrice" class="input-field" placeholder="50000" step="0.01">
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Position Size (₹)</label>
+                <input type="number" id="positionSize" class="input-field" placeholder="100000" step="1">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Total position value</div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Leverage (x)</label>
+                <input type="number" id="leverage" class="input-field" placeholder="5" step="0.1" min="1">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Trading leverage (e.g., 5x, 10x, 20x)</div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Maintenance Margin (%)</label>
+                <input type="number" id="maintenanceMargin" class="input-field" placeholder="0.5" value="0.5" step="0.1">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Minimum margin to maintain position (typically 0.5-1%)</div>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculateLiquidation()">
+                <i class="fas fa-calculator"></i> Calculate Liquidation Price
+            </button>
+        </div>
+        
+        <div class="results-section" id="resultsSection">
+            <div class="calculator-card">
+                <h2 style="color: #C9A227; margin-bottom: 30px; font-family: 'Playfair Display', serif;">Liquidation Analysis</h2>
+                
+                <div class="result-card danger-card">
+                    <div style="color: #e74c3c; font-size: 1.2rem; font-weight: 600;">
+                        <i class="fas fa-exclamation-triangle"></i> Liquidation Price
+                    </div>
+                    <div class="result-value" id="liquidationPrice">-</div>
+                    <div style="color: #999;" id="liquidationChange">-</div>
+                </div>
+                
+                <div class="grid-2">
+                    <div class="result-card info-card">
+                        <div style="color: #3498db; font-weight: 600;">Initial Margin</div>
+                        <div style="color: #fff; font-size: 2rem; font-weight: 700; margin-top: 10px;" id="initialMargin">-</div>
+                        <div style="color: #666; margin-top: 5px;">Required capital</div>
+                    </div>
+                    
+                    <div class="result-card info-card">
+                        <div style="color: #3498db; font-weight: 600;">Maintenance Margin</div>
+                        <div style="color: #fff; font-size: 2rem; font-weight: 700; margin-top: 10px;" id="maintMargin">-</div>
+                        <div style="color: #666; margin-top: 5px;">Minimum to hold</div>
+                    </div>
+                    
+                    <div class="result-card warning-card">
+                        <div style="color: #f39c12; font-weight: 600;">Distance to Liquidation</div>
+                        <div style="color: #fff; font-size: 2rem; font-weight: 700; margin-top: 10px;" id="distancePercent">-</div>
+                        <div style="color: #666; margin-top: 5px;">Percentage move</div>
+                    </div>
+                    
+                    <div class="result-card warning-card">
+                        <div style="color: #f39c12; font-weight: 600;">Max Loss at Liquidation</div>
+                        <div style="color: #fff; font-size: 2rem; font-weight: 700; margin-top: 10px;" id="maxLoss">-</div>
+                        <div style="color: #666; margin-top: 5px;">Total potential loss</div>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(231, 76, 60, 0.1); border: 2px solid #e74c3c; padding: 20px; border-radius: 12px; margin-top: 30px;">
+                    <strong><i class="fas fa-exclamation-triangle"></i> Risk Warning:</strong>
+                    <p style="color: #999; margin-top: 10px;">
+                        Leveraged trading carries significant risk. Your position will be automatically liquidated if the price reaches the liquidation price, resulting in the loss of your initial margin. Always use stop losses and manage your risk carefully.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let positionType = 'long';
+        
+        function setPosition(type) {
+            positionType = type;
+            document.getElementById('longBtn').classList.toggle('active', type === 'long');
+            document.getElementById('shortBtn').classList.toggle('active', type === 'short');
+        }
+        
+        function calculateLiquidation() {
+            const entryPrice = parseFloat(document.getElementById('entryPrice').value);
+            const positionSize = parseFloat(document.getElementById('positionSize').value);
+            const leverage = parseFloat(document.getElementById('leverage').value);
+            const maintenanceMarginPercent = parseFloat(document.getElementById('maintenanceMargin').value) / 100;
+            
+            if (!entryPrice || !positionSize || !leverage || isNaN(maintenanceMarginPercent)) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            const initialMargin = positionSize / leverage;
+            const maintMargin = positionSize * maintenanceMarginPercent;
+            
+            let liquidationPrice, distancePercent;
+            
+            if (positionType === 'long') {
+                // Long: Liq Price = Entry * (1 - (1/Leverage) + Maintenance Margin %)
+                liquidationPrice = entryPrice * (1 - (1 / leverage) + maintenanceMarginPercent);
+                distancePercent = ((entryPrice - liquidationPrice) / entryPrice * 100);
+            } else {
+                // Short: Liq Price = Entry * (1 + (1/Leverage) - Maintenance Margin %)
+                liquidationPrice = entryPrice * (1 + (1 / leverage) - maintenanceMarginPercent);
+                distancePercent = ((liquidationPrice - entryPrice) / entryPrice * 100);
+            }
+            
+            const maxLoss = initialMargin;
+            
+            document.getElementById('liquidationPrice').textContent = '₹' + liquidationPrice.toFixed(2);
+            
+            const changeText = positionType === 'long' ? 
+                `Price drops ${distancePercent.toFixed(2)}%` : 
+                `Price rises ${distancePercent.toFixed(2)}%`;
+            document.getElementById('liquidationChange').textContent = changeText;
+            
+            document.getElementById('initialMargin').textContent = '₹' + initialMargin.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('maintMargin').textContent = '₹' + maintMargin.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('distancePercent').textContent = distancePercent.toFixed(2) + '%';
+            document.getElementById('maxLoss').textContent = '₹' + maxLoss.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

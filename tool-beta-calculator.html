@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beta Coefficient Calculator - Stock Market Risk Tool | BroBillionaire</title>
+    <meta name="description" content="Calculate beta coefficient to measure stock volatility relative to the market. Assess systematic risk and portfolio diversification.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .calculator-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .calculator-card { background: #1a1a1a; border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid #2a2a2a; }
+        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 10px; }
+        .calculator-subtitle { color: #999; font-size: 1.1rem; margin-bottom: 40px; }
+        .input-group { margin-bottom: 25px; }
+        .input-label { display: block; color: #C9A227; font-weight: 600; margin-bottom: 10px; }
+        .input-field { width: 100%; padding: 15px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #fff; font-size: 1rem; }
+        .calculate-btn { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; font-weight: 700; padding: 18px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; }
+        .results-section { display: none; margin-top: 40px; }
+        .result-card { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 30px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid; text-align: center; }
+        .beta-low { border-left-color: #3498db; }
+        .beta-moderate { border-left-color: #f39c12; }
+        .beta-high { border-left-color: #e74c3c; }
+        .result-value { color: #fff; font-size: 4rem; font-weight: 700; margin: 15px 0; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .beta-scale { height: 60px; background: linear-gradient(to right, #3498db, #2ecc71, #f39c12, #e74c3c); border-radius: 12px; position: relative; margin: 30px 0; }
+        .beta-marker { position: absolute; top: -10px; width: 4px; height: 80px; background: #C9A227; transition: left 0.5s; }
+        .beta-label { text-align: center; margin-top: 10px; color: #C9A227; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-card">
+            <h1 class="calculator-title">Beta Coefficient Calculator</h1>
+            <p class="calculator-subtitle">Calculate beta to measure a stock's volatility relative to the market index.</p>
+            
+            <div class="input-group">
+                <label class="input-label">Stock Return (%)</label>
+                <input type="number" id="stockReturn" class="input-field" placeholder="15" step="0.01">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Average annual return of the stock</div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Market Return (%)</label>
+                <input type="number" id="marketReturn" class="input-field" placeholder="10" step="0.01">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Average annual return of market index (Nifty 50)</div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Stock Standard Deviation (%)</label>
+                <input type="number" id="stockStdDev" class="input-field" placeholder="25" step="0.01">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Volatility of stock returns</div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Market Standard Deviation (%)</label>
+                <input type="number" id="marketStdDev" class="input-field" placeholder="15" step="0.01">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Volatility of market returns</div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Correlation Coefficient</label>
+                <input type="number" id="correlation" class="input-field" placeholder="0.75" step="0.01" min="-1" max="1">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Correlation between stock and market (-1 to 1, typically 0.5 to 0.9)</div>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculateBeta()">
+                <i class="fas fa-calculator"></i> Calculate Beta
+            </button>
+        </div>
+        
+        <div class="results-section" id="resultsSection">
+            <div class="calculator-card">
+                <h2 style="color: #C9A227; margin-bottom: 30px; font-family: 'Playfair Display', serif;">Beta Analysis</h2>
+                
+                <div class="result-card" id="mainResult">
+                    <div style="color: #C9A227; font-size: 1.2rem; font-weight: 600;">Beta Coefficient (β)</div>
+                    <div class="result-value" id="betaValue">-</div>
+                    <div style="color: #999; font-size: 1.1rem;" id="betaInterpretation">-</div>
+                </div>
+                
+                <div class="beta-scale">
+                    <div class="beta-marker" id="betaMarker"></div>
+                </div>
+                <div class="beta-label" id="betaLabel">-</div>
+                
+                <div class="grid-3">
+                    <div class="result-card beta-low">
+                        <div style="color: #3498db; font-weight: 600;">Systematic Risk</div>
+                        <div style="color: #fff; font-size: 2rem; font-weight: 700; margin-top: 10px;" id="systematicRisk">-</div>
+                        <div style="color: #666; margin-top: 5px;">Market-related risk</div>
+                    </div>
+                    
+                    <div class="result-card beta-moderate">
+                        <div style="color: #f39c12; font-weight: 600;">Volatility Ratio</div>
+                        <div style="color: #fff; font-size: 2rem; font-weight: 700; margin-top: 10px;" id="volatilityRatio">-</div>
+                        <div style="color: #666; margin-top: 5px;">Stock vs Market volatility</div>
+                    </div>
+                    
+                    <div class="result-card beta-high">
+                        <div style="color: #e74c3c; font-weight: 600;">Expected Return</div>
+                        <div style="color: #fff; font-size: 2rem; font-weight: 700; margin-top: 10px;" id="expectedReturn">-</div>
+                        <div style="color: #666; margin-top: 5px;">Using CAPM model</div>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(52, 152, 219, 0.1); border: 2px solid #3498db; padding: 20px; border-radius: 12px; margin-top: 30px;">
+                    <strong><i class="fas fa-info-circle"></i> Beta Interpretation:</strong>
+                    <ul style="margin: 10px 0 0 20px; color: #999;">
+                        <li><strong>β = 1:</strong> Stock moves exactly with the market</li>
+                        <li><strong>β > 1:</strong> Stock is more volatile than the market (higher risk, higher potential return)</li>
+                        <li><strong>β < 1:</strong> Stock is less volatile than the market (lower risk, defensive)</li>
+                        <li><strong>β = 0:</strong> Stock movement is uncorrelated with the market</li>
+                        <li><strong>β < 0:</strong> Stock moves opposite to the market (rare, inverse relationship)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function calculateBeta() {
+            const stockReturn = parseFloat(document.getElementById('stockReturn').value);
+            const marketReturn = parseFloat(document.getElementById('marketReturn').value);
+            const stockStdDev = parseFloat(document.getElementById('stockStdDev').value);
+            const marketStdDev = parseFloat(document.getElementById('marketStdDev').value);
+            const correlation = parseFloat(document.getElementById('correlation').value);
+            
+            if (isNaN(stockReturn) || isNaN(marketReturn) || isNaN(stockStdDev) || isNaN(marketStdDev) || isNaN(correlation)) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // Beta = Correlation * (Stock StdDev / Market StdDev)
+            const beta = correlation * (stockStdDev / marketStdDev);
+            
+            const volatilityRatio = stockStdDev / marketStdDev;
+            
+            // CAPM: Expected Return = Risk-Free Rate + Beta * (Market Return - Risk-Free Rate)
+            const riskFreeRate = 6.5; // Assumed risk-free rate
+            const expectedReturn = riskFreeRate + beta * (marketReturn - riskFreeRate);
+            
+            document.getElementById('betaValue').textContent = beta.toFixed(3);
+            
+            // Interpretation
+            let interpretation, riskLevel;
+            const mainResult = document.getElementById('mainResult');
+            mainResult.className = 'result-card';
+            
+            if (beta < 0) {
+                interpretation = 'Inverse Correlation - Moves opposite to market';
+                riskLevel = 'Negative Beta (Rare)';
+                mainResult.classList.add('beta-low');
+            } else if (beta < 0.5) {
+                interpretation = 'Low Volatility - Defensive stock';
+                riskLevel = 'Low Risk';
+                mainResult.classList.add('beta-low');
+            } else if (beta < 1) {
+                interpretation = 'Moderate Volatility - Less volatile than market';
+                riskLevel = 'Below Average Risk';
+                mainResult.classList.add('beta-moderate');
+            } else if (beta === 1) {
+                interpretation = 'Market Volatility - Moves with market';
+                riskLevel = 'Average Risk';
+                mainResult.classList.add('beta-moderate');
+            } else if (beta < 1.5) {
+                interpretation = 'High Volatility - More volatile than market';
+                riskLevel = 'Above Average Risk';
+                mainResult.classList.add('beta-high');
+            } else {
+                interpretation = 'Very High Volatility - Significantly more volatile';
+                riskLevel = 'High Risk';
+                mainResult.classList.add('beta-high');
+            }
+            
+            document.getElementById('betaInterpretation').textContent = interpretation;
+            document.getElementById('systematicRisk').textContent = riskLevel;
+            document.getElementById('volatilityRatio').textContent = volatilityRatio.toFixed(2) + 'x';
+            document.getElementById('expectedReturn').textContent = expectedReturn.toFixed(2) + '%';
+            
+            // Position beta marker on scale (0 to 2)
+            let markerPosition = Math.min(Math.max(beta / 2 * 100, 0), 100);
+            document.getElementById('betaMarker').style.left = markerPosition + '%';
+            document.getElementById('betaLabel').textContent = `β = ${beta.toFixed(3)}`;
+            
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

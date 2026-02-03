@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black-Scholes Option Pricing Calculator | BroBillionaire</title>
+    <meta name="description" content="Calculate theoretical option prices using Black-Scholes model. Get option values, Greeks, and implied volatility for accurate options pricing.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .calculator-container { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+        .calculator-card { background: #1a1a1a; border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid #2a2a2a; }
+        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 10px; }
+        .calculator-subtitle { color: #999; font-size: 1.1rem; margin-bottom: 40px; }
+        .input-group { margin-bottom: 25px; }
+        .input-label { display: block; color: #C9A227; font-weight: 600; margin-bottom: 10px; }
+        .input-field { width: 100%; padding: 15px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #fff; font-size: 1rem; }
+        .calculate-btn { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; font-weight: 700; padding: 18px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; }
+        .results-section { display: none; margin-top: 40px; }
+        .result-card { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 30px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid #C9A227; text-align: center; }
+        .result-value { color: #fff; font-size: 3rem; font-weight: 700; margin: 15px 0; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .greek-card { background: #0a0a0a; padding: 20px; border-radius: 12px; border: 2px solid #2a2a2a; text-align: center; }
+        .option-toggle { display: flex; gap: 10px; margin-bottom: 20px; }
+        .option-btn { flex: 1; padding: 15px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #666; cursor: pointer; }
+        .option-btn.active { background: #C9A227; color: #000; border-color: #C9A227; font-weight: 700; }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-card">
+            <h1 class="calculator-title">Black-Scholes Calculator</h1>
+            <p class="calculator-subtitle">Calculate theoretical option prices and Greeks using the Black-Scholes model.</p>
+            
+            <div class="option-toggle">
+                <button class="option-btn active" onclick="setOptionType('call')" id="callBtn">Call Option</button>
+                <button class="option-btn" onclick="setOptionType('put')" id="putBtn">Put Option</button>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Spot Price (₹)</label>
+                <input type="number" id="spotPrice" class="input-field" placeholder="50000" step="0.01">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Current price of the underlying</div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Strike Price (₹)</label>
+                <input type="number" id="strikePrice" class="input-field" placeholder="50000" step="0.01">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Exercise price of the option</div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Days to Expiry</label>
+                <input type="number" id="daysToExpiry" class="input-field" placeholder="30" min="1">
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Volatility (%)</label>
+                <input type="number" id="volatility" class="input-field" placeholder="18" step="0.01">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Implied/Historical volatility (annualized)</div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Risk-Free Rate (%)</label>
+                <input type="number" id="riskFreeRate" class="input-field" placeholder="6.5" value="6.5" step="0.01">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">91-day T-Bill rate (India: ~6-7%)</div>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculateBlackScholes()">
+                <i class="fas fa-calculator"></i> Calculate Option Price
+            </button>
+        </div>
+        
+        <div class="results-section" id="resultsSection">
+            <div class="calculator-card">
+                <h2 style="color: #C9A227; margin-bottom: 30px; font-family: 'Playfair Display', serif;">Option Valuation</h2>
+                
+                <div class="result-card">
+                    <div style="color: #C9A227; font-size: 1.2rem; font-weight: 600;">Theoretical Option Price</div>
+                    <div class="result-value" id="optionPrice">-</div>
+                    <div style="color: #999;" id="optionType">Call Option</div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                    <div class="result-card">
+                        <div style="color: #C9A227; font-weight: 600;">Intrinsic Value</div>
+                        <div style="color: #fff; font-size: 2rem; font-weight: 700; margin-top: 10px;" id="intrinsicValue">-</div>
+                    </div>
+                    <div class="result-card">
+                        <div style="color: #C9A227; font-weight: 600;">Time Value</div>
+                        <div style="color: #fff; font-size: 2rem; font-weight: 700; margin-top: 10px;" id="timeValue">-</div>
+                    </div>
+                    <div class="result-card">
+                        <div style="color: #C9A227; font-weight: 600;">Moneyness</div>
+                        <div style="color: #fff; font-size: 2rem; font-weight: 700; margin-top: 10px;" id="moneyness">-</div>
+                    </div>
+                </div>
+                
+                <h3 style="color: #C9A227; margin-top: 40px; margin-bottom: 20px; font-family: 'Playfair Display', serif;">The Greeks</h3>
+                
+                <div class="grid-4">
+                    <div class="greek-card">
+                        <div style="color: #C9A227; font-weight: 600; margin-bottom: 10px;">Delta (Δ)</div>
+                        <div style="color: #fff; font-size: 1.8rem; font-weight: 700;" id="delta">-</div>
+                        <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Price sensitivity</div>
+                    </div>
+                    <div class="greek-card">
+                        <div style="color: #C9A227; font-weight: 600; margin-bottom: 10px;">Gamma (Γ)</div>
+                        <div style="color: #fff; font-size: 1.8rem; font-weight: 700;" id="gamma">-</div>
+                        <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Delta change rate</div>
+                    </div>
+                    <div class="greek-card">
+                        <div style="color: #C9A227; font-weight: 600; margin-bottom: 10px;">Theta (Θ)</div>
+                        <div style="color: #fff; font-size: 1.8rem; font-weight: 700;" id="theta">-</div>
+                        <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Time decay/day</div>
+                    </div>
+                    <div class="greek-card">
+                        <div style="color: #C9A227; font-weight: 600; margin-bottom: 10px;">Vega (ν)</div>
+                        <div style="color: #fff; font-size: 1.8rem; font-weight: 700;" id="vega">-</div>
+                        <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">IV sensitivity</div>
+                    </div>
+                    <div class="greek-card">
+                        <div style="color: #C9A227; font-weight: 600; margin-bottom: 10px;">Rho (ρ)</div>
+                        <div style="color: #fff; font-size: 1.8rem; font-weight: 700;" id="rho">-</div>
+                        <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Interest rate risk</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let optionType = 'call';
+        
+        function setOptionType(type) {
+            optionType = type;
+            document.getElementById('callBtn').classList.toggle('active', type === 'call');
+            document.getElementById('putBtn').classList.toggle('active', type === 'put');
+        }
+        
+        function normalCDF(x) {
+            const t = 1 / (1 + 0.2316419 * Math.abs(x));
+            const d = 0.3989423 * Math.exp(-x * x / 2);
+            const prob = d * t * (0.3193815 + t * (-0.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274))));
+            return x > 0 ? 1 - prob : prob;
+        }
+        
+        function normalPDF(x) {
+            return Math.exp(-0.5 * x * x) / Math.sqrt(2 * Math.PI);
+        }
+        
+        function calculateBlackScholes() {
+            const S = parseFloat(document.getElementById('spotPrice').value);
+            const K = parseFloat(document.getElementById('strikePrice').value);
+            const days = parseFloat(document.getElementById('daysToExpiry').value);
+            const sigma = parseFloat(document.getElementById('volatility').value) / 100;
+            const r = parseFloat(document.getElementById('riskFreeRate').value) / 100;
+            
+            if (!S || !K || !days || !sigma || isNaN(r)) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            const T = days / 365;
+            const d1 = (Math.log(S / K) + (r + 0.5 * sigma * sigma) * T) / (sigma * Math.sqrt(T));
+            const d2 = d1 - sigma * Math.sqrt(T);
+            
+            let price, delta, intrinsic;
+            if (optionType === 'call') {
+                price = S * normalCDF(d1) - K * Math.exp(-r * T) * normalCDF(d2);
+                delta = normalCDF(d1);
+                intrinsic = Math.max(S - K, 0);
+            } else {
+                price = K * Math.exp(-r * T) * normalCDF(-d2) - S * normalCDF(-d1);
+                delta = normalCDF(d1) - 1;
+                intrinsic = Math.max(K - S, 0);
+            }
+            
+            const gamma = normalPDF(d1) / (S * sigma * Math.sqrt(T));
+            const theta = -(S * normalPDF(d1) * sigma) / (2 * Math.sqrt(T)) - 
+                         (optionType === 'call' ? 1 : -1) * r * K * Math.exp(-r * T) * normalCDF(optionType === 'call' ? d2 : -d2);
+            const vega = S * normalPDF(d1) * Math.sqrt(T);
+            const rho = (optionType === 'call' ? 1 : -1) * K * T * Math.exp(-r * T) * normalCDF(optionType === 'call' ? d2 : -d2);
+            
+            const timeValue = price - intrinsic;
+            let moneyness = S === K ? 'ATM' : (optionType === 'call' ? (S > K ? 'ITM' : 'OTM') : (S < K ? 'ITM' : 'OTM'));
+            
+            document.getElementById('optionPrice').textContent = '₹' + price.toFixed(2);
+            document.getElementById('optionType').textContent = (optionType === 'call' ? 'Call' : 'Put') + ' Option';
+            document.getElementById('intrinsicValue').textContent = '₹' + intrinsic.toFixed(2);
+            document.getElementById('timeValue').textContent = '₹' + timeValue.toFixed(2);
+            document.getElementById('moneyness').textContent = moneyness;
+            
+            document.getElementById('delta').textContent = delta.toFixed(4);
+            document.getElementById('gamma').textContent = gamma.toFixed(6);
+            document.getElementById('theta').textContent = (theta / 365).toFixed(4);
+            document.getElementById('vega').textContent = (vega / 100).toFixed(4);
+            document.getElementById('rho').textContent = (rho / 100).toFixed(4);
+            
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spread Trading Calculator - Calendar & Vertical Spreads | BroBillionaire</title>
+    <meta name="description" content="Calculate profit/loss for option spreads including vertical spreads, calendar spreads, bull call spread, bear put spread, and more.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .calculator-container { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+        .calculator-card { background: #1a1a1a; border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid #2a2a2a; }
+        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 10px; }
+        .calculator-subtitle { color: #999; font-size: 1.1rem; margin-bottom: 40px; }
+        .input-group { margin-bottom: 25px; }
+        .input-label { display: block; color: #C9A227; font-weight: 600; margin-bottom: 10px; }
+        .input-field { width: 100%; padding: 15px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #fff; font-size: 1rem; }
+        .calculate-btn { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; font-weight: 700; padding: 18px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; }
+        .results-section { display: none; margin-top: 40px; }
+        .result-card { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 30px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid #C9A227; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .preset-tabs { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+        .preset-tab { padding: 12px 20px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; cursor: pointer; color: #666; }
+        .preset-tab.active { background: #C9A227; color: #000; border-color: #C9A227; font-weight: 700; }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-card">
+            <h1 class="calculator-title">Spread Trading Calculator</h1>
+            <p class="calculator-subtitle">Calculate profit/loss for various option spread strategies.</p>
+            
+            <div class="preset-tabs">
+                <button class="preset-tab active" onclick="setSpread('bullCall')">Bull Call Spread</button>
+                <button class="preset-tab" onclick="setSpread('bearPut')">Bear Put Spread</button>
+                <button class="preset-tab" onclick="setSpread('callCredit')">Call Credit Spread</button>
+                <button class="preset-tab" onclick="setSpread('putCredit')">Put Credit Spread</button>
+                <button class="preset-tab" onclick="setSpread('calendar')">Calendar Spread</button>
+            </div>
+            
+            <div id="spreadInfo" style="background: #0a0a0a; padding: 20px; border-radius: 8px; margin-bottom: 30px; border-left: 4px solid #C9A227;">
+                <strong style="color: #C9A227;">Bull Call Spread</strong>
+                <p style="color: #999; margin-top: 10px;">Buy lower strike call + Sell higher strike call. Bullish strategy with limited risk and reward.</p>
+            </div>
+            
+            <div class="grid-2">
+                <div>
+                    <h3 style="color: #C9A227; margin-bottom: 20px;">Buy Leg</h3>
+                    <div class="input-group">
+                        <label class="input-label">Strike Price (₹)</label>
+                        <input type="number" id="buyStrike" class="input-field" placeholder="50000" step="0.01">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Premium Paid (₹)</label>
+                        <input type="number" id="buyPremium" class="input-field" placeholder="200" step="0.01">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Quantity (Lots)</label>
+                        <input type="number" id="buyQuantity" class="input-field" placeholder="1" value="1" min="1">
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="color: #C9A227; margin-bottom: 20px;">Sell Leg</h3>
+                    <div class="input-group">
+                        <label class="input-label">Strike Price (₹)</label>
+                        <input type="number" id="sellStrike" class="input-field" placeholder="50500" step="0.01">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Premium Received (₹)</label>
+                        <input type="number" id="sellPremium" class="input-field" placeholder="100" step="0.01">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Quantity (Lots)</label>
+                        <input type="number" id="sellQuantity" class="input-field" placeholder="1" value="1" min="1">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Lot Size</label>
+                <input type="number" id="lotSize" class="input-field" placeholder="25" value="25" min="1">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Shares per lot (Nifty: 25, Bank Nifty: 15)</div>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculateSpread()">
+                <i class="fas fa-calculator"></i> Calculate Spread P&L
+            </button>
+        </div>
+        
+        <div class="results-section" id="resultsSection">
+            <div class="calculator-card">
+                <h2 style="color: #C9A227; margin-bottom: 30px; font-family: 'Playfair Display', serif;">Spread Analysis</h2>
+                
+                <div class="grid-2">
+                    <div class="result-card">
+                        <div style="color: #2ecc71; font-weight: 600; font-size: 1.2rem;">Maximum Profit</div>
+                        <div style="color: #fff; font-size: 2.5rem; font-weight: 700; margin-top: 10px;" id="maxProfit">-</div>
+                        <div style="color: #666; margin-top: 5px;" id="maxProfitAt">-</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div style="color: #e74c3c; font-weight: 600; font-size: 1.2rem;">Maximum Loss</div>
+                        <div style="color: #fff; font-size: 2.5rem; font-weight: 700; margin-top: 10px;" id="maxLoss">-</div>
+                        <div style="color: #666; margin-top: 5px;" id="maxLossAt">-</div>
+                    </div>
+                </div>
+                
+                <div class="grid-2">
+                    <div class="result-card">
+                        <div style="color: #C9A227; font-weight: 600;">Net Premium</div>
+                        <div style="color: #fff; font-size: 2rem; font-weight: 700; margin-top: 10px;" id="netPremium">-</div>
+                        <div style="color: #666; margin-top: 5px;">Initial cost/credit</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div style="color: #C9A227; font-weight: 600;">Breakeven Point</div>
+                        <div style="color: #fff; font-size: 2rem; font-weight: 700; margin-top: 10px;" id="breakeven">-</div>
+                        <div style="color: #666; margin-top: 5px;">No profit/loss price</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div style="color: #C9A227; font-weight: 600;">Risk-Reward Ratio</div>
+                        <div style="color: #fff; font-size: 2rem; font-weight: 700; margin-top: 10px;" id="riskReward">-</div>
+                        <div style="color: #666; margin-top: 5px;">Reward/Risk</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div style="color: #C9A227; font-weight: 600;">ROI on Max Risk</div>
+                        <div style="color: #fff; font-size: 2rem; font-weight: 700; margin-top: 10px;" id="roi">-</div>
+                        <div style="color: #666; margin-top: 5px;">Potential return %</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const spreadTypes = {
+            bullCall: {
+                name: 'Bull Call Spread',
+                description: 'Buy lower strike call + Sell higher strike call. Bullish strategy with limited risk and reward.',
+                buyStrike: 50000,
+                buyPremium: 200,
+                sellStrike: 50500,
+                sellPremium: 100
+            },
+            bearPut: {
+                name: 'Bear Put Spread',
+                description: 'Buy higher strike put + Sell lower strike put. Bearish strategy with limited risk and reward.',
+                buyStrike: 50500,
+                buyPremium: 250,
+                sellStrike: 50000,
+                sellPremium: 120
+            },
+            callCredit: {
+                name: 'Call Credit Spread (Bear Call)',
+                description: 'Sell lower strike call + Buy higher strike call. Bearish/neutral strategy for premium collection.',
+                buyStrike: 51000,
+                buyPremium: 80,
+                sellStrike: 50500,
+                sellPremium: 150
+            },
+            putCredit: {
+                name: 'Put Credit Spread (Bull Put)',
+                description: 'Sell higher strike put + Buy lower strike put. Bullish/neutral strategy for premium collection.',
+                buyStrike: 49500,
+                buyPremium: 80,
+                sellStrike: 50000,
+                sellPremium: 150
+            },
+            calendar: {
+                name: 'Calendar Spread',
+                description: 'Sell near-term option + Buy far-term option at same strike. Profits from time decay differential.',
+                buyStrike: 50000,
+                buyPremium: 300,
+                sellStrike: 50000,
+                sellPremium: 200
+            }
+        };
+        
+        function setSpread(type) {
+            const spread = spreadTypes[type];
+            document.querySelectorAll('.preset-tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.getElementById('spreadInfo').innerHTML = `
+                <strong style="color: #C9A227;">${spread.name}</strong>
+                <p style="color: #999; margin-top: 10px;">${spread.description}</p>
+            `;
+            
+            document.getElementById('buyStrike').value = spread.buyStrike;
+            document.getElementById('buyPremium').value = spread.buyPremium;
+            document.getElementById('sellStrike').value = spread.sellStrike;
+            document.getElementById('sellPremium').value = spread.sellPremium;
+        }
+        
+        function calculateSpread() {
+            const buyStrike = parseFloat(document.getElementById('buyStrike').value);
+            const buyPremium = parseFloat(document.getElementById('buyPremium').value);
+            const buyQty = parseFloat(document.getElementById('buyQuantity').value);
+            const sellStrike = parseFloat(document.getElementById('sellStrike').value);
+            const sellPremium = parseFloat(document.getElementById('sellPremium').value);
+            const sellQty = parseFloat(document.getElementById('sellQuantity').value);
+            const lotSize = parseFloat(document.getElementById('lotSize').value);
+            
+            if (!buyStrike || !buyPremium || !sellStrike || !sellPremium || !lotSize) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // Net premium (negative = debit, positive = credit)
+            const netPremiumPerShare = sellPremium - buyPremium;
+            const netPremium = netPremiumPerShare * lotSize * Math.min(buyQty, sellQty);
+            
+            // Strike width
+            const strikeWidth = Math.abs(sellStrike - buyStrike);
+            
+            // For debit spreads (Bull Call, Bear Put)
+            let maxProfit, maxLoss, breakeven;
+            
+            if (buyStrike < sellStrike) {
+                // Bull Call Spread
+                maxProfit = (strikeWidth * lotSize * Math.min(buyQty, sellQty)) - Math.abs(netPremium);
+                maxLoss = Math.abs(netPremium);
+                breakeven = buyStrike + Math.abs(netPremiumPerShare);
+                
+                document.getElementById('maxProfitAt').textContent = `At or above ₹${sellStrike}`;
+                document.getElementById('maxLossAt').textContent = `At or below ₹${buyStrike}`;
+            } else {
+                // Bear Put Spread
+                maxProfit = (strikeWidth * lotSize * Math.min(buyQty, sellQty)) - Math.abs(netPremium);
+                maxLoss = Math.abs(netPremium);
+                breakeven = buyStrike - Math.abs(netPremiumPerShare);
+                
+                document.getElementById('maxProfitAt').textContent = `At or below ₹${sellStrike}`;
+                document.getElementById('maxLossAt').textContent = `At or above ₹${buyStrike}`;
+            }
+            
+            const riskReward = maxProfit / maxLoss;
+            const roi = (maxProfit / maxLoss) * 100;
+            
+            document.getElementById('maxProfit').textContent = '+₹' + maxProfit.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('maxLoss').textContent = '-₹' + maxLoss.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('netPremium').textContent = (netPremium >= 0 ? '+' : '') + '₹' + netPremium.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('breakeven').textContent = '₹' + breakeven.toFixed(2);
+            document.getElementById('riskReward').textContent = '1:' + riskReward.toFixed(2);
+            document.getElementById('roi').textContent = roi.toFixed(1) + '%';
+            
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expected Move Calculator - Options Implied Volatility | BroBillionaire</title>
+    <meta name="description" content="Calculate expected price move based on implied volatility for options expiry. Predict market movement range for options trading strategies.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .calculator-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .calculator-card { background: #1a1a1a; border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid #2a2a2a; }
+        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 10px; }
+        .calculator-subtitle { color: #999; font-size: 1.1rem; margin-bottom: 40px; }
+        .input-group { margin-bottom: 25px; }
+        .input-label { display: block; color: #C9A227; font-weight: 600; margin-bottom: 10px; }
+        .input-field { width: 100%; padding: 15px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #fff; font-size: 1rem; }
+        .calculate-btn { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; font-weight: 700; padding: 18px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; }
+        .results-section { display: none; margin-top: 40px; }
+        .range-card { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 30px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid #C9A227; }
+        .price-range { display: flex; justify-content: space-between; align-items: center; margin: 20px 0; }
+        .price-point { text-align: center; }
+        .price-value { color: #fff; font-size: 2rem; font-weight: 700; }
+        .price-label { color: #999; font-size: 0.9rem; margin-top: 5px; }
+        .range-bar { height: 60px; background: linear-gradient(to right, #e74c3c, #f39c12, #2ecc71, #f39c12, #e74c3c); border-radius: 12px; position: relative; margin: 30px 0; }
+        .current-price-marker { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 4px; height: 80px; background: #C9A227; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .std-card { background: #0a0a0a; padding: 20px; border-radius: 12px; border: 2px solid #2a2a2a; }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-card">
+            <h1 class="calculator-title">Expected Move Calculator</h1>
+            <p class="calculator-subtitle">Calculate expected price movement based on implied volatility for options expiration.</p>
+            
+            <div class="input-group">
+                <label class="input-label">Current Price (₹)</label>
+                <input type="number" id="currentPrice" class="input-field" placeholder="50000" step="0.01">
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Implied Volatility (%)</label>
+                <input type="number" id="impliedVol" class="input-field" placeholder="18" step="0.01">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">ATM option IV (India VIX for Nifty, typically 12-25%)</div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Days to Expiry</label>
+                <input type="number" id="daysToExpiry" class="input-field" placeholder="7" min="1">
+                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Number of trading days until expiration</div>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculateExpectedMove()">
+                <i class="fas fa-calculator"></i> Calculate Expected Move
+            </button>
+        </div>
+        
+        <div class="results-section" id="resultsSection">
+            <div class="calculator-card">
+                <h2 style="color: #C9A227; margin-bottom: 30px; font-family: 'Playfair Display', serif;">Expected Price Range</h2>
+                
+                <div class="range-card">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <div style="color: #C9A227; font-size: 1.2rem; font-weight: 600;">1 Standard Deviation Range (68% probability)</div>
+                        <div style="color: #999; margin-top: 5px;">Expected range with 68% confidence</div>
+                    </div>
+                    <div class="price-range">
+                        <div class="price-point">
+                            <div class="price-label">Lower Bound</div>
+                            <div class="price-value" id="lower1sd">-</div>
+                            <div class="price-label" id="lower1sdChange">-</div>
+                        </div>
+                        <div class="price-point">
+                            <div class="price-label">Current</div>
+                            <div class="price-value" style="color: #C9A227;" id="current">-</div>
+                        </div>
+                        <div class="price-point">
+                            <div class="price-label">Upper Bound</div>
+                            <div class="price-value" id="upper1sd">-</div>
+                            <div class="price-label" id="upper1sdChange">-</div>
+                        </div>
+                    </div>
+                    <div class="range-bar">
+                        <div class="current-price-marker"></div>
+                    </div>
+                </div>
+                
+                <div class="grid-2">
+                    <div class="std-card">
+                        <div style="color: #C9A227; font-weight: 600; margin-bottom: 15px;">2 Standard Deviations (95% probability)</div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <span style="color: #999;">Lower:</span>
+                            <span style="color: #fff; font-weight: 700;" id="lower2sd">-</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: #999;">Upper:</span>
+                            <span style="color: #fff; font-weight: 700;" id="upper2sd">-</span>
+                        </div>
+                    </div>
+                    
+                    <div class="std-card">
+                        <div style="color: #C9A227; font-weight: 600; margin-bottom: 15px;">3 Standard Deviations (99.7% probability)</div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <span style="color: #999;">Lower:</span>
+                            <span style="color: #fff; font-weight: 700;" id="lower3sd">-</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: #999;">Upper:</span>
+                            <span style="color: #fff; font-weight: 700;" id="upper3sd">-</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(52, 152, 219, 0.1); border: 2px solid #3498db; padding: 20px; border-radius: 12px; margin-top: 30px;">
+                    <strong><i class="fas fa-info-circle"></i> Trading Implications:</strong>
+                    <ul style="margin: 10px 0 0 20px; color: #999;">
+                        <li>1 SD: Iron Condor/Strangle strike selection</li>
+                        <li>2 SD: Conservative option selling range</li>
+                        <li>Expected move helps in setting realistic profit targets</li>
+                        <li>Higher IV = Larger expected move = Higher option premiums</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function calculateExpectedMove() {
+            const currentPrice = parseFloat(document.getElementById('currentPrice').value);
+            const iv = parseFloat(document.getElementById('impliedVol').value) / 100;
+            const days = parseFloat(document.getElementById('daysToExpiry').value);
+            
+            if (!currentPrice || !iv || !days) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // Expected move formula: Price * IV * sqrt(days / 365)
+            const expectedMove1SD = currentPrice * iv * Math.sqrt(days / 365);
+            
+            const lower1sd = currentPrice - expectedMove1SD;
+            const upper1sd = currentPrice + expectedMove1SD;
+            const lower2sd = currentPrice - (expectedMove1SD * 2);
+            const upper2sd = currentPrice + (expectedMove1SD * 2);
+            const lower3sd = currentPrice - (expectedMove1SD * 3);
+            const upper3sd = currentPrice + (expectedMove1SD * 3);
+            
+            const changePercent1SD = (expectedMove1SD / currentPrice * 100).toFixed(2);
+            
+            document.getElementById('current').textContent = '₹' + currentPrice.toLocaleString('en-IN');
+            document.getElementById('lower1sd').textContent = '₹' + lower1sd.toFixed(2);
+            document.getElementById('upper1sd').textContent = '₹' + upper1sd.toFixed(2);
+            document.getElementById('lower1sdChange').textContent = `(-${changePercent1SD}%)`;
+            document.getElementById('upper1sdChange').textContent = `(+${changePercent1SD}%)`;
+            
+            document.getElementById('lower2sd').textContent = '₹' + lower2sd.toFixed(2);
+            document.getElementById('upper2sd').textContent = '₹' + upper2sd.toFixed(2);
+            document.getElementById('lower3sd').textContent = '₹' + lower3sd.toFixed(2);
+            document.getElementById('upper3sd').textContent = '₹' + upper3sd.toFixed(2);
+            
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

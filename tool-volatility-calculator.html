@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volatility Calculator - Historical & Implied Volatility | BroBillionaire</title>
+    <meta name="description" content="Calculate historical volatility, annualized volatility, and analyze price fluctuations for stocks and options trading.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .calculator-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .calculator-card { background: #1a1a1a; border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid #2a2a2a; }
+        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 10px; }
+        .calculator-subtitle { color: #999; font-size: 1.1rem; margin-bottom: 40px; }
+        .input-group { margin-bottom: 25px; }
+        .input-label { display: block; color: #C9A227; font-weight: 600; margin-bottom: 10px; }
+        .input-field { width: 100%; padding: 15px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #fff; font-size: 1rem; }
+        .calculate-btn { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; font-weight: 700; padding: 18px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; }
+        .results-section { display: none; margin-top: 40px; }
+        .result-card { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 30px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid #C9A227; text-align: center; }
+        .result-value { color: #fff; font-size: 3.5rem; font-weight: 700; margin: 15px 0; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .price-row { display: grid; grid-template-columns: 1fr 1fr 50px; gap: 15px; margin-bottom: 10px; align-items: end; }
+        .add-price-btn { background: #2a2a2a; color: #C9A227; padding: 12px 20px; border: 2px solid #3a3a3a; border-radius: 8px; cursor: pointer; margin-top: 10px; }
+        .remove-btn { background: #e74c3c; color: #fff; border: none; border-radius: 8px; padding: 15px; cursor: pointer; }
+        .vol-low { border-left-color: #3498db; }
+        .vol-moderate { border-left-color: #f39c12; }
+        .vol-high { border-left-color: #e74c3c; }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-card">
+            <h1 class="calculator-title">Volatility Calculator</h1>
+            <p class="calculator-subtitle">Calculate historical volatility and analyze price fluctuations over time.</p>
+            
+            <div class="input-group">
+                <label class="input-label">Historical Prices</label>
+                <div style="color: #666; margin-bottom: 15px;">Enter closing prices (minimum 20 data points recommended)</div>
+                <div id="priceContainer">
+                    <div class="price-row">
+                        <input type="date" class="input-field price-date">
+                        <input type="number" class="input-field price-value" placeholder="Price ₹" step="0.01">
+                        <button class="remove-btn" onclick="removePrice(this)"><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="price-row">
+                        <input type="date" class="input-field price-date">
+                        <input type="number" class="input-field price-value" placeholder="Price ₹" step="0.01">
+                        <button class="remove-btn" onclick="removePrice(this)"><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="price-row">
+                        <input type="date" class="input-field price-date">
+                        <input type="number" class="input-field price-value" placeholder="Price ₹" step="0.01">
+                        <button class="remove-btn" onclick="removePrice(this)"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+                <button class="add-price-btn" onclick="addPrice()"><i class="fas fa-plus"></i> Add More Prices</button>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Or Use Simple Method</label>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+                    <div>
+                        <label style="display: block; color: #999; margin-bottom: 10px;">High Price</label>
+                        <input type="number" id="highPrice" class="input-field" placeholder="52000" step="0.01">
+                    </div>
+                    <div>
+                        <label style="display: block; color: #999; margin-bottom: 10px;">Low Price</label>
+                        <input type="number" id="lowPrice" class="input-field" placeholder="48000" step="0.01">
+                    </div>
+                    <div>
+                        <label style="display: block; color: #999; margin-bottom: 10px;">Time Period (Days)</label>
+                        <input type="number" id="timePeriod" class="input-field" placeholder="30" min="1">
+                    </div>
+                </div>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculateVolatility()">
+                <i class="fas fa-calculator"></i> Calculate Volatility
+            </button>
+        </div>
+        
+        <div class="results-section" id="resultsSection">
+            <div class="calculator-card">
+                <h2 style="color: #C9A227; margin-bottom: 30px; font-family: 'Playfair Display', serif;">Volatility Analysis</h2>
+                
+                <div class="result-card" id="mainResult">
+                    <div style="color: #C9A227; font-size: 1.2rem; font-weight: 600;">Annualized Volatility</div>
+                    <div class="result-value" id="annualizedVol">-</div>
+                    <div style="color: #999; font-size: 1.1rem;" id="volInterpretation">-</div>
+                </div>
+                
+                <div class="grid-2">
+                    <div class="result-card">
+                        <div style="color: #C9A227; font-weight: 600;">Daily Volatility</div>
+                        <div style="color: #fff; font-size: 2.5rem; font-weight: 700; margin-top: 10px;" id="dailyVol">-</div>
+                        <div style="color: #666; margin-top: 5px;">Average daily price change</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div style="color: #C9A227; font-weight: 600;">Monthly Volatility</div>
+                        <div style="color: #fff; font-size: 2.5rem; font-weight: 700; margin-top: 10px;" id="monthlyVol">-</div>
+                        <div style="color: #666; margin-top: 5px;">30-day volatility estimate</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div style="color: #C9A227; font-weight: 600;">Standard Deviation</div>
+                        <div style="color: #fff; font-size: 2.5rem; font-weight: 700; margin-top: 10px;" id="stdDev">-</div>
+                        <div style="color: #666; margin-top: 5px;">Price dispersion</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div style="color: #C9A227; font-weight: 600;">Volatility Category</div>
+                        <div style="color: #fff; font-size: 2.5rem; font-weight: 700; margin-top: 10px;" id="volCategory">-</div>
+                        <div style="color: #666; margin-top: 5px;">Risk classification</div>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(52, 152, 219, 0.1); border: 2px solid #3498db; padding: 20px; border-radius: 12px; margin-top: 30px;">
+                    <strong><i class="fas fa-info-circle"></i> Volatility Guide:</strong>
+                    <ul style="margin: 10px 0 0 20px; color: #999;">
+                        <li><strong>Low Volatility (< 15%):</strong> Stable stocks, defensive sectors (utilities, FMCG)</li>
+                        <li><strong>Moderate Volatility (15-30%):</strong> Large-cap stocks, index movements</li>
+                        <li><strong>High Volatility (30-50%):</strong> Mid/small-cap stocks, growth stocks</li>
+                        <li><strong>Extreme Volatility (> 50%):</strong> Penny stocks, cryptocurrency, highly speculative</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function addPrice() {
+            const container = document.getElementById('priceContainer');
+            const div = document.createElement('div');
+            div.className = 'price-row';
+            div.innerHTML = `
+                <input type="date" class="input-field price-date">
+                <input type="number" class="input-field price-value" placeholder="Price ₹" step="0.01">
+                <button class="remove-btn" onclick="removePrice(this)"><i class="fas fa-times"></i></button>
+            `;
+            container.appendChild(div);
+        }
+        
+        function removePrice(btn) {
+            const rows = document.querySelectorAll('.price-row');
+            if (rows.length > 2) {
+                btn.parentElement.remove();
+            }
+        }
+        
+        function calculateVolatility() {
+            // Try historical prices first
+            const prices = [];
+            document.querySelectorAll('.price-row').forEach(row => {
+                const price = parseFloat(row.querySelector('.price-value').value);
+                if (price) prices.push(price);
+            });
+            
+            let annualizedVol, dailyVol;
+            
+            if (prices.length >= 2) {
+                // Calculate returns
+                const returns = [];
+                for (let i = 1; i < prices.length; i++) {
+                    returns.push(Math.log(prices[i] / prices[i-1]));
+                }
+                
+                // Calculate mean
+                const mean = returns.reduce((a, b) => a + b, 0) / returns.length;
+                
+                // Calculate standard deviation
+                const variance = returns.reduce((sum, ret) => sum + Math.pow(ret - mean, 2), 0) / returns.length;
+                dailyVol = Math.sqrt(variance);
+                
+                // Annualize (assuming 252 trading days)
+                annualizedVol = dailyVol * Math.sqrt(252) * 100;
+                
+            } else {
+                // Use simple method
+                const high = parseFloat(document.getElementById('highPrice').value);
+                const low = parseFloat(document.getElementById('lowPrice').value);
+                const days = parseFloat(document.getElementById('timePeriod').value);
+                
+                if (!high || !low || !days) {
+                    alert('Please enter either multiple historical prices or use the simple method');
+                    return;
+                }
+                
+                // Parkinson's volatility formula
+                dailyVol = Math.sqrt(Math.log(high / low) ** 2 / (4 * Math.log(2)));
+                annualizedVol = dailyVol * Math.sqrt(252 / days) * 100;
+            }
+            
+            const monthlyVol = annualizedVol / Math.sqrt(12);
+            const stdDev = dailyVol * 100;
+            
+            document.getElementById('annualizedVol').textContent = annualizedVol.toFixed(2) + '%';
+            document.getElementById('dailyVol').textContent = (dailyVol * 100).toFixed(2) + '%';
+            document.getElementById('monthlyVol').textContent = monthlyVol.toFixed(2) + '%';
+            document.getElementById('stdDev').textContent = stdDev.toFixed(3) + '%';
+            
+            // Categorize volatility
+            let category, interpretation;
+            const mainResult = document.getElementById('mainResult');
+            mainResult.className = 'result-card';
+            
+            if (annualizedVol < 15) {
+                category = 'Low';
+                interpretation = 'Stable - Defensive stock';
+                mainResult.classList.add('vol-low');
+            } else if (annualizedVol < 30) {
+                category = 'Moderate';
+                interpretation = 'Normal - Index-like volatility';
+                mainResult.classList.add('vol-moderate');
+            } else if (annualizedVol < 50) {
+                category = 'High';
+                interpretation = 'Volatile - Growth/Mid-cap stock';
+                mainResult.classList.add('vol-high');
+            } else {
+                category = 'Extreme';
+                interpretation = 'Very Volatile - High risk asset';
+                mainResult.classList.add('vol-high');
+            }
+            
+            document.getElementById('volCategory').textContent = category;
+            document.getElementById('volInterpretation').textContent = interpretation;
+            
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
