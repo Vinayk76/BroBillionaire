@@ -250,6 +250,88 @@
             document.getElementById('resultsSection').style.display = 'block';
             document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
         }
+        
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+            if (!isActive) answer.classList.add('active');
+        }
     </script>
+    
+    <style>
+        .faq-section { max-width: 1200px; margin: 50px auto; padding: 40px 20px; }
+        .faq-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 40px; text-align: center; }
+        .faq-item { background: #1a1a1a; border-radius: 12px; margin-bottom: 15px; border: 1px solid #2a2a2a; overflow: hidden; }
+        .faq-question { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: #fff; font-weight: 600; font-size: 1.1rem; }
+        .faq-question:hover { background: #222; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #0a0a0a; }
+        .faq-answer.active { max-height: 600px; }
+        .faq-answer p { padding: 25px; margin: 0; color: #999; line-height: 1.8; }
+    </style>
+    
+    <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Why is portfolio allocation important for investors?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Portfolio allocation is arguably more important than individual stock selection. Studies show 90% of investment returns come from asset allocation, not stock picking. Proper allocation reduces risk through diversification, smooths returns, and aligns investments with your goals and risk tolerance. It prevents overexposure to any single asset class and helps you stay disciplined during market volatility.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How often should I rebalance my portfolio?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Rebalance annually or when any asset class deviates 5-10% from target allocation. For example, if stocks are 60% target but grow to 70%, rebalance by selling stocks and buying bonds. Quarterly rebalancing works for active traders. Annual rebalancing minimizes taxes and transaction costs. Use significant life events (marriage, retirement) as triggers to review allocation.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What's the difference between Conservative, Balanced, and Aggressive portfolios?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Conservative (70-80% bonds, 20-30% stocks): Low risk, stable returns, ideal for retirees or short-term goals. Balanced (50-60% stocks, 40-50% bonds): Moderate risk and growth, good for mid-term goals (5-10 years). Aggressive (70-90% stocks, 10-30% bonds): High growth potential, higher volatility, best for young investors with 15+ year horizon. Your age and goals determine the right choice.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Should I include gold and real estate in my portfolio?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Yes, alternative assets like gold (5-10%) and real estate (10-20%) improve diversification. Gold protects against inflation and currency devaluation. Real estate provides rental income and inflation hedge. REITs offer real estate exposure without direct property ownership. Commodities and gold often move inversely to stocks, reducing portfolio volatility during market crashes.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How do I determine my risk tolerance for allocation?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Consider: 1) Age - younger investors can take more risk (100 minus age = stock %), 2) Time horizon - longer = more stocks, 3) Income stability - secure job = more risk, 4) Existing savings - larger emergency fund = more risk, 5) Sleep test - if allocation causes anxiety, it's too aggressive. Start conservative and increase equity exposure as you become comfortable with volatility.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What percentage should I allocate to international stocks?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Allocate 20-40% of equity portion to international stocks for geographic diversification. This reduces country-specific risk, captures global growth, and hedges against rupee depreciation. Consider 10-15% to US markets (S&P 500), 10-15% to emerging markets, and 5-10% to developed markets (Europe, Japan). International diversification has become easier through low-cost index funds and ETFs.</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

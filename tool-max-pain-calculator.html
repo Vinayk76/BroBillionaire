@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Max Pain Calculator - Options Expiry Max Pain Theory India | BroBillionaire</title>
+    <meta name="description" content="Calculate Max Pain strike for Nifty and Bank Nifty options. Predict where market will close on expiry day using open interest data and max pain theory.">
+    <meta name="keywords" content="max pain calculator, options max pain, Nifty max pain, Bank Nifty max pain, expiry day trading, open interest analysis, option chain max pain India">
+    <link rel="canonical" href="https://brobillionaire.com/tool-max-pain-calculator.html">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .calculator-container { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+        .calculator-card { background: #1a1a1a; border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid #2a2a2a; }
+        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: #C9A227; margin-bottom: 10px; }
+        .calculator-subtitle { color: #999; font-size: 1.1rem; margin-bottom: 40px; line-height: 1.6; }
+        .input-group { margin-bottom: 25px; }
+        .input-label { display: block; color: #C9A227; font-weight: 600; margin-bottom: 10px; }
+        .textarea-field { width: 100%; min-height: 150px; padding: 15px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #fff; font-size: 0.9rem; font-family: 'Courier New', monospace; resize: vertical; }
+        .textarea-field:focus { border-color: #C9A227; outline: none; }
+        .input-hint { color: #666; font-size: 0.85rem; margin-top: 5px; }
+        .calculate-btn { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; font-weight: 700; padding: 18px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; transition: transform 0.2s; }
+        .calculate-btn:hover { transform: translateY(-2px); }
+        .sample-btn { background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%); margin-bottom: 15px; }
+        .results-section { display: none; margin-top: 40px; }
+        .result-card { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 50px; border-radius: 12px; text-align: center; border: 3px solid #C9A227; margin-bottom: 30px; }
+        .result-value { color: #C9A227; font-size: 6rem; font-weight: 700; margin: 20px 0; font-family: 'Playfair Display', serif; text-shadow: 0 0 20px rgba(201, 162, 39, 0.3); }
+        .result-label { color: #999; font-size: 1.3rem; margin-bottom: 20px; }
+        .result-hint { color: #fff; font-size: 1.2rem; margin-top: 20px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; }
+        .metric-card { background: #0a0a0a; padding: 25px; border-radius: 12px; border: 1px solid #2a2a2a; }
+        .metric-label { color: #C9A227; font-weight: 600; margin-bottom: 12px; font-size: 0.95rem; text-transform: uppercase; }
+        .metric-value { color: #fff; font-size: 2rem; font-weight: 700; }
+        .pain-chart { background: #0a0a0a; padding: 30px; border-radius: 12px; margin-top: 30px; height: 400px; }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-card">
+            <h1 class="calculator-title"><i class="fas fa-crosshairs"></i> Max Pain Calculator</h1>
+            <p class="calculator-subtitle">Calculate the Max Pain strike where option sellers (market makers) lose the least money. Market tends to gravitate towards this level on expiry day.</p>
+            
+            <div class="input-group">
+                <label class="input-label">Current Spot Price (₹)</label>
+                <input type="number" id="spotPrice" class="input-field" placeholder="19500" value="19500" style="width: 100%; padding: 15px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #fff; font-size: 1rem;">
+                <div class="input-hint">Current market price of the underlying</div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Strike & Open Interest Data</label>
+                <textarea id="oiData" class="textarea-field" placeholder="Enter data in format: Strike, Call OI, Put OI (one per line)
+Example:
+19000, 1000000, 2500000
+19100, 1200000, 2000000
+19200, 1500000, 1800000"></textarea>
+                <div class="input-hint">Enter strike prices with call and put open interest. Get this from NSE option chain or your broker.</div>
+            </div>
+            
+            <button class="calculate-btn sample-btn" onclick="loadSampleData()">
+                <i class="fas fa-flask"></i> Load Sample Data
+            </button>
+            
+            <button class="calculate-btn" onclick="calculateMaxPain()">
+                <i class="fas fa-calculator"></i> Calculate Max Pain
+            </button>
+        </div>
+        
+        <div class="results-section" id="resultsSection">
+            <div class="calculator-card">
+                <h2 style="color: #C9A227; margin-bottom: 30px; font-family: 'Playfair Display', serif; font-size: 2rem;">
+                    <i class="fas fa-bullseye"></i> Max Pain Analysis
+                </h2>
+                
+                <div class="result-card">
+                    <div class="result-label">MAX PAIN STRIKE</div>
+                    <div class="result-value" id="maxPainStrike">-</div>
+                    <div class="result-hint" id="maxPainHint">Market likely to gravitate towards this level on expiry</div>
+                </div>
+                
+                <div class="grid-3">
+                    <div class="metric-card">
+                        <div class="metric-label">Current Spot</div>
+                        <div class="metric-value" id="currentSpot">-</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Distance to Max Pain</div>
+                        <div class="metric-value" id="distancePoints">-</div>
+                        <div class="input-hint" id="distancePercent">-</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Expected Direction</div>
+                        <div class="metric-value" style="font-size: 1.8rem;" id="expectedDirection">-</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Total Call OI</div>
+                        <div class="metric-value" id="totalCallOI">-</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Total Put OI</div>
+                        <div class="metric-value" id="totalPutOI">-</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Put-Call Ratio</div>
+                        <div class="metric-value" id="pcrValue">-</div>
+                    </div>
+                </div>
+                
+                <div class="pain-chart">
+                    <canvas id="painChart"></canvas>
+                </div>
+                
+                <div style="background: rgba(201, 162, 39, 0.1); border: 2px solid #C9A227; padding: 25px; border-radius: 12px; margin-top: 30px;">
+                    <h3 style="color: #C9A227; margin-bottom: 15px;"><i class="fas fa-lightbulb"></i> Max Pain Trading Strategy:</h3>
+                    <ul style="margin: 10px 0 0 20px; color: #999; line-height: 1.8;">
+                        <li><strong>Theory:</strong> Market makers (option sellers) have largest positions. They profit most if market closes at max pain (where most options expire worthless).</li>
+                        <li><strong>Expiry Day Strategy:</strong> If current price is far from max pain in the morning, market tends to move towards max pain by 3:15 PM.</li>
+                        <li><strong>Trading Rule:</strong> Trade in the direction of max pain. If spot at 19800 and max pain at 19500, sell rallies / buy puts in morning.</li>
+                        <li><strong>Risk Management:</strong> Max pain is not 100% accurate. Set stop loss 100-150 points from entry. Works best on weekly expiries.</li>
+                        <li><strong>Best Results:</strong> When distance to max pain is > 200 points in Nifty or > 500 points in Bank Nifty. Closer distance = less reliable.</li>
+                    </ul>
+                </div>
+                
+                <div style="background: rgba(52, 152, 219, 0.1); border: 2px solid #3498db; padding: 25px; border-radius: 12px; margin-top: 30px;">
+                    <h3 style="color: #3498db; margin-bottom: 15px;"><i class="fas fa-info-circle"></i> Understanding Max Pain:</h3>
+                    <p style="color: #999; line-height: 1.8; margin: 0;">
+                        Max Pain is the strike price where option buyers lose the most money (and sellers gain the most) at expiry. Calculation: for each strike, 
+                        sum the total value of all ITM options if market closes there. Strike with lowest total pain = max pain. Market makers hedge by buying/selling 
+                        the underlying, which pushes price towards max pain. Theory works because: 1) Options are a zero-sum game, 2) Sellers have bigger positions 
+                        than buyers, 3) Sellers actively manage risk by hedging. Effectiveness: 70-80% accuracy on weekly expiry days, especially in last 2-3 hours. 
+                        Less effective during strong trends or major news events. Use as supplementary tool, not sole decision maker.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        let chartInstance = null;
+        
+        function loadSampleData() {
+            const sampleData = `19000, 500000, 3000000
+19100, 800000, 2500000
+19200, 1200000, 2000000
+19300, 1800000, 1500000
+19400, 2500000, 1200000
+19500, 3500000, 3200000
+19600, 3000000, 2500000
+19700, 2000000, 1800000
+19800, 1500000, 1200000
+19900, 1000000, 800000
+20000, 800000, 500000`;
+            document.getElementById('oiData').value = sampleData;
+            document.getElementById('spotPrice').value = '19500';
+        }
+        
+        function calculateMaxPain() {
+            const spotPrice = parseFloat(document.getElementById('spotPrice').value);
+            const oiDataText = document.getElementById('oiData').value;
+            
+            if (isNaN(spotPrice)) {
+                alert('Please enter a valid spot price');
+                return;
+            }
+            
+            if (!oiDataText.trim()) {
+                alert('Please enter open interest data');
+                return;
+            }
+            
+            // Parse OI data
+            const strikes = [];
+            const lines = oiDataText.trim().split('\n');
+            
+            for (let line of lines) {
+                const parts = line.split(',').map(p => p.trim());
+                if (parts.length === 3) {
+                    const strike = parseFloat(parts[0]);
+                    const callOI = parseFloat(parts[1]);
+                    const putOI = parseFloat(parts[2]);
+                    
+                    if (!isNaN(strike) && !isNaN(callOI) && !isNaN(putOI)) {
+                        strikes.push({ strike, callOI, putOI });
+                    }
+                }
+            }
+            
+            if (strikes.length < 3) {
+                alert('Please enter at least 3 valid strike data rows');
+                return;
+            }
+            
+            strikes.sort((a, b) => a.strike - b.strike);
+            
+            // Calculate max pain
+            let maxPainStrike = strikes[0].strike;
+            let minPain = Infinity;
+            const painValues = [];
+            
+            for (let testStrike of strikes) {
+                let totalPain = 0;
+                
+                // Calculate call pain
+                for (let s of strikes) {
+                    if (testStrike.strike > s.strike) {
+                        totalPain += (testStrike.strike - s.strike) * s.callOI;
+                    }
+                }
+                
+                // Calculate put pain
+                for (let s of strikes) {
+                    if (testStrike.strike < s.strike) {
+                        totalPain += (s.strike - testStrike.strike) * s.putOI;
+                    }
+                }
+                
+                painValues.push({ strike: testStrike.strike, pain: totalPain });
+                
+                if (totalPain < minPain) {
+                    minPain = totalPain;
+                    maxPainStrike = testStrike.strike;
+                }
+            }
+            
+            // Calculate totals and PCR
+            const totalCallOI = strikes.reduce((sum, s) => sum + s.callOI, 0);
+            const totalPutOI = strikes.reduce((sum, s) => sum + s.putOI, 0);
+            const pcr = (totalPutOI / totalCallOI).toFixed(3);
+            
+            // Calculate distance
+            const distance = maxPainStrike - spotPrice;
+            const distancePercent = ((Math.abs(distance) / spotPrice) * 100).toFixed(2);
+            
+            // Display results
+            document.getElementById('maxPainStrike').textContent = '₹' + maxPainStrike.toFixed(0);
+            document.getElementById('currentSpot').textContent = '₹' + spotPrice.toFixed(0);
+            document.getElementById('distancePoints').textContent = (distance >= 0 ? '+' : '') + distance.toFixed(0);
+            document.getElementById('distancePercent').textContent = distancePercent + '% ' + (distance >= 0 ? 'above' : 'below') + ' current';
+            
+            if (Math.abs(distance) > spotPrice * 0.02) {
+                document.getElementById('expectedDirection').textContent = distance > 0 ? '⬆️ UPWARD' : '⬇️ DOWNWARD';
+                document.getElementById('expectedDirection').style.color = distance > 0 ? '#2ecc71' : '#e74c3c';
+                document.getElementById('maxPainHint').textContent = `Strong pull towards ₹${maxPainStrike.toFixed(0)} expected on expiry day`;
+            } else {
+                document.getElementById('expectedDirection').textContent = '↔️ NEUTRAL';
+                document.getElementById('expectedDirection').style.color = '#3498db';
+                document.getElementById('maxPainHint').textContent = `Price close to max pain - expect rangebound movement`;
+            }
+            
+            document.getElementById('totalCallOI').textContent = (totalCallOI / 1000000).toFixed(2) + 'M';
+            document.getElementById('totalPutOI').textContent = (totalPutOI / 1000000).toFixed(2) + 'M';
+            document.getElementById('pcrValue').textContent = pcr;
+            
+            // Draw chart
+            drawPainChart(painValues, maxPainStrike, spotPrice);
+            
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        function drawPainChart(painValues, maxPain, spot) {
+            const ctx = document.getElementById('painChart').getContext('2d');
+            
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            
+            const labels = painValues.map(p => p.strike.toFixed(0));
+            const data = painValues.map(p => p.pain / 1000000); // Convert to millions
+            
+            const colors = painValues.map(p => 
+                p.strike === maxPain ? '#C9A227' : 
+                Math.abs(p.strike - spot) < 50 ? '#3498db' : 
+                '#666'
+            );
+            
+            chartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Total Pain Value (in Millions)',
+                        data: data,
+                        backgroundColor: colors,
+                        borderColor: colors,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#C9A227', font: { size: 14, weight: 'bold' } }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return 'Pain: ₹' + (context.parsed.y * 1000000).toLocaleString();
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Strike Price', color: '#C9A227' },
+                            ticks: { color: '#999' },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        y: {
+                            title: { display: true, text: 'Total Pain (₹ Millions)', color: '#C9A227' },
+                            ticks: { color: '#999' },
+                            grid: { color: '#2a2a2a' }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+            if (!isActive) answer.classList.add('active');
+        }
+    </script>
+    
+    <style>
+        .input-field { width: 100%; padding: 15px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #fff; font-size: 1rem; }
+        .input-field:focus { border-color: #C9A227; outline: none; }
+        .faq-section { max-width: 1200px; margin: 50px auto; padding: 40px 20px; }
+        .faq-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 40px; text-align: center; }
+        .faq-item { background: #1a1a1a; border-radius: 12px; margin-bottom: 15px; border: 1px solid #2a2a2a; overflow: hidden; }
+        .faq-question { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: #fff; font-weight: 600; font-size: 1.1rem; }
+        .faq-question:hover { background: #222; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #0a0a0a; }
+        .faq-answer.active { max-height: 1000px; }
+        .faq-answer p { padding: 25px; margin: 0; color: #999; line-height: 1.8; }
+    </style>
+    
+    <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What is Max Pain and does it really work?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Max Pain is the strike price where option buyers lose maximum money (and sellers gain maximum) at expiry. Theory: Since market makers sell most options and hedge by trading the underlying, they push price towards max pain to maximize their profits. Effectiveness: 70-80% accuracy on weekly expiry days in Indian markets, especially in last 2-3 hours of trading. Works best when: 1) Distance to max pain is significant (>200 points Nifty, >500 Bank Nifty), 2) No major news/events, 3) Market in rangebound mode. Doesn't work during strong trends or news-driven moves. Use as supplementary indicator, not sole decision maker.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How do I trade using Max Pain on expiry day?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Max Pain expiry day strategy: 1) Calculate max pain at 9:30 AM using option chain, 2) If spot is 200+ points away, trade towards max pain, 3) Enter position by 11 AM, exit by 2:30 PM, 4) Set 100-150 point stop loss. Example: Nifty spot 19800, max pain 19500 - sell futures/buy puts targeting 19500. Works best 11 AM to 3 PM window when volatility increases. Don't hold past 3:15 PM - gamma risk explodes. Combine with price action: if price makes lower high and max pain is below, short with confidence. Avoid if India VIX spikes or major news pending. Professional traders use max pain to guide direction, technicals to time entry.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Where do I find Open Interest data for Max Pain calculation?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Get Open Interest data from: 1) NSE India website - Option Chain section, download CSV with all strikes and OI, 2) Your broker's platform (Zerodha, Upstox, Angel) - Option Chain tab shows live OI, 3) Options analytics platforms (Sensibull, Opstra) - calculate and display max pain automatically, 4) TradingView with NSE data subscription. For manual calculation: Sum call OI and put OI for each strike, input into our calculator. Update data every hour on expiry day as OI changes dynamically. Professional approach: Track max pain movement throughout day - if it shifts significantly (100+ points), new strategy may be emerging.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Does Max Pain work for Bank Nifty and stock options?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Max Pain effectiveness by instrument: Bank Nifty: 75-80% accuracy - very effective due to high options volume and market maker presence. Need 500+ point distance for reliable signal. Nifty: 70-75% accuracy - slightly less effective but still reliable. 200+ point distance needed. Stock Options: 50-60% accuracy - less reliable due to lower liquidity and external factors (company news). Works best on high-volume stocks like Reliance, TCS, HDFC Bank. Mid/small cap stocks: Avoid max pain trading - too easily manipulated. General rule: Higher option volume = better max pain accuracy. Bank Nifty weekly expiries show strongest max pain effect. Monthly expiries are less predictable.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Can Max Pain predict direction before expiry day?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Max Pain changes daily as new positions are added/closed. Using it before expiry: Track max pain changes 2-3 days before expiry - sudden shifts indicate strategy changes by big players. If max pain moves 200+ points in one day, smart money is repositioning. Day before expiry: If price is far from max pain, momentum often starts building towards it. Not reliable 7+ days before expiry as too much can change. Best use: Combine current price action with max pain direction. If price at 19800, max pain 19500, and you see selling pressure technically - that's confluence. Don't blindly trade towards max pain early in week - wait for expiry day for maximum accuracy.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What if price doesn't reach Max Pain?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Max Pain is not a guarantee - it's a statistical tendency. Price fails to reach max pain when: 1) Strong trend overpowers option positioning (bull/bear run), 2) Major news/events occur (policy changes, global events), 3) Large institutional orders override market maker hedging, 4) Distance too large (300+ Nifty, 800+ Bank Nifty), 5) Low option volume that week. Risk management: Never expect exact max pain - target zone within 50-100 points. Set profit targets at 50-70% of distance. Use stop loss always. If price moves away from max pain in morning, exit immediately - signal that theory not working today. Professional traders check: if max pain at 19500 but strong support at 19600, respect support more than max pain.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How do I combine Max Pain with other indicators?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Powerful combinations: 1) Max Pain + PCR: If PCR is extreme (>1.5 or <0.7) and max pain aligns with contrarian direction, high probability setup, 2) Max Pain + Support/Resistance: Max pain near key technical level = magnetic effect increases, 3) Max Pain + Volume Profile: If max pain coincides with high volume node, price likely to settle there, 4) Max Pain + Trend: Don't fight strong trends even if max pain opposite - max pain works in rangebound markets, 5) Max Pain + Time: Last 2 hours of expiry day = max pain influence strongest. Best strategy: Use max pain for direction bias, wait for technical setup for entry. Example: Max pain 19500, current 19700, wait for bearish candle pattern at 19650-19700 to short with max pain as target.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

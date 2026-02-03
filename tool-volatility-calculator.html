@@ -233,6 +233,88 @@
             document.getElementById('resultsSection').style.display = 'block';
             document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
         }
+        
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+            if (!isActive) answer.classList.add('active');
+        }
     </script>
+    
+    <style>
+        .faq-section { max-width: 1200px; margin: 50px auto; padding: 40px 20px; }
+        .faq-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 40px; text-align: center; }
+        .faq-item { background: #1a1a1a; border-radius: 12px; margin-bottom: 15px; border: 1px solid #2a2a2a; overflow: hidden; }
+        .faq-question { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: #fff; font-weight: 600; font-size: 1.1rem; }
+        .faq-question:hover { background: #222; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #0a0a0a; }
+        .faq-answer.active { max-height: 600px; }
+        .faq-answer p { padding: 25px; margin: 0; color: #999; line-height: 1.8; }
+    </style>
+    
+    <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What is volatility and why does it matter for trading?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Volatility measures price fluctuation magnitude - how much and how fast prices change. High volatility = large, rapid price swings. Low volatility = stable, gradual price changes. Volatility matters because: 1) Determines stop loss distance (wider stops needed for high volatility), 2) Affects option pricing (high volatility = expensive options), 3) Influences position sizing (smaller positions for volatile stocks), 4) Determines trading strategies (scalping for low volatility, swing trading for high). India VIX measures Nifty volatility - above 20 is high, below 12 is low.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How should I trade in high volatility vs low volatility markets?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>High Volatility: 1) Reduce position size, 2) Use wider stop losses, 3) Sell options (collect high premium), 4) Avoid buying expensive options, 5) Trade directionally only with strong conviction, 6) Take profits quicker. Low Volatility: 1) Buy options (cheap premiums), 2) Use tighter stops, 3) Increase position size, 4) Scalp for small profits, 5) Range trading works well, 6) Avoid option selling (low premiums). Volatility mean-reverts - high volatility eventually drops, low volatility eventually spikes. Trade accordingly.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What's the difference between implied volatility and historical volatility?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Historical Volatility (HV) = Past price movements calculated from actual price data. This calculator shows HV. Implied Volatility (IV) = Market's expectation of future volatility derived from option prices. IV is forward-looking, HV is backward-looking. Compare both: If IV > HV, options are expensive (good for selling). If IV < HV, options are cheap (good for buying). Before earnings, IV spikes (uncertainty). After earnings, IV crashes. Use HV to understand stock's typical behavior, IV to decide option trading strategy.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How many days of price data do I need for accurate volatility calculation?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Minimum 20-30 trading days for short-term volatility. Ideal periods: 30 days for intraday trading, 60-90 days for swing trading, 252 days (1 year) for long-term analysis. More data = smoother results but less responsive to recent changes. Options traders use 20-30 days HV to compare with IV. For Bank Nifty/Nifty, use 30 days. During trending markets, use shorter periods (20 days). During stable markets, use longer periods (60-90 days). Avoid using data across major market regime changes (bull to bear).</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What is a normal volatility percentage?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Nifty/Sensex: 15-20% normal, 25%+ high, 10% low. Large-cap stocks: 20-30%. Mid-cap stocks: 30-50%. Small-cap stocks: 40-60%+. Crypto: 60-100%+. During 2008 crisis, Nifty volatility hit 80%. During calm markets (2017), it dropped to 10%. High volatility stocks need larger stop losses (3-5 ATR) and smaller position sizes. Low volatility stocks allow tighter stops (1-2 ATR) and larger positions. Always adjust strategy to current volatility regime, not just average volatility.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How does volatility affect option prices?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Volatility directly impacts option prices through Vega (one of the Greeks). When volatility increases 1%, ATM option price increases by Vega amount. High volatility = expensive options (both calls and puts). This is why options are costly before earnings (high IV) and cheap after earnings (IV crush). Option sellers profit from volatility decrease, buyers profit from volatility increase. Pro tip: Check IV percentile - don't buy options when IV is at 90th percentile (very expensive), sell options when IV is at 10th percentile (cheap premiums won't compensate risk).</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

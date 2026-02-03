@@ -204,6 +204,88 @@
             document.getElementById('resultsSection').style.display = 'block';
             document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
         }
+        
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+            if (!isActive) answer.classList.add('active');
+        }
     </script>
+    
+    <style>
+        .faq-section { max-width: 1200px; margin: 50px auto; padding: 40px 20px; }
+        .faq-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 40px; text-align: center; }
+        .faq-item { background: #1a1a1a; border-radius: 12px; margin-bottom: 15px; border: 1px solid #2a2a2a; overflow: hidden; }
+        .faq-question { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: #fff; font-weight: 600; font-size: 1.1rem; }
+        .faq-question:hover { background: #222; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #0a0a0a; }
+        .faq-answer.active { max-height: 600px; }
+        .faq-answer p { padding: 25px; margin: 0; color: #999; line-height: 1.8; }
+    </style>
+    
+    <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What are option Greeks and how do I use them?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Greeks measure option price sensitivity: Delta (price change per ₹1 stock move, 0-1 for calls, 0 to -1 for puts), Gamma (Delta's rate of change), Theta (daily time decay), Vega (price change per 1% IV change), Rho (price change per 1% interest rate change). Delta is most important - 0.5 Delta means option moves ₹0.50 for every ₹1 stock move. High Gamma means Delta changes rapidly. High Theta means fast time decay.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How can I use Black-Scholes to find mispriced options?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Calculate theoretical option price using Black-Scholes, then compare with actual market price. If market price > theoretical price, option is overvalued (consider selling/writing). If market price < theoretical price, option is undervalued (consider buying). However, the model assumes constant volatility and perfect markets - use it as one tool among many. Real traders also check IV percentile and historical pricing patterns.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Why does Black-Scholes show different prices from NSE options chain?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Differences occur because: 1) Black-Scholes assumes European options (NSE options are European-style, so this matches), 2) Real market has bid-ask spread, 3) Model uses continuous compounding vs actual interest rates, 4) Implied volatility varies across strikes (volatility smile/skew), 5) Real markets have transaction costs and liquidity constraints. Use Black-Scholes for approximation, not exact pricing. Market price is always right for execution.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How does implied volatility affect option pricing?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>IV is the most critical input after stock price. Higher IV = higher option prices (both calls and puts). When IV increases (volatility expansion), all options become more expensive. When IV decreases (IV crush), options lose value even if stock doesn't move. This is why option buyers lose money post-earnings despite being directionally correct. Always check IV percentile - don't buy options when IV is at 80-100 percentile.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What are the limitations of Black-Scholes model?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Black-Scholes limitations: 1) Assumes constant volatility (real volatility changes), 2) Assumes log-normal price distribution (real markets have fat tails and black swans), 3) Ignores transaction costs, 4) Assumes continuous trading (markets close overnight), 5) Doesn't account for dividend adjustments perfectly. Despite limitations, it remains the industry standard for option pricing and Greek calculations. More complex models exist but Black-Scholes balances accuracy with simplicity.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Should I use risk-free rate as NSE T-Bill rate or repo rate?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Use Indian government T-bill rate for risk-free rate (typically 6-7% for 91-day T-bills). You can also use repo rate or 10-year government bond yield. The risk-free rate has minimal impact on short-term option pricing compared to volatility and time decay. For monthly options, a 1% difference in risk-free rate changes option price by less than 0.5%. Focus more on getting accurate IV and time to expiration.</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -219,6 +219,88 @@
             
             document.getElementById(method + 'Levels').innerHTML = html;
         }
+        
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+            if (!isActive) answer.classList.add('active');
+        }
     </script>
+    
+    <style>
+        .faq-section { max-width: 1200px; margin: 50px auto; padding: 40px 20px; }
+        .faq-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 40px; text-align: center; }
+        .faq-item { background: #1a1a1a; border-radius: 12px; margin-bottom: 15px; border: 1px solid #2a2a2a; overflow: hidden; }
+        .faq-question { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: #fff; font-weight: 600; font-size: 1.1rem; }
+        .faq-question:hover { background: #222; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #0a0a0a; }
+        .faq-answer.active { max-height: 500px; }
+        .faq-answer p { padding: 25px; margin: 0; color: #999; line-height: 1.8; }
+    </style>
+    
+    <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What are pivot points and how are they used in trading?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Pivot points are technical indicators that use the previous day's high, low, and close prices to calculate support and resistance levels for the current trading session. Traders use these levels to identify potential entry/exit points, set stop losses, and determine intraday price targets for stocks, indices, and commodities.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Which pivot point method is most accurate?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Classic pivot points are the most widely used and tested. However, Camarilla pivots work well for intraday trading with tight ranges, while Fibonacci pivots are popular for swing trading. The best method depends on your trading style, timeframe, and the market you're trading. Try multiple methods and see which aligns best with actual price action.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Can I use pivot points for Bank Nifty and Nifty intraday trading?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Yes, pivot points are extremely popular for Bank Nifty and Nifty intraday trading. Many professional traders use them to identify key levels for options buying/selling. Enter yesterday's high, low, and close prices to calculate today's support and resistance levels. Camarilla pivots are particularly effective for Indian index trading.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How do I trade using pivot points?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Buy near support levels (S1, S2, S3) when price shows reversal signals, with stop loss below next support. Sell near resistance levels (R1, R2, R3) when price shows weakness. If price breaks above pivot point with volume, it's bullish; below pivot is bearish. Use pivot points with candlestick patterns, volume, and momentum indicators for confirmation.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What's the difference between Classic and Camarilla pivots?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Classic pivots use simple averaging of high, low, and close to calculate levels. Camarilla pivots place more emphasis on the close price and generate tighter support/resistance levels (up to 4 levels on each side), making them ideal for intraday range trading and scalping. Camarilla levels are particularly accurate in sideways markets.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Do pivot points work for all timeframes?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Pivot points work best for intraday trading using daily data. You can also calculate weekly pivots for swing trading (using last week's data) or monthly pivots for positional trading. The most popular application is daily pivots for intraday trading in stocks, futures, and options markets.</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

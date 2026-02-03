@@ -229,6 +229,88 @@
             document.getElementById('comparisonSection').style.display = 'block';
             document.getElementById('comparisonSection').scrollIntoView({ behavior: 'smooth' });
         }
+        
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+            if (!isActive) answer.classList.add('active');
+        }
     </script>
+    
+    <style>
+        .faq-section { max-width: 1200px; margin: 50px auto; padding: 40px 20px; }
+        .faq-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 40px; text-align: center; }
+        .faq-item { background: #1a1a1a; border-radius: 12px; margin-bottom: 15px; border: 1px solid #2a2a2a; overflow: hidden; }
+        .faq-question { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: #fff; font-weight: 600; font-size: 1.1rem; }
+        .faq-question:hover { background: #222; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #0a0a0a; }
+        .faq-answer.active { max-height: 500px; }
+        .faq-answer p { padding: 25px; margin: 0; color: #999; line-height: 1.8; }
+    </style>
+    
+    <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What's the difference between simple ROI and annualized ROI?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Simple ROI = (Final Value - Initial Investment) / Initial Investment × 100. It shows total return but ignores time. Annualized ROI adjusts returns to yearly basis for fair comparison across different time periods. Example: 50% return in 5 years = 8.4% annualized. Always use annualized ROI to compare investments with different holding periods. Simple ROI is misleading when comparing short vs long-term investments.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What is a good ROI percentage for investments?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Stock market average: 10-12% annually. Good ROI: 12-20%. Excellent ROI: 20%+. Below 7%: Consider safer alternatives like FDs. Context matters - real estate typically returns 8-12%, mutual funds 12-15%, stocks 15-20% (with volatility). Risk and ROI are correlated - higher ROI usually means higher risk. Don't chase unrealistic ROI promises (25%+ guaranteed) - they're likely scams. Compare your ROI against relevant benchmarks (Nifty for stocks, inflation for bonds).</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Can ROI be negative?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Yes, negative ROI means you lost money. Example: Invested ₹1,00,000, now worth ₹80,000 = -20% ROI. Reasons for negative ROI: bad investment choice, poor timing (bought at peak), market crash, business failure, high fees eating returns. If ROI is negative for extended period (3+ years for stocks), consider: 1) Holding longer (if fundamentals are good), 2) Cutting losses and reallocating, 3) Averaging down (if you believe in recovery). Not all negative ROIs are permanent - markets are cyclical.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Should I include dividends when calculating ROI?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Yes! Total ROI = ((Final Value + Dividends Received - Initial Investment) / Initial Investment) × 100. Ignoring dividends understates true returns. Example: Stock bought at ₹100, now ₹120, received ₹10 dividends = 30% return (not 20%). For mutual funds, choose growth option to auto-reinvest dividends. For stocks, manually add dividend income to final value. Dividends significantly boost long-term returns - 2-3% dividend yield compounds over decades.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What's the difference between ROI and CAGR?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>ROI shows total return percentage. CAGR (Compound Annual Growth Rate) shows smoothed annual growth rate. CAGR accounts for compounding - more accurate for multi-year investments. Example: Investment grows from ₹1L to ₹2L in 5 years. ROI = 100%. CAGR = 14.87%. Use ROI for simple calculations. Use CAGR for: 1) Multi-year comparisons, 2) Mutual fund performance, 3) Business growth rates, 4) Any investment with compounding. CAGR is industry standard for reporting returns.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How do taxes and fees affect ROI?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Taxes and fees significantly reduce actual ROI. Calculate Post-Tax ROI = ((Final Value - Tax - Fees) - Initial Investment) / Initial Investment. Example: 15% pre-tax ROI becomes 11.25% post-tax after STCG/LTCG. Mutual fund expense ratio of 1-2% annually compounds into 15-25% lower returns over 20 years. Brokerage, STT, GST eat 0.5-1% of trading gains. Always compare investments on post-tax, post-fee basis. Tax-efficient investing (LTCG vs STCG, tax-loss harvesting) can boost net returns by 2-3% annually.</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

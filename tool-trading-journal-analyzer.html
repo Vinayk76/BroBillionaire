@@ -225,6 +225,88 @@
             document.getElementById('resultsSection').style.display = 'block';
             document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
         }
+        
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+            if (!isActive) answer.classList.add('active');
+        }
     </script>
+    
+    <style>
+        .faq-section { max-width: 1200px; margin: 50px auto; padding: 40px 20px; }
+        .faq-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 40px; text-align: center; }
+        .faq-item { background: #1a1a1a; border-radius: 12px; margin-bottom: 15px; border: 1px solid #2a2a2a; overflow: hidden; }
+        .faq-question { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: #fff; font-weight: 600; font-size: 1.1rem; }
+        .faq-question:hover { background: #222; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #0a0a0a; }
+        .faq-answer.active { max-height: 600px; }
+        .faq-answer p { padding: 25px; margin: 0; color: #999; line-height: 1.8; }
+    </style>
+    
+    <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Why is profit factor more important than win rate?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Profit factor = Total Wins / Total Losses. It shows actual profitability regardless of win rate. You can have 30% win rate but 3.0 profit factor if you cut losses quickly and let winners run big. Conversely, 70% win rate with 0.8 profit factor means you're losing money (small wins, huge losses). Professional traders target profit factor above 2.0. Win rate alone is misleading - it's the combination of win rate AND average win/loss size that determines success.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What does expectancy mean and how do I use it?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Expectancy is your average profit or loss per trade over time. Formula: (Win% × Avg Win) - (Loss% × Avg Loss). Positive expectancy means you make money long-term. If expectancy is ₹100, you make ₹100 per trade on average. Multiply expectancy by number of trades to project annual profit. A strategy with ₹50 expectancy and 200 trades/year = ₹10,000/year. Focus on improving expectancy by increasing avg win, decreasing avg loss, or boosting win rate.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How many trades do I need to accurately evaluate my strategy?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Minimum 30 trades for basic statistical significance, 50-100 trades for reliable data, 200+ trades for high confidence. With fewer than 30 trades, your stats could be due to luck (positive or negative). If you're developing a new strategy, paper trade or backtest 100+ times before risking real money. Review stats every 50 trades to identify performance trends. Don't make major strategy changes based on 5-10 trades - that's insufficient sample size.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What if my metrics are declining over time?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Declining metrics indicate: 1) Market conditions have changed (your edge disappeared), 2) Psychological issues (overconfidence, revenge trading), 3) Increased position sizing causing stress, 4) Strategy worked initially but is now curve-fitted, 5) You stopped following rules. Solutions: Take break to reset psychology, review recent losing trades for patterns, reduce position size, return to strict rule-following, consider strategy adaptation, or develop new strategy if edge truly gone.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Should I trade more frequently to increase profits?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Only if you maintain positive expectancy. More trades with negative expectancy = faster losses. Quality > Quantity. Professional traders take 2-5 high-quality setups per week rather than 20 mediocre ones. Trading more doesn't increase profits - trading better does. Calculate: Annual Profit = Expectancy × Number of Trades. Improve expectancy first (better entries, risk management), then consider increasing frequency. Over-trading is a top killer of trading accounts.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What statistics do professional traders track?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Professionals track: 1) Win rate, Profit factor, Expectancy (core metrics), 2) Average win/loss ratio, 3) Maximum drawdown and recovery time, 4) Consecutive wins/losses (streaks), 5) Performance by day of week, time of day, 6) Performance by strategy/setup type, 7) Sharpe Ratio, 8) Risk-adjusted returns, 9) Holding period analysis, 10) Slippage and commissions impact. Use detailed journaling software like Edgewonk, TraderSync, or detailed Excel spreadsheets. Review monthly.</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -162,6 +162,88 @@
             document.getElementById('resultsSection').style.display = 'block';
             document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
         }
+        
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+            if (!isActive) answer.classList.add('active');
+        }
     </script>
+    
+    <style>
+        .faq-section { max-width: 1200px; margin: 50px auto; padding: 40px 20px; }
+        .faq-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 40px; text-align: center; }
+        .faq-item { background: #1a1a1a; border-radius: 12px; margin-bottom: 15px; border: 1px solid #2a2a2a; overflow: hidden; }
+        .faq-question { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: #fff; font-weight: 600; font-size: 1.1rem; }
+        .faq-question:hover { background: #222; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #0a0a0a; }
+        .faq-answer.active { max-height: 500px; }
+        .faq-answer p { padding: 25px; margin: 0; color: #999; line-height: 1.8; }
+    </style>
+    
+    <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What is Sharpe Ratio and why is it important?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Sharpe Ratio measures risk-adjusted returns - it tells you how much return you're getting per unit of risk taken. A higher Sharpe Ratio means better risk-adjusted performance. It's crucial for comparing different investments or trading strategies fairly, as raw returns don't account for volatility. Professional fund managers and traders use Sharpe Ratio as a key performance metric.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What is considered a good Sharpe Ratio?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Sharpe Ratio interpretation: Below 1 = Suboptimal (returns don't justify risk), 1-2 = Good (acceptable risk-adjusted returns), 2-3 = Very Good (excellent performance), Above 3 = Exceptional (institutional-grade performance). For trading strategies, aim for Sharpe above 1.5. Top hedge funds typically achieve 2-3. Values above 3 are rare and indicate exceptional risk management.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What time period should I use for Sharpe Ratio calculation?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Use at least 1 year (12 months) of data for reliable Sharpe Ratio. 3-5 years is ideal for long-term strategies. For trading strategies, you can use 6-12 months if you have frequent trades. Longer periods give more statistical significance. Always annualize your Sharpe Ratio for comparison across different timeframes. Monthly data is standard for most calculations.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How can I improve my Sharpe Ratio?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Improve Sharpe Ratio by: 1) Increasing returns through better strategy or entries, 2) Reducing volatility with proper risk management and diversification, 3) Cutting losing trades quickly, 4) Scaling position size down during high volatility periods, 5) Adding uncorrelated assets to portfolio, 6) Using options for hedging. Focus on consistent returns rather than home runs.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What's the difference between Sharpe Ratio and Sortino Ratio?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Sharpe Ratio penalizes all volatility (both upside and downside). Sortino Ratio only penalizes downside volatility, which traders prefer since upside volatility is desirable. Sortino Ratio is often higher than Sharpe for the same strategy. Use Sharpe for standard comparison, Sortino for more nuanced risk assessment. Both are valuable metrics for evaluating trading performance.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Can Sharpe Ratio be negative?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Yes, negative Sharpe Ratio occurs when your returns are lower than the risk-free rate (typically government bonds). This means you'd be better off investing in safe government securities than your current strategy. A negative Sharpe indicates poor performance and suggests you should stop trading that strategy or significantly revise your approach.</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

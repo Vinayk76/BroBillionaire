@@ -166,6 +166,88 @@
             document.getElementById('resultsSection').style.display = 'block';
             document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
         }
+        
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+            if (!isActive) answer.classList.add('active');
+        }
     </script>
+    
+    <style>
+        .faq-section { max-width: 1200px; margin: 50px auto; padding: 40px 20px; }
+        .faq-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 40px; text-align: center; }
+        .faq-item { background: #1a1a1a; border-radius: 12px; margin-bottom: 15px; border: 1px solid #2a2a2a; overflow: hidden; }
+        .faq-question { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: #fff; font-weight: 600; font-size: 1.1rem; }
+        .faq-question:hover { background: #222; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #0a0a0a; }
+        .faq-answer.active { max-height: 600px; }
+        .faq-answer p { padding: 25px; margin: 0; color: #999; line-height: 1.8; }
+    </style>
+    
+    <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What is Implied Volatility (IV) and why does it matter?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Implied Volatility (IV) is the market's forecast of future price movement, expressed as an annual percentage. It's derived from option prices. High IV means market expects large price swings (good for option buyers), low IV means stable prices (good for option sellers). IV typically spikes before earnings, events, and during market uncertainty. Check IV percentile to know if current IV is historically high or low.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How do I interpret the 1σ, 2σ, and 3σ probability ranges?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>1 Standard Deviation (1σ) = 68% probability price stays within range, 2σ = 95% probability, 3σ = 99.7% probability. Example: Nifty at 50,000 with 1σ range of 48,000-52,000 means 68% chance Nifty stays between these levels by expiry. Options traders use 1σ for credit spreads (selling outside expected range) and 2σ for extreme scenarios. Price moving beyond 2σ is rare but happens 5% of the time.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How can I use expected move for options trading?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Use expected move to: 1) Sell credit spreads outside 1σ range for high probability trades, 2) Buy options only if you expect move larger than 1σ, 3) Set realistic profit targets, 4) Compare option premiums to expected move (if premium > expected move, overpriced), 5) Size positions based on probability. Conservative traders stay inside 1σ, aggressive traders bet on moves beyond 2σ.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Should I trade options before earnings using expected move?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>IV typically doubles before earnings, increasing expected move. Options are expensive pre-earnings due to high IV. If you believe stock will move MORE than expected move, buy options. If you think it'll move LESS, sell options. Post-earnings, IV crashes (IV crush), causing option buyers to lose even if direction is correct. Experienced traders often sell premium before earnings to capitalize on IV crush.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Where can I find IV for Nifty, Bank Nifty, and stocks?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Find IV on: NSE India website (under derivatives section), trading platforms (Zerodha, Upstox show IV on option chain), Opstra, Sensibull, and Option Chain websites. For rough estimate, use ATM (At-The-Money) option premium - higher premium means higher IV. India VIX represents Nifty's expected volatility. Bank Nifty IV is typically higher than Nifty IV due to higher volatility.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What options strategy should I use based on expected move?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Low expected move (low IV): Sell credit spreads, iron condors, covered calls - collect premium. High expected move (high IV): Be cautious, options expensive. Wait for IV to drop or trade directionally if you have strong conviction. Medium expected move: Debit spreads, butterflies work well. Always check if expected move justifies option premium you're paying or collecting.</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

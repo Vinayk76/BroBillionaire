@@ -166,6 +166,88 @@
             document.getElementById('resultsSection').style.display = 'block';
             document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
         }
+        
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+            if (!isActive) answer.classList.add('active');
+        }
     </script>
+    
+    <style>
+        .faq-section { max-width: 1200px; margin: 50px auto; padding: 40px 20px; }
+        .faq-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 40px; text-align: center; }
+        .faq-item { background: #1a1a1a; border-radius: 12px; margin-bottom: 15px; border: 1px solid #2a2a2a; overflow: hidden; }
+        .faq-question { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: #fff; font-weight: 600; font-size: 1.1rem; }
+        .faq-question:hover { background: #222; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #0a0a0a; }
+        .faq-answer.active { max-height: 500px; }
+        .faq-answer p { padding: 25px; margin: 0; color: #999; line-height: 1.8; }
+    </style>
+    
+    <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What is Fibonacci retracement and how does it work?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Fibonacci retracement is a technical analysis tool that uses horizontal lines to indicate areas of support or resistance at the key Fibonacci levels (23.6%, 38.2%, 50%, 61.8%, 78.6%) before the price continues in the original direction. Traders use these levels to identify potential reversal points during pullbacks in a trending market.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How do I use this Fibonacci calculator for trading?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>For uptrends, enter the swing low price and swing high price. For downtrends, enter the swing high (start) and swing low (end). The calculator will show retracement levels where price might bounce (support in uptrend, resistance in downtrend) and extension levels for potential profit targets.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What is the most important Fibonacci level?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>The 61.8% (golden ratio) is considered the most important Fibonacci retracement level by many traders, as it represents a significant support/resistance zone. The 38.2% and 50% levels are also widely watched. Many traders look for confluence of multiple Fibonacci levels with other technical indicators for stronger signals.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What are Fibonacci extension levels used for?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Fibonacci extension levels (123.6%, 138.2%, 161.8%, 200%, 261.8%) are used to project profit targets beyond the original swing high (in uptrends) or swing low (in downtrends). Traders use these to set take-profit orders or identify where strong resistance/support might emerge.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Can I use Fibonacci levels for intraday trading?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Yes, Fibonacci retracement works on all timeframes including intraday. Day traders commonly use 5-minute, 15-minute, and 1-hour charts to identify Fibonacci levels for Bank Nifty, Nifty, and stock trading. The same principles apply regardless of timeframe.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Should I use Fibonacci with other indicators?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Yes, combining Fibonacci levels with other technical tools increases accuracy. Use Fibonacci with trend lines, moving averages, RSI, MACD, volume analysis, and candlestick patterns. Look for confluence zones where multiple indicators align for higher-probability trade setups.</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

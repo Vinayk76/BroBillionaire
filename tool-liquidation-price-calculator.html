@@ -175,6 +175,88 @@
             document.getElementById('resultsSection').style.display = 'block';
             document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
         }
+        
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+            if (!isActive) answer.classList.add('active');
+        }
     </script>
+    
+    <style>
+        .faq-section { max-width: 1200px; margin: 50px auto; padding: 40px 20px; }
+        .faq-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 40px; text-align: center; }
+        .faq-item { background: #1a1a1a; border-radius: 12px; margin-bottom: 15px; border: 1px solid #2a2a2a; overflow: hidden; }
+        .faq-question { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: #fff; font-weight: 600; font-size: 1.1rem; }
+        .faq-question:hover { background: #222; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #0a0a0a; }
+        .faq-answer.active { max-height: 600px; }
+        .faq-answer p { padding: 25px; margin: 0; color: #999; line-height: 1.8; }
+    </style>
+    
+    <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What is liquidation and why does it happen in leveraged trading?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Liquidation occurs when your position is automatically closed by the exchange/broker because your margin falls below maintenance margin requirement. This protects the exchange from losses. With 10x leverage, a 10% adverse move wipes out your entire margin. The higher the leverage, the closer your liquidation price to entry price. Liquidation can happen in seconds during flash crashes or high volatility events. You lose your entire margin when liquidated.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What's the difference between initial margin and maintenance margin?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Initial Margin is the amount required to open a leveraged position (typically 10-20% for 10x-5x leverage). Maintenance Margin is the minimum balance required to keep position open (usually 50% of initial margin). If your account falls below maintenance margin due to losses, you get liquidated. Example: ₹10,000 initial margin with 5% maintenance = liquidation when account reaches ₹500. Always keep buffer above maintenance margin.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How do I avoid getting liquidated in leveraged positions?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Avoid liquidation by: 1) Using lower leverage (3x-5x instead of 20x), 2) Setting stop loss before liquidation price, 3) Never using 100% of account for margin, 4) Adding more margin when position moves against you, 5) Avoiding leverage during high volatility/news events, 6) Monitoring positions constantly, 7) Using isolated margin instead of cross margin for risky trades. Remember: High leverage = high risk of total loss.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How frequently should I check my liquidation price?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Check liquidation price: 1) Before opening any leveraged position, 2) During high volatility periods (check every 15-30 minutes), 3) After major news events, 4) If position moves 50% toward liquidation price, 5) Set price alerts at 70% of distance to liquidation. Most exchanges show liquidation price in real-time. For overnight positions, ensure liquidation price is far enough to survive gaps. A good rule: liquidation should be at least 20-30% away from current price.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Is liquidation price different for crypto vs stock trading?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Yes. Crypto exchanges offer up to 125x leverage (extremely dangerous) with liquidation happening in seconds. Crypto markets never close, so liquidation risk is 24/7. Indian stock futures typically offer 3x-5x leverage with lower liquidation risk. Crypto also has higher volatility - Bitcoin can move 10-20% in hours. The liquidation formula is same, but crypto liquidations are far more common due to high leverage availability and extreme volatility. Start with 2x-3x leverage maximum.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What's the difference between cross margin and isolated margin for liquidation?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Isolated Margin: Only the margin allocated to that position is at risk. If liquidated, you lose only that position's margin. Safer for risky trades. Cross Margin: Your entire account balance backs all positions. Prevents liquidation better, but one bad trade can wipe out entire account. Use isolated margin for experimental/aggressive trades. Use cross margin for conservative, well-planned positions. Beginners should always use isolated margin to limit downside risk.</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iron Condor Calculator - Options Iron Condor Strategy India | BroBillionaire</title>
+    <meta name="description" content="Calculate Iron Condor P&L, breakeven points, max profit/loss for Nifty and Bank Nifty options. Perfect defined-risk strategy for range-bound markets.">
+    <meta name="keywords" content="iron condor calculator, options spread calculator India, iron condor strategy, Nifty iron condor, Bank Nifty iron condor, defined risk options, range trading calculator">
+    <link rel="canonical" href="https://brobillionaire.com/tool-iron-condor-calculator.html">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .calculator-container { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+        .calculator-card { background: #1a1a1a; border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid #2a2a2a; }
+        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: #C9A227; margin-bottom: 10px; }
+        .calculator-subtitle { color: #999; font-size: 1.1rem; margin-bottom: 40px; line-height: 1.6; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .input-group { margin-bottom: 25px; }
+        .input-label { display: block; color: #C9A227; font-weight: 600; margin-bottom: 10px; }
+        .input-field { width: 100%; padding: 15px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #fff; font-size: 1rem; }
+        .input-field:focus { border-color: #C9A227; outline: none; }
+        .input-hint { color: #666; font-size: 0.85rem; margin-top: 5px; }
+        .calculate-btn { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; font-weight: 700; padding: 18px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; transition: transform 0.2s; }
+        .calculate-btn:hover { transform: translateY(-2px); }
+        .results-section { display: none; margin-top: 40px; }
+        .payoff-chart { background: #0a0a0a; padding: 30px; border-radius: 12px; margin-bottom: 30px; height: 400px; }
+        .metric-card { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 25px; border-radius: 12px; border-left: 4px solid #C9A227; }
+        .metric-label { color: #C9A227; font-size: 0.95rem; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; }
+        .metric-value { color: #fff; font-size: 2.5rem; font-weight: 700; font-family: 'Playfair Display', serif; }
+        .profit { color: #2ecc71; }
+        .loss { color: #e74c3c; }
+        .legs-diagram { background: #0a0a0a; padding: 30px; border-radius: 12px; margin-bottom: 30px; }
+        .leg-item { background: #1a1a1a; padding: 15px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid; }
+        .leg-call-sell { border-left-color: #e74c3c; }
+        .leg-call-buy { border-left-color: #95a5a6; }
+        .leg-put-sell { border-left-color: #e74c3c; }
+        .leg-put-buy { border-left-color: #95a5a6; }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-card">
+            <h1 class="calculator-title"><i class="fas fa-layer-group"></i> Iron Condor Calculator</h1>
+            <p class="calculator-subtitle">Calculate P&L for Iron Condor - the ultimate defined-risk strategy for range-bound markets. Combine bear call spread + bull put spread.</p>
+            
+            <div class="grid-2">
+                <div class="input-group">
+                    <label class="input-label">Current Spot Price (₹)</label>
+                    <input type="number" id="spotPrice" class="input-field" placeholder="19500" value="19500">
+                    <div class="input-hint">Current market price</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Lot Size</label>
+                    <input type="number" id="lotSize" class="input-field" placeholder="50" value="50">
+                    <div class="input-hint">Nifty=50, Bank Nifty=15</div>
+                </div>
+            </div>
+            
+            <h3 style="color: #C9A227; margin: 30px 0 20px 0; border-bottom: 2px solid #2a2a2a; padding-bottom: 10px;">
+                <i class="fas fa-arrow-up"></i> Bear Call Spread (Upper)
+            </h3>
+            
+            <div class="grid-2">
+                <div class="input-group">
+                    <label class="input-label">Sell Call Strike (₹)</label>
+                    <input type="number" id="sellCallStrike" class="input-field" placeholder="19700" value="19700">
+                    <div class="input-hint">Short call - collect premium</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Sell Call Premium (₹)</label>
+                    <input type="number" id="sellCallPremium" class="input-field" placeholder="80" value="80">
+                    <div class="input-hint">Premium received for short call</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Buy Call Strike (₹)</label>
+                    <input type="number" id="buyCallStrike" class="input-field" placeholder="19800" value="19800">
+                    <div class="input-hint">Long call - hedge / limit risk</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Buy Call Premium (₹)</label>
+                    <input type="number" id="buyCallPremium" class="input-field" placeholder="40" value="40">
+                    <div class="input-hint">Premium paid for long call</div>
+                </div>
+            </div>
+            
+            <h3 style="color: #C9A227; margin: 30px 0 20px 0; border-bottom: 2px solid #2a2a2a; padding-bottom: 10px;">
+                <i class="fas fa-arrow-down"></i> Bull Put Spread (Lower)
+            </h3>
+            
+            <div class="grid-2">
+                <div class="input-group">
+                    <label class="input-label">Sell Put Strike (₹)</label>
+                    <input type="number" id="sellPutStrike" class="input-field" placeholder="19300" value="19300">
+                    <div class="input-hint">Short put - collect premium</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Sell Put Premium (₹)</label>
+                    <input type="number" id="sellPutPremium" class="input-field" placeholder="75" value="75">
+                    <div class="input-hint">Premium received for short put</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Buy Put Strike (₹)</label>
+                    <input type="number" id="buyPutStrike" class="input-field" placeholder="19200" value="19200">
+                    <div class="input-hint">Long put - hedge / limit risk</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Buy Put Premium (₹)</label>
+                    <input type="number" id="buyPutPremium" class="input-field" placeholder="35" value="35">
+                    <div class="input-hint">Premium paid for long put</div>
+                </div>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculateIronCondor()">
+                <i class="fas fa-calculator"></i> Calculate Iron Condor
+            </button>
+        </div>
+        
+        <div class="results-section" id="resultsSection">
+            <div class="calculator-card">
+                <h2 style="color: #C9A227; margin-bottom: 30px; font-family: 'Playfair Display', serif; font-size: 2rem;">
+                    <i class="fas fa-chart-area"></i> Iron Condor Analysis
+                </h2>
+                
+                <div class="legs-diagram">
+                    <h3 style="color: #C9A227; margin-bottom: 20px;">Strategy Legs</h3>
+                    <div class="leg-item leg-call-sell">
+                        <span style="color: #fff;"><strong>SELL</strong> Call <span id="sellCallLeg">-</span></span>
+                        <span style="color: #2ecc71;">+<span id="sellCallCredit">-</span></span>
+                    </div>
+                    <div class="leg-item leg-call-buy">
+                        <span style="color: #fff;"><strong>BUY</strong> Call <span id="buyCallLeg">-</span></span>
+                        <span style="color: #e74c3c;">-<span id="buyCallDebit">-</span></span>
+                    </div>
+                    <div class="leg-item leg-put-sell">
+                        <span style="color: #fff;"><strong>SELL</strong> Put <span id="sellPutLeg">-</span></span>
+                        <span style="color: #2ecc71;">+<span id="sellPutCredit">-</span></span>
+                    </div>
+                    <div class="leg-item leg-put-buy">
+                        <span style="color: #fff;"><strong>BUY</strong> Put <span id="buyPutLeg">-</span></span>
+                        <span style="color: #e74c3c;">-<span id="buyPutDebit">-</span></span>
+                    </div>
+                </div>
+                
+                <div class="payoff-chart">
+                    <canvas id="payoffChart"></canvas>
+                </div>
+                
+                <div class="grid-2" style="margin-bottom: 30px;">
+                    <div class="metric-card">
+                        <div class="metric-label">Net Credit (Max Profit)</div>
+                        <div class="metric-value profit" id="maxProfit">-</div>
+                        <div class="input-hint">If price stays in profit zone</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Max Loss</div>
+                        <div class="metric-value loss" id="maxLoss">-</div>
+                        <div class="input-hint">If price breaches wings</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Upper Breakeven</div>
+                        <div class="metric-value" id="upperBreakeven">-</div>
+                        <div class="input-hint">Start losing above this</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Lower Breakeven</div>
+                        <div class="metric-value" id="lowerBreakeven">-</div>
+                        <div class="input-hint">Start losing below this</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Profit Zone Width</div>
+                        <div class="metric-value" id="profitZone">-</div>
+                        <div class="input-hint">Price range for full profit</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Risk-Reward Ratio</div>
+                        <div class="metric-value" id="riskReward">-</div>
+                        <div class="input-hint">Reward per unit risk</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Probability of Profit</div>
+                        <div class="metric-value" id="profitProb">-</div>
+                        <div class="input-hint">Based on breakeven range</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Return on Risk</div>
+                        <div class="metric-value" id="returnOnRisk">-</div>
+                        <div class="input-hint">Profit / max loss ratio</div>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(201, 162, 39, 0.1); border: 2px solid #C9A227; padding: 25px; border-radius: 12px; margin-bottom: 20px;">
+                    <h3 style="color: #C9A227; margin-bottom: 15px;"><i class="fas fa-lightbulb"></i> Strategy Insights:</h3>
+                    <div id="strategyInsights" style="color: #999; line-height: 1.8;"></div>
+                </div>
+                
+                <div style="background: rgba(52, 152, 219, 0.1); border: 2px solid #3498db; padding: 25px; border-radius: 12px;">
+                    <h3 style="color: #3498db; margin-bottom: 15px;"><i class="fas fa-shield-alt"></i> Risk Management:</h3>
+                    <ul style="margin: 10px 0 0 20px; color: #999; line-height: 1.8;">
+                        <li><strong>Position Sizing:</strong> Risk only 2-5% of capital per iron condor. With max loss calculated, size accordingly.</li>
+                        <li><strong>Exit Rules:</strong> Close at 50% of max profit OR 100% of max loss. Don't be greedy or stubborn.</li>
+                        <li><strong>Adjustment:</strong> If one side tested, close that side or roll it further OTM. Don't wait for max loss.</li>
+                        <li><strong>Time Management:</strong> Enter 30-45 days before expiry. Exit 1-2 weeks before if no profit - avoid gamma risk.</li>
+                        <li><strong>Market Selection:</strong> Only trade iron condors in range-bound markets. Check IV Rank > 50 for optimal premiums.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        let chartInstance = null;
+        
+        function calculateIronCondor() {
+            const spot = parseFloat(document.getElementById('spotPrice').value);
+            const lotSize = parseFloat(document.getElementById('lotSize').value);
+            
+            const sellCallStrike = parseFloat(document.getElementById('sellCallStrike').value);
+            const sellCallPremium = parseFloat(document.getElementById('sellCallPremium').value);
+            const buyCallStrike = parseFloat(document.getElementById('buyCallStrike').value);
+            const buyCallPremium = parseFloat(document.getElementById('buyCallPremium').value);
+            
+            const sellPutStrike = parseFloat(document.getElementById('sellPutStrike').value);
+            const sellPutPremium = parseFloat(document.getElementById('sellPutPremium').value);
+            const buyPutStrike = parseFloat(document.getElementById('buyPutStrike').value);
+            const buyPutPremium = parseFloat(document.getElementById('buyPutPremium').value);
+            
+            if (isNaN(spot) || isNaN(lotSize) || isNaN(sellCallStrike) || isNaN(sellCallPremium) || 
+                isNaN(buyCallStrike) || isNaN(buyCallPremium) || isNaN(sellPutStrike) || 
+                isNaN(sellPutPremium) || isNaN(buyPutStrike) || isNaN(buyPutPremium)) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // Validate structure
+            if (buyCallStrike <= sellCallStrike) {
+                alert('Buy call strike must be higher than sell call strike');
+                return;
+            }
+            if (sellPutStrike <= buyPutStrike) {
+                alert('Sell put strike must be higher than buy put strike');
+                return;
+            }
+            
+            // Calculate net credit
+            const netCredit = (sellCallPremium - buyCallPremium + sellPutPremium - buyPutPremium) * lotSize;
+            
+            // Calculate max loss
+            const callSpreadWidth = (buyCallStrike - sellCallStrike) * lotSize;
+            const putSpreadWidth = (sellPutStrike - buyPutStrike) * lotSize;
+            const maxLoss = Math.max(callSpreadWidth, putSpreadWidth) - netCredit;
+            
+            // Calculate breakevens
+            const upperBreakeven = sellCallStrike + (netCredit / lotSize);
+            const lowerBreakeven = sellPutStrike - (netCredit / lotSize);
+            
+            // Profit zone
+            const profitZone = sellCallStrike - sellPutStrike;
+            const profitZonePercent = (profitZone / spot * 100).toFixed(2);
+            
+            // Risk-reward
+            const riskReward = (netCredit / maxLoss).toFixed(3);
+            const returnOnRisk = (netCredit / maxLoss * 100).toFixed(1);
+            
+            // Probability (simplified based on breakeven range)
+            const totalRange = buyCallStrike - buyPutStrike;
+            const profitRange = upperBreakeven - lowerBreakeven;
+            const profitProb = (profitRange / totalRange * 100).toFixed(1);
+            
+            // Display legs
+            document.getElementById('sellCallLeg').textContent = '@ ₹' + sellCallStrike;
+            document.getElementById('sellCallCredit').textContent = '₹' + (sellCallPremium * lotSize).toFixed(0);
+            document.getElementById('buyCallLeg').textContent = '@ ₹' + buyCallStrike;
+            document.getElementById('buyCallDebit').textContent = '₹' + (buyCallPremium * lotSize).toFixed(0);
+            document.getElementById('sellPutLeg').textContent = '@ ₹' + sellPutStrike;
+            document.getElementById('sellPutCredit').textContent = '₹' + (sellPutPremium * lotSize).toFixed(0);
+            document.getElementById('buyPutLeg').textContent = '@ ₹' + buyPutStrike;
+            document.getElementById('buyPutDebit').textContent = '₹' + (buyPutPremium * lotSize).toFixed(0);
+            
+            // Display results
+            document.getElementById('maxProfit').textContent = '₹' + netCredit.toFixed(0);
+            document.getElementById('maxLoss').textContent = '₹' + maxLoss.toFixed(0);
+            document.getElementById('upperBreakeven').textContent = '₹' + upperBreakeven.toFixed(2);
+            document.getElementById('lowerBreakeven').textContent = '₹' + lowerBreakeven.toFixed(2);
+            document.getElementById('profitZone').textContent = '₹' + profitZone + ' (' + profitZonePercent + '%)';
+            document.getElementById('riskReward').textContent = '1:' + riskReward;
+            document.getElementById('profitProb').textContent = profitProb + '%';
+            document.getElementById('returnOnRisk').textContent = returnOnRisk + '%';
+            
+            // Generate insights
+            let insights = '<ul style="margin: 10px 0 0 20px;">';
+            insights += `<li><strong>Credit Received:</strong> ₹${netCredit.toFixed(0)} is your max profit if market stays between ₹${sellPutStrike} and ₹${sellCallStrike}.</li>`;
+            insights += `<li><strong>Defined Risk:</strong> Maximum loss is ₹${maxLoss.toFixed(0)} - fully defined and limited. No surprises.</li>`;
+            insights += `<li><strong>Probability:</strong> ~${profitProb}% chance of profit based on breakeven range. Higher spread width = lower risk but lower credit.</li>`;
+            
+            if (parseFloat(riskReward) > 0.4) {
+                insights += `<li><strong>Risk-Reward:</strong> Excellent R:R of 1:${riskReward}. This is an attractive iron condor setup.</li>`;
+            } else if (parseFloat(riskReward) > 0.25) {
+                insights += `<li><strong>Risk-Reward:</strong> Acceptable R:R of 1:${riskReward}. Standard iron condor setup.</li>`;
+            } else {
+                insights += `<li><strong>Risk-Reward:</strong> Low R:R of 1:${riskReward}. Consider wider wings or different strikes for better reward.</li>`;
+            }
+            
+            const currentInProfitZone = spot > sellPutStrike && spot < sellCallStrike;
+            if (currentInProfitZone) {
+                insights += `<li><strong>Current Position:</strong> Spot at ₹${spot} is within profit zone. Good entry - market is centered.</li>`;
+            } else if (spot >= sellCallStrike) {
+                insights += `<li><strong>Current Position:</strong> Spot at ₹${spot} is ABOVE sell call strike. Risky - upside tested already. Wait for pullback.</li>`;
+            } else {
+                insights += `<li><strong>Current Position:</strong> Spot at ₹${spot} is BELOW sell put strike. Risky - downside tested already. Wait for bounce.</li>`;
+            }
+            
+            insights += `<li><strong>Best Time to Enter:</strong> High IV environment (IV Rank > 60), range-bound market, 30-45 days to expiry.</li>`;
+            insights += `<li><strong>Management:</strong> Exit at 50% profit (₹${(netCredit * 0.5).toFixed(0)}) or 100% loss (₹${maxLoss.toFixed(0)}). Don't hold to expiry.</li>`;
+            insights += '</ul>';
+            
+            document.getElementById('strategyInsights').innerHTML = insights;
+            
+            // Draw payoff chart
+            drawPayoffChart(spot, sellCallStrike, buyCallStrike, sellCallPremium, buyCallPremium,
+                           sellPutStrike, buyPutStrike, sellPutPremium, buyPutPremium, lotSize);
+            
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        function drawPayoffChart(spot, sellCallStrike, buyCallStrike, sellCallPrem, buyCallPrem,
+                                sellPutStrike, buyPutStrike, sellPutPrem, buyPutPrem, lotSize) {
+            const ctx = document.getElementById('payoffChart').getContext('2d');
+            
+            const range = spot * 0.15;
+            const pricePoints = [];
+            const plValues = [];
+            
+            for (let price = spot - range; price <= spot + range; price += range / 50) {
+                pricePoints.push(price.toFixed(0));
+                
+                // Calculate P&L for each leg
+                let callSpreadPL = 0;
+                if (price > sellCallStrike) {
+                    callSpreadPL = -(price - sellCallStrike) + sellCallPrem;
+                } else {
+                    callSpreadPL = sellCallPrem;
+                }
+                if (price > buyCallStrike) {
+                    callSpreadPL += (price - buyCallStrike) - buyCallPrem;
+                } else {
+                    callSpreadPL -= buyCallPrem;
+                }
+                
+                let putSpreadPL = 0;
+                if (price < sellPutStrike) {
+                    putSpreadPL = -(sellPutStrike - price) + sellPutPrem;
+                } else {
+                    putSpreadPL = sellPutPrem;
+                }
+                if (price < buyPutStrike) {
+                    putSpreadPL += (buyPutStrike - price) - buyPutPrem;
+                } else {
+                    putSpreadPL -= buyPutPrem;
+                }
+                
+                const totalPL = (callSpreadPL + putSpreadPL) * lotSize;
+                plValues.push(totalPL);
+            }
+            
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: pricePoints,
+                    datasets: [{
+                        label: 'Iron Condor P&L',
+                        data: plValues,
+                        borderColor: '#C9A227',
+                        backgroundColor: 'rgba(201, 162, 39, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#C9A227', font: { size: 14, weight: 'bold' } }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Underlying Price at Expiry', color: '#C9A227' },
+                            ticks: { color: '#999' },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        y: {
+                            title: { display: true, text: 'Profit/Loss (₹)', color: '#C9A227' },
+                            ticks: { color: '#999' },
+                            grid: { color: '#2a2a2a' }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+            if (!isActive) answer.classList.add('active');
+        }
+    </script>
+    
+    <style>
+        .faq-section { max-width: 1200px; margin: 50px auto; padding: 40px 20px; }
+        .faq-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 40px; text-align: center; }
+        .faq-item { background: #1a1a1a; border-radius: 12px; margin-bottom: 15px; border: 1px solid #2a2a2a; overflow: hidden; }
+        .faq-question { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: #fff; font-weight: 600; font-size: 1.1rem; }
+        .faq-question:hover { background: #222; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #0a0a0a; }
+        .faq-answer.active { max-height: 1000px; }
+        .faq-answer p { padding: 25px; margin: 0; color: #999; line-height: 1.8; }
+    </style>
+    
+    <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What is an Iron Condor and when should I use it?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Iron Condor = Bear Call Spread + Bull Put Spread. You sell an OTM call and put while buying further OTM calls/puts for protection. This creates a defined-risk, defined-reward strategy perfect for range-bound markets. Use when: 1) Market has been consolidating for weeks, 2) IV Rank is high (>60) so premiums are juicy, 3) No major events on calendar, 4) 30-45 days to expiry for optimal theta decay. Avoid during: Strong trends, low IV, event weeks (budget, RBI policy), earnings season. Iron condor profits from time decay and decreasing volatility - you want market to stay still and premiums to shrink.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How do I choose strikes for Iron Condor?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Strike selection strategy: 1) Sell options at 0.20-0.30 delta (70-80% probability of expiring OTM), 2) Buy wings 50-100 points away for protection, 3) Keep wings equidistant for balanced risk. Example for Nifty at 19500: Sell 19300 put, Buy 19200 put, Sell 19700 call, Buy 19800 call. Wider wings = lower risk but lower credit. Narrower wings = higher credit but higher risk. Target 1:3 risk-reward minimum. Professional setup: 100-point wide spreads in Nifty, 300-500 point spreads in Bank Nifty. Adjust based on volatility - wider spreads when IV high, tighter when IV low.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What's a good return on risk for Iron Condor?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Good return on risk (credit / max loss): 25-40% = Excellent (high probability, decent credit), 15-25% = Acceptable (standard iron condor), Below 15% = Poor (too much risk for small credit). Example: If max loss is ₹4000 and credit is ₹1200, return = 30% which is great. Higher returns come with lower probability of success. Professional traders target 25-30% return with 70%+ win rate. Don't chase high returns by going too tight - you'll get burned on volatility spikes. Better to accept 20% return with 80% win rate than 50% return with 40% win rate. Consistency beats home runs in iron condor trading.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How do I manage an Iron Condor position?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Iron Condor management rules: 1) <strong>50% Profit Rule:</strong> Close position when you've captured 50% of max credit. Don't be greedy. 2) <strong>100% Loss Rule:</strong> Exit if loss reaches 100% of credit received. Don't let it go to max loss. 3) <strong>Tested Side:</strong> If price approaches one breakeven, close that side or roll it further OTM. Leave profitable side open. 4) <strong>Time Rule:</strong> Exit 1-2 weeks before expiry even if not profitable - gamma risk accelerates. 5) <strong>Adjustment:</strong> If challenged, convert to inverted strangle or butterfly. Advanced: Track theta daily - if not collecting expected time decay, something's wrong. Monitor IV changes - sudden spike can hurt all short options.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Can I trade Iron Condor every week?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Yes, but with discipline. Weekly iron condors work well when: 1) Market is in consolidation phase, 2) High IV provides good premiums, 3) You follow strict rules. Strategy: Enter Monday/Tuesday (30-45 days out), exit Thursday/Friday or at 50% profit. Don't hold through expiry. Position sizing critical: Never risk more than 2-5% capital per condor. Run multiple small condors rather than one large position. Track overall portfolio delta and gamma - don't get too directionally exposed. During volatile periods or trending markets, skip weeks. Professional traders deploy iron condors as part of portfolio - not sole strategy. Combine with directional trades and other strategies for balanced approach.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

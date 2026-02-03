@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Straddle Strangle Calculator - Options Strategy P&L Calculator India | BroBillionaire</title>
+    <meta name="description" content="Calculate Straddle and Strangle options strategy P&L, breakeven points, max profit/loss for Nifty and Bank Nifty. Essential tool for volatility traders.">
+    <meta name="keywords" content="straddle calculator, strangle calculator, options strategy calculator India, long straddle, short straddle, Nifty options calculator, Bank Nifty straddle, breakeven calculator">
+    <link rel="canonical" href="https://brobillionaire.com/tool-straddle-strangle-calculator.html">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .calculator-container { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+        .calculator-card { background: #1a1a1a; border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid #2a2a2a; }
+        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: #C9A227; margin-bottom: 10px; }
+        .calculator-subtitle { color: #999; font-size: 1.1rem; margin-bottom: 40px; line-height: 1.6; }
+        .strategy-selector { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 30px; }
+        .strategy-btn { padding: 20px; background: #0a0a0a; border: 3px solid #2a2a2a; border-radius: 12px; cursor: pointer; transition: all 0.3s; text-align: center; }
+        .strategy-btn.active { border-color: #C9A227; background: rgba(201, 162, 39, 0.1); }
+        .strategy-btn h3 { color: #C9A227; margin-bottom: 8px; font-size: 1.3rem; }
+        .strategy-btn p { color: #666; font-size: 0.9rem; margin: 0; }
+        .position-toggle { display: flex; gap: 10px; margin-bottom: 25px; }
+        .toggle-btn { flex: 1; padding: 15px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #999; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+        .toggle-btn.active { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; border-color: #C9A227; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .input-group { margin-bottom: 25px; }
+        .input-label { display: block; color: #C9A227; font-weight: 600; margin-bottom: 10px; }
+        .input-field { width: 100%; padding: 15px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #fff; font-size: 1rem; }
+        .input-field:focus { border-color: #C9A227; outline: none; }
+        .input-hint { color: #666; font-size: 0.85rem; margin-top: 5px; }
+        .calculate-btn { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; font-weight: 700; padding: 18px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; transition: transform 0.2s; }
+        .calculate-btn:hover { transform: translateY(-2px); }
+        .results-section { display: none; margin-top: 40px; }
+        .payoff-chart { background: #0a0a0a; padding: 30px; border-radius: 12px; margin-bottom: 30px; height: 400px; position: relative; }
+        .metric-card { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 25px; border-radius: 12px; border-left: 4px solid #C9A227; }
+        .metric-label { color: #C9A227; font-size: 0.95rem; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        .metric-value { color: #fff; font-size: 2.5rem; font-weight: 700; font-family: 'Playfair Display', serif; }
+        .profit { color: #2ecc71; }
+        .loss { color: #e74c3c; }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-card">
+            <h1 class="calculator-title"><i class="fas fa-expand-arrows-alt"></i> Straddle & Strangle Calculator</h1>
+            <p class="calculator-subtitle">Calculate P&L, breakeven points, and max profit/loss for Straddle and Strangle strategies. Perfect for volatility trading.</p>
+            
+            <div class="strategy-selector">
+                <div class="strategy-btn active" id="straddleBtn" onclick="selectStrategy('straddle')">
+                    <h3><i class="fas fa-arrows-alt-h"></i> STRADDLE</h3>
+                    <p>Same strike - ATM play</p>
+                </div>
+                <div class="strategy-btn" id="strangleBtn" onclick="selectStrategy('strangle')">
+                    <h3><i class="fas fa-expand"></i> STRANGLE</h3>
+                    <p>Different strikes - OTM play</p>
+                </div>
+            </div>
+            
+            <div class="position-toggle">
+                <div class="toggle-btn active" id="longBtn" onclick="selectPosition('long')">
+                    <i class="fas fa-arrow-up"></i> LONG (Buy)
+                </div>
+                <div class="toggle-btn" id="shortBtn" onclick="selectPosition('short')">
+                    <i class="fas fa-arrow-down"></i> SHORT (Sell)
+                </div>
+            </div>
+            
+            <div class="grid-2">
+                <div class="input-group">
+                    <label class="input-label">Current Spot Price (₹)</label>
+                    <input type="number" id="spotPrice" class="input-field" placeholder="19500" value="19500">
+                    <div class="input-hint">Nifty/Bank Nifty current price</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" id="callStrikeLabel">Call Strike (₹)</label>
+                    <input type="number" id="callStrike" class="input-field" placeholder="19500" value="19500">
+                    <div class="input-hint" id="callStrikeHint">Call option strike price</div>
+                </div>
+                
+                <div class="input-group" id="putStrikeGroup" style="display:none;">
+                    <label class="input-label">Put Strike (₹)</label>
+                    <input type="number" id="putStrike" class="input-field" placeholder="19300" value="19300">
+                    <div class="input-hint">Put option strike price (for strangle)</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Call Premium (₹)</label>
+                    <input type="number" id="callPremium" class="input-field" placeholder="120" value="120">
+                    <div class="input-hint">Call option premium paid/received</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Put Premium (₹)</label>
+                    <input type="number" id="putPremium" class="input-field" placeholder="115" value="115">
+                    <div class="input-hint">Put option premium paid/received</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Lot Size</label>
+                    <input type="number" id="lotSize" class="input-field" placeholder="50" value="50">
+                    <div class="input-hint">Nifty=50, Bank Nifty=15</div>
+                </div>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculateStrategy()">
+                <i class="fas fa-calculator"></i> Calculate P&L & Breakeven
+            </button>
+        </div>
+        
+        <div class="results-section" id="resultsSection">
+            <div class="calculator-card">
+                <h2 style="color: #C9A227; margin-bottom: 30px; font-family: 'Playfair Display', serif; font-size: 2rem;">
+                    <i class="fas fa-chart-area"></i> Strategy Analysis
+                </h2>
+                
+                <div class="payoff-chart" id="payoffChart">
+                    <canvas id="chartCanvas"></canvas>
+                </div>
+                
+                <div class="grid-2" style="margin-bottom: 30px;">
+                    <div class="metric-card">
+                        <div class="metric-label">Upper Breakeven</div>
+                        <div class="metric-value" id="upperBreakeven">-</div>
+                        <div class="input-hint">Price needs to go above this to profit</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Lower Breakeven</div>
+                        <div class="metric-value" id="lowerBreakeven">-</div>
+                        <div class="input-hint">Price needs to go below this to profit</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Max Profit</div>
+                        <div class="metric-value" id="maxProfit">-</div>
+                        <div class="input-hint" id="maxProfitHint">-</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Max Loss</div>
+                        <div class="metric-value" id="maxLoss">-</div>
+                        <div class="input-hint" id="maxLossHint">-</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Total Premium</div>
+                        <div class="metric-value" id="totalPremium">-</div>
+                        <div class="input-hint">Total capital required/received</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Required Move</div>
+                        <div class="metric-value" id="requiredMove">-</div>
+                        <div class="input-hint">% move needed for breakeven</div>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(52, 152, 219, 0.1); border: 2px solid #3498db; padding: 25px; border-radius: 12px;">
+                    <h3 style="color: #3498db; margin-bottom: 15px;"><i class="fas fa-lightbulb"></i> Strategy Insights:</h3>
+                    <div id="strategyInsights" style="color: #999; line-height: 1.8;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        let selectedStrategy = 'straddle';
+        let selectedPosition = 'long';
+        let chartInstance = null;
+        
+        function selectStrategy(strategy) {
+            selectedStrategy = strategy;
+            document.getElementById('straddleBtn').classList.toggle('active', strategy === 'straddle');
+            document.getElementById('strangleBtn').classList.toggle('active', strategy === 'strangle');
+            
+            const putStrikeGroup = document.getElementById('putStrikeGroup');
+            const callStrikeLabel = document.getElementById('callStrikeLabel');
+            const callStrikeHint = document.getElementById('callStrikeHint');
+            
+            if (strategy === 'straddle') {
+                putStrikeGroup.style.display = 'none';
+                callStrikeLabel.textContent = 'Strike Price (₹)';
+                callStrikeHint.textContent = 'Same strike for both call and put';
+            } else {
+                putStrikeGroup.style.display = 'block';
+                callStrikeLabel.textContent = 'Call Strike (₹)';
+                callStrikeHint.textContent = 'Call option strike (typically OTM)';
+            }
+        }
+        
+        function selectPosition(position) {
+            selectedPosition = position;
+            document.getElementById('longBtn').classList.toggle('active', position === 'long');
+            document.getElementById('shortBtn').classList.toggle('active', position === 'short');
+        }
+        
+        function calculateStrategy() {
+            const spotPrice = parseFloat(document.getElementById('spotPrice').value);
+            const callStrike = parseFloat(document.getElementById('callStrike').value);
+            const putStrike = selectedStrategy === 'straddle' ? callStrike : parseFloat(document.getElementById('putStrike').value);
+            const callPremium = parseFloat(document.getElementById('callPremium').value);
+            const putPremium = parseFloat(document.getElementById('putPremium').value);
+            const lotSize = parseFloat(document.getElementById('lotSize').value);
+            
+            if (isNaN(spotPrice) || isNaN(callStrike) || isNaN(callPremium) || isNaN(putPremium) || isNaN(lotSize)) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            if (selectedStrategy === 'strangle' && isNaN(putStrike)) {
+                alert('Please enter put strike for strangle');
+                return;
+            }
+            
+            const totalPremium = (callPremium + putPremium) * lotSize;
+            const multiplier = selectedPosition === 'long' ? -1 : 1;
+            
+            // Calculate breakevens
+            let upperBreakeven, lowerBreakeven, maxProfit, maxLoss;
+            
+            if (selectedStrategy === 'straddle') {
+                upperBreakeven = callStrike + callPremium + putPremium;
+                lowerBreakeven = callStrike - (callPremium + putPremium);
+            } else {
+                upperBreakeven = callStrike + callPremium + putPremium;
+                lowerBreakeven = putStrike - (callPremium + putPremium);
+            }
+            
+            if (selectedPosition === 'long') {
+                maxProfit = 'Unlimited';
+                maxLoss = totalPremium;
+            } else {
+                maxProfit = totalPremium;
+                maxLoss = 'Unlimited';
+            }
+            
+            const requiredMoveUp = ((upperBreakeven - spotPrice) / spotPrice * 100).toFixed(2);
+            const requiredMoveDown = ((spotPrice - lowerBreakeven) / spotPrice * 100).toFixed(2);
+            
+            // Display results
+            document.getElementById('upperBreakeven').textContent = '₹' + upperBreakeven.toFixed(2);
+            document.getElementById('lowerBreakeven').textContent = '₹' + lowerBreakeven.toFixed(2);
+            document.getElementById('maxProfit').textContent = maxProfit === 'Unlimited' ? '∞ Unlimited' : '₹' + maxProfit.toFixed(0);
+            document.getElementById('maxLoss').textContent = maxLoss === 'Unlimited' ? '∞ Unlimited' : '₹' + maxLoss.toFixed(0);
+            document.getElementById('totalPremium').textContent = '₹' + totalPremium.toFixed(0);
+            document.getElementById('requiredMove').textContent = '+' + requiredMoveUp + '% / -' + requiredMoveDown + '%';
+            
+            document.getElementById('maxProfit').className = 'metric-value ' + (selectedPosition === 'long' ? 'profit' : 'profit');
+            document.getElementById('maxLoss').className = 'metric-value ' + (selectedPosition === 'long' ? 'loss' : 'loss');
+            
+            document.getElementById('maxProfitHint').textContent = selectedPosition === 'long' ? 'On large moves in either direction' : 'If price stays between strikes';
+            document.getElementById('maxLossHint').textContent = selectedPosition === 'long' ? 'If price doesn\'t move' : 'On large moves';
+            
+            // Generate insights
+            let insights = '<ul style="margin: 10px 0 0 20px;">';
+            
+            if (selectedPosition === 'long') {
+                insights += `<li><strong>Strategy:</strong> ${selectedStrategy === 'straddle' ? 'Long Straddle' : 'Long Strangle'} - Buying volatility</li>`;
+                insights += `<li><strong>Market View:</strong> Expecting big move but unsure of direction. Need ${Math.max(Math.abs(requiredMoveUp), Math.abs(requiredMoveDown)).toFixed(1)}% move minimum.</li>`;
+                insights += `<li><strong>Risk:</strong> Maximum loss of ₹${totalPremium.toFixed(0)} if market doesn't move. Time decay works against you.</li>`;
+                insights += `<li><strong>Reward:</strong> Unlimited profit potential. Profits accelerate as move increases.</li>`;
+                insights += `<li><strong>Best Time:</strong> Low IV environment before events (budget, earnings, RBI policy). Exit after volatility spike.</li>`;
+                insights += `<li><strong>Greeks Impact:</strong> You are long gamma (good), long vega (good if IV rises), short theta (bad - loses value daily).</li>`;
+            } else {
+                insights += `<li><strong>Strategy:</strong> ${selectedStrategy === 'straddle' ? 'Short Straddle' : 'Short Strangle'} - Selling volatility</li>`;
+                insights += `<li><strong>Market View:</strong> Expecting range-bound market. Profit if price stays within ₹${lowerBreakeven.toFixed(0)} - ₹${upperBreakeven.toFixed(0)}.</li>`;
+                insights += `<li><strong>Risk:</strong> UNLIMITED loss potential on large moves. Requires active management and hedging.</li>`;
+                insights += `<li><strong>Reward:</strong> Maximum profit of ₹${totalPremium.toFixed(0)} if both options expire worthless.</li>`;
+                insights += `<li><strong>Best Time:</strong> High IV environment. Sell when IV Rank > 75. Exit at 50% profit or 100% loss.</li>`;
+                insights += `<li><strong>Greeks Impact:</strong> You are short gamma (bad - accelerating losses), short vega (good if IV drops), long theta (good - earn daily).</li>`;
+            }
+            
+            insights += '</ul>';
+            document.getElementById('strategyInsights').innerHTML = insights;
+            
+            // Draw payoff chart
+            drawPayoffChart(spotPrice, callStrike, putStrike, callPremium, putPremium, lotSize);
+            
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        function drawPayoffChart(spot, callStrike, putStrike, callPremium, putPremium, lotSize) {
+            const ctx = document.getElementById('chartCanvas').getContext('2d');
+            
+            // Generate price points
+            const range = spot * 0.2;
+            const pricePoints = [];
+            const plValues = [];
+            
+            for (let price = spot - range; price <= spot + range; price += range / 50) {
+                pricePoints.push(price.toFixed(0));
+                
+                let callPL = Math.max(0, price - callStrike) - callPremium;
+                let putPL = Math.max(0, putStrike - price) - putPremium;
+                
+                let totalPL = (callPL + putPL) * lotSize;
+                
+                if (selectedPosition === 'short') {
+                    totalPL = -totalPL;
+                }
+                
+                plValues.push(totalPL);
+            }
+            
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: pricePoints,
+                    datasets: [{
+                        label: selectedPosition === 'long' ? 'Long ' : 'Short ' + (selectedStrategy === 'straddle' ? 'Straddle' : 'Strangle'),
+                        data: plValues,
+                        borderColor: '#C9A227',
+                        backgroundColor: 'rgba(201, 162, 39, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#C9A227', font: { size: 14, weight: 'bold' } }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Underlying Price', color: '#C9A227' },
+                            ticks: { color: '#999' },
+                            grid: { color: '#2a2a2a' }
+                        },
+                        y: {
+                            title: { display: true, text: 'Profit/Loss (₹)', color: '#C9A227' },
+                            ticks: { color: '#999' },
+                            grid: { color: '#2a2a2a' }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+            if (!isActive) answer.classList.add('active');
+        }
+    </script>
+    
+    <style>
+        .faq-section { max-width: 1200px; margin: 50px auto; padding: 40px 20px; }
+        .faq-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 40px; text-align: center; }
+        .faq-item { background: #1a1a1a; border-radius: 12px; margin-bottom: 15px; border: 1px solid #2a2a2a; overflow: hidden; }
+        .faq-question { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: #fff; font-weight: 600; font-size: 1.1rem; }
+        .faq-question:hover { background: #222; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #0a0a0a; }
+        .faq-answer.active { max-height: 1000px; }
+        .faq-answer p { padding: 25px; margin: 0; color: #999; line-height: 1.8; }
+    </style>
+    
+    <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                When should I use Straddle vs Strangle?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Use Straddle when expecting huge volatility and willing to pay higher premium - both options ATM give maximum sensitivity to moves but cost more. Use Strangle when you want cheaper entry - both OTM options cost less but need larger moves to profit. Long Straddle: Best before major events (budget, RBI policy) when you're certain of big move but not direction. Costs ₹200-300 for Nifty ATM typically. Long Strangle: Best when IV is low and you want lower capital commitment. Costs ₹100-150 but needs 3-4% move minimum. Straddle profits faster, Strangle needs more patience but risks less.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What's the best time to buy a Long Straddle?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Buy Long Straddle when: 1) IV Rank below 30 (premiums cheap), 2) 1-2 days before major event (budget, policy, earnings), 3) During unusual calm before expected move, 4) When market is consolidating near key levels. Best example: India VIX at 12, budget in 2 days - buy Nifty ATM straddle. Exit immediately after event when IV collapses. Don't hold past 15 days - theta kills you. Wrong time: High IV (VIX > 20), no catalysts ahead, expiry week (gamma risk high). Calculate if you can profit: if straddle costs ₹250, you need 250/50 = ₹5 move per lot just to breakeven daily from theta.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Is Short Straddle safe? When should I use it?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Short Straddle is HIGH RISK - unlimited loss potential both sides. Only for experienced traders with: 1) Strong risk management, 2) Ability to adjust/hedge, 3) Adequate capital for margin. Safe time to sell: IV Rank > 80 (premiums bloated), range-bound market for weeks, post-event IV collapse, 30-45 days to expiry (optimal theta collection). Never sell straddle before events or in trending markets. Use defined-risk alternatives (Iron Condor, Credit Spreads) if you're not expert. Professional approach: Sell straddle, immediately set stop loss at 2x premium received. Exit at 50% profit or 100% loss. Monitor daily. Hedge with futures if move accelerates.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How do I manage a Straddle position?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Long Straddle management: 1) Exit one leg if it's losing (market moving one direction), let winner run, 2) Roll to next expiry if trade needs more time, 3) Exit at 100% profit or 50% loss, 4) Book profits immediately after IV spike. Don't wait for max profit. Short Straddle management: 1) Set alerts at breakeven points, 2) If breached, roll losing leg further OTM, 3) Consider converting to Iron Condor by buying wings, 4) Exit at 50% profit - don't be greedy, 5) Close immediately if loss reaches 100% of premium received. Never hold short straddle into expiry week - gamma risk explodes. Advanced: Adjust delta to neutral if market moves, convert to directional trade if conviction changes.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What's the minimum move needed for Long Straddle to profit?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Calculate breakeven: Strike + Total Premium = Upper Breakeven. Strike - Total Premium = Lower Breakeven. Example: Nifty 19500 straddle costs ₹240 (₹120 call + ₹120 put). Upper BE = 19500 + 240 = 19740. Lower BE = 19500 - 240 = 19260. Need 1.23% move minimum. But this is at expiry! During position life, you need less move if IV expands. If buying 7 days before expiry, need at least 2% move due to theta decay. Rule of thumb: Straddle needs 1.5-2% move in Nifty, 2-3% in Bank Nifty to show profit after factoring time decay. Higher IV = higher breakeven. Calculate weekly: if theta is ₹35/week, underlying must move more than that to profit.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

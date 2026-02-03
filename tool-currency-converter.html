@@ -177,6 +177,88 @@
         
         // Initial conversion
         convert();
+        
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+            if (!isActive) answer.classList.add('active');
+        }
     </script>
+    
+    <style>
+        .faq-section { max-width: 1200px; margin: 50px auto; padding: 40px 20px; }
+        .faq-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 40px; text-align: center; }
+        .faq-item { background: #1a1a1a; border-radius: 12px; margin-bottom: 15px; border: 1px solid #2a2a2a; overflow: hidden; }
+        .faq-question { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: #fff; font-weight: 600; font-size: 1.1rem; }
+        .faq-question:hover { background: #222; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #0a0a0a; }
+        .faq-answer.active { max-height: 600px; }
+        .faq-answer p { padding: 25px; margin: 0; color: #999; line-height: 1.8; }
+    </style>
+    
+    <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How does forex trading work?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Forex (foreign exchange) trading involves buying one currency and simultaneously selling another in pairs (e.g., USD/INR, EUR/USD). Profit comes from exchange rate movements. If you think USD will strengthen vs INR, buy USD/INR. If USD rises from ₹83 to ₹84, you profit ₹1 per dollar. Forex is the world's largest financial market ($7.5 trillion daily volume), operates 24/5, offers high leverage (up to 1:100), and has tight spreads. Major forex sessions: Asian (Tokyo), European (London), American (New York).</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What are the most traded currency pairs?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Major pairs (highest liquidity): EUR/USD (Euro/Dollar - 24% of volume), USD/JPY (Dollar/Yen - 13%), GBP/USD (Pound/Dollar - 9%), USD/CHF (Dollar/Swiss Franc), AUD/USD, USD/CAD. For Indian traders: USD/INR, EUR/INR, GBP/INR, JPY/INR. Major pairs have tightest spreads (0.1-0.3 pips) and best liquidity. Exotic pairs (USD/INR, USD/THB) have wider spreads but offer opportunities. Beginners should stick to majors for lower risk and transaction costs.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What factors affect exchange rates?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Key factors: 1) Interest rate differentials (higher rates attract foreign capital, strengthen currency), 2) Economic data (GDP, unemployment, inflation), 3) Central bank policy (RBI interventions, Fed rate decisions), 4) Political stability and geopolitical events, 5) Trade balance (exports vs imports), 6) Foreign investment flows, 7) Market sentiment and speculation. For INR: Oil prices matter (India imports 80% oil), FII flows, current account deficit. USD strengthens with Fed rate hikes. Track economic calendars for scheduled announcements that move currencies.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Can retail traders in India trade forex?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Yes, but with restrictions. SEBI allows trading only INR-based pairs on recognized exchanges (NSE, BSE, MCX-SX): USD/INR, EUR/INR, GBP/INR, JPY/INR. You cannot trade pure foreign pairs (EUR/USD, GBP/USD) from India - that's illegal. Use RBI-authorized platforms only. Trading foreign pairs on offshore platforms violates FEMA. Futures contracts available with lot sizes (1000 USD). For global forex trading, open account with international broker (complex tax and legal implications). Most Indian traders stick to NSE currency futures.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What's the best time to trade forex from India?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Best times (IST): 1) 1:30 PM - 5:30 PM (London session overlap with India - highest volume for EUR/INR, GBP/INR), 2) 6:00 PM - 9:00 PM (London-New York overlap - extreme volatility, major moves), 3) 9:00 AM - 11:00 AM (NSE currency futures active trading). Avoid Asian session (late night) unless trading JPY/INR. Major economic data releases: 6:00 PM (US data), 1:30 PM (European data), 7:00 AM (Asian data). USD/INR most active 9:00 AM - 5:00 PM IST when both Indian and global markets overlap.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Is forex trading riskier than stock trading?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Forex has unique risks: 1) High leverage (50x-100x) amplifies losses, 2) 24-hour market means overnight gaps less common but weekend gaps exist, 3) Currency movements affected by global macro events (hard to predict), 4) Lower volatility per pip but leverage increases exposure, 5) Requires understanding of global economics and central banks. Advantages: High liquidity, low transaction costs, no single point failure (unlike stocks). Risk is comparable to options trading if using high leverage. Trade forex with 1-5x leverage, use strict stop losses, avoid trading during major news if inexperienced. Leverage is the main danger - 100x leverage means 1% adverse move wipes account.</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

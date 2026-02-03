@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IV Percentile Calculator - Implied Volatility Percentile Options Tool | BroBillionaire</title>
+    <meta name="description" content="Calculate IV Percentile to find what percentage of time implied volatility was below current levels. More accurate than IV Rank for options trading decisions.">
+    <meta name="keywords" content="IV Percentile calculator, implied volatility percentile, IVP calculator, options analytics, Nifty IV percentile, volatility analysis, options trading India">
+    <link rel="canonical" href="https://brobillionaire.com/tool-iv-percentile-calculator.html">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .calculator-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .calculator-card { background: #1a1a1a; border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid #2a2a2a; }
+        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: #C9A227; margin-bottom: 10px; }
+        .calculator-subtitle { color: #999; font-size: 1.1rem; margin-bottom: 40px; line-height: 1.6; }
+        .input-group { margin-bottom: 25px; }
+        .input-label { display: block; color: #C9A227; font-weight: 600; margin-bottom: 10px; font-size: 1rem; }
+        .input-field, .textarea-field { width: 100%; padding: 15px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #fff; font-size: 1rem; transition: border-color 0.3s; font-family: 'Inter', sans-serif; }
+        .textarea-field { min-height: 120px; resize: vertical; }
+        .input-field:focus, .textarea-field:focus { border-color: #C9A227; outline: none; }
+        .input-hint { color: #666; font-size: 0.85rem; margin-top: 5px; }
+        .calculate-btn { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; font-weight: 700; padding: 18px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; transition: transform 0.2s; }
+        .calculate-btn:hover { transform: translateY(-2px); }
+        .results-section { display: none; margin-top: 40px; }
+        .result-card { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 40px; border-radius: 12px; text-align: center; border-left: 5px solid; margin-bottom: 30px; }
+        .ivp-very-high { border-left-color: #e74c3c; }
+        .ivp-high { border-left-color: #f39c12; }
+        .ivp-neutral { border-left-color: #3498db; }
+        .ivp-low { border-left-color: #95a5a6; }
+        .ivp-very-low { border-left-color: #7f8c8d; }
+        .result-value { color: #fff; font-size: 5rem; font-weight: 700; margin: 20px 0; font-family: 'Playfair Display', serif; }
+        .rating-text { color: #C9A227; font-size: 1.8rem; font-weight: 600; margin-bottom: 15px; }
+        .strategy-hint { color: #999; font-size: 1.1rem; margin-top: 10px; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 30px; }
+        .metric-card { background: #0a0a0a; padding: 25px; border-radius: 12px; border: 1px solid #2a2a2a; }
+        .metric-label { color: #C9A227; font-weight: 600; margin-bottom: 12px; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; }
+        .metric-value { color: #fff; font-size: 2rem; font-weight: 700; }
+        .ivp-gauge { width: 100%; height: 30px; background: linear-gradient(to right, #7f8c8d 0%, #95a5a6 25%, #3498db 50%, #f39c12 75%, #e74c3c 100%); border-radius: 15px; position: relative; margin: 30px 0; }
+        .ivp-marker { position: absolute; width: 4px; height: 40px; background: #fff; top: -5px; box-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        .info-box { background: rgba(201, 162, 39, 0.1); border: 2px solid #C9A227; padding: 25px; border-radius: 12px; margin-top: 30px; }
+        .info-box h3 { color: #C9A227; margin-bottom: 15px; }
+        .info-box ul { margin: 10px 0 0 20px; color: #999; line-height: 1.8; }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-card">
+            <h1 class="calculator-title"><i class="fas fa-percentage"></i> IV Percentile Calculator</h1>
+            <p class="calculator-subtitle">Calculate Implied Volatility Percentile - a more accurate measure than IV Rank. Determines what percentage of trading days had lower IV than current level.</p>
+            
+            <div class="input-group">
+                <label class="input-label">Current IV (%)</label>
+                <input type="number" id="currentIV" class="input-field" placeholder="25.5" step="0.01">
+                <div class="input-hint">Current implied volatility percentage</div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Historical IV Values (Last 252 Trading Days)</label>
+                <textarea id="historicalIV" class="textarea-field" placeholder="Enter comma-separated IV values, e.g.: 22.5, 23.1, 21.8, 24.3, 25.9, 26.2..."></textarea>
+                <div class="input-hint">Enter at least 50 historical IV values separated by commas. More data points = more accurate percentile. Use 252 days (1 year) for best results.</div>
+            </div>
+            
+            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                <button class="calculate-btn" style="flex: 1;" onclick="calculateIVPercentile()">
+                    <i class="fas fa-calculator"></i> Calculate IV Percentile
+                </button>
+                <button class="calculate-btn" style="flex: 0.5; background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);" onclick="generateSampleData()">
+                    <i class="fas fa-flask"></i> Sample Data
+                </button>
+            </div>
+        </div>
+        
+        <div class="results-section" id="resultsSection">
+            <div class="calculator-card">
+                <h2 style="color: #C9A227; margin-bottom: 30px; font-family: 'Playfair Display', serif; font-size: 2rem;">IV Percentile Analysis</h2>
+                
+                <div class="result-card" id="mainResult">
+                    <div style="color: #999; font-size: 1.2rem;">IV Percentile</div>
+                    <div class="result-value" id="ivPercentileValue">-</div>
+                    <div class="rating-text" id="ivpRating">-</div>
+                    <div class="strategy-hint" id="strategyHint">-</div>
+                </div>
+                
+                <div style="padding: 0 20px;">
+                    <h3 style="color: #C9A227; text-align: center; margin-bottom: 15px;">IV Position in Historical Distribution</h3>
+                    <div class="ivp-gauge">
+                        <div class="ivp-marker" id="ivpMarker"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; color: #666; font-size: 0.85rem;">
+                        <span>Low (0)</span>
+                        <span>Medium (50)</span>
+                        <span>High (100)</span>
+                    </div>
+                </div>
+                
+                <div class="grid-2">
+                    <div class="metric-card">
+                        <div class="metric-label">Current IV</div>
+                        <div class="metric-value" id="currentIVDisplay">-</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Days Below Current IV</div>
+                        <div class="metric-value" id="daysBelowCurrent">-</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Mean Historical IV</div>
+                        <div class="metric-value" id="meanIV">-</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Data Points Used</div>
+                        <div class="metric-value" id="dataPoints">-</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Recommended Action</div>
+                        <div class="metric-value" style="font-size: 1.3rem;" id="recommendedAction">-</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Market Condition</div>
+                        <div class="metric-value" style="font-size: 1.3rem;" id="marketCondition">-</div>
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <h3><i class="fas fa-lightbulb"></i> Trading Strategy Based on IV Percentile:</h3>
+                    <ul>
+                        <li><strong>IVP 80-100 (Very High):</strong> Prime opportunity for premium selling. Sell naked options, straddles, iron condors. Premiums at historical extremes.</li>
+                        <li><strong>IVP 60-80 (High):</strong> Favorable for credit spreads, covered calls, cash-secured puts. Still good for sellers.</li>
+                        <li><strong>IVP 40-60 (Neutral):</strong> Market in equilibrium. Trade with directional bias or avoid until clearer setup.</li>
+                        <li><strong>IVP 20-40 (Low):</strong> Good time to buy options. Debit spreads, long calls/puts have edge as IV is cheap.</li>
+                        <li><strong>IVP 0-20 (Very Low):</strong> Exceptional buying opportunity. Load up on long options before IV expansion. Avoid all premium selling.</li>
+                    </ul>
+                </div>
+                
+                <div style="background: rgba(52, 152, 219, 0.1); border: 2px solid #3498db; padding: 25px; border-radius: 12px; margin-top: 30px;">
+                    <h3 style="color: #3498db; margin-bottom: 15px;"><i class="fas fa-info-circle"></i> Understanding IV Percentile:</h3>
+                    <p style="color: #999; line-height: 1.8; margin: 0;">
+                        IV Percentile tells you what percentage of days in the lookback period had IV below the current level. If IV Percentile is 75%, 
+                        it means 75% of historical days had lower IV than today - making current premiums expensive. Unlike IV Rank which only uses high/low 
+                        values, IV Percentile uses ALL historical data points, making it statistically more robust. Professional traders prefer IV Percentile 
+                        for precision. Use 252 trading days (1 year) of data for standard calculation. IVP above 75 = sell premium aggressively. IVP below 25 = buy options.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function generateSampleData() {
+            // Generate realistic IV data with mean reversion
+            const baseIV = 20;
+            const volatility = 5;
+            const numPoints = 252;
+            const ivValues = [];
+            
+            let currentValue = baseIV;
+            for (let i = 0; i < numPoints; i++) {
+                // Mean reversion with random walk
+                const randomChange = (Math.random() - 0.5) * volatility * 0.3;
+                const meanReversion = (baseIV - currentValue) * 0.05;
+                currentValue = Math.max(10, Math.min(40, currentValue + randomChange + meanReversion));
+                ivValues.push(currentValue.toFixed(2));
+            }
+            
+            document.getElementById('historicalIV').value = ivValues.join(', ');
+            document.getElementById('currentIV').value = (baseIV + Math.random() * volatility).toFixed(2);
+        }
+        
+        function calculateIVPercentile() {
+            const currentIV = parseFloat(document.getElementById('currentIV').value);
+            const historicalIVStr = document.getElementById('historicalIV').value;
+            
+            if (isNaN(currentIV)) {
+                alert('Please enter a valid current IV value');
+                return;
+            }
+            
+            if (!historicalIVStr.trim()) {
+                alert('Please enter historical IV values');
+                return;
+            }
+            
+            // Parse historical IV values
+            const historicalIV = historicalIVStr
+                .split(',')
+                .map(v => parseFloat(v.trim()))
+                .filter(v => !isNaN(v) && v > 0);
+            
+            if (historicalIV.length < 10) {
+                alert('Please enter at least 10 historical IV values for meaningful calculation');
+                return;
+            }
+            
+            // Calculate IV Percentile
+            const daysBelowCurrent = historicalIV.filter(iv => iv < currentIV).length;
+            const ivPercentile = (daysBelowCurrent / historicalIV.length) * 100;
+            
+            // Calculate mean
+            const meanIV = historicalIV.reduce((sum, iv) => sum + iv, 0) / historicalIV.length;
+            
+            // Display results
+            document.getElementById('ivPercentileValue').textContent = ivPercentile.toFixed(1) + '%';
+            document.getElementById('currentIVDisplay').textContent = currentIV.toFixed(2) + '%';
+            document.getElementById('daysBelowCurrent').textContent = daysBelowCurrent + ' / ' + historicalIV.length;
+            document.getElementById('meanIV').textContent = meanIV.toFixed(2) + '%';
+            document.getElementById('dataPoints').textContent = historicalIV.length;
+            
+            // Position marker on gauge
+            document.getElementById('ivpMarker').style.left = ivPercentile + '%';
+            
+            // Determine rating and recommendations
+            const mainResult = document.getElementById('mainResult');
+            const ivpRating = document.getElementById('ivpRating');
+            const strategyHint = document.getElementById('strategyHint');
+            const recommendedAction = document.getElementById('recommendedAction');
+            const marketCondition = document.getElementById('marketCondition');
+            
+            mainResult.className = 'result-card';
+            
+            if (ivPercentile >= 80) {
+                mainResult.classList.add('ivp-very-high');
+                ivpRating.textContent = 'Very High IV';
+                strategyHint.textContent = 'Excellent for aggressive premium selling';
+                recommendedAction.textContent = '🔴 SELL PREMIUM';
+                marketCondition.textContent = 'Extreme Fear';
+            } else if (ivPercentile >= 60) {
+                mainResult.classList.add('ivp-high');
+                ivpRating.textContent = 'High IV';
+                strategyHint.textContent = 'Favorable for credit strategies';
+                recommendedAction.textContent = '🟠 SELL OPTIONS';
+                marketCondition.textContent = 'Elevated Fear';
+            } else if (ivPercentile >= 40) {
+                mainResult.classList.add('ivp-neutral');
+                ivpRating.textContent = 'Neutral IV';
+                strategyHint.textContent = 'Trade based on market conviction';
+                recommendedAction.textContent = '🟡 NEUTRAL';
+                marketCondition.textContent = 'Normal';
+            } else if (ivPercentile >= 20) {
+                mainResult.classList.add('ivp-low');
+                ivpRating.textContent = 'Low IV';
+                strategyHint.textContent = 'Consider debit strategies';
+                recommendedAction.textContent = '🟢 BUY OPTIONS';
+                marketCondition.textContent = 'Low Fear';
+            } else {
+                mainResult.classList.add('ivp-very-low');
+                ivpRating.textContent = 'Very Low IV';
+                strategyHint.textContent = 'Prime opportunity for buying options';
+                recommendedAction.textContent = '🟢 BUY PREMIUM';
+                marketCondition.textContent = 'Complacency';
+            }
+            
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+            if (!isActive) answer.classList.add('active');
+        }
+    </script>
+    
+    <style>
+        .faq-section { max-width: 1200px; margin: 50px auto; padding: 40px 20px; }
+        .faq-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 40px; text-align: center; }
+        .faq-item { background: #1a1a1a; border-radius: 12px; margin-bottom: 15px; border: 1px solid #2a2a2a; overflow: hidden; }
+        .faq-question { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: #fff; font-weight: 600; font-size: 1.1rem; }
+        .faq-question:hover { background: #222; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #0a0a0a; }
+        .faq-answer.active { max-height: 1000px; }
+        .faq-answer p { padding: 25px; margin: 0; color: #999; line-height: 1.8; }
+    </style>
+    
+    <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What is IV Percentile and how is it different from IV Rank?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>IV Percentile measures what percentage of historical trading days had IV below the current level. If IVP is 80%, then 80% of days had lower IV than today. Unlike IV Rank which only uses the highest and lowest IV values, IV Percentile uses EVERY data point in the lookback period, making it statistically more accurate and reliable. Professional traders and institutions prefer IV Percentile for precision. Both metrics answer the same question: "Is IV high or low historically?" but IVP does it with more granularity.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How much historical data do I need for IV Percentile calculation?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Minimum: 50 data points for basic calculation. Recommended: 252 data points (1 trading year) for standard analysis. Professional: 504 data points (2 years) for robust statistics. More data points give more accurate percentiles but require more computational effort. For daily options traders, 252 days is the industry standard. Use end-of-day IV values from each trading day. You can get this data from options analytics platforms, trading software, or historical VIX data for Indian indices.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Where do I find historical IV data for Nifty and Bank Nifty?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>For Nifty/Bank Nifty IV data: 1) NSE India website - download India VIX historical data (proxy for Nifty IV), 2) NSE's historical data portal has daily options data, 3) TradingView - India VIX indicator with export function, 4) Options analytics platforms (Sensibull, Opstra) provide historical IV, 5) Download from your broker's API if available. For quick analysis, India VIX serves as Nifty's IV. Bank Nifty doesn't have a dedicated VIX, but you can calculate it from ATM option premiums using Black-Scholes reverse calculation or use our tools.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What IV Percentile threshold should I use for trading decisions?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Trading thresholds: IVP above 75 = aggressive premium selling (straddles, naked options), IVP 60-75 = conservative selling (credit spreads, iron condors), IVP 40-60 = neutral zone (trade directionally), IVP 25-40 = start considering long options, IVP below 25 = aggressive option buying. Professional traders set alerts at IVP 20, 40, 60, 80 for action triggers. In Indian markets, combine IVP with event calendar: avoid selling premium before budget, elections, or major RBI announcements even if IVP is high. Wait for post-event IV collapse.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Can IV Percentile help me time my option buying?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Yes! IVP below 25 is ideal for buying options as premiums are historically cheap. Best scenarios: 1) IVP under 20 + upcoming event = buy long straddles, 2) IVP 20-30 + strong technical setup = buy directional options (calls/puts), 3) IVP under 15 + no immediate events = accumulate LEAPS or longer-dated options. Avoid buying when IVP is above 60 unless you have very strong conviction, as you're overpaying for volatility. Time your entries during calm, low-volatility periods (Diwali week, summer doldrums) when IV tends to bottom out.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Should I use IV Rank or IV Percentile for my trading?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Use both, but prefer IV Percentile for more accurate analysis. IV Rank is simpler and faster to calculate (only needs high/low values). IV Percentile is more statistically robust but requires all historical data points. In practice, they usually give similar signals - if one shows high, the other will too. Start with IV Rank for quick checks. Use IV Percentile for final trade decisions and position sizing. Advanced traders monitor both: if IV Rank and IVP diverge significantly, it indicates unusual market conditions or outlier events that skew the data.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How do I interpret IV Percentile during unusual market events?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>During extreme events (COVID crash, war, banking crisis), IVP can hit 95-100 as volatility spikes to unprecedented levels. In these scenarios: 1) Don't blindly sell premium even if IVP is 100 - markets can stay volatile longer than you can stay solvent, 2) Consider that IV can expand even further beyond historical ranges, 3) Wait for IV to peak and start declining before selling, 4) Use defined-risk strategies (spreads) instead of naked positions. During unusual calm periods with IVP below 5, expect mean reversion - volatility will eventually increase. These extremes often mark major turning points in markets.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

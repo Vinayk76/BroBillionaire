@@ -190,6 +190,88 @@
             document.getElementById('resultsSection').style.display = 'block';
             document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
         }
+        
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+            if (!isActive) answer.classList.add('active');
+        }
     </script>
+    
+    <style>
+        .faq-section { max-width: 1200px; margin: 50px auto; padding: 40px 20px; }
+        .faq-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 40px; text-align: center; }
+        .faq-item { background: #1a1a1a; border-radius: 12px; margin-bottom: 15px; border: 1px solid #2a2a2a; overflow: hidden; }
+        .faq-question { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: #fff; font-weight: 600; font-size: 1.1rem; }
+        .faq-question:hover { background: #222; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #0a0a0a; }
+        .faq-answer.active { max-height: 600px; }
+        .faq-answer p { padding: 25px; margin: 0; color: #999; line-height: 1.8; }
+    </style>
+    
+    <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What does beta tell me about a stock?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Beta measures how much a stock moves relative to the overall market (Nifty/Sensex). Beta = 1 means stock moves exactly with market. Beta > 1 means more volatile (amplified moves). Beta < 1 means less volatile (dampened moves). Example: Beta 1.5 stock moves 15% when market moves 10%. High beta stocks (tech, small-caps) offer higher returns but higher risk. Low beta stocks (utilities, FMCG) are defensive and stable. Use beta for portfolio risk management and position sizing.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How do I use beta for investment decisions?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Use beta to: 1) Match risk tolerance (conservative investors choose beta < 1, aggressive choose beta > 1), 2) Time the market (hold high beta in bull markets for amplified gains, switch to low beta in bear markets), 3) Diversify portfolio (mix high and low beta stocks to balance risk), 4) Calculate expected returns using CAPM, 5) Hedge positions (short high beta stocks in market downturns). During uncertain times, rotate from high beta to low beta stocks for capital preservation.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What is a good beta for my portfolio?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Portfolio beta depends on goals: Conservative (beta 0.6-0.8): Near retirement, low risk tolerance. Balanced (beta 0.9-1.1): Moderate risk, matches market. Aggressive (beta 1.2-1.5): Young investors, high growth focus. Calculate portfolio beta = Weighted average of individual stock betas. Example: 50% in beta 1.5 stock + 50% in beta 0.5 stock = Portfolio beta 1.0. Adjust beta by changing allocation - increase high beta stocks to raise portfolio beta, increase low beta to lower it.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Can beta predict stock performance?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>No, beta only measures relative volatility, not returns. High beta doesn't mean high returns - it means high volatility in both directions. A beta 2.0 stock can lose 20% when market drops 10%, or gain 20% when market rises 10%. Beta is backward-looking (calculated from historical data) and may not predict future volatility. Company fundamentals, earnings growth, and industry trends determine long-term returns. Use beta for risk assessment, not return prediction. Combine beta analysis with fundamental analysis for complete picture.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Why does my stock's beta keep changing?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Beta changes because: 1) It's calculated using rolling historical data (typically 1-3 years), 2) Company operations change (adding/removing debt changes beta), 3) Industry dynamics shift, 4) Market conditions evolve, 5) Time period and frequency of returns affect calculation. Growth stocks often have increasing beta as they become more volatile. Mature companies have stable beta. Recalculate beta periodically (quarterly/annually). For accurate beta, use 3-5 years of monthly return data and compare against relevant index (Nifty for large-caps).</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What's the difference between beta and standard deviation?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Beta measures systematic risk (market-related risk you can't diversify away). Standard deviation measures total risk (both systematic and unsystematic risk). Beta compares stock to market, standard deviation looks at stock in isolation. A stock can have high standard deviation but low beta if its movements are uncorrelated with market. For portfolio risk, beta matters more because unsystematic risk can be diversified away. Use both: beta for market risk exposure, standard deviation for total volatility assessment.</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

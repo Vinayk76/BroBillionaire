@@ -158,6 +158,88 @@
             document.getElementById('resultsSection').style.display = 'block';
             document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
         }
+        
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+            if (!isActive) answer.classList.add('active');
+        }
     </script>
+    
+    <style>
+        .faq-section { max-width: 1200px; margin: 50px auto; padding: 40px 20px; }
+        .faq-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 40px; text-align: center; }
+        .faq-item { background: #1a1a1a; border-radius: 12px; margin-bottom: 15px; border: 1px solid #2a2a2a; overflow: hidden; }
+        .faq-question { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: #fff; font-weight: 600; font-size: 1.1rem; }
+        .faq-question:hover { background: #222; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #0a0a0a; }
+        .faq-answer.active { max-height: 500px; }
+        .faq-answer p { padding: 25px; margin: 0; color: #999; line-height: 1.8; }
+    </style>
+    
+    <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What is the Kelly Criterion and why should I use it?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Kelly Criterion is a mathematical formula that determines the optimal position size to maximize long-term wealth growth while minimizing risk of ruin. It considers your win probability, average win/loss ratio, and account size. Using Kelly prevents overtrading (risking too much) and undertrading (missing growth opportunities). It's widely used by professional gamblers, traders, and investors.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Should I use Full Kelly or Fractional Kelly for trading?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Most professional traders use Fractional Kelly (25-50% of Full Kelly) because: 1) It reduces volatility and drawdowns, 2) It accounts for estimation errors in win rate and profit/loss ratios, 3) It provides more psychological comfort. Full Kelly can lead to large position sizes and dramatic account swings. Start with 25% Kelly if you're new to position sizing.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What happens if my Kelly percentage is negative?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>A negative Kelly percentage means your trading strategy has negative expected value - you will lose money over time. This indicates either your win rate is too low, or your average loss is too large compared to average win. Do not trade this strategy. Improve your edge by: better entries, tighter stop losses, bigger profit targets, or higher win rate before risking real money.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How do I calculate my win probability and average win/loss?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Use your trading journal history: Win Probability = (Winning Trades ÷ Total Trades) × 100. Average Win = Total Profit from Wins ÷ Number of Wins. Average Loss = Total Loss from Losses ÷ Number of Losses. You need at least 30-50 trades for statistically meaningful data. Paper trade or backtest your strategy if you don't have real trade history.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Can I use Kelly Criterion for options trading?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Yes, Kelly Criterion works for options trading. Calculate your historical win rate and average win/loss from past option trades. For options buying, use the premium paid as your loss amount. For options selling, account for potential large losses. Many options traders use even more conservative fractional Kelly (10-25%) due to higher volatility and occasional large losses in options.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Is Kelly Criterion better than fixed percentage risk per trade?
+                <i class="fas fa-chevron-down" style="color: #C9A227;"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Kelly Criterion is mathematically optimal for growth, while fixed percentage (like 1-2% per trade) is simpler and more conservative. Kelly dynamically adjusts position size based on your edge. Use Kelly if you have: 1) Accurate statistics on your strategy, 2) Consistent trading results, 3) Desire to maximize returns. Use fixed percentage if you prefer simplicity and lower volatility. Both methods work - Kelly is theoretically superior but requires discipline.</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
