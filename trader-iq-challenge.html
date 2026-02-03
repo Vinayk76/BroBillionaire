@@ -38,6 +38,9 @@
             --wrong: #ef4444;
             --bg: #0a0a0a;
             --card: #111111;
+            --combo-1: #3b82f6;
+            --combo-2: #a855f7;
+            --combo-3: #ef4444;
         }
         
         body {
@@ -286,6 +289,207 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 1.2rem;
             color: var(--correct);
+            position: relative;
+        }
+        
+        /* Combo System */
+        .combo-display {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            z-index: 500;
+            background: linear-gradient(135deg, rgba(26,26,26,0.95) 0%, rgba(13,13,13,0.95) 100%);
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            padding: 20px;
+            display: none;
+            animation: slideInRight 0.5s ease;
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateY(-50%) translateX(100px); opacity: 0; }
+            to { transform: translateY(-50%) translateX(0); opacity: 1; }
+        }
+        
+        .combo-display.active {
+            display: block;
+        }
+        
+        .combo-title {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        
+        .combo-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            background: linear-gradient(135deg, var(--combo-1), var(--combo-2), var(--combo-3));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 0.5s infinite;
+        }
+        
+        .combo-multiplier {
+            font-size: 0.9rem;
+            text-align: center;
+            color: var(--primary);
+            margin-top: 5px;
+        }
+        
+        /* Power-ups */
+        .powerups-panel {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .powerup-btn {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            background: rgba(201, 162, 39, 0.1);
+            border: 2px solid var(--primary);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .powerup-btn:hover:not(.disabled) {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+        
+        .powerup-btn.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        
+        .powerup-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            font-size: 0.7rem;
+            color: #000;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .powerup-label {
+            font-size: 0.6rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 2px;
+        }
+        
+        /* Achievements */
+        .achievement-popup {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            padding: 20px 25px;
+            display: none;
+            z-index: 1500;
+            animation: slideInAchievement 0.5s ease;
+            min-width: 280px;
+        }
+        
+        @keyframes slideInAchievement {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .achievement-popup.show {
+            display: block;
+        }
+        
+        .achievement-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .achievement-icon {
+            font-size: 2.5rem;
+        }
+        
+        .achievement-text h3 {
+            color: var(--primary);
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .achievement-text p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.85rem;
+        }
+        
+        /* Leaderboard Tabs */
+        .leaderboard-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+            overflow-x: auto;
+            padding-bottom: 2px;
+        }
+        
+        .leaderboard-tab {
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            color: rgba(255,255,255,0.5);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            white-space: nowrap;
+        }
+        
+        .leaderboard-tab.active {
+            color: var(--primary);
+        }
+        
+        .leaderboard-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        .leaderboard-tab:hover {
+            color: var(--primary);
+        }
+        
+        .leaderboard-content {
+            display: none;
+        }
+        
+        .leaderboard-content.active {
+            display: block;
         }
         
         .question-card {
@@ -818,6 +1022,128 @@
             .iq-score { font-size: 3.5rem; }
             .quiz-header { flex-direction: column; gap: 15px; }
             .progress-bar { width: 100%; }
+            .combo-display {
+                right: 10px;
+                padding: 15px;
+                top: auto;
+                bottom: 20px;
+                transform: none;
+            }
+            .combo-value { font-size: 2rem; }
+            .achievement-popup {
+                right: 10px;
+                left: 10px;
+                min-width: auto;
+            }
+            .powerup-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            .difficulty-selector {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .difficulty-btn {
+                width: 100%;
+            }
+            .leaderboard-tabs {
+                gap: 5px;
+            }
+            .leaderboard-tab {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+            .result-stats {
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 80px 15px 40px;
+            }
+            .start-screen h1 {
+                font-size: 1.6rem;
+            }
+            .start-screen p {
+                font-size: 1rem;
+            }
+            .question-card {
+                padding: 25px;
+            }
+            .question-text {
+                font-size: 1.1rem;
+            }
+            .option-btn {
+                padding: 15px 20px;
+                font-size: 0.95rem;
+            }
+            .result-card {
+                padding: 30px 20px;
+            }
+            .iq-score {
+                font-size: 2.8rem;
+            }
+            .result-title {
+                font-size: 1.5rem;
+            }
+            .share-btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Particles and Effects */
+        .score-particle {
+            position: fixed;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            pointer-events: none;
+            z-index: 1000;
+            animation: scoreFloat 1s ease-out forwards;
+        }
+        
+        @keyframes scoreFloat {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+        /* Smooth Transitions */
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .shake {
+            animation: shake 0.5s ease;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+        
+        /* Progress Ring */
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        
+        .progress-ring-circle {
+            transition: stroke-dashoffset 0.3s;
+            transform-origin: 50% 50%;
         }
     </style>
 
@@ -907,8 +1233,8 @@
                     <div class="stat-label">Attempts</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value">?</div>
-                    <div class="stat-label">Your IQ Score</div>
+                    <div class="stat-value" id="totalPlayersHome">0</div>
+                    <div class="stat-label">Players Worldwide</div>
                 </div>
             </div>
         </div>
@@ -950,6 +1276,43 @@
             <button class="next-btn" id="nextBtn" onclick="nextQuestion()">
                 Next Question <i class="fas fa-arrow-right"></i>
             </button>
+            
+            <!-- Power-ups Panel -->
+            <div class="powerups-panel">
+                <div class="powerup-btn" id="skipPowerup" onclick="usePowerup('skip')" title="Skip Question">
+                    <span>⏭️</span>
+                    <div class="powerup-count" id="skipCount">1</div>
+                    <div class="powerup-label">Skip</div>
+                </div>
+                <div class="powerup-btn" id="fiftyFiftyPowerup" onclick="usePowerup('5050')" title="50:50 - Remove 2 wrong answers">
+                    <span>🎯</span>
+                    <div class="powerup-count" id="fiftyFiftyCount">1</div>
+                    <div class="powerup-label">50:50</div>
+                </div>
+                <div class="powerup-btn" id="freezeTimePowerup" onclick="usePowerup('freeze')" title="Freeze Timer (+10s)">
+                    <span>⏸️</span>
+                    <div class="powerup-count" id="freezeCount">1</div>
+                    <div class="powerup-label">+Time</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Combo Display -->
+        <div class="combo-display" id="comboDisplay">
+            <div class="combo-title">COMBO!</div>
+            <div class="combo-value" id="comboValue">0</div>
+            <div class="combo-multiplier">×<span id="comboMultiplier">1.0</span></div>
+        </div>
+        
+        <!-- Achievement Popup -->
+        <div class="achievement-popup" id="achievementPopup">
+            <div class="achievement-header">
+                <div class="achievement-icon" id="achievementIcon">🏆</div>
+                <div class="achievement-text">
+                    <h3 id="achievementTitle">Achievement Unlocked!</h3>
+                    <p id="achievementDesc">First Question Correct!</p>
+                </div>
+            </div>
         </div>
         
         <!-- Result Screen -->
@@ -1013,10 +1376,35 @@
             
             <div class="leaderboard-preview">
                 <div class="leaderboard-title">
-                    <i class="fas fa-trophy"></i> Top Scores
+                    <i class="fas fa-trophy"></i> Leaderboards
                 </div>
-                <div id="leaderboardList">
-                    <!-- Dynamic leaderboard will be populated here -->
+                
+                <div class="leaderboard-tabs">
+                    <button class="leaderboard-tab active" onclick="switchLeaderboard('overall')">
+                        🏆 All Time
+                    </button>
+                    <button class="leaderboard-tab" onclick="switchLeaderboard('monthly')">
+                        📅 This Month
+                    </button>
+                    <button class="leaderboard-tab" onclick="switchLeaderboard('weekly')">
+                        📆 This Week
+                    </button>
+                    <button class="leaderboard-tab" onclick="switchLeaderboard('daily')">
+                        ⚡ Today
+                    </button>
+                </div>
+                
+                <div class="leaderboard-content active" id="leaderboard-overall">
+                    <!-- Overall leaderboard -->
+                </div>
+                <div class="leaderboard-content" id="leaderboard-monthly">
+                    <!-- Monthly leaderboard -->
+                </div>
+                <div class="leaderboard-content" id="leaderboard-weekly">
+                    <!-- Weekly leaderboard -->
+                </div>
+                <div class="leaderboard-content" id="leaderboard-daily">
+                    <!-- Daily leaderboard -->
                 </div>
             </div>
         </div>
@@ -1055,47 +1443,136 @@
         let userName = '';
         let userAvatar = '';
         
-        // Leaderboard Management
-        function loadLeaderboard() {
+        // Game State
+        let currentQuestion = 0;
+        let score = 0;
+        let streak = 0;
+        let maxStreak = 0;
+        let totalTime = 0;
+        let answeredQuestions = 0;
+        let timer;
+        let timeLeft;
+        let difficulty = 'beginner';
+        let shuffledQuestions = [];
+        let comboMultiplier = 1.0;
+        
+        // Power-ups
+        let powerups = {
+            skip: 1,
+            fiftyFifty: 1,
+            freeze: 1
+        };
+        
+        // Achievements
+        const achievements = {
+            firstCorrect: { icon: '🎯', title: 'First Blood', desc: 'Got your first answer correct!', unlocked: false },
+            streak3: { icon: '🔥', title: 'Hot Streak', desc: '3 correct answers in a row!', unlocked: false },
+            streak5: { icon: '⚡', title: 'On Fire', desc: '5 correct answers in a row!', unlocked: false },
+            perfectScore: { icon: '💯', title: 'Perfect Score', desc: 'Got all 15 questions correct!', unlocked: false },
+            speedDemon: { icon: '🚀', title: 'Speed Demon', desc: 'Averaged under 10 seconds per answer!', unlocked: false },
+            comboMaster: { icon: '🎊', title: 'Combo Master', desc: 'Reached 3x combo multiplier!', unlocked: false }
+        };
+        
+        const timePerDifficulty = {
+            beginner: 30,
+            pro: 20,
+            legend: 15
+        };
+        
+        // Leaderboard Management with time periods
+        function getTimestamp() {
+            const now = new Date();
+            return {
+                date: now.toISOString(),
+                day: now.toISOString().split('T')[0],
+                week: getWeekNumber(now),
+                month: `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}`
+            };
+        }
+        
+        function getWeekNumber(date) {
+            const firstDay = new Date(date.getFullYear(), 0, 1);
+            const days = Math.floor((date - firstDay) / (24 * 60 * 60 * 1000));
+            return Math.ceil((days + firstDay.getDay() + 1) / 7);
+        }
+        
+        function loadLeaderboard(period = 'overall') {
             const leaderboard = JSON.parse(localStorage.getItem('traderIQLeaderboard') || '[]');
-            return leaderboard.sort((a, b) => b.score - a.score).slice(0, 10);
+            const timestamp = getTimestamp();
+            
+            let filtered = leaderboard;
+            
+            if (period === 'daily') {
+                filtered = leaderboard.filter(entry => entry.day === timestamp.day);
+            } else if (period === 'weekly') {
+                filtered = leaderboard.filter(entry => entry.week === timestamp.week);
+            } else if (period === 'monthly') {
+                filtered = leaderboard.filter(entry => entry.month === timestamp.month);
+            }
+            
+            return filtered.sort((a, b) => b.score - a.score).slice(0, 100);
         }
         
         function saveToLeaderboard(name, score, avatar) {
             const leaderboard = JSON.parse(localStorage.getItem('traderIQLeaderboard') || '[]');
+            const timestamp = getTimestamp();
             
             leaderboard.push({
                 name: name,
                 score: score,
                 avatar: avatar || '',
-                date: new Date().toISOString()
+                date: timestamp.date,
+                day: timestamp.day,
+                week: timestamp.week,
+                month: timestamp.month
             });
             
-            // Keep only top 100 scores
-            const topScores = leaderboard.sort((a, b) => b.score - a.score).slice(0, 100);
-            localStorage.setItem('traderIQLeaderboard', JSON.stringify(topScores));
-            
-            updateLeaderboardDisplay();
+            localStorage.setItem('traderIQLeaderboard', JSON.stringify(leaderboard));
+            updateAllLeaderboards();
         }
         
-        function updateLeaderboardDisplay() {
-            const leaderboard = loadLeaderboard();
-            const container = document.getElementById('leaderboardList');
+        function updateAllLeaderboards() {
+            updateLeaderboardDisplay('overall');
+            updateLeaderboardDisplay('monthly');
+            updateLeaderboardDisplay('weekly');
+            updateLeaderboardDisplay('daily');
+            updateTotalPlayers();
+        }
+        
+        function updateTotalPlayers() {
+            const leaderboard = JSON.parse(localStorage.getItem('traderIQLeaderboard') || '[]');
+            const uniquePlayers = new Set(leaderboard.map(e => e.name)).size;
+            const totalPlayersEl = document.getElementById('totalPlayersHome');
+            if (totalPlayersEl) {
+                totalPlayersEl.textContent = uniquePlayers || '0';
+            }
+        }
+        
+        function updateLeaderboardDisplay(period) {
+            const leaderboard = loadLeaderboard(period);
+            const container = document.getElementById(`leaderboard-${period}`);
+            
+            if (!container) return;
             
             if (leaderboard.length === 0) {
-                container.innerHTML = '<div style="text-align: center; color: #666; padding: 20px;">Be the first to set a score!</div>';
+                container.innerHTML = '<div style="text-align: center; color: #666; padding: 20px;">No scores yet. Be the first!</div>';
                 return;
             }
             
-            container.innerHTML = leaderboard.slice(0, 5).map((entry, index) => {
+            container.innerHTML = leaderboard.slice(0, 10).map((entry, index) => {
                 const rankClass = index === 0 ? 'gold' : '';
                 const avatarHTML = entry.avatar 
                     ? `<img src="${entry.avatar}" alt="${entry.name}">`
                     : `<i class="fas fa-user"></i>`;
                 
+                let medal = '';
+                if (index === 0) medal = '🥇';
+                else if (index === 1) medal = '🥈';
+                else if (index === 2) medal = '🥉';
+                
                 return `
                     <div class="leaderboard-item">
-                        <div class="leaderboard-rank ${rankClass}">${index + 1}</div>
+                        <div class="leaderboard-rank ${rankClass}">${medal || (index + 1)}</div>
                         <div class="leaderboard-avatar">${avatarHTML}</div>
                         <div class="leaderboard-name">${entry.name}</div>
                         <div class="leaderboard-score">${entry.score}</div>
@@ -1104,18 +1581,25 @@
             }).join('');
         }
         
-        function getUserRank(name, score) {
-            const leaderboard = JSON.parse(localStorage.getItem('traderIQLeaderboard') || '[]');
-            const sortedLeaderboard = leaderboard.sort((a, b) => b.score - a.score);
+        function switchLeaderboard(period) {
+            // Update tabs
+            document.querySelectorAll('.leaderboard-tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
             
-            // Find user's rank (considering ties)
-            const rank = sortedLeaderboard.findIndex(entry => 
+            // Update content
+            document.querySelectorAll('.leaderboard-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(`leaderboard-${period}`).classList.add('active');
+        }
+        
+        function getUserRank(name, score, period = 'overall') {
+            const leaderboard = loadLeaderboard(period);
+            const rank = leaderboard.findIndex(entry => 
                 entry.name === name && entry.score === score
             ) + 1;
             
             return {
-                rank: rank || sortedLeaderboard.length,
-                total: sortedLeaderboard.length
+                rank: rank || leaderboard.length + 1,
+                total: leaderboard.length
             };
         }
         
@@ -1151,16 +1635,133 @@
             actualStartQuiz();
         }
         
+        // Achievement System
+        function showAchievement(achievementKey) {
+            if (achievements[achievementKey].unlocked) return;
+            
+            achievements[achievementKey].unlocked = true;
+            const achievement = achievements[achievementKey];
+            
+            document.getElementById('achievementIcon').textContent = achievement.icon;
+            document.getElementById('achievementTitle').textContent = achievement.title;
+            document.getElementById('achievementDesc').textContent = achievement.desc;
+            
+            const popup = document.getElementById('achievementPopup');
+            popup.classList.add('show');
+            
+            // Play sound effect (optional)
+            playSound('achievement');
+            
+            setTimeout(() => {
+                popup.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Sound Effects (silent if not needed)
+        function playSound(type) {
+            // Optional: Add sound effects here
+            // Example: new Audio('sounds/' + type + '.mp3').play();
+        }
+        
+        // Power-ups
+        function usePowerup(type) {
+            if (powerups[type] <= 0) return;
+            
+            powerups[type]--;
+            updatePowerupDisplay(type);
+            
+            if (type === 'skip') {
+                nextQuestion();
+            } else if (type === '5050') {
+                fiftyFifty();
+            } else if (type === 'freeze') {
+                freezeTime();
+            }
+            
+            playSound('powerup');
+        }
+        
+        function updatePowerupDisplay(type) {
+            const countMap = {
+                skip: 'skipCount',
+                '5050': 'fiftyFiftyCount',
+                freeze: 'freezeCount'
+            };
+            
+            const btnMap = {
+                skip: 'skipPowerup',
+                '5050': 'fiftyFiftyPowerup',
+                freeze: 'freezeTimePowerup'
+            };
+            
+            document.getElementById(countMap[type]).textContent = powerups[type];
+            
+            if (powerups[type] <= 0) {
+                document.getElementById(btnMap[type]).classList.add('disabled');
+            }
+        }
+        
+        function fiftyFifty() {
+            const q = shuffledQuestions[currentQuestion];
+            const options = document.querySelectorAll('.option-btn');
+            let wrongRemoved = 0;
+            
+            options.forEach(opt => {
+                const index = parseInt(opt.dataset.index);
+                if (index !== q.correct && wrongRemoved < 2 && !opt.classList.contains('disabled')) {
+                    opt.style.opacity = '0.3';
+                    opt.style.pointerEvents = 'none';
+                    wrongRemoved++;
+                }
+            });
+        }
+        
+        function freezeTime() {
+            timeLeft += 10;
+            document.getElementById('timerValue').textContent = timeLeft;
+            createScoreParticle('+10s', 'var(--primary)');
+        }
+        
+        // Combo System
+        function updateCombo() {
+            if (streak >= 3) {
+                comboMultiplier = 1.0 + (streak - 2) * 0.5;
+                document.getElementById('comboValue').textContent = streak;
+                document.getElementById('comboMultiplier').textContent = comboMultiplier.toFixed(1);
+                document.getElementById('comboDisplay').classList.add('active');
+                
+                if (streak === 3) showAchievement('streak3');
+                if (streak === 5) showAchievement('streak5');
+                if (comboMultiplier >= 3.0) showAchievement('comboMaster');
+            } else {
+                comboMultiplier = 1.0;
+                document.getElementById('comboDisplay').classList.remove('active');
+            }
+        }
+        
+        // Score Particles
+        function createScoreParticle(text, color) {
+            const particle = document.createElement('div');
+            particle.className = 'score-particle';
+            particle.textContent = text;
+            particle.style.color = color;
+            particle.style.left = '50%';
+            particle.style.top = '50%';
+            document.body.appendChild(particle);
+            
+            setTimeout(() => particle.remove(), 1000);
+        }
+        
         // Initialize leaderboard on page load
         window.addEventListener('DOMContentLoaded', () => {
-            updateLeaderboardDisplay();
+            updateAllLeaderboards();
         });
         
         // Questions Database
         const questions = [
             {
                 category: "Options Trading",
-                question: "What does 'ITM' stand for in options trading?",
+                question: "What does 'ITM' stand in options trading?",
                 options: ["In The Market", "In The Money", "Into The Movement", "Immediate Trade Mode"],
                 correct: 1,
                 explanation: "ITM (In The Money) means the option has intrinsic value. For calls, it's when strike price < current price. For puts, it's when strike price > current price."
@@ -1244,7 +1845,7 @@
             },
             {
                 category: "Market Mechanics",
-                question: "What happens during 'Short Squeeze'?",
+                question: "What happens during a 'Short Squeeze'?",
                 options: ["Prices fall rapidly", "Short sellers forced to buy, pushing prices higher", "Options expire", "Volume decreases"],
                 correct: 1,
                 explanation: "A short squeeze occurs when heavily shorted stocks rise, forcing short sellers to buy shares to cover their positions, which further accelerates the price increase."
@@ -1262,25 +1863,43 @@
                 options: ["Mark Douglas", "Jack Schwager", "Van Tharp", "Jesse Livermore"],
                 correct: 0,
                 explanation: "Mark Douglas wrote 'Trading in the Zone', a classic book on trading psychology that focuses on developing the proper mindset for consistent trading success."
+            },
+            {
+                category: "Options Trading",
+                question: "What is a 'Straddle' strategy?",
+                options: ["Buying calls only", "Buying both call and put at same strike", "Selling options only", "Buying multiple strikes"],
+                correct: 1,
+                explanation: "A straddle involves buying both a call and put option at the same strike price, profiting from significant price movement in either direction."
+            },
+            {
+                category: "Market Psychology",
+                question: "What is 'Confirmation Bias' in trading?",
+                options: ["Getting trade confirmations", "Seeking info that supports your view", "Confirming stop losses", "Broker confirmation"],
+                correct: 1,
+                explanation: "Confirmation bias is the tendency to seek and interpret information that confirms your existing beliefs while ignoring contradictory evidence."
+            },
+            {
+                category: "Technical Indicators",
+                question: "What does MACD stand for?",
+                options: ["Moving Average Calculation Data", "Moving Average Convergence Divergence", "Market Analysis Calculation Device", "Multiple Asset Correlation Display"],
+                correct: 1,
+                explanation: "MACD (Moving Average Convergence Divergence) is a trend-following momentum indicator that shows the relationship between two moving averages."
+            },
+            {
+                category: "Market Orders",
+                question: "What is a 'Limit Order'?",
+                options: ["Order with daily limit", "Order to buy/sell at specific price or better", "Maximum order size", "Time-limited order"],
+                correct: 1,
+                explanation: "A limit order specifies the maximum price you're willing to pay when buying, or minimum price when selling. It guarantees price but not execution."
+            },
+            {
+                category: "Options Greeks",
+                question: "What does 'Delta' measure in options?",
+                options: ["Time decay", "Price change sensitivity", "Volatility impact", "Interest rate effect"],
+                correct: 1,
+                explanation: "Delta measures how much an option's price changes for every $1 movement in the underlying asset. Ranges from 0 to 1 for calls, 0 to -1 for puts."
             }
         ];
-        
-        let currentQuestion = 0;
-        let score = 0;
-        let streak = 0;
-        let maxStreak = 0;
-        let totalTime = 0;
-        let answeredQuestions = 0;
-        let timer;
-        let timeLeft;
-        let difficulty = 'beginner';
-        let shuffledQuestions = [];
-        
-        const timePerDifficulty = {
-            beginner: 30,
-            pro: 20,
-            legend: 15
-        };
         
         function selectDifficulty(el) {
             document.querySelectorAll('.difficulty-btn').forEach(btn => btn.classList.remove('selected'));
@@ -1302,6 +1921,7 @@
         }
         
         function actualStartQuiz() {
+            // Reset everything
             shuffledQuestions = shuffleArray(questions).slice(0, 15);
             currentQuestion = 0;
             score = 0;
@@ -1309,6 +1929,17 @@
             maxStreak = 0;
             totalTime = 0;
             answeredQuestions = 0;
+            comboMultiplier = 1.0;
+            
+            // Reset power-ups
+            powerups = { skip: 1, fiftyFifty: 1, freeze: 1 };
+            updatePowerupDisplay('skip');
+            updatePowerupDisplay('5050');
+            updatePowerupDisplay('freeze');
+            document.querySelectorAll('.powerup-btn').forEach(btn => btn.classList.remove('disabled'));
+            
+            // Reset achievements
+            Object.keys(achievements).forEach(key => achievements[key].unlocked = false);
             
             document.getElementById('startScreen').style.display = 'none';
             document.getElementById('quizScreen').style.display = 'block';
@@ -1327,7 +1958,7 @@
             
             const letters = ['A', 'B', 'C', 'D'];
             const optionsHtml = q.options.map((opt, i) => `
-                <button class="option-btn" onclick="selectAnswer(${i})" data-index="${i}">
+                <button class="option-btn fade-in" onclick="selectAnswer(${i})" data-index="${i}">
                     <div class="option-letter">${letters[i]}</div>
                     <div>${opt}</div>
                 </button>
@@ -1377,12 +2008,18 @@
             });
             
             streak = 0;
+            comboMultiplier = 1.0;
+            document.getElementById('comboDisplay').classList.remove('active');
             totalTime += timePerDifficulty[difficulty];
             answeredQuestions++;
             
             document.getElementById('explanationText').textContent = q.explanation;
             document.getElementById('explanationBox').style.display = 'block';
             document.getElementById('nextBtn').style.display = 'block';
+            
+            // Shake effect
+            document.querySelector('.question-card').classList.add('shake');
+            setTimeout(() => document.querySelector('.question-card').classList.remove('shake'), 500);
         }
         
         function selectAnswer(index) {
@@ -1410,11 +2047,33 @@
                 streak++;
                 if (streak > maxStreak) maxStreak = streak;
                 
-                // Bonus points for fast answers
-                const bonus = Math.max(0, Math.floor((timeLeft / timePerDifficulty[difficulty]) * 10));
-                document.getElementById('scoreDisplay').innerHTML = `<i class="fas fa-star"></i> ${score * 10 + bonus}`;
+                // Update combo
+                updateCombo();
+                
+                // Calculate points with combo multiplier
+                const basePoints = 10;
+                const timeBonus = Math.max(0, Math.floor((timeLeft / timePerDifficulty[difficulty]) * 5));
+                const comboBonus = Math.floor(basePoints * (comboMultiplier - 1));
+                const totalPoints = Math.floor((basePoints + timeBonus + comboBonus) * comboMultiplier);
+                
+                document.getElementById('scoreDisplay').innerHTML = `<i class="fas fa-star"></i> ${score * 10 + totalPoints}`;
+                
+                // Show score particle
+                createScoreParticle(`+${totalPoints}`, 'var(--correct)');
+                
+                // Achievements
+                if (score === 1) showAchievement('firstCorrect');
+                
+                playSound('correct');
             } else {
                 streak = 0;
+                comboMultiplier = 1.0;
+                document.getElementById('comboDisplay').classList.remove('active');
+                playSound('wrong');
+                
+                // Shake effect
+                document.querySelector('.question-card').classList.add('shake');
+                setTimeout(() => document.querySelector('.question-card').classList.remove('shake'), 500);
             }
             
             document.getElementById('explanationText').textContent = q.explanation;
@@ -1433,11 +2092,10 @@
         }
         
         function calculateIQ() {
-            // Base IQ + bonuses
             const baseIQ = 100;
-            const correctBonus = (score / 15) * 50; // Up to 50 points for correct answers
-            const speedBonus = Math.max(0, 15 - (totalTime / answeredQuestions)) * 1.5; // Speed bonus
-            const streakBonus = maxStreak * 2; // Streak bonus
+            const correctBonus = (score / 15) * 50;
+            const speedBonus = Math.max(0, 15 - (totalTime / answeredQuestions)) * 1.5;
+            const streakBonus = maxStreak * 2;
             const difficultyMultiplier = difficulty === 'legend' ? 1.2 : difficulty === 'pro' ? 1.1 : 1;
             
             return Math.round((baseIQ + correctBonus + speedBonus + streakBonus) * difficultyMultiplier);
@@ -1451,6 +2109,10 @@
             const avgTime = (totalTime / answeredQuestions).toFixed(1);
             const percentile = Math.min(99, Math.round((iq - 80) / 80 * 100));
             
+            // Check achievements
+            if (score === 15) showAchievement('perfectScore');
+            if (avgTime < 10) showAchievement('speedDemon');
+            
             // Save to leaderboard
             saveToLeaderboard(userName, iq, userAvatar);
             
@@ -1462,12 +2124,8 @@
             document.getElementById('avgTime').textContent = avgTime + 's';
             document.getElementById('streakCount').textContent = maxStreak;
             
-            // Update rank display if it exists
             if (document.getElementById('userRank')) {
                 document.getElementById('userRank').textContent = `#${rankData.rank}`;
-            }
-            if (document.getElementById('totalPlayers')) {
-                document.getElementById('totalPlayers').textContent = rankData.total;
             }
             
             // Set result based on score
@@ -1498,6 +2156,11 @@
             document.getElementById('resultTitle').textContent = title;
             document.getElementById('resultDescription').textContent = description;
             document.getElementById('percentileMarker').style.left = percentile + '%';
+            
+            // Animate percentile
+            setTimeout(() => {
+                document.getElementById('percentileFill').style.width = percentile + '%';
+            }, 300);
             
             // Confetti for high scores
             if (iq >= 130) {
@@ -1540,7 +2203,6 @@
         }
         
         function retryQuiz() {
-            // Reset user data for new attempt
             userName = '';
             userAvatar = '';
             document.getElementById('nameInput').value = '';
