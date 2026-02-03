@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!-- Primary Title & Meta Tags -->
+    <title>FREE Mutual Fund Comparison Calculator 2026 - Compare SIP Returns & Performance | BroBillionaire</title>
+    <meta name="title" content="FREE Mutual Fund Comparison Calculator 2026 - Compare SIP Returns & Performance | BroBillionaire">
+    <meta name="description" content="Compare multiple mutual funds side-by-side! FREE calculator for SIP & lumpsum returns, expense ratios, CAGR comparison. Best mutual fund comparison tool India 2026. No signup required!">
+    <meta name="keywords" content="mutual fund comparison, mutual fund calculator, compare mutual funds, SIP comparison calculator, best mutual fund India, mutual fund returns calculator, CAGR comparison, expense ratio comparison, lumpsum vs SIP, mutual fund analyzer, fund comparison tool, mutual fund performance, compare fund returns 2026">
+    <meta name="author" content="BroBillionaire">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://brobillionaire.com/tool-mutual-fund-comparison.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://brobillionaire.com/tool-mutual-fund-comparison.html">
+    <meta property="og:title" content="FREE Mutual Fund Comparison Calculator - Compare SIP Returns">
+    <meta property="og:description" content="Compare multiple mutual funds! Calculate SIP & lumpsum returns, compare CAGR & expense ratios. Best fund comparison tool!">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mutual Fund Comparison Calculator FREE - Compare Fund Returns">
+    <meta name="twitter:description" content="Compare multiple mutual funds side-by-side! SIP & lumpsum returns, CAGR, expense ratios. Professional tool FREE!">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        .tool-container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        .tool-header { text-align: center; padding: 3rem 0; background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border-bottom: 3px solid #C9A227; margin-bottom: 3rem; }
+        .tool-category { display: inline-block; background: linear-gradient(135deg, #C9A227, #a68b1e); color: #000; padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.85rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 1rem; text-transform: uppercase; }
+        .tool-title { font-size: 3rem; color: #fff; margin-bottom: 1rem; font-family: 'Playfair Display', serif; font-weight: 700; }
+        .tool-subtitle { font-size: 1.2rem; color: #ccc; max-width: 900px; margin: 0 auto; line-height: 1.6; }
+        
+        .funds-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+        .fund-card { background: linear-gradient(145deg, #1a1a1a, #252525); border: 2px solid #333; border-radius: 15px; padding: 2rem; box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
+        .fund-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid #C9A227; }
+        .fund-header h3 { color: #C9A227; font-size: 1.5rem; }
+        .remove-btn { background: #dc2626; color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+        .remove-btn:hover { background: #991b1b; }
+        
+        .input-group { margin-bottom: 1.5rem; }
+        .input-label { display: block; color: #fff; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.95rem; }
+        .input-field { width: 100%; background: #0d0d0d; border: 2px solid #333; border-radius: 8px; padding: 1rem; color: #fff; font-size: 1rem; transition: all 0.3s; }
+        .input-field:focus { outline: none; border-color: #C9A227; box-shadow: 0 0 0 3px rgba(201,162,39,0.1); }
+        
+        .investment-type-selector { display: flex; gap: 1rem; margin-bottom: 2rem; }
+        .type-btn { flex: 1; padding: 1rem; background: #0d0d0d; border: 2px solid #333; color: #888; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.3s; }
+        .type-btn.active { border-color: #C9A227; color: #C9A227; background: rgba(201,162,39,0.1); }
+        
+        .add-fund-btn { width: 100%; padding: 1.5rem; background: linear-gradient(135deg, #C9A227, #a68b1e); color: #000; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; margin-bottom: 2rem; transition: all 0.3s; }
+        .add-fund-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(201,162,39,0.3); }
+        
+        .calculate-btn { width: 100%; padding: 1.5rem; background: linear-gradient(135deg, #16a34a, #15803d); color: #fff; border: none; border-radius: 12px; font-size: 1.2rem; font-weight: 700; cursor: pointer; margin-bottom: 2rem; transition: all 0.3s; }
+        .calculate-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(22,163,74,0.3); }
+        
+        .comparison-results { background: linear-gradient(145deg, #0d0d0d, #1a1a1a); border: 2px solid #C9A227; border-radius: 15px; padding: 2rem; margin-bottom: 2rem; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        .comparison-table th { background: #1a1a1a; color: #C9A227; padding: 1rem; text-align: left; font-weight: 600; border-bottom: 2px solid #C9A227; }
+        .comparison-table td { padding: 1rem; color: #ccc; border-bottom: 1px solid #333; }
+        .comparison-table tr:hover { background: #1a1a1a; }
+        .best-performer { background: rgba(34,197,94,0.1) !important; border-left: 4px solid #22c55e; }
+        
+        .chart-container { background: #0d0d0d; border-radius: 15px; padding: 2rem; margin-top: 2rem; border: 2px solid #333; }
+        .chart-wrapper { position: relative; height: 400px; }
+        
+        .winner-banner { background: linear-gradient(135deg, #22c55e, #16a34a); color: #fff; padding: 1.5rem; border-radius: 12px; text-align: center; margin-bottom: 2rem; font-size: 1.2rem; font-weight: 700; }
+        
+        @media (max-width: 968px) {
+            .tool-title { font-size: 2rem; }
+            .funds-container { grid-template-columns: 1fr; }
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Mutual Fund Comparison Calculator",
+        "description": "Compare multiple mutual funds side-by-side with SIP and lumpsum returns calculator",
+        "url": "https://brobillionaire.com/tool-mutual-fund-comparison.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">BroBillionaire</a>
+            <div class="nav-links">
+                <a href="articles.html" class="nav-link">Articles</a>
+                <a href="tools.html" class="nav-link active">Tools</a>
+                <a href="about.html" class="nav-link">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <nav class="breadcrumb-nav">
+        <a href="index.html">Home</a><a href="tools.html">Tools</a><span>Mutual Fund Comparison</span>
+    </nav>
+
+    <header class="tool-header">
+        <div class="tool-container">
+            <div class="tool-category">📊 FREE MUTUAL FUND TOOL</div>
+            <h1 class="tool-title">Mutual Fund Comparison Calculator</h1>
+            <p class="tool-subtitle">Compare multiple mutual funds side-by-side. Calculate SIP & lumpsum returns, analyze CAGR, expense ratios, and total returns to find the best performing funds for your portfolio.</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="tool-container">
+            <div class="investment-type-selector">
+                <button class="type-btn active" data-type="sip" onclick="switchType('sip')">SIP Investment</button>
+                <button class="type-btn" data-type="lumpsum" onclick="switchType('lumpsum')">Lumpsum Investment</button>
+            </div>
+
+            <div id="funds-container" class="funds-container"></div>
+            
+            <button class="add-fund-btn" onclick="addFund()">
+                <i class="fas fa-plus"></i> Add Fund to Compare
+            </button>
+            
+            <button class="calculate-btn" onclick="calculateComparison()">
+                <i class="fas fa-calculator"></i> Compare Funds
+            </button>
+
+            <div id="results" style="display:none;">
+                <div id="winner-banner" class="winner-banner"></div>
+                
+                <div class="comparison-results">
+                    <h2 style="color: #C9A227; font-size: 2rem; margin-bottom: 1.5rem;">📊 Comparison Results</h2>
+                    <div id="comparison-table-container"></div>
+                </div>
+
+                <div class="chart-container">
+                    <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 1.5rem;">Growth Comparison Chart</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="comparisonChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h2>🎯 How to Compare Mutual Funds</h2>
+                <p>Choosing the right mutual fund requires careful analysis of multiple factors. Our comparison tool helps you evaluate funds side-by-side to make informed investment decisions.</p>
+                
+                <h3>Key Factors to Compare</h3>
+                <ul>
+                    <li><strong>Returns (CAGR):</strong> Historical compound annual growth rate shows consistent performance</li>
+                    <li><strong>Expense Ratio:</strong> Lower expenses mean higher net returns for investors</li>
+                    <li><strong>Total Returns:</strong> Final corpus after investment period shows actual wealth creation</li>
+                    <li><strong>Risk Profile:</strong> Standard deviation and volatility indicate investment safety</li>
+                    <li><strong>Fund Manager:</strong> Track record and consistency of fund management team</li>
+                </ul>
+
+                <h3>SIP vs Lumpsum: Which is Better?</h3>
+                <p><strong>SIP (Systematic Investment Plan):</strong> Regular monthly investments help average out market volatility and build wealth through rupee cost averaging. Ideal for salaried investors and long-term goals.</p>
+                <p><strong>Lumpsum:</strong> One-time large investment can give higher returns in bull markets but carries timing risk. Better when you have a windfall or markets are undervalued.</p>
+
+                <div class="highlight-box">
+                    <strong>Pro Tip:</strong> Don't just chase past returns! Consider expense ratio, fund consistency, and alignment with your investment goals. A fund with 12% CAGR and 0.5% expense ratio may beat a 13% CAGR fund with 1.5% expenses over long term.
+                </div>
+
+                <h3>Understanding Expense Ratio Impact</h3>
+                <p>Expense ratio is the annual fee charged by mutual funds. Even a 1% difference compounds significantly over time. For a ₹10 lakh investment over 20 years at 12% returns:</p>
+                <ul>
+                    <li>0.5% expense ratio: Final value ~₹89 lakhs</li>
+                    <li>1.5% expense ratio: Final value ~₹73 lakhs</li>
+                    <li>Difference: ₹16 lakhs lost to higher fees!</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>BroBillionaire</h3>
+                    <p>Premium financial tools and insights for smart investors. Master markets, build wealth.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="tools.html">Tools</a>
+                    <a href="articles.html">Articles</a>
+                    <a href="about.html">About</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="disclaimer.html">Disclaimer</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 BroBillionaire. Educational content only. Not investment advice.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let fundCount = 0;
+        let currentType = 'sip';
+        let chart = null;
+
+        function switchType(type) {
+            currentType = type;
+            document.querySelectorAll('.type-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.type === type);
+            });
+            
+            document.querySelectorAll('.sip-fields').forEach(el => {
+                el.style.display = type === 'sip' ? 'block' : 'none';
+            });
+            document.querySelectorAll('.lumpsum-fields').forEach(el => {
+                el.style.display = type === 'lumpsum' ? 'block' : 'none';
+            });
+        }
+
+        function addFund() {
+            fundCount++;
+            const container = document.getElementById('funds-container');
+            const fundCard = document.createElement('div');
+            fundCard.className = 'fund-card';
+            fundCard.id = `fund-${fundCount}`;
+            fundCard.innerHTML = `
+                <div class="fund-header">
+                    <h3>Fund ${fundCount}</h3>
+                    <button class="remove-btn" onclick="removeFund(${fundCount})">Remove</button>
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Fund Name</label>
+                    <input type="text" class="input-field" id="name-${fundCount}" placeholder="e.g., ICICI Prudential Bluechip">
+                </div>
+                <div class="input-group sip-fields">
+                    <label class="input-label">Monthly SIP Amount (₹)</label>
+                    <input type="number" class="input-field" id="sip-${fundCount}" placeholder="e.g., 10000" value="10000">
+                </div>
+                <div class="input-group lumpsum-fields" style="display:none;">
+                    <label class="input-label">Lumpsum Amount (₹)</label>
+                    <input type="number" class="input-field" id="lumpsum-${fundCount}" placeholder="e.g., 500000" value="500000">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Expected Annual Returns (CAGR %)</label>
+                    <input type="number" class="input-field" id="cagr-${fundCount}" placeholder="e.g., 12" value="12" step="0.1">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Expense Ratio (%)</label>
+                    <input type="number" class="input-field" id="expense-${fundCount}" placeholder="e.g., 0.75" value="0.75" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Investment Period (Years)</label>
+                    <input type="number" class="input-field" id="period-${fundCount}" placeholder="e.g., 10" value="10">
+                </div>
+            `;
+            container.appendChild(fundCard);
+        }
+
+        function removeFund(id) {
+            const fund = document.getElementById(`fund-${id}`);
+            if(fund) fund.remove();
+        }
+
+        function calculateComparison() {
+            const funds = [];
+            const fundCards = document.querySelectorAll('.fund-card');
+            
+            if(fundCards.length < 2) {
+                alert('Please add at least 2 funds to compare!');
+                return;
+            }
+
+            fundCards.forEach(card => {
+                const id = card.id.split('-')[1];
+                const name = document.getElementById(`name-${id}`).value || `Fund ${id}`;
+                const cagr = parseFloat(document.getElementById(`cagr-${id}`).value);
+                const expense = parseFloat(document.getElementById(`expense-${id}`).value);
+                const period = parseInt(document.getElementById(`period-${id}`).value);
+                
+                let invested, finalValue;
+                
+                if(currentType === 'sip') {
+                    const monthly = parseFloat(document.getElementById(`sip-${id}`).value);
+                    invested = monthly * 12 * period;
+                    const netReturn = cagr - expense;
+                    const monthlyRate = netReturn / 12 / 100;
+                    const months = period * 12;
+                    finalValue = monthly * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate);
+                } else {
+                    const amount = parseFloat(document.getElementById(`lumpsum-${id}`).value);
+                    invested = amount;
+                    const netReturn = cagr - expense;
+                    finalValue = amount * Math.pow(1 + netReturn/100, period);
+                }
+                
+                const returns = finalValue - invested;
+                const totalReturn = (returns / invested) * 100;
+                const netCAGR = cagr - expense;
+                
+                funds.push({ name, cagr, expense, netCAGR, invested, finalValue, returns, totalReturn, period });
+            });
+
+            funds.sort((a, b) => b.finalValue - a.finalValue);
+            displayResults(funds);
+        }
+
+        function displayResults(funds) {
+            const winner = funds[0];
+            document.getElementById('winner-banner').innerHTML = `
+                🏆 Best Performer: <strong>${winner.name}</strong> with ₹${winner.finalValue.toLocaleString('en-IN', {maximumFractionDigits: 0})} final value!
+            `;
+
+            let tableHTML = `
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Fund Name</th>
+                            <th>Invested</th>
+                            <th>Final Value</th>
+                            <th>Returns</th>
+                            <th>CAGR %</th>
+                            <th>Expense %</th>
+                            <th>Net CAGR %</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            funds.forEach((fund, index) => {
+                const rowClass = index === 0 ? 'best-performer' : '';
+                tableHTML += `
+                    <tr class="${rowClass}">
+                        <td><strong>${fund.name}</strong></td>
+                        <td>₹${fund.invested.toLocaleString('en-IN', {maximumFractionDigits: 0})}</td>
+                        <td>₹${fund.finalValue.toLocaleString('en-IN', {maximumFractionDigits: 0})}</td>
+                        <td style="color: #22c55e;">+₹${fund.returns.toLocaleString('en-IN', {maximumFractionDigits: 0})}</td>
+                        <td>${fund.cagr.toFixed(2)}%</td>
+                        <td>${fund.expense.toFixed(2)}%</td>
+                        <td><strong>${fund.netCAGR.toFixed(2)}%</strong></td>
+                    </tr>
+                `;
+            });
+
+            tableHTML += '</tbody></table>';
+            document.getElementById('comparison-table-container').innerHTML = tableHTML;
+            document.getElementById('results').style.display = 'block';
+            
+            drawChart(funds);
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function drawChart(funds) {
+            const ctx = document.getElementById('comparisonChart').getContext('2d');
+            
+            if(chart) chart.destroy();
+
+            const period = funds[0].period;
+            const labels = Array.from({length: period + 1}, (_, i) => `Year ${i}`);
+            
+            const datasets = funds.map((fund, idx) => {
+                const colors = ['#C9A227', '#22c55e', '#3b82f6', '#8b5cf6', '#f59e0b', '#ec4899'];
+                const color = colors[idx % colors.length];
+                
+                const data = [];
+                for(let year = 0; year <= period; year++) {
+                    if(currentType === 'sip') {
+                        const monthly = fund.invested / (period * 12);
+                        const monthlyRate = fund.netCAGR / 12 / 100;
+                        const months = year * 12;
+                        const value = months > 0 ? monthly * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate) : 0;
+                        data.push(value);
+                    } else {
+                        data.push(fund.invested * Math.pow(1 + fund.netCAGR/100, year));
+                    }
+                }
+                
+                return {
+                    label: fund.name,
+                    data: data,
+                    borderColor: color,
+                    backgroundColor: color + '20',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    fill: true
+                };
+            });
+
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: { labels, datasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#fff', font: { size: 12, weight: '600' } } },
+                        tooltip: {
+                            backgroundColor: '#1a1a1a',
+                            titleColor: '#C9A227',
+                            bodyColor: '#ccc',
+                            borderColor: '#C9A227',
+                            borderWidth: 1,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ₹' + context.parsed.y.toLocaleString('en-IN', {maximumFractionDigits: 0});
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#333' },
+                            ticks: {
+                                color: '#ccc',
+                                callback: function(value) {
+                                    return '₹' + (value/100000).toFixed(1) + 'L';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: { color: '#333' },
+                            ticks: { color: '#ccc' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize with 2 funds
+        addFund();
+        addFund();
+    </script>
+</body>
+</html>

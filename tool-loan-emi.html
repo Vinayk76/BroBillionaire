@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>EMI Calculator - Loan & Mortgage Calculator | BroBillionaire</title>
+    <meta name="title" content="EMI Calculator - Loan & Mortgage Calculator | BroBillionaire">
+    <meta name="description" content="Free EMI calculator for home loan, car loan, personal loan. Calculate monthly installments, total interest, and loan amortization schedule. Compare loan options easily.">
+    <meta name="keywords" content="EMI calculator, loan calculator, home loan EMI, car loan calculator, mortgage calculator, loan amortization, interest calculator">
+    <meta name="author" content="BroBillionaire">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://brobillionaire.com/tool-loan-emi.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://brobillionaire.com/tool-loan-emi.html">
+    <meta property="og:title" content="EMI Calculator - Loan & Mortgage Calculator">
+    <meta property="og:description" content="Free EMI calculator for home loan, car loan, personal loan. Calculate monthly installments, total interest, and loan amortization schedule.">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    <meta property="og:site_name" content="BroBillionaire">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://brobillionaire.com/tool-loan-emi.html">
+    <meta property="twitter:title" content="EMI Calculator - Loan & Mortgage Calculator">
+    <meta property="twitter:description" content="Free EMI calculator for home loan, car loan, personal loan. Calculate monthly installments.">
+    <meta property="twitter:image" content="https://brobillionaire.com/og-image.jpg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            color: white;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            color: rgba(255,255,255,0.95);
+            font-size: 1.1em;
+        }
+        
+        .calculator-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .calculator-box {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        
+        .input-group {
+            margin-bottom: 30px;
+        }
+        
+        label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #f5576c;
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+        
+        .value-display {
+            color: #f093fb;
+            font-weight: 700;
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: linear-gradient(to right, #f093fb, #f5576c);
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #f5576c;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #f5576c;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .results-box {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        
+        .big-result {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .big-result h3 {
+            font-size: 1em;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .big-result .amount {
+            font-size: 3em;
+            font-weight: 700;
+        }
+        
+        .breakdown {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            border-left: 4px solid #f093fb;
+        }
+        
+        .breakdown-label {
+            color: #666;
+            font-weight: 600;
+        }
+        
+        .breakdown-value {
+            color: #f5576c;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+        
+        .chart-container {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            margin-top: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            grid-column: 1 / -1;
+        }
+        
+        .pie-chart {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+        }
+        
+        .pie {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #f093fb 0deg,
+                #f093fb var(--principal-deg),
+                #f5576c var(--principal-deg),
+                #f5576c 360deg
+            );
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .pie-center {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        
+        .amortization {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            margin-top: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            grid-column: 1 / -1;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        tr:hover {
+            background: #fef5f9;
+        }
+        
+        @media (max-width: 968px) {
+            .calculator-wrapper {
+                grid-template-columns: 1fr;
+            }
+            
+            .chart-container, .amortization {
+                grid-column: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏦 EMI Calculator</h1>
+            <p class="subtitle">Calculate Your Loan EMI & Plan Your Finances</p>
+        </header>
+        
+        <div class="calculator-wrapper">
+            <div class="calculator-box">
+                <h2 style="color: #f5576c; margin-bottom: 25px;">Loan Details</h2>
+                
+                <div class="input-group">
+                    <label>
+                        <span>Loan Amount</span>
+                        <span class="value-display">₹<span id="loanDisplay">10,00,000</span></span>
+                    </label>
+                    <input type="range" id="loanAmount" min="100000" max="50000000" step="100000" value="1000000" oninput="calculateEMI()">
+                </div>
+                
+                <div class="input-group">
+                    <label>
+                        <span>Interest Rate (% per annum)</span>
+                        <span class="value-display"><span id="rateDisplay">8.5</span>%</span>
+                    </label>
+                    <input type="range" id="interestRate" min="1" max="20" step="0.1" value="8.5" oninput="calculateEMI()">
+                </div>
+                
+                <div class="input-group">
+                    <label>
+                        <span>Loan Tenure</span>
+                        <span class="value-display"><span id="tenureDisplay">20</span> years</span>
+                    </label>
+                    <input type="range" id="tenure" min="1" max="30" step="1" value="20" oninput="calculateEMI()">
+                </div>
+                
+                <div style="margin-top: 30px; padding: 20px; background: linear-gradient(135deg, rgba(240, 147, 251, 0.1), rgba(245, 87, 108, 0.1)); border-radius: 10px;">
+                    <h4 style="color: #f5576c; margin-bottom: 10px;">Loan Type Presets</h4>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button onclick="setLoanType('home')" style="flex: 1; min-width: 120px; padding: 10px; background: linear-gradient(135deg, #f093fb, #f5576c); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">Home Loan</button>
+                        <button onclick="setLoanType('car')" style="flex: 1; min-width: 120px; padding: 10px; background: linear-gradient(135deg, #f093fb, #f5576c); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">Car Loan</button>
+                        <button onclick="setLoanType('personal')" style="flex: 1; min-width: 120px; padding: 10px; background: linear-gradient(135deg, #f093fb, #f5576c); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">Personal Loan</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="results-box">
+                <div class="big-result">
+                    <h3>Monthly EMI</h3>
+                    <div class="amount">₹<span id="emiAmount">0</span></div>
+                </div>
+                
+                <div class="breakdown">
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Principal Amount</span>
+                        <span class="breakdown-value">₹<span id="principalAmount">0</span></span>
+                    </div>
+                    
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Total Interest</span>
+                        <span class="breakdown-value">₹<span id="totalInterest">0</span></span>
+                    </div>
+                    
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Total Amount Payable</span>
+                        <span class="breakdown-value">₹<span id="totalAmount">0</span></span>
+                    </div>
+                    
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Total Months</span>
+                        <span class="breakdown-value"><span id="totalMonths">0</span> months</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <h3 style="color: #f5576c; text-align: center; margin-bottom: 10px;">Principal vs Interest Breakdown</h3>
+                <div class="pie-chart">
+                    <div class="pie" id="pieChart">
+                        <div class="pie-center">
+                            <div style="font-size: 0.9em; color: #999;">Total</div>
+                            <div style="font-size: 1.5em; font-weight: 700; color: #f5576c;">₹<span id="pieTotal">0</span>L</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #f093fb;"></div>
+                        <span>Principal: ₹<span id="legendPrincipal">0</span>L (<span id="principalPercent">0</span>%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #f5576c;"></div>
+                        <span>Interest: ₹<span id="legendInterest">0</span>L (<span id="interestPercent">0</span>%)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="amortization">
+                <h3 style="color: #f5576c; margin-bottom: 20px;">Amortization Schedule (Yearly)</h3>
+                <table id="amortizationTable">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Opening Balance</th>
+                            <th>EMI Paid</th>
+                            <th>Principal</th>
+                            <th>Interest</th>
+                            <th>Closing Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function setLoanType(type) {
+            if (type === 'home') {
+                document.getElementById('loanAmount').value = 3000000;
+                document.getElementById('interestRate').value = 8.5;
+                document.getElementById('tenure').value = 20;
+            } else if (type === 'car') {
+                document.getElementById('loanAmount').value = 800000;
+                document.getElementById('interestRate').value = 9.5;
+                document.getElementById('tenure').value = 7;
+            } else if (type === 'personal') {
+                document.getElementById('loanAmount').value = 500000;
+                document.getElementById('interestRate').value = 12;
+                document.getElementById('tenure').value = 5;
+            }
+            calculateEMI();
+        }
+        
+        function calculateEMI() {
+            const principal = parseFloat(document.getElementById('loanAmount').value);
+            const annualRate = parseFloat(document.getElementById('interestRate').value);
+            const years = parseFloat(document.getElementById('tenure').value);
+            
+            // Update displays
+            document.getElementById('loanDisplay').textContent = (principal / 100000).toFixed(2);
+            document.getElementById('rateDisplay').textContent = annualRate.toFixed(1);
+            document.getElementById('tenureDisplay').textContent = years;
+            
+            const monthlyRate = annualRate / 12 / 100;
+            const months = years * 12;
+            
+            // EMI Formula: P * r * (1+r)^n / ((1+r)^n - 1)
+            const emi = principal * monthlyRate * Math.pow(1 + monthlyRate, months) / (Math.pow(1 + monthlyRate, months) - 1);
+            
+            const totalAmount = emi * months;
+            const totalInterest = totalAmount - principal;
+            
+            // Display results
+            document.getElementById('emiAmount').textContent = emi.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('principalAmount').textContent = principal.toLocaleString('en-IN');
+            document.getElementById('totalInterest').textContent = totalInterest.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('totalAmount').textContent = totalAmount.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('totalMonths').textContent = months;
+            
+            // Update pie chart
+            const principalPercent = (principal / totalAmount * 100).toFixed(1);
+            const interestPercent = (totalInterest / totalAmount * 100).toFixed(1);
+            const principalDeg = (principal / totalAmount * 360).toFixed(2);
+            
+            document.getElementById('pieChart').style.setProperty('--principal-deg', principalDeg + 'deg');
+            document.getElementById('pieTotal').textContent = (totalAmount / 100000).toFixed(1);
+            document.getElementById('legendPrincipal').textContent = (principal / 100000).toFixed(1);
+            document.getElementById('legendInterest').textContent = (totalInterest / 100000).toFixed(1);
+            document.getElementById('principalPercent').textContent = principalPercent;
+            document.getElementById('interestPercent').textContent = interestPercent;
+            
+            // Generate amortization schedule
+            let balance = principal;
+            let tableHTML = '';
+            
+            for (let year = 1; year <= years; year++) {
+                const openingBalance = balance;
+                let yearlyPrincipal = 0;
+                let yearlyInterest = 0;
+                
+                for (let month = 1; month <= 12; month++) {
+                    const interest = balance * monthlyRate;
+                    const principalPaid = emi - interest;
+                    balance -= principalPaid;
+                    
+                    yearlyPrincipal += principalPaid;
+                    yearlyInterest += interest;
+                }
+                
+                const yearlyEMI = emi * 12;
+                
+                tableHTML += `
+                    <tr>
+                        <td style="font-weight: 700; color: #f5576c;">${year}</td>
+                        <td>₹${openingBalance.toLocaleString('en-IN', {maximumFractionDigits: 0})}</td>
+                        <td>₹${yearlyEMI.toLocaleString('en-IN', {maximumFractionDigits: 0})}</td>
+                        <td style="color: #f093fb; font-weight: 600;">₹${yearlyPrincipal.toLocaleString('en-IN', {maximumFractionDigits: 0})}</td>
+                        <td style="color: #f5576c; font-weight: 600;">₹${yearlyInterest.toLocaleString('en-IN', {maximumFractionDigits: 0})}</td>
+                        <td style="font-weight: 700;">₹${Math.max(0, balance).toLocaleString('en-IN', {maximumFractionDigits: 0})}</td>
+                    </tr>
+                `;
+            }
+            
+            document.getElementById('tableBody').innerHTML = tableHTML;
+        }
+        
+        // Initial calculation
+        calculateEMI();
+    </script>
+</body>
+</html>

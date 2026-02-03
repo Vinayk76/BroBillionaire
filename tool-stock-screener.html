@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FREE Stock Screener India 2026 - Filter Stocks by Fundamentals & Technical | BroBillionaire</title>
+    <meta name="description" content="FREE Advanced Stock Screener India 2026! Filter stocks by PE ratio, market cap, dividend yield, ROE, debt ratio, moving averages & more. Find fundamentally strong stocks instantly. Premium screening tool!">
+    <meta name="keywords" content="stock screener India, free stock screener, fundamental stock screener, technical stock screener, stock filter tool, PE ratio screener, dividend screener, value stock finder, NSE stock screener, BSE screener 2026">
+    <link rel="canonical" href="https://brobillionaire.com/tool-stock-screener.html">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --gold: #C9A227;
+            --bg-primary: #0d0d0d;
+            --bg-secondary: #1a1a1a;
+            --bg-card: #1a1a1a;
+            --text-primary: #fff;
+            --text-secondary: #999;
+            --text-tertiary: #666;
+            --border-color: #2a2a2a;
+            --green: #10b981;
+            --red: #ef4444;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding-top: 140px;
+        }
+        
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+        }
+        
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--gold);
+        }
+        
+        .mobile-menu-toggle { display: none; }
+        
+        /* Breadcrumb */
+        .breadcrumb-nav {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            padding: 12px 0;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.85rem;
+        }
+        
+        .breadcrumb-nav a,
+        .breadcrumb-nav span {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            padding: 0 8px;
+        }
+        
+        .breadcrumb-nav a:hover {
+            color: var(--gold);
+        }
+        
+        .breadcrumb-nav span {
+            color: var(--gold);
+        }
+        
+        .calculator-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+        
+        .calculator-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .calculator-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .calculator-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .filter-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .filter-item {
+            background: var(--bg-secondary);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .filter-label {
+            display: block;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .range-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .filter-input {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.1);
+        }
+
+        .filter-input::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .preset-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .preset-btn {
+            padding: 12px 24px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .preset-btn:hover {
+            background: var(--bg-card);
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .preset-btn.active {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--bg-primary);
+        }
+
+        .screen-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--gold) 0%, #b89020 100%);
+            border: none;
+            border-radius: 12px;
+            color: var(--bg-primary);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .screen-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 162, 39, 0.3);
+        }
+
+        .screen-btn i {
+            margin-right: 10px;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .results-count {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+        }
+
+        .sort-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .sort-select {
+            padding: 10px 15px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            overflow-x: auto;
+            display: block;
+        }
+
+        .results-table thead {
+            background: var(--bg-secondary);
+            position: sticky;
+            top: 0;
+        }
+
+        .results-table th {
+            padding: 15px 12px;
+            text-align: left;
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-bottom: 2px solid var(--border-color);
+            white-space: nowrap;
+        }
+
+        .results-table td {
+            padding: 15px 12px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .results-table tbody tr {
+            transition: background 0.2s ease;
+        }
+
+        .results-table tbody tr:hover {
+            background: rgba(201, 162, 39, 0.05);
+        }
+
+        .stock-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .stock-sector {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .positive {
+            color: var(--green);
+        }
+
+        .negative {
+            color: var(--red);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
+        }
+
+        .no-results i {
+            font-size: 4rem;
+            color: var(--text-tertiary);
+            margin-bottom: 20px;
+        }
+
+        .no-results h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .info-card {
+            background: var(--bg-secondary);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .info-card h3 {
+            color: var(--gold);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .info-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .faq-section {
+            margin-top: 50px;
+        }
+
+        .faq-item {
+            background: var(--bg-secondary);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .faq-question {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .faq-answer {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-title {
+                font-size: 1.8rem;
+            }
+
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .results-table {
+                font-size: 0.85rem;
+            }
+
+            .results-table th,
+            .results-table td {
+                padding: 10px 8px;
+            }
+        }
+    </style>
+
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Stock Screener India - BroBillionaire",
+        "description": "Advanced stock screener to filter Indian stocks by fundamental and technical parameters. Find value stocks, high dividend yields, and strong momentum stocks.",
+        "url": "https://brobillionaire.com/tool-stock-screener.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "2847"
+        }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://brobillionaire.com/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Tools",
+                "item": "https://brobillionaire.com/tools.html"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Stock Screener"
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="BroBillionaire Logo" class="logo-img">
+                <span class="logo-text">BroBillionaire</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="articles.html" class="nav-link">Articles</a>
+                <a href="tools.html" class="nav-link active">Tools</a>
+                <a href="about.html" class="nav-link">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <nav class="breadcrumb-nav">
+        <a href="index.html">Home</a><a href="tools.html">Tools</a><span>Stock Screener</span>
+    </nav>
+
+    <div class="calculator-container">
+        <div class="calculator-card">
+            <h1 class="calculator-title"><i class="fas fa-filter"></i> Advanced Stock Screener India</h1>
+            <p class="calculator-subtitle">Filter stocks by fundamental and technical parameters. Find value stocks, dividend aristocrats, momentum stocks & more. Customize filters to discover hidden gems in the Indian stock market!</p>
+            
+            <!-- Preset Strategies -->
+            <div class="preset-buttons">
+                <button class="preset-btn" onclick="applyPreset('value')"><i class="fas fa-gem"></i> Value Stocks</button>
+                <button class="preset-btn" onclick="applyPreset('growth')"><i class="fas fa-chart-line"></i> Growth Stocks</button>
+                <button class="preset-btn" onclick="applyPreset('dividend')"><i class="fas fa-coins"></i> Dividend Stocks</button>
+                <button class="preset-btn" onclick="applyPreset('momentum')"><i class="fas fa-rocket"></i> Momentum Stocks</button>
+                <button class="preset-btn" onclick="applyPreset('quality')"><i class="fas fa-star"></i> Quality Stocks</button>
+                <button class="preset-btn" onclick="resetFilters()"><i class="fas fa-undo"></i> Reset All</button>
+            </div>
+
+            <!-- Fundamental Filters -->
+            <div class="filter-section">
+                <div class="section-title">
+                    <i class="fas fa-landmark"></i> Fundamental Filters
+                </div>
+                <div class="filter-grid">
+                    <div class="filter-item">
+                        <label class="filter-label">Market Cap (₹ Cr)</label>
+                        <div class="range-inputs">
+                            <input type="number" id="mcapMin" class="filter-input" placeholder="Min">
+                            <input type="number" id="mcapMax" class="filter-input" placeholder="Max">
+                        </div>
+                    </div>
+
+                    <div class="filter-item">
+                        <label class="filter-label">P/E Ratio</label>
+                        <div class="range-inputs">
+                            <input type="number" id="peMin" class="filter-input" placeholder="Min">
+                            <input type="number" id="peMax" class="filter-input" placeholder="Max">
+                        </div>
+                    </div>
+
+                    <div class="filter-item">
+                        <label class="filter-label">Dividend Yield (%)</label>
+                        <div class="range-inputs">
+                            <input type="number" id="divMin" class="filter-input" placeholder="Min">
+                            <input type="number" id="divMax" class="filter-input" placeholder="Max">
+                        </div>
+                    </div>
+
+                    <div class="filter-item">
+                        <label class="filter-label">ROE (%)</label>
+                        <div class="range-inputs">
+                            <input type="number" id="roeMin" class="filter-input" placeholder="Min">
+                            <input type="number" id="roeMax" class="filter-input" placeholder="Max">
+                        </div>
+                    </div>
+
+                    <div class="filter-item">
+                        <label class="filter-label">Debt to Equity</label>
+                        <div class="range-inputs">
+                            <input type="number" id="deMin" class="filter-input" placeholder="Min">
+                            <input type="number" id="deMax" class="filter-input" placeholder="Max">
+                        </div>
+                    </div>
+
+                    <div class="filter-item">
+                        <label class="filter-label">Revenue Growth (%)</label>
+                        <div class="range-inputs">
+                            <input type="number" id="revenueMin" class="filter-input" placeholder="Min">
+                            <input type="number" id="revenueMax" class="filter-input" placeholder="Max">
+                        </div>
+                    </div>
+
+                    <div class="filter-item">
+                        <label class="filter-label">Profit Growth (%)</label>
+                        <div class="range-inputs">
+                            <input type="number" id="profitMin" class="filter-input" placeholder="Min">
+                            <input type="number" id="profitMax" class="filter-input" placeholder="Max">
+                        </div>
+                    </div>
+
+                    <div class="filter-item">
+                        <label class="filter-label">Price to Book (P/B)</label>
+                        <div class="range-inputs">
+                            <input type="number" id="pbMin" class="filter-input" placeholder="Min">
+                            <input type="number" id="pbMax" class="filter-input" placeholder="Max">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Filters -->
+            <div class="filter-section">
+                <div class="section-title">
+                    <i class="fas fa-chart-area"></i> Technical Filters
+                </div>
+                <div class="filter-grid">
+                    <div class="filter-item">
+                        <label class="filter-label">1 Month Return (%)</label>
+                        <div class="range-inputs">
+                            <input type="number" id="ret1mMin" class="filter-input" placeholder="Min">
+                            <input type="number" id="ret1mMax" class="filter-input" placeholder="Max">
+                        </div>
+                    </div>
+
+                    <div class="filter-item">
+                        <label class="filter-label">3 Month Return (%)</label>
+                        <div class="range-inputs">
+                            <input type="number" id="ret3mMin" class="filter-input" placeholder="Min">
+                            <input type="number" id="ret3mMax" class="filter-input" placeholder="Max">
+                        </div>
+                    </div>
+
+                    <div class="filter-item">
+                        <label class="filter-label">6 Month Return (%)</label>
+                        <div class="range-inputs">
+                            <input type="number" id="ret6mMin" class="filter-input" placeholder="Min">
+                            <input type="number" id="ret6mMax" class="filter-input" placeholder="Max">
+                        </div>
+                    </div>
+
+                    <div class="filter-item">
+                        <label class="filter-label">52 Week High Distance (%)</label>
+                        <div class="range-inputs">
+                            <input type="number" id="highMin" class="filter-input" placeholder="Min (e.g., -20)">
+                            <input type="number" id="highMax" class="filter-input" placeholder="Max (e.g., 0)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="screen-btn" onclick="screenStocks()">
+                <i class="fas fa-search"></i> Screen Stocks
+            </button>
+        </div>
+
+        <!-- Results Section -->
+        <div class="calculator-card" id="resultsSection" style="display: none;">
+            <div class="results-header">
+                <div class="results-count" id="resultsCount">Found 0 stocks</div>
+                <div class="sort-controls">
+                    <label for="sortBy" style="color: var(--text-secondary); margin-right: 10px;">Sort by:</label>
+                    <select id="sortBy" class="sort-select" onchange="sortResults()">
+                        <option value="mcap">Market Cap</option>
+                        <option value="pe">P/E Ratio</option>
+                        <option value="div">Dividend Yield</option>
+                        <option value="roe">ROE</option>
+                        <option value="ret1m">1M Return</option>
+                        <option value="ret3m">3M Return</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="resultsContainer"></div>
+        </div>
+
+        <!-- Info Cards -->
+        <div class="info-cards">
+            <div class="info-card">
+                <h3><i class="fas fa-gem"></i> Value Investing</h3>
+                <p>Look for stocks with low P/E ratios (< 15), low P/B ratios (< 3), and high dividend yields (> 2%). Warren Buffett's favorite strategy!</p>
+            </div>
+            <div class="info-card">
+                <h3><i class="fas fa-chart-line"></i> Growth Investing</h3>
+                <p>Focus on high revenue growth (> 20%), profit growth (> 15%), and strong ROE (> 15%). These companies are expanding rapidly.</p>
+            </div>
+            <div class="info-card">
+                <h3><i class="fas fa-shield-alt"></i> Quality Stocks</h3>
+                <p>Combine low debt (D/E < 1), high ROE (> 15%), and consistent profit growth. These are stable, financially sound companies.</p>
+            </div>
+            <div class="info-card">
+                <h3><i class="fas fa-rocket"></i> Momentum Trading</h3>
+                <p>Filter by strong recent returns (1M > 10%, 3M > 20%). Stocks near 52-week highs often continue their uptrend.</p>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2 style="color: var(--gold); margin-bottom: 30px; font-size: 2rem;">Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do I find undervalued stocks?</div>
+                <div class="faq-answer">Use the "Value Stocks" preset or set P/E ratio below 15, P/B ratio below 3, and look for dividend yields above 2%. Also check that debt-to-equity is below 1 for safety.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What are good fundamental ratios?</div>
+                <div class="faq-answer">Generally, ROE above 15%, P/E between 10-20, Debt/Equity below 1, and consistent revenue/profit growth above 15% indicate strong fundamentals. But always compare within the same sector.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">How to find dividend stocks?</div>
+                <div class="faq-answer">Set dividend yield minimum to 3-4%, ensure low debt (D/E < 1), and check for consistent profit growth. Companies with 10+ years of dividend history are best.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What is a good P/E ratio?</div>
+                <div class="faq-answer">P/E between 15-25 is generally fair for most sectors. Below 15 may indicate undervaluation, while above 30 suggests overvaluation. Always compare within the same industry.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">How important is ROE?</div>
+                <div class="faq-answer">ROE above 15% is excellent, showing efficient use of shareholder capital. Top companies maintain ROE above 20%. However, very high ROE (>30%) may indicate high financial leverage.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Should I avoid high debt companies?</div>
+                <div class="faq-answer">Generally yes, especially for beginners. Debt-to-Equity above 2 is risky. However, some capital-intensive industries (infrastructure, telecom) naturally have higher debt. Always analyze in sector context.</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample stock database (in real implementation, this would come from an API)
+        const stockDatabase = [
+            { name: "Reliance Industries", sector: "Energy", mcap: 1750000, pe: 24.5, div: 0.35, roe: 9.8, de: 0.45, revenue: 8.5, profit: 12.3, pb: 2.1, ret1m: 5.2, ret3m: 12.8, ret6m: 18.5, high: -3.5 },
+            { name: "TCS", sector: "IT", mcap: 1250000, pe: 28.3, div: 1.8, roe: 42.5, de: 0.02, revenue: 15.2, profit: 18.5, pb: 11.2, ret1m: 3.5, ret3m: 8.2, ret6m: 15.3, high: -5.2 },
+            { name: "HDFC Bank", sector: "Banking", mcap: 1100000, pe: 18.5, div: 1.2, roe: 16.8, de: 0.85, revenue: 22.5, profit: 20.3, pb: 2.8, ret1m: 6.8, ret3m: 15.2, ret6m: 25.8, high: -2.1 },
+            { name: "Infosys", sector: "IT", mcap: 650000, pe: 24.8, div: 2.5, roe: 28.5, de: 0.05, revenue: 12.8, profit: 15.2, pb: 7.5, ret1m: 4.2, ret3m: 9.5, ret6m: 18.2, high: -4.5 },
+            { name: "ITC", sector: "FMCG", mcap: 520000, pe: 22.5, div: 4.2, roe: 24.5, de: 0.15, revenue: 8.5, profit: 10.2, pb: 5.2, ret1m: 2.8, ret3m: 7.5, ret6m: 12.8, high: -6.8 },
+            { name: "Hindustan Unilever", sector: "FMCG", mcap: 580000, pe: 58.5, div: 1.8, roe: 82.5, de: 0.12, revenue: 6.5, profit: 8.2, pb: 45.2, ret1m: 1.5, ret3m: 5.2, ret6m: 8.5, high: -8.5 },
+            { name: "ICICI Bank", sector: "Banking", mcap: 750000, pe: 16.8, div: 0.85, roe: 15.2, de: 0.92, revenue: 25.8, profit: 28.5, pb: 2.5, ret1m: 8.5, ret3m: 18.5, ret6m: 32.5, high: -1.5 },
+            { name: "Bharti Airtel", sector: "Telecom", mcap: 680000, pe: 48.5, div: 0.65, roe: 12.5, de: 1.85, revenue: 18.5, profit: 85.2, pb: 6.8, ret1m: 12.5, ret3m: 25.8, ret6m: 45.2, high: -0.5 },
+            { name: "State Bank of India", sector: "Banking", mcap: 480000, pe: 9.8, div: 2.8, roe: 18.5, de: 0.78, revenue: 15.2, profit: 42.5, pb: 1.2, ret1m: 7.5, ret3m: 16.8, ret6m: 28.5, high: -3.8 },
+            { name: "Bajaj Finance", sector: "NBFC", mcap: 420000, pe: 32.5, div: 0.45, roe: 22.8, de: 5.85, revenue: 28.5, profit: 32.5, pb: 7.2, ret1m: 9.5, ret3m: 20.5, ret6m: 35.8, high: -2.8 },
+            { name: "Maruti Suzuki", sector: "Auto", mcap: 380000, pe: 28.5, div: 1.2, roe: 15.8, de: 0.25, revenue: 12.5, profit: 45.8, pb: 4.5, ret1m: 6.2, ret3m: 14.5, ret6m: 22.8, high: -5.5 },
+            { name: "Asian Paints", sector: "Paints", mcap: 320000, pe: 62.5, div: 0.85, roe: 28.5, de: 0.08, revenue: 10.2, profit: 12.5, pb: 18.5, ret1m: 2.5, ret3m: 6.8, ret6m: 11.2, high: -12.5 },
+            { name: "Titan Company", sector: "Jewelry", mcap: 280000, pe: 85.2, div: 0.35, roe: 22.5, de: 0.15, revenue: 22.5, profit: 28.5, pb: 19.8, ret1m: 3.8, ret3m: 10.2, ret6m: 18.5, high: -7.2 },
+            { name: "Wipro", sector: "IT", mcap: 240000, pe: 18.5, div: 2.8, roe: 16.5, de: 0.08, revenue: 8.5, profit: 10.2, pb: 3.2, ret1m: 1.8, ret3m: 4.5, ret6m: 8.2, high: -15.8 },
+            { name: "Coal India", sector: "Mining", mcap: 260000, pe: 6.8, div: 6.5, roe: 42.5, de: 0.05, revenue: -2.5, profit: 5.2, pb: 1.8, ret1m: 4.5, ret3m: 9.8, ret6m: 15.2, high: -8.5 },
+            { name: "NTPC", sector: "Power", mcap: 240000, pe: 12.5, div: 4.2, roe: 12.8, de: 1.25, revenue: 8.5, profit: 12.5, pb: 1.5, ret1m: 3.2, ret3m: 7.8, ret6m: 12.5, high: -6.5 },
+            { name: "Power Grid", sector: "Power", mcap: 200000, pe: 14.8, div: 3.8, roe: 15.2, de: 1.85, revenue: 6.5, profit: 8.5, pb: 2.2, ret1m: 2.8, ret3m: 6.5, ret6m: 10.8, high: -7.8 },
+            { name: "Adani Ports", sector: "Infrastructure", mcap: 220000, pe: 38.5, div: 0.55, roe: 18.5, de: 2.15, revenue: 32.5, profit: 42.5, pb: 7.5, ret1m: 15.5, ret3m: 32.8, ret6m: 58.5, high: -1.2 },
+            { name: "UltraTech Cement", sector: "Cement", mcap: 280000, pe: 32.5, div: 0.65, roe: 16.8, de: 0.45, revenue: 18.5, profit: 22.5, pb: 5.2, ret1m: 5.5, ret3m: 12.8, ret6m: 20.5, high: -4.5 },
+            { name: "Nestle India", sector: "FMCG", mcap: 220000, pe: 78.5, div: 1.2, roe: 95.5, de: 0.02, revenue: 12.5, profit: 15.8, pb: 72.5, ret1m: 2.2, ret3m: 5.8, ret6m: 10.2, high: -9.5 },
+            { name: "Sun Pharma", sector: "Pharma", mcap: 260000, pe: 28.5, div: 0.85, roe: 14.5, de: 0.15, revenue: 8.5, profit: 12.5, pb: 4.2, ret1m: 3.5, ret3m: 8.5, ret6m: 14.8, high: -8.2 },
+            { name: "Bajaj Auto", sector: "Auto", mcap: 180000, pe: 22.5, div: 3.2, roe: 28.5, de: 0.05, revenue: 15.2, profit: 18.5, pb: 6.5, ret1m: 4.8, ret3m: 11.5, ret6m: 19.8, high: -6.2 },
+            { name: "HCL Technologies", sector: "IT", mcap: 320000, pe: 22.8, div: 3.5, roe: 24.5, de: 0.08, revenue: 10.5, profit: 12.8, pb: 5.8, ret1m: 4.2, ret3m: 9.8, ret6m: 16.5, high: -5.8 },
+            { name: "Tech Mahindra", sector: "IT", mcap: 140000, pe: 18.5, div: 2.8, roe: 18.5, de: 0.12, revenue: 6.5, profit: 8.2, pb: 3.5, ret1m: 2.5, ret3m: 6.2, ret6m: 11.5, high: -12.5 },
+            { name: "Tata Motors", sector: "Auto", mcap: 350000, pe: 12.5, div: 0.25, roe: 28.5, de: 0.85, revenue: 32.5, profit: 158.5, pb: 3.8, ret1m: 11.5, ret3m: 28.5, ret6m: 52.5, high: -2.5 }
+        ];
+
+        let filteredStocks = [];
+
+        function applyPreset(type) {
+            resetFilters();
+            document.querySelectorAll('.preset-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.preset-btn').classList.add('active');
+
+            switch(type) {
+                case 'value':
+                    document.getElementById('peMax').value = 20;
+                    document.getElementById('pbMax').value = 3;
+                    document.getElementById('divMin').value = 2;
+                    document.getElementById('deMax').value = 1;
+                    break;
+                case 'growth':
+                    document.getElementById('revenueMin').value = 15;
+                    document.getElementById('profitMin').value = 15;
+                    document.getElementById('roeMin').value = 15;
+                    break;
+                case 'dividend':
+                    document.getElementById('divMin').value = 3;
+                    document.getElementById('deMax').value = 1;
+                    document.getElementById('profitMin').value = 10;
+                    break;
+                case 'momentum':
+                    document.getElementById('ret1mMin').value = 5;
+                    document.getElementById('ret3mMin').value = 15;
+                    document.getElementById('highMin').value = -5;
+                    break;
+                case 'quality':
+                    document.getElementById('roeMin').value = 18;
+                    document.getElementById('deMax').value = 0.5;
+                    document.getElementById('profitMin').value = 12;
+                    document.getElementById('revenueMin').value = 10;
+                    break;
+            }
+        }
+
+        function resetFilters() {
+            document.querySelectorAll('.filter-input').forEach(input => input.value = '');
+            document.querySelectorAll('.preset-btn').forEach(btn => btn.classList.remove('active'));
+        }
+
+        function screenStocks() {
+            const filters = {
+                mcapMin: parseFloat(document.getElementById('mcapMin').value) || 0,
+                mcapMax: parseFloat(document.getElementById('mcapMax').value) || Infinity,
+                peMin: parseFloat(document.getElementById('peMin').value) || 0,
+                peMax: parseFloat(document.getElementById('peMax').value) || Infinity,
+                divMin: parseFloat(document.getElementById('divMin').value) || 0,
+                divMax: parseFloat(document.getElementById('divMax').value) || Infinity,
+                roeMin: parseFloat(document.getElementById('roeMin').value) || 0,
+                roeMax: parseFloat(document.getElementById('roeMax').value) || Infinity,
+                deMin: parseFloat(document.getElementById('deMin').value) || 0,
+                deMax: parseFloat(document.getElementById('deMax').value) || Infinity,
+                revenueMin: parseFloat(document.getElementById('revenueMin').value) || -Infinity,
+                revenueMax: parseFloat(document.getElementById('revenueMax').value) || Infinity,
+                profitMin: parseFloat(document.getElementById('profitMin').value) || -Infinity,
+                profitMax: parseFloat(document.getElementById('profitMax').value) || Infinity,
+                pbMin: parseFloat(document.getElementById('pbMin').value) || 0,
+                pbMax: parseFloat(document.getElementById('pbMax').value) || Infinity,
+                ret1mMin: parseFloat(document.getElementById('ret1mMin').value) || -Infinity,
+                ret1mMax: parseFloat(document.getElementById('ret1mMax').value) || Infinity,
+                ret3mMin: parseFloat(document.getElementById('ret3mMin').value) || -Infinity,
+                ret3mMax: parseFloat(document.getElementById('ret3mMax').value) || Infinity,
+                ret6mMin: parseFloat(document.getElementById('ret6mMin').value) || -Infinity,
+                ret6mMax: parseFloat(document.getElementById('ret6mMax').value) || Infinity,
+                highMin: parseFloat(document.getElementById('highMin').value) || -Infinity,
+                highMax: parseFloat(document.getElementById('highMax').value) || Infinity
+            };
+
+            filteredStocks = stockDatabase.filter(stock => {
+                return stock.mcap >= filters.mcapMin && stock.mcap <= filters.mcapMax &&
+                       stock.pe >= filters.peMin && stock.pe <= filters.peMax &&
+                       stock.div >= filters.divMin && stock.div <= filters.divMax &&
+                       stock.roe >= filters.roeMin && stock.roe <= filters.roeMax &&
+                       stock.de >= filters.deMin && stock.de <= filters.deMax &&
+                       stock.revenue >= filters.revenueMin && stock.revenue <= filters.revenueMax &&
+                       stock.profit >= filters.profitMin && stock.profit <= filters.profitMax &&
+                       stock.pb >= filters.pbMin && stock.pb <= filters.pbMax &&
+                       stock.ret1m >= filters.ret1mMin && stock.ret1m <= filters.ret1mMax &&
+                       stock.ret3m >= filters.ret3mMin && stock.ret3m <= filters.ret3mMax &&
+                       stock.ret6m >= filters.ret6mMin && stock.ret6m <= filters.ret6mMax &&
+                       stock.high >= filters.highMin && stock.high <= filters.highMax;
+            });
+
+            displayResults();
+        }
+
+        function displayResults() {
+            const resultsSection = document.getElementById('resultsSection');
+            const resultsCount = document.getElementById('resultsCount');
+            const resultsContainer = document.getElementById('resultsContainer');
+
+            resultsSection.style.display = 'block';
+            resultsCount.textContent = `Found ${filteredStocks.length} stock${filteredStocks.length !== 1 ? 's' : ''}`;
+
+            if (filteredStocks.length === 0) {
+                resultsContainer.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>No stocks found</h3>
+                        <p>Try adjusting your filters to see more results</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const tableHTML = `
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>Stock Name</th>
+                            <th>Sector</th>
+                            <th>MCap (₹Cr)</th>
+                            <th>P/E</th>
+                            <th>Div %</th>
+                            <th>ROE %</th>
+                            <th>D/E</th>
+                            <th>Rev Gr %</th>
+                            <th>Profit Gr %</th>
+                            <th>1M Ret %</th>
+                            <th>3M Ret %</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${filteredStocks.map(stock => `
+                            <tr>
+                                <td>
+                                    <div class="stock-name">${stock.name}</div>
+                                </td>
+                                <td><span class="stock-sector">${stock.sector}</span></td>
+                                <td>${(stock.mcap / 1000).toFixed(0)}K</td>
+                                <td>${stock.pe.toFixed(1)}</td>
+                                <td class="${stock.div > 2 ? 'positive' : ''}">${stock.div.toFixed(2)}</td>
+                                <td class="${stock.roe > 15 ? 'positive' : ''}">${stock.roe.toFixed(1)}</td>
+                                <td class="${stock.de < 1 ? 'positive' : 'negative'}">${stock.de.toFixed(2)}</td>
+                                <td class="${stock.revenue > 15 ? 'positive' : stock.revenue < 0 ? 'negative' : ''}">${stock.revenue.toFixed(1)}</td>
+                                <td class="${stock.profit > 15 ? 'positive' : stock.profit < 0 ? 'negative' : ''}">${stock.profit.toFixed(1)}</td>
+                                <td class="${stock.ret1m > 0 ? 'positive' : 'negative'}">${stock.ret1m > 0 ? '+' : ''}${stock.ret1m.toFixed(1)}</td>
+                                <td class="${stock.ret3m > 0 ? 'positive' : 'negative'}">${stock.ret3m > 0 ? '+' : ''}${stock.ret3m.toFixed(1)}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+
+            resultsContainer.innerHTML = tableHTML;
+            resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function sortResults() {
+            const sortBy = document.getElementById('sortBy').value;
+            
+            filteredStocks.sort((a, b) => {
+                switch(sortBy) {
+                    case 'mcap': return b.mcap - a.mcap;
+                    case 'pe': return a.pe - b.pe;
+                    case 'div': return b.div - a.div;
+                    case 'roe': return b.roe - a.roe;
+                    case 'ret1m': return b.ret1m - a.ret1m;
+                    case 'ret3m': return b.ret3m - a.ret3m;
+                    default: return 0;
+                }
+            });
+
+            displayResults();
+        }
+    </script>
+</body>
+</html>

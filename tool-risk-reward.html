@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Reward Calculator - Position Sizing Tool | BroBillionaire</title>
+    <meta name="description" content="Free risk-reward calculator for traders. Calculate position size, risk amount, stop loss, and target price. Optimize trading risk with proper position sizing.">
+    <meta name="keywords" content="risk reward calculator, position sizing, stop loss calculator, risk management, trading calculator, position size calculator">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #a0a0a0;
+            font-size: 1.1em;
+        }
+        
+        .calculator-box {
+            background: rgba(30, 30, 50, 0.6);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(240, 147, 251, 0.2);
+        }
+        
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #f093fb;
+            font-weight: 600;
+        }
+        
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            background: rgba(20, 20, 40, 0.8);
+            border: 2px solid rgba(240, 147, 251, 0.3);
+            border-radius: 8px;
+            color: #e0e0e0;
+            font-size: 16px;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #f093fb;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .result-card {
+            background: rgba(20, 20, 40, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border: 2px solid rgba(240, 147, 251, 0.3);
+        }
+        
+        .result-card h3 {
+            color: #a0a0a0;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .result-card .value {
+            color: #f093fb;
+            font-size: 2em;
+            font-weight: 700;
+        }
+        
+        .trade-visual {
+            background: rgba(20, 20, 40, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .price-levels {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .level {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .level-bar {
+            flex: 1;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            color: white;
+            font-weight: 700;
+            position: relative;
+        }
+        
+        .target-bar {
+            background: linear-gradient(90deg, #43e97b, #38f9d7);
+        }
+        
+        .entry-bar {
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+        }
+        
+        .stop-bar {
+            background: linear-gradient(90deg, #ff6b6b, #ee5a6f);
+        }
+        
+        .recommendation {
+            background: linear-gradient(135deg, rgba(67, 233, 123, 0.2), rgba(56, 249, 215, 0.2));
+            border: 2px solid #43e97b;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .recommendation h3 {
+            color: #43e97b;
+            margin-bottom: 15px;
+        }
+        
+        .warning {
+            background: rgba(255, 152, 0, 0.1);
+            border: 2px solid #ff9800;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            color: #ffa726;
+        }
+        
+        @media (max-width: 768px) {
+            .input-grid, .results-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚖️ Risk-Reward Calculator</h1>
+            <p class="subtitle">Calculate Position Size & Manage Trading Risk</p>
+        </header>
+        
+        <div class="calculator-box">
+            <h2 style="color: #f093fb; margin-bottom: 25px;">Trading Setup Details</h2>
+            
+            <div class="input-grid">
+                <div class="input-group">
+                    <label>Account Balance (₹)</label>
+                    <input type="number" id="accountBalance" placeholder="Total trading capital" value="100000">
+                </div>
+                
+                <div class="input-group">
+                    <label>Risk Per Trade (%)</label>
+                    <input type="number" id="riskPercent" placeholder="Max 1-2% recommended" value="2" step="0.1">
+                </div>
+            </div>
+            
+            <h3 style="color: #f093fb; margin: 30px 0 20px 0;">Price Levels</h3>
+            
+            <div class="input-grid">
+                <div class="input-group">
+                    <label>Entry Price (₹)</label>
+                    <input type="number" id="entryPrice" placeholder="Your entry price" value="1500">
+                </div>
+                
+                <div class="input-group">
+                    <label>Stop Loss (₹)</label>
+                    <input type="number" id="stopLoss" placeholder="Your stop loss" value="1450">
+                </div>
+                
+                <div class="input-group">
+                    <label>Target Price (₹)</label>
+                    <input type="number" id="targetPrice" placeholder="Your target" value="1600">
+                </div>
+            </div>
+            
+            <button onclick="calculateRiskReward()">Calculate Position Size</button>
+        </div>
+        
+        <div id="results" style="display: none;">
+            <div class="results-grid">
+                <div class="result-card">
+                    <h3>Position Size</h3>
+                    <div class="value" id="positionSize">0</div>
+                    <p style="color: #a0a0a0; font-size: 0.9em; margin-top: 5px;">Shares</p>
+                </div>
+                
+                <div class="result-card">
+                    <h3>Risk Amount</h3>
+                    <div class="value">₹<span id="riskAmount">0</span></div>
+                </div>
+                
+                <div class="result-card">
+                    <h3>Potential Profit</h3>
+                    <div class="value" style="color: #43e97b;">₹<span id="profitAmount">0</span></div>
+                </div>
+                
+                <div class="result-card">
+                    <h3>Risk:Reward</h3>
+                    <div class="value" id="riskReward">0:0</div>
+                </div>
+                
+                <div class="result-card">
+                    <h3>Investment</h3>
+                    <div class="value">₹<span id="investment">0</span></div>
+                </div>
+            </div>
+            
+            <div class="trade-visual">
+                <h3 style="color: #f093fb; margin-bottom: 20px;">Trade Visualization</h3>
+                
+                <div class="price-levels">
+                    <div class="level">
+                        <div style="width: 100px; color: #43e97b; font-weight: 700;">Target</div>
+                        <div class="level-bar target-bar">
+                            <span>₹<span id="targetDisplay">0</span></span>
+                            <span style="margin-left: auto;">+<span id="targetPercent">0</span>%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="level">
+                        <div style="width: 100px; color: #4facfe; font-weight: 700;">Entry</div>
+                        <div class="level-bar entry-bar">
+                            <span>₹<span id="entryDisplay">0</span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="level">
+                        <div style="width: 100px; color: #ff6b6b; font-weight: 700;">Stop Loss</div>
+                        <div class="level-bar stop-bar">
+                            <span>₹<span id="stopDisplay">0</span></span>
+                            <span style="margin-left: auto;">-<span id="stopPercent">0</span>%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px;">
+                    <div style="background: rgba(240, 147, 251, 0.1); padding: 20px; border-radius: 10px;">
+                        <h4 style="color: #f093fb; margin-bottom: 10px;">Trade Statistics</h4>
+                        <p style="color: #a0a0a0;">Risk per share: <strong style="color: #e0e0e0;">₹<span id="riskPerShare">0</span></strong></p>
+                        <p style="color: #a0a0a0;">Reward per share: <strong style="color: #e0e0e0;">₹<span id="rewardPerShare">0</span></strong></p>
+                        <p style="color: #a0a0a0;">Break-even with charges: <strong style="color: #e0e0e0;">₹<span id="breakeven">0</span></strong></p>
+                    </div>
+                    
+                    <div style="background: rgba(240, 147, 251, 0.1); padding: 20px; border-radius: 10px;">
+                        <h4 style="color: #f093fb; margin-bottom: 10px;">Capital Usage</h4>
+                        <p style="color: #a0a0a0;">Capital deployed: <strong style="color: #e0e0e0;"><span id="capitalPercent">0</span>%</strong></p>
+                        <p style="color: #a0a0a0;">Remaining balance: <strong style="color: #e0e0e0;">₹<span id="remaining">0</span></strong></p>
+                        <p style="color: #a0a0a0;">Leverage used: <strong style="color: #e0e0e0;"><span id="leverage">None</span></strong></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recommendation">
+                <h3>💡 Risk Management Analysis</h3>
+                <div id="analysis"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function calculateRiskReward() {
+            const accountBalance = parseFloat(document.getElementById('accountBalance').value) || 0;
+            const riskPercent = parseFloat(document.getElementById('riskPercent').value) / 100 || 0;
+            const entryPrice = parseFloat(document.getElementById('entryPrice').value) || 0;
+            const stopLoss = parseFloat(document.getElementById('stopLoss').value) || 0;
+            const targetPrice = parseFloat(document.getElementById('targetPrice').value) || 0;
+            
+            if (!accountBalance || !entryPrice || !stopLoss || !targetPrice) {
+                alert('Please fill all fields');
+                return;
+            }
+            
+            const riskAmount = accountBalance * riskPercent;
+            const riskPerShare = Math.abs(entryPrice - stopLoss);
+            const rewardPerShare = Math.abs(targetPrice - entryPrice);
+            
+            const positionSize = Math.floor(riskAmount / riskPerShare);
+            const investment = positionSize * entryPrice;
+            const potentialProfit = positionSize * rewardPerShare;
+            
+            const riskRewardRatio = rewardPerShare / riskPerShare;
+            
+            const stopPercent = ((Math.abs(entryPrice - stopLoss) / entryPrice) * 100).toFixed(2);
+            const targetPercent = ((Math.abs(targetPrice - entryPrice) / entryPrice) * 100).toFixed(2);
+            
+            const capitalPercent = ((investment / accountBalance) * 100).toFixed(1);
+            const remaining = accountBalance - investment;
+            
+            // Assuming 0.1% brokerage + taxes
+            const charges = investment * 0.001;
+            const breakeven = entryPrice + (charges / positionSize);
+            
+            // Display results
+            document.getElementById('positionSize').textContent = positionSize.toLocaleString('en-IN');
+            document.getElementById('riskAmount').textContent = riskAmount.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('profitAmount').textContent = potentialProfit.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('riskReward').textContent = `1:${riskRewardRatio.toFixed(2)}`;
+            document.getElementById('investment').textContent = investment.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            
+            document.getElementById('targetDisplay').textContent = targetPrice;
+            document.getElementById('entryDisplay').textContent = entryPrice;
+            document.getElementById('stopDisplay').textContent = stopLoss;
+            document.getElementById('targetPercent').textContent = targetPercent;
+            document.getElementById('stopPercent').textContent = stopPercent;
+            
+            document.getElementById('riskPerShare').textContent = riskPerShare.toFixed(2);
+            document.getElementById('rewardPerShare').textContent = rewardPerShare.toFixed(2);
+            document.getElementById('breakeven').textContent = breakeven.toFixed(2);
+            document.getElementById('capitalPercent').textContent = capitalPercent;
+            document.getElementById('remaining').textContent = remaining.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('leverage').textContent = 'None';
+            
+            // Generate analysis
+            let analysis = '<ul style="line-height: 2; color: #e0e0e0;">';
+            
+            if (riskRewardRatio >= 2) {
+                analysis += '<li>✅ <strong style="color: #43e97b;">Excellent Risk:Reward!</strong> Ratio of 1:' + riskRewardRatio.toFixed(2) + ' provides good profit potential.</li>';
+            } else if (riskRewardRatio >= 1.5) {
+                analysis += '<li>✅ <strong style="color: #43e97b;">Good Risk:Reward.</strong> Acceptable for many trading strategies.</li>';
+            } else if (riskRewardRatio >= 1) {
+                analysis += '<li>⚠️ <strong style="color: #ffa726;">Average Risk:Reward.</strong> Consider finding better entry/target levels.</li>';
+            } else {
+                analysis += '<li>❌ <strong style="color: #ff6b6b;">Poor Risk:Reward!</strong> Risk exceeds reward. Avoid this trade.</li>';
+            }
+            
+            if (riskPercent <= 0.01) {
+                analysis += '<li>✅ <strong>Conservative risk.</strong> You\'re risking ' + (riskPercent * 100).toFixed(1) + '% of capital.</li>';
+            } else if (riskPercent <= 0.02) {
+                analysis += '<li>✅ <strong>Moderate risk.</strong> Standard 1-2% risk per trade.</li>';
+            } else {
+                analysis += '<li>⚠️ <strong style="color: #ffa726;">High risk!</strong> Risking ' + (riskPercent * 100).toFixed(1) + '% is aggressive. Consider reducing.</li>';
+            }
+            
+            if (capitalPercent > 50) {
+                analysis += '<li>⚠️ <strong style="color: #ffa726;">Over-concentration!</strong> Using ' + capitalPercent + '% of capital in one trade. Diversify more.</li>';
+            } else if (capitalPercent > 25) {
+                analysis += '<li>⚠️ <strong>High concentration.</strong> ' + capitalPercent + '% in single trade limits diversification.</li>';
+            } else {
+                analysis += '<li>✅ <strong>Good diversification.</strong> Using ' + capitalPercent + '% allows multiple positions.</li>';
+            }
+            
+            if (stopPercent > 5) {
+                analysis += '<li>⚠️ <strong>Wide stop loss.</strong> ' + stopPercent + '% stop may lead to larger losses. Consider tighter stop.</li>';
+            }
+            
+            const winRate = 100 / (1 + riskRewardRatio);
+            analysis += '<li>📊 <strong>Breakeven win rate:</strong> You need to win ' + winRate.toFixed(0) + '% of trades to break even at this ratio.</li>';
+            
+            analysis += '</ul>';
+            
+            document.getElementById('analysis').innerHTML = analysis;
+            
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

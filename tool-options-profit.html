@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Options Profit Calculator - Calculate Options P&L | BroBillionaire</title>
+    <meta name="description" content="Free options profit calculator. Calculate profit/loss for call and put options. Analyze breakeven, max profit, max loss, and payoff diagram for options trading.">
+    <meta name="keywords" content="options calculator, options profit calculator, call put calculator, options payoff, breakeven calculator, options trading calculator">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            color: white;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            color: rgba(255,255,255,0.95);
+            font-size: 1.1em;
+        }
+        
+        .calculator-box {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        
+        .option-type {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .type-btn {
+            flex: 1;
+            padding: 15px;
+            background: #f5f5f5;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        
+        .type-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .position-type {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .pos-btn {
+            flex: 1;
+            padding: 12px;
+            background: #f5f5f5;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .pos-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .results {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            margin-top: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        
+        .result-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .result-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .result-card h3 {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .result-card .value {
+            font-size: 2em;
+            font-weight: 700;
+        }
+        
+        .payoff-diagram {
+            background: #f9f9f9;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .price-row {
+            display: grid;
+            grid-template-columns: 100px 1fr 120px;
+            gap: 15px;
+            padding: 12px;
+            margin-bottom: 8px;
+            background: white;
+            border-radius: 8px;
+            align-items: center;
+        }
+        
+        .price-row:nth-child(even) {
+            background: #fafafa;
+        }
+        
+        .pl-bar {
+            height: 30px;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+        
+        .profit-bar {
+            background: linear-gradient(90deg, #43e97b, #38f9d7);
+        }
+        
+        .loss-bar {
+            background: linear-gradient(90deg, #ff6b6b, #ee5a6f);
+        }
+        
+        @media (max-width: 768px) {
+            .option-type, .position-type {
+                flex-direction: column;
+            }
+            
+            .input-grid, .result-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📞 Options Profit Calculator</h1>
+            <p class="subtitle">Calculate P&L for Call & Put Options</p>
+        </header>
+        
+        <div class="calculator-box">
+            <h3 style="color: #667eea; margin-bottom: 15px;">Select Option Type</h3>
+            <div class="option-type">
+                <div class="type-btn active" onclick="selectType('call')">📈 Call Option</div>
+                <div class="type-btn" onclick="selectType('put')">📉 Put Option</div>
+            </div>
+            
+            <h3 style="color: #667eea; margin-bottom: 15px;">Select Position</h3>
+            <div class="position-type">
+                <div class="pos-btn active" onclick="selectPosition('buy')">🟢 Buy (Long)</div>
+                <div class="pos-btn" onclick="selectPosition('sell')">🔴 Sell (Short)</div>
+            </div>
+            
+            <div class="input-grid">
+                <div class="input-group">
+                    <label>Strike Price (₹)</label>
+                    <input type="number" id="strikePrice" placeholder="Strike price" value="18000">
+                </div>
+                
+                <div class="input-group">
+                    <label>Premium Paid/Received (₹)</label>
+                    <input type="number" id="premium" placeholder="Option premium" value="150">
+                </div>
+                
+                <div class="input-group">
+                    <label>Lot Size</label>
+                    <input type="number" id="lotSize" placeholder="Contract lot size" value="50">
+                </div>
+                
+                <div class="input-group">
+                    <label>Number of Lots</label>
+                    <input type="number" id="numLots" placeholder="How many lots?" value="1">
+                </div>
+                
+                <div class="input-group">
+                    <label>Current Spot Price (₹)</label>
+                    <input type="number" id="spotPrice" placeholder="Current market price" value="18000">
+                </div>
+            </div>
+            
+            <button onclick="calculateOptions()">Calculate Profit/Loss</button>
+        </div>
+        
+        <div id="results" style="display: none;">
+            <div class="results">
+                <h2 style="color: #667eea; margin-bottom: 25px;" id="resultTitle">Results</h2>
+                
+                <div class="result-cards">
+                    <div class="result-card">
+                        <h3>Current P&L</h3>
+                        <div class="value" id="currentPL">₹0</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>Breakeven Price</h3>
+                        <div class="value">₹<span id="breakeven">0</span></div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>Max Profit</h3>
+                        <div class="value" id="maxProfit">Unlimited</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>Max Loss</h3>
+                        <div class="value" id="maxLoss">₹0</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>ROI</h3>
+                        <div class="value" id="roi">0%</div>
+                    </div>
+                </div>
+                
+                <div class="payoff-diagram">
+                    <h3 style="color: #667eea; margin-bottom: 20px;">Payoff at Different Spot Prices</h3>
+                    <div id="payoffChart"></div>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1)); border-radius: 15px; padding: 25px; margin-top: 30px;">
+                    <h3 style="color: #667eea; margin-bottom: 15px;">💡 Strategy Insights</h3>
+                    <div id="insights"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let optionType = 'call';
+        let positionType = 'buy';
+        
+        function selectType(type) {
+            optionType = type;
+            document.querySelectorAll('.type-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+        
+        function selectPosition(position) {
+            positionType = position;
+            document.querySelectorAll('.pos-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+        
+        function calculateOptions() {
+            const strikePrice = parseFloat(document.getElementById('strikePrice').value) || 0;
+            const premium = parseFloat(document.getElementById('premium').value) || 0;
+            const lotSize = parseFloat(document.getElementById('lotSize').value) || 0;
+            const numLots = parseFloat(document.getElementById('numLots').value) || 0;
+            const spotPrice = parseFloat(document.getElementById('spotPrice').value) || 0;
+            
+            if (!strikePrice || !premium || !lotSize || !numLots || !spotPrice) {
+                alert('Please fill all fields');
+                return;
+            }
+            
+            const totalUnits = lotSize * numLots;
+            const totalPremium = premium * totalUnits;
+            
+            let currentPL, breakeven, maxProfit, maxLoss, insights;
+            
+            if (optionType === 'call') {
+                if (positionType === 'buy') {
+                    // Long Call
+                    currentPL = Math.max(0, spotPrice - strikePrice) * totalUnits - totalPremium;
+                    breakeven = strikePrice + premium;
+                    maxProfit = 'Unlimited';
+                    maxLoss = totalPremium;
+                    
+                    insights = `
+                        <ul style="line-height: 2;">
+                            <li><strong>Strategy:</strong> Long Call - Bullish strategy with limited risk.</li>
+                            <li><strong>Risk:</strong> Maximum loss is limited to premium paid (₹${totalPremium.toLocaleString('en-IN')}).</li>
+                            <li><strong>Reward:</strong> Unlimited profit potential as stock price rises.</li>
+                            <li><strong>Breakeven:</strong> Price must rise above ₹${breakeven.toFixed(2)} to profit.</li>
+                            <li><strong>Best When:</strong> Expecting significant upward movement in underlying.</li>
+                        </ul>
+                    `;
+                } else {
+                    // Short Call
+                    currentPL = totalPremium - Math.max(0, spotPrice - strikePrice) * totalUnits;
+                    breakeven = strikePrice + premium;
+                    maxProfit = totalPremium;
+                    maxLoss = 'Unlimited';
+                    
+                    insights = `
+                        <ul style="line-height: 2;">
+                            <li><strong>Strategy:</strong> Short Call - Bearish/Neutral strategy with unlimited risk.</li>
+                            <li><strong>Risk:</strong> Unlimited losses if price rises significantly above strike.</li>
+                            <li><strong>Reward:</strong> Maximum profit is premium received (₹${totalPremium.toLocaleString('en-IN')}).</li>
+                            <li><strong>Breakeven:</strong> Price must stay below ₹${breakeven.toFixed(2)} for profit.</li>
+                            <li><strong>⚠️ Warning:</strong> Very risky! Requires margin and careful monitoring.</li>
+                        </ul>
+                    `;
+                }
+            } else {
+                if (positionType === 'buy') {
+                    // Long Put
+                    currentPL = Math.max(0, strikePrice - spotPrice) * totalUnits - totalPremium;
+                    breakeven = strikePrice - premium;
+                    maxProfit = (strikePrice - premium) * totalUnits;
+                    maxLoss = totalPremium;
+                    
+                    insights = `
+                        <ul style="line-height: 2;">
+                            <li><strong>Strategy:</strong> Long Put - Bearish strategy with limited risk.</li>
+                            <li><strong>Risk:</strong> Maximum loss is premium paid (₹${totalPremium.toLocaleString('en-IN')}).</li>
+                            <li><strong>Reward:</strong> Maximum profit is ₹${maxProfit.toLocaleString('en-IN')} if stock goes to zero.</li>
+                            <li><strong>Breakeven:</strong> Price must fall below ₹${breakeven.toFixed(2)} to profit.</li>
+                            <li><strong>Best When:</strong> Expecting significant downward movement or hedging.</li>
+                        </ul>
+                    `;
+                } else {
+                    // Short Put
+                    currentPL = totalPremium - Math.max(0, strikePrice - spotPrice) * totalUnits;
+                    breakeven = strikePrice - premium;
+                    maxProfit = totalPremium;
+                    maxLoss = (strikePrice - premium) * totalUnits;
+                    
+                    insights = `
+                        <ul style="line-height: 2;">
+                            <li><strong>Strategy:</strong> Short Put - Bullish/Neutral strategy.</li>
+                            <li><strong>Risk:</strong> Maximum loss is ₹${maxLoss.toLocaleString('en-IN')} if stock goes to zero.</li>
+                            <li><strong>Reward:</strong> Maximum profit is premium received (₹${totalPremium.toLocaleString('en-IN')}).</li>
+                            <li><strong>Breakeven:</strong> Price must stay above ₹${breakeven.toFixed(2)} for profit.</li>
+                            <li><strong>Best When:</strong> Want to acquire stock at lower price or premium income.</li>
+                        </ul>
+                    `;
+                }
+            }
+            
+            const roi = (currentPL / totalPremium * 100).toFixed(2);
+            
+            // Update result title
+            const strategyName = `${positionType === 'buy' ? 'Long' : 'Short'} ${optionType === 'call' ? 'Call' : 'Put'}`;
+            document.getElementById('resultTitle').textContent = `${strategyName} Analysis`;
+            
+            // Display results
+            const plClass = currentPL >= 0 ? 'color: #43e97b;' : 'color: #ff6b6b;';
+            const plSymbol = currentPL >= 0 ? '+' : '';
+            document.getElementById('currentPL').innerHTML = `<span style="${plClass}">${plSymbol}₹${Math.abs(currentPL).toLocaleString('en-IN', {maximumFractionDigits: 0})}</span>`;
+            
+            document.getElementById('breakeven').textContent = breakeven.toFixed(2);
+            
+            if (typeof maxProfit === 'number') {
+                document.getElementById('maxProfit').textContent = '₹' + maxProfit.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            } else {
+                document.getElementById('maxProfit').textContent = maxProfit;
+            }
+            
+            if (typeof maxLoss === 'number') {
+                document.getElementById('maxLoss').textContent = '₹' + maxLoss.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            } else {
+                document.getElementById('maxLoss').textContent = maxLoss;
+            }
+            
+            document.getElementById('roi').textContent = plSymbol + roi + '%';
+            document.getElementById('insights').innerHTML = insights;
+            
+            // Generate payoff diagram
+            generatePayoff(strikePrice, premium, totalUnits, spotPrice);
+            
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function generatePayoff(strike, premium, units, currentSpot) {
+            let html = '';
+            const priceRange = strike * 0.2;
+            const startPrice = Math.floor(strike - priceRange);
+            const endPrice = Math.ceil(strike + priceRange);
+            const step = Math.ceil((endPrice - startPrice) / 15);
+            
+            for (let price = startPrice; price <= endPrice; price += step) {
+                let pl;
+                
+                if (optionType === 'call') {
+                    if (positionType === 'buy') {
+                        pl = Math.max(0, price - strike) * units - (premium * units);
+                    } else {
+                        pl = (premium * units) - Math.max(0, price - strike) * units;
+                    }
+                } else {
+                    if (positionType === 'buy') {
+                        pl = Math.max(0, strike - price) * units - (premium * units);
+                    } else {
+                        pl = (premium * units) - Math.max(0, strike - price) * units;
+                    }
+                }
+                
+                const plClass = pl >= 0 ? 'profit-bar' : 'loss-bar';
+                const maxWidth = Math.abs(pl) / (premium * units * 5) * 100;
+                const barWidth = Math.min(maxWidth, 100);
+                
+                const plSymbol = pl >= 0 ? '+' : '';
+                const highlight = Math.abs(price - currentSpot) < step ? 'font-weight: 700; background: #fff3cd;' : '';
+                
+                html += `
+                    <div class="price-row" style="${highlight}">
+                        <div style="font-weight: 600;">₹${price}</div>
+                        <div class="pl-bar ${plClass}" style="width: ${barWidth}%;"></div>
+                        <div style="text-align: right; font-weight: 600; ${pl >= 0 ? 'color: #43e97b;' : 'color: #ff6b6b;'}">${plSymbol}₹${Math.abs(pl).toLocaleString('en-IN', {maximumFractionDigits: 0})}</div>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('payoffChart').innerHTML = html;
+        }
+    </script>
+</body>
+</html>

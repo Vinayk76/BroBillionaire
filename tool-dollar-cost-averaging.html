@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>FREE Dollar Cost Averaging Calculator 2026 - DCA vs Lumpsum Strategy | BroBillionaire</title>
+    <meta name="title" content="FREE Dollar Cost Averaging Calculator 2026 - DCA vs Lumpsum Strategy | BroBillionaire">
+    <meta name="description" content="Compare DCA vs Lumpsum investment strategies! FREE calculator with historical simulation, market timing analysis & rupee cost averaging. Smart investment strategy tool India 2026!">
+    <meta name="keywords" content="dollar cost averaging calculator, DCA vs lumpsum, rupee cost averaging, SIP vs lumpsum calculator, investment strategy calculator, market timing calculator, systematic investment calculator India 2026">
+    <meta name="author" content="BroBillionaire">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://brobillionaire.com/tool-dollar-cost-averaging.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://brobillionaire.com/tool-dollar-cost-averaging.html">
+    <meta property="og:title" content="FREE Dollar Cost Averaging Calculator - DCA vs Lumpsum Strategy">
+    <meta property="og:description" content="Compare DCA vs Lumpsum investment strategies! FREE calculator with historical simulation, market timing analysis & rupee cost averaging. Smart investment strategy tool India 2026!">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    <meta property="og:site_name" content="BroBillionaire">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://brobillionaire.com/tool-dollar-cost-averaging.html">
+    <meta property="twitter:title" content="FREE Dollar Cost Averaging Calculator - DCA vs Lumpsum Strategy">
+    <meta property="twitter:description" content="Compare DCA vs Lumpsum investment strategies! FREE calculator with historical simulation, market timing analysis & rupee cost averaging.">
+    <meta property="twitter:image" content="https://brobillionaire.com/og-image.jpg">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --gold: #C9A227;
+            --bg-primary: #0d0d0d;
+            --bg-secondary: #1a1a1a;
+            --bg-card: #1a1a1a;
+            --text-primary: #fff;
+            --text-secondary: #999;
+            --text-tertiary: #666;
+            --border-color: #2a2a2a;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding-top: 140px;
+        }
+        
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+        }
+        
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--gold);
+        }
+        
+        .mobile-menu-toggle { display: none; }
+        
+        /* Breadcrumb */
+        .breadcrumb-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+        }
+        
+        .breadcrumb-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .breadcrumb-nav a:hover {
+            color: var(--gold);
+        }
+        
+        .breadcrumb-nav a::after {
+            content: "›";
+            margin: 0 10px;
+            color: var(--text-tertiary);
+        }
+        
+        /* Calculator Styles */
+        .calculator-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .calculator-card { background: var(--bg-card); border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid var(--border-color); }
+        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--gold); margin-bottom: 10px; }
+        .calculator-subtitle { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 40px; line-height: 1.6; }
+        
+        .input-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 30px; }
+        .input-group { margin-bottom: 25px; }
+        .input-label { display: block; color: var(--gold); font-weight: 600; margin-bottom: 10px; font-size: 1rem; }
+        .input-field, .input-select { width: 100%; padding: 15px; background: #0a0a0a; border: 2px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 1rem; transition: border-color 0.3s; }
+        .input-field:focus, .input-select:focus { border-color: var(--gold); outline: none; }
+        .input-hint { color: var(--text-tertiary); font-size: 0.85rem; margin-top: 5px; }
+        
+        .calculate-btn { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; font-weight: 700; padding: 18px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; transition: transform 0.2s; }
+        .calculate-btn:hover { transform: translateY(-2px); }
+        
+        .results-section { display: none; margin-top: 40px; }
+        
+        .comparison-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .comparison-card { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 35px; border-radius: 12px; border: 3px solid; text-align: center; }
+        .comparison-card.dca { border-color: #3498db; }
+        .comparison-card.lumpsum { border-color: #e67e22; }
+        .comparison-card.winner { border-color: var(--gold); box-shadow: 0 0 30px rgba(201, 162, 39, 0.3); }
+        
+        .strategy-title { color: var(--gold); font-size: 1.5rem; margin-bottom: 20px; font-weight: 600; }
+        .strategy-value { color: var(--text-primary); font-size: 3rem; font-weight: 700; margin: 15px 0; font-family: 'Playfair Display', serif; }
+        .strategy-returns { color: var(--text-secondary); font-size: 1.1rem; }
+        .strategy-returns.positive { color: #27ae60; }
+        .strategy-returns.negative { color: #e74c3c; }
+        
+        .winner-badge { background: var(--gold); color: #000; padding: 8px 20px; border-radius: 20px; font-weight: 700; display: inline-block; margin-top: 15px; }
+        
+        .chart-container { max-width: 800px; margin: 30px auto; padding: 30px; background: rgba(10, 10, 10, 0.5); border-radius: 12px; }
+        
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 30px 0; }
+        .metric-card { background: #0a0a0a; padding: 25px; border-radius: 12px; border: 1px solid var(--border-color); text-align: center; }
+        .metric-label { color: var(--gold); font-weight: 600; margin-bottom: 10px; font-size: 0.9rem; text-transform: uppercase; }
+        .metric-value { color: var(--text-primary); font-size: 1.8rem; font-weight: 700; }
+        
+        .strategy-box { background: rgba(201, 162, 39, 0.1); border: 2px solid var(--gold); padding: 30px; border-radius: 12px; margin-top: 30px; }
+        .strategy-box h3 { color: var(--gold); margin-bottom: 20px; font-size: 1.5rem; }
+        .strategy-box ul { margin: 10px 0 0 20px; color: var(--text-secondary); line-height: 1.8; }
+        .strategy-box li { margin-bottom: 12px; }
+        .strategy-box strong { color: var(--text-primary); }
+        
+        .info-box { background: rgba(52, 152, 219, 0.1); border: 2px solid #3498db; padding: 25px; border-radius: 12px; margin-top: 30px; }
+        .info-box h3 { color: #3498db; margin-bottom: 15px; }
+        .info-box p { color: var(--text-secondary); line-height: 1.8; margin: 0; }
+        
+        /* FAQ Section */
+        .faq-section { max-width: 1200px; margin: 50px auto; padding: 40px 20px; }
+        .faq-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--gold); margin-bottom: 40px; text-align: center; }
+        .faq-item { background: var(--bg-card); border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--border-color); overflow: hidden; }
+        .faq-question { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--text-primary); font-weight: 600; font-size: 1.1rem; }
+        .faq-question:hover { background: #222; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #0a0a0a; }
+        .faq-answer.active { max-height: 2000px; }
+        .faq-answer p { padding: 25px; margin: 0; color: var(--text-secondary); line-height: 1.8; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 120px; }
+            .calculator-title { font-size: 2rem; }
+            .nav-links { display: none; }
+            .mobile-menu-toggle { display: block; }
+            .input-grid { grid-template-columns: 1fr; }
+            .strategy-value { font-size: 2.2rem; }
+        }
+    </style>
+
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://brobillionaire.com/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Tools",
+                "item": "https://brobillionaire.com/tools.html"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Dollar Cost Averaging Calculator"
+            }
+        ]
+    }
+    </script>
+
+    <!-- WebApplication Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Dollar Cost Averaging Calculator",
+        "description": "Compare DCA vs Lumpsum investment strategies with historical simulation and market timing analysis.",
+        "url": "https://brobillionaire.com/tool-dollar-cost-averaging.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="BroBillionaire Logo" class="logo-img">
+                <span class="logo-text">BroBillionaire</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="articles.html" class="nav-link">Articles</a>
+                <a href="tools.html" class="nav-link active">Tools</a>
+                <a href="about.html" class="nav-link">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <nav class="breadcrumb-nav">
+        <a href="index.html">Home</a><a href="tools.html">Tools</a><span>Dollar Cost Averaging Calculator</span>
+    </nav>
+
+    <div class="calculator-container">
+        <div class="calculator-card">
+            <h1 class="calculator-title"><i class="fas fa-chart-line"></i> Dollar Cost Averaging vs Lumpsum Calculator</h1>
+            <p class="calculator-subtitle">Compare DCA (Rupee Cost Averaging) and Lumpsum investment strategies. See which strategy performs better based on investment amount, duration, and expected returns. Make data-driven investment decisions!</p>
+            
+            <div class="input-grid">
+                <div class="input-group">
+                    <label class="input-label">Total Investment Amount (₹)</label>
+                    <input type="number" id="totalAmount" class="input-field" placeholder="120000" value="120000">
+                    <div class="input-hint">Total capital you want to invest</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Investment Period (Months)</label>
+                    <input type="number" id="investmentPeriod" class="input-field" placeholder="12" value="12">
+                    <div class="input-hint">Duration for DCA installments</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Expected Annual Return (%)</label>
+                    <input type="number" id="annualReturn" class="input-field" placeholder="12" value="12" step="0.1">
+                    <div class="input-hint">Historical market returns: 10-15%</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Market Volatility (%)</label>
+                    <input type="number" id="volatility" class="input-field" placeholder="15" value="15" step="1">
+                    <div class="input-hint">Market fluctuation (10-30%)</div>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Market Scenario</label>
+                <select id="marketScenario" class="input-select">
+                    <option value="stable">Stable Market (Sideways)</option>
+                    <option value="bullish">Bullish Market (Trending Up)</option>
+                    <option value="bearish">Bearish Market (Trending Down)</option>
+                    <option value="volatile">Volatile Market (High Swings)</option>
+                </select>
+                <div class="input-hint">Select expected market condition</div>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculateDCA()">
+                <i class="fas fa-calculator"></i> Compare Strategies
+            </button>
+        </div>
+        
+        <div class="results-section" id="resultsSection">
+            <div class="calculator-card">
+                <h2 style="color: var(--gold); margin-bottom: 30px; font-family: 'Playfair Display', serif; font-size: 2rem; text-align: center;">Strategy Comparison Results</h2>
+                
+                <div class="comparison-cards">
+                    <div class="comparison-card dca" id="dcaCard">
+                        <div class="strategy-title"><i class="fas fa-calendar-alt"></i> Dollar Cost Averaging (DCA)</div>
+                        <div style="color: var(--text-tertiary); margin-bottom: 10px;">Monthly SIP Investment</div>
+                        <div class="strategy-value" id="dcaFinalValue">₹0</div>
+                        <div class="strategy-returns" id="dcaReturns">0% Returns</div>
+                        <div style="margin-top: 20px; color: var(--text-secondary);">
+                            <div>Average Price: <span id="dcaAvgPrice" style="color: var(--text-primary); font-weight: 600;">₹0</span></div>
+                            <div>Units Accumulated: <span id="dcaUnits" style="color: var(--text-primary); font-weight: 600;">0</span></div>
+                        </div>
+                        <div id="dcaWinner"></div>
+                    </div>
+                    
+                    <div class="comparison-card lumpsum" id="lumpsumCard">
+                        <div class="strategy-title"><i class="fas fa-coins"></i> Lumpsum Investment</div>
+                        <div style="color: var(--text-tertiary); margin-bottom: 10px;">One-time Investment</div>
+                        <div class="strategy-value" id="lumpsumFinalValue">₹0</div>
+                        <div class="strategy-returns" id="lumpsumReturns">0% Returns</div>
+                        <div style="margin-top: 20px; color: var(--text-secondary);">
+                            <div>Entry Price: <span id="lumpsumPrice" style="color: var(--text-primary); font-weight: 600;">₹0</span></div>
+                            <div>Units Bought: <span id="lumpsumUnits" style="color: var(--text-primary); font-weight: 600;">0</span></div>
+                        </div>
+                        <div id="lumpsumWinner"></div>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <canvas id="dcaChart"></canvas>
+                </div>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">Difference</div>
+                        <div class="metric-value" id="diffValue">₹0</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Better By</div>
+                        <div class="metric-value" id="diffPercent">0%</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Total Invested</div>
+                        <div class="metric-value" id="totalInvested">₹0</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Investment Period</div>
+                        <div class="metric-value" id="periodDisplay">0M</div>
+                    </div>
+                </div>
+                
+                <div class="strategy-box">
+                    <h3><i class="fas fa-lightbulb"></i> Strategy Recommendation:</h3>
+                    <div id="strategyRecommendation" style="color: var(--text-secondary); line-height: 1.8;"></div>
+                </div>
+                
+                <div class="info-box">
+                    <h3><i class="fas fa-info-circle"></i> Understanding the Results:</h3>
+                    <p id="resultExplanation"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let dcaChartInstance = null;
+        
+        function calculateDCA() {
+            const totalAmount = parseFloat(document.getElementById('totalAmount').value);
+            const investmentPeriod = parseInt(document.getElementById('investmentPeriod').value);
+            const annualReturn = parseFloat(document.getElementById('annualReturn').value);
+            const volatility = parseFloat(document.getElementById('volatility').value);
+            const marketScenario = document.getElementById('marketScenario').value;
+            
+            if (isNaN(totalAmount) || isNaN(investmentPeriod) || isNaN(annualReturn) || isNaN(volatility)) {
+                alert('Please fill in all fields with valid numbers');
+                return;
+            }
+            
+            if (totalAmount <= 0 || investmentPeriod <= 0) {
+                alert('Investment amount and period must be positive');
+                return;
+            }
+            
+            const monthlyInvestment = totalAmount / investmentPeriod;
+            const monthlyReturn = annualReturn / 12 / 100;
+            const monthlyVolatility = volatility / 12 / 100;
+            
+            // Simulate price movement based on scenario
+            let prices = [];
+            let basePrice = 100;
+            prices.push(basePrice);
+            
+            for (let i = 1; i <= investmentPeriod; i++) {
+                let trend = monthlyReturn;
+                let randomFactor = (Math.random() - 0.5) * 2 * monthlyVolatility;
+                
+                if (marketScenario === 'bullish') {
+                    trend = monthlyReturn * 1.5;
+                } else if (marketScenario === 'bearish') {
+                    trend = monthlyReturn * 0.3 - 0.01;
+                } else if (marketScenario === 'volatile') {
+                    randomFactor *= 2;
+                }
+                
+                let newPrice = prices[i-1] * (1 + trend + randomFactor);
+                prices.push(Math.max(newPrice, 10)); // Prevent negative prices
+            }
+            
+            // Calculate DCA
+            let dcaUnits = 0;
+            let dcaTotalCost = 0;
+            let dcaValues = [0];
+            
+            for (let i = 1; i <= investmentPeriod; i++) {
+                let units = monthlyInvestment / prices[i];
+                dcaUnits += units;
+                dcaTotalCost += monthlyInvestment;
+                dcaValues.push(dcaUnits * prices[i]);
+            }
+            
+            const dcaFinalValue = dcaUnits * prices[prices.length - 1];
+            const dcaAvgPrice = dcaTotalCost / dcaUnits;
+            const dcaReturns = ((dcaFinalValue - totalAmount) / totalAmount) * 100;
+            
+            // Calculate Lumpsum
+            const lumpsumUnits = totalAmount / prices[0];
+            const lumpsumFinalValue = lumpsumUnits * prices[prices.length - 1];
+            const lumpsumReturns = ((lumpsumFinalValue - totalAmount) / totalAmount) * 100;
+            
+            // Display results
+            document.getElementById('dcaFinalValue').textContent = '₹' + dcaFinalValue.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById('dcaReturns').textContent = dcaReturns.toFixed(2) + '% Returns';
+            document.getElementById('dcaReturns').className = 'strategy-returns ' + (dcaReturns >= 0 ? 'positive' : 'negative');
+            document.getElementById('dcaAvgPrice').textContent = '₹' + dcaAvgPrice.toFixed(2);
+            document.getElementById('dcaUnits').textContent = dcaUnits.toFixed(2);
+            
+            document.getElementById('lumpsumFinalValue').textContent = '₹' + lumpsumFinalValue.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById('lumpsumReturns').textContent = lumpsumReturns.toFixed(2) + '% Returns';
+            document.getElementById('lumpsumReturns').className = 'strategy-returns ' + (lumpsumReturns >= 0 ? 'positive' : 'negative');
+            document.getElementById('lumpsumPrice').textContent = '₹' + prices[0].toFixed(2);
+            document.getElementById('lumpsumUnits').textContent = lumpsumUnits.toFixed(2);
+            
+            const difference = dcaFinalValue - lumpsumFinalValue;
+            const diffPercent = Math.abs((difference / lumpsumFinalValue) * 100);
+            
+            document.getElementById('diffValue').textContent = '₹' + Math.abs(difference).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById('diffPercent').textContent = diffPercent.toFixed(2) + '%';
+            document.getElementById('totalInvested').textContent = '₹' + totalAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById('periodDisplay').textContent = investmentPeriod + 'M';
+            
+            // Determine winner
+            const dcaCard = document.getElementById('dcaCard');
+            const lumpsumCard = document.getElementById('lumpsumCard');
+            dcaCard.classList.remove('winner');
+            lumpsumCard.classList.remove('winner');
+            document.getElementById('dcaWinner').innerHTML = '';
+            document.getElementById('lumpsumWinner').innerHTML = '';
+            
+            if (dcaFinalValue > lumpsumFinalValue) {
+                dcaCard.classList.add('winner');
+                document.getElementById('dcaWinner').innerHTML = '<div class="winner-badge">🏆 WINNER</div>';
+            } else {
+                lumpsumCard.classList.add('winner');
+                document.getElementById('lumpsumWinner').innerHTML = '<div class="winner-badge">🏆 WINNER</div>';
+            }
+            
+            // Strategy recommendation
+            let recommendation = '';
+            if (marketScenario === 'bearish') {
+                recommendation = '<strong>DCA is strongly recommended</strong> in bearish markets. You buy more units when prices are low, significantly lowering your average cost. Lumpsum at market top can result in heavy losses. DCA protects capital during downturns.';
+            } else if (marketScenario === 'bullish') {
+                recommendation = '<strong>Lumpsum generally wins</strong> in bullish markets since you get full exposure from day one. However, if you\'re risk-averse or uncertain about timing, DCA still provides peace of mind by spreading entry points.';
+            } else if (marketScenario === 'volatile') {
+                recommendation = '<strong>DCA shines in volatile markets</strong> by averaging out the peaks and troughs. You automatically buy more when prices dip and less when they spike. This volatility protection often results in better risk-adjusted returns.';
+            } else {
+                recommendation = '<strong>Both strategies work similarly</strong> in stable markets. Choose DCA if you receive income monthly (salary-based investing) or Lumpsum if you have idle capital. Historical data shows Lumpsum wins 2/3 of the time in normal markets.';
+            }
+            document.getElementById('strategyRecommendation').innerHTML = recommendation;
+            
+            // Result explanation
+            const winner = dcaFinalValue > lumpsumFinalValue ? 'DCA' : 'Lumpsum';
+            const explanation = `In this ${marketScenario} market scenario with ${volatility}% volatility, ${winner} strategy performed better by ₹${Math.abs(difference).toFixed(0)} (${diffPercent.toFixed(2)}%). ${winner === 'DCA' ? 'DCA\'s systematic approach helped capture lower prices during market dips.' : 'Lumpsum\'s immediate full exposure captured more upside gains.'}`;
+            document.getElementById('resultExplanation').textContent = explanation;
+            
+            // Draw chart
+            drawChart(prices, dcaValues);
+            
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        function drawChart(prices, dcaValues) {
+            const ctx = document.getElementById('dcaChart').getContext('2d');
+            const months = Array.from({length: prices.length}, (_, i) => 'M' + i);
+            
+            // Calculate lumpsum values
+            const lumpsumUnits = parseFloat(document.getElementById('totalAmount').value) / prices[0];
+            const lumpsumValues = prices.map(p => lumpsumUnits * p);
+            
+            if (dcaChartInstance) {
+                dcaChartInstance.destroy();
+            }
+            
+            dcaChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: months,
+                    datasets: [
+                        {
+                            label: 'DCA Portfolio Value',
+                            data: dcaValues,
+                            borderColor: '#3498db',
+                            backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Lumpsum Portfolio Value',
+                            data: lumpsumValues,
+                            borderColor: '#e67e22',
+                            backgroundColor: 'rgba(230, 126, 34, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Market Price',
+                            data: prices,
+                            borderColor: '#95a5a6',
+                            backgroundColor: 'rgba(149, 165, 166, 0.1)',
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            tension: 0.4,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#999', font: { size: 12 } }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: '#C9A227',
+                            bodyColor: '#fff'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            position: 'left',
+                            ticks: { 
+                                color: '#666',
+                                callback: function(value) { return '₹' + value.toFixed(0); }
+                            },
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            title: { display: true, text: 'Portfolio Value (₹)', color: '#999' }
+                        },
+                        y1: {
+                            type: 'linear',
+                            position: 'right',
+                            ticks: { 
+                                color: '#666',
+                                callback: function(value) { return '₹' + value.toFixed(0); }
+                            },
+                            grid: { display: false },
+                            title: { display: true, text: 'Market Price', color: '#999' }
+                        },
+                        x: {
+                            ticks: { color: '#666' },
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+            if (!isActive) answer.classList.add('active');
+        }
+    </script>
+    
+    <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What is Dollar Cost Averaging (DCA) and how does it work?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Dollar Cost Averaging (DCA), also called Rupee Cost Averaging in India, is an investment strategy where you invest a fixed amount at regular intervals (monthly/quarterly) regardless of market price. Instead of investing ₹1,20,000 lumpsum, you invest ₹10,000 every month for 12 months. When prices are low, you buy more units; when prices are high, you buy fewer units. This averages out your purchase cost over time, reducing the impact of market volatility and eliminating the stress of timing the market perfectly.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                DCA vs Lumpsum - Which investment strategy is better in 2026?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Historical data shows Lumpsum wins approximately 2/3 of the time in normal bull markets since you get immediate full exposure to market gains. However, DCA is superior in: 1) Bear/Volatile markets - protects capital, 2) When you lack market timing confidence - reduces psychological stress, 3) Salary-based investing - matches cash flow, 4) High valuation markets - averages down entry cost. In 2026, given elevated valuations and geopolitical uncertainty, DCA provides better risk management for most retail investors in India.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How to choose between SIP (DCA) and lumpsum for Nifty/mutual fund investment?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Choose Lumpsum when: 1) Nifty PE < 20 (undervalued), 2) Market crash/correction has occurred recently, 3) You have high conviction about market bottom, 4) You have idle cash earning low returns. Choose SIP/DCA when: 1) Nifty PE > 22 (overvalued) - current 2026 levels, 2) Market at all-time highs, 3) First-time investor or risk-averse, 4) Salary-based income monthly. Best strategy: Use SIP for core portfolio (80%) + Keep 20% cash for lumpsum deployment during corrections. Combine both for optimal results.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What is the ideal DCA investment frequency - weekly, monthly or quarterly?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Monthly DCA is optimal for most investors as it: 1) Aligns with salary income, 2) Sufficient frequency to capture volatility, 3) Lower transaction costs than weekly, 4) Easy to track and maintain discipline. Weekly DCA works for: Highly volatile markets, Active traders, Large investment amounts. Quarterly DCA is too infrequent - misses monthly volatility opportunities. Research shows monthly SIP captures 85-90% of weekly DCA benefits with much simpler execution. For Indian markets, time your monthly SIP around market weakness (typically mid-month) rather than fixed dates.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Should I continue DCA during market crashes or increase investment?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Absolutely continue DCA during crashes - this is when it delivers maximum value! Your fixed monthly amount buys significantly more units at lower prices, drastically reducing average cost. Even better: Increase SIP during crashes using "Step-Up SIP" strategy: 1) Normal market: ₹10,000/month, 2) 10% correction: ₹15,000/month, 3) 20%+ crash: ₹20,000/month. Historical data shows investors who increased DCA during 2020 COVID crash, 2008 crisis, or 2013 taper tantrum generated exceptional returns. Never stop SIP during fear - that's precisely when you're buying at discounts.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How long should I run DCA strategy - 6 months, 1 year or longer?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>DCA duration depends on market conditions and amount: 1) Normal markets: 12-18 months optimal for averaging, 2) Volatile/Bearish: Extend to 24 months to capture more lows, 3) Bullish rally: 6-9 months sufficient, complete deployment faster. Rule of thumb: Larger the amount, longer the DCA period. For ₹10 lakhs: Spread over 15-18 months. For ₹1 lakh: 6-12 months sufficient. However, DCA should ideally be permanent for wealth building - continuous monthly SIP for 10-20+ years compounds into significant corpus through all market cycles.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Can I use DCA for stock investing or only mutual funds?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>DCA works for both stocks and mutual funds, but with different considerations: Mutual Funds DCA (Better): Automatic SIP facility, Diversified portfolio reduces single-stock risk, Lower tracking required, Ideal for beginners. Stock DCA (Advanced): Works well for blue-chip stocks (Reliance, TCS, HDFC Bank), Requires manual buying every month, Higher transaction costs (brokerage), Risk of company-specific issues. Best approach: Use SIP for 70-80% portfolio in diversified funds + Manual DCA for 20-30% in 3-5 quality stocks you understand deeply. Avoid DCA in penny stocks or speculative plays.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer style="background: var(--bg-secondary); padding: 60px 40px; text-align: center; border-top: 1px solid var(--border-color); margin-top: 80px;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 40px; text-align: left; margin-bottom: 40px;">
+                <div style="flex: 1; min-width: 250px;">
+                    <h3 style="color: var(--gold); margin-bottom: 20px; font-size: 1.5rem;">BroBillionaire</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">Empowering Indian traders with premium tools, deep market insights, and actionable trading strategies. Master the markets in 2026!</p>
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                    <h4 style="color: var(--gold); margin-bottom: 15px;">Quick Links</h4>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <a href="index.html" style="color: var(--text-secondary); text-decoration: none;">Home</a>
+                        <a href="articles.html" style="color: var(--text-secondary); text-decoration: none;">Articles</a>
+                        <a href="tools.html" style="color: var(--text-secondary); text-decoration: none;">Tools</a>
+                        <a href="about.html" style="color: var(--text-secondary); text-decoration: none;">About</a>
+                    </div>
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                    <h4 style="color: var(--gold); margin-bottom: 15px;">Popular Tools</h4>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <a href="tool-option-strategy-builder.html" style="color: var(--text-secondary); text-decoration: none;">Option Strategy Builder</a>
+                        <a href="tool-position-size-calculator.html" style="color: var(--text-secondary); text-decoration: none;">Position Size Calculator</a>
+                        <a href="tool-tax-harvesting-calculator.html" style="color: var(--text-secondary); text-decoration: none;">Tax Harvesting Calculator</a>
+                    </div>
+                </div>
+            </div>
+            <div style="border-top: 1px solid var(--border-color); padding-top: 30px; color: var(--text-tertiary); font-size: 0.9rem;">
+                <p>&copy; 2026 BroBillionaire. All rights reserved. Built for Indian Traders 🇮🇳</p>
+                <p style="margin-top: 10px;">Disclaimer: All tools and content are for educational purposes only. Not financial advice. Trade at your own risk.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

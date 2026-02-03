@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FREE Stock Split Calculator 2026 - Impact Analysis & New Price Tool | BroBillionaire</title>
+    <meta name="description" content="Calculate stock split impact on holdings! FREE calculator for split ratio, adjusted price, quantity change & investment value. Stock split analyzer 2026!">
+    <meta name="keywords" content="stock split calculator, bonus share calculator, split ratio calculator, adjusted stock price, stock split impact, share split calculator India 2026">
+    <link rel="canonical" href="https://brobillionaire.com/tool-stock-split-analyzer.html">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --gold: #C9A227;
+            --bg-primary: #0d0d0d;
+            --bg-secondary: #1a1a1a;
+            --bg-card: #1a1a1a;
+            --text-primary: #fff;
+            --text-secondary: #999;
+            --text-tertiary: #666;
+            --border-color: #2a2a2a;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding-top: 140px;
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+        }
+        
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--gold);
+        }
+        
+        .mobile-menu-toggle { display: none; }
+        
+        .breadcrumb-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+        }
+        
+        .breadcrumb-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .breadcrumb-nav a:hover {
+            color: var(--gold);
+        }
+        
+        .breadcrumb-nav a::after {
+            content: "›";
+            margin: 0 10px;
+            color: var(--text-tertiary);
+        }
+        
+        .calculator-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .calculator-card { background: var(--bg-card); border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid var(--border-color); }
+        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--gold); margin-bottom: 10px; }
+        .calculator-subtitle { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 40px; line-height: 1.6; }
+        
+        .input-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 30px; }
+        .input-group { margin-bottom: 25px; }
+        .input-label { display: block; color: var(--gold); font-weight: 600; margin-bottom: 10px; font-size: 1rem; }
+        .input-field, .input-select { width: 100%; padding: 15px; background: #0a0a0a; border: 2px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 1rem; transition: border-color 0.3s; }
+        .input-field:focus, .input-select:focus { border-color: var(--gold); outline: none; }
+        .input-hint { color: var(--text-tertiary); font-size: 0.85rem; margin-top: 5px; }
+        
+        .calculate-btn { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; font-weight: 700; padding: 18px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; transition: transform 0.2s; }
+        .calculate-btn:hover { transform: translateY(-2px); }
+        
+        .results-section { display: none; margin-top: 40px; }
+        
+        .comparison-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; margin-bottom: 30px; }
+        .comparison-card { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 40px; border-radius: 12px; border: 3px solid; }
+        .comparison-card.before { border-color: #e74c3c; }
+        .comparison-card.after { border-color: #27ae60; }
+        
+        .status-title { color: var(--gold); font-size: 1.8rem; margin-bottom: 20px; font-weight: 600; text-align: center; }
+        .status-details { margin-top: 20px; }
+        .detail-row { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid var(--border-color); }
+        .detail-label { color: var(--text-secondary); font-size: 1rem; }
+        .detail-value { color: var(--text-primary); font-weight: 600; font-size: 1.1rem; }
+        
+        .split-ratio-box { background: rgba(201, 162, 39, 0.15); border: 3px solid var(--gold); padding: 30px; border-radius: 12px; text-align: center; margin: 30px 0; }
+        .split-ratio-title { color: var(--gold); font-size: 1.3rem; margin-bottom: 15px; }
+        .split-ratio-value { color: var(--text-primary); font-size: 3.5rem; font-weight: 700; font-family: 'Playfair Display', serif; }
+        
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 30px 0; }
+        .metric-card { background: #0a0a0a; padding: 25px; border-radius: 12px; border: 1px solid var(--border-color); text-align: center; }
+        .metric-label { color: var(--gold); font-weight: 600; margin-bottom: 10px; font-size: 0.9rem; text-transform: uppercase; }
+        .metric-value { color: var(--text-primary); font-size: 1.8rem; font-weight: 700; }
+        
+        .info-box { background: rgba(52, 152, 219, 0.1); border: 2px solid #3498db; padding: 25px; border-radius: 12px; margin-top: 30px; }
+        .info-box h3 { color: #3498db; margin-bottom: 15px; }
+        .info-box p { color: var(--text-secondary); line-height: 1.8; margin: 10px 0; }
+        .info-box ul { margin: 10px 0 0 20px; color: var(--text-secondary); line-height: 1.8; }
+        
+        .chart-container { max-width: 600px; margin: 30px auto; padding: 30px; background: rgba(10, 10, 10, 0.5); border-radius: 12px; }
+        .chart-title { color: var(--gold); font-size: 1.5rem; margin-bottom: 20px; text-align: center; font-weight: 600; }
+        
+        .faq-section { max-width: 1200px; margin: 50px auto; padding: 40px 20px; }
+        .faq-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--gold); margin-bottom: 40px; text-align: center; }
+        .faq-item { background: var(--bg-card); border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--border-color); overflow: hidden; }
+        .faq-question { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--text-primary); font-weight: 600; font-size: 1.1rem; }
+        .faq-question:hover { background: #222; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #0a0a0a; }
+        .faq-answer.active { max-height: 2000px; }
+        .faq-answer p { padding: 25px; margin: 0; color: var(--text-secondary); line-height: 1.8; }
+        
+        @media (max-width: 768px) {
+            body { padding-top: 120px; }
+            .calculator-title { font-size: 2rem; }
+            .nav-links { display: none; }
+            .mobile-menu-toggle { display: block; }
+            .input-grid { grid-template-columns: 1fr; }
+            .comparison-cards { grid-template-columns: 1fr; }
+            .split-ratio-value { font-size: 2.5rem; }
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://brobillionaire.com/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Tools",
+                "item": "https://brobillionaire.com/tools.html"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Stock Split Analyzer"
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Stock Split Analyzer",
+        "description": "Calculate stock split impact on holdings with split ratio, adjusted price, quantity change and investment value analysis.",
+        "url": "https://brobillionaire.com/tool-stock-split-analyzer.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="BroBillionaire Logo" class="logo-img">
+                <span class="logo-text">BroBillionaire</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="articles.html" class="nav-link">Articles</a>
+                <a href="tools.html" class="nav-link active">Tools</a>
+                <a href="about.html" class="nav-link">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <nav class="breadcrumb-nav">
+        <a href="index.html">Home</a><a href="tools.html">Tools</a><span>Stock Split Analyzer</span>
+    </nav>
+
+    <div class="calculator-container">
+        <div class="calculator-card">
+            <h1 class="calculator-title"><i class="fas fa-cut"></i> Stock Split Calculator</h1>
+            <p class="calculator-subtitle">Calculate stock split or bonus share impact on your holdings. Understand how split ratio affects share quantity, price per share, and total investment value. Perfect for analyzing Reliance, TCS, Infosys splits!</p>
+            
+            <div class="input-grid">
+                <div class="input-group">
+                    <label class="input-label">Stock Name (Optional)</label>
+                    <input type="text" id="stockName" class="input-field" placeholder="e.g., Reliance, TCS, Infosys">
+                    <div class="input-hint">Enter stock name for reference</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Current Holdings (Quantity)</label>
+                    <input type="number" id="currentQuantity" class="input-field" placeholder="100" value="100">
+                    <div class="input-hint">Number of shares you own</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Current Price per Share (₹)</label>
+                    <input type="number" id="currentPrice" class="input-field" placeholder="2500" value="2500">
+                    <div class="input-hint">Pre-split stock price</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Average Purchase Price (₹)</label>
+                    <input type="number" id="avgPrice" class="input-field" placeholder="2000" value="2000">
+                    <div class="input-hint">Your average buying price</div>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Split Type</label>
+                <select id="splitType" class="input-select" onchange="updateSplitInputs()">
+                    <option value="split">Stock Split (e.g., 1:5, 1:10)</option>
+                    <option value="bonus">Bonus Shares (e.g., 1:1, 1:2)</option>
+                    <option value="custom">Custom Ratio</option>
+                </select>
+                <div class="input-hint">Select the type of corporate action</div>
+            </div>
+            
+            <div class="input-grid" id="splitRatioInputs">
+                <div class="input-group">
+                    <label class="input-label" id="oldSharesLabel">Old Shares</label>
+                    <input type="number" id="oldShares" class="input-field" placeholder="1" value="1">
+                    <div class="input-hint" id="oldSharesHint">Existing shares</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" id="newSharesLabel">New Shares</label>
+                    <input type="number" id="newShares" class="input-field" placeholder="5" value="5">
+                    <div class="input-hint" id="newSharesHint">Total shares after split</div>
+                </div>
+            </div>
+            
+            <button class="calculate-btn" onclick="analyzeSplit()">
+                <i class="fas fa-calculator"></i> Analyze Stock Split Impact
+            </button>
+        </div>
+        
+        <div class="results-section" id="resultsSection">
+            <div class="split-ratio-box">
+                <div class="split-ratio-title" id="splitTypeDisplay">Stock Split Ratio</div>
+                <div class="split-ratio-value" id="splitRatioDisplay">1:5</div>
+                <div style="color: var(--text-secondary); margin-top: 15px;" id="splitExplanation">
+                    Each 1 old share becomes 5 new shares
+                </div>
+            </div>
+            
+            <div class="calculator-card">
+                <h2 style="color: var(--gold); margin-bottom: 30px; font-family: 'Playfair Display', serif; font-size: 2rem; text-align: center;" id="stockTitle">Stock Split Impact Analysis</h2>
+                
+                <div class="comparison-cards">
+                    <div class="comparison-card before">
+                        <div class="status-title"><i class="fas fa-history"></i> Before Split</div>
+                        <div class="status-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Quantity:</span>
+                                <span class="detail-value" id="beforeQty">100 shares</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Price per Share:</span>
+                                <span class="detail-value" id="beforePrice">₹2,500</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Total Investment Value:</span>
+                                <span class="detail-value" id="beforeValue">₹2,50,000</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Average Buy Price:</span>
+                                <span class="detail-value" id="beforeAvgPrice">₹2,000</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Unrealized P&L:</span>
+                                <span class="detail-value" id="beforePL">+₹50,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-card after">
+                        <div class="status-title"><i class="fas fa-arrow-right"></i> After Split</div>
+                        <div class="status-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Quantity:</span>
+                                <span class="detail-value" id="afterQty">500 shares</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Price per Share:</span>
+                                <span class="detail-value" id="afterPrice">₹500</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Total Investment Value:</span>
+                                <span class="detail-value" id="afterValue">₹2,50,000</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Average Buy Price:</span>
+                                <span class="detail-value" id="afterAvgPrice">₹400</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Unrealized P&L:</span>
+                                <span class="detail-value" id="afterPL">+₹50,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">Multiplier</div>
+                        <div class="metric-value" id="multiplier">5x</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">New Shares Added</div>
+                        <div class="metric-value" id="sharesAdded">+400</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Value Impact</div>
+                        <div class="metric-value" style="color: #3498db;">ZERO</div>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <h3 class="chart-title">Quantity & Price Adjustment</h3>
+                    <canvas id="splitChart"></canvas>
+                </div>
+                
+                <div class="info-box">
+                    <h3><i class="fas fa-info-circle"></i> Key Insights</h3>
+                    <p id="keyInsights"></p>
+                    <ul>
+                        <li><strong>No Change in Investment Value:</strong> Total portfolio value remains exactly the same before and after split</li>
+                        <li><strong>Proportional Adjustment:</strong> Share quantity increases, price decreases proportionally</li>
+                        <li><strong>P&L Unchanged:</strong> Your profit/loss percentage and absolute value stay identical</li>
+                        <li><strong>Increased Liquidity:</strong> Lower price per share makes stock more accessible to retail investors</li>
+                        <li><strong>Tax Neutral:</strong> No tax implications - it's just a re-denomination of existing holdings</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What is stock split and how does it affect my holdings?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Stock split divides existing shares into multiple shares to reduce price per share. Example: 1:5 split means 1 share becomes 5 shares. If you owned 100 shares at ₹2,500 = ₹2,50,000 total value, after 1:5 split you'll own 500 shares at ₹500 = same ₹2,50,000 value! It's like exchanging one ₹500 note for five ₹100 notes - total value unchanged. Companies do splits to: 1) Make stock more affordable for retail investors, 2) Increase liquidity and trading volume, 3) Psychological appeal of "cheaper" price. Your profit/loss percentage remains identical. The split is purely cosmetic - no real gain or loss occurs.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Stock split vs bonus shares - what's the difference?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p><strong>Stock Split:</strong> Total shares outstanding in market increases. Price adjusts automatically on split date. No transfer from company reserves. Example: 1:10 split - your 10 shares at ₹5,000 become 100 shares at ₹500. <strong>Bonus Shares:</strong> Additional shares issued from company reserves to existing shareholders. Reward for loyalty. Price adjusts based on bonus ratio. Example: 1:2 bonus - for every 1 share owned, you get 2 bonus shares free (total 3 shares). Your 10 shares become 30 shares. <strong>Net effect:</strong> Both are economically identical to you! Total value unchanged. Key difference: Bonus uses company reserves (appears in financial statements), split is just re-denomination. Tax treatment same: No immediate tax - cost basis adjusts. From investor perspective, treat both identically - just more shares at lower price, same total value.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Should I buy stock before or after split announcement?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Timing doesn't matter fundamentally - split doesn't change intrinsic value! However, practical considerations: <strong>Buy BEFORE record date if:</strong> 1) You want benefit of split (though economically neutral), 2) Stock has bullish momentum due to split news (sentiment-driven rally), 3) Historical pattern shows post-split buying interest. <strong>Wait AFTER split if:</strong> 1) Stock rallied 15-20% on split news (overheated), 2) You prefer lower absolute price (₹500 vs ₹2,500 psychologically easier), 3) Want to see post-split trading pattern/liquidity. <strong>Reality check 2026:</strong> Splits often create positive sentiment, temporary price bump of 5-10% around announcement, then normalizes within weeks. Don't FOMO buy just for split! Example: MRF announced 1:10 split in 2024 at ₹1,20,000, rallied to ₹1,35,000 pre-split, settled at ₹12,000 post-split (same value!). Focus on company fundamentals, not split gimmicks. Best approach: If you like the stock fundamentally, buy regardless of split timing.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How to calculate average price after stock split for tax purposes?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Average price adjusts proportionally to maintain same cost basis. Formula: New Average Price = Old Average Price ÷ Split Ratio. Example calculation: <strong>Before split:</strong> Bought 100 shares at ₹2,000 average. <strong>1:5 split announced:</strong> You now own 500 shares. <strong>New average:</strong> ₹2,000 ÷ 5 = ₹400 per share. <strong>Total cost basis:</strong> 100 × ₹2,000 = ₹2,00,000 (before) = 500 × ₹400 = ₹2,00,000 (after) - Unchanged! <strong>For tax filing:</strong> Use adjusted average price ₹400 for new quantity 500 shares. If you sell at ₹500 post-split: Profit = (₹500 - ₹400) × 500 = ₹50,000. This equals pre-split profit: (₹2,500 - ₹2,000) × 100 = ₹50,000. <strong>Important:</strong> Demat account automatically adjusts quantity and average price on split date. No manual calculation needed. But maintain records for tax purposes. LTCG/STCG holding period starts from original purchase date, not split date!</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What happens to my F&O positions during stock split?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>F&O contracts adjust to maintain economic equivalence! <strong>Futures adjustment:</strong> Lot size multiplies by split ratio, price divides. Example: Reliance 1:5 split - Old contract: 250 lot size × ₹2,500 = ₹6,25,000 exposure. New contract: 1,250 lot size × ₹500 = ₹6,25,000 - Same exposure! Your P&L unaffected. <strong>Options adjustment:</strong> Strike prices adjust proportionally. If you held ₹2,500 Call option, after 1:5 split it becomes ₹500 Call (economically identical). Premium adjusts: ₹100 premium becomes ₹20 premium. <strong>NSE procedure:</strong> Creates special adjusted contracts with suffix (e.g., RELIANCE_ADJ) that mirror pre-split ratios. Both old and new contracts trade till old expiry. <strong>Critical points:</strong> 1) MTM unaffected - no profit/loss on split date, 2) Margin requirements adjust proportionally, 3) Close positions before split to avoid confusion, 4) Weekly/monthly expiry patterns may change. <strong>Pro tip:</strong> For active traders, square off F&O positions 2-3 days before split effective date to avoid adjustment complexities and re-enter post-split in clean contracts.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Recent stock splits in India 2024-2026 - which stocks split?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p><strong>Major splits 2024-2026:</strong> MRF: 1:10 split in July 2024, ₹1,20,000 → ₹12,000. Reason: Highest-priced stock, inaccessible to retail. Result: Trading volumes increased 300%+. Bajaj Auto: 1:10 split in June 2024, ₹9,500 → ₹950. Impact: Retail participation surged. Page Industries: 1:10 split in August 2024, ₹44,000 → ₹4,400. Nestle India: Considering 1:10 split in 2025, currently ₹24,000+. Bosch: 1:10 split in 2024, ₹20,000 → ₹2,000. <strong>Why these splits?</strong> High absolute price (>₹10,000) limits retail accessibility, Lower price improves liquidity, Options trading becomes feasible at lower strikes. <strong>Post-split performance:</strong> Most stocks maintained growth trajectory - split doesn't change fundamentals! MRF: +12% post-split in 3 months (vs Nifty +5%), Bajaj Auto: +18% in 6 months post-split. <strong>Pattern:</strong> Stocks >₹5,000 are prime split candidates. Check announcements during earnings season (Feb, May, Aug, Nov). <strong>2026 watch list:</strong> Shree Cement (₹27,000+), 3M India (₹30,000+), Honeywell (₹40,000+) - potential split candidates.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Do stock splits increase company value or share price long-term?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p><strong>Fundamentally: NO.</strong> Split is cosmetic - doesn't change company earnings, assets, or intrinsic value. It's like cutting a pizza into more slices - same pizza! <strong>However, indirect benefits:</strong> 1) Improved liquidity: More retail investors can afford shares, higher trading volumes. 2) Options accessibility: Lower strikes enable F&O trading for retail. 3) Psychological impact: ₹500 stock "feels" cheaper than ₹5,000, attracts buyers. 4) Inclusion in indices: Lower price may qualify for broader indices. 5) Analyst coverage: Increased retail interest attracts more research. <strong>Research data:</strong> US studies show stocks outperform by 3-5% in year following split announcement (sentiment effect, not fundamental). But this normalizes within 18 months. <strong>India context 2026:</strong> Retail boom means splits have bigger impact - increased accessibility drives sustained demand. Example: MRF post-split saw sustained retail interest, delivery volumes up 200%. <strong>Bottom line:</strong> Short-term positive sentiment (5-15% bump possible), long-term performance depends entirely on business fundamentals. Buy quality companies, not split news! If business is poor, split won't save it. If business is great, split just makes it more accessible.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer style="background: var(--bg-secondary); padding: 60px 40px; text-align: center; border-top: 1px solid var(--border-color); margin-top: 80px;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 40px; text-align: left; margin-bottom: 40px;">
+                <div style="flex: 1; min-width: 250px;">
+                    <h3 style="color: var(--gold); margin-bottom: 20px; font-size: 1.5rem;">BroBillionaire</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">Empowering Indian traders with premium tools, deep market insights, and actionable trading strategies. Master the markets in 2026!</p>
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                    <h4 style="color: var(--gold); margin-bottom: 15px;">Quick Links</h4>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <a href="index.html" style="color: var(--text-secondary); text-decoration: none;">Home</a>
+                        <a href="articles.html" style="color: var(--text-secondary); text-decoration: none;">Articles</a>
+                        <a href="tools.html" style="color: var(--text-secondary); text-decoration: none;">Tools</a>
+                        <a href="about.html" style="color: var(--text-secondary); text-decoration: none;">About</a>
+                    </div>
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                    <h4 style="color: var(--gold); margin-bottom: 15px;">Popular Tools</h4>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <a href="tool-option-strategy-builder.html" style="color: var(--text-secondary); text-decoration: none;">Option Strategy Builder</a>
+                        <a href="tool-position-size-calculator.html" style="color: var(--text-secondary); text-decoration: none;">Position Size Calculator</a>
+                        <a href="tool-tax-harvesting-calculator.html" style="color: var(--text-secondary); text-decoration: none;">Tax Harvesting Calculator</a>
+                    </div>
+                </div>
+            </div>
+            <div style="border-top: 1px solid var(--border-color); padding-top: 30px; color: var(--text-tertiary); font-size: 0.9rem;">
+                <p>&copy; 2026 BroBillionaire. All rights reserved. Built for Indian Traders 🇮🇳</p>
+                <p style="margin-top: 10px;">Disclaimer: All tools and content are for educational purposes only. Not financial advice. Trade at your own risk.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let splitChartInstance = null;
+        
+        function updateSplitInputs() {
+            const splitType = document.getElementById('splitType').value;
+            
+            if (splitType === 'split') {
+                document.getElementById('oldSharesLabel').textContent = 'Old Shares';
+                document.getElementById('newSharesLabel').textContent = 'New Shares (Total)';
+                document.getElementById('oldSharesHint').textContent = 'Existing shares before split';
+                document.getElementById('newSharesHint').textContent = 'Total shares after split (e.g., 5 for 1:5)';
+                document.getElementById('oldShares').value = 1;
+                document.getElementById('newShares').value = 5;
+            } else if (splitType === 'bonus') {
+                document.getElementById('oldSharesLabel').textContent = 'Existing Shares';
+                document.getElementById('newSharesLabel').textContent = 'Bonus Shares';
+                document.getElementById('oldSharesHint').textContent = 'Shares you currently own';
+                document.getElementById('newSharesHint').textContent = 'Bonus shares per existing share';
+                document.getElementById('oldShares').value = 1;
+                document.getElementById('newShares').value = 1;
+            } else {
+                document.getElementById('oldSharesLabel').textContent = 'Old Shares';
+                document.getElementById('newSharesLabel').textContent = 'New Shares';
+                document.getElementById('oldSharesHint').textContent = 'Before ratio';
+                document.getElementById('newSharesHint').textContent = 'After ratio';
+            }
+        }
+        
+        function analyzeSplit() {
+            const stockName = document.getElementById('stockName').value || 'Stock';
+            const currentQty = parseFloat(document.getElementById('currentQuantity').value);
+            const currentPrice = parseFloat(document.getElementById('currentPrice').value);
+            const avgPrice = parseFloat(document.getElementById('avgPrice').value);
+            const oldShares = parseFloat(document.getElementById('oldShares').value);
+            const newShares = parseFloat(document.getElementById('newShares').value);
+            const splitType = document.getElementById('splitType').value;
+            
+            if (!currentQty || !currentPrice || !avgPrice || !oldShares || !newShares) {
+                alert('Please enter all values!');
+                return;
+            }
+            
+            // Calculate split ratio
+            let multiplier;
+            if (splitType === 'bonus') {
+                multiplier = 1 + (newShares / oldShares); // 1:1 bonus = 2x total
+            } else {
+                multiplier = newShares / oldShares; // 1:5 split = 5x
+            }
+            
+            // Before split
+            const beforeValue = currentQty * currentPrice;
+            const beforeCost = currentQty * avgPrice;
+            const beforePL = beforeValue - beforeCost;
+            
+            // After split
+            const afterQty = currentQty * multiplier;
+            const afterPrice = currentPrice / multiplier;
+            const afterAvgPrice = avgPrice / multiplier;
+            const afterValue = afterQty * afterPrice;
+            const afterCost = afterQty * afterAvgPrice;
+            const afterPL = afterValue - afterCost;
+            
+            // Display results
+            document.getElementById('stockTitle').textContent = stockName + ' - Split Impact Analysis';
+            
+            // Split ratio display
+            if (splitType === 'bonus') {
+                document.getElementById('splitTypeDisplay').textContent = 'Bonus Shares Ratio';
+                document.getElementById('splitRatioDisplay').textContent = oldShares + ':' + newShares;
+                document.getElementById('splitExplanation').textContent = `For every ${oldShares} share${oldShares > 1 ? 's' : ''} owned, you get ${newShares} bonus share${newShares > 1 ? 's' : ''} (total ${oldShares + newShares} shares)`;
+            } else {
+                document.getElementById('splitTypeDisplay').textContent = 'Stock Split Ratio';
+                document.getElementById('splitRatioDisplay').textContent = oldShares + ':' + newShares;
+                document.getElementById('splitExplanation').textContent = `Each ${oldShares} share${oldShares > 1 ? 's' : ''} become${oldShares === 1 ? 's' : ''} ${newShares} share${newShares > 1 ? 's' : ''}`;
+            }
+            
+            // Before split
+            document.getElementById('beforeQty').textContent = currentQty.toFixed(0) + ' shares';
+            document.getElementById('beforePrice').textContent = '₹' + currentPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById('beforeValue').textContent = '₹' + beforeValue.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById('beforeAvgPrice').textContent = '₹' + avgPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById('beforePL').textContent = (beforePL >= 0 ? '+' : '') + '₹' + beforePL.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            
+            // After split
+            document.getElementById('afterQty').textContent = afterQty.toFixed(0) + ' shares';
+            document.getElementById('afterPrice').textContent = '₹' + afterPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById('afterValue').textContent = '₹' + afterValue.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById('afterAvgPrice').textContent = '₹' + afterAvgPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById('afterPL').textContent = (afterPL >= 0 ? '+' : '') + '₹' + afterPL.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            
+            // Metrics
+            document.getElementById('multiplier').textContent = multiplier.toFixed(1) + 'x';
+            document.getElementById('sharesAdded').textContent = '+' + (afterQty - currentQty).toFixed(0);
+            
+            // Key insights
+            const plPercent = ((beforePL / beforeCost) * 100).toFixed(2);
+            document.getElementById('keyInsights').innerHTML = `<strong>${stockName}</strong> ${splitType === 'bonus' ? 'bonus issue' : 'stock split'} of ${oldShares}:${newShares} increases your holding from <strong>${currentQty} to ${afterQty.toFixed(0)} shares</strong>. Price adjusts from <strong>₹${currentPrice.toFixed(2)} to ₹${afterPrice.toFixed(2)}</strong> per share. Your total investment value remains <strong>₹${beforeValue.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong> with <strong>${plPercent}% ${beforePL >= 0 ? 'profit' : 'loss'}</strong> unchanged. The split makes the stock more accessible to retail investors at a lower absolute price.`;
+            
+            // Draw chart
+            drawSplitChart(currentQty, afterQty, currentPrice, afterPrice);
+            
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        function drawSplitChart(beforeQty, afterQty, beforePrice, afterPrice) {
+            const ctx = document.getElementById('splitChart').getContext('2d');
+            
+            if (splitChartInstance) {
+                splitChartInstance.destroy();
+            }
+            
+            splitChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Quantity (Shares)', 'Price per Share (₹)'],
+                    datasets: [
+                        {
+                            label: 'Before Split',
+                            data: [beforeQty, beforePrice],
+                            backgroundColor: '#e74c3c',
+                            borderColor: '#e74c3c',
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'After Split',
+                            data: [afterQty, afterPrice],
+                            backgroundColor: '#27ae60',
+                            borderColor: '#27ae60',
+                            borderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#999', font: { size: 12 } }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: '#C9A227',
+                            bodyColor: '#fff'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: { color: '#666' },
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' }
+                        },
+                        x: {
+                            ticks: { color: '#666' },
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+            if (!isActive) answer.classList.add('active');
+        }
+    </script>
+</body>
+</html>

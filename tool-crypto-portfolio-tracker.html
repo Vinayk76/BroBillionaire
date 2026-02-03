@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>FREE Crypto Portfolio Tracker 2026 - Bitcoin Ethereum Holdings Calculator | BroBillionaire</title>
+    <meta name="title" content="FREE Crypto Portfolio Tracker 2026 - Bitcoin Ethereum Holdings Calculator | BroBillionaire">
+    <meta name="description" content="Track crypto portfolio with live P&L! FREE calculator for Bitcoin, Ethereum, altcoins with profit/loss tracking, allocation analysis & performance metrics 2026!">
+    <meta name="keywords" content="crypto portfolio tracker, bitcoin calculator, ethereum holdings, crypto profit calculator, cryptocurrency tracker, portfolio allocation, crypto P&L calculator India 2026">
+    <meta name="author" content="BroBillionaire">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://brobillionaire.com/tool-crypto-portfolio-tracker.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://brobillionaire.com/tool-crypto-portfolio-tracker.html">
+    <meta property="og:title" content="FREE Crypto Portfolio Tracker - Bitcoin Ethereum Calculator">
+    <meta property="og:description" content="Track crypto portfolio with live P&L! FREE calculator for Bitcoin, Ethereum, altcoins with profit/loss tracking, allocation analysis.">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    <meta property="og:site_name" content="BroBillionaire">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://brobillionaire.com/tool-crypto-portfolio-tracker.html">
+    <meta property="twitter:title" content="FREE Crypto Portfolio Tracker - Bitcoin Ethereum Calculator">
+    <meta property="twitter:description" content="Track crypto portfolio with live P&L! FREE calculator for Bitcoin, Ethereum, altcoins with profit/loss tracking.">
+    <meta property="twitter:image" content="https://brobillionaire.com/og-image.jpg">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --gold: #C9A227;
+            --bg-primary: #0d0d0d;
+            --bg-secondary: #1a1a1a;
+            --bg-card: #1a1a1a;
+            --text-primary: #fff;
+            --text-secondary: #999;
+            --text-tertiary: #666;
+            --border-color: #2a2a2a;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding-top: 140px;
+        }
+        
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+        }
+        
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--gold);
+        }
+        
+        .mobile-menu-toggle { display: none; }
+        
+        /* Breadcrumb */
+        .breadcrumb-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+        }
+        
+        .breadcrumb-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .breadcrumb-nav a:hover {
+            color: var(--gold);
+        }
+        
+        .breadcrumb-nav a::after {
+            content: "›";
+            margin: 0 10px;
+            color: var(--text-tertiary);
+        }
+        
+        /* Calculator Styles */
+        .calculator-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .calculator-card { background: var(--bg-card); border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid var(--border-color); }
+        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--gold); margin-bottom: 10px; }
+        .calculator-subtitle { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 40px; line-height: 1.6; }
+        
+        .input-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 30px; }
+        .input-group { margin-bottom: 25px; }
+        .input-label { display: block; color: var(--gold); font-weight: 600; margin-bottom: 10px; font-size: 1rem; }
+        .input-field, .input-select { width: 100%; padding: 15px; background: #0a0a0a; border: 2px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 1rem; transition: border-color 0.3s; }
+        .input-field:focus, .input-select:focus { border-color: var(--gold); outline: none; }
+        .input-hint { color: var(--text-tertiary); font-size: 0.85rem; margin-top: 5px; }
+        
+        .add-crypto-btn, .calculate-btn { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; font-weight: 700; padding: 15px 30px; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; transition: transform 0.2s; margin-top: 10px; }
+        .add-crypto-btn:hover, .calculate-btn:hover { transform: translateY(-2px); }
+        .calculate-btn { width: 100%; padding: 18px; font-size: 1.1rem; }
+        
+        .crypto-list { margin-top: 30px; }
+        .crypto-item { background: #0a0a0a; padding: 20px; border-radius: 8px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border-color); }
+        .crypto-info { flex: 1; }
+        .crypto-name { color: var(--gold); font-weight: 600; font-size: 1.1rem; margin-bottom: 5px; }
+        .crypto-details { color: var(--text-secondary); font-size: 0.9rem; }
+        .remove-btn { background: #e74c3c; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 0.9rem; }
+        .remove-btn:hover { background: #c0392b; }
+        
+        .results-section { display: none; margin-top: 40px; }
+        
+        .portfolio-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .summary-card { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 30px; border-radius: 12px; border: 2px solid var(--gold); text-align: center; }
+        .summary-label { color: var(--gold); font-weight: 600; margin-bottom: 10px; font-size: 0.9rem; text-transform: uppercase; }
+        .summary-value { color: var(--text-primary); font-size: 2.5rem; font-weight: 700; margin: 10px 0; font-family: 'Playfair Display', serif; }
+        .summary-change { font-size: 1.1rem; }
+        .summary-change.positive { color: #27ae60; }
+        .summary-change.negative { color: #e74c3c; }
+        
+        .chart-container { max-width: 100%; margin: 30px 0; padding: 30px; background: rgba(10, 10, 10, 0.5); border-radius: 12px; }
+        .chart-title { color: var(--gold); font-size: 1.5rem; margin-bottom: 20px; text-align: center; font-weight: 600; }
+        
+        .holdings-table { width: 100%; margin-top: 30px; border-collapse: collapse; }
+        .holdings-table th { background: #0a0a0a; color: var(--gold); padding: 15px; text-align: left; font-weight: 600; border-bottom: 2px solid var(--gold); }
+        .holdings-table td { padding: 15px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); }
+        .holdings-table tr:hover { background: rgba(201, 162, 39, 0.05); }
+        
+        .info-box { background: rgba(52, 152, 219, 0.1); border: 2px solid #3498db; padding: 25px; border-radius: 12px; margin-top: 30px; }
+        .info-box h3 { color: #3498db; margin-bottom: 15px; }
+        .info-box p { color: var(--text-secondary); line-height: 1.8; margin: 0; }
+        
+        /* FAQ Section */
+        .faq-section { max-width: 1200px; margin: 50px auto; padding: 40px 20px; }
+        .faq-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--gold); margin-bottom: 40px; text-align: center; }
+        .faq-item { background: var(--bg-card); border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--border-color); overflow: hidden; }
+        .faq-question { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--text-primary); font-weight: 600; font-size: 1.1rem; }
+        .faq-question:hover { background: #222; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #0a0a0a; }
+        .faq-answer.active { max-height: 2000px; }
+        .faq-answer p { padding: 25px; margin: 0; color: var(--text-secondary); line-height: 1.8; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 120px; }
+            .calculator-title { font-size: 2rem; }
+            .nav-links { display: none; }
+            .mobile-menu-toggle { display: block; }
+            .input-grid { grid-template-columns: 1fr; }
+            .summary-value { font-size: 2rem; }
+            .crypto-item { flex-direction: column; gap: 15px; align-items: flex-start; }
+        }
+    </style>
+
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://brobillionaire.com/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Tools",
+                "item": "https://brobillionaire.com/tools.html"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Crypto Portfolio Tracker"
+            }
+        ]
+    }
+    </script>
+
+    <!-- WebApplication Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Crypto Portfolio Tracker",
+        "description": "Track crypto portfolio with live P&L, Bitcoin, Ethereum, altcoins profit/loss tracking and allocation analysis.",
+        "url": "https://brobillionaire.com/tool-crypto-portfolio-tracker.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="BroBillionaire Logo" class="logo-img">
+                <span class="logo-text">BroBillionaire</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="articles.html" class="nav-link">Articles</a>
+                <a href="tools.html" class="nav-link active">Tools</a>
+                <a href="about.html" class="nav-link">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <nav class="breadcrumb-nav">
+        <a href="index.html">Home</a><a href="tools.html">Tools</a><span>Crypto Portfolio Tracker</span>
+    </nav>
+
+    <div class="calculator-container">
+        <div class="calculator-card">
+            <h1 class="calculator-title"><i class="fab fa-bitcoin"></i> Crypto Portfolio Tracker</h1>
+            <p class="calculator-subtitle">Track your cryptocurrency portfolio across Bitcoin, Ethereum, and altcoins. Monitor real-time profit/loss, portfolio allocation, and performance metrics. Smart crypto portfolio management for 2026!</p>
+            
+            <div class="input-grid">
+                <div class="input-group">
+                    <label class="input-label">Cryptocurrency</label>
+                    <select id="cryptoName" class="input-select">
+                        <option value="Bitcoin">Bitcoin (BTC)</option>
+                        <option value="Ethereum">Ethereum (ETH)</option>
+                        <option value="Binance Coin">Binance Coin (BNB)</option>
+                        <option value="Cardano">Cardano (ADA)</option>
+                        <option value="Solana">Solana (SOL)</option>
+                        <option value="Ripple">Ripple (XRP)</option>
+                        <option value="Polkadot">Polkadot (DOT)</option>
+                        <option value="Dogecoin">Dogecoin (DOGE)</option>
+                        <option value="Polygon">Polygon (MATIC)</option>
+                        <option value="Avalanche">Avalanche (AVAX)</option>
+                    </select>
+                    <div class="input-hint">Select cryptocurrency</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Quantity Held</label>
+                    <input type="number" id="cryptoQuantity" class="input-field" placeholder="0.5" step="0.00000001">
+                    <div class="input-hint">Total coins/tokens owned</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Purchase Price (₹)</label>
+                    <input type="number" id="purchasePrice" class="input-field" placeholder="3500000">
+                    <div class="input-hint">Average buy price per unit</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Current Price (₹)</label>
+                    <input type="number" id="currentPrice" class="input-field" placeholder="4200000">
+                    <div class="input-hint">Current market price per unit</div>
+                </div>
+            </div>
+            
+            <button class="add-crypto-btn" onclick="addCrypto()">
+                <i class="fas fa-plus"></i> Add to Portfolio
+            </button>
+            
+            <div class="crypto-list" id="cryptoList"></div>
+            
+            <button class="calculate-btn" onclick="calculatePortfolio()" style="margin-top: 30px;">
+                <i class="fas fa-chart-pie"></i> Analyze Portfolio
+            </button>
+        </div>
+        
+        <div class="results-section" id="resultsSection">
+            <div class="calculator-card">
+                <h2 style="color: var(--gold); margin-bottom: 30px; font-family: 'Playfair Display', serif; font-size: 2rem; text-align: center;">Portfolio Summary</h2>
+                
+                <div class="portfolio-summary">
+                    <div class="summary-card">
+                        <div class="summary-label">Total Investment</div>
+                        <div class="summary-value" id="totalInvestment">₹0</div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <div class="summary-label">Current Value</div>
+                        <div class="summary-value" id="currentValue">₹0</div>
+                        <div class="summary-change" id="totalChange">+₹0 (0%)</div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <div class="summary-label">Total P&L</div>
+                        <div class="summary-value" id="totalPL">₹0</div>
+                        <div class="summary-change" id="plPercent">0%</div>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <h3 class="chart-title">Portfolio Allocation</h3>
+                    <canvas id="allocationChart"></canvas>
+                </div>
+                
+                <div class="calculator-card" style="margin-top: 30px;">
+                    <h3 style="color: var(--gold); margin-bottom: 20px; font-size: 1.5rem;">Holdings Breakdown</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="holdings-table">
+                            <thead>
+                                <tr>
+                                    <th>Asset</th>
+                                    <th>Quantity</th>
+                                    <th>Avg Buy Price</th>
+                                    <th>Current Price</th>
+                                    <th>Investment</th>
+                                    <th>Current Value</th>
+                                    <th>P&L</th>
+                                    <th>Returns %</th>
+                                </tr>
+                            </thead>
+                            <tbody id="holdingsTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <h3 class="chart-title">Performance Comparison</h3>
+                    <canvas id="performanceChart"></canvas>
+                </div>
+                
+                <div class="info-box">
+                    <h3><i class="fas fa-lightbulb"></i> Portfolio Insights</h3>
+                    <p id="portfolioInsights">Add cryptocurrencies to see personalized portfolio insights and recommendations.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How to track crypto portfolio effectively in 2026?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Track your crypto portfolio by: 1) Recording every purchase with date, price, and quantity in a tracker like BroBillionaire, 2) Monitor current market prices daily from reliable sources (CoinMarketCap, WazirX, CoinDCX), 3) Calculate individual asset P&L = (Current Price - Purchase Price) × Quantity, 4) Review portfolio allocation monthly - diversify across BTC (40%), ETH (30%), altcoins (30%), 5) Track transaction fees and tax implications separately, 6) Set price alerts for significant moves, 7) Rebalance quarterly to maintain target allocation. Use portfolio trackers to automate calculations and get real-time insights.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What is a good crypto portfolio allocation for Indian investors?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Conservative allocation (Low risk): Bitcoin 50%, Ethereum 30%, Top 10 altcoins 15%, Stablecoins 5%. Moderate allocation (Balanced): Bitcoin 40%, Ethereum 30%, Top 10 altcoins 20%, Mid-cap tokens 10%. Aggressive allocation (High risk): Bitcoin 30%, Ethereum 25%, Top 10 altcoins 25%, Small-cap/DeFi 20%. Key principles for 2026: 1) Bitcoin as foundation (30-50%), 2) Ethereum for smart contracts (25-30%), 3) Never allocate >10% to single altcoin, 4) Keep 5-10% stablecoins for buying dips, 5) Total crypto should be <10% of overall investment portfolio. Rebalance when any asset deviates >15% from target.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How to calculate crypto profit/loss in INR for Indian tax purposes?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Crypto P&L calculation for Indian taxes: 1) Short-term gains (<12 months): Profit = (Selling Price - Purchase Price) × Quantity, taxed at 30% flat rate under Section 115BBH, 2) Long-term gains (>12 months): Same 30% tax applies - no LTCG benefit, 3) Always calculate in INR on transaction date using actual exchange rates, 4) FIFO method (First In First Out) for cost basis if multiple purchases, 5) Include transaction fees, GST (1%) as part of cost, 6) No set-off of losses allowed against other income, 7) VDA losses can offset only VDA gains in same year. Maintain detailed records: date, quantity, buy price, sell price, fees, INR conversion. Use crypto tax calculators or consult CA for complex cases with multiple exchanges and wallets.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Should I hold Bitcoin in WazirX, CoinDCX or move to hardware wallet?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Storage strategy based on holding value: Small holdings (<₹50,000): Keep on reputable exchanges (WazirX, CoinDCX, CoinSwitch) - convenient for trading, easier INR conversion. Medium holdings (₹50,000 - ₹5 lakhs): Split 70% exchange, 30% software wallet (Trust Wallet, MetaMask) for security. Large holdings (>₹5 lakhs): Move 70-80% to hardware wallet (Ledger Nano, Trezor) - maximum security, offline storage. Remember: "Not your keys, not your crypto" - exchanges can be hacked or frozen. Hardware wallet one-time cost ₹8,000-15,000 is worth it for large holdings. Keep recovery seed phrase extremely secure - write on metal plate, store in bank locker. For active traders: Keep trading amount on exchange, move profits to cold storage monthly. Never keep all crypto in single location.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                When to take profit from crypto portfolio - sell all or partial?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Smart profit-taking strategy for 2026: Never sell everything - crypto is long-term play. Use tiered approach: 1) At 50% gain: Sell 20-25% to recover initial investment (now playing with house money), 2) At 100% gain: Sell another 25-30%, let rest run, 3) At 200%+ gain: Sell 30-40%, keep core position (20-25% of original) long-term. Altcoin strategy (more volatile): Take 50% profits at 100% gain, sell 75% at 200%+, keep small position for moonshot. Bitcoin/Ethereum (hodl assets): Never sell core position, only trim 10-20% at major resistance levels. Trigger points: Sell when portfolio becomes >15% of net worth, during extreme greed (RSI >80 on weekly), before known major events. Rebalancing: Monthly review - if any coin >2x target allocation, take partial profits. Don't regret selling - securing profits is never wrong!</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How much crypto should be in overall investment portfolio in India 2026?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Crypto allocation in total portfolio: Conservative investors (age 40+, low risk tolerance): 2-5% in crypto (primarily Bitcoin/Ethereum). Moderate investors (age 30-40, medium risk): 5-10% in crypto. Aggressive investors (age <30, high risk tolerance): 10-20% in crypto. Never exceed 20% - crypto is highly volatile! Recommended 2026 portfolio structure: 40% Equity (stocks/mutual funds), 25% Debt (bonds/FDs), 15% Real estate, 10% Gold, 5-10% Crypto, 5% Emergency cash. Rules: 1) Invest only surplus money you can afford to lose, 2) Never take loan for crypto, 3) Don't invest emergency fund, 4) Build traditional assets first, then add crypto, 5) Rebalance annually - if crypto grows to 25%, book profits. Crypto is satellite position, not core holding.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Best time to buy crypto - should I wait for Bitcoin crash or start now?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Timing crypto market is nearly impossible - even experts fail. Best approach: Dollar Cost Averaging (DCA). Instead of lumpsum ₹1 lakh, invest ₹10,000 monthly for 10 months. This averages out volatility. When to accelerate buying: 1) Bitcoin drop >30% from ATH - increase SIP by 50%, 2) Fear & Greed Index <25 (Extreme Fear) - perfect accumulation zone, 3) After regulatory FUD in India - panic creates opportunity, 4) Major crypto winter (2022-like events) - deploy extra capital. When to pause/reduce: 1) Bitcoin near all-time high, 2) Fear & Greed Index >75 (Extreme Greed), 3) Massive social media hype ("Bitcoin to $1 million"), 4) Crypto becomes >20% of your portfolio. Golden rule 2026: Start small, invest regularly, ignore daily noise. If waiting for "perfect entry", you'll wait forever. Time in market > Timing the market applies to crypto too!</p>
+            </div>
+        </div>
+    </div>
+
+    <footer style="background: var(--bg-secondary); padding: 60px 40px; text-align: center; border-top: 1px solid var(--border-color); margin-top: 80px;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 40px; text-align: left; margin-bottom: 40px;">
+                <div style="flex: 1; min-width: 250px;">
+                    <h3 style="color: var(--gold); margin-bottom: 20px; font-size: 1.5rem;">BroBillionaire</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">Empowering Indian traders with premium tools, deep market insights, and actionable trading strategies. Master the markets in 2026!</p>
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                    <h4 style="color: var(--gold); margin-bottom: 15px;">Quick Links</h4>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <a href="index.html" style="color: var(--text-secondary); text-decoration: none;">Home</a>
+                        <a href="articles.html" style="color: var(--text-secondary); text-decoration: none;">Articles</a>
+                        <a href="tools.html" style="color: var(--text-secondary); text-decoration: none;">Tools</a>
+                        <a href="about.html" style="color: var(--text-secondary); text-decoration: none;">About</a>
+                    </div>
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                    <h4 style="color: var(--gold); margin-bottom: 15px;">Popular Tools</h4>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <a href="tool-option-strategy-builder.html" style="color: var(--text-secondary); text-decoration: none;">Option Strategy Builder</a>
+                        <a href="tool-position-size-calculator.html" style="color: var(--text-secondary); text-decoration: none;">Position Size Calculator</a>
+                        <a href="tool-tax-harvesting-calculator.html" style="color: var(--text-secondary); text-decoration: none;">Tax Harvesting Calculator</a>
+                    </div>
+                </div>
+            </div>
+            <div style="border-top: 1px solid var(--border-color); padding-top: 30px; color: var(--text-tertiary); font-size: 0.9rem;">
+                <p>&copy; 2026 BroBillionaire. All rights reserved. Built for Indian Traders 🇮🇳</p>
+                <p style="margin-top: 10px;">Disclaimer: All tools and content are for educational purposes only. Not financial advice. Trade at your own risk.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let portfolio = [];
+        let allocationChartInstance = null;
+        let performanceChartInstance = null;
+        
+        function addCrypto() {
+            const name = document.getElementById('cryptoName').value;
+            const quantity = parseFloat(document.getElementById('cryptoQuantity').value);
+            const purchasePrice = parseFloat(document.getElementById('purchasePrice').value);
+            const currentPrice = parseFloat(document.getElementById('currentPrice').value);
+            
+            if (!quantity || !purchasePrice || !currentPrice || quantity <= 0 || purchasePrice <= 0 || currentPrice <= 0) {
+                alert('Please enter valid values for all fields!');
+                return;
+            }
+            
+            const crypto = {
+                name: name,
+                quantity: quantity,
+                purchasePrice: purchasePrice,
+                currentPrice: currentPrice,
+                investment: quantity * purchasePrice,
+                currentValue: quantity * currentPrice,
+                pl: (quantity * currentPrice) - (quantity * purchasePrice),
+                plPercent: (((currentPrice - purchasePrice) / purchasePrice) * 100)
+            };
+            
+            portfolio.push(crypto);
+            displayCryptoList();
+            
+            // Clear inputs
+            document.getElementById('cryptoQuantity').value = '';
+            document.getElementById('purchasePrice').value = '';
+            document.getElementById('currentPrice').value = '';
+        }
+        
+        function displayCryptoList() {
+            const listDiv = document.getElementById('cryptoList');
+            listDiv.innerHTML = '<h3 style="color: var(--gold); margin: 20px 0; font-size: 1.3rem;">Portfolio Holdings (' + portfolio.length + ')</h3>';
+            
+            portfolio.forEach((crypto, index) => {
+                const plClass = crypto.pl >= 0 ? 'positive' : 'negative';
+                const plSign = crypto.pl >= 0 ? '+' : '';
+                
+                listDiv.innerHTML += `
+                    <div class="crypto-item">
+                        <div class="crypto-info">
+                            <div class="crypto-name">${crypto.name}</div>
+                            <div class="crypto-details">
+                                ${crypto.quantity.toFixed(8)} units × ₹${crypto.currentPrice.toLocaleString('en-IN')} = 
+                                <strong style="color: var(--text-primary);">₹${crypto.currentValue.toLocaleString('en-IN', {maximumFractionDigits: 0})}</strong>
+                            </div>
+                            <div class="crypto-details">
+                                P&L: <span class="${plClass}" style="font-weight: 600;">${plSign}₹${Math.abs(crypto.pl).toLocaleString('en-IN', {maximumFractionDigits: 0})} (${plSign}${crypto.plPercent.toFixed(2)}%)</span>
+                            </div>
+                        </div>
+                        <button class="remove-btn" onclick="removeCrypto(${index})">
+                            <i class="fas fa-trash"></i> Remove
+                        </button>
+                    </div>
+                `;
+            });
+        }
+        
+        function removeCrypto(index) {
+            portfolio.splice(index, 1);
+            displayCryptoList();
+            if (portfolio.length === 0) {
+                document.getElementById('resultsSection').style.display = 'none';
+            }
+        }
+        
+        function calculatePortfolio() {
+            if (portfolio.length === 0) {
+                alert('Please add at least one cryptocurrency to your portfolio!');
+                return;
+            }
+            
+            const totalInvestment = portfolio.reduce((sum, crypto) => sum + crypto.investment, 0);
+            const currentValue = portfolio.reduce((sum, crypto) => sum + crypto.currentValue, 0);
+            const totalPL = currentValue - totalInvestment;
+            const totalPLPercent = ((totalPL / totalInvestment) * 100);
+            
+            // Display summary
+            document.getElementById('totalInvestment').textContent = '₹' + totalInvestment.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('currentValue').textContent = '₹' + currentValue.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            
+            const totalChangeElem = document.getElementById('totalChange');
+            const plSign = totalPL >= 0 ? '+' : '';
+            totalChangeElem.textContent = plSign + '₹' + Math.abs(totalPL).toLocaleString('en-IN', {maximumFractionDigits: 0}) + ' (' + plSign + totalPLPercent.toFixed(2) + '%)';
+            totalChangeElem.className = 'summary-change ' + (totalPL >= 0 ? 'positive' : 'negative');
+            
+            document.getElementById('totalPL').textContent = (totalPL >= 0 ? '+' : '') + '₹' + totalPL.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            
+            const plPercentElem = document.getElementById('plPercent');
+            plPercentElem.textContent = (totalPL >= 0 ? '+' : '') + totalPLPercent.toFixed(2) + '%';
+            plPercentElem.className = 'summary-change ' + (totalPL >= 0 ? 'positive' : 'negative');
+            
+            // Display holdings table
+            let tableHTML = '';
+            portfolio.forEach(crypto => {
+                const plClass = crypto.pl >= 0 ? 'positive' : 'negative';
+                const plSign = crypto.pl >= 0 ? '+' : '';
+                tableHTML += `
+                    <tr>
+                        <td style="color: var(--gold); font-weight: 600;">${crypto.name}</td>
+                        <td>${crypto.quantity.toFixed(8)}</td>
+                        <td>₹${crypto.purchasePrice.toLocaleString('en-IN')}</td>
+                        <td>₹${crypto.currentPrice.toLocaleString('en-IN')}</td>
+                        <td>₹${crypto.investment.toLocaleString('en-IN', {maximumFractionDigits: 0})}</td>
+                        <td><strong>₹${crypto.currentValue.toLocaleString('en-IN', {maximumFractionDigits: 0})}</strong></td>
+                        <td class="${plClass}">${plSign}₹${Math.abs(crypto.pl).toLocaleString('en-IN', {maximumFractionDigits: 0})}</td>
+                        <td class="${plClass}" style="font-weight: 600;">${plSign}${crypto.plPercent.toFixed(2)}%</td>
+                    </tr>
+                `;
+            });
+            document.getElementById('holdingsTableBody').innerHTML = tableHTML;
+            
+            // Draw charts
+            drawAllocationChart();
+            drawPerformanceChart();
+            
+            // Generate insights
+            generateInsights(totalPLPercent);
+            
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        function drawAllocationChart() {
+            const ctx = document.getElementById('allocationChart').getContext('2d');
+            
+            const labels = portfolio.map(c => c.name);
+            const data = portfolio.map(c => c.currentValue);
+            const colors = ['#F7931A', '#627EEA', '#F3BA2F', '#0033AD', '#14F195', '#23292F', '#E6007A', '#C3A634', '#8247E5', '#E84142'];
+            
+            if (allocationChartInstance) {
+                allocationChartInstance.destroy();
+            }
+            
+            allocationChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: colors.slice(0, portfolio.length),
+                        borderColor: '#0d0d0d',
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#999',
+                                font: { size: 12 },
+                                padding: 15
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: '#C9A227',
+                            bodyColor: '#fff',
+                            callbacks: {
+                                label: function(context) {
+                                    const value = context.parsed;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((value / total) * 100).toFixed(1);
+                                    return context.label + ': ₹' + value.toLocaleString('en-IN', {maximumFractionDigits: 0}) + ' (' + percentage + '%)';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function drawPerformanceChart() {
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            
+            const labels = portfolio.map(c => c.name);
+            const returns = portfolio.map(c => c.plPercent);
+            const colors = returns.map(r => r >= 0 ? '#27ae60' : '#e74c3c');
+            
+            if (performanceChartInstance) {
+                performanceChartInstance.destroy();
+            }
+            
+            performanceChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Returns %',
+                        data: returns,
+                        backgroundColor: colors,
+                        borderColor: colors,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: '#C9A227',
+                            bodyColor: '#fff',
+                            callbacks: {
+                                label: function(context) {
+                                    return 'Returns: ' + context.parsed.y.toFixed(2) + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: { 
+                                color: '#666',
+                                callback: function(value) { return value + '%'; }
+                            },
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            title: { display: true, text: 'Returns %', color: '#999' }
+                        },
+                        x: {
+                            ticks: { color: '#666' },
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function generateInsights(totalPLPercent) {
+            const totalValue = portfolio.reduce((sum, c) => sum + c.currentValue, 0);
+            const bestPerformer = portfolio.reduce((best, crypto) => crypto.plPercent > best.plPercent ? crypto : best, portfolio[0]);
+            const worstPerformer = portfolio.reduce((worst, crypto) => crypto.plPercent < worst.plPercent ? crypto : worst, portfolio[0]);
+            
+            let insights = `<strong>Portfolio Performance:</strong> Your crypto portfolio is ${totalPLPercent >= 0 ? 'up' : 'down'} ${Math.abs(totalPLPercent).toFixed(2)}% overall. `;
+            
+            insights += `<strong>Best Performer:</strong> ${bestPerformer.name} with ${bestPerformer.plPercent >= 0 ? '+' : ''}${bestPerformer.plPercent.toFixed(2)}% returns. `;
+            insights += `<strong>Worst Performer:</strong> ${worstPerformer.name} at ${worstPerformer.plPercent >= 0 ? '+' : ''}${worstPerformer.plPercent.toFixed(2)}%. `;
+            
+            // Check concentration
+            const maxAllocation = Math.max(...portfolio.map(c => (c.currentValue / totalValue) * 100));
+            if (maxAllocation > 50) {
+                insights += `<br><br><strong>⚠️ Diversification Alert:</strong> One asset represents ${maxAllocation.toFixed(1)}% of your portfolio. Consider rebalancing to reduce concentration risk.`;
+            }
+            
+            // Profit taking suggestion
+            if (totalPLPercent > 50) {
+                insights += `<br><br><strong>💡 Suggestion:</strong> With ${totalPLPercent.toFixed(1)}% gains, consider taking partial profits (20-30%) to secure returns and reduce risk exposure.`;
+            }
+            
+            // Loss averaging suggestion
+            if (totalPLPercent < -20) {
+                insights += `<br><br><strong>💡 Suggestion:</strong> During ${Math.abs(totalPLPercent).toFixed(1)}% drawdown, consider DCA (Dollar Cost Averaging) to average down entry prices if you have conviction in assets.`;
+            }
+            
+            document.getElementById('portfolioInsights').innerHTML = insights;
+        }
+        
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+            if (!isActive) answer.classList.add('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Dividend Yield Calculator - Stock Income Analysis | BroBillionaire</title>
+    <meta name="title" content="Dividend Yield Calculator - Stock Income Analysis | BroBillionaire">
+    <meta name="description" content="Free dividend yield calculator. Calculate dividend returns, passive income, and total returns. Analyze dividend stocks with yield, payout ratio, and growth projections.">
+    <meta name="keywords" content="dividend yield calculator, dividend income, dividend stocks, passive income calculator, dividend payout, dividend growth, stock yield">
+    <meta name="author" content="BroBillionaire">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://brobillionaire.com/tool-dividend-yield.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://brobillionaire.com/tool-dividend-yield.html">
+    <meta property="og:title" content="Dividend Yield Calculator - Stock Income Analysis">
+    <meta property="og:description" content="Free dividend yield calculator. Calculate dividend returns, passive income, and total returns. Analyze dividend stocks with yield, payout ratio.">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    <meta property="og:site_name" content="BroBillionaire">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://brobillionaire.com/tool-dividend-yield.html">
+    <meta property="twitter:title" content="Dividend Yield Calculator - Stock Income Analysis">
+    <meta property="twitter:description" content="Free dividend yield calculator. Calculate dividend returns, passive income, and total returns.">
+    <meta property="twitter:image" content="https://brobillionaire.com/og-image.jpg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #a0a0a0;
+            font-size: 1.1em;
+        }
+        
+        .calculator-box {
+            background: rgba(30, 30, 50, 0.6);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(67, 233, 123, 0.2);
+        }
+        
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #43e97b;
+            font-weight: 600;
+        }
+        
+        input[type="number"], input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            background: rgba(20, 20, 40, 0.8);
+            border: 2px solid rgba(67, 233, 123, 0.3);
+            border-radius: 8px;
+            color: #e0e0e0;
+            font-size: 16px;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #43e97b;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: #1a1a2e;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .result-card {
+            background: rgba(20, 20, 40, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 4px solid #43e97b;
+        }
+        
+        .result-card h3 {
+            color: #a0a0a0;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .result-card .value {
+            color: #43e97b;
+            font-size: 2em;
+            font-weight: 700;
+        }
+        
+        .income-chart {
+            background: rgba(20, 20, 40, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .year-row {
+            display: grid;
+            grid-template-columns: 80px 1fr 1fr 1fr;
+            gap: 15px;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: rgba(67, 233, 123, 0.05);
+            border-radius: 8px;
+            align-items: center;
+        }
+        
+        .year-row:nth-child(even) {
+            background: rgba(67, 233, 123, 0.1);
+        }
+        
+        .year-row.header {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: #1a1a2e;
+            font-weight: 700;
+        }
+        
+        .comparison {
+            background: rgba(20, 20, 40, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: rgba(67, 233, 123, 0.05);
+            border-radius: 8px;
+        }
+        
+        .metric-label {
+            color: #a0a0a0;
+            font-weight: 600;
+        }
+        
+        .metric-value {
+            color: #43e97b;
+            font-weight: 700;
+        }
+        
+        .alert {
+            background: rgba(255, 193, 7, 0.1);
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            color: #ffc107;
+        }
+        
+        .success {
+            background: rgba(67, 233, 123, 0.1);
+            border: 2px solid #43e97b;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            color: #43e97b;
+        }
+        
+        @media (max-width: 768px) {
+            .input-grid, .results-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .year-row {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💰 Dividend Yield Calculator</h1>
+            <p class="subtitle">Calculate Your Passive Income from Dividend Stocks</p>
+        </header>
+        
+        <div class="calculator-box">
+            <h2 style="color: #43e97b; margin-bottom: 25px;">Stock & Investment Details</h2>
+            
+            <div class="input-grid">
+                <div class="input-group">
+                    <label>Stock Name (Optional)</label>
+                    <input type="text" id="stockName" placeholder="e.g., Reliance, TCS">
+                </div>
+                
+                <div class="input-group">
+                    <label>Stock Price (₹)</label>
+                    <input type="number" id="stockPrice" placeholder="Current stock price" value="2500">
+                </div>
+                
+                <div class="input-group">
+                    <label>Number of Shares</label>
+                    <input type="number" id="shares" placeholder="Shares owned" value="100">
+                </div>
+            </div>
+            
+            <div class="input-grid">
+                <div class="input-group">
+                    <label>Annual Dividend per Share (₹)</label>
+                    <input type="number" id="dividend" placeholder="Dividend per share" value="50">
+                </div>
+                
+                <div class="input-group">
+                    <label>Dividend Growth Rate (%)</label>
+                    <input type="number" id="growthRate" placeholder="Expected annual growth" value="8" step="0.1">
+                </div>
+                
+                <div class="input-group">
+                    <label>Years to Hold</label>
+                    <input type="number" id="years" placeholder="Investment period" value="10">
+                </div>
+            </div>
+            
+            <div class="input-grid">
+                <div class="input-group">
+                    <label>Tax Rate on Dividends (%)</label>
+                    <input type="number" id="taxRate" placeholder="Your tax bracket" value="30" step="0.1">
+                </div>
+                
+                <div class="input-group">
+                    <label>Reinvest Dividends?</label>
+                    <select id="reinvest" style="width: 100%; padding: 12px; background: rgba(20, 20, 40, 0.8); border: 2px solid rgba(67, 233, 123, 0.3); border-radius: 8px; color: #e0e0e0; font-size: 16px;">
+                        <option value="no">No - Take Cash</option>
+                        <option value="yes">Yes - Reinvest</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button onclick="calculateDividend()">Calculate Dividend Returns</button>
+        </div>
+        
+        <div id="results" style="display: none;">
+            <div class="results-grid">
+                <div class="result-card">
+                    <h3>Current Dividend Yield</h3>
+                    <div class="value" id="currentYield">0%</div>
+                </div>
+                
+                <div class="result-card">
+                    <h3>Annual Dividend Income</h3>
+                    <div class="value" id="annualIncome">₹0</div>
+                </div>
+                
+                <div class="result-card">
+                    <h3>Monthly Passive Income</h3>
+                    <div class="value" id="monthlyIncome">₹0</div>
+                </div>
+                
+                <div class="result-card">
+                    <h3>After-Tax Income</h3>
+                    <div class="value" id="afterTaxIncome">₹0</div>
+                </div>
+            </div>
+            
+            <div class="comparison">
+                <h3 style="color: #43e97b; margin-bottom: 20px;">Investment Analysis</h3>
+                
+                <div class="metric">
+                    <span class="metric-label">Total Investment</span>
+                    <span class="metric-value" id="totalInvestment">₹0</span>
+                </div>
+                
+                <div class="metric">
+                    <span class="metric-label">Total Dividends (10 years)</span>
+                    <span class="metric-value" id="totalDividends">₹0</span>
+                </div>
+                
+                <div class="metric">
+                    <span class="metric-label">Dividend Payout Ratio</span>
+                    <span class="metric-value" id="payoutRatio">N/A</span>
+                </div>
+                
+                <div class="metric">
+                    <span class="metric-label">Yield on Cost (10 years)</span>
+                    <span class="metric-value" id="yieldOnCost">0%</span>
+                </div>
+                
+                <div id="recommendation"></div>
+            </div>
+            
+            <div class="income-chart">
+                <h3 style="color: #43e97b; margin-bottom: 20px;">10-Year Dividend Projection</h3>
+                <div id="projectionTable"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function calculateDividend() {
+            const stockName = document.getElementById('stockName').value || 'Your Stock';
+            const stockPrice = parseFloat(document.getElementById('stockPrice').value) || 0;
+            const shares = parseFloat(document.getElementById('shares').value) || 0;
+            const dividend = parseFloat(document.getElementById('dividend').value) || 0;
+            const growthRate = parseFloat(document.getElementById('growthRate').value) / 100 || 0;
+            const years = parseFloat(document.getElementById('years').value) || 10;
+            const taxRate = parseFloat(document.getElementById('taxRate').value) / 100 || 0;
+            const reinvest = document.getElementById('reinvest').value === 'yes';
+            
+            const totalInvestment = stockPrice * shares;
+            const annualDividendIncome = dividend * shares;
+            const monthlyIncome = annualDividendIncome / 12;
+            const afterTaxIncome = annualDividendIncome * (1 - taxRate);
+            const currentYield = (dividend / stockPrice) * 100;
+            
+            // Display immediate results
+            document.getElementById('currentYield').textContent = currentYield.toFixed(2) + '%';
+            document.getElementById('annualIncome').textContent = '₹' + annualDividendIncome.toLocaleString('en-IN');
+            document.getElementById('monthlyIncome').textContent = '₹' + monthlyIncome.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('afterTaxIncome').textContent = '₹' + afterTaxIncome.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('totalInvestment').textContent = '₹' + totalInvestment.toLocaleString('en-IN');
+            
+            // Calculate 10-year projections
+            let totalDividendsReceived = 0;
+            let currentShares = shares;
+            let tableHTML = '<div class="year-row header"><div>Year</div><div>Dividend/Share</div><div>Total Shares</div><div>Annual Income</div></div>';
+            
+            for (let year = 1; year <= years; year++) {
+                const dividendPerShare = dividend * Math.pow(1 + growthRate, year - 1);
+                const yearlyIncome = dividendPerShare * currentShares;
+                const afterTaxYearlyIncome = yearlyIncome * (1 - taxRate);
+                
+                totalDividendsReceived += yearlyIncome;
+                
+                tableHTML += `
+                    <div class="year-row">
+                        <div style="color: #43e97b; font-weight: 700;">${year}</div>
+                        <div>₹${dividendPerShare.toFixed(2)}</div>
+                        <div>${currentShares.toFixed(0)}</div>
+                        <div style="color: #43e97b; font-weight: 700;">₹${yearlyIncome.toLocaleString('en-IN', {maximumFractionDigits: 0})}</div>
+                    </div>
+                `;
+                
+                // If reinvesting, buy more shares
+                if (reinvest) {
+                    const newShares = afterTaxYearlyIncome / stockPrice;
+                    currentShares += newShares;
+                }
+            }
+            
+            document.getElementById('projectionTable').innerHTML = tableHTML;
+            document.getElementById('totalDividends').textContent = '₹' + totalDividendsReceived.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            
+            // Calculate yield on cost after 10 years
+            const finalDividendPerShare = dividend * Math.pow(1 + growthRate, years);
+            const yieldOnCost = (finalDividendPerShare / stockPrice) * 100;
+            document.getElementById('yieldOnCost').textContent = yieldOnCost.toFixed(2) + '%';
+            
+            // Payout ratio (assuming earnings per share is 2x dividend)
+            const assumedEPS = dividend * 2;
+            const payoutRatio = (dividend / assumedEPS) * 100;
+            document.getElementById('payoutRatio').textContent = payoutRatio.toFixed(1) + '%';
+            
+            // Generate recommendations
+            let recommendation = '';
+            
+            if (currentYield < 2) {
+                recommendation = '<div class="alert">⚠️ <strong>Low Yield:</strong> This stock has a low dividend yield. Consider if you\'re investing primarily for income.</div>';
+            } else if (currentYield > 8) {
+                recommendation = '<div class="alert">⚠️ <strong>High Yield Warning:</strong> Very high yields can indicate company distress. Verify dividend sustainability.</div>';
+            } else if (currentYield >= 4 && currentYield <= 6) {
+                recommendation = '<div class="success">✅ <strong>Healthy Yield:</strong> This stock offers a balanced dividend yield with growth potential.</div>';
+            }
+            
+            if (payoutRatio > 80) {
+                recommendation += '<div class="alert" style="margin-top: 10px;">⚠️ <strong>High Payout Ratio:</strong> Company is paying out most earnings. Dividend growth may be limited.</div>';
+            }
+            
+            if (reinvest && yieldOnCost > 15) {
+                recommendation += '<div class="success" style="margin-top: 10px;">🎯 <strong>Excellent Strategy:</strong> Reinvesting dividends will significantly compound your returns!</div>';
+            }
+            
+            if (totalDividendsReceived > totalInvestment) {
+                recommendation += '<div class="success" style="margin-top: 10px;">💎 <strong>Investment Recovery:</strong> Your dividends will exceed your initial investment in ' + years + ' years!</div>';
+            }
+            
+            document.getElementById('recommendation').innerHTML = recommendation;
+            
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

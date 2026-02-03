@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Asset Allocation Calculator - Portfolio Balance Tool | BroBillionaire</title>
+    <meta name="title" content="Asset Allocation Calculator - Portfolio Balance Tool | BroBillionaire">
+    <meta name="description" content="Free asset allocation calculator. Optimize your investment portfolio balance across stocks, bonds, real estate, and cash. Strategic portfolio diversification tool for investors.">
+    <meta name="keywords" content="asset allocation calculator, portfolio balance, investment diversification, portfolio optimization, strategic asset allocation, tactical allocation">
+    <meta name="author" content="BroBillionaire">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://brobillionaire.com/tool-asset-allocation.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://brobillionaire.com/tool-asset-allocation.html">
+    <meta property="og:title" content="Asset Allocation Calculator - Portfolio Balance Tool">
+    <meta property="og:description" content="Free asset allocation calculator. Optimize your investment portfolio balance across stocks, bonds, real estate, and cash.">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    <meta property="og:site_name" content="BroBillionaire">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://brobillionaire.com/tool-asset-allocation.html">
+    <meta property="twitter:title" content="Asset Allocation Calculator - Portfolio Balance Tool">
+    <meta property="twitter:description" content="Free asset allocation calculator. Optimize your investment portfolio balance across stocks, bonds, real estate, and cash.">
+    <meta property="twitter:image" content="https://brobillionaire.com/og-image.jpg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0d0d0d;
+            color: #fff;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            color: #C9A227;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            color: #999;
+            font-size: 1.1em;
+        }
+        
+        .calculator-box {
+            background: linear-gradient(145deg, #1a1a1a, #252525);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 2px solid #333;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #C9A227;
+            font-weight: 600;
+        }
+        
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            background: #0d0d0d;
+            border: 2px solid #333;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #C9A227;
+            box-shadow: 0 0 0 3px rgba(201,162,39,0.1);
+        }
+        
+        .asset-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: end;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #C9A227, #a68b1e);
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201,162,39,0.3);
+        }
+        
+        .results {
+            background: linear-gradient(145deg, #1a1a1a, #252525);
+            border: 2px solid #333;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: rgba(201, 162, 39, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid #C9A227;
+        }
+        
+        .result-label {
+            color: #a0a0a0;
+            font-weight: 600;
+        }
+        
+        .result-value {
+            color: #C9A227;
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+        
+        .chart-container {
+            background: linear-gradient(145deg, #1a1a1a, #252525);
+            border: 2px solid #333;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        
+        .bar {
+            height: 40px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .recommendation {
+            background: rgba(201, 162, 39, 0.1);
+            border: 2px solid #C9A227;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .recommendation h3 {
+            color: #C9A227;
+            margin-bottom: 15px;
+        }
+        
+        .warning {
+            background: rgba(255, 152, 0, 0.1);
+            border: 2px solid #ff9800;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .asset-row {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💼 Asset Allocation Calculator</h1>
+            <p class="subtitle">Optimize Your Portfolio Balance Across Asset Classes</p>
+        </header>
+        
+        <div class="calculator-box">
+            <h2 style="color: #C9A227; margin-bottom: 20px; font-family: 'Playfair Display', serif;">Enter Your Portfolio Details</h2>
+            
+            <div class="input-group">
+                <label>Your Age</label>
+                <input type="number" id="age" placeholder="Enter your age" value="35">
+            </div>
+            
+            <div class="input-group">
+                <label>Risk Tolerance (1-10)</label>
+                <input type="number" id="risk" min="1" max="10" placeholder="1 = Conservative, 10 = Aggressive" value="6">
+            </div>
+            
+            <div class="input-group">
+                <label>Total Portfolio Value (₹)</label>
+                <input type="number" id="totalValue" placeholder="Enter total portfolio value" value="1000000">
+            </div>
+            
+            <h3 style="color: #C9A227; margin: 30px 0 20px 0; font-family: 'Playfair Display', serif;">Current Asset Allocation</h3>
+            
+            <div class="asset-row">
+                <div>
+                    <label>Stocks/Equity</label>
+                    <input type="number" id="stocks" placeholder="Amount in stocks" value="600000">
+                </div>
+                <div>
+                    <label>Percentage</label>
+                    <input type="number" id="stocksPct" readonly>
+                </div>
+            </div>
+            
+            <div class="asset-row">
+                <div>
+                    <label>Bonds/Fixed Income</label>
+                    <input type="number" id="bonds" placeholder="Amount in bonds" value="200000">
+                </div>
+                <div>
+                    <label>Percentage</label>
+                    <input type="number" id="bondsPct" readonly>
+                </div>
+            </div>
+            
+            <div class="asset-row">
+                <div>
+                    <label>Real Estate</label>
+                    <input type="number" id="realestate" placeholder="Amount in real estate" value="150000">
+                </div>
+                <div>
+                    <label>Percentage</label>
+                    <input type="number" id="realestatePct" readonly>
+                </div>
+            </div>
+            
+            <div class="asset-row">
+                <div>
+                    <label>Cash/Liquid</label>
+                    <input type="number" id="cash" placeholder="Amount in cash" value="50000">
+                </div>
+                <div>
+                    <label>Percentage</label>
+                    <input type="number" id="cashPct" readonly>
+                </div>
+            </div>
+            
+            <button onclick="calculateAllocation()">Calculate Optimal Allocation</button>
+        </div>
+        
+        <div id="results" style="display: none;">
+            <div class="results">
+                <h2 style="color: #C9A227; margin-bottom: 20px; font-family: 'Playfair Display', serif;">Current Allocation Analysis</h2>
+                <div class="result-item">
+                    <span class="result-label">Total Portfolio Value</span>
+                    <span class="result-value" id="currentTotal">₹0</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Number of Asset Classes</span>
+                    <span class="result-value" id="assetCount">0</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Diversification Score</span>
+                    <span class="result-value" id="divScore">0/100</span>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <h3 style="color: #C9A227; margin-bottom: 20px; font-family: 'Playfair Display', serif;">Current vs Recommended Allocation</h3>
+                <div id="allocationChart"></div>
+            </div>
+            
+            <div class="recommendation">
+                <h3>📊 Strategic Recommendations</h3>
+                <div id="recommendations"></div>
+            </div>
+            
+            <div class="results" style="margin-top: 30px;">
+                <h3 style="color: #C9A227; margin-bottom: 20px; font-family: 'Playfair Display', serif;">Rebalancing Actions</h3>
+                <div id="rebalancing"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function calculateAllocation() {
+            const age = parseFloat(document.getElementById('age').value) || 0;
+            const risk = parseFloat(document.getElementById('risk').value) || 5;
+            const totalValue = parseFloat(document.getElementById('totalValue').value) || 0;
+            
+            const stocks = parseFloat(document.getElementById('stocks').value) || 0;
+            const bonds = parseFloat(document.getElementById('bonds').value) || 0;
+            const realestate = parseFloat(document.getElementById('realestate').value) || 0;
+            const cash = parseFloat(document.getElementById('cash').value) || 0;
+            
+            const currentTotal = stocks + bonds + realestate + cash;
+            
+            // Calculate current percentages
+            const stocksPct = (stocks / currentTotal * 100).toFixed(1);
+            const bondsPct = (bonds / currentTotal * 100).toFixed(1);
+            const realestatePct = (realestate / currentTotal * 100).toFixed(1);
+            const cashPct = (cash / currentTotal * 100).toFixed(1);
+            
+            document.getElementById('stocksPct').value = stocksPct;
+            document.getElementById('bondsPct').value = bondsPct;
+            document.getElementById('realestatePct').value = realestatePct;
+            document.getElementById('cashPct').value = cashPct;
+            
+            // Calculate recommended allocation based on age and risk
+            const recommendedStocks = Math.min(90, Math.max(20, (100 - age) + (risk * 3)));
+            const recommendedBonds = Math.min(60, Math.max(10, age - (risk * 2)));
+            const recommendedRealEstate = Math.min(30, Math.max(5, 20 - risk + (age / 5)));
+            const recommendedCash = Math.max(5, 100 - recommendedStocks - recommendedBonds - recommendedRealEstate);
+            
+            // Display results
+            document.getElementById('currentTotal').textContent = `₹${currentTotal.toLocaleString('en-IN')}`;
+            
+            const assetCount = [stocks, bonds, realestate, cash].filter(v => v > 0).length;
+            document.getElementById('assetCount').textContent = assetCount;
+            
+            // Calculate diversification score
+            const idealDist = [25, 25, 25, 25];
+            const actualDist = [parseFloat(stocksPct), parseFloat(bondsPct), parseFloat(realestatePct), parseFloat(cashPct)];
+            const variance = actualDist.reduce((sum, val, i) => sum + Math.abs(val - idealDist[i]), 0);
+            const divScore = Math.max(0, 100 - variance);
+            document.getElementById('divScore').textContent = `${divScore.toFixed(0)}/100`;
+            
+            // Create allocation chart
+            const chartHTML = `
+                <div style="margin-bottom: 30px;">
+                    <h4 style="color: #a0a0a0; margin-bottom: 10px;">Stocks/Equity</h4>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <span style="width: 80px; color: #a0a0a0;">Current:</span>
+                        <div class="bar" style="width: ${stocksPct}%; background: linear-gradient(90deg, #C9A227, #a68b1e);">
+                            ${stocksPct}%
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; align-items: center; margin-top: 5px;">
+                        <span style="width: 80px; color: #a0a0a0;">Target:</span>
+                        <div class="bar" style="width: ${recommendedStocks}%; background: linear-gradient(90deg, rgba(201, 162, 39, 0.3), rgba(166, 139, 30, 0.3)); border: 2px dashed #C9A227;">
+                            ${recommendedStocks.toFixed(1)}%
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 30px;">
+                    <h4 style="color: #a0a0a0; margin-bottom: 10px;">Bonds/Fixed Income</h4>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <span style="width: 80px; color: #a0a0a0;">Current:</span>
+                        <div class="bar" style="width: ${bondsPct}%; background: linear-gradient(90deg, #f093fb, #f5576c);">
+                            ${bondsPct}%
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; align-items: center; margin-top: 5px;">
+                        <span style="width: 80px; color: #a0a0a0;">Target:</span>
+                        <div class="bar" style="width: ${recommendedBonds}%; background: linear-gradient(90deg, rgba(240, 147, 251, 0.5), rgba(245, 87, 108, 0.5)); border: 2px dashed #f093fb;">
+                            ${recommendedBonds.toFixed(1)}%
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 30px;">
+                    <h4 style="color: #a0a0a0; margin-bottom: 10px;">Real Estate</h4>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <span style="width: 80px; color: #a0a0a0;">Current:</span>
+                        <div class="bar" style="width: ${realestatePct}%; background: linear-gradient(90deg, #4facfe, #00f2fe);">
+                            ${realestatePct}%
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; align-items: center; margin-top: 5px;">
+                        <span style="width: 80px; color: #a0a0a0;">Target:</span>
+                        <div class="bar" style="width: ${recommendedRealEstate}%; background: linear-gradient(90deg, rgba(79, 172, 254, 0.5), rgba(0, 242, 254, 0.5)); border: 2px dashed #4facfe;">
+                            ${recommendedRealEstate.toFixed(1)}%
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 30px;">
+                    <h4 style="color: #a0a0a0; margin-bottom: 10px;">Cash/Liquid</h4>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <span style="width: 80px; color: #a0a0a0;">Current:</span>
+                        <div class="bar" style="width: ${cashPct}%; background: linear-gradient(90deg, #43e97b, #38f9d7);">
+                            ${cashPct}%
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; align-items: center; margin-top: 5px;">
+                        <span style="width: 80px; color: #a0a0a0;">Target:</span>
+                        <div class="bar" style="width: ${recommendedCash}%; background: linear-gradient(90deg, rgba(67, 233, 123, 0.5), rgba(56, 249, 215, 0.5)); border: 2px dashed #43e97b;">
+                            ${recommendedCash.toFixed(1)}%
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('allocationChart').innerHTML = chartHTML;
+            
+            // Generate recommendations
+            let recommendations = '<ul style="line-height: 2;">';
+            
+            const stocksDiff = recommendedStocks - parseFloat(stocksPct);
+            if (Math.abs(stocksDiff) > 5) {
+                if (stocksDiff > 0) {
+                    recommendations += `<li>✅ Increase equity allocation by ${stocksDiff.toFixed(1)}% (₹${(currentTotal * stocksDiff / 100).toLocaleString('en-IN')})</li>`;
+                } else {
+                    recommendations += `<li>⚠️ Reduce equity allocation by ${Math.abs(stocksDiff).toFixed(1)}% (₹${(currentTotal * Math.abs(stocksDiff) / 100).toLocaleString('en-IN')})</li>`;
+                }
+            }
+            
+            const bondsDiff = recommendedBonds - parseFloat(bondsPct);
+            if (Math.abs(bondsDiff) > 5) {
+                if (bondsDiff > 0) {
+                    recommendations += `<li>✅ Increase bond allocation by ${bondsDiff.toFixed(1)}% (₹${(currentTotal * bondsDiff / 100).toLocaleString('en-IN')})</li>`;
+                } else {
+                    recommendations += `<li>⚠️ Reduce bond allocation by ${Math.abs(bondsDiff).toFixed(1)}% (₹${(currentTotal * Math.abs(bondsDiff) / 100).toLocaleString('en-IN')})</li>`;
+                }
+            }
+            
+            if (divScore < 60) {
+                recommendations += '<li>🎯 Your portfolio lacks diversification. Consider spreading investments across more asset classes.</li>';
+            }
+            
+            if (age > 50 && parseFloat(stocksPct) > 70) {
+                recommendations += '<li>⚠️ High equity allocation for your age. Consider reducing risk exposure.</li>';
+            }
+            
+            if (parseFloat(cashPct) < 5) {
+                recommendations += '<li>💰 Maintain at least 5-10% in cash for emergency liquidity.</li>';
+            }
+            
+            recommendations += '</ul>';
+            document.getElementById('recommendations').innerHTML = recommendations;
+            
+            // Show rebalancing actions
+            const rebalancingHTML = `
+                <div class="result-item">
+                    <span class="result-label">Target Stocks/Equity</span>
+                    <span class="result-value">₹${(currentTotal * recommendedStocks / 100).toLocaleString('en-IN')}</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Target Bonds</span>
+                    <span class="result-value">₹${(currentTotal * recommendedBonds / 100).toLocaleString('en-IN')}</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Target Real Estate</span>
+                    <span class="result-value">₹${(currentTotal * recommendedRealEstate / 100).toLocaleString('en-IN')}</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Target Cash</span>
+                    <span class="result-value">₹${(currentTotal * recommendedCash / 100).toLocaleString('en-IN')}</span>
+                </div>
+            `;
+            
+            document.getElementById('rebalancing').innerHTML = rebalancingHTML;
+            
+            document.getElementById('results').style.display = 'block';
+        }
+        
+        // Auto-calculate on input change
+        ['stocks', 'bonds', 'realestate', 'cash', 'totalValue', 'age', 'risk'].forEach(id => {
+            document.getElementById(id).addEventListener('input', function() {
+                const stocks = parseFloat(document.getElementById('stocks').value) || 0;
+                const bonds = parseFloat(document.getElementById('bonds').value) || 0;
+                const realestate = parseFloat(document.getElementById('realestate').value) || 0;
+                const cash = parseFloat(document.getElementById('cash').value) || 0;
+                const total = stocks + bonds + realestate + cash;
+                
+                if (total > 0) {
+                    document.getElementById('stocksPct').value = (stocks / total * 100).toFixed(1);
+                    document.getElementById('bondsPct').value = (bonds / total * 100).toFixed(1);
+                    document.getElementById('realestatePct').value = (realestate / total * 100).toFixed(1);
+                    document.getElementById('cashPct').value = (cash / total * 100).toFixed(1);
+                }
+            });
+        });
+        
+        // Initial calculation
+        calculateAllocation();
+    </script>
+</body>
+</html>

@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>FREE IPO Valuation Calculator 2026 - Pre-IPO Price Analysis Tool | BroBillionaire</title>
+    <meta name="title" content="FREE IPO Valuation Calculator 2026 - Pre-IPO Price Analysis Tool | BroBillionaire">
+    <meta name="description" content="Analyze IPO valuations before investing! FREE calculator for P/E ratio, price band analysis, GMP tracking & listing gains prediction. Smart IPO investment tool 2026!">
+    <meta name="keywords" content="IPO valuation calculator, IPO price analysis, grey market premium, GMP calculator, IPO P/E ratio, listing gains calculator, pre-IPO analysis, IPO fair value calculator India 2026">
+    <meta name="author" content="BroBillionaire">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://brobillionaire.com/tool-ipo-valuation-calculator.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://brobillionaire.com/tool-ipo-valuation-calculator.html">
+    <meta property="og:title" content="FREE IPO Valuation Calculator - Pre-IPO Price Analysis">
+    <meta property="og:description" content="Analyze IPO valuations before investing! FREE calculator for P/E ratio, price band analysis, GMP tracking & listing gains prediction.">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    <meta property="og:site_name" content="BroBillionaire">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://brobillionaire.com/tool-ipo-valuation-calculator.html">
+    <meta property="twitter:title" content="FREE IPO Valuation Calculator - Pre-IPO Price Analysis">
+    <meta property="twitter:description" content="Analyze IPO valuations before investing! FREE calculator for P/E ratio, price band analysis, GMP tracking.">
+    <meta property="twitter:image" content="https://brobillionaire.com/og-image.jpg">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --gold: #C9A227;
+            --bg-primary: #0d0d0d;
+            --bg-secondary: #1a1a1a;
+            --bg-card: #1a1a1a;
+            --text-primary: #fff;
+            --text-secondary: #999;
+            --text-tertiary: #666;
+            --border-color: #2a2a2a;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding-top: 140px;
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+        }
+        
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--gold);
+        }
+        
+        .mobile-menu-toggle { display: none; }
+        
+        .breadcrumb-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+        }
+        
+        .breadcrumb-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .breadcrumb-nav a:hover {
+            color: var(--gold);
+        }
+        
+        .breadcrumb-nav a::after {
+            content: "›";
+            margin: 0 10px;
+            color: var(--text-tertiary);
+        }
+        
+        .calculator-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .calculator-card { background: var(--bg-card); border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid var(--border-color); }
+        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--gold); margin-bottom: 10px; }
+        .calculator-subtitle { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 40px; line-height: 1.6; }
+        
+        .input-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 30px; }
+        .input-group { margin-bottom: 25px; }
+        .input-label { display: block; color: var(--gold); font-weight: 600; margin-bottom: 10px; font-size: 1rem; }
+        .input-field, .input-select { width: 100%; padding: 15px; background: #0a0a0a; border: 2px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 1rem; transition: border-color 0.3s; }
+        .input-field:focus, .input-select:focus { border-color: var(--gold); outline: none; }
+        .input-hint { color: var(--text-tertiary); font-size: 0.85rem; margin-top: 5px; }
+        
+        .calculate-btn { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; font-weight: 700; padding: 18px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; transition: transform 0.2s; }
+        .calculate-btn:hover { transform: translateY(-2px); }
+        
+        .results-section { display: none; margin-top: 40px; }
+        
+        .valuation-card { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 40px; border-radius: 12px; text-align: center; margin-bottom: 30px; border: 3px solid; }
+        .valuation-card.undervalued { border-color: #2ecc71; }
+        .valuation-card.fairly-valued { border-color: #f39c12; }
+        .valuation-card.overvalued { border-color: #e74c3c; }
+        
+        .valuation-status { color: var(--text-tertiary); font-size: 1.2rem; margin-bottom: 10px; }
+        .valuation-value { color: var(--text-primary); font-size: 4rem; font-weight: 700; margin: 15px 0; font-family: 'Playfair Display', serif; }
+        .valuation-label { color: var(--gold); font-size: 1.5rem; font-weight: 600; margin-bottom: 15px; }
+        .valuation-recommendation { color: var(--text-secondary); font-size: 1.1rem; margin-top: 15px; }
+        
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 30px 0; }
+        .metric-card { background: #0a0a0a; padding: 25px; border-radius: 12px; border: 1px solid var(--border-color); text-align: center; }
+        .metric-label { color: var(--gold); font-weight: 600; margin-bottom: 10px; font-size: 0.9rem; text-transform: uppercase; }
+        .metric-value { color: var(--text-primary); font-size: 1.8rem; font-weight: 700; }
+        .metric-subtext { color: var(--text-tertiary); font-size: 0.85rem; margin-top: 8px; }
+        
+        .comparison-section { background: rgba(10, 10, 10, 0.5); padding: 40px; border-radius: 12px; margin: 30px 0; border: 1px solid var(--border-color); }
+        .comparison-title { color: var(--gold); font-size: 1.5rem; margin-bottom: 25px; text-align: center; }
+        
+        .chart-container { max-width: 700px; margin: 30px auto; padding: 30px; background: rgba(10, 10, 10, 0.5); border-radius: 12px; }
+        
+        .gmp-indicator { display: flex; align-items: center; justify-content: center; gap: 15px; padding: 25px; background: rgba(46, 204, 113, 0.1); border: 2px solid #2ecc71; border-radius: 12px; margin: 20px 0; }
+        .gmp-indicator.negative { background: rgba(231, 76, 60, 0.1); border-color: #e74c3c; }
+        .gmp-label { color: var(--text-secondary); font-size: 1.1rem; }
+        .gmp-value { color: var(--text-primary); font-size: 2.5rem; font-weight: 700; }
+        
+        .strategy-box { background: rgba(201, 162, 39, 0.1); border: 2px solid var(--gold); padding: 30px; border-radius: 12px; margin-top: 30px; }
+        .strategy-box h3 { color: var(--gold); margin-bottom: 20px; font-size: 1.5rem; }
+        .strategy-box ul { margin: 10px 0 0 20px; color: var(--text-secondary); line-height: 1.8; }
+        .strategy-box li { margin-bottom: 12px; }
+        .strategy-box strong { color: var(--text-primary); }
+        
+        .info-box { background: rgba(52, 152, 219, 0.1); border: 2px solid #3498db; padding: 25px; border-radius: 12px; margin-top: 30px; }
+        .info-box h3 { color: #3498db; margin-bottom: 15px; }
+        .info-box p { color: var(--text-secondary); line-height: 1.8; margin: 0; }
+        
+        .warning-box { background: rgba(231, 76, 60, 0.1); border: 2px solid #e74c3c; padding: 25px; border-radius: 12px; margin-top: 20px; }
+        .warning-box h3 { color: #e74c3c; margin-bottom: 15px; }
+        .warning-box ul { margin: 10px 0 0 20px; color: var(--text-secondary); line-height: 1.8; }
+        
+        .faq-section { max-width: 1200px; margin: 50px auto; padding: 40px 20px; }
+        .faq-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--gold); margin-bottom: 40px; text-align: center; }
+        .faq-item { background: var(--bg-card); border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--border-color); overflow: hidden; }
+        .faq-question { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--text-primary); font-weight: 600; font-size: 1.1rem; }
+        .faq-question:hover { background: #222; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #0a0a0a; }
+        .faq-answer.active { max-height: 2000px; }
+        .faq-answer p { padding: 25px; margin: 0; color: var(--text-secondary); line-height: 1.8; }
+        
+        @media (max-width: 768px) {
+            body { padding-top: 120px; }
+            .calculator-title { font-size: 2rem; }
+            .nav-links { display: none; }
+            .mobile-menu-toggle { display: block; }
+            .input-grid { grid-template-columns: 1fr; }
+            .valuation-value { font-size: 2.5rem; }
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://brobillionaire.com/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Tools",
+                "item": "https://brobillionaire.com/tools.html"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "IPO Valuation Calculator"
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "IPO Valuation Calculator",
+        "description": "Analyze IPO valuations with P/E ratio comparison, GMP tracking, and listing gains prediction calculator.",
+        "url": "https://brobillionaire.com/tool-ipo-valuation-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="BroBillionaire Logo" class="logo-img">
+                <span class="logo-text">BroBillionaire</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="articles.html" class="nav-link">Articles</a>
+                <a href="tools.html" class="nav-link active">Tools</a>
+                <a href="about.html" class="nav-link">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <nav class="breadcrumb-nav">
+        <a href="index.html">Home</a><a href="tools.html">Tools</a><span>IPO Valuation Calculator</span>
+    </nav>
+
+    <div class="calculator-container">
+        <div class="calculator-card">
+            <h1 class="calculator-title"><i class="fas fa-rocket"></i> IPO Valuation Calculator</h1>
+            <p class="calculator-subtitle">Analyze IPO valuations before investing! Calculate fair value based on P/E ratios, compare with sector peers, track Grey Market Premium (GMP), and estimate listing day gains. Make informed IPO investment decisions!</p>
+            
+            <div class="input-grid">
+                <div class="input-group">
+                    <label class="input-label">IPO Name</label>
+                    <input type="text" id="ipoName" class="input-field" placeholder="XYZ Ltd">
+                    <div class="input-hint">Company name for reference</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">IPO Price Band - Upper (₹)</label>
+                    <input type="number" id="ipoPrice" class="input-field" placeholder="350" value="350">
+                    <div class="input-hint">Upper price band of IPO</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Post-IPO EPS (₹)</label>
+                    <input type="number" id="eps" class="input-field" placeholder="25" value="25" step="0.01">
+                    <div class="input-hint">Earnings per share (from DRHP)</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Sector</label>
+                    <select id="sector" class="input-select" onchange="updateSectorPE()">
+                        <option value="it">IT / Software (25)</option>
+                        <option value="pharma">Pharma (30)</option>
+                        <option value="banking">Banking / NBFC (15)</option>
+                        <option value="fmcg">FMCG (45)</option>
+                        <option value="auto">Auto / Auto Ancillary (22)</option>
+                        <option value="chemical">Chemical (20)</option>
+                        <option value="textile">Textile (18)</option>
+                        <option value="realty">Real Estate (12)</option>
+                        <option value="metal">Metal / Mining (10)</option>
+                        <option value="other">Other (20)</option>
+                    </select>
+                    <div class="input-hint">Industry sector for comparison</div>
+                </div>
+            </div>
+            
+            <div class="input-grid">
+                <div class="input-group">
+                    <label class="input-label">Sector Average P/E</label>
+                    <input type="number" id="sectorPE" class="input-field" placeholder="25" value="25" step="0.1">
+                    <div class="input-hint">Average P/E of listed peers</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Grey Market Premium - GMP (₹)</label>
+                    <input type="number" id="gmp" class="input-field" placeholder="50" value="50">
+                    <div class="input-hint">Current grey market premium (optional)</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Issue Size (₹ Cr)</label>
+                    <input type="number" id="issueSize" class="input-field" placeholder="1500" value="1500">
+                    <div class="input-hint">Total IPO size in crores</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Subscription Status</label>
+                    <input type="number" id="subscription" class="input-field" placeholder="50" value="50" step="0.1">
+                    <div class="input-hint">Oversubscription (times)</div>
+                </div>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculateIPO()">
+                <i class="fas fa-calculator"></i> Analyze IPO Valuation
+            </button>
+        </div>
+        
+        <div class="results-section" id="resultsSection">
+            <div class="calculator-card">
+                <h2 style="color: var(--gold); margin-bottom: 30px; font-family: 'Playfair Display', serif; font-size: 2rem; text-align: center;">IPO Valuation Analysis</h2>
+                
+                <div class="valuation-card" id="valuationCard">
+                    <div class="valuation-status">IPO Valuation Status</div>
+                    <div class="valuation-value" id="valuationStatus">FAIRLY VALUED</div>
+                    <div class="valuation-label">Fair Value: ₹<span id="fairValue">0</span></div>
+                    <div class="valuation-recommendation" id="recommendation">-</div>
+                </div>
+                
+                <div id="gmpSection"></div>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">IPO P/E Ratio</div>
+                        <div class="metric-value" id="ipoPE">0</div>
+                        <div class="metric-subtext" id="peComparison">-</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Sector P/E</div>
+                        <div class="metric-value" id="sectorPEDisplay">0</div>
+                        <div class="metric-subtext">Industry average</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Premium / Discount</div>
+                        <div class="metric-value" id="premiumDiscount">0%</div>
+                        <div class="metric-subtext" id="pdSubtext">-</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Expected Listing Gain</div>
+                        <div class="metric-value" id="listingGain">0%</div>
+                        <div class="metric-subtext">Based on GMP & valuation</div>
+                    </div>
+                </div>
+                
+                <div class="comparison-section">
+                    <div class="comparison-title">P/E Ratio Comparison</div>
+                    <div class="chart-container">
+                        <canvas id="peChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="strategy-box">
+                    <h3><i class="fas fa-clipboard-check"></i> Investment Analysis:</h3>
+                    <div id="investmentAnalysis"></div>
+                </div>
+                
+                <div class="info-box">
+                    <h3><i class="fas fa-info-circle"></i> Key Metrics Explained:</h3>
+                    <p id="metricsExplanation"></p>
+                </div>
+                
+                <div class="warning-box">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Risk Factors to Consider:</h3>
+                    <ul>
+                        <li><strong>Lock-in Period:</strong> Anchor investors have 30-day lock-in; promoters/pre-IPO shareholders may have 1-3 year lock-in. Check DRHP for details.</li>
+                        <li><strong>Market Conditions:</strong> IPO performance heavily depends on overall market sentiment and sector rotation trends.</li>
+                        <li><strong>Company Fundamentals:</strong> Beyond P/E, analyze debt levels, revenue growth, promoter track record, and business model sustainability.</li>
+                        <li><strong>GMP Reliability:</strong> Grey market premium is unofficial and can change rapidly. Not a guaranteed indicator of listing performance.</li>
+                        <li><strong>Allotment Risk:</strong> Oversubscribed IPOs may result in partial or no allotment, especially in retail category.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let peChartInstance = null;
+        
+        function updateSectorPE() {
+            const sector = document.getElementById('sector').value;
+            const sectorPEs = {
+                it: 25, pharma: 30, banking: 15, fmcg: 45, auto: 22,
+                chemical: 20, textile: 18, realty: 12, metal: 10, other: 20
+            };
+            document.getElementById('sectorPE').value = sectorPEs[sector] || 20;
+        }
+        
+        function calculateIPO() {
+            const ipoName = document.getElementById('ipoName').value || 'This IPO';
+            const ipoPrice = parseFloat(document.getElementById('ipoPrice').value);
+            const eps = parseFloat(document.getElementById('eps').value);
+            const sectorPE = parseFloat(document.getElementById('sectorPE').value);
+            const gmp = parseFloat(document.getElementById('gmp').value) || 0;
+            const issueSize = parseFloat(document.getElementById('issueSize').value);
+            const subscription = parseFloat(document.getElementById('subscription').value);
+            
+            if (isNaN(ipoPrice) || isNaN(eps) || isNaN(sectorPE)) {
+                alert('Please fill in all required fields with valid numbers');
+                return;
+            }
+            
+            if (eps <= 0) {
+                alert('EPS must be positive. Check DRHP for post-IPO EPS.');
+                return;
+            }
+            
+            // Calculate IPO P/E
+            const ipoPE = ipoPrice / eps;
+            
+            // Calculate fair value based on sector P/E
+            const fairValue = eps * sectorPE;
+            
+            // Premium/Discount vs sector
+            const premiumDiscount = ((ipoPE - sectorPE) / sectorPE) * 100;
+            
+            // Expected listing price based on GMP
+            const expectedListingPrice = ipoPrice + gmp;
+            const listingGainPercent = (gmp / ipoPrice) * 100;
+            
+            // Valuation status
+            let valuationStatus = '';
+            let valuationClass = '';
+            let recommendation = '';
+            
+            if (premiumDiscount < -15) {
+                valuationStatus = 'UNDERVALUED';
+                valuationClass = 'undervalued';
+                recommendation = '✅ Strong BUY - Priced below sector average with good upside potential';
+            } else if (premiumDiscount < 10) {
+                valuationStatus = 'FAIRLY VALUED';
+                valuationClass = 'fairly-valued';
+                recommendation = '⚖️ SUBSCRIBE with caution - Fairly priced, depends on fundamentals';
+            } else {
+                valuationStatus = 'OVERVALUED';
+                valuationClass = 'overvalued';
+                recommendation = '❌ AVOID - Expensive vs peers, limited upside, high downside risk';
+            }
+            
+            // Display results
+            document.getElementById('valuationStatus').textContent = valuationStatus;
+            document.getElementById('fairValue').textContent = fairValue.toFixed(2);
+            document.getElementById('recommendation').textContent = recommendation;
+            
+            const valuationCard = document.getElementById('valuationCard');
+            valuationCard.className = 'valuation-card ' + valuationClass;
+            
+            document.getElementById('ipoPE').textContent = ipoPE.toFixed(2);
+            document.getElementById('sectorPEDisplay').textContent = sectorPE.toFixed(2);
+            document.getElementById('premiumDiscount').textContent = (premiumDiscount > 0 ? '+' : '') + premiumDiscount.toFixed(1) + '%';
+            document.getElementById('listingGain').textContent = (listingGainPercent > 0 ? '+' : '') + listingGainPercent.toFixed(1) + '%';
+            
+            // P/E comparison text
+            if (ipoPE > sectorPE * 1.2) {
+                document.getElementById('peComparison').textContent = '⚠️ Much higher than sector';
+                document.getElementById('pdSubtext').textContent = 'Expensive vs peers';
+            } else if (ipoPE < sectorPE * 0.8) {
+                document.getElementById('peComparison').textContent = '✅ Lower than sector';
+                document.getElementById('pdSubtext').textContent = 'Attractive valuation';
+            } else {
+                document.getElementById('peComparison').textContent = 'Similar to sector';
+                document.getElementById('pdSubtext').textContent = 'Fair pricing';
+            }
+            
+            // GMP Section
+            if (gmp !== 0) {
+                const gmpClass = gmp > 0 ? '' : 'negative';
+                const gmpColor = gmp > 0 ? '#2ecc71' : '#e74c3c';
+                document.getElementById('gmpSection').innerHTML = `
+                    <div class="gmp-indicator ${gmpClass}">
+                        <div class="gmp-label">Grey Market Premium (GMP):</div>
+                        <div class="gmp-value" style="color: ${gmpColor};">₹${gmp}</div>
+                        <div class="gmp-label">Expected Listing: ₹${expectedListingPrice.toFixed(2)}</div>
+                    </div>
+                `;
+            } else {
+                document.getElementById('gmpSection').innerHTML = '';
+            }
+            
+            // Investment Analysis
+            let analysisHTML = '<ul style="margin: 10px 0 0 20px; color: var(--text-secondary); line-height: 1.8;">';
+            
+            analysisHTML += `<li><strong>Valuation:</strong> ${ipoName} is priced at ${ipoPE.toFixed(2)}x P/E vs sector average of ${sectorPE.toFixed(2)}x. `;
+            if (premiumDiscount > 15) {
+                analysisHTML += 'This ${premiumDiscount.toFixed(1)}% premium is difficult to justify unless company has exceptional growth/margins.</li>';
+            } else if (premiumDiscount < -10) {
+                analysisHTML += 'The ${Math.abs(premiumDiscount).toFixed(1)}% discount suggests attractive entry point.</li>';
+            } else {
+                analysisHTML += 'Fair pricing relative to peers.</li>';
+            }
+            
+            analysisHTML += `<li><strong>Issue Size:</strong> ₹${issueSize} crore IPO `;
+            if (issueSize > 5000) {
+                analysisHTML += '- Large issue may face supply pressure post-listing.</li>';
+            } else if (issueSize < 500) {
+                analysisHTML += '- Small issue, easier for operators to move price.</li>';
+            } else {
+                analysisHTML += '- Moderate size, balanced liquidity.</li>';
+            }
+            
+            analysisHTML += `<li><strong>Subscription:</strong> ${subscription}x oversubscription `;
+            if (subscription > 50) {
+                analysisHTML += '- Massive demand suggests strong listing pop possible, but allotment will be very low.</li>';
+            } else if (subscription < 5) {
+                analysisHTML += '- Weak demand is red flag. May list flat or below issue price.</li>';
+            } else {
+                analysisHTML += '- Healthy demand, good allotment chances.</li>';
+            }
+            
+            if (gmp > ipoPrice * 0.2) {
+                analysisHTML += `<li><strong>GMP Alert:</strong> ₹${gmp} GMP (${listingGainPercent.toFixed(1)}%) is very high. Often unrealistic; expect profit booking on listing day.</li>`;
+            } else if (gmp < 0) {
+                analysisHTML += `<li><strong>Negative GMP:</strong> ₹${gmp} indicates weak sentiment. May list below issue price. Avoid unless you have long-term conviction.</li>`;
+            }
+            
+            analysisHTML += '</ul>';
+            document.getElementById('investmentAnalysis').innerHTML = analysisHTML;
+            
+            // Metrics Explanation
+            const metricsText = `IPO P/E of ${ipoPE.toFixed(2)} means investors pay ₹${ipoPE.toFixed(2)} for every ₹1 of earnings. Fair value of ₹${fairValue.toFixed(2)} is calculated as EPS (₹${eps}) × Sector P/E (${sectorPE.toFixed(2)}). ${gmp > 0 ? `Current GMP of ₹${gmp} suggests ${listingGainPercent.toFixed(1)}% listing gain, but GMP is unofficial and can change. ` : ''}Always read DRHP for complete financial picture including debt, promoter holding, and use of IPO proceeds.`;
+            document.getElementById('metricsExplanation').textContent = metricsText;
+            
+            // Draw chart
+            drawPEChart(ipoPE, sectorPE, ipoName);
+            
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        function drawPEChart(ipoPE, sectorPE, ipoName) {
+            const ctx = document.getElementById('peChart').getContext('2d');
+            
+            if (peChartInstance) {
+                peChartInstance.destroy();
+            }
+            
+            peChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [ipoName + ' IPO', 'Sector Average', 'Fair Value PE'],
+                    datasets: [{
+                        label: 'P/E Ratio',
+                        data: [ipoPE, sectorPE, sectorPE],
+                        backgroundColor: [
+                            ipoPE > sectorPE * 1.15 ? 'rgba(231, 76, 60, 0.7)' : ipoPE < sectorPE * 0.85 ? 'rgba(46, 204, 113, 0.7)' : 'rgba(243, 156, 18, 0.7)',
+                            'rgba(52, 152, 219, 0.7)',
+                            'rgba(201, 162, 39, 0.7)'
+                        ],
+                        borderColor: [
+                            ipoPE > sectorPE * 1.15 ? '#e74c3c' : ipoPE < sectorPE * 0.85 ? '#2ecc71' : '#f39c12',
+                            '#3498db',
+                            '#C9A227'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: '#C9A227',
+                            bodyColor: '#fff',
+                            callbacks: {
+                                label: function(context) {
+                                    return 'P/E: ' + context.parsed.y.toFixed(2);
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { 
+                                color: '#666',
+                                callback: function(value) { return value.toFixed(0); }
+                            },
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            title: { display: true, text: 'P/E Ratio', color: '#999' }
+                        },
+                        x: {
+                            ticks: { color: '#666' },
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+            if (!isActive) answer.classList.add('active');
+        }
+    </script>
+    
+    <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How to analyze if an IPO is worth investing in India?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>5-step IPO analysis framework: 1) Valuation: Compare IPO P/E with listed peers. Avoid if premium >20%. 2) Fundamentals: Check revenue growth (>20% CAGR), profit margins, debt/equity ratio (<1 preferred). 3) Promoter Quality: Track record, shareholding (>50% post-IPO shows confidence). 4) Use of Proceeds: Fresh issue (expansion) better than Offer for Sale (promoter exit). 5) Market Conditions: Avoid IPOs during bear markets. Read entire DRHP (Draft Red Herring Prospectus) - especially "Risk Factors" section. Best IPOs often go unnoticed; avoid overhyped issues with celebrity endorsements.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What is Grey Market Premium (GMP) and is it reliable for IPO investing?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Grey Market Premium (GMP) is the unofficial premium over IPO price at which shares trade before listing. Example: IPO price ₹100, GMP ₹30 means expected listing at ₹130. How it works: Unofficial dealers buy/sell IPO applications before allotment. GMP reliability issues: 1) Highly volatile - changes hourly, 2) No regulatory oversight - prone to manipulation, 3) Often inflated by vested interests, 4) Drops sharply near listing day. Use GMP as ONE indicator, not the deciding factor. High GMP (>30% premium) often leads to listing day profit booking. Negative GMP is serious red flag - avoid such IPOs. Always combine GMP with fundamental analysis.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What P/E ratio is good for IPO investment in different sectors?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Sector-wise reasonable IPO P/E ratios (2026 India): IT/Software: 20-30x (TCS, Infosys trade at 25-28x), FMCG: 40-60x (high for brand value - HUL at 60x+), Pharma: 25-35x (varies by US FDA exposure), Banking/NBFC: 12-18x (HDFC Bank at 18-20x), Auto: 18-25x (Maruti around 22x), Chemical/Manufacturing: 15-25x, Real Estate/Infra: 10-15x (cyclical sector), Metal/Commodity: 8-12x (low due to cyclicality). General rule: IPO P/E should be within 10-15% of sector leader's P/E. Avoid IPOs priced 30%+ premium to sector unless company has monopoly/patent/tech moat. Lower P/E isn't always better - may indicate poor quality.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Should I apply for IPO for listing gains or long-term holding?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Strategy depends on IPO quality: Listing Gains (Short-term): Apply if 1) Oversubscribed 30x+, 2) Small issue size (<₹500 cr), 3) Strong GMP (15%+), 4) Good market conditions. Book 50% profit on listing, hold rest. Risk: Allotment uncertainty, listing losses possible. Long-term Holding: Apply if 1) Industry leader or disruptor, 2) Strong fundamentals - consistent profits, low debt, 3) Fair/cheap valuation vs peers, 4) Quality promoters with execution track record. Ignore listing gains; focus on 3-5 year wealth creation. Best approach: Mix both. Apply for quality IPOs at reasonable valuations, sell partial on listing if massive pop (>30%), hold remaining long-term. Avoid: Applying for every IPO blindly.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How much money should I invest in IPOs as percentage of portfolio?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>IPO allocation strategy by portfolio size: Small Portfolio (₹1-5 lakhs): Max 5% in IPOs - Focus on quality stocks, not risky IPOs. Medium Portfolio (₹5-25 lakhs): 10-15% in 3-4 IPOs annually - Diversify across sectors. Large Portfolio (₹25 lakhs+): Up to 20% in IPOs - Can take calculated risks. Per IPO investment: Retail investors (₹2 lakhs max) should apply for full quota to maximize allotment chances. Never borrow or use emergency funds for IPO applications. IPO success rate in India: ~40% list above issue price, ~30% give multibagger returns long-term. Treat IPOs as high-risk, high-reward portion of portfolio. Core holdings (70-80%) should be established companies.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What are red flags to avoid in IPO investments?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Top IPO red flags - AVOID if you see: 1) Offer for Sale >70% - Promoters exiting, no fresh capital for business, 2) Consistent losses or one-time profit before IPO - Earnings manipulation, 3) Debt/Equity >2 - Heavily leveraged, bankruptcy risk, 4) Related party transactions >20% revenue - Corporate governance issues, 5) Frequent management changes - Instability, 6) Overvaluation - P/E 50%+ higher than sector, 7) Regulatory issues/pending litigations mentioned in DRHP, 8) No anchor investors or poor anchor list, 9) Subscription <2x on last day, 10) Negative GMP throughout IPO period. If IPO has 3+ red flags, skip it completely. Remember: Missing one IPO is fine; losing capital isn't reversible.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                When should I sell IPO shares after listing - immediately or hold?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>IPO exit strategy framework: Sell immediately (Day 1) if: 1) Listing gain >40% - Too much too fast, 2) You applied only for listing gains, 3) Fundamentals don't justify current price, 4) Need capital urgently. Hold 6-12 months if: 1) Listing gain 10-30% - Still reasonable valuation, 2) Good quarterly results expected, 3) Lock-in expiry will create volatility (sell before). Hold long-term (3-5 years) if: 1) Quality business with moat, 2) Industry tailwinds strong, 3) Listed at fair/cheap valuation, 4) Company executing expansion plans. Smart approach: Book 30-50% on listing to recover capital + some profit, hold remaining for long-term wealth creation. Review quarterly results; exit if fundamentals deteriorate. Don't hold losers hoping for recovery - cut losses at -20%.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer style="background: var(--bg-secondary); padding: 60px 40px; text-align: center; border-top: 1px solid var(--border-color); margin-top: 80px;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 40px; text-align: left; margin-bottom: 40px;">
+                <div style="flex: 1; min-width: 250px;">
+                    <h3 style="color: var(--gold); margin-bottom: 20px; font-size: 1.5rem;">BroBillionaire</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">Empowering Indian traders with premium tools, deep market insights, and actionable trading strategies. Master the markets in 2026!</p>
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                    <h4 style="color: var(--gold); margin-bottom: 15px;">Quick Links</h4>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <a href="index.html" style="color: var(--text-secondary); text-decoration: none;">Home</a>
+                        <a href="articles.html" style="color: var(--text-secondary); text-decoration: none;">Articles</a>
+                        <a href="tools.html" style="color: var(--text-secondary); text-decoration: none;">Tools</a>
+                        <a href="about.html" style="color: var(--text-secondary); text-decoration: none;">About</a>
+                    </div>
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                    <h4 style="color: var(--gold); margin-bottom: 15px;">Popular Tools</h4>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <a href="tool-option-strategy-builder.html" style="color: var(--text-secondary); text-decoration: none;">Option Strategy Builder</a>
+                        <a href="tool-asset-allocation-optimizer.html" style="color: var(--text-secondary); text-decoration: none;">Asset Allocation Optimizer</a>
+                        <a href="tool-dollar-cost-averaging.html" style="color: var(--text-secondary); text-decoration: none;">DCA Calculator</a>
+                    </div>
+                </div>
+            </div>
+            <div style="border-top: 1px solid var(--border-color); padding-top: 30px; color: var(--text-tertiary); font-size: 0.9rem;">
+                <p>&copy; 2026 BroBillionaire. All rights reserved. Built for Indian Traders 🇮🇳</p>
+                <p style="margin-top: 10px;">Disclaimer: All tools and content are for educational purposes only. Not financial advice. Trade at your own risk.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
