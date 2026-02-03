@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!-- Primary Title & Meta Tags -->
+    <title>Stock Valuation Checker FREE - Is Your Stock Undervalued or Overvalued? 2026 | BroBillionaire</title>
+    <meta name="title" content="Stock Valuation Checker FREE - Is Your Stock Undervalued or Overvalued? 2026 | BroBillionaire">
+    <meta name="description" content="FREE Stock Valuation Checker. Analyze any stock using P/E, P/B, P/S ratios & more. Get instant analysis if stock is undervalued, overvalued or fairly valued with Warren Buffett-style insights!">
+    <meta name="keywords" content="stock valuation checker, stock analysis tool, undervalued stocks, overvalued stocks, P/E ratio calculator, price to book ratio, stock fundamental analysis, value investing tool, stock screener, warren buffett stock analysis, stock valuation calculator 2026">
+    <meta name="author" content="BroBillionaire">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://brobillionaire.com/tool-buffett-indicator.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://brobillionaire.com/tool-buffett-indicator.html">
+    <meta property="og:title" content="Stock Valuation Checker - Is Your Stock Undervalued?">
+    <meta property="og:description" content="Analyze any stock instantly! Check if it's undervalued, overvalued or fairly priced using multiple valuation metrics.">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Stock Valuation Checker - Value Investing Tool">
+    <meta name="twitter:description" content="Find undervalued stocks with this free valuation analyzer. Warren Buffett style!">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="responsive.css">
+    
+    <style>
+        /* Tool Container */
+        .tool-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        /* Tool Header */
+        .tool-header {
+            background: linear-gradient(135deg, var(--bg-secondary, #1a1a1a) 0%, var(--bg-primary, #0d0d0d) 50%, var(--bg-secondary, #1a1a1a) 100%);
+            padding: 140px 20px 80px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-gold, #C9A227);
+            position: relative;
+        }
+
+        .tool-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold, #C9A227), transparent);
+        }
+        
+        .tool-category {
+            display: inline-block;
+            background: rgba(201, 162, 39, 0.15);
+            color: var(--gold, #C9A227);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-gold, #C9A227);
+        }
+        
+        .tool-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--gold, #C9A227) 0%, var(--gold-light, #e6c35c) 50%, var(--gold, #C9A227) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .tool-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary, #aaa);
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.8;
+        }
+        
+        .calculator-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .calculator-card {
+            background: linear-gradient(145deg, #1a1a1a, #252525);
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        
+        .card-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #C9A227;
+        }
+        
+        .card-header h2 {
+            color: #C9A227;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-header p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-label {
+            display: block;
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .input-hint {
+            display: block;
+            color: #666;
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+        }
+        
+        .input-field {
+            width: 100%;
+            background: #0d0d0d;
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 1rem;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: #C9A227;
+            box-shadow: 0 0 0 3px rgba(201,162,39,0.1);
+        }
+
+        .quick-select {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .quick-btn {
+            padding: 0.4rem 0.8rem;
+            background: #0d0d0d;
+            border: 1px solid #444;
+            color: #888;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quick-btn:hover {
+            border-color: #C9A227;
+            color: #C9A227;
+            background: rgba(201, 162, 39, 0.1);
+        }
+        
+        .calculate-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, #C9A227, #a68b1e);
+            color: #000;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+        }
+        
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201, 162, 39, 0.3);
+        }
+
+        .result-container {
+            display: none;
+            margin-top: 2rem;
+            padding: 2rem;
+            background: linear-gradient(145deg, #0d0d0d, #1a1a1a);
+            border-radius: 15px;
+            border: 2px solid #C9A227;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-main {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .result-ratio {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #C9A227, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .result-label {
+            font-size: 1.2rem;
+            color: #888;
+            margin-bottom: 1rem;
+        }
+
+        .valuation-meter {
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(90deg, 
+                #4ade80 0%, 
+                #4ade80 50%, 
+                #fbbf24 50%, 
+                #fbbf24 80%, 
+                #ef4444 80%, 
+                #ef4444 100%);
+            border-radius: 10px;
+            position: relative;
+            margin: 2rem 0;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .meter-marker {
+            position: absolute;
+            top: -10px;
+            transform: translateX(-50%);
+            transition: left 0.5s ease;
+        }
+
+        .marker-arrow {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 20px solid #fff;
+            filter: drop-shadow(0 3px 10px rgba(0,0,0,0.5));
+        }
+
+        .marker-value {
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            color: #000;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .meter-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .meter-labels span:nth-child(1) { color: #4ade80; }
+        .meter-labels span:nth-child(2) { color: #fbbf24; }
+        .meter-labels span:nth-child(3) { color: #ef4444; }
+
+        .verdict-box {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .verdict-box.undervalued {
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.1), rgba(74, 222, 128, 0.05));
+            border: 2px solid #4ade80;
+        }
+
+        .verdict-box.fair {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(251, 191, 36, 0.05));
+            border: 2px solid #fbbf24;
+        }
+
+        .verdict-box.overvalued {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05));
+            border: 2px solid #ef4444;
+        }
+
+        .verdict-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .verdict-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .verdict-box.undervalued .verdict-title { color: #4ade80; }
+        .verdict-box.fair .verdict-title { color: #fbbf24; }
+        .verdict-box.overvalued .verdict-title { color: #ef4444; }
+
+        .verdict-message {
+            font-size: 1.1rem;
+            color: #ccc;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .bro-insight {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.2), rgba(201, 162, 39, 0.05));
+            border-left: 4px solid #C9A227;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .bro-insight-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #C9A227;
+            margin-bottom: 1rem;
+        }
+
+        .bro-insight-text {
+            color: #ddd;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .historical-reference {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .reference-card {
+            background: #0d0d0d;
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid #333;
+            text-align: center;
+        }
+
+        .reference-year {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 0.3rem;
+        }
+
+        .reference-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #C9A227;
+            margin-bottom: 0.3rem;
+        }
+
+        .reference-label {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .info-section {
+            background: linear-gradient(145deg, #1a1a1a, #252525);
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-section h3 {
+            color: #C9A227;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-section p {
+            color: #ccc;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .info-points {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-points li {
+            color: #ccc;
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .info-points li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #C9A227;
+            font-weight: 700;
+        }
+
+        @media (max-width: 992px) {
+            .tool-container {
+                padding: 0 20px;
+            }
+
+            .tool-header {
+                padding: 120px 20px 60px;
+            }
+
+            .tool-title {
+                font-size: 2.5rem;
+            }
+
+            .calculator-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .historical-reference {
+                grid-template-columns: 1fr;
+            }
+
+            .result-ratio {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .tool-header {
+                padding: 100px 15px 50px;
+            }
+
+            .tool-title {
+                font-size: 2rem;
+            }
+
+            .tool-subtitle {
+                font-size: 1rem;
+            }
+
+            .tool-category {
+                font-size: 0.7rem;
+                padding: 6px 15px;
+            }
+        }
+    </style>
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Stock Valuation Checker",
+        "description": "Analyze stocks to determine if they're undervalued, overvalued or fairly valued using fundamental analysis metrics",
+        "url": "https://brobillionaire.com/tool-buffett-indicator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- Navigation - Matching BroBillionaire Theme -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                <span class="logo-text">BroBillionaire</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="articles.html" class="nav-link">Articles</a>
+                <a href="tools.html" class="nav-link active">Tools</a>
+                <a href="about.html" class="nav-link">About</a>
+            </div>
+            <button class="cta-btn gold-btn" onclick="window.location.href='articles.html'">Read Free</button>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+    <div class="mobile-nav-dropdown" id="mobileNavDropdown">
+        <a href="index.html">Home</a>
+        <a href="articles.html">Articles</a>
+        <a href="tools.html">Tools</a>
+        <a href="about.html">About</a>
+    </div>
+
+    <!-- Tool Header -->
+    <header class="tool-header">
+        <div class="tool-container">
+            <div class="tool-category">💎 FREE STOCK ANALYSIS TOOL</div>
+            <h1 class="tool-title">Stock Valuation Checker</h1>
+            <p class="tool-subtitle">Analyze any stock using P/E, P/B, and P/S ratios to determine if it's undervalued, overvalued, or fairly valued. Professional-grade fundamental analysis inspired by Warren Buffett's value investing principles. Get instant insights with our advanced scoring algorithm.</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="tool-container">
+        <div class="calculator-wrapper">
+            <!-- Calculator Input -->
+            <div class="calculator-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-calculator"></i> Stock Analysis Input</h2>
+                    <p>Enter stock fundamentals for instant valuation analysis</p>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Stock Name (Optional)</label>
+                    <input type="text" id="stockName" class="input-field" placeholder="e.g., Apple Inc.">
+                    <span class="input-hint">💡 For your reference only</span>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Current Stock Price ($)</label>
+                    <input type="number" id="stockPrice" class="input-field" placeholder="150" step="0.01">
+                    <span class="input-hint">💡 Current market price per share</span>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Earnings Per Share (EPS) - Annual</label>
+                    <input type="number" id="eps" class="input-field" placeholder="6.5" step="0.01">
+                    <span class="input-hint">💡 Trailing twelve months (TTM) EPS</span>
+                    <div class="quick-select">
+                        <button class="quick-btn" onclick="setExample('tech')">Tech Example</button>
+                        <button class="quick-btn" onclick="setExample('value')">Value Example</button>
+                        <button class="quick-btn" onclick="setExample('growth')">Growth Example</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Book Value Per Share ($)</label>
+                    <input type="number" id="bookValue" class="input-field" placeholder="25" step="0.01">
+                    <span class="input-hint">💡 Net asset value per share</span>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Revenue Per Share ($) - Annual</label>
+                    <input type="number" id="revenue" class="input-field" placeholder="75" step="0.01">
+                    <span class="input-hint">💡 Total revenue divided by shares outstanding</span>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Industry Average P/E Ratio</label>
+                    <input type="number" id="industryPE" class="input-field" placeholder="20" step="0.1">
+                    <span class="input-hint">💡 Typical P/E for the stock's sector (15-25 for most)</span>
+                </div>
+
+                <button class="calculate-btn" onclick="calculateStockValuation()">
+                    <i class="fas fa-chart-line"></i> Analyze Stock Valuation
+                </button>
+            </div>
+
+            <!-- Quick Info -->
+            <div class="calculator-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-info-circle"></i> How It Works</h2>
+                </div>
+                <div style="color: #ccc; line-height: 1.8;">
+                    <p style="margin-bottom: 1rem;">This tool analyzes <strong style="color: #C9A227;">multiple valuation metrics</strong> to determine if a stock is undervalued, fairly valued, or overvalued compared to industry standards.</p>
+                    
+                    <p style="margin-bottom: 1rem;"><strong style="color: #fff;">Key Metrics Analyzed:</strong></p>
+
+                    <div style="background: #0d0d0d; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <h4 style="color: #C9A227; margin-bottom: 0.8rem; font-size: 0.95rem;">📈 P/E Ratio (Price-to-Earnings)</h4>
+                        <p style="font-size: 0.85rem; margin: 0;">Compares stock price to earnings. Lower is generally better for value investors.</p>
+                    </div>
+
+                    <div style="background: #0d0d0d; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <h4 style="color: #C9A227; margin-bottom: 0.8rem; font-size: 0.95rem;">📚 P/B Ratio (Price-to-Book)</h4>
+                        <p style="font-size: 0.85rem; margin: 0;">Compares stock price to book value. Warren Buffett loves stocks trading below book value!</p>
+                    </div>
+
+                    <div style="background: #0d0d0d; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <h4 style="color: #C9A227; margin-bottom: 0.8rem; font-size: 0.95rem;">💰 P/S Ratio (Price-to-Sales)</h4>
+                        <p style="font-size: 0.85rem; margin: 0;">Compares stock price to revenue. Great for evaluating growth companies.</p>
+                    </div>
+
+                    <div style="background: rgba(201, 162, 39, 0.1); padding: 1rem; border-radius: 8px; margin-top: 1rem; border-left: 3px solid #C9A227;">
+                        <p style="font-size: 0.85rem; color: #ddd; margin: 0;">
+                            <strong>⚡ Bro Tip:</strong> This tool combines multiple metrics for a holistic view. One metric alone can mislead - but together, they paint the full picture. Warren Buffett style value investing! 🎯
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Container -->
+        <div class="result-container" id="resultContainer">
+            <div class="result-main">
+                <div class="result-ratio" id="resultRatio">-</div>
+                <div class="result-label" id="stockNameDisplay" style="font-size: 1rem; color: #C9A227; margin-bottom: 0.5rem;"></div>
+                <div class="result-label">Valuation Score</div>
+            </div>
+
+            <!-- Key Metrics Display -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0; padding: 1.5rem; background: #0d0d0d; border-radius: 10px;">
+                <div style="text-align: center;">
+                    <div style="color: #888; font-size: 0.85rem; margin-bottom: 0.3rem;">P/E Ratio</div>
+                    <div id="peDisplay" style="font-size: 1.8rem; font-weight: 700; color: #C9A227;">-</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="color: #888; font-size: 0.85rem; margin-bottom: 0.3rem;">P/B Ratio</div>
+                    <div id="pbDisplay" style="font-size: 1.8rem; font-weight: 700; color: #C9A227;">-</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="color: #888; font-size: 0.85rem; margin-bottom: 0.3rem;">P/S Ratio</div>
+                    <div id="psDisplay" style="font-size: 1.8rem; font-weight: 700; color: #C9A227;">-</div>
+                </div>
+            </div>
+
+            <!-- Valuation Meter -->
+            <div class="valuation-meter">
+                <div class="meter-marker" id="meterMarker" style="left: 50%;">
+                    <div class="marker-value" id="markerValue">FAIR</div>
+                    <div class="marker-arrow"></div>
+                </div>
+            </div>
+            <div class="meter-labels">
+                <span>🟢 Undervalued</span>
+                <span>🟡 Fair Value</span>
+                <span>🔴 Overvalued</span>
+            </div>
+
+            <!-- Verdict -->
+            <div class="verdict-box" id="verdictBox">
+                <div class="verdict-icon" id="verdictIcon">🎯</div>
+                <div class="verdict-title" id="verdictTitle">Market Status</div>
+                <p class="verdict-message" id="verdictMessage">Enter values to see market valuation</p>
+            </div>
+
+            <!-- Bro Insight -->
+            <div class="bro-insight">
+                <div class="bro-insight-header">
+                    🧠 BroBillionaire Insight
+                </div>
+                <div class="bro-insight-text" id="broInsight">
+                    Calculate to get your personalized market insight...
+                </div>
+            </div>
+
+            <!-- Valuation Breakdown -->
+            <div class="historical-reference" style="margin-top: 2rem;">
+                <div class="reference-card" id="peStatus">
+                    <div class="reference-year">P/E Analysis</div>
+                    <div class="reference-value" style="font-size: 1.2rem;">-</div>
+                    <div class="reference-label">vs Industry</div>
+                </div>
+                <div class="reference-card" id="pbStatus">
+                    <div class="reference-year">P/B Analysis</div>
+                    <div class="reference-value" style="font-size: 1.2rem;">-</div>
+                    <div class="reference-label">Book Value Check</div>
+                </div>
+                <div class="reference-card" id="psStatus">
+                    <div class="reference-year">P/S Analysis</div>
+                    <div class="reference-value" style="font-size: 1.2rem;">-</div>
+                    <div class="reference-label">Revenue Multiple</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Educational Section -->
+        <div class="info-section">
+            <h3><i class="fas fa-graduation-cap"></i> Understanding Stock Valuation Metrics</h3>
+            <p>Warren Buffett built his fortune finding undervalued stocks using fundamental analysis. Here's what each metric tells you:</p>
+            
+            <ul class="info-points">
+                <li><strong>P/E Ratio (Price-to-Earnings):</strong> Shows how much you pay for each dollar of earnings. Lower is generally better. Market average is 15-20x.</li>
+                <li><strong>P/B Ratio (Price-to-Book):</strong> Compares price to book value. Below 1.0 means trading below net assets - potential value play!</li>
+                <li><strong>P/S Ratio (Price-to-Sales):</strong> Price relative to revenue. Useful for growth stocks or companies with temporary losses.</li>
+                <li><strong>Industry Comparison:</strong> Always compare to sector peers. Tech stocks trade higher than utilities - that's normal!</li>
+                <li><strong>Growth Matters:</strong> High-growth companies deserve premium valuations. Don't just chase low P/E blindly.</li>
+            </ul>
+        </div>
+
+        <div class="info-section">
+            <h3><i class="fas fa-exclamation-triangle"></i> Important Limitations & Warnings</h3>
+            <ul class="info-points">
+                <li><strong>Valuation isn't everything:</strong> A cheap stock can get cheaper if the business is deteriorating</li>
+                <li><strong>Quality matters:</strong> Sometimes expensive stocks are worth it (Apple, Microsoft prove this)</li>
+                <li><strong>Growth justifies premiums:</strong> Fast-growing companies deserve higher P/E ratios</li>
+                <li><strong>Check the business:</strong> Read financial statements, understand the competitive moat, assess management</li>
+                <li><strong>Value traps exist:</strong> Low P/E doesn't always mean bargain - could signal dying business</li>
+                <li><strong>This is a starting point:</strong> Use this tool for initial screening, then do deep research before investing</li>
+                <li><strong>Market sentiment matters:</strong> "Undervalued" stocks can stay undervalued during bear markets</li>
+            </ul>
+        </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand-section">
+                <div class="logo">
+                    <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                    <span class="logo-text">BroBillionaire</span>
+                </div>
+                <p class="tagline">Master the markets with free trading education. Learn from legendary traders and build your wealth.</p>
+            </div>
+            <nav class="footer-nav">
+                <a href="index.html">Home</a>
+                <a href="articles.html">All Articles</a>
+                <a href="tools.html">Trading Tools</a>
+                <a href="about.html">About Us</a>
+            </nav>
+        </div>
+    </footer>
+    <div class="footer-disclaimer">
+        <p>&copy; 2026 BroBillionaire. All rights reserved. Trading involves risk. Past performance is not indicative of future results.</p>
+    </div>
+
+    <script src="mobile-nav.js"></script>
+    <script>
+        function setExample(type) {
+            if (type === 'tech') {
+                document.getElementById('stockName').value = 'Apple Inc.';
+                document.getElementById('stockPrice').value = '180';
+                document.getElementById('eps').value = '6.5';
+                document.getElementById('bookValue').value = '4.1';
+                document.getElementById('revenue').value = '25';
+                document.getElementById('industryPE').value = '28';
+            } else if (type === 'value') {
+                document.getElementById('stockName').value = 'Bank of America';
+                document.getElementById('stockPrice').value = '32';
+                document.getElementById('eps').value = '3.1';
+                document.getElementById('bookValue').value = '31';
+                document.getElementById('revenue').value = '15';
+                document.getElementById('industryPE').value = '12';
+            } else if (type === 'growth') {
+                document.getElementById('stockName').value = 'Tesla Inc.';
+                document.getElementById('stockPrice').value = '250';
+                document.getElementById('eps').value = '4.2';
+                document.getElementById('bookValue').value = '20';
+                document.getElementById('revenue').value = '80';
+                document.getElementById('industryPE').value = '35';
+            }
+        }
+
+        function calculateStockValuation() {
+            const stockName = document.getElementById('stockName').value || 'This Stock';
+            const price = parseFloat(document.getElementById('stockPrice').value);
+            const eps = parseFloat(document.getElementById('eps').value);
+            const bookValue = parseFloat(document.getElementById('bookValue').value);
+            const revenue = parseFloat(document.getElementById('revenue').value);
+            const industryPE = parseFloat(document.getElementById('industryPE').value);
+
+            if (!price || !eps || !bookValue || !revenue || !industryPE || 
+                price <= 0 || eps <= 0 || bookValue <= 0 || revenue <= 0 || industryPE <= 0) {
+                alert('Please enter valid positive numbers for all fields');
+                return;
+            }
+
+            // Calculate ratios
+            const peRatio = price / eps;
+            const pbRatio = price / bookValue;
+            const psRatio = price / revenue;
+
+            // Calculate valuation score (0-100, where 50 is fair value)
+            let score = 50;
+            
+            // P/E component (30 points)
+            const peVsIndustry = peRatio / industryPE;
+            if (peVsIndustry < 0.7) score -= 15;
+            else if (peVsIndustry < 0.9) score -= 8;
+            else if (peVsIndustry > 1.5) score += 15;
+            else if (peVsIndustry > 1.2) score += 8;
+
+            // P/B component (20 points)
+            if (pbRatio < 1) score -= 10;
+            else if (pbRatio < 2) score -= 5;
+            else if (pbRatio > 5) score += 10;
+            else if (pbRatio > 3) score += 5;
+
+            // P/S component (15 points)
+            if (psRatio < 2) score -= 7;
+            else if (psRatio < 3) score -= 3;
+            else if (psRatio > 8) score += 7;
+            else if (psRatio > 5) score += 3;
+
+            // Cap score between 0-100
+            score = Math.max(0, Math.min(100, score));
+
+            // Show results
+            document.getElementById('resultContainer').style.display = 'block';
+            document.getElementById('stockNameDisplay').textContent = stockName;
+            
+            // Display ratios
+            document.getElementById('peDisplay').textContent = peRatio.toFixed(2) + 'x';
+            document.getElementById('pbDisplay').textContent = pbRatio.toFixed(2) + 'x';
+            document.getElementById('psDisplay').textContent = psRatio.toFixed(2) + 'x';
+
+            // Position meter marker (score 0-100)
+            document.getElementById('meterMarker').style.left = score + '%';
+
+            // Determine verdict
+            let verdictClass, verdictIcon, verdictTitle, verdictMsg, broInsight;
+            let peStatus, pbStatus, psStatus, scoreDisplay;
+
+            if (score < 35) {
+                verdictClass = 'undervalued';
+                verdictIcon = '💎';
+                verdictTitle = 'UNDERVALUED';
+                scoreDisplay = 'STRONG BUY ZONE';
+                verdictMsg = 'Multiple metrics suggest this stock is trading below its intrinsic value. Could be a value opportunity if fundamentals are solid.';
+                broInsight = '<strong>Bro, this looks interesting! 💎</strong> This stock is showing multiple signs of undervaluation. BUT - and this is crucial - make sure you understand WHY it is cheap. Is the company facing temporary challenges (good), or is it a dying business (bad)? Warren Buffett made billions buying undervalued companies with strong fundamentals. Check: 1) Is the business growing? 2) Does it have competitive advantages? 3) Is management competent? If yes to all three, you might have found a gem. Do deep research before pulling the trigger! 📚';
+                
+                peStatus = peRatio < industryPE ? '✅ Below Industry' : '⚠️ Above Industry';
+                pbStatus = pbRatio < 2 ? '✅ Attractive' : (pbRatio < 3 ? '⚖️ Neutral' : '❌ High');
+                psStatus = psRatio < 3 ? '✅ Attractive' : (psRatio < 5 ? '⚖️ Neutral' : '❌ High');
+            } else if (score >= 35 && score < 65) {
+                verdictClass = 'fair';
+                verdictIcon = '⚖️';
+                verdictTitle = 'FAIRLY VALUED';
+                scoreDisplay = 'NEUTRAL ZONE';
+                verdictMsg = 'The stock appears to be trading near its fair value based on fundamentals. Neither a screaming buy nor dangerously overpriced.';
+                broInsight = '<strong>This is the sweet spot, bro! ⚖️</strong> Fairly valued does not mean boring - it means the market has correctly priced in the fundamentals. Most successful long-term investments happen at fair value, not bargain prices. Focus on: 1) Business quality and growth prospects, 2) Management excellence, 3) Competitive moat strength. If those check out, fair value can turn into great returns as the company grows. Remember: "It is far better to buy a wonderful company at a fair price than a fair company at a wonderful price" - Warren Buffett. Quality > Price! 💼';
+                
+                peStatus = Math.abs(peRatio - industryPE) / industryPE < 0.2 ? '⚖️ In Line' : (peRatio < industryPE ? '✅ Below Industry' : '⚠️ Above Industry');
+                pbStatus = pbRatio < 3 ? '✅ Reasonable' : (pbRatio < 5 ? '⚖️ Moderate' : '❌ High');
+                psStatus = psRatio < 5 ? '✅ Reasonable' : (psRatio < 8 ? '⚖️ Moderate' : '❌ High');
+            } else {
+                verdictClass = 'overvalued';
+                verdictIcon = '🔴';
+                verdictTitle = 'OVERVALUED';
+                scoreDisplay = 'CAUTION ZONE';
+                verdictMsg = 'The stock appears expensive relative to fundamentals. Premium valuation requires exceptional growth to justify current prices.';
+                
+                if (score > 75) {
+                    broInsight = '<strong>DANGER ZONE, BRO! 🚨</strong> This stock is EXPENSIVE. The valuation is stretched across multiple metrics. Now, does this mean it is automatically a bad investment? No - some of the best companies trade at premiums (Apple, Microsoft, etc.). BUT you need to answer these questions: 1) Is growth accelerating enough to justify this price? 2) Does it have an unbreakable moat? 3) Are you buying at the top of a hype cycle? If you cannot confidently answer yes to the first two and no to the third, STAY AWAY. There will always be another opportunity. Do not chase FOMO! 🛑';
+                } else {
+                    broInsight = '<strong>Proceed with caution, bro! ⚠️</strong> This stock is on the pricey side. That does not automatically make it a bad investment - quality often comes at a premium. But you need above-average growth to make this work. Ask yourself: 1) What is the growth trajectory? 2) Is there a clear path to profitability/expansion? 3) Am I paying for potential that may not materialize? High valuations work out when companies exceed expectations. They destroy portfolios when reality disappoints. Size your position smaller than usual if you proceed! 🎯';
+                }
+                
+                peStatus = peRatio > industryPE * 1.3 ? '❌ Well Above Industry' : '⚠️ Above Industry';
+                pbStatus = pbRatio > 5 ? '❌ Very High' : (pbRatio > 3 ? '⚠️ Elevated' : '⚖️ Moderate');
+                psStatus = psRatio > 8 ? '❌ Very High' : (psRatio > 5 ? '⚠️ Elevated' : '⚖️ Moderate');
+            }
+
+            // Update UI
+            const verdictBox = document.getElementById('verdictBox');
+            verdictBox.className = 'verdict-box ' + verdictClass;
+            document.getElementById('resultRatio').textContent = scoreDisplay;
+            document.getElementById('markerValue').textContent = scoreDisplay;
+            document.getElementById('verdictIcon').textContent = verdictIcon;
+            document.getElementById('verdictTitle').textContent = verdictTitle;
+            document.getElementById('verdictMessage').textContent = verdictMsg;
+            document.getElementById('broInsight').innerHTML = broInsight;
+
+            // Update status cards
+            document.getElementById('peStatus').querySelector('.reference-value').innerHTML = peStatus;
+            document.getElementById('pbStatus').querySelector('.reference-value').innerHTML = pbStatus;
+            document.getElementById('psStatus').querySelector('.reference-value').innerHTML = psStatus;
+
+            // Scroll to results
+            document.getElementById('resultContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const dropdown = document.getElementById('mobileNavDropdown');
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            dropdown.classList.toggle('active');
+            toggle.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
