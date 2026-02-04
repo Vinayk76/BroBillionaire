@@ -172,8 +172,8 @@ def generate_smart_mappings():
         
         # Trading Strategies
         'fibonacci': ['tool-fibonacci-calculator.html', 'tool-profit-calculator.html'],
-        'breakout': ['tool-fibonacci-calculator.html', 'tool-premarket-gapper-scanner.html'],
-        'momentum': ['tool-premarket-gapper-scanner.html', 'tool-fibonacci-calculator.html'],
+        'breakout': ['tool-fibonacci-calculator.html', 'tool-smart-money-tracker.html'],
+        'momentum': ['tool-smart-money-tracker.html', 'tool-fibonacci-calculator.html'],
         'swing': ['tool-fibonacci-calculator.html', 'tool-profit-calculator.html'],
         
         # Market Analysis
@@ -182,7 +182,7 @@ def generate_smart_mappings():
         
         # Currency & Commodities
         'currency': ['tool-currency-converter.html', 'tool-portfolio-tracker.html'],
-        'commodity': ['tool-premarket-gapper-scanner.html', 'tool-fibonacci-calculator.html'],
+        'commodity': ['tool-smart-money-tracker.html', 'tool-fibonacci-calculator.html'],
         
         # Default fallback
         'default': ['tool-portfolio-tracker.html', 'tool-trading-journal-analyzer.html']

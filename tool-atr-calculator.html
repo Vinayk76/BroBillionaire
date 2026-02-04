@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <title>ATR Calculator & Stop Loss FREE 2026 - Average True Range Calculator | BroBillionaire</title>
+    <meta name="description" content="FREE ATR Calculator 2026! Calculate Average True Range for volatility-based stop loss & take profit. ATR trailing stop, position sizing with ATR multiplier. Best ATR calculator for traders!">
+    <meta name="keywords" content="ATR calculator, average true range calculator, ATR stop loss calculator, ATR trailing stop, volatility calculator, ATR indicator, ATR multiplier, trading volatility, ATR position size, swing trading stop loss 2026">
+    <meta name="author" content="BroBillionaire">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://brobillionaire.com/tool-atr-calculator.html">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://brobillionaire.com/tool-atr-calculator.html">
+    <meta property="og:title" content="FREE ATR Calculator - Volatility Based Stop Loss 2026">
+    <meta property="og:description" content="Calculate ATR for smart stop loss placement. Professional volatility trading tool!">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FREE ATR Calculator - Average True Range">
+    <meta name="twitter:description" content="Calculate ATR stop loss & take profit levels instantly!">
+    
+    <meta name="theme-color" content="#C9A227">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "ATR Calculator - BroBillionaire",
+        "description": "Calculate Average True Range for volatility-based stop loss and take profit levels.",
+        "url": "https://brobillionaire.com/tool-atr-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    }
+    </script>
+    
+    <style>
+        .tool-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px 80px; }
+        
+        .tool-hero {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .tool-hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(201, 162, 39, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .tool-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold), #a68b1e);
+            color: #000;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        
+        .tool-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+        
+        .tool-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 900px) {
+            .calc-grid { grid-template-columns: 1fr; }
+        }
+        
+        .calc-card {
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 35px;
+        }
+        
+        .calc-card h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .input-hint {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        
+        .input-field {
+            width: 100%;
+            background: #0d0d0d;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 14px 16px;
+            color: #fff;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.15);
+        }
+        
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .candle-inputs {
+            background: #0d0d0d;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .candle-inputs h4 {
+            color: var(--gold);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .candle-row {
+            display: grid;
+            grid-template-columns: 50px 1fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        
+        .candle-row span {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+        
+        .candle-row input {
+            background: #1a1a1a;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 8px 10px;
+            color: #fff;
+            font-size: 0.85rem;
+        }
+        
+        .candle-row input:focus {
+            border-color: var(--gold);
+            outline: none;
+        }
+        
+        .calculate-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--gold), #a68b1e);
+            color: #000;
+            border: none;
+            padding: 18px 30px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .calculate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(201, 162, 39, 0.4);
+        }
+        
+        .results-card {
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            padding: 35px;
+        }
+        
+        .atr-display {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(145deg, #0d0d0d, #1a1a1a);
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .atr-label {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        
+        .atr-value {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        
+        .atr-percent {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+        
+        .levels-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .level-box {
+            background: #0d0d0d;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .level-box.buy {
+            border-color: #4ade80;
+        }
+        
+        .level-box.sell {
+            border-color: #ef4444;
+        }
+        
+        .level-title {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        
+        .level-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        
+        .level-value.green { color: #4ade80; }
+        .level-value.red { color: #ef4444; }
+        
+        .multiplier-section {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .multiplier-section h4 {
+            color: var(--gold);
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+        
+        .multiplier-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        
+        .multiplier-box {
+            background: #0d0d0d;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .multiplier-box:hover, .multiplier-box.active {
+            border-color: var(--gold);
+            background: rgba(201, 162, 39, 0.1);
+        }
+        
+        .multiplier-box .mult {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+        
+        .multiplier-box .value {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .volatility-meter {
+            margin-top: 25px;
+            background: #0d0d0d;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .volatility-meter h4 {
+            color: var(--gold);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .meter-bar {
+            height: 12px;
+            background: #1a1a1a;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        
+        .meter-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.5s ease;
+        }
+        
+        .meter-fill.low { background: linear-gradient(90deg, #22c55e, #4ade80); }
+        .meter-fill.medium { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+        .meter-fill.high { background: linear-gradient(90deg, #ef4444, #f87171); }
+        
+        .meter-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        .info-section {
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 50px;
+        }
+        
+        .info-section h2 {
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 25px;
+        }
+        
+        .info-section h3 {
+            color: var(--gold);
+            font-size: 1.3rem;
+            margin: 30px 0 15px;
+        }
+        
+        .info-section p, .info-section li {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .info-section ul { padding-left: 25px; }
+        
+        .formula-box {
+            background: #0d0d0d;
+            border-left: 4px solid var(--gold);
+            padding: 20px 25px;
+            border-radius: 0 12px 12px 0;
+            margin: 20px 0;
+        }
+        
+        .formula-box code {
+            color: var(--gold);
+            font-size: 1rem;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .breadcrumb {
+            padding: 15px 20px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        
+        .breadcrumb a:hover { color: var(--gold); }
+        .breadcrumb a::after { content: '›'; margin-left: 10px; }
+        .breadcrumb span { color: var(--gold); }
+        
+        .tool-footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
+        }
+        
+        .tool-footer a { color: var(--gold); text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <a href="tools.html">Tools</a>
+        <span>ATR Calculator</span>
+    </div>
+    
+    <div class="tool-container">
+        <div class="tool-hero">
+            <div class="tool-badge">📊 FREE TRADING TOOL</div>
+            <h1 class="tool-title">ATR Calculator</h1>
+            <p class="tool-subtitle">
+                Calculate Average True Range for volatility-based stop loss placement. 
+                Use ATR multipliers to set smart stop loss and take profit levels.
+            </p>
+        </div>
+        
+        <div class="calc-grid">
+            <div class="calc-card">
+                <h2><i class="fas fa-chart-bar"></i> Calculate ATR</h2>
+                
+                <div class="input-group">
+                    <label class="input-label">
+                        Current Price
+                        <span class="input-hint">Entry or current market price</span>
+                    </label>
+                    <input type="number" id="currentPrice" class="input-field" placeholder="100.00" value="100" step="0.01">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">
+                        ATR Value
+                        <span class="input-hint">From your chart (14-period default)</span>
+                    </label>
+                    <input type="number" id="atrValue" class="input-field" placeholder="2.50" value="2.50" step="0.01">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">
+                        ATR Period
+                        <span class="input-hint">Number of candles</span>
+                    </label>
+                    <input type="number" id="atrPeriod" class="input-field" value="14" min="1" max="100">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">
+                        ATR Multiplier for Stop Loss
+                        <span class="input-hint">Common: 1.5x - 3x ATR</span>
+                    </label>
+                    <input type="number" id="atrMultiplier" class="input-field" placeholder="2.0" value="2" step="0.1" min="0.5" max="10">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">
+                        Trade Direction
+                    </label>
+                    <select id="tradeDirection" class="input-field">
+                        <option value="long">Long (Buy)</option>
+                        <option value="short">Short (Sell)</option>
+                    </select>
+                </div>
+                
+                <button class="calculate-btn" onclick="calculateATR()">
+                    <i class="fas fa-calculator"></i> Calculate Levels
+                </button>
+            </div>
+            
+            <div class="results-card">
+                <div class="atr-display">
+                    <div class="atr-label">Average True Range</div>
+                    <div class="atr-value" id="displayATR">2.50</div>
+                    <div class="atr-percent" id="displayATRPercent">2.50% of price</div>
+                </div>
+                
+                <div class="levels-grid">
+                    <div class="level-box sell">
+                        <div class="level-title">Stop Loss Level</div>
+                        <div class="level-value red" id="stopLossLevel">95.00</div>
+                    </div>
+                    <div class="level-box buy">
+                        <div class="level-title">Take Profit (1:1)</div>
+                        <div class="level-value green" id="takeProfitLevel">105.00</div>
+                    </div>
+                    <div class="level-box">
+                        <div class="level-title">Stop Distance</div>
+                        <div class="level-value" id="stopDistance">5.00</div>
+                    </div>
+                    <div class="level-box">
+                        <div class="level-title">Risk per Share</div>
+                        <div class="level-value" id="riskPerShare">₹5.00</div>
+                    </div>
+                </div>
+                
+                <div class="multiplier-section">
+                    <h4>Quick ATR Multipliers</h4>
+                    <div class="multiplier-grid">
+                        <div class="multiplier-box" onclick="setMultiplier(1)">
+                            <div class="mult">1x ATR</div>
+                            <div class="value" id="mult1">2.50</div>
+                        </div>
+                        <div class="multiplier-box" onclick="setMultiplier(1.5)">
+                            <div class="mult">1.5x ATR</div>
+                            <div class="value" id="mult15">3.75</div>
+                        </div>
+                        <div class="multiplier-box active" onclick="setMultiplier(2)">
+                            <div class="mult">2x ATR</div>
+                            <div class="value" id="mult2">5.00</div>
+                        </div>
+                        <div class="multiplier-box" onclick="setMultiplier(3)">
+                            <div class="mult">3x ATR</div>
+                            <div class="value" id="mult3">7.50</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="volatility-meter">
+                    <h4>Volatility Level</h4>
+                    <div class="meter-bar">
+                        <div class="meter-fill medium" id="volatilityFill" style="width: 50%"></div>
+                    </div>
+                    <div class="meter-labels">
+                        <span>Low</span>
+                        <span>Medium</span>
+                        <span>High</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <h2>📈 What is ATR (Average True Range)?</h2>
+            <p>ATR is a technical analysis indicator that measures market volatility by decomposing the entire range of an asset price for a given period. Developed by J. Welles Wilder, ATR is commonly used for setting stop-loss levels.</p>
+            
+            <h3>ATR Formula</h3>
+            <div class="formula-box">
+                <code>True Range = Max[(High - Low), |High - Previous Close|, |Low - Previous Close|]</code><br><br>
+                <code>ATR = (Previous ATR × (n-1) + Current TR) / n</code>
+            </div>
+            
+            <h3>How to Use ATR for Stop Loss</h3>
+            <ul>
+                <li><strong>1x ATR:</strong> Tight stop, higher chance of being stopped out, used in strong trends</li>
+                <li><strong>1.5x ATR:</strong> Moderate stop, good for swing trading</li>
+                <li><strong>2x ATR:</strong> Standard stop, gives room for normal volatility</li>
+                <li><strong>3x ATR:</strong> Wide stop, used in highly volatile markets</li>
+            </ul>
+            
+            <h3>ATR Trading Strategies</h3>
+            <ul>
+                <li><strong>Volatility Stop:</strong> Place stop loss at Entry ± (ATR × Multiplier)</li>
+                <li><strong>Chandelier Exit:</strong> Trailing stop at Highest High - (ATR × 3)</li>
+                <li><strong>Position Sizing:</strong> Risk Amount / ATR = Position Size</li>
+                <li><strong>Breakout Filter:</strong> Valid breakout if move > 1.5x ATR</li>
+            </ul>
+            
+            <h3>Best ATR Settings</h3>
+            <ul>
+                <li><strong>Day Trading:</strong> 7-10 period ATR on 5-15 min charts</li>
+                <li><strong>Swing Trading:</strong> 14 period ATR on daily charts (default)</li>
+                <li><strong>Position Trading:</strong> 14-21 period ATR on weekly charts</li>
+            </ul>
+        </div>
+    </div>
+    
+    <footer class="tool-footer">
+        <p>Made with ❤️ by <a href="index.html">BroBillionaire</a> | <a href="tools.html">More Free Tools</a></p>
+    </footer>
+    
+    <script>
+        function calculateATR() {
+            const price = parseFloat(document.getElementById('currentPrice').value) || 100;
+            const atr = parseFloat(document.getElementById('atrValue').value) || 2.5;
+            const multiplier = parseFloat(document.getElementById('atrMultiplier').value) || 2;
+            const direction = document.getElementById('tradeDirection').value;
+            
+            const atrPercent = (atr / price) * 100;
+            const stopDistance = atr * multiplier;
+            
+            let stopLoss, takeProfit;
+            if (direction === 'long') {
+                stopLoss = price - stopDistance;
+                takeProfit = price + stopDistance;
+            } else {
+                stopLoss = price + stopDistance;
+                takeProfit = price - stopDistance;
+            }
+            
+            // Update display
+            document.getElementById('displayATR').textContent = atr.toFixed(2);
+            document.getElementById('displayATRPercent').textContent = atrPercent.toFixed(2) + '% of price';
+            document.getElementById('stopLossLevel').textContent = stopLoss.toFixed(2);
+            document.getElementById('takeProfitLevel').textContent = takeProfit.toFixed(2);
+            document.getElementById('stopDistance').textContent = stopDistance.toFixed(2);
+            document.getElementById('riskPerShare').textContent = '₹' + stopDistance.toFixed(2);
+            
+            // Update multiplier values
+            document.getElementById('mult1').textContent = atr.toFixed(2);
+            document.getElementById('mult15').textContent = (atr * 1.5).toFixed(2);
+            document.getElementById('mult2').textContent = (atr * 2).toFixed(2);
+            document.getElementById('mult3').textContent = (atr * 3).toFixed(2);
+            
+            // Update volatility meter
+            const volatilityFill = document.getElementById('volatilityFill');
+            let volatilityWidth, volatilityClass;
+            
+            if (atrPercent < 1.5) {
+                volatilityWidth = 25;
+                volatilityClass = 'low';
+            } else if (atrPercent < 3) {
+                volatilityWidth = 50;
+                volatilityClass = 'medium';
+            } else if (atrPercent < 5) {
+                volatilityWidth = 75;
+                volatilityClass = 'medium';
+            } else {
+                volatilityWidth = 95;
+                volatilityClass = 'high';
+            }
+            
+            volatilityFill.style.width = volatilityWidth + '%';
+            volatilityFill.className = 'meter-fill ' + volatilityClass;
+            
+            // Update active multiplier
+            document.querySelectorAll('.multiplier-box').forEach(box => box.classList.remove('active'));
+        }
+        
+        function setMultiplier(mult) {
+            document.getElementById('atrMultiplier').value = mult;
+            
+            document.querySelectorAll('.multiplier-box').forEach(box => box.classList.remove('active'));
+            event.target.closest('.multiplier-box').classList.add('active');
+            
+            calculateATR();
+        }
+        
+        // Calculate on input change
+        document.querySelectorAll('input, select').forEach(el => {
+            el.addEventListener('input', calculateATR);
+            el.addEventListener('change', calculateATR);
+        });
+        
+        // Initial calculation
+        calculateATR();
+    </script>
+</body>
+</html>

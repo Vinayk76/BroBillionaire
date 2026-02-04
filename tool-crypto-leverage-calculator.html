@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <title>Crypto Leverage Calculator FREE 2026 - Liquidation Price & PnL | BroBillionaire</title>
+    <meta name="description" content="FREE Crypto Leverage Calculator 2026! Calculate liquidation price, margin, PnL for Bitcoin, Ethereum futures. Binance, Bybit leverage calculator with ROE & risk management.">
+    <meta name="keywords" content="crypto leverage calculator, liquidation price calculator, Bitcoin futures calculator, leverage trading calculator, crypto margin calculator, Binance leverage, Bybit calculator, perpetual futures, crypto risk calculator 2026">
+    <meta name="author" content="BroBillionaire">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://brobillionaire.com/tool-crypto-leverage-calculator.html">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://brobillionaire.com/tool-crypto-leverage-calculator.html">
+    <meta property="og:title" content="FREE Crypto Leverage Calculator - Liquidation Price 2026">
+    <meta property="og:description" content="Calculate leverage, liquidation price, ROE for crypto futures trading!">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FREE Crypto Leverage Calculator">
+    <meta name="twitter:description" content="Calculate crypto liquidation price & leverage PnL instantly!">
+    
+    <meta name="theme-color" content="#C9A227">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Crypto Leverage Calculator - BroBillionaire",
+        "description": "Calculate liquidation price, margin requirements, and PnL for leveraged crypto futures trading.",
+        "url": "https://brobillionaire.com/tool-crypto-leverage-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    }
+    </script>
+    
+    <style>
+        .tool-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px 80px; }
+        
+        .tool-hero {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .tool-hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(247, 147, 26, 0.2) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .tool-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f7931a, #ff9500);
+            color: #000;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        
+        .tool-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+        
+        .tool-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        
+        .warning-banner {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.1));
+            border: 1px solid #ef4444;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .warning-banner i {
+            font-size: 1.5rem;
+            color: #ef4444;
+        }
+        
+        .warning-banner p {
+            color: #fca5a5;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        .calc-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 950px) {
+            .calc-layout { grid-template-columns: 1fr; }
+        }
+        
+        .calc-card {
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px;
+        }
+        
+        .calc-card h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .coin-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .coin-btn {
+            background: #0d0d0d;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 12px 20px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .coin-btn img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+        }
+        
+        .coin-btn:hover, .coin-btn.active {
+            border-color: var(--gold);
+            background: rgba(201, 162, 39, 0.1);
+        }
+        
+        .input-group {
+            margin-bottom: 18px;
+        }
+        
+        .input-label {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .input-field {
+            width: 100%;
+            background: #0d0d0d;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 14px 16px;
+            color: #fff;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.15);
+        }
+        
+        .leverage-slider-container {
+            margin-bottom: 20px;
+        }
+        
+        .leverage-display {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .leverage-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        
+        .leverage-badge {
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .leverage-badge.low { background: #22c55e; color: #000; }
+        .leverage-badge.medium { background: #f59e0b; color: #000; }
+        .leverage-badge.high { background: #ef4444; color: #fff; }
+        
+        .leverage-slider {
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, #22c55e, #f59e0b, #ef4444);
+            border-radius: 4px;
+            outline: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+        
+        .leverage-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            background: var(--gold);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .leverage-presets {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .preset-btn {
+            background: #0d0d0d;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 8px 14px;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .preset-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        
+        .direction-toggle {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .direction-btn {
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            background: #0d0d0d;
+            color: var(--text-secondary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .direction-btn.long.active {
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+        }
+        
+        .direction-btn.short.active {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+        
+        .results-card {
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            padding: 30px;
+        }
+        
+        .position-summary {
+            background: linear-gradient(145deg, #0d0d0d, #1a1a1a);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .position-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+        
+        .position-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .result-box {
+            background: #0d0d0d;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 18px;
+        }
+        
+        .result-box.danger {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.05);
+        }
+        
+        .result-box.success {
+            border-color: #22c55e;
+        }
+        
+        .result-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        
+        .result-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        
+        .result-value.red { color: #ef4444; }
+        .result-value.green { color: #22c55e; }
+        .result-value.gold { color: var(--gold); }
+        
+        .pnl-section {
+            background: #0d0d0d;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .pnl-section h4 {
+            color: var(--gold);
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+        
+        .pnl-row {
+            display: grid;
+            grid-template-columns: 100px 1fr 1fr 1fr;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.85rem;
+        }
+        
+        .pnl-row:last-child { border-bottom: none; }
+        
+        .pnl-row.header {
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+        
+        .pnl-row span:first-child { color: var(--text-secondary); }
+        .pnl-row .profit { color: #22c55e; }
+        .pnl-row .loss { color: #ef4444; }
+        
+        .risk-meter {
+            margin-top: 20px;
+        }
+        
+        .risk-meter h4 {
+            color: var(--gold);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .risk-bar {
+            height: 10px;
+            background: #1a1a1a;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        
+        .risk-fill {
+            height: 100%;
+            border-radius: 5px;
+            transition: all 0.5s ease;
+        }
+        
+        .risk-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+        
+        .info-section {
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 50px;
+        }
+        
+        .info-section h2 {
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+        }
+        
+        .info-section h3 {
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin: 25px 0 15px;
+        }
+        
+        .info-section p, .info-section li {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+        
+        .info-section ul { padding-left: 25px; }
+        
+        .formula-box {
+            background: #0d0d0d;
+            border-left: 4px solid var(--gold);
+            padding: 18px 22px;
+            border-radius: 0 12px 12px 0;
+            margin: 20px 0;
+        }
+        
+        .formula-box code {
+            color: var(--gold);
+            font-size: 0.95rem;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .breadcrumb {
+            padding: 15px 20px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        
+        .breadcrumb a:hover { color: var(--gold); }
+        .breadcrumb a::after { content: '›'; margin-left: 10px; }
+        .breadcrumb span { color: var(--gold); }
+        
+        .tool-footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
+        }
+        
+        .tool-footer a { color: var(--gold); text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <a href="tools.html">Tools</a>
+        <span>Crypto Leverage Calculator</span>
+    </div>
+    
+    <div class="tool-container">
+        <div class="tool-hero">
+            <div class="tool-badge">₿ CRYPTO FUTURES TOOL</div>
+            <h1 class="tool-title">Crypto Leverage Calculator</h1>
+            <p class="tool-subtitle">
+                Calculate liquidation price, margin requirements, PnL, and ROE for leveraged crypto futures trading on Binance, Bybit & more.
+            </p>
+        </div>
+        
+        <div class="warning-banner">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p><strong>High Risk Warning:</strong> Leveraged trading can result in losses greater than your initial deposit. Trade responsibly.</p>
+        </div>
+        
+        <div class="calc-layout">
+            <div class="calc-card">
+                <h2><i class="fab fa-bitcoin"></i> Position Details</h2>
+                
+                <div class="coin-selector">
+                    <button class="coin-btn active" onclick="selectCoin('BTC', 95000)">
+                        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC"> BTC
+                    </button>
+                    <button class="coin-btn" onclick="selectCoin('ETH', 3200)">
+                        <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH"> ETH
+                    </button>
+                    <button class="coin-btn" onclick="selectCoin('SOL', 180)">
+                        <img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="SOL"> SOL
+                    </button>
+                    <button class="coin-btn" onclick="selectCoin('BNB', 620)">
+                        <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png" alt="BNB"> BNB
+                    </button>
+                </div>
+                
+                <div class="direction-toggle">
+                    <button class="direction-btn long active" onclick="setDirection('long')">
+                        <i class="fas fa-arrow-up"></i> Long
+                    </button>
+                    <button class="direction-btn short" onclick="setDirection('short')">
+                        <i class="fas fa-arrow-down"></i> Short
+                    </button>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Entry Price (USDT)</label>
+                    <input type="number" id="entryPrice" class="input-field" value="95000" step="0.01">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Margin / Collateral (USDT)</label>
+                    <input type="number" id="margin" class="input-field" value="1000" step="0.01">
+                </div>
+                
+                <div class="leverage-slider-container">
+                    <div class="leverage-display">
+                        <span class="leverage-value" id="leverageDisplay">10x</span>
+                        <span class="leverage-badge medium" id="leverageBadge">Medium Risk</span>
+                    </div>
+                    <input type="range" id="leverage" class="leverage-slider" min="1" max="125" value="10">
+                    <div class="leverage-presets">
+                        <button class="preset-btn" onclick="setLeverage(2)">2x</button>
+                        <button class="preset-btn" onclick="setLeverage(5)">5x</button>
+                        <button class="preset-btn" onclick="setLeverage(10)">10x</button>
+                        <button class="preset-btn" onclick="setLeverage(20)">20x</button>
+                        <button class="preset-btn" onclick="setLeverage(50)">50x</button>
+                        <button class="preset-btn" onclick="setLeverage(100)">100x</button>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Target/Exit Price (optional)</label>
+                    <input type="number" id="exitPrice" class="input-field" placeholder="Leave empty for table" step="0.01">
+                </div>
+            </div>
+            
+            <div class="results-card">
+                <h2><i class="fas fa-chart-line"></i> Position Analysis</h2>
+                
+                <div class="position-summary">
+                    <div class="position-value" id="positionSize">$10,000</div>
+                    <div class="position-label">Position Size</div>
+                </div>
+                
+                <div class="results-grid">
+                    <div class="result-box danger">
+                        <div class="result-label">Liquidation Price</div>
+                        <div class="result-value red" id="liquidationPrice">$85,500</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-label">Distance to Liquidation</div>
+                        <div class="result-value" id="liqDistance">-10.00%</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-label">Required Margin</div>
+                        <div class="result-value gold" id="requiredMargin">$1,000</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-label">Maintenance Margin</div>
+                        <div class="result-value" id="maintenanceMargin">$50</div>
+                    </div>
+                </div>
+                
+                <div class="pnl-section">
+                    <h4>PnL at Different Price Levels</h4>
+                    <div class="pnl-row header">
+                        <span>Move %</span>
+                        <span>Price</span>
+                        <span>PnL (USDT)</span>
+                        <span>ROE %</span>
+                    </div>
+                    <div id="pnlTable"></div>
+                </div>
+                
+                <div class="risk-meter">
+                    <h4>Risk Level</h4>
+                    <div class="risk-bar">
+                        <div class="risk-fill" id="riskFill" style="width: 40%; background: linear-gradient(90deg, #22c55e, #f59e0b);"></div>
+                    </div>
+                    <div class="risk-labels">
+                        <span>Conservative</span>
+                        <span>Moderate</span>
+                        <span>Aggressive</span>
+                        <span>Degen</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <h2>📖 How Crypto Leverage Works</h2>
+            <p>Leverage allows you to control a larger position with less capital. With 10x leverage, $1,000 controls a $10,000 position. While this amplifies profits, it also amplifies losses.</p>
+            
+            <h3>Key Formulas</h3>
+            <div class="formula-box">
+                <code>Position Size = Margin × Leverage</code><br><br>
+                <code>Long Liquidation = Entry × (1 - 1/Leverage + Maintenance Rate)</code><br><br>
+                <code>Short Liquidation = Entry × (1 + 1/Leverage - Maintenance Rate)</code><br><br>
+                <code>ROE = (PnL / Margin) × 100%</code>
+            </div>
+            
+            <h3>Understanding Liquidation</h3>
+            <ul>
+                <li><strong>Liquidation:</strong> Your position is automatically closed when losses approach your margin</li>
+                <li><strong>Maintenance Margin:</strong> Minimum margin required (0.5% for most pairs)</li>
+                <li><strong>Partial Liquidation:</strong> Some exchanges reduce position instead of full liquidation</li>
+            </ul>
+            
+            <h3>Risk Management Tips</h3>
+            <ul>
+                <li>Never use more than 5-10% of capital on a single leveraged trade</li>
+                <li>Use stop-losses to limit downside before liquidation</li>
+                <li>Lower leverage = more room for price movement</li>
+                <li>High leverage (50x+) is extremely risky for volatile assets</li>
+            </ul>
+            
+            <h3>Leverage Recommendations</h3>
+            <ul>
+                <li><strong>1-3x:</strong> Conservative, suitable for swing trading</li>
+                <li><strong>5-10x:</strong> Moderate risk, common for day trading</li>
+                <li><strong>20-50x:</strong> High risk, only for scalping with tight stops</li>
+                <li><strong>100x+:</strong> Extreme risk, not recommended</li>
+            </ul>
+        </div>
+    </div>
+    
+    <footer class="tool-footer">
+        <p>Made with ❤️ by <a href="index.html">BroBillionaire</a> | <a href="tools.html">More Free Tools</a></p>
+    </footer>
+    
+    <script>
+        let currentDirection = 'long';
+        const maintenanceRate = 0.005; // 0.5%
+        
+        function selectCoin(coin, price) {
+            document.querySelectorAll('.coin-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.coin-btn').classList.add('active');
+            document.getElementById('entryPrice').value = price;
+            calculate();
+        }
+        
+        function setDirection(direction) {
+            currentDirection = direction;
+            document.querySelectorAll('.direction-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`.direction-btn.${direction}`).classList.add('active');
+            calculate();
+        }
+        
+        function setLeverage(lev) {
+            document.getElementById('leverage').value = lev;
+            calculate();
+        }
+        
+        function calculate() {
+            const entryPrice = parseFloat(document.getElementById('entryPrice').value) || 95000;
+            const margin = parseFloat(document.getElementById('margin').value) || 1000;
+            const leverage = parseInt(document.getElementById('leverage').value) || 10;
+            
+            const positionSize = margin * leverage;
+            const quantity = positionSize / entryPrice;
+            
+            // Liquidation price calculation
+            let liquidationPrice;
+            if (currentDirection === 'long') {
+                liquidationPrice = entryPrice * (1 - (1 / leverage) + maintenanceRate);
+            } else {
+                liquidationPrice = entryPrice * (1 + (1 / leverage) - maintenanceRate);
+            }
+            
+            const liqDistance = ((liquidationPrice - entryPrice) / entryPrice) * 100;
+            const maintenanceMargin = positionSize * maintenanceRate;
+            
+            // Update display
+            document.getElementById('leverageDisplay').textContent = leverage + 'x';
+            document.getElementById('positionSize').textContent = '$' + positionSize.toLocaleString('en-US', {maximumFractionDigits: 2});
+            document.getElementById('liquidationPrice').textContent = '$' + liquidationPrice.toLocaleString('en-US', {maximumFractionDigits: 2});
+            document.getElementById('liqDistance').textContent = liqDistance.toFixed(2) + '%';
+            document.getElementById('requiredMargin').textContent = '$' + margin.toLocaleString('en-US', {maximumFractionDigits: 2});
+            document.getElementById('maintenanceMargin').textContent = '$' + maintenanceMargin.toLocaleString('en-US', {maximumFractionDigits: 2});
+            
+            // Update leverage badge
+            const badge = document.getElementById('leverageBadge');
+            if (leverage <= 5) {
+                badge.textContent = 'Low Risk';
+                badge.className = 'leverage-badge low';
+            } else if (leverage <= 20) {
+                badge.textContent = 'Medium Risk';
+                badge.className = 'leverage-badge medium';
+            } else {
+                badge.textContent = 'High Risk';
+                badge.className = 'leverage-badge high';
+            }
+            
+            // Update risk meter
+            const riskFill = document.getElementById('riskFill');
+            const riskPercent = Math.min((leverage / 125) * 100, 100);
+            riskFill.style.width = riskPercent + '%';
+            
+            if (leverage <= 10) {
+                riskFill.style.background = 'linear-gradient(90deg, #22c55e, #4ade80)';
+            } else if (leverage <= 25) {
+                riskFill.style.background = 'linear-gradient(90deg, #22c55e, #f59e0b)';
+            } else if (leverage <= 50) {
+                riskFill.style.background = 'linear-gradient(90deg, #f59e0b, #ef4444)';
+            } else {
+                riskFill.style.background = 'linear-gradient(90deg, #ef4444, #dc2626)';
+            }
+            
+            // Generate PnL table
+            const moves = currentDirection === 'long' 
+                ? [10, 5, 2, 1, -1, -2, -5]
+                : [-10, -5, -2, -1, 1, 2, 5];
+            
+            let tableHTML = '';
+            moves.forEach(move => {
+                const newPrice = entryPrice * (1 + move/100);
+                let pnl;
+                if (currentDirection === 'long') {
+                    pnl = (newPrice - entryPrice) * quantity;
+                } else {
+                    pnl = (entryPrice - newPrice) * quantity;
+                }
+                const roe = (pnl / margin) * 100;
+                
+                const pnlClass = pnl >= 0 ? 'profit' : 'loss';
+                const roeClass = roe >= 0 ? 'profit' : 'loss';
+                
+                tableHTML += `
+                    <div class="pnl-row">
+                        <span>${move > 0 ? '+' : ''}${move}%</span>
+                        <span>$${newPrice.toLocaleString('en-US', {maximumFractionDigits: 2})}</span>
+                        <span class="${pnlClass}">${pnl >= 0 ? '+' : ''}$${pnl.toFixed(2)}</span>
+                        <span class="${roeClass}">${roe >= 0 ? '+' : ''}${roe.toFixed(1)}%</span>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('pnlTable').innerHTML = tableHTML;
+        }
+        
+        // Event listeners
+        document.querySelectorAll('input').forEach(el => {
+            el.addEventListener('input', calculate);
+        });
+        
+        // Initial calculation
+        calculate();
+    </script>
+</body>
+</html>
