@@ -8,196 +8,170 @@
 
     // Common header HTML template
     const headerHTML = `
-    <!-- Common Navigation Header -->
-    <nav class="navbar article-navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <a href="index.html" style="display: flex; align-items: center; text-decoration: none;">
-                    <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
-                    <span class="logo-text">BroBillionaire</span>
-                </a>
+    <!-- Article Navigation -->
+    <nav class="article-nav">
+        <div class="article-nav-container">
+            <a href="articles.html" class="back-link" style="margin-right:15px;"><i class="fas fa-th-large"></i><span>All Articles</span></a>
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Home</span>
+            </a>
+            <div class="article-nav-center">
+                <a href="index.html" style="display: inline-flex; align-items: center;"><img src="logo.jpg" alt="BroBillionaire" class="nav-logo-small"></a>
             </div>
-            <div class="nav-links">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="articles.html" class="nav-link">All Articles</a>
-                <a href="tools.html" class="nav-link">Tools</a>
-                <a href="about.html" class="nav-link">About</a>
-                <a href="contact.html" class="nav-link">Contact</a>
-            </div>
-            <div class="nav-right">
-                <button class="share-btn header-share-btn" onclick="shareArticle()" title="Share Article">
+            <div class="article-share">
+                <button class="share-btn" onclick="shareArticle()">
                     <i class="fas fa-share-alt"></i>
-                </button>
-                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
                 </button>
             </div>
         </div>
+        <div class="reading-progress-bar"></div>
     </nav>
-    <div class="mobile-nav-dropdown" id="mobileNavDropdown">
-        <a href="index.html">Home</a>
-        <a href="articles.html">All Articles</a>
-        <a href="tools.html">Tools</a>
-        <a href="viral-tools-hub.html">Viral Tools</a>
-        <a href="community.html">Community</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-    </div>
     `;
 
     // CSS for the common header (article-specific styles)
     const headerStyles = `
     <style id="common-header-styles">
-        /* Article Navbar Styles */
-        .article-navbar {
+        /* Article Navigation Styles */
+        .article-nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            z-index: 1000;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
             border-bottom: 1px solid rgba(201, 162, 39, 0.15);
+            z-index: 1000;
             padding: 0;
             transition: all 0.3s ease;
         }
-
-        .article-navbar .nav-container {
+        
+        .article-nav.scrolled {
+            background: rgba(5, 5, 5, 0.98);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .article-nav-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 12px 24px;
+            padding: 15px 30px;
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
-
-        .article-navbar .logo {
-            display: flex;
+        
+        .back-link {
+            display: inline-flex;
             align-items: center;
-            gap: 10px;
-        }
-
-        .article-navbar .logo-img {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            object-fit: cover;
-        }
-
-        .article-navbar .logo-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #C9A227;
-            letter-spacing: 0.5px;
-        }
-
-        .article-navbar .nav-links {
-            display: flex;
-            gap: 32px;
-            align-items: center;
-        }
-
-        .article-navbar .nav-link {
-            color: rgba(255, 255, 255, 0.85);
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 500;
-            letter-spacing: 0.3px;
-            transition: color 0.3s ease;
-            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
-
-        .article-navbar .nav-link:hover {
+        
+        .back-link:hover {
             color: #C9A227;
+            background: rgba(201, 162, 39, 0.1);
+            border-color: rgba(201, 162, 39, 0.3);
+            transform: translateX(-3px);
         }
-
-        .article-navbar .nav-link::after {
-            content: '';
+        
+        .article-nav-center {
             position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #C9A227, #E8D48B);
-            transition: width 0.3s ease;
+            left: 50%;
+            transform: translateX(-50%);
         }
-
-        .article-navbar .nav-link:hover::after {
-            width: 100%;
+        
+        .nav-logo-small {
+            height: 40px;
+            width: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
         }
-
-        .article-navbar .nav-right {
+        
+        .nav-logo-small:hover {
+            transform: scale(1.05);
+        }
+        
+        .article-share {
             display: flex;
             align-items: center;
-            gap: 16px;
         }
-
-        .article-navbar .header-share-btn {
-            background: rgba(201, 162, 39, 0.15);
+        
+        .share-btn {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.15) 0%, rgba(201, 162, 39, 0.05) 100%);
             border: 1px solid rgba(201, 162, 39, 0.3);
             color: #C9A227;
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .share-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(201, 162, 39, 0.3) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .share-btn:hover {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.3) 0%, rgba(201, 162, 39, 0.1) 100%);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 25px rgba(201, 162, 39, 0.4);
+        }
+        
+        .share-btn:hover::before {
+            opacity: 1;
         }
 
-        .article-navbar .header-share-btn:hover {
-            background: rgba(201, 162, 39, 0.25);
-            border-color: #C9A227;
-            transform: scale(1.05);
+        /* Reading Progress Bar */
+        .reading-progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #C9A227, #FFD700, #C9A227);
+            background-size: 200% 100%;
+            animation: shimmer 2s ease-in-out infinite;
+            transition: width 0.1s ease;
+            box-shadow: 0 0 10px rgba(201, 162, 39, 0.5);
         }
-
-        .article-navbar .mobile-menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 5px;
-        }
-
-        .article-navbar .mobile-menu-toggle span {
-            width: 24px;
-            height: 2px;
-            background: #C9A227;
-            transition: all 0.3s ease;
+        
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
         }
 
         /* Mobile Responsive */
-        @media (max-width: 900px) {
-            .article-navbar .nav-links {
+        @media (max-width: 768px) {
+            .article-nav-container {
+                padding: 12px 16px;
+            }
+            
+            .back-link span {
                 display: none;
             }
-
-            .article-navbar .mobile-menu-toggle {
-                display: flex;
+            
+            .back-link {
+                padding: 8px 12px;
             }
-        }
-
-        @media (max-width: 480px) {
-            .article-navbar .logo-text {
-                font-size: 1.1rem;
-            }
-
-            .article-navbar .nav-container {
-                padding: 10px 16px;
-            }
-        }
-
-        /* Scrolled state */
-        .article-navbar.scrolled {
-            background: rgba(5, 5, 5, 0.98);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
         /* Adjust body padding for fixed header */
@@ -206,12 +180,7 @@
         }
 
         body.has-common-header .reading-progress {
-            top: 64px;
-        }
-
-        /* Hide old article-nav when common header is present */
-        body.has-common-header .article-nav {
-            display: none !important;
+            top: 70px;
         }
     </style>
     `;
@@ -220,6 +189,11 @@
     function initCommonHeader() {
         // Check if we're on an article page
         if (!document.body.classList.contains('article-page')) {
+            return;
+        }
+
+        // Check if article-nav already exists (don't duplicate)
+        if (document.querySelector('.article-nav')) {
             return;
         }
 
@@ -233,7 +207,7 @@
         document.body.classList.add('has-common-header');
 
         // Handle scroll effect
-        const navbar = document.querySelector('.article-navbar');
+        const navbar = document.querySelector('.article-nav');
         if (navbar) {
             window.addEventListener('scroll', function() {
                 if (window.scrollY > 50) {
@@ -242,17 +216,18 @@
                     navbar.classList.remove('scrolled');
                 }
             });
-        }
-    }
 
-    // Mobile menu toggle function (if not already defined)
-    if (typeof window.toggleMobileMenu !== 'function') {
-        window.toggleMobileMenu = function() {
-            const dropdown = document.getElementById('mobileNavDropdown');
-            if (dropdown) {
-                dropdown.classList.toggle('active');
+            // Update reading progress bar
+            const progressBar = navbar.querySelector('.reading-progress-bar');
+            if (progressBar) {
+                window.addEventListener('scroll', function() {
+                    const scrollTop = window.scrollY;
+                    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                    const scrollPercent = (scrollTop / docHeight) * 100;
+                    progressBar.style.width = scrollPercent + '%';
+                });
             }
-        };
+        }
     }
 
     // Share article function (if not already defined)
