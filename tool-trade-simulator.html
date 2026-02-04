@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Trade Simulator Monte Carlo 2026 - Test Your Trading Strategy Probability | BroBillionaire</title>
+    <meta name="description" content="FREE Monte Carlo Trading Simulator 2026! Test your trading strategy with 1000+ simulations. See probability of profit, max drawdown, and risk of ruin. Best trading simulator for F&O, options, and day traders India.">
+    <meta name="keywords" content="monte carlo trading simulator, trading probability calculator, risk of ruin calculator, trading strategy tester, win rate simulator, trading backtest, day trading simulator India 2026, options trading simulator">
+    <meta name="author" content="BroBillionaire">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://brobillionaire.com/tool-trade-simulator.html">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://brobillionaire.com/tool-trade-simulator.html">
+    <meta property="og:title" content="Monte Carlo Trade Simulator - Test Your Edge">
+    <meta property="og:description" content="Run 1000+ simulations to test if your trading strategy will survive. See probability of profit and ruin.">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --gold: #C9A227;
+            --bg-primary: #0d0d0d;
+            --bg-secondary: #1a1a1a;
+            --bg-card: #161616;
+            --text-primary: #fff;
+            --text-secondary: #999;
+            --border-color: #2a2a2a;
+            --green: #10b981;
+            --red: #ef4444;
+            --blue: #3b82f6;
+            --purple: #8b5cf6;
+            --cyan: #06b6d4;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-top: 140px;
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-img { width: 40px; height: 40px; border-radius: 10px; }
+        .logo-text { font-size: 1.25rem; font-weight: 600; color: var(--text-primary); }
+        .nav-links { display: flex; gap: 35px; }
+        .nav-link { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; }
+        .nav-link:hover, .nav-link.active { color: var(--gold); }
+        
+        .breadcrumb-nav {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            padding: 12px 0;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.85rem;
+        }
+        
+        .breadcrumb-container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+        .breadcrumb-nav a, .breadcrumb-nav span { color: rgba(255,255,255,0.6); text-decoration: none; padding: 0 8px; }
+        .breadcrumb-nav a:hover { color: var(--gold); }
+        .breadcrumb-nav span { color: var(--gold); }
+        
+        .tool-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px 80px; }
+        
+        .tool-hero { text-align: center; margin-bottom: 50px; position: relative; }
+        
+        .tool-hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .sim-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(6, 182, 212, 0.1));
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: var(--cyan);
+            margin-bottom: 20px;
+        }
+        
+        .tool-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, var(--cyan) 50%, #fff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+        
+        .tool-subtitle { color: var(--text-secondary); font-size: 1.1rem; max-width: 700px; margin: 0 auto; }
+        
+        .input-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .input-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--cyan), #22d3ee, var(--cyan));
+        }
+        
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .input-group { display: flex; flex-direction: column; gap: 8px; }
+        .input-label { font-weight: 600; color: var(--text-primary); display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
+        .input-label i { color: var(--cyan); font-size: 1rem; }
+        
+        .input-field {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 14px 18px;
+            font-size: 1rem;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .input-field:focus { outline: none; border-color: var(--cyan); }
+        .input-hint { font-size: 0.75rem; color: var(--text-secondary); }
+        
+        .sim-controls {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .sim-btn {
+            padding: 16px 35px;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .sim-btn.primary {
+            background: linear-gradient(135deg, var(--cyan), #0891b2);
+            color: white;
+        }
+        
+        .sim-btn.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(6, 182, 212, 0.3);
+        }
+        
+        .sim-btn.secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+        
+        .results-section { display: none; margin-top: 40px; }
+        .results-section.show { display: block; animation: fadeInUp 0.6s ease; }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .verdict-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .verdict-card {
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .verdict-card.profit {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05));
+            border: 2px solid var(--green);
+        }
+        
+        .verdict-card.loss {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.05));
+            border: 2px solid var(--red);
+        }
+        
+        .verdict-card.neutral {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+        }
+        
+        .verdict-icon { font-size: 2.5rem; margin-bottom: 15px; }
+        .verdict-value { font-size: 2rem; font-weight: 700; margin-bottom: 5px; }
+        .verdict-card.profit .verdict-value { color: var(--green); }
+        .verdict-card.loss .verdict-value { color: var(--red); }
+        .verdict-card.neutral .verdict-value { color: var(--cyan); }
+        .verdict-label { font-size: 0.9rem; color: var(--text-secondary); }
+        
+        .simulation-visual { margin-bottom: 40px; }
+        .section-header { text-align: center; margin-bottom: 30px; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--cyan); margin-bottom: 10px; }
+        .section-subtitle { color: var(--text-secondary); }
+        
+        .chart-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px;
+            height: 400px;
+            position: relative;
+        }
+        
+        .sim-status {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .sim-status.running { background: rgba(6, 182, 212, 0.2); color: var(--cyan); }
+        .sim-status.complete { background: rgba(16, 185, 129, 0.2); color: var(--green); }
+        
+        .distribution-section { margin-bottom: 40px; }
+        
+        .distribution-chart {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px;
+            height: 300px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .stat-icon { font-size: 1.5rem; margin-bottom: 10px; }
+        .stat-value { font-size: 1.5rem; font-weight: 700; color: var(--cyan); margin-bottom: 5px; }
+        .stat-label { font-size: 0.85rem; color: var(--text-secondary); }
+        
+        .ruin-meter-section { margin-bottom: 40px; }
+        
+        .ruin-meter {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .ruin-title { font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 20px; }
+        
+        .ruin-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .ruin-value.safe { color: var(--green); }
+        .ruin-value.warning { color: #fbbf24; }
+        .ruin-value.danger { color: var(--red); }
+        
+        .ruin-bar {
+            max-width: 500px;
+            margin: 20px auto;
+            height: 15px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .ruin-bar-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+        
+        .ruin-bar-fill.safe { background: linear-gradient(90deg, var(--green), #34d399); }
+        .ruin-bar-fill.warning { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+        .ruin-bar-fill.danger { background: linear-gradient(90deg, var(--red), #f87171); }
+        
+        .ruin-scale {
+            display: flex;
+            justify-content: space-between;
+            max-width: 500px;
+            margin: 10px auto 0;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .insights-section { margin-bottom: 40px; }
+        
+        .insight-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .insight-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+        }
+        
+        .insight-card.good { border-left: 4px solid var(--green); }
+        .insight-card.bad { border-left: 4px solid var(--red); }
+        .insight-card.neutral { border-left: 4px solid var(--cyan); }
+        
+        .insight-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .insight-card.good .insight-title { color: var(--green); }
+        .insight-card.bad .insight-title { color: var(--red); }
+        .insight-card.neutral .insight-title { color: var(--cyan); }
+        .insight-text { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+        
+        .tool-footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .tool-footer a { color: var(--gold); text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            body { padding-top: 120px; }
+            .input-section { padding: 25px; }
+            .ruin-value { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                <span class="logo-text">BroBillionaire</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="articles.html" class="nav-link">Articles</a>
+                <a href="tools.html" class="nav-link active">Tools</a>
+                <a href="about.html" class="nav-link">About</a>
+            </div>
+        </div>
+    </nav>
+    
+    <nav class="breadcrumb-nav">
+        <div class="breadcrumb-container">
+            <a href="index.html">Home</a> /
+            <a href="tools.html">Tools</a> /
+            <span>Trade Simulator</span>
+        </div>
+    </nav>
+
+    <div class="tool-container">
+        
+        <div class="tool-hero">
+            <div class="sim-badge">
+                <i class="fas fa-dice"></i>
+                Monte Carlo Simulation
+            </div>
+            <h1 class="tool-title">🎲 Trade Simulator</h1>
+            <p class="tool-subtitle">
+                Will your trading strategy survive? Run 1,000 simulations based on your win rate and risk/reward to see probability of profit, max drawdown, and risk of ruin.
+            </p>
+        </div>
+        
+        <div class="input-section">
+            <div class="input-grid">
+                <div class="input-group">
+                    <label class="input-label">
+                        <i class="fas fa-wallet"></i>
+                        Starting Capital
+                    </label>
+                    <input type="text" class="input-field" id="startingCapital" placeholder="₹ e.g., 1,00,000" value="">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">
+                        <i class="fas fa-bullseye"></i>
+                        Win Rate (%)
+                    </label>
+                    <input type="number" class="input-field" id="winRate" placeholder="e.g., 45" min="1" max="99" value="45">
+                    <span class="input-hint">Your historical win percentage</span>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">
+                        <i class="fas fa-chart-line"></i>
+                        Avg Win (% of capital)
+                    </label>
+                    <input type="number" class="input-field" id="avgWin" placeholder="e.g., 3" step="0.1" value="3">
+                    <span class="input-hint">Average profit per winning trade</span>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">
+                        <i class="fas fa-chart-line-down"></i>
+                        Avg Loss (% of capital)
+                    </label>
+                    <input type="number" class="input-field" id="avgLoss" placeholder="e.g., 2" step="0.1" value="2">
+                    <span class="input-hint">Average loss per losing trade</span>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">
+                        <i class="fas fa-hashtag"></i>
+                        Trades per Month
+                    </label>
+                    <input type="number" class="input-field" id="tradesPerMonth" placeholder="e.g., 20" min="1" value="20">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">
+                        <i class="fas fa-calendar"></i>
+                        Simulation Period (Months)
+                    </label>
+                    <input type="number" class="input-field" id="simMonths" placeholder="e.g., 12" min="1" max="60" value="12">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">
+                        <i class="fas fa-skull"></i>
+                        Ruin Level (% of capital)
+                    </label>
+                    <input type="number" class="input-field" id="ruinLevel" placeholder="e.g., 50" min="10" max="100" value="50">
+                    <span class="input-hint">Consider "ruined" if capital drops to this %</span>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">
+                        <i class="fas fa-play"></i>
+                        Number of Simulations
+                    </label>
+                    <input type="number" class="input-field" id="numSimulations" placeholder="e.g., 1000" min="100" max="5000" value="1000">
+                </div>
+            </div>
+            
+            <div class="sim-controls">
+                <button class="sim-btn primary" onclick="runSimulation()">
+                    <i class="fas fa-play"></i>
+                    Run 1,000 Simulations
+                </button>
+                <button class="sim-btn secondary" onclick="resetSimulation()">
+                    <i class="fas fa-redo"></i>
+                    Reset
+                </button>
+            </div>
+        </div>
+        
+        <div class="results-section" id="resultsSection">
+            
+            <div class="verdict-grid">
+                <div class="verdict-card profit" id="profitCard">
+                    <div class="verdict-icon">💰</div>
+                    <div class="verdict-value" id="profitPercent">0%</div>
+                    <div class="verdict-label">Profitable Simulations</div>
+                </div>
+                <div class="verdict-card loss" id="lossCard">
+                    <div class="verdict-icon">📉</div>
+                    <div class="verdict-value" id="ruinPercent">0%</div>
+                    <div class="verdict-label">Hit Ruin Level</div>
+                </div>
+                <div class="verdict-card neutral">
+                    <div class="verdict-icon">📊</div>
+                    <div class="verdict-value" id="avgReturn">0%</div>
+                    <div class="verdict-label">Avg Final Return</div>
+                </div>
+                <div class="verdict-card neutral">
+                    <div class="verdict-icon">🎯</div>
+                    <div class="verdict-value" id="expectancy">0</div>
+                    <div class="verdict-label">Expectancy (R)</div>
+                </div>
+            </div>
+            
+            <div class="simulation-visual">
+                <div class="section-header">
+                    <h2 class="section-title">📈 Equity Curves (Sample of 50)</h2>
+                    <p class="section-subtitle">Each line is one possible outcome of your trading</p>
+                </div>
+                <div class="chart-container">
+                    <span class="sim-status complete" id="simStatus">1000 simulations complete</span>
+                    <canvas id="equityChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="distribution-section">
+                <div class="section-header">
+                    <h2 class="section-title">📊 Final Return Distribution</h2>
+                    <p class="section-subtitle">How your returns are distributed across all simulations</p>
+                </div>
+                <div class="distribution-chart">
+                    <canvas id="distributionChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📈</div>
+                    <div class="stat-value" id="medianReturn">0%</div>
+                    <div class="stat-label">Median Return</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-value" id="bestCase">0%</div>
+                    <div class="stat-label">Best Case (95th %ile)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⚠️</div>
+                    <div class="stat-value" id="worstCase">0%</div>
+                    <div class="stat-label">Worst Case (5th %ile)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📉</div>
+                    <div class="stat-value" id="maxDrawdown">0%</div>
+                    <div class="stat-label">Avg Max Drawdown</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🎲</div>
+                    <div class="stat-value" id="winStreak">0</div>
+                    <div class="stat-label">Avg Longest Win Streak</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💀</div>
+                    <div class="stat-value" id="loseStreak">0</div>
+                    <div class="stat-label">Avg Longest Lose Streak</div>
+                </div>
+            </div>
+            
+            <div class="ruin-meter-section">
+                <div class="section-header">
+                    <h2 class="section-title">☠️ Risk of Ruin</h2>
+                    <p class="section-subtitle">Probability of hitting your ruin level</p>
+                </div>
+                
+                <div class="ruin-meter">
+                    <div class="ruin-title">Risk of Ruin</div>
+                    <div class="ruin-value" id="ruinRisk">0%</div>
+                    <div class="ruin-bar">
+                        <div class="ruin-bar-fill" id="ruinBarFill" style="width: 0%"></div>
+                    </div>
+                    <div class="ruin-scale">
+                        <span>0% Safe ✅</span>
+                        <span>25%</span>
+                        <span>50% Risky ⚠️</span>
+                        <span>75%</span>
+                        <span>100% ☠️</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="insights-section">
+                <div class="section-header">
+                    <h2 class="section-title">💡 Insights & Recommendations</h2>
+                </div>
+                
+                <div class="insight-cards" id="insightCards">
+                    <!-- Will be populated by JS -->
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+    
+    <footer class="tool-footer">
+        <p>Made with 🎲 by <a href="index.html">BroBillionaire</a> • Know your edge before you trade</p>
+        <p style="margin-top: 10px;">
+            <a href="tools.html">More Tools</a> • 
+            <a href="articles.html">Read Articles</a>
+        </p>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+        let equityChart = null;
+        let distributionChart = null;
+        
+        function formatIndianCurrency(num) {
+            if (num >= 10000000) return '₹' + (num / 10000000).toFixed(2) + ' Cr';
+            if (num >= 100000) return '₹' + (num / 100000).toFixed(2) + ' L';
+            return '₹' + Math.round(num).toLocaleString('en-IN');
+        }
+        
+        function parseIndianCurrency(str) {
+            if (!str) return 0;
+            return parseFloat(str.replace(/[₹,\s]/g, '')) || 0;
+        }
+        
+        document.getElementById('startingCapital').addEventListener('blur', function() {
+            const value = parseIndianCurrency(this.value);
+            if (value > 0) this.value = '₹' + value.toLocaleString('en-IN');
+        });
+        
+        function runSimulation() {
+            const startingCapital = parseIndianCurrency(document.getElementById('startingCapital').value) || 100000;
+            const winRate = parseFloat(document.getElementById('winRate').value) / 100 || 0.45;
+            const avgWin = parseFloat(document.getElementById('avgWin').value) / 100 || 0.03;
+            const avgLoss = parseFloat(document.getElementById('avgLoss').value) / 100 || 0.02;
+            const tradesPerMonth = parseInt(document.getElementById('tradesPerMonth').value) || 20;
+            const simMonths = parseInt(document.getElementById('simMonths').value) || 12;
+            const ruinLevel = parseFloat(document.getElementById('ruinLevel').value) / 100 || 0.5;
+            const numSimulations = parseInt(document.getElementById('numSimulations').value) || 1000;
+            
+            const totalTrades = tradesPerMonth * simMonths;
+            const ruinThreshold = startingCapital * ruinLevel;
+            
+            // Run simulations
+            const allResults = [];
+            const allCurves = [];
+            let profitCount = 0;
+            let ruinCount = 0;
+            let totalMaxDrawdown = 0;
+            let totalWinStreak = 0;
+            let totalLoseStreak = 0;
+            
+            for (let sim = 0; sim < numSimulations; sim++) {
+                let capital = startingCapital;
+                let peak = capital;
+                let maxDrawdown = 0;
+                let currentWinStreak = 0;
+                let currentLoseStreak = 0;
+                let maxWinStreak = 0;
+                let maxLoseStreak = 0;
+                let hitRuin = false;
+                
+                const curve = [capital];
+                
+                for (let trade = 0; trade < totalTrades; trade++) {
+                    if (capital <= ruinThreshold) {
+                        hitRuin = true;
+                        break;
+                    }
+                    
+                    const isWin = Math.random() < winRate;
+                    
+                    if (isWin) {
+                        capital *= (1 + avgWin);
+                        currentWinStreak++;
+                        currentLoseStreak = 0;
+                        maxWinStreak = Math.max(maxWinStreak, currentWinStreak);
+                    } else {
+                        capital *= (1 - avgLoss);
+                        currentLoseStreak++;
+                        currentWinStreak = 0;
+                        maxLoseStreak = Math.max(maxLoseStreak, currentLoseStreak);
+                    }
+                    
+                    if (capital > peak) peak = capital;
+                    const drawdown = (peak - capital) / peak;
+                    maxDrawdown = Math.max(maxDrawdown, drawdown);
+                    
+                    curve.push(capital);
+                }
+                
+                const finalReturn = ((capital - startingCapital) / startingCapital) * 100;
+                allResults.push(finalReturn);
+                allCurves.push(curve);
+                
+                if (capital > startingCapital) profitCount++;
+                if (hitRuin) ruinCount++;
+                
+                totalMaxDrawdown += maxDrawdown;
+                totalWinStreak += maxWinStreak;
+                totalLoseStreak += maxLoseStreak;
+            }
+            
+            // Calculate statistics
+            allResults.sort((a, b) => a - b);
+            
+            const profitPercent = (profitCount / numSimulations) * 100;
+            const ruinPercent = (ruinCount / numSimulations) * 100;
+            const avgReturn = allResults.reduce((a, b) => a + b, 0) / numSimulations;
+            const medianReturn = allResults[Math.floor(numSimulations / 2)];
+            const percentile5 = allResults[Math.floor(numSimulations * 0.05)];
+            const percentile95 = allResults[Math.floor(numSimulations * 0.95)];
+            const avgMaxDrawdown = (totalMaxDrawdown / numSimulations) * 100;
+            const avgWinStreak = Math.round(totalWinStreak / numSimulations);
+            const avgLoseStreak = Math.round(totalLoseStreak / numSimulations);
+            
+            // Expectancy
+            const expectancy = (winRate * avgWin) - ((1 - winRate) * avgLoss);
+            const expectancyR = expectancy / avgLoss;
+            
+            // Display results
+            document.getElementById('resultsSection').classList.add('show');
+            document.getElementById('profitPercent').textContent = profitPercent.toFixed(1) + '%';
+            document.getElementById('ruinPercent').textContent = ruinPercent.toFixed(1) + '%';
+            document.getElementById('avgReturn').textContent = (avgReturn >= 0 ? '+' : '') + avgReturn.toFixed(1) + '%';
+            document.getElementById('expectancy').textContent = expectancyR.toFixed(2) + 'R';
+            
+            document.getElementById('medianReturn').textContent = (medianReturn >= 0 ? '+' : '') + medianReturn.toFixed(1) + '%';
+            document.getElementById('bestCase').textContent = '+' + percentile95.toFixed(1) + '%';
+            document.getElementById('worstCase').textContent = percentile5.toFixed(1) + '%';
+            document.getElementById('maxDrawdown').textContent = avgMaxDrawdown.toFixed(1) + '%';
+            document.getElementById('winStreak').textContent = avgWinStreak;
+            document.getElementById('loseStreak').textContent = avgLoseStreak;
+            
+            // Ruin meter
+            const ruinRisk = ruinPercent;
+            document.getElementById('ruinRisk').textContent = ruinRisk.toFixed(1) + '%';
+            
+            const ruinBar = document.getElementById('ruinBarFill');
+            ruinBar.style.width = ruinRisk + '%';
+            ruinBar.className = 'ruin-bar-fill';
+            
+            const ruinValue = document.getElementById('ruinRisk');
+            ruinValue.className = 'ruin-value';
+            
+            if (ruinRisk < 10) {
+                ruinBar.classList.add('safe');
+                ruinValue.classList.add('safe');
+            } else if (ruinRisk < 30) {
+                ruinBar.classList.add('warning');
+                ruinValue.classList.add('warning');
+            } else {
+                ruinBar.classList.add('danger');
+                ruinValue.classList.add('danger');
+            }
+            
+            // Charts
+            renderEquityChart(allCurves.slice(0, 50), totalTrades);
+            renderDistributionChart(allResults);
+            
+            // Insights
+            generateInsights(profitPercent, ruinPercent, expectancyR, avgMaxDrawdown, winRate * 100, avgWin / avgLoss);
+            
+            document.getElementById('simStatus').textContent = numSimulations + ' simulations complete';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        function renderEquityChart(curves, totalTrades) {
+            const ctx = document.getElementById('equityChart').getContext('2d');
+            
+            if (equityChart) equityChart.destroy();
+            
+            const labels = [];
+            for (let i = 0; i <= totalTrades; i++) {
+                labels.push(i);
+            }
+            
+            const datasets = curves.map((curve, i) => {
+                const finalReturn = curve[curve.length - 1] > curve[0];
+                return {
+                    label: `Sim ${i + 1}`,
+                    data: curve,
+                    borderColor: finalReturn ? 'rgba(16, 185, 129, 0.3)' : 'rgba(239, 68, 68, 0.3)',
+                    borderWidth: 1,
+                    fill: false,
+                    tension: 0.1,
+                    pointRadius: 0
+                };
+            });
+            
+            equityChart = new Chart(ctx, {
+                type: 'line',
+                data: { labels, datasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: 'rgba(255,255,255,0.05)' },
+                            ticks: { color: '#666', maxTicksLimit: 10 },
+                            title: { display: true, text: 'Number of Trades', color: '#666' }
+                        },
+                        y: {
+                            grid: { color: 'rgba(255,255,255,0.05)' },
+                            ticks: { color: '#666', callback: v => formatIndianCurrency(v) },
+                            title: { display: true, text: 'Capital', color: '#666' }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function renderDistributionChart(results) {
+            const ctx = document.getElementById('distributionChart').getContext('2d');
+            
+            if (distributionChart) distributionChart.destroy();
+            
+            // Create histogram bins
+            const min = Math.min(...results);
+            const max = Math.max(...results);
+            const numBins = 30;
+            const binWidth = (max - min) / numBins;
+            
+            const bins = [];
+            const labels = [];
+            
+            for (let i = 0; i < numBins; i++) {
+                const binStart = min + i * binWidth;
+                const binEnd = binStart + binWidth;
+                const count = results.filter(r => r >= binStart && r < binEnd).length;
+                bins.push(count);
+                labels.push(binStart.toFixed(0) + '%');
+            }
+            
+            distributionChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Frequency',
+                        data: bins,
+                        backgroundColor: bins.map((_, i) => {
+                            const value = min + i * binWidth;
+                            return value >= 0 ? 'rgba(16, 185, 129, 0.6)' : 'rgba(239, 68, 68, 0.6)';
+                        }),
+                        borderColor: bins.map((_, i) => {
+                            const value = min + i * binWidth;
+                            return value >= 0 ? 'rgba(16, 185, 129, 1)' : 'rgba(239, 68, 68, 1)';
+                        }),
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: '#666', maxTicksLimit: 10 }
+                        },
+                        y: {
+                            grid: { color: 'rgba(255,255,255,0.05)' },
+                            ticks: { color: '#666' }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function generateInsights(profitPercent, ruinPercent, expectancy, maxDrawdown, winRate, rrRatio) {
+            const insights = [];
+            
+            if (expectancy > 0) {
+                insights.push({
+                    type: 'good',
+                    title: '✅ Positive Expectancy',
+                    text: `Your strategy has positive expectancy (${expectancy.toFixed(2)}R). This means over a large number of trades, you're expected to make money. Keep trading!`
+                });
+            } else {
+                insights.push({
+                    type: 'bad',
+                    title: '❌ Negative Expectancy',
+                    text: `Your strategy has negative expectancy (${expectancy.toFixed(2)}R). Over time, you will lose money. You need to either improve win rate or risk/reward ratio.`
+                });
+            }
+            
+            if (ruinPercent > 30) {
+                insights.push({
+                    type: 'bad',
+                    title: '⚠️ High Risk of Ruin',
+                    text: `${ruinPercent.toFixed(1)}% of simulations hit ruin level. This is dangerously high. Consider reducing position size or improving your edge.`
+                });
+            } else if (ruinPercent > 10) {
+                insights.push({
+                    type: 'neutral',
+                    title: '📊 Moderate Risk',
+                    text: `${ruinPercent.toFixed(1)}% risk of ruin is acceptable but could be improved. Consider reducing position size by 20-30%.`
+                });
+            } else {
+                insights.push({
+                    type: 'good',
+                    title: '🛡️ Low Risk of Ruin',
+                    text: `Only ${ruinPercent.toFixed(1)}% risk of ruin. Your position sizing is conservative and sustainable.`
+                });
+            }
+            
+            if (maxDrawdown > 40) {
+                insights.push({
+                    type: 'bad',
+                    title: '📉 Large Drawdowns Expected',
+                    text: `Average max drawdown of ${maxDrawdown.toFixed(1)}% is psychologically challenging. Most traders quit after 30% drawdown. Can you handle it?`
+                });
+            }
+            
+            if (rrRatio < 1.5 && winRate < 55) {
+                insights.push({
+                    type: 'neutral',
+                    title: '🎯 Improve Risk/Reward',
+                    text: `Your R:R ratio of 1:${rrRatio.toFixed(1)} combined with ${winRate.toFixed(0)}% win rate is marginal. Aim for 1:2 R:R or 60%+ win rate.`
+                });
+            }
+            
+            if (profitPercent > 80) {
+                insights.push({
+                    type: 'good',
+                    title: '🏆 Strong Edge',
+                    text: `${profitPercent.toFixed(0)}% of simulations ended profitable. You have a strong statistical edge. Stay consistent!`
+                });
+            }
+            
+            const container = document.getElementById('insightCards');
+            container.innerHTML = insights.map(i => `
+                <div class="insight-card ${i.type}">
+                    <h4 class="insight-title">${i.title}</h4>
+                    <p class="insight-text">${i.text}</p>
+                </div>
+            `).join('');
+        }
+        
+        function resetSimulation() {
+            document.getElementById('resultsSection').classList.remove('show');
+            if (equityChart) equityChart.destroy();
+            if (distributionChart) distributionChart.destroy();
+        }
+    </script>
+
+</body>
+</html>

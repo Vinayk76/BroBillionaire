@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Rent vs Buy Calculator India 2026 - Should You Rent or Buy a House? | BroBillionaire</title>
+    <meta name="description" content="FREE Rent vs Buy Calculator 2026! Find out if renting or buying a home is better for you financially. Compare total costs, opportunity costs, and break-even point. Best rent vs buy calculator India with detailed analysis.">
+    <meta name="keywords" content="rent vs buy calculator India, should I buy or rent, home buying calculator, rent or buy decision, property calculator India 2026, real estate calculator, house buying vs renting, EMI vs rent calculator">
+    <meta name="author" content="BroBillionaire">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://brobillionaire.com/tool-rent-vs-buy.html">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://brobillionaire.com/tool-rent-vs-buy.html">
+    <meta property="og:title" content="Rent vs Buy Calculator - Make the Right Housing Decision">
+    <meta property="og:description" content="Should you rent or buy? Find out with our detailed financial comparison calculator.">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --gold: #C9A227;
+            --bg-primary: #0d0d0d;
+            --bg-secondary: #1a1a1a;
+            --bg-card: #161616;
+            --text-primary: #fff;
+            --text-secondary: #999;
+            --border-color: #2a2a2a;
+            --green: #10b981;
+            --red: #ef4444;
+            --blue: #3b82f6;
+            --purple: #8b5cf6;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-top: 140px;
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-img { width: 40px; height: 40px; border-radius: 10px; }
+        .logo-text { font-size: 1.25rem; font-weight: 600; color: var(--text-primary); }
+        .nav-links { display: flex; gap: 35px; }
+        .nav-link { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; }
+        .nav-link:hover, .nav-link.active { color: var(--gold); }
+        
+        .breadcrumb-nav {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            padding: 12px 0;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.85rem;
+        }
+        
+        .breadcrumb-container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+        .breadcrumb-nav a, .breadcrumb-nav span { color: rgba(255,255,255,0.6); text-decoration: none; padding: 0 8px; }
+        .breadcrumb-nav a:hover { color: var(--gold); }
+        .breadcrumb-nav span { color: var(--gold); }
+        
+        .tool-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px 80px; }
+        
+        .tool-hero { text-align: center; margin-bottom: 50px; }
+        
+        .house-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.1));
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: var(--blue);
+            margin-bottom: 20px;
+        }
+        
+        .tool-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, var(--blue) 50%, #fff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+        
+        .tool-subtitle { color: var(--text-secondary); font-size: 1.1rem; max-width: 700px; margin: 0 auto; }
+        
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 900px) {
+            .calculator-grid { grid-template-columns: 1fr; }
+        }
+        
+        .calc-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 35px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .calc-section.rent::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--purple), #a78bfa);
+        }
+        
+        .calc-section.buy::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--blue), #60a5fa);
+        }
+        
+        .calc-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .calc-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .rent .calc-icon { background: rgba(139, 92, 246, 0.2); color: var(--purple); }
+        .buy .calc-icon { background: rgba(59, 130, 246, 0.2); color: var(--blue); }
+        
+        .calc-title { font-size: 1.3rem; font-weight: 700; }
+        
+        .input-group { margin-bottom: 20px; }
+        .input-label { display: block; font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px; font-weight: 500; }
+        
+        .input-field {
+            width: 100%;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 14px 18px;
+            font-size: 1rem;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus { outline: none; border-color: var(--blue); }
+        .input-hint { font-size: 0.75rem; color: var(--text-secondary); margin-top: 5px; }
+        
+        .calculate-btn {
+            width: 100%;
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            background: linear-gradient(135deg, var(--blue), #2563eb);
+            color: white;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        .calculate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.3);
+        }
+        
+        .results-section { display: none; margin-top: 40px; }
+        .results-section.show { display: block; animation: fadeInUp 0.6s ease; }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .verdict-card {
+            border-radius: 24px;
+            padding: 50px 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .verdict-card.rent-wins {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(139, 92, 246, 0.05));
+            border: 2px solid var(--purple);
+        }
+        
+        .verdict-card.buy-wins {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05));
+            border: 2px solid var(--blue);
+        }
+        
+        .verdict-emoji { font-size: 4rem; margin-bottom: 20px; }
+        .verdict-label { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 10px; }
+        
+        .verdict-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .verdict-card.rent-wins .verdict-text { color: var(--purple); }
+        .verdict-card.buy-wins .verdict-text { color: var(--blue); }
+        
+        .verdict-savings { font-size: 1.2rem; color: var(--text-secondary); }
+        .verdict-savings strong { color: var(--green); font-size: 1.4rem; }
+        
+        .comparison-section { margin-bottom: 40px; }
+        .section-header { text-align: center; margin-bottom: 30px; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); margin-bottom: 10px; }
+        .section-subtitle { color: var(--text-secondary); }
+        
+        .comparison-table {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .table-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .table-row:last-child { border-bottom: none; }
+        
+        .table-header {
+            background: var(--bg-secondary);
+            font-weight: 600;
+        }
+        
+        .table-cell {
+            padding: 18px 25px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .table-cell.label { color: var(--text-secondary); }
+        .table-cell.rent { color: var(--purple); font-weight: 600; }
+        .table-cell.buy { color: var(--blue); font-weight: 600; }
+        
+        .table-row.total { background: rgba(201, 162, 39, 0.1); }
+        .table-row.total .table-cell { font-weight: 700; font-size: 1.1rem; }
+        .table-row.total .table-cell.rent { color: var(--purple); }
+        .table-row.total .table-cell.buy { color: var(--blue); }
+        
+        .winner-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-left: 10px;
+        }
+        
+        .winner-badge.rent { background: rgba(139, 92, 246, 0.2); color: var(--purple); }
+        .winner-badge.buy { background: rgba(59, 130, 246, 0.2); color: var(--blue); }
+        
+        .breakeven-section { margin-bottom: 40px; }
+        
+        .breakeven-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .breakeven-label { font-size: 1rem; color: var(--text-secondary); margin-bottom: 15px; }
+        
+        .breakeven-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        
+        .breakeven-desc { color: var(--text-secondary); font-size: 0.95rem; max-width: 500px; margin: 0 auto; }
+        
+        .chart-section { margin-bottom: 40px; }
+        
+        .chart-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px;
+            height: 400px;
+        }
+        
+        .factors-section { margin-bottom: 40px; }
+        
+        .factors-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .factors-grid { grid-template-columns: 1fr; }
+        }
+        
+        .factor-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+        }
+        
+        .factor-card.rent-side { border-left: 4px solid var(--purple); }
+        .factor-card.buy-side { border-left: 4px solid var(--blue); }
+        
+        .factor-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .factor-card.rent-side .factor-title { color: var(--purple); }
+        .factor-card.buy-side .factor-title { color: var(--blue); }
+        
+        .factor-list { list-style: none; }
+        .factor-list li { padding: 8px 0; color: var(--text-secondary); display: flex; align-items: flex-start; gap: 10px; }
+        .factor-list li i { color: var(--green); margin-top: 4px; }
+        
+        .tool-footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .tool-footer a { color: var(--gold); text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            body { padding-top: 120px; }
+            .calc-section { padding: 25px; }
+            .table-row { grid-template-columns: 1.5fr 1fr 1fr; }
+            .table-cell { padding: 12px 15px; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                <span class="logo-text">BroBillionaire</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="articles.html" class="nav-link">Articles</a>
+                <a href="tools.html" class="nav-link active">Tools</a>
+                <a href="about.html" class="nav-link">About</a>
+            </div>
+        </div>
+    </nav>
+    
+    <nav class="breadcrumb-nav">
+        <div class="breadcrumb-container">
+            <a href="index.html">Home</a> /
+            <a href="tools.html">Tools</a> /
+            <span>Rent vs Buy Calculator</span>
+        </div>
+    </nav>
+
+    <div class="tool-container">
+        
+        <div class="tool-hero">
+            <div class="house-badge">
+                <i class="fas fa-home"></i>
+                Make the Right Decision
+            </div>
+            <h1 class="tool-title">🏠 Rent vs Buy Calculator</h1>
+            <p class="tool-subtitle">
+                Should you rent or buy? Make a data-driven decision by comparing the true cost of renting vs buying over time. No emotional bias, just pure math.
+            </p>
+        </div>
+        
+        <div class="calculator-grid">
+            <div class="calc-section rent">
+                <div class="calc-header">
+                    <div class="calc-icon"><i class="fas fa-key"></i></div>
+                    <h2 class="calc-title">Rent Option</h2>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Monthly Rent</label>
+                    <input type="text" class="input-field" id="monthlyRent" placeholder="₹ e.g., 30,000">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Security Deposit (months)</label>
+                    <input type="number" class="input-field" id="securityDeposit" value="2" min="0" max="12">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Expected Rent Increase/Year (%)</label>
+                    <input type="number" class="input-field" id="rentIncrease" value="5" min="0" max="20">
+                    <span class="input-hint">Typically 5-10% in metros</span>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Investment Return (if not buying) %</label>
+                    <input type="number" class="input-field" id="investmentReturn" value="12" min="0" max="30">
+                    <span class="input-hint">Expected return on the down payment if invested</span>
+                </div>
+            </div>
+            
+            <div class="calc-section buy">
+                <div class="calc-header">
+                    <div class="calc-icon"><i class="fas fa-home"></i></div>
+                    <h2 class="calc-title">Buy Option</h2>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Property Price</label>
+                    <input type="text" class="input-field" id="propertyPrice" placeholder="₹ e.g., 80,00,000">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Down Payment (%)</label>
+                    <input type="number" class="input-field" id="downPayment" value="20" min="5" max="100">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Home Loan Interest Rate (%)</label>
+                    <input type="number" class="input-field" id="loanInterest" value="8.5" step="0.1" min="5" max="15">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Loan Tenure (years)</label>
+                    <input type="number" class="input-field" id="loanTenure" value="20" min="5" max="30">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Property Appreciation/Year (%)</label>
+                    <input type="number" class="input-field" id="appreciation" value="6" min="0" max="20">
+                    <span class="input-hint">Historical avg: 5-8% in good locations</span>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Maintenance + Society Charges/Year</label>
+                    <input type="text" class="input-field" id="maintenance" placeholder="₹ e.g., 60,000">
+                </div>
+            </div>
+        </div>
+        
+        <div class="input-group" style="max-width: 400px; margin: 0 auto 30px;">
+            <label class="input-label" style="text-align: center; display: block;">Time Horizon (years)</label>
+            <input type="number" class="input-field" id="timeHorizon" value="15" min="5" max="30" style="text-align: center;">
+            <span class="input-hint" style="text-align: center; display: block;">How long do you plan to stay?</span>
+        </div>
+        
+        <button class="calculate-btn" onclick="calculateRentVsBuy()" style="max-width: 500px; margin: 0 auto; display: flex;">
+            <i class="fas fa-calculator"></i>
+            Compare Rent vs Buy
+        </button>
+        
+        <div class="results-section" id="resultsSection">
+            
+            <div class="verdict-card" id="verdictCard">
+                <div class="verdict-emoji" id="verdictEmoji">🏠</div>
+                <div class="verdict-label">Our Verdict</div>
+                <div class="verdict-text" id="verdictText">Buying is Better!</div>
+                <div class="verdict-savings">You save <strong id="savingsAmount">₹0</strong> over <span id="savingsYears">15</span> years</div>
+            </div>
+            
+            <div class="comparison-section">
+                <div class="section-header">
+                    <h2 class="section-title">📊 Detailed Comparison</h2>
+                    <p class="section-subtitle">Complete cost breakdown over your time horizon</p>
+                </div>
+                
+                <div class="comparison-table">
+                    <div class="table-row table-header">
+                        <div class="table-cell label">Cost Component</div>
+                        <div class="table-cell rent">🔑 Rent</div>
+                        <div class="table-cell buy">🏠 Buy</div>
+                    </div>
+                    <div class="table-row">
+                        <div class="table-cell label">Initial Outflow</div>
+                        <div class="table-cell rent" id="rentInitial">₹0</div>
+                        <div class="table-cell buy" id="buyInitial">₹0</div>
+                    </div>
+                    <div class="table-row">
+                        <div class="table-cell label">Monthly Payments (Total)</div>
+                        <div class="table-cell rent" id="rentMonthly">₹0</div>
+                        <div class="table-cell buy" id="buyMonthly">₹0</div>
+                    </div>
+                    <div class="table-row">
+                        <div class="table-cell label">Maintenance & Costs</div>
+                        <div class="table-cell rent" id="rentMaintenance">₹0</div>
+                        <div class="table-cell buy" id="buyMaintenance">₹0</div>
+                    </div>
+                    <div class="table-row">
+                        <div class="table-cell label">Opportunity Cost</div>
+                        <div class="table-cell rent" id="rentOpportunity">₹0</div>
+                        <div class="table-cell buy" id="buyOpportunity">₹0</div>
+                    </div>
+                    <div class="table-row">
+                        <div class="table-cell label">Asset Value at End</div>
+                        <div class="table-cell rent" id="rentAsset">₹0</div>
+                        <div class="table-cell buy" id="buyAsset">₹0</div>
+                    </div>
+                    <div class="table-row total">
+                        <div class="table-cell label">NET COST</div>
+                        <div class="table-cell rent" id="rentTotal">₹0</div>
+                        <div class="table-cell buy" id="buyTotal">₹0</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="breakeven-section">
+                <div class="section-header">
+                    <h2 class="section-title">⏱️ Break-Even Analysis</h2>
+                </div>
+                
+                <div class="breakeven-card">
+                    <div class="breakeven-label">Buying becomes better after</div>
+                    <div class="breakeven-value" id="breakevenYears">7 Years</div>
+                    <div class="breakeven-desc" id="breakevenDesc">If you stay less than this, renting is financially better. If you stay longer, buying wins.</div>
+                </div>
+            </div>
+            
+            <div class="chart-section">
+                <div class="section-header">
+                    <h2 class="section-title">📈 Cost Over Time</h2>
+                    <p class="section-subtitle">See how costs accumulate year by year</p>
+                </div>
+                <div class="chart-container">
+                    <canvas id="costChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="factors-section">
+                <div class="section-header">
+                    <h2 class="section-title">🤔 Beyond the Numbers</h2>
+                    <p class="section-subtitle">Financial math is just one part of the decision</p>
+                </div>
+                
+                <div class="factors-grid">
+                    <div class="factor-card rent-side">
+                        <h3 class="factor-title"><i class="fas fa-key"></i> When to Rent</h3>
+                        <ul class="factor-list">
+                            <li><i class="fas fa-check"></i> You might relocate for career in next 5 years</li>
+                            <li><i class="fas fa-check"></i> Job stability is uncertain</li>
+                            <li><i class="fas fa-check"></i> You want flexibility and no maintenance hassle</li>
+                            <li><i class="fas fa-check"></i> Property prices are inflated (bubble territory)</li>
+                            <li><i class="fas fa-check"></i> You can invest the difference disciplinedly</li>
+                            <li><i class="fas fa-check"></i> You're young and priorities may change</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="factor-card buy-side">
+                        <h3 class="factor-title"><i class="fas fa-home"></i> When to Buy</h3>
+                        <ul class="factor-list">
+                            <li><i class="fas fa-check"></i> You plan to stay 10+ years in the same city</li>
+                            <li><i class="fas fa-check"></i> Stable income with good job security</li>
+                            <li><i class="fas fa-check"></i> You want forced savings (EMI discipline)</li>
+                            <li><i class="fas fa-check"></i> Emotional value of owning your home</li>
+                            <li><i class="fas fa-check"></i> Tax benefits on home loan interest</li>
+                            <li><i class="fas fa-check"></i> Hedge against rental inflation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+    
+    <footer class="tool-footer">
+        <p>Made with 🏠 by <a href="index.html">BroBillionaire</a> • Make smart financial decisions</p>
+        <p style="margin-top: 10px;">
+            <a href="tools.html">More Tools</a> • 
+            <a href="articles.html">Read Articles</a>
+        </p>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+        let costChart = null;
+        
+        function formatIndianCurrency(num) {
+            if (num >= 10000000) return '₹' + (num / 10000000).toFixed(2) + ' Cr';
+            if (num >= 100000) return '₹' + (num / 100000).toFixed(2) + ' L';
+            return '₹' + Math.round(num).toLocaleString('en-IN');
+        }
+        
+        function parseIndianCurrency(str) {
+            if (!str) return 0;
+            return parseFloat(str.replace(/[₹,\s]/g, '')) || 0;
+        }
+        
+        ['monthlyRent', 'propertyPrice', 'maintenance'].forEach(id => {
+            document.getElementById(id).addEventListener('blur', function() {
+                const value = parseIndianCurrency(this.value);
+                if (value > 0) this.value = '₹' + value.toLocaleString('en-IN');
+            });
+        });
+        
+        function calculateEMI(principal, annualRate, years) {
+            const monthlyRate = annualRate / 12 / 100;
+            const months = years * 12;
+            return principal * monthlyRate * Math.pow(1 + monthlyRate, months) / (Math.pow(1 + monthlyRate, months) - 1);
+        }
+        
+        function calculateFutureValue(presentValue, rate, years) {
+            return presentValue * Math.pow(1 + rate / 100, years);
+        }
+        
+        function calculateRentVsBuy() {
+            const monthlyRent = parseIndianCurrency(document.getElementById('monthlyRent').value);
+            const securityDeposit = parseInt(document.getElementById('securityDeposit').value) || 2;
+            const rentIncrease = parseFloat(document.getElementById('rentIncrease').value) || 5;
+            const investmentReturn = parseFloat(document.getElementById('investmentReturn').value) || 12;
+            
+            const propertyPrice = parseIndianCurrency(document.getElementById('propertyPrice').value);
+            const downPaymentPercent = parseFloat(document.getElementById('downPayment').value) || 20;
+            const loanInterest = parseFloat(document.getElementById('loanInterest').value) || 8.5;
+            const loanTenure = parseInt(document.getElementById('loanTenure').value) || 20;
+            const appreciation = parseFloat(document.getElementById('appreciation').value) || 6;
+            const yearlyMaintenance = parseIndianCurrency(document.getElementById('maintenance').value) || 60000;
+            
+            const timeHorizon = parseInt(document.getElementById('timeHorizon').value) || 15;
+            
+            if (monthlyRent <= 0 || propertyPrice <= 0) {
+                alert('Please enter monthly rent and property price');
+                return;
+            }
+            
+            // RENT CALCULATIONS
+            const rentSecurityDeposit = monthlyRent * securityDeposit;
+            
+            let totalRentPaid = 0;
+            let currentRent = monthlyRent;
+            const rentByYear = [];
+            
+            for (let year = 1; year <= timeHorizon; year++) {
+                totalRentPaid += currentRent * 12;
+                rentByYear.push(totalRentPaid);
+                currentRent *= (1 + rentIncrease / 100);
+            }
+            
+            // Opportunity cost of security deposit
+            const rentOpportunityCost = 0; // Security deposit returns at end
+            
+            // If renting, the down payment can be invested
+            const downPaymentAmount = propertyPrice * downPaymentPercent / 100;
+            const investedDownPayment = calculateFutureValue(downPaymentAmount, investmentReturn, timeHorizon);
+            const investmentGain = investedDownPayment - downPaymentAmount;
+            
+            const totalRentCost = totalRentPaid - investmentGain;
+            
+            // BUY CALCULATIONS
+            const loanAmount = propertyPrice - downPaymentAmount;
+            const monthlyEMI = calculateEMI(loanAmount, loanInterest, loanTenure);
+            
+            const actualLoanYears = Math.min(loanTenure, timeHorizon);
+            const totalEMIPaid = monthlyEMI * 12 * actualLoanYears;
+            
+            const totalMaintenance = yearlyMaintenance * timeHorizon;
+            
+            // Registration & stamp duty (approx 7%)
+            const registrationCost = propertyPrice * 0.07;
+            
+            // Property value at end
+            const propertyValueAtEnd = calculateFutureValue(propertyPrice, appreciation, timeHorizon);
+            
+            // Outstanding loan at end (if tenure > horizon)
+            let outstandingLoan = 0;
+            if (loanTenure > timeHorizon) {
+                const monthlyRate = loanInterest / 12 / 100;
+                const totalMonths = loanTenure * 12;
+                const paidMonths = timeHorizon * 12;
+                const remainingMonths = totalMonths - paidMonths;
+                outstandingLoan = monthlyEMI * (1 - Math.pow(1 + monthlyRate, -remainingMonths)) / monthlyRate;
+            }
+            
+            const netPropertyValue = propertyValueAtEnd - outstandingLoan;
+            
+            const totalBuyCost = downPaymentAmount + registrationCost + totalEMIPaid + totalMaintenance - netPropertyValue;
+            
+            // COMPARISON
+            const rentWins = totalRentCost < totalBuyCost;
+            const savings = Math.abs(totalRentCost - totalBuyCost);
+            
+            // Find break-even
+            let breakevenYear = 0;
+            for (let y = 1; y <= 30; y++) {
+                let rentCostY = 0;
+                let currentR = monthlyRent;
+                for (let i = 1; i <= y; i++) {
+                    rentCostY += currentR * 12;
+                    currentR *= (1 + rentIncrease / 100);
+                }
+                const investGainY = calculateFutureValue(downPaymentAmount, investmentReturn, y) - downPaymentAmount;
+                rentCostY -= investGainY;
+                
+                const emiYears = Math.min(loanTenure, y);
+                const buyCostY = downPaymentAmount + registrationCost + (monthlyEMI * 12 * emiYears) + (yearlyMaintenance * y);
+                const propValueY = calculateFutureValue(propertyPrice, appreciation, y);
+                
+                let outstandingY = 0;
+                if (loanTenure > y) {
+                    const mr = loanInterest / 12 / 100;
+                    const remMonths = (loanTenure - y) * 12;
+                    outstandingY = monthlyEMI * (1 - Math.pow(1 + mr, -remMonths)) / mr;
+                }
+                
+                const netBuyCostY = buyCostY - (propValueY - outstandingY);
+                
+                if (netBuyCostY < rentCostY && breakevenYear === 0) {
+                    breakevenYear = y;
+                }
+            }
+            
+            // Display results
+            document.getElementById('resultsSection').classList.add('show');
+            
+            const verdictCard = document.getElementById('verdictCard');
+            verdictCard.className = rentWins ? 'verdict-card rent-wins' : 'verdict-card buy-wins';
+            document.getElementById('verdictEmoji').textContent = rentWins ? '🔑' : '🏠';
+            document.getElementById('verdictText').textContent = rentWins ? 'Renting is Better!' : 'Buying is Better!';
+            document.getElementById('savingsAmount').textContent = formatIndianCurrency(savings);
+            document.getElementById('savingsYears').textContent = timeHorizon;
+            
+            // Table
+            document.getElementById('rentInitial').textContent = formatIndianCurrency(rentSecurityDeposit);
+            document.getElementById('buyInitial').textContent = formatIndianCurrency(downPaymentAmount + registrationCost);
+            document.getElementById('rentMonthly').textContent = formatIndianCurrency(totalRentPaid);
+            document.getElementById('buyMonthly').textContent = formatIndianCurrency(totalEMIPaid);
+            document.getElementById('rentMaintenance').textContent = '₹0 (landlord pays)';
+            document.getElementById('buyMaintenance').textContent = formatIndianCurrency(totalMaintenance);
+            document.getElementById('rentOpportunity').textContent = '-' + formatIndianCurrency(investmentGain) + ' (gain)';
+            document.getElementById('buyOpportunity').textContent = '₹0';
+            document.getElementById('rentAsset').textContent = '₹0';
+            document.getElementById('buyAsset').textContent = formatIndianCurrency(netPropertyValue);
+            document.getElementById('rentTotal').textContent = formatIndianCurrency(totalRentCost);
+            document.getElementById('buyTotal').textContent = formatIndianCurrency(totalBuyCost);
+            
+            // Breakeven
+            if (breakevenYear > 0 && breakevenYear <= 30) {
+                document.getElementById('breakevenYears').textContent = breakevenYear + ' Years';
+                document.getElementById('breakevenDesc').textContent = `If you stay less than ${breakevenYear} years, renting is financially better. If you stay longer, buying wins.`;
+            } else {
+                document.getElementById('breakevenYears').textContent = 'Never';
+                document.getElementById('breakevenDesc').textContent = 'Based on these numbers, renting is always cheaper. Consider if property appreciation assumptions are too low.';
+            }
+            
+            // Chart
+            renderCostChart(monthlyRent, rentIncrease, investmentReturn, downPaymentAmount, monthlyEMI, loanTenure, yearlyMaintenance, propertyPrice, appreciation, registrationCost, timeHorizon);
+            
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        function renderCostChart(monthlyRent, rentIncrease, investmentReturn, downPayment, monthlyEMI, loanTenure, maintenance, propertyPrice, appreciation, registration, maxYears) {
+            const ctx = document.getElementById('costChart').getContext('2d');
+            
+            if (costChart) costChart.destroy();
+            
+            const labels = [];
+            const rentData = [];
+            const buyData = [];
+            
+            for (let year = 1; year <= maxYears; year++) {
+                labels.push('Year ' + year);
+                
+                // Rent cumulative
+                let rentCost = 0;
+                let currentRent = monthlyRent;
+                for (let i = 1; i <= year; i++) {
+                    rentCost += currentRent * 12;
+                    currentRent *= (1 + rentIncrease / 100);
+                }
+                const investGain = calculateFutureValue(downPayment, investmentReturn, year) - downPayment;
+                rentData.push(rentCost - investGain);
+                
+                // Buy cumulative
+                const emiYears = Math.min(loanTenure, year);
+                let buyCost = downPayment + registration + (monthlyEMI * 12 * emiYears) + (maintenance * year);
+                const propValue = calculateFutureValue(propertyPrice, appreciation, year);
+                
+                let outstanding = 0;
+                if (loanTenure > year) {
+                    const mr = 8.5 / 12 / 100;
+                    const remMonths = (loanTenure - year) * 12;
+                    outstanding = monthlyEMI * (1 - Math.pow(1 + mr, -remMonths)) / mr;
+                }
+                
+                buyData.push(buyCost - (propValue - outstanding));
+            }
+            
+            costChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Rent Net Cost',
+                            data: rentData,
+                            borderColor: '#8b5cf6',
+                            backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Buy Net Cost',
+                            data: buyData,
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top', labels: { color: '#fff', usePointStyle: true } },
+                        tooltip: {
+                            backgroundColor: 'rgba(26,26,26,0.95)',
+                            callbacks: {
+                                label: ctx => ctx.dataset.label + ': ' + formatIndianCurrency(ctx.raw)
+                            }
+                        }
+                    },
+                    scales: {
+                        x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#666' } },
+                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#666', callback: v => formatIndianCurrency(v) } }
+                    }
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

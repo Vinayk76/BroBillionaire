@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Latte Factor Calculator 2026 - Small Expenses Big Impact on Wealth | BroBillionaire</title>
+    <meta name="description" content="FREE Latte Factor Calculator 2026! See how small daily expenses (coffee, subscriptions, shopping) compound into LAKHS over time. Visualize the true cost of your spending habits. Viral money saving tool India!">
+    <meta name="keywords" content="latte factor calculator, small expense calculator, coffee money calculator, spending habit calculator, compound expense calculator, daily expense impact, save money calculator India 2026, lifestyle expense calculator">
+    <meta name="author" content="BroBillionaire">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://brobillionaire.com/tool-latte-factor.html">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://brobillionaire.com/tool-latte-factor.html">
+    <meta property="og:title" content="Latte Factor Calculator - Small Expenses, Big Impact">
+    <meta property="og:description" content="See how your daily coffee could become ₹1 Crore! Calculate the true cost of small expenses.">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Latte Factor Calculator | BroBillionaire">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --gold: #C9A227;
+            --bg-primary: #0d0d0d;
+            --bg-secondary: #1a1a1a;
+            --bg-card: #161616;
+            --text-primary: #fff;
+            --text-secondary: #999;
+            --border-color: #2a2a2a;
+            --green: #10b981;
+            --red: #ef4444;
+            --coffee: #8B4513;
+            --coffee-light: #D2691E;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-top: 140px;
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-img { width: 40px; height: 40px; border-radius: 10px; }
+        .logo-text { font-size: 1.25rem; font-weight: 600; color: var(--text-primary); }
+        .nav-links { display: flex; gap: 35px; }
+        .nav-link { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+        .nav-link:hover, .nav-link.active { color: var(--gold); }
+        
+        .breadcrumb-nav {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            padding: 12px 0;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.85rem;
+        }
+        
+        .breadcrumb-container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+        .breadcrumb-nav a, .breadcrumb-nav span { color: rgba(255,255,255,0.6); text-decoration: none; padding: 0 8px; }
+        .breadcrumb-nav a:hover { color: var(--gold); }
+        .breadcrumb-nav span { color: var(--gold); }
+        
+        .tool-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px 80px; }
+        
+        .tool-hero { text-align: center; margin-bottom: 50px; position: relative; }
+        
+        .tool-hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(139, 69, 19, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .coffee-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.2), rgba(139, 69, 19, 0.1));
+            border: 1px solid rgba(210, 105, 30, 0.3);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: var(--coffee-light);
+            margin-bottom: 20px;
+        }
+        
+        .tool-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, var(--coffee-light) 50%, #fff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+        
+        .tool-subtitle { color: var(--text-secondary); font-size: 1.1rem; max-width: 700px; margin: 0 auto; }
+        
+        .input-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .input-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--coffee), var(--coffee-light), var(--coffee));
+        }
+        
+        .expense-presets {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .preset-btn {
+            padding: 20px 15px;
+            border-radius: 16px;
+            border: 2px solid var(--border-color);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .preset-btn:hover { border-color: var(--coffee-light); transform: translateY(-3px); }
+        .preset-btn.active { border-color: var(--coffee-light); background: rgba(139, 69, 19, 0.1); }
+        .preset-btn .emoji { font-size: 2rem; display: block; margin-bottom: 8px; }
+        .preset-btn .name { font-weight: 600; font-size: 0.9rem; margin-bottom: 4px; }
+        .preset-btn .amount { font-size: 0.8rem; color: var(--coffee-light); }
+        
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .input-group { display: flex; flex-direction: column; gap: 10px; }
+        .input-label { font-weight: 600; color: var(--text-primary); display: flex; align-items: center; gap: 10px; font-size: 0.95rem; }
+        .input-label i { color: var(--coffee-light); font-size: 1.1rem; }
+        
+        .input-field {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px 20px;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .input-field:focus { outline: none; border-color: var(--coffee-light); box-shadow: 0 0 0 4px rgba(139, 69, 19, 0.1); }
+        .input-hint { font-size: 0.8rem; color: var(--text-secondary); margin-top: 5px; }
+        
+        .frequency-toggle {
+            display: flex;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 5px;
+            gap: 5px;
+        }
+        
+        .freq-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .freq-btn.active { background: var(--coffee); color: white; }
+        
+        .calculate-btn {
+            width: 100%;
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            background: linear-gradient(135deg, var(--coffee), var(--coffee-light));
+            color: white;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .calculate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(139, 69, 19, 0.3);
+        }
+        
+        .results-section { display: none; }
+        .results-section.show { display: block; animation: fadeInUp 0.6s ease; }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .shock-card {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.05));
+            border: 2px solid var(--red);
+            border-radius: 24px;
+            padding: 50px 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shock-label { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 10px; }
+        
+        .shock-amount {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 10vw, 5rem);
+            font-weight: 700;
+            color: var(--red);
+            text-shadow: 0 0 60px rgba(239, 68, 68, 0.5);
+        }
+        
+        .shock-subtitle { font-size: 1.2rem; color: var(--text-secondary); margin-top: 15px; }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .comparison-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .comparison-card:hover { border-color: var(--coffee-light); transform: translateY(-5px); }
+        .comparison-card .emoji { font-size: 3rem; margin-bottom: 15px; }
+        .comparison-card .could-buy { font-size: 1rem; color: var(--text-secondary); margin-bottom: 10px; }
+        .comparison-card .item { font-size: 1.4rem; font-weight: 700; color: var(--text-primary); margin-bottom: 5px; }
+        .comparison-card .or { font-size: 0.9rem; color: var(--coffee-light); }
+        
+        .timeline-section { margin-bottom: 40px; }
+        .section-header { text-align: center; margin-bottom: 30px; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--coffee-light); margin-bottom: 10px; }
+        .section-subtitle { color: var(--text-secondary); }
+        
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+        
+        .timeline-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-card:hover { border-color: var(--coffee-light); }
+        .timeline-period { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 10px; }
+        .timeline-amount { font-size: 1.5rem; font-weight: 700; color: var(--red); margin-bottom: 5px; }
+        .timeline-invested { font-size: 1.3rem; font-weight: 600; color: var(--green); }
+        .timeline-label { font-size: 0.8rem; color: var(--text-secondary); margin-top: 5px; }
+        
+        .alternative-section { margin-bottom: 40px; }
+        
+        .alternative-card {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
+            border: 2px solid var(--green);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .alternative-title { font-size: 1.5rem; font-weight: 700; color: var(--green); margin-bottom: 20px; }
+        
+        .alternative-amount {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--green);
+            margin-bottom: 10px;
+        }
+        
+        .alternative-desc { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 25px; }
+        
+        .vs-comparison {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .vs-item { text-align: center; }
+        .vs-emoji { font-size: 3rem; margin-bottom: 10px; }
+        .vs-label { font-size: 0.9rem; color: var(--text-secondary); }
+        .vs-amount { font-size: 1.2rem; font-weight: 700; }
+        .vs-amount.red { color: var(--red); }
+        .vs-amount.green { color: var(--green); }
+        .vs-or { font-size: 1.5rem; font-weight: 700; color: var(--gold); }
+        
+        .share-section { margin-bottom: 40px; }
+        
+        .share-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .share-title { font-size: 1.3rem; color: var(--gold); margin-bottom: 20px; }
+        
+        .share-buttons { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        
+        .share-btn {
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+        }
+        
+        .share-btn.twitter { background: #1DA1F2; color: white; }
+        .share-btn.whatsapp { background: #25D366; color: white; }
+        .share-btn:hover { transform: translateY(-3px); }
+        
+        .tool-footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .tool-footer a { color: var(--gold); text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            body { padding-top: 120px; }
+            .input-section { padding: 25px; }
+            .shock-card { padding: 30px 20px; }
+            .vs-comparison { gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                <span class="logo-text">BroBillionaire</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="articles.html" class="nav-link">Articles</a>
+                <a href="tools.html" class="nav-link active">Tools</a>
+                <a href="about.html" class="nav-link">About</a>
+            </div>
+        </div>
+    </nav>
+    
+    <nav class="breadcrumb-nav">
+        <div class="breadcrumb-container">
+            <a href="index.html">Home</a> /
+            <a href="tools.html">Tools</a> /
+            <span>Latte Factor Calculator</span>
+        </div>
+    </nav>
+
+    <div class="tool-container">
+        
+        <div class="tool-hero">
+            <div class="coffee-badge">
+                <i class="fas fa-coffee"></i>
+                Small Expenses • Big Impact
+            </div>
+            <h1 class="tool-title">☕ Latte Factor Calculator</h1>
+            <p class="tool-subtitle">
+                That daily coffee could be worth ₹1 CRORE! See how small, "harmless" daily expenses compound into LAKHS over time. Prepare to be shocked.
+            </p>
+        </div>
+        
+        <div class="input-section">
+            <h3 style="color: var(--coffee-light); margin-bottom: 20px; font-size: 1.1rem;">
+                <i class="fas fa-hand-pointer"></i> Quick Select Your Expense
+            </h3>
+            
+            <div class="expense-presets">
+                <button class="preset-btn" onclick="selectPreset(this, 150, 'daily')">
+                    <span class="emoji">☕</span>
+                    <span class="name">Coffee</span>
+                    <span class="amount">₹150/day</span>
+                </button>
+                <button class="preset-btn" onclick="selectPreset(this, 200, 'daily')">
+                    <span class="emoji">🍔</span>
+                    <span class="name">Snacks/Junk</span>
+                    <span class="amount">₹200/day</span>
+                </button>
+                <button class="preset-btn" onclick="selectPreset(this, 500, 'daily')">
+                    <span class="emoji">🚗</span>
+                    <span class="name">Uber/Ola</span>
+                    <span class="amount">₹500/day</span>
+                </button>
+                <button class="preset-btn" onclick="selectPreset(this, 300, 'daily')">
+                    <span class="emoji">🍺</span>
+                    <span class="name">Drinks</span>
+                    <span class="amount">₹300/day</span>
+                </button>
+                <button class="preset-btn" onclick="selectPreset(this, 199, 'monthly')">
+                    <span class="emoji">📺</span>
+                    <span class="name">Netflix</span>
+                    <span class="amount">₹199/month</span>
+                </button>
+                <button class="preset-btn" onclick="selectPreset(this, 1000, 'monthly')">
+                    <span class="emoji">🎧</span>
+                    <span class="name">Subscriptions</span>
+                    <span class="amount">₹1000/month</span>
+                </button>
+                <button class="preset-btn" onclick="selectPreset(this, 500, 'weekly')">
+                    <span class="emoji">🛍️</span>
+                    <span class="name">Shopping</span>
+                    <span class="amount">₹500/week</span>
+                </button>
+                <button class="preset-btn" onclick="selectPreset(this, 400, 'daily')">
+                    <span class="emoji">🍕</span>
+                    <span class="name">Food Delivery</span>
+                    <span class="amount">₹400/day</span>
+                </button>
+            </div>
+            
+            <div class="input-grid">
+                <div class="input-group">
+                    <label class="input-label">
+                        <i class="fas fa-rupee-sign"></i>
+                        Expense Amount
+                    </label>
+                    <input type="text" class="input-field" id="expenseAmount" placeholder="₹ e.g., 150">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">
+                        <i class="fas fa-clock"></i>
+                        Frequency
+                    </label>
+                    <div class="frequency-toggle">
+                        <button class="freq-btn active" onclick="selectFrequency(this, 'daily')">Daily</button>
+                        <button class="freq-btn" onclick="selectFrequency(this, 'weekly')">Weekly</button>
+                        <button class="freq-btn" onclick="selectFrequency(this, 'monthly')">Monthly</button>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">
+                        <i class="fas fa-calendar-alt"></i>
+                        Time Period (Years)
+                    </label>
+                    <input type="number" class="input-field" id="timePeriod" placeholder="e.g., 20" value="20">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">
+                        <i class="fas fa-chart-line"></i>
+                        If Invested at (% return)
+                    </label>
+                    <input type="number" class="input-field" id="returnRate" placeholder="e.g., 12" value="12">
+                    <span class="input-hint">Historical equity returns: 12-15%</span>
+                </div>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculateLatteFactor()">
+                <i class="fas fa-calculator"></i>
+                Show Me The Damage
+            </button>
+        </div>
+        
+        <div class="results-section" id="resultsSection">
+            
+            <div class="shock-card">
+                <div class="shock-label">💸 Total Money You'll Spend</div>
+                <div class="shock-amount" id="totalSpent">₹0</div>
+                <div class="shock-subtitle" id="spentSubtitle">on this "small" expense over 20 years</div>
+            </div>
+            
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <div class="emoji">🏠</div>
+                    <div class="could-buy">This could buy you</div>
+                    <div class="item" id="couldBuyHouse">0 months rent</div>
+                    <div class="or">in a metro city</div>
+                </div>
+                <div class="comparison-card">
+                    <div class="emoji">✈️</div>
+                    <div class="could-buy">Or fund</div>
+                    <div class="item" id="couldBuyTrips">0 international trips</div>
+                    <div class="or">to Europe/USA</div>
+                </div>
+                <div class="comparison-card">
+                    <div class="emoji">📱</div>
+                    <div class="could-buy">Or buy</div>
+                    <div class="item" id="couldBuyPhones">0 iPhones</div>
+                    <div class="or">latest model</div>
+                </div>
+                <div class="comparison-card">
+                    <div class="emoji">🎓</div>
+                    <div class="could-buy">Or pay for</div>
+                    <div class="item" id="couldBuyEducation">0 years MBA</div>
+                    <div class="or">at top B-school</div>
+                </div>
+            </div>
+            
+            <div class="timeline-section">
+                <div class="section-header">
+                    <h2 class="section-title">📊 Money Lost Over Time</h2>
+                    <p class="section-subtitle">Spent vs If Invested</p>
+                </div>
+                
+                <div class="timeline-grid">
+                    <div class="timeline-card">
+                        <div class="timeline-period">1 Year</div>
+                        <div class="timeline-amount" id="spent1yr">₹0</div>
+                        <div class="timeline-invested" id="invested1yr">₹0</div>
+                        <div class="timeline-label">if invested</div>
+                    </div>
+                    <div class="timeline-card">
+                        <div class="timeline-period">5 Years</div>
+                        <div class="timeline-amount" id="spent5yr">₹0</div>
+                        <div class="timeline-invested" id="invested5yr">₹0</div>
+                        <div class="timeline-label">if invested</div>
+                    </div>
+                    <div class="timeline-card">
+                        <div class="timeline-period">10 Years</div>
+                        <div class="timeline-amount" id="spent10yr">₹0</div>
+                        <div class="timeline-invested" id="invested10yr">₹0</div>
+                        <div class="timeline-label">if invested</div>
+                    </div>
+                    <div class="timeline-card">
+                        <div class="timeline-period">20 Years</div>
+                        <div class="timeline-amount" id="spent20yr">₹0</div>
+                        <div class="timeline-invested" id="invested20yr">₹0</div>
+                        <div class="timeline-label">if invested</div>
+                    </div>
+                    <div class="timeline-card">
+                        <div class="timeline-period">30 Years</div>
+                        <div class="timeline-amount" id="spent30yr">₹0</div>
+                        <div class="timeline-invested" id="invested30yr">₹0</div>
+                        <div class="timeline-label">if invested</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="alternative-section">
+                <div class="section-header">
+                    <h2 class="section-title">🚀 The Wealth You Could Build</h2>
+                    <p class="section-subtitle">If you invested this money instead</p>
+                </div>
+                
+                <div class="alternative-card">
+                    <div class="alternative-title">If Invested in Index Funds</div>
+                    <div class="alternative-amount" id="investedValue">₹0</div>
+                    <div class="alternative-desc" id="investedDesc">This is what your "latte money" could grow to!</div>
+                    
+                    <div class="vs-comparison">
+                        <div class="vs-item">
+                            <div class="vs-emoji">☕</div>
+                            <div class="vs-label">Spent on lattes</div>
+                            <div class="vs-amount red" id="vsSpent">₹0</div>
+                        </div>
+                        <div class="vs-or">VS</div>
+                        <div class="vs-item">
+                            <div class="vs-emoji">📈</div>
+                            <div class="vs-label">If Invested</div>
+                            <div class="vs-amount green" id="vsInvested">₹0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="share-section">
+                <div class="share-card">
+                    <div class="share-title">😱 Share This Eye-Opener!</div>
+                    <div class="share-buttons">
+                        <button class="share-btn twitter" onclick="shareTwitter()">
+                            <i class="fab fa-twitter"></i> Share on Twitter
+                        </button>
+                        <button class="share-btn whatsapp" onclick="shareWhatsApp()">
+                            <i class="fab fa-whatsapp"></i> Share on WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+    
+    <footer class="tool-footer">
+        <p>Made with ☕ by <a href="index.html">BroBillionaire</a> • Stop the leaks, build wealth</p>
+        <p style="margin-top: 10px;">
+            <a href="tools.html">More Tools</a> • 
+            <a href="articles.html">Read Articles</a>
+        </p>
+    </footer>
+    
+    <script>
+        let currentFrequency = 'daily';
+        
+        function selectPreset(btn, amount, frequency) {
+            document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('expenseAmount').value = '₹' + amount.toLocaleString('en-IN');
+            
+            document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`.freq-btn[onclick*="${frequency}"]`).classList.add('active');
+            currentFrequency = frequency;
+        }
+        
+        function selectFrequency(btn, freq) {
+            document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentFrequency = freq;
+        }
+        
+        function formatIndianCurrency(num) {
+            if (num >= 10000000) return '₹' + (num / 10000000).toFixed(2) + ' Cr';
+            if (num >= 100000) return '₹' + (num / 100000).toFixed(2) + ' L';
+            return '₹' + Math.round(num).toLocaleString('en-IN');
+        }
+        
+        function parseIndianCurrency(str) {
+            if (!str) return 0;
+            return parseFloat(str.replace(/[₹,\s]/g, '')) || 0;
+        }
+        
+        document.getElementById('expenseAmount').addEventListener('blur', function() {
+            const value = parseIndianCurrency(this.value);
+            if (value > 0) this.value = '₹' + value.toLocaleString('en-IN');
+        });
+        
+        function calculateFutureValue(monthlyAmount, years, annualRate) {
+            const monthlyRate = annualRate / 12;
+            const months = years * 12;
+            return monthlyAmount * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate);
+        }
+        
+        function calculateLatteFactor() {
+            const expenseAmount = parseIndianCurrency(document.getElementById('expenseAmount').value);
+            const timePeriod = parseInt(document.getElementById('timePeriod').value) || 20;
+            const returnRate = parseFloat(document.getElementById('returnRate').value) / 100 || 0.12;
+            
+            if (expenseAmount <= 0) {
+                alert('Please enter an expense amount');
+                return;
+            }
+            
+            // Convert to monthly
+            let monthlyExpense;
+            if (currentFrequency === 'daily') {
+                monthlyExpense = expenseAmount * 30;
+            } else if (currentFrequency === 'weekly') {
+                monthlyExpense = expenseAmount * 4.33;
+            } else {
+                monthlyExpense = expenseAmount;
+            }
+            
+            // Total spent
+            const totalSpent = monthlyExpense * 12 * timePeriod;
+            
+            // If invested
+            const investedValue = calculateFutureValue(monthlyExpense, timePeriod, returnRate);
+            
+            // Display results
+            document.getElementById('resultsSection').classList.add('show');
+            document.getElementById('totalSpent').textContent = formatIndianCurrency(totalSpent);
+            document.getElementById('spentSubtitle').textContent = `on this "small" expense over ${timePeriod} years`;
+            
+            // Comparisons
+            document.getElementById('couldBuyHouse').textContent = Math.round(totalSpent / 25000) + ' months rent';
+            document.getElementById('couldBuyTrips').textContent = Math.round(totalSpent / 200000) + ' international trips';
+            document.getElementById('couldBuyPhones').textContent = Math.round(totalSpent / 150000) + ' iPhones';
+            document.getElementById('couldBuyEducation').textContent = Math.round(totalSpent / 2500000) + ' years MBA';
+            
+            // Timeline
+            const periods = [1, 5, 10, 20, 30];
+            periods.forEach(yr => {
+                const spent = monthlyExpense * 12 * yr;
+                const invested = calculateFutureValue(monthlyExpense, yr, returnRate);
+                
+                const spentEl = document.getElementById(`spent${yr}yr`);
+                const investedEl = document.getElementById(`invested${yr}yr`);
+                
+                if (spentEl) spentEl.textContent = formatIndianCurrency(spent);
+                if (investedEl) investedEl.textContent = formatIndianCurrency(invested);
+            });
+            
+            // Alternative card
+            document.getElementById('investedValue').textContent = formatIndianCurrency(investedValue);
+            document.getElementById('investedDesc').textContent = `Invested at ${(returnRate * 100).toFixed(0)}% return over ${timePeriod} years`;
+            document.getElementById('vsSpent').textContent = formatIndianCurrency(totalSpent);
+            document.getElementById('vsInvested').textContent = formatIndianCurrency(investedValue);
+            
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        function shareTwitter() {
+            const totalSpent = document.getElementById('totalSpent').textContent;
+            const invested = document.getElementById('investedValue').textContent;
+            const text = `😱 My daily coffee habit could cost me ${totalSpent} over 20 years! If invested, it could be ${invested}! Check out the Latte Factor Calculator:`;
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(window.location.href)}`, '_blank');
+        }
+        
+        function shareWhatsApp() {
+            const totalSpent = document.getElementById('totalSpent').textContent;
+            const invested = document.getElementById('investedValue').textContent;
+            const text = `😱 My daily coffee habit could cost me ${totalSpent} over 20 years! If invested, it could be ${invested}! Check out the Latte Factor Calculator: ${window.location.href}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+        }
+    </script>
+
+</body>
+</html>
