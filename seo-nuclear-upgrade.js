@@ -159,25 +159,9 @@ function generateItemListSchema(title, description, filename, itemCount = 7) {
     </script>`;
 }
 
-// Generate AggregateRating Schema
-function generateRatingSchema(title, rating, reviewCount) {
-    return `
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": "${title.replace(/"/g, '\\"')}",
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "${rating}",
-            "bestRating": "5",
-            "worstRating": "1",
-            "ratingCount": "${reviewCount}",
-            "reviewCount": "${reviewCount}"
-        }
-    }
-    </script>`;
-}
+// NOTE: AggregateRating Schema removed - Google doesn't support AggregateRating on WebPage type
+// Only valid on Product, LocalBusiness, Book, Course, Movie, SoftwareApplication, etc.
+// Keeping this comment for reference
 
 // Generate Person Schema for trader profiles
 function generatePersonSchema(traderName, description, filename) {
@@ -528,8 +512,7 @@ function processArticle(filename) {
     // Add Author Schema to all articles
     additionalSchemas.push(generateAuthorSchema());
     
-    // Add Rating Schema to all articles
-    additionalSchemas.push(generateRatingSchema(title, rating, reviewCount));
+    // NOTE: Rating Schema removed - Google doesn't support AggregateRating on WebPage type
     
     // Educational articles get Course schema
     if (ARTICLE_CATEGORIES.educational.includes(filename)) {
