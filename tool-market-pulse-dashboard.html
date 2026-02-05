@@ -134,13 +134,13 @@
         .fear-greed-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #ef4444, #fbbf24, #10b981); }
         
         .gauge-wrapper { display: flex; align-items: center; justify-content: center; gap: 2rem; }
-        .gauge-container { position: relative; width: 220px; height: 130px; }
-        .gauge-svg { width: 100%; height: 100%; overflow: visible; }
-        .gauge-bg { fill: none; stroke: #2a2a4a; stroke-width: 25; }
-        .gauge-fill { fill: none; stroke-width: 25; stroke-linecap: butt; transition: all 1s ease-out; }
-        .gauge-center { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); text-align: center; }
-        .gauge-value { font-size: 3.5rem; font-weight: 800; background: linear-gradient(135deg, #C9A227, #ffd700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .gauge-label { font-size: 1.3rem; font-weight: 700; margin-top: -0.3rem; }
+        .gauge-container { display: flex; flex-direction: column; align-items: center; width: 220px; }
+        .gauge-svg { width: 100%; height: auto; overflow: visible; display: block; }
+        .gauge-bg { fill: none; stroke: #2a2a4a; stroke-width: 20; }
+        .gauge-fill { fill: none; stroke-width: 20; stroke-linecap: butt; transition: all 1s ease-out; }
+        .gauge-center { text-align: center; margin-top: -10px; position: relative; z-index: 10; background: linear-gradient(to bottom, transparent 0%, #1a1a2e 20%, #1a1a2e 100%); padding: 8px 15px; border-radius: 8px; }
+        .gauge-value { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, #C9A227, #ffd700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; margin-bottom: 0.25rem; }
+        .gauge-label { font-size: 0.95rem; font-weight: 700; margin-top: 0.3rem; line-height: 1.2; }
         #gaugeNeedle line { filter: drop-shadow(0 0 4px rgba(201, 162, 39, 0.6)); }
         #gaugeNeedle circle { filter: drop-shadow(0 0 6px rgba(201, 162, 39, 0.8)); }
         
@@ -159,35 +159,35 @@
         .refresh-btn:hover { border-color: #C9A227; color: #C9A227; }
         
         .crypto-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-        .crypto-item { background: #16161f; border-radius: 12px; padding: 1rem; display: flex; align-items: center; gap: 1rem; border: 1px solid transparent; transition: all 0.3s; }
+        .crypto-item { background: #16161f; border-radius: 12px; padding: 1rem; display: flex; align-items: center; gap: 0.75rem; border: 1px solid transparent; transition: all 0.3s; overflow: hidden; }
         .crypto-item:hover { border-color: #C9A227; transform: translateY(-2px); }
-        .crypto-icon { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; }
-        .crypto-info { flex: 1; min-width: 0; }
-        .crypto-name { font-weight: 600; font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .crypto-symbol { color: #888; font-size: 0.8rem; }
-        .crypto-price-col { text-align: right; flex-shrink: 0; }
-        .crypto-price { font-weight: 700; font-size: 1.1rem; white-space: nowrap; }
-        .crypto-change { font-size: 0.85rem; font-weight: 600; }
+        .crypto-icon { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; object-fit: contain; }
+        .crypto-info { flex: 1; min-width: 0; overflow: hidden; }
+        .crypto-name { font-weight: 600; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .crypto-symbol { color: #888; font-size: 0.75rem; }
+        .crypto-price-col { text-align: right; flex-shrink: 0; min-width: 80px; max-width: 100px; overflow: hidden; }
+        .crypto-price { font-weight: 700; font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .crypto-change { font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
         .crypto-change.positive { color: #10b981; }
         .crypto-change.negative { color: #ef4444; }
         
         /* Market Indices */
         .indices-card { grid-column: span 2; background: linear-gradient(135deg, #1e1e2f 0%, #16161f 100%); border-radius: 20px; padding: 1.5rem; border: 1px solid #333; }
-        .indices-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-        .index-item { background: #16161f; border-radius: 12px; padding: 1.2rem; border: 1px solid #2a2a4a; transition: all 0.3s; }
+        .indices-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+        .index-item { background: #16161f; border-radius: 12px; padding: 1rem; border: 1px solid #2a2a4a; transition: all 0.3s; text-align: center; }
         .index-item:hover { border-color: #C9A227; }
-        .index-name { color: #888; font-size: 0.85rem; margin-bottom: 0.3rem; }
-        .index-value { font-size: 1.5rem; font-weight: 700; }
-        .index-change { font-size: 0.9rem; font-weight: 600; margin-top: 0.2rem; }
+        .index-name { color: #888; font-size: 0.8rem; margin-bottom: 0.3rem; }
+        .index-value { font-size: 1.3rem; font-weight: 700; }
+        .index-change { font-size: 0.85rem; font-weight: 600; margin-top: 0.2rem; }
         
         /* Currency Rates */
         .currency-card { grid-column: span 2; background: linear-gradient(135deg, #1e1e2f 0%, #16161f 100%); border-radius: 20px; padding: 1.5rem; border: 1px solid #333; }
-        .currency-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
-        .currency-item { background: #16161f; border-radius: 10px; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
-        .currency-pair { display: flex; align-items: center; gap: 0.5rem; }
-        .currency-flag { font-size: 1.2rem; }
-        .currency-code { font-weight: 600; }
-        .currency-rate { font-weight: 700; font-size: 1.1rem; color: #C9A227; }
+        .currency-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
+        .currency-item { background: #16161f; border-radius: 10px; padding: 0.8rem 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .currency-pair { display: flex; align-items: center; gap: 0.4rem; }
+        .currency-flag { font-size: 1.1rem; }
+        .currency-code { font-weight: 600; font-size: 0.9rem; }
+        .currency-rate { font-weight: 700; font-size: 1rem; color: #C9A227; }
         
         /* Market Mood Bars */
         .mood-card { grid-column: span 4; background: linear-gradient(135deg, #1e1e2f 0%, #16161f 100%); border-radius: 20px; padding: 1.5rem; border: 1px solid #333; }
@@ -227,10 +227,26 @@
         .last-updated { text-align: center; color: #666; font-size: 0.85rem; margin-top: 1.5rem; }
         
         /* Responsive */
+        @media (max-width: 1400px) {
+            .crypto-grid { grid-template-columns: repeat(2, 1fr); }
+            .currency-grid { grid-template-columns: repeat(2, 1fr); }
+            .crypto-price-col { min-width: 75px; }
+            .crypto-price { font-size: 0.9rem; }
+        }
+        
         @media (max-width: 1200px) {
             .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
             .fear-greed-card, .crypto-card, .indices-card, .currency-card, .mood-card, .news-card, .insight-card { grid-column: span 2; }
+            .crypto-grid { grid-template-columns: repeat(3, 1fr); }
+            .currency-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        
+        @media (max-width: 992px) {
             .crypto-grid { grid-template-columns: repeat(2, 1fr); }
+            .currency-grid { grid-template-columns: repeat(2, 1fr); }
+            .mood-grid { grid-template-columns: repeat(2, 1fr); }
+            .indices-grid { grid-template-columns: repeat(2, 1fr); }
+            .crypto-price { font-size: 0.85rem; }
         }
         
         @media (max-width: 768px) {
@@ -239,6 +255,9 @@
             .gauge-wrapper { flex-direction: column; }
             .crypto-grid, .indices-grid, .currency-grid, .mood-grid, .news-grid { grid-template-columns: 1fr; }
             .header h1 { font-size: 1.8rem; }
+            .crypto-item { padding: 0.8rem; gap: 0.5rem; }
+            .crypto-price-col { min-width: 90px; max-width: 110px; }
+            .crypto-price { font-size: 0.9rem; }
         }
         
         /* Tooltips */
@@ -278,8 +297,8 @@
                             <path class="gauge-fill" id="fearGreedGauge" d="M20 100 A80 80 0 0 1 180 100" style="stroke: url(#gaugeGradient); stroke-dasharray: 251; stroke-dashoffset: 251;"></path>
                             <!-- Needle -->
                             <g id="gaugeNeedle" transform="rotate(-90, 100, 100)">
-                                <line x1="100" y1="100" x2="100" y2="35" stroke="#C9A227" stroke-width="3" stroke-linecap="round"/>
-                                <circle cx="100" cy="100" r="8" fill="#C9A227"/>
+                                <line x1="100" y1="100" x2="100" y2="45" stroke="#C9A227" stroke-width="3" stroke-linecap="round"/>
+                                <circle cx="100" cy="100" r="6" fill="#C9A227"/>
                             </g>
                         </svg>
                         <div class="gauge-center">

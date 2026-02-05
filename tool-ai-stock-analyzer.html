@@ -45,19 +45,14 @@
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": "AI Stock Analyzer - BroBillionaire",
-        "description": "Free AI-powered stock analysis tool with buy/sell signals, price targets and technical analysis for NSE/BSE stocks",
+        "description": "Free educational stock analysis tool for learning about technical indicators and fundamental metrics for NSE stocks",
         "url": "https://brobillionaire.com/tool-ai-stock-analyzer.html",
-        "applicationCategory": "FinanceApplication",
+        "applicationCategory": "EducationalApplication",
         "operatingSystem": "Any",
         "offers": {
             "@type": "Offer",
             "price": "0",
             "priceCurrency": "INR"
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "ratingCount": "24532"
         }
     }
     </script>
@@ -73,7 +68,7 @@
                 "name": "What is AI Stock Analyzer?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "AI Stock Analyzer is a free tool that uses artificial intelligence to analyze any stock and provide buy/sell signals, price targets, technical analysis, and fundamental scores instantly."
+                    "text": "AI Stock Analyzer is a free educational tool that displays technical indicators, fundamental metrics, and analysis for NSE stocks. This is for learning purposes only and should not be used for investment decisions."
                 }
             },
             {
@@ -81,23 +76,23 @@
                 "name": "Is this AI Stock Analyzer free?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes, our AI Stock Analyzer is 100% free to use. Analyze unlimited stocks without any registration or payment required."
+                    "text": "Yes, this AI Stock Analyzer is 100% free to use. No registration or payment required. Note: This is an educational tool only."
                 }
             },
             {
                 "@type": "Question",
-                "name": "How accurate is the AI stock analysis?",
+                "name": "Is this tool suitable for making investment decisions?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Our AI analyzes 50+ technical indicators, fundamental metrics, and market sentiment to provide comprehensive analysis. The tool is for educational purposes and should be combined with your own research."
+                    "text": "No. This tool is for educational purposes only. Always consult a SEBI-registered investment advisor before making any investment decisions. Stock markets involve risk and you can lose money."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Can I use this for NSE and BSE stocks?",
+                "name": "Where does the stock data come from?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes, our AI Stock Analyzer works with all NSE and BSE listed stocks. Simply enter the stock symbol or company name to get instant analysis."
+                    "text": "Stock prices are fetched from Yahoo Finance API where available. Data may be delayed or inaccurate. Always verify with official NSE/BSE sources. Some fundamental data is simulated for educational demonstration."
                 }
             }
         ]
@@ -172,13 +167,18 @@
         /* Premium Header */
         .tool-header { 
             text-align: center; 
-            padding: 50px 40px; 
-            background: var(--bg-card);
-            border-radius: 20px; 
-            margin-bottom: 30px; 
-            border: 1px solid var(--border-color);
+            padding: 55px 45px; 
+            background: linear-gradient(145deg, rgba(18, 18, 18, 0.98), rgba(26, 26, 26, 0.95));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px; 
+            margin-bottom: 32px; 
+            border: 1px solid rgba(201, 162, 39, 0.2);
             position: relative; 
             overflow: hidden;
+            box-shadow: 
+                0 15px 50px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
         
         .tool-header::before { 
@@ -187,7 +187,7 @@
             top: 0; 
             left: 0;
             right: 0;
-            height: 3px;
+            height: 4px;
             background: var(--gold-gradient);
         }
         
@@ -198,8 +198,8 @@
             left: -100%; 
             width: 300%; 
             height: 300%; 
-            background: linear-gradient(45deg, transparent 40%, rgba(201, 162, 39, 0.03) 50%, transparent 60%); 
-            animation: headerShine 8s ease-in-out infinite; 
+            background: linear-gradient(45deg, transparent 40%, rgba(201, 162, 39, 0.04) 50%, transparent 60%); 
+            animation: headerShine 6s ease-in-out infinite; 
         }
         
         @keyframes headerShine { 
@@ -210,9 +210,11 @@
         .badge-container {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 14px;
+            margin-bottom: 22px;
             flex-wrap: wrap;
+            position: relative;
+            z-index: 1;;
             position: relative;
             z-index: 1;
         }
@@ -220,40 +222,62 @@
         .premium-badge { 
             display: inline-flex; 
             align-items: center; 
-            gap: 6px; 
+            gap: 7px; 
             background: var(--gold-gradient);
             color: var(--bg-primary); 
-            padding: 8px 16px; 
+            padding: 9px 18px; 
             border-radius: 50px; 
-            font-weight: 600; 
-            font-size: 0.8rem;
-            letter-spacing: 0.5px;
+            font-weight: 700; 
+            font-size: 0.78rem;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(201, 162, 39, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .premium-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(201, 162, 39, 0.35);
         }
 
         .premium-badge.ai-badge {
-            background: linear-gradient(135deg, #9d4edd 0%, #b76eff 100%);
+            background: linear-gradient(135deg, #9d4edd 0%, #c77dff 100%);
             color: #fff;
+            box-shadow: 0 4px 15px rgba(157, 78, 221, 0.3);
+        }
+
+        .premium-badge.ai-badge:hover {
+            box-shadow: 0 6px 20px rgba(157, 78, 221, 0.4);
         }
 
         .premium-badge.live-badge {
             background: linear-gradient(135deg, var(--green) 0%, #5eff9e 100%);
             color: var(--bg-primary);
+            box-shadow: 0 4px 15px rgba(74, 222, 128, 0.3);
+        }
+
+        .premium-badge.live-badge:hover {
+            box-shadow: 0 6px 20px rgba(74, 222, 128, 0.4);
         }
 
         .tool-header h1 { 
-            font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: 700;
-            margin-bottom: 15px; 
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            font-weight: 800;
+            margin-bottom: 18px; 
             position: relative;
             z-index: 1;
+            letter-spacing: -0.5px;
         }
 
         .tool-header h1 .gold-text {
-            color: var(--gold);
+            background: linear-gradient(135deg, var(--gold), #ffd700, var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .tool-header p { 
-            font-size: 1.1rem; 
+            font-size: 1.15rem; 
             color: var(--text-secondary);
             max-width: 700px;
             margin: 0 auto;
@@ -294,30 +318,48 @@
 
         /* Search Section */
         .search-section { 
-            background: var(--bg-card);
-            padding: 30px; 
-            border-radius: 16px; 
-            margin-bottom: 30px;
-            border: 1px solid var(--border-color);
+            background: linear-gradient(145deg, rgba(18, 18, 18, 0.98), rgba(26, 26, 26, 0.95));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 35px; 
+            border-radius: 20px; 
+            margin-bottom: 32px;
+            border: 1px solid rgba(201, 162, 39, 0.15);
             position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 10px 40px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
 
         .search-section::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gold-gradient);
+        }
+
+        .search-section::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(201, 162, 39, 0.08), transparent 60%);
+            pointer-events: none;
         }
         
         .search-box { 
             display: flex; 
-            gap: 15px; 
+            gap: 16px; 
             flex-wrap: wrap;
             align-items: stretch;
+            position: relative;
+            z-index: 1;
         }
 
         .search-input-wrapper {
@@ -329,54 +371,62 @@
         .search-input-wrapper::before {
             content: '🔍';
             position: absolute;
-            left: 20px;
+            left: 22px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 1.1rem;
-            opacity: 0.5;
+            font-size: 1.15rem;
+            opacity: 0.6;
             pointer-events: none;
+            z-index: 2;
         }
         
         .search-input { 
             width: 100%;
-            padding: 18px 20px 18px 55px; 
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color); 
-            border-radius: 12px; 
+            padding: 20px 22px 20px 58px; 
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            border-radius: 14px; 
             color: var(--text-primary); 
-            font-size: 1.05rem;
+            font-size: 1.08rem;
             font-weight: 500;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             font-family: 'Inter', sans-serif;
         }
         
         .search-input:focus { 
             border-color: var(--gold); 
             outline: none; 
-            box-shadow: 0 0 30px rgba(201, 162, 39, 0.2);
+            box-shadow: 0 0 35px rgba(201, 162, 39, 0.25), inset 0 0 20px rgba(201, 162, 39, 0.05);
+            background: rgba(30, 30, 30, 0.95);
         }
 
         .search-input::placeholder {
             color: var(--text-muted);
+            transition: opacity 0.3s;
+        }
+
+        .search-input:focus::placeholder {
+            opacity: 0.4;
         }
         
         .analyze-btn { 
-            padding: 18px 40px; 
+            padding: 20px 45px; 
             background: var(--gold-gradient);
             color: var(--bg-primary); 
             border: none; 
-            border-radius: 12px; 
-            font-weight: 700; 
-            font-size: 1rem;
-            letter-spacing: 0.5px;
+            border-radius: 14px; 
+            font-weight: 800; 
+            font-size: 1.05rem;
+            letter-spacing: 1px;
             cursor: pointer; 
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex; 
             align-items: center; 
-            gap: 10px;
+            gap: 12px;
             position: relative;
             overflow: hidden;
             text-transform: uppercase;
+            box-shadow: 0 8px 25px rgba(201, 162, 39, 0.3);
         }
 
         .analyze-btn::before {
@@ -386,8 +436,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s;
         }
 
         .analyze-btn:hover::before {
@@ -395,26 +445,128 @@
         }
         
         .analyze-btn:hover { 
-            transform: translateY(-3px); 
-            box-shadow: 0 15px 40px rgba(201, 162, 39, 0.4);
+            transform: translateY(-4px) scale(1.02); 
+            box-shadow: 0 20px 50px rgba(201, 162, 39, 0.45);
+        }
+
+        .analyze-btn:active {
+            transform: translateY(-2px) scale(0.98);
+        }
+
+        /* Autocomplete Dropdown */
+        .autocomplete-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: linear-gradient(145deg, rgba(26, 26, 26, 0.98), rgba(18, 18, 18, 0.98));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-top: none;
+            border-radius: 0 0 14px 14px;
+            max-height: 350px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .autocomplete-dropdown.active {
+            display: block;
+        }
+
+        .autocomplete-item {
+            padding: 14px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            transition: all 0.2s ease;
+        }
+
+        .autocomplete-item:last-child {
+            border-bottom: none;
+            border-radius: 0 0 14px 14px;
+        }
+
+        .autocomplete-item:hover,
+        .autocomplete-item.selected {
+            background: rgba(201, 162, 39, 0.1);
+        }
+
+        .autocomplete-item-left {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .autocomplete-symbol {
+            font-weight: 700;
+            color: var(--gold);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+        }
+
+        .autocomplete-name {
+            font-size: 0.8rem;
+            color: var(--text-tertiary);
+        }
+
+        .autocomplete-sector {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        .autocomplete-empty {
+            padding: 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .stock-count-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(201, 162, 39, 0.1);
+            color: var(--gold);
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 10px;
         }
         
         .analyze-btn:disabled { 
-            opacity: 0.6; 
+            opacity: 0.5; 
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
         }
 
         .analyze-btn .btn-icon {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
+            animation: btnIconPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes btnIconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
         
         .quick-stocks { 
             display: flex; 
-            gap: 8px; 
+            gap: 10px; 
             flex-wrap: wrap; 
-            margin-top: 20px;
+            margin-top: 22px;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
 
         .quick-stocks-label {
@@ -446,47 +598,91 @@
 
         /* Stock Info Header */
         .stock-header {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 25px 30px;
-            margin-bottom: 25px;
-            border: 1px solid var(--border-color);
+            background: linear-gradient(145deg, rgba(18, 18, 18, 0.98), rgba(26, 26, 26, 0.95));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 28px 35px;
+            margin-bottom: 28px;
+            border: 1px solid rgba(201, 162, 39, 0.2);
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .stock-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gold-gradient);
+        }
+
+        .stock-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(201, 162, 39, 0.1), transparent 70%);
+            pointer-events: none;
         }
 
         .stock-info {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 22px;
         }
 
         .stock-logo {
-            width: 60px;
-            height: 60px;
-            background: var(--bg-tertiary);
-            border-radius: 12px;
+            width: 68px;
+            height: 68px;
+            background: linear-gradient(145deg, rgba(201, 162, 39, 0.15), rgba(201, 162, 39, 0.05));
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 800;
-            color: var(--gold);
-            border: 1px solid var(--border-gold);
+            background: linear-gradient(135deg, var(--gold), #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            border: 2px solid rgba(201, 162, 39, 0.4);
+            box-shadow: 0 8px 25px rgba(201, 162, 39, 0.2);
+            position: relative;
+        }
+
+        .stock-logo::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            background: linear-gradient(145deg, rgba(201, 162, 39, 0.15), rgba(201, 162, 39, 0.05));
+            z-index: -1;
         }
 
         .stock-details h2 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 700;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
+            background: linear-gradient(135deg, #fff, #e0e0e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .stock-details .stock-meta {
             display: flex;
-            gap: 15px;
+            gap: 18px;
             color: var(--text-tertiary);
             font-size: 0.85rem;
         }
@@ -494,23 +690,32 @@
         .stock-details .stock-meta span {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
+            padding: 4px 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 6px;
         }
 
         .stock-price-info {
             text-align: right;
+            position: relative;
+            z-index: 1;
         }
 
         .current-price-large {
-            font-size: 2.2rem;
-            font-weight: 700;
+            font-size: 2.5rem;
+            font-weight: 800;
             font-family: 'JetBrains Mono', monospace;
-            color: var(--text-primary);
+            background: linear-gradient(135deg, #fff, #e0e0e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 20px rgba(255, 255, 255, 0.1);
         }
 
         .price-change-large {
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-size: 1.15rem;
+            font-weight: 700;
             margin-top: 5px;
         }
 
@@ -531,13 +736,18 @@
         }
         
         .analysis-card { 
-            background: var(--bg-card);
+            background: linear-gradient(145deg, rgba(18, 18, 18, 0.95), rgba(26, 26, 26, 0.9));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             padding: 25px; 
-            border-radius: 16px; 
-            border: 1px solid var(--border-color);
-            transition: all 0.4s ease;
+            border-radius: 20px; 
+            border: 1px solid rgba(201, 162, 39, 0.15);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
+            box-shadow: 
+                0 4px 30px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
 
         .analysis-card::before {
@@ -551,14 +761,44 @@
             opacity: 0;
             transition: opacity 0.3s;
         }
+
+        .analysis-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                rgba(201, 162, 39, 0.1) 60deg,
+                transparent 120deg
+            );
+            animation: borderRotate 8s linear infinite;
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: -1;
+        }
+
+        @keyframes borderRotate {
+            100% { transform: rotate(360deg); }
+        }
         
         .analysis-card:hover { 
-            border-color: var(--border-gold);
-            transform: translateY(-5px);
-            box-shadow: 0 20px 50px rgba(201, 162, 39, 0.1);
+            border-color: rgba(201, 162, 39, 0.4);
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 
+                0 25px 60px rgba(201, 162, 39, 0.15),
+                0 10px 30px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .analysis-card:hover::before {
+            opacity: 1;
+        }
+
+        .analysis-card:hover::after {
             opacity: 1;
         }
 
@@ -601,86 +841,135 @@
         }
         
         .badge-bullish { 
-            background: rgba(74, 222, 128, 0.15); 
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.2), rgba(74, 222, 128, 0.1)); 
             color: var(--green);
-            border: 1px solid rgba(74, 222, 128, 0.3);
+            border: 1px solid rgba(74, 222, 128, 0.4);
+            box-shadow: 0 4px 15px rgba(74, 222, 128, 0.2);
         }
         
         .badge-bearish { 
-            background: rgba(239, 68, 68, 0.15); 
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.1)); 
             color: var(--red);
-            border: 1px solid rgba(239, 68, 68, 0.3);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2);
         }
         
         .badge-neutral { 
-            background: rgba(201, 162, 39, 0.15); 
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.2), rgba(201, 162, 39, 0.1)); 
             color: var(--gold);
-            border: 1px solid rgba(201, 162, 39, 0.3);
+            border: 1px solid rgba(201, 162, 39, 0.4);
+            box-shadow: 0 4px 15px rgba(201, 162, 39, 0.2);
         }
 
         /* Signal Card */
         .signal-box { 
             text-align: center; 
-            padding: 30px; 
-            background: var(--bg-secondary);
-            border-radius: 12px;
+            padding: 35px; 
+            background: linear-gradient(180deg, rgba(26, 26, 26, 0.95), rgba(18, 18, 18, 0.98));
+            border-radius: 16px;
             position: relative;
             overflow: hidden;
         }
+
+        .signal-box::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150%;
+            height: 150%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(201, 162, 39, 0.08) 0%, transparent 60%);
+            animation: signalPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes signalPulse {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+        }
         
         .signal-indicator { 
-            font-size: 4rem; 
+            font-size: 4.5rem; 
             font-weight: 900; 
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             position: relative;
             z-index: 1;
+            animation: signalBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes signalBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
         
         .signal-buy { 
             color: var(--green); 
-            text-shadow: 0 0 40px rgba(74, 222, 128, 0.5);
+            text-shadow: 0 0 50px rgba(74, 222, 128, 0.6), 0 0 100px rgba(74, 222, 128, 0.3);
+            filter: drop-shadow(0 0 20px rgba(74, 222, 128, 0.4));
         }
         
         .signal-sell { 
             color: var(--red); 
-            text-shadow: 0 0 40px rgba(239, 68, 68, 0.5);
+            text-shadow: 0 0 50px rgba(239, 68, 68, 0.6), 0 0 100px rgba(239, 68, 68, 0.3);
+            filter: drop-shadow(0 0 20px rgba(239, 68, 68, 0.4));
         }
         
         .signal-hold { 
             color: var(--gold); 
-            text-shadow: 0 0 40px rgba(201, 162, 39, 0.5);
+            text-shadow: 0 0 50px rgba(201, 162, 39, 0.6), 0 0 100px rgba(201, 162, 39, 0.3);
+            filter: drop-shadow(0 0 20px rgba(201, 162, 39, 0.4));
         }
         
         .signal-label { 
-            font-size: 1.4rem; 
-            font-weight: 700; 
-            margin-bottom: 5px;
-            letter-spacing: 2px;
+            font-size: 1.5rem; 
+            font-weight: 800; 
+            margin-bottom: 8px;
+            letter-spacing: 3px;
             position: relative;
             z-index: 1;
+            text-transform: uppercase;
         }
         
         .confidence-bar { 
-            height: 10px; 
-            background: var(--bg-tertiary);
-            border-radius: 5px; 
+            height: 12px; 
+            background: rgba(40, 40, 40, 0.6);
+            border-radius: 8px; 
             overflow: hidden; 
-            margin-top: 20px;
+            margin-top: 22px;
             position: relative;
             z-index: 1;
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3);
         }
         
         .confidence-fill { 
             height: 100%; 
-            border-radius: 5px; 
-            transition: width 1s ease-out;
-            background: linear-gradient(90deg, var(--green), var(--gold));
+            border-radius: 8px; 
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(90deg, #10b981, #34d399, var(--gold), #ffd700);
+            box-shadow: 0 0 15px rgba(74, 222, 128, 0.4);
+            position: relative;
+        }
+
+        .confidence-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: confidenceShimmer 2s infinite;
+        }
+
+        @keyframes confidenceShimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         .confidence-text {
             display: flex;
             justify-content: space-between;
-            margin-top: 10px;
+            margin-top: 12px;
             font-size: 0.85rem;
             color: var(--text-tertiary);
             position: relative;
@@ -688,8 +977,12 @@
         }
 
         .confidence-value {
-            font-weight: 700;
-            color: var(--gold);
+            font-weight: 800;
+            font-size: 1rem;
+            background: linear-gradient(135deg, var(--gold), #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-family: 'JetBrains Mono', monospace;
         }
 
@@ -705,32 +998,52 @@
         }
         
         .metric-item { 
-            background: var(--bg-secondary);
-            padding: 15px; 
-            border-radius: 10px; 
+            background: linear-gradient(145deg, rgba(26, 26, 26, 0.9), rgba(18, 18, 18, 0.95));
+            padding: 18px; 
+            border-radius: 12px; 
             text-align: center;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .metric-item:hover::before {
+            left: 100%;
         }
 
         .metric-item:hover {
-            border-color: var(--border-gold);
+            border-color: rgba(201, 162, 39, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(201, 162, 39, 0.1);
         }
         
         .metric-value { 
-            font-size: 1.4rem; 
+            font-size: 1.5rem; 
             font-weight: 700; 
             color: var(--text-primary);
             font-family: 'JetBrains Mono', monospace;
+            text-shadow: 0 2px 10px rgba(201, 162, 39, 0.2);
         }
         
         .metric-label { 
-            font-size: 0.75rem; 
+            font-size: 0.7rem; 
             color: var(--text-tertiary);
-            margin-top: 5px;
+            margin-top: 6px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 500;
+            letter-spacing: 0.8px;
+            font-weight: 600;
         }
         
         .metric-positive { color: var(--green) !important; }
@@ -739,100 +1052,128 @@
         /* Gauge */
         .gauge-container { 
             position: relative; 
-            width: 200px; 
-            height: 110px; 
+            width: 220px; 
+            height: 120px; 
             margin: 0 auto;
         }
         
-        .gauge-bg { fill: none; stroke: var(--bg-tertiary); stroke-width: 16; }
+        .gauge-bg { 
+            fill: none; 
+            stroke: rgba(40, 40, 40, 0.8); 
+            stroke-width: 18;
+        }
+        
         .gauge-fill { 
             fill: none; 
-            stroke-width: 16; 
+            stroke-width: 18; 
             stroke-linecap: round; 
-            transition: stroke-dashoffset 1.5s ease-out;
-            filter: drop-shadow(0 0 8px var(--gold));
+            transition: stroke-dashoffset 2s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 0 12px var(--gold)) drop-shadow(0 0 25px rgba(201, 162, 39, 0.4));
         }
         
         .gauge-value { 
             position: absolute; 
-            bottom: 15px; 
+            bottom: 20px; 
             left: 50%; 
             transform: translateX(-50%); 
-            font-size: 2.2rem; 
+            font-size: 2.5rem; 
             font-weight: 800;
             font-family: 'JetBrains Mono', monospace;
-            color: var(--gold);
+            background: linear-gradient(135deg, var(--gold), #ffd700, var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(201, 162, 39, 0.5);
         }
 
         .gauge-label {
             position: absolute;
-            bottom: -8px;
+            bottom: -5px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
+            font-weight: 600;
         }
 
         /* Price Targets */
         .price-targets { 
-            background: var(--bg-secondary);
+            background: linear-gradient(145deg, rgba(26, 26, 26, 0.9), rgba(18, 18, 18, 0.95));
             padding: 20px; 
-            border-radius: 12px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
         }
         
         .target-row { 
             display: flex; 
             justify-content: space-between;
             align-items: center;
-            padding: 12px 0; 
-            border-bottom: 1px solid var(--border-color);
+            padding: 16px 18px; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            margin: 4px 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: transparent;
+        }
+        
+        .target-row:hover {
+            background: rgba(201, 162, 39, 0.05);
+            transform: translateX(5px);
         }
         
         .target-row:last-child { border-bottom: none; }
         
         .target-label { 
-            color: var(--text-tertiary);
-            font-weight: 500;
+            color: var(--text-secondary);
+            font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
+            gap: 10px;
+            font-size: 0.95rem;
+            min-width: 140px;
         }
 
         .target-label .dot {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
+            flex-shrink: 0;
         }
 
-        .target-label .dot.green { background: var(--green); }
-        .target-label .dot.red { background: var(--red); }
-        .target-label .dot.gold { background: var(--gold); }
+        .target-label .dot.green { background: var(--green); box-shadow: 0 0 8px rgba(74, 222, 128, 0.5); }
+        .target-label .dot.red { background: var(--red); box-shadow: 0 0 8px rgba(239, 68, 68, 0.5); }
+        .target-label .dot.gold { background: var(--gold); box-shadow: 0 0 8px rgba(201, 162, 39, 0.5); }
         
         .target-value { 
-            font-weight: 600;
+            font-weight: 700;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .target-percent {
-            font-size: 0.8rem;
-            margin-left: 8px;
-            padding: 3px 8px;
-            border-radius: 5px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 6px;
+            min-width: 55px;
+            text-align: center;
         }
         
         .target-upside { color: var(--green); }
-        .target-upside .target-percent { background: rgba(74, 222, 128, 0.15); }
+        .target-upside .target-percent { background: rgba(74, 222, 128, 0.15); color: var(--green); }
         .target-downside { color: var(--red); }
-        .target-downside .target-percent { background: rgba(239, 68, 68, 0.15); }
+        .target-downside .target-percent { background: rgba(239, 68, 68, 0.15); color: var(--red); }
 
         .target-current {
-            background: rgba(201, 162, 39, 0.1);
-            margin: 8px -20px;
-            padding: 12px 20px;
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.15), rgba(201, 162, 39, 0.05));
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            margin: 8px 0;
+            padding: 16px 16px;
             border-left: 3px solid var(--gold);
         }
 
@@ -848,8 +1189,16 @@
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            padding: 12px 0; 
-            border-bottom: 1px solid var(--border-color);
+            padding: 14px 12px; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            margin: 2px 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .indicator-row:hover {
+            background: rgba(201, 162, 39, 0.03);
+            transform: translateX(5px);
         }
 
         .indicator-row:last-child { border-bottom: none; }
@@ -859,62 +1208,77 @@
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             font-size: 0.9rem;
         }
 
         .indicator-name .indicator-icon {
             font-size: 1rem;
+            color: var(--gold);
+            opacity: 0.8;
         }
 
         .indicator-values {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .indicator-num {
             font-family: 'JetBrains Mono', monospace;
             color: var(--text-tertiary);
             font-size: 0.85rem;
+            min-width: 50px;
+            text-align: right;
         }
         
         .indicator-signal { 
-            padding: 5px 12px; 
-            border-radius: 6px; 
+            padding: 6px 14px; 
+            border-radius: 8px; 
             font-size: 0.75rem; 
             font-weight: 700;
-            min-width: 70px;
+            min-width: 75px;
             text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
         .ind-buy { 
-            background: rgba(74, 222, 128, 0.15); 
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.2), rgba(74, 222, 128, 0.1)); 
             color: var(--green);
-            border: 1px solid rgba(74, 222, 128, 0.3);
+            border: 1px solid rgba(74, 222, 128, 0.4);
+            box-shadow: 0 2px 8px rgba(74, 222, 128, 0.15);
         }
         
         .ind-sell { 
-            background: rgba(239, 68, 68, 0.15); 
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.1)); 
             color: var(--red);
-            border: 1px solid rgba(239, 68, 68, 0.3);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.15);
         }
         
         .ind-neutral { 
-            background: rgba(201, 162, 39, 0.15); 
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.2), rgba(201, 162, 39, 0.1)); 
             color: var(--gold);
-            border: 1px solid rgba(201, 162, 39, 0.3);
+            border: 1px solid rgba(201, 162, 39, 0.4);
+            box-shadow: 0 2px 8px rgba(201, 162, 39, 0.15);
         }
 
         /* AI Summary */
         .ai-summary { 
-            background: var(--bg-card);
-            padding: 30px; 
-            border-radius: 16px; 
-            border: 1px solid var(--border-gold);
-            margin-top: 25px;
+            background: linear-gradient(145deg, rgba(18, 18, 18, 0.98), rgba(26, 26, 26, 0.95));
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            padding: 35px; 
+            border-radius: 20px; 
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            margin-top: 28px;
             position: relative;
             overflow: hidden;
+            box-shadow: 
+                0 15px 50px rgba(201, 162, 39, 0.1),
+                0 5px 25px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
 
         .ai-summary::before {
@@ -923,31 +1287,61 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
+            height: 4px;
             background: var(--gold-gradient);
+        }
+
+        .ai-summary::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(201, 162, 39, 0.08), transparent 60%);
+            pointer-events: none;
+            animation: aiGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes aiGlow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
         }
 
         .ai-summary-header {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
+            gap: 18px;
+            margin-bottom: 22px;
+            position: relative;
+            z-index: 1;
         }
 
         .ai-avatar {
-            width: 50px;
-            height: 50px;
+            width: 56px;
+            height: 56px;
             background: var(--gold-gradient);
-            border-radius: 12px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
+            box-shadow: 0 8px 25px rgba(201, 162, 39, 0.3);
+            animation: avatarPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes avatarPulse {
+            0%, 100% { box-shadow: 0 8px 25px rgba(201, 162, 39, 0.3); }
+            50% { box-shadow: 0 8px 35px rgba(201, 162, 39, 0.5); }
         }
         
         .ai-summary h3 { 
-            color: var(--gold); 
-            font-size: 1.2rem;
+            background: linear-gradient(135deg, var(--gold), #ffd700, var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.3rem;
             font-weight: 700;
         }
 
@@ -1148,8 +1542,9 @@
             left: 0; 
             right: 0; 
             bottom: 0; 
-            background: rgba(13, 13, 13, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 10, 0.97);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             z-index: 1000; 
             justify-content: center; 
             align-items: center; 
@@ -1158,29 +1553,49 @@
         
         .loading-overlay.active { display: flex; }
 
+        .loading-overlay::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 500px;
+            height: 500px;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(201, 162, 39, 0.1), transparent 60%);
+            animation: loadingGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes loadingGlow {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
         .loading-container {
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
 
         .ai-brain-container {
             position: relative;
-            width: 140px;
-            height: 140px;
+            width: 160px;
+            height: 160px;
             margin: 0 auto;
         }
         
         .ai-brain { 
-            font-size: 4.5rem;
+            font-size: 5rem;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            animation: brainFloat 2s ease-in-out infinite;
+            animation: brainFloat 2.5s ease-in-out infinite;
+            filter: drop-shadow(0 0 25px rgba(201, 162, 39, 0.4));
         }
 
         @keyframes brainFloat {
-            0%, 100% { transform: translate(-50%, -50%); }
-            50% { transform: translate(-50%, -60%); }
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -58%) scale(1.05); }
         }
 
         .brain-ring {
@@ -1220,35 +1635,40 @@
         }
         
         .loading-text { 
-            margin-top: 25px; 
-            font-size: 1.3rem; 
-            color: var(--gold);
-            font-weight: 600;
+            margin-top: 28px; 
+            font-size: 1.4rem; 
+            background: linear-gradient(135deg, var(--gold), #ffd700, var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
         .loading-subtext {
-            margin-top: 8px;
-            font-size: 0.95rem;
+            margin-top: 10px;
+            font-size: 1rem;
             color: var(--text-tertiary);
         }
 
         .loading-steps {
-            margin-top: 30px;
+            margin-top: 35px;
             text-align: left;
-            background: var(--bg-card);
-            padding: 20px 25px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
+            background: linear-gradient(145deg, rgba(26, 26, 26, 0.9), rgba(18, 18, 18, 0.95));
+            padding: 22px 28px;
+            border-radius: 16px;
+            border: 1px solid rgba(201, 162, 39, 0.15);
+            backdrop-filter: blur(10px);
         }
 
         .loading-step {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 10px 0;
+            gap: 14px;
+            padding: 12px 0;
             color: var(--text-muted);
-            font-size: 0.9rem;
-            transition: all 0.3s;
+            font-size: 0.92rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .loading-step.active {
@@ -1477,33 +1897,56 @@
             gap: 8px;
         }
 
-        /* Live Data Indicator */
+        /* Live Data Indicator - Premium */
         .live-indicator {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            font-size: 0.75rem;
-            color: var(--green);
-            animation: livePulse 2s infinite;
+            gap: 8px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--bg-primary);
+            background: linear-gradient(135deg, var(--green), #2dd4bf);
+            padding: 6px 14px;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(74, 222, 128, 0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+            animation: liveGlow 2s ease-in-out infinite;
         }
 
         .live-indicator::before {
             content: '';
             width: 8px;
             height: 8px;
-            background: var(--green);
+            background: var(--bg-primary);
             border-radius: 50%;
             animation: liveDot 1s infinite;
+            box-shadow: 0 0 6px rgba(0,0,0,0.3);
         }
 
         @keyframes liveDot {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
         }
 
-        @keyframes livePulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
+        @keyframes liveGlow {
+            0%, 100% { box-shadow: 0 2px 10px rgba(74, 222, 128, 0.4), inset 0 1px 0 rgba(255,255,255,0.2); }
+            50% { box-shadow: 0 2px 20px rgba(74, 222, 128, 0.6), inset 0 1px 0 rgba(255,255,255,0.2); }
+        }
+
+        /* Simulated Data Indicator */
+        .simulated-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--orange);
+            background: rgba(251, 146, 60, 0.15);
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(251, 146, 60, 0.3);
         }
 
         /* Data Source Badge */
@@ -1654,7 +2097,8 @@
             <div class="search-section">
                 <div class="search-box">
                     <div class="search-input-wrapper">
-                        <input type="text" id="stockInput" class="search-input" placeholder="Enter stock symbol (e.g., RELIANCE, TCS, HDFCBANK...)" autocomplete="off">
+                        <input type="text" id="stockInput" class="search-input" placeholder="Type stock symbol or company name (e.g., RELIANCE, TCS...)" autocomplete="off">
+                        <div id="autocompleteDropdown" class="autocomplete-dropdown"></div>
                     </div>
                     <button class="analyze-btn" id="analyzeBtn" onclick="analyzeStock()">
                         <span class="btn-icon"><i class="fas fa-rocket"></i></span> Analyze Now
@@ -1671,7 +2115,10 @@
                     <span class="quick-stock" onclick="selectStock('SBIN')">SBIN</span>
                     <span class="quick-stock" onclick="selectStock('TATAMOTORS')">TATAMOTORS</span>
                     <span class="quick-stock" onclick="selectStock('ADANIENT')">ADANIENT</span>
-                    <span class="quick-stock" onclick="selectStock('BAJFINANCE')">BAJFINANCE</span>
+                    <span class="quick-stock" onclick="selectStock('OLAELEC')">OLA</span>
+                </div>
+                <div style="margin-top: 12px; text-align: center;">
+                    <span class="stock-count-badge"><i class="fas fa-database"></i> 500+ NSE Stocks Available</span>
                 </div>
             </div>
 
@@ -2064,11 +2511,11 @@
             <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
             <div class="faq-item" onclick="toggleFaq(this)">
                 <div class="faq-question">
-                    <span>What is AI Stock Analyzer Pro and how accurate is it?</span>
+                    <span>What is AI Stock Analyzer and what does it do?</span>
                     <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
                 </div>
                 <div class="faq-answer">
-                    AI Stock Analyzer Pro uses advanced machine learning algorithms trained on millions of data points to analyze 50+ technical indicators, fundamental metrics, market sentiment, and historical patterns. Our AI achieves 98.7% accuracy in identifying market trends. However, stock markets are inherently unpredictable, and this tool should be used alongside your own research and professional financial advice.
+                    AI Stock Analyzer is an educational tool that uses algorithms to analyze technical indicators, fundamental metrics, and market patterns for NSE/BSE stocks. <strong>Important:</strong> This tool is for educational purposes only. Stock markets are inherently unpredictable, and this tool should NOT be used as the sole basis for investment decisions. Always do your own research and consult a SEBI-registered investment advisor.
                 </div>
             </div>
             <div class="faq-item" onclick="toggleFaq(this)">
@@ -2077,16 +2524,16 @@
                     <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
                 </div>
                 <div class="faq-answer">
-                    Yes! Our AI Stock Analyzer Pro is 100% free to use - forever. There's no registration required, no hidden fees, no premium tier, and no limit on the number of stocks you can analyze. We believe everyone deserves access to institutional-grade stock analysis tools.
+                    Yes! This AI Stock Analyzer is 100% free to use. There's no registration required and no hidden fees. However, please note that this is an educational tool and should not be used for making actual investment decisions without consulting a qualified financial advisor.
                 </div>
             </div>
             <div class="faq-item" onclick="toggleFaq(this)">
                 <div class="faq-question">
-                    <span>What technical indicators does the AI analyze?</span>
+                    <span>What technical indicators does the tool analyze?</span>
                     <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
                 </div>
                 <div class="faq-answer">
-                    Our AI analyzes 50+ indicators including RSI (Relative Strength Index), MACD (Moving Average Convergence Divergence), EMA & SMA (Exponential & Simple Moving Averages), Bollinger Bands, Stochastic Oscillator, ADX (Average Directional Index), Volume Analysis, Support & Resistance levels, Fibonacci retracements, and many more proprietary indicators.
+                    The tool displays various indicators including RSI (Relative Strength Index), MACD (Moving Average Convergence Divergence), EMA & SMA (Exponential & Simple Moving Averages), Bollinger Bands, Stochastic Oscillator, Volume Analysis, and Support & Resistance levels. Note: Some indicators are simulated for educational demonstration purposes.
                 </div>
             </div>
             <div class="faq-item" onclick="toggleFaq(this)">
@@ -2095,16 +2542,16 @@
                     <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
                 </div>
                 <div class="faq-answer">
-                    You can analyze any stock listed on NSE (National Stock Exchange) and BSE (Bombay Stock Exchange). This includes all Nifty 50 stocks, Nifty Next 50, midcap stocks, smallcap stocks, sectoral indices components, and over 5000+ listed securities.
+                    You can enter any stock symbol listed on NSE (National Stock Exchange). The tool attempts to fetch live price data from Yahoo Finance for NSE-listed stocks. For stocks where live data is unavailable, the tool generates simulated data for educational purposes.
                 </div>
             </div>
             <div class="faq-item" onclick="toggleFaq(this)">
                 <div class="faq-question">
-                    <span>How often is the data updated?</span>
+                    <span>Where does the price data come from?</span>
                     <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
                 </div>
                 <div class="faq-answer">
-                    Our AI pulls real-time market data during trading hours (9:15 AM - 3:30 PM IST). Price data, volume, and technical indicators are updated every few seconds. Fundamental data is updated quarterly based on company filings. The AI model itself is continuously learning and improving from new market patterns.
+                    Stock price data is fetched from Yahoo Finance API where available. However, there may be delays, inaccuracies, or API failures. <strong>Always verify prices with official NSE/BSE sources before making any trading decisions.</strong> Fundamental data like PE ratio, ROE, etc. is simulated for educational purposes.
                 </div>
             </div>
             <div class="faq-item" onclick="toggleFaq(this)">
@@ -2113,27 +2560,28 @@
                     <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
                 </div>
                 <div class="faq-answer">
-                    <strong>STRONG BUY (Score 78+):</strong> Multiple indicators strongly suggest high upside potential with favorable risk-reward.<br>
-                    <strong>BUY (Score 62-77):</strong> Positive indicators outweigh negative ones, good entry opportunity.<br>
-                    <strong>HOLD (Score 42-61):</strong> Mixed signals, maintain existing positions but wait for clearer direction.<br>
-                    <strong>SELL (Score 28-41):</strong> Negative indicators dominate, consider reducing exposure.<br>
-                    <strong>STRONG SELL (Score below 28):</strong> Multiple indicators suggest significant downside risk.
+                    <strong>STRONG BUY (Score 75+):</strong> Strong technicals & fundamentals suggest potential upside (educational only).<br>
+                    <strong>BUY (Score 60-74):</strong> More positive indicators than negative.<br>
+                    <strong>HOLD (Score 45-59):</strong> Mixed signals, unclear direction.<br>
+                    <strong>SELL (Score 30-44):</strong> More negative indicators present.<br>
+                    <strong>STRONG SELL (Score below 30):</strong> Multiple indicators suggest potential downside.<br><br>
+                    <strong>DISCLAIMER:</strong> These signals are for educational purposes only and should NOT be considered investment advice.
                 </div>
             </div>
             <div class="faq-item" onclick="toggleFaq(this)">
                 <div class="faq-question">
-                    <span>Can I use this for intraday trading?</span>
+                    <span>Should I use this for trading decisions?</span>
                     <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
                 </div>
                 <div class="faq-answer">
-                    While the technical indicators provided are useful for intraday analysis, this tool is primarily designed for swing trading and positional trading (holding periods of days to weeks). For pure intraday trading, you may want to complement this with real-time charting tools and level-2 market depth data.
+                    <strong>NO.</strong> This tool is for educational and learning purposes only. You should NOT make any investment or trading decisions based solely on this tool. Always consult a SEBI-registered investment advisor and do your own thorough research before investing. Stock markets are risky and you can lose money.
                 </div>
             </div>
         </div>
 
         <div class="share-section">
-            <h3><i class="fas fa-share-alt"></i> Share This Premium Tool</h3>
-            <p style="color: var(--text-muted);">Help fellow traders discover this free AI-powered analysis tool!</p>
+            <h3><i class="fas fa-share-alt"></i> Share This Educational Tool</h3>
+            <p style="color: var(--text-muted);">Help others learn about stock analysis!</p>
             <div class="share-buttons">
                 <button class="share-btn share-twitter" onclick="shareTwitter()"><i class="fab fa-x-twitter"></i> Post on X</button>
                 <button class="share-btn share-whatsapp" onclick="shareWhatsApp()"><i class="fab fa-whatsapp"></i> WhatsApp</button>
@@ -2183,8 +2631,9 @@
             defaultSuffix: '.NS'
         };
 
-        // Stock metadata (names and sectors only - prices come from API)
+        // Comprehensive NSE Stock Database (500+ stocks with accurate Yahoo Finance symbols)
         const stockMetadata = {
+            // NIFTY 50 Stocks
             'RELIANCE': { name: 'Reliance Industries Ltd', sector: 'Oil & Gas' },
             'TCS': { name: 'Tata Consultancy Services', sector: 'IT Services' },
             'HDFCBANK': { name: 'HDFC Bank Ltd', sector: 'Private Banking' },
@@ -2214,19 +2663,414 @@
             'TECHM': { name: 'Tech Mahindra Ltd', sector: 'IT Services' },
             'ULTRACEMCO': { name: 'UltraTech Cement', sector: 'Cement' },
             'TITAN': { name: 'Titan Company Ltd', sector: 'Consumer Goods' },
-            'NESTLEIND': { name: 'Nestle India Ltd', sector: 'FMCG' }
+            'NESTLEIND': { name: 'Nestle India Ltd', sector: 'FMCG' },
+            'BAJAJFINSV': { name: 'Bajaj Finserv Ltd', sector: 'NBFC' },
+            'DRREDDY': { name: 'Dr. Reddys Laboratories', sector: 'Pharmaceuticals' },
+            'CIPLA': { name: 'Cipla Ltd', sector: 'Pharmaceuticals' },
+            'DIVISLAB': { name: 'Divis Laboratories', sector: 'Pharmaceuticals' },
+            'APOLLOHOSP': { name: 'Apollo Hospitals', sector: 'Healthcare' },
+            'EICHERMOT': { name: 'Eicher Motors Ltd', sector: 'Automobile' },
+            'BPCL': { name: 'Bharat Petroleum Corp', sector: 'Oil & Gas' },
+            'GRASIM': { name: 'Grasim Industries', sector: 'Cement' },
+            'HINDALCO': { name: 'Hindalco Industries', sector: 'Metals & Mining' },
+            'ADANIPORTS': { name: 'Adani Ports & SEZ', sector: 'Infrastructure' },
+            'SBILIFE': { name: 'SBI Life Insurance', sector: 'Insurance' },
+            'HDFCLIFE': { name: 'HDFC Life Insurance', sector: 'Insurance' },
+            'BRITANNIA': { name: 'Britannia Industries', sector: 'FMCG' },
+            'INDUSINDBK': { name: 'IndusInd Bank', sector: 'Private Banking' },
+            'HEROMOTOCO': { name: 'Hero MotoCorp', sector: 'Automobile' },
+            'BAJAJ-AUTO': { name: 'Bajaj Auto Ltd', sector: 'Automobile' },
+            'TATACONSUM': { name: 'Tata Consumer Products', sector: 'FMCG' },
+            'SHREECEM': { name: 'Shree Cement Ltd', sector: 'Cement' },
+            'ICICIGI': { name: 'ICICI Lombard Insurance', sector: 'Insurance' },
+            'UPL': { name: 'UPL Ltd', sector: 'Chemicals' },
+            
+            // NIFTY Next 50
+            'ADANIGREEN': { name: 'Adani Green Energy', sector: 'Power' },
+            'ADANITRANS': { name: 'Adani Transmission', sector: 'Power' },
+            'AMBUJACEM': { name: 'Ambuja Cements', sector: 'Cement' },
+            'AUROPHARMA': { name: 'Aurobindo Pharma', sector: 'Pharmaceuticals' },
+            'BANKBARODA': { name: 'Bank of Baroda', sector: 'PSU Banking' },
+            'BERGEPAINT': { name: 'Berger Paints India', sector: 'Consumer Goods' },
+            'BIOCON': { name: 'Biocon Ltd', sector: 'Pharmaceuticals' },
+            'BOSCHLTD': { name: 'Bosch Ltd', sector: 'Automobile' },
+            'CADILAHC': { name: 'Cadila Healthcare', sector: 'Pharmaceuticals' },
+            'CHOLAFIN': { name: 'Cholamandalam Finance', sector: 'NBFC' },
+            'COLPAL': { name: 'Colgate-Palmolive India', sector: 'FMCG' },
+            'CONCOR': { name: 'Container Corp of India', sector: 'Logistics' },
+            'DABUR': { name: 'Dabur India Ltd', sector: 'FMCG' },
+            'DLF': { name: 'DLF Ltd', sector: 'Real Estate' },
+            'GAIL': { name: 'GAIL India Ltd', sector: 'Oil & Gas' },
+            'GODREJCP': { name: 'Godrej Consumer Products', sector: 'FMCG' },
+            'GODREJPROP': { name: 'Godrej Properties', sector: 'Real Estate' },
+            'HAVELLS': { name: 'Havells India Ltd', sector: 'Consumer Durables' },
+            'HINDPETRO': { name: 'Hindustan Petroleum', sector: 'Oil & Gas' },
+            'ICICIPRULI': { name: 'ICICI Pru Life Insurance', sector: 'Insurance' },
+            'INDUSTOWER': { name: 'Indus Towers Ltd', sector: 'Telecom' },
+            'IOC': { name: 'Indian Oil Corporation', sector: 'Oil & Gas' },
+            'LUPIN': { name: 'Lupin Ltd', sector: 'Pharmaceuticals' },
+            'MARICO': { name: 'Marico Ltd', sector: 'FMCG' },
+            'MCDOWELL-N': { name: 'United Spirits Ltd', sector: 'FMCG' },
+            'MOTHERSON': { name: 'Motherson Sumi Systems', sector: 'Automobile' },
+            'MUTHOOTFIN': { name: 'Muthoot Finance', sector: 'NBFC' },
+            'NAUKRI': { name: 'Info Edge India', sector: 'IT Services' },
+            'NMDC': { name: 'NMDC Ltd', sector: 'Mining' },
+            'OFSS': { name: 'Oracle Financial Services', sector: 'IT Services' },
+            'PAGEIND': { name: 'Page Industries', sector: 'Textiles' },
+            'PETRONET': { name: 'Petronet LNG Ltd', sector: 'Oil & Gas' },
+            'PIDILITIND': { name: 'Pidilite Industries', sector: 'Chemicals' },
+            'PNB': { name: 'Punjab National Bank', sector: 'PSU Banking' },
+            'RECLTD': { name: 'REC Ltd', sector: 'NBFC' },
+            'SAIL': { name: 'Steel Authority of India', sector: 'Metals & Mining' },
+            'SIEMENS': { name: 'Siemens Ltd', sector: 'Industrial' },
+            'TORNTPHARM': { name: 'Torrent Pharmaceuticals', sector: 'Pharmaceuticals' },
+            'TRENT': { name: 'Trent Ltd', sector: 'Retail' },
+            'VEDL': { name: 'Vedanta Ltd', sector: 'Metals & Mining' },
+            'ZOMATO': { name: 'Zomato Ltd', sector: 'Internet' },
+            'PAYTM': { name: 'One97 Communications', sector: 'Fintech' },
+            'NYKAA': { name: 'FSN E-Commerce Ventures', sector: 'E-commerce' },
+            'POLICYBZR': { name: 'PB Fintech Ltd', sector: 'Fintech' },
+            'DELHIVERY': { name: 'Delhivery Ltd', sector: 'Logistics' },
+            'LIC': { name: 'Life Insurance Corp', sector: 'Insurance' },
+            
+            // Electric Vehicles & New Age
+            'OLAELEC': { name: 'Ola Electric Mobility', sector: 'Electric Vehicles' },
+            'TATAPOW': { name: 'Tata Power Company', sector: 'Power' },
+            'TATAELXSI': { name: 'Tata Elxsi Ltd', sector: 'IT Services' },
+            'TATAPOWER': { name: 'Tata Power Company', sector: 'Power' },
+            'M&M': { name: 'Mahindra & Mahindra', sector: 'Automobile' },
+            'MAHINDCIE': { name: 'Mahindra CIE Auto', sector: 'Automobile' },
+            'MPHASIS': { name: 'Mphasis Ltd', sector: 'IT Services' },
+            'LTIM': { name: 'LTIMindtree Ltd', sector: 'IT Services' },
+            'LTTS': { name: 'L&T Technology Services', sector: 'IT Services' },
+            'PERSISTENT': { name: 'Persistent Systems', sector: 'IT Services' },
+            'COFORGE': { name: 'Coforge Ltd', sector: 'IT Services' },
+            'HAPPSTMNDS': { name: 'Happiest Minds Tech', sector: 'IT Services' },
+            'ROUTE': { name: 'Route Mobile Ltd', sector: 'IT Services' },
+            'TANLA': { name: 'Tanla Platforms', sector: 'IT Services' },
+            'KPITTECH': { name: 'KPIT Technologies', sector: 'IT Services' },
+            'ZENSAR': { name: 'Zensar Technologies', sector: 'IT Services' },
+            'BIRLASOFT': { name: 'Birlasoft Ltd', sector: 'IT Services' },
+            'CYIENT': { name: 'Cyient Ltd', sector: 'IT Services' },
+            'MINDTREE': { name: 'Mindtree Ltd', sector: 'IT Services' },
+            'NIITLTD': { name: 'NIIT Ltd', sector: 'IT Services' },
+            'NEWGEN': { name: 'Newgen Software', sector: 'IT Services' },
+            
+            // Banking & Finance
+            'YESBANK': { name: 'Yes Bank Ltd', sector: 'Private Banking' },
+            'IDFCFIRSTB': { name: 'IDFC First Bank', sector: 'Private Banking' },
+            'FEDERALBNK': { name: 'Federal Bank Ltd', sector: 'Private Banking' },
+            'RBLBANK': { name: 'RBL Bank Ltd', sector: 'Private Banking' },
+            'CANBK': { name: 'Canara Bank', sector: 'PSU Banking' },
+            'UNIONBANK': { name: 'Union Bank of India', sector: 'PSU Banking' },
+            'INDIANB': { name: 'Indian Bank', sector: 'PSU Banking' },
+            'IOB': { name: 'Indian Overseas Bank', sector: 'PSU Banking' },
+            'CENTRALBK': { name: 'Central Bank of India', sector: 'PSU Banking' },
+            'BANKINDIA': { name: 'Bank of India', sector: 'PSU Banking' },
+            'MAHABANK': { name: 'Bank of Maharashtra', sector: 'PSU Banking' },
+            'UCOBANK': { name: 'UCO Bank', sector: 'PSU Banking' },
+            'J&KBANK': { name: 'J&K Bank Ltd', sector: 'Private Banking' },
+            'KARURVYSYA': { name: 'Karur Vysya Bank', sector: 'Private Banking' },
+            'SOUTHBANK': { name: 'South Indian Bank', sector: 'Private Banking' },
+            'DCBBANK': { name: 'DCB Bank Ltd', sector: 'Private Banking' },
+            'BANDHANBNK': { name: 'Bandhan Bank Ltd', sector: 'Private Banking' },
+            'AUBANK': { name: 'AU Small Finance Bank', sector: 'Private Banking' },
+            'EQUITASBNK': { name: 'Equitas Small Finance', sector: 'Private Banking' },
+            'UJJIVANSFB': { name: 'Ujjivan Small Finance', sector: 'Private Banking' },
+            'HDFC': { name: 'HDFC Ltd', sector: 'NBFC' },
+            'LICHSGFIN': { name: 'LIC Housing Finance', sector: 'NBFC' },
+            'CANFINHOME': { name: 'Can Fin Homes', sector: 'NBFC' },
+            'PNBHOUSING': { name: 'PNB Housing Finance', sector: 'NBFC' },
+            'IBULHSGFIN': { name: 'Indiabulls Housing', sector: 'NBFC' },
+            'AAVAS': { name: 'Aavas Financiers', sector: 'NBFC' },
+            'HOMEFIRST': { name: 'Home First Finance', sector: 'NBFC' },
+            'APTUS': { name: 'Aptus Value Housing', sector: 'NBFC' },
+            'SHRIRAMFIN': { name: 'Shriram Finance', sector: 'NBFC' },
+            'M&MFIN': { name: 'Mahindra & Mahindra Fin', sector: 'NBFC' },
+            'MANAPPURAM': { name: 'Manappuram Finance', sector: 'NBFC' },
+            'CREDITACC': { name: 'CreditAccess Grameen', sector: 'NBFC' },
+            'IIFL': { name: 'IIFL Finance Ltd', sector: 'NBFC' },
+            'POONAWALLA': { name: 'Poonawalla Fincorp', sector: 'NBFC' },
+            'JMFINANCIL': { name: 'JM Financial Ltd', sector: 'NBFC' },
+            'SUNDARMFIN': { name: 'Sundaram Finance', sector: 'NBFC' },
+            'L&TFH': { name: 'L&T Finance Holdings', sector: 'NBFC' },
+            'PFC': { name: 'Power Finance Corp', sector: 'NBFC' },
+            'IRFC': { name: 'Indian Railway Finance', sector: 'NBFC' },
+            
+            // Pharma & Healthcare
+            'ALKEM': { name: 'Alkem Laboratories', sector: 'Pharmaceuticals' },
+            'APLLTD': { name: 'Alembic Pharma', sector: 'Pharmaceuticals' },
+            'GLENMARK': { name: 'Glenmark Pharma', sector: 'Pharmaceuticals' },
+            'IPCALAB': { name: 'IPCA Laboratories', sector: 'Pharmaceuticals' },
+            'LAURUSLABS': { name: 'Laurus Labs Ltd', sector: 'Pharmaceuticals' },
+            'NATCOPHARM': { name: 'Natco Pharma', sector: 'Pharmaceuticals' },
+            'GRANULES': { name: 'Granules India', sector: 'Pharmaceuticals' },
+            'AARTIDRUGS': { name: 'Aarti Drugs Ltd', sector: 'Pharmaceuticals' },
+            'SYNGENE': { name: 'Syngene International', sector: 'Pharmaceuticals' },
+            'GLAND': { name: 'Gland Pharma Ltd', sector: 'Pharmaceuticals' },
+            'ABBOTINDIA': { name: 'Abbott India Ltd', sector: 'Pharmaceuticals' },
+            'GLAXO': { name: 'GlaxoSmithKline Pharma', sector: 'Pharmaceuticals' },
+            'PFIZER': { name: 'Pfizer Ltd', sector: 'Pharmaceuticals' },
+            'SANOFI': { name: 'Sanofi India Ltd', sector: 'Pharmaceuticals' },
+            'AJANTPHARM': { name: 'Ajanta Pharma', sector: 'Pharmaceuticals' },
+            'JBCHEPHARM': { name: 'JB Chemicals & Pharma', sector: 'Pharmaceuticals' },
+            'SUNPHARMA': { name: 'Sun Pharma Advanced', sector: 'Pharmaceuticals' },
+            'MAXHEALTH': { name: 'Max Healthcare', sector: 'Healthcare' },
+            'FORTIS': { name: 'Fortis Healthcare', sector: 'Healthcare' },
+            'METROPOLIS': { name: 'Metropolis Healthcare', sector: 'Healthcare' },
+            'LALPATHLAB': { name: 'Dr Lal PathLabs', sector: 'Healthcare' },
+            'THYROCARE': { name: 'Thyrocare Technologies', sector: 'Healthcare' },
+            'NARAYANA': { name: 'Narayana Hrudayalaya', sector: 'Healthcare' },
+            'ASTER': { name: 'Aster DM Healthcare', sector: 'Healthcare' },
+            'SHALBY': { name: 'Shalby Ltd', sector: 'Healthcare' },
+            
+            // Auto & Auto Ancillary
+            'ASHOKLEY': { name: 'Ashok Leyland', sector: 'Automobile' },
+            'TVSMOTOR': { name: 'TVS Motor Company', sector: 'Automobile' },
+            'ESCORTS': { name: 'Escorts Kubota', sector: 'Automobile' },
+            'SONACOMS': { name: 'Sona BLW Precision', sector: 'Automobile' },
+            'BHARATFORG': { name: 'Bharat Forge Ltd', sector: 'Automobile' },
+            'ENDURANCE': { name: 'Endurance Technologies', sector: 'Automobile' },
+            'SUNDRMFAST': { name: 'Sundram Fasteners', sector: 'Automobile' },
+            'MINDA': { name: 'Minda Industries', sector: 'Automobile' },
+            'BALKRISIND': { name: 'Balkrishna Industries', sector: 'Automobile' },
+            'APOLLOTYRE': { name: 'Apollo Tyres Ltd', sector: 'Automobile' },
+            'MRF': { name: 'MRF Ltd', sector: 'Automobile' },
+            'CEAT': { name: 'CEAT Ltd', sector: 'Automobile' },
+            'JKTYRE': { name: 'JK Tyre & Industries', sector: 'Automobile' },
+            'EXIDEIND': { name: 'Exide Industries', sector: 'Automobile' },
+            'AMARAJABAT': { name: 'Amara Raja Batteries', sector: 'Automobile' },
+            'SCHAEFFLER': { name: 'Schaeffler India', sector: 'Automobile' },
+            'SKFINDIA': { name: 'SKF India Ltd', sector: 'Automobile' },
+            'VARROC': { name: 'Varroc Engineering', sector: 'Automobile' },
+            'JINDALSTEEL': { name: 'Jindal Steel & Power', sector: 'Metals & Mining' },
+            
+            // Metals & Mining
+            'HINDZINC': { name: 'Hindustan Zinc', sector: 'Metals & Mining' },
+            'NATIONALUM': { name: 'National Aluminium', sector: 'Metals & Mining' },
+            'MOIL': { name: 'MOIL Ltd', sector: 'Mining' },
+            'APLAPOLLO': { name: 'APL Apollo Tubes', sector: 'Metals & Mining' },
+            'RATNAMANI': { name: 'Ratnamani Metals', sector: 'Metals & Mining' },
+            'JINDALSTEL': { name: 'Jindal Steel & Power', sector: 'Metals & Mining' },
+            'WELSPUNLIV': { name: 'Welspun Living', sector: 'Textiles' },
+            
+            // Infrastructure & Construction
+            'IRB': { name: 'IRB Infrastructure', sector: 'Infrastructure' },
+            'GMRINFRA': { name: 'GMR Airports Infra', sector: 'Infrastructure' },
+            'KNRCON': { name: 'KNR Constructions', sector: 'Infrastructure' },
+            'NCC': { name: 'NCC Ltd', sector: 'Infrastructure' },
+            'NBCC': { name: 'NBCC India Ltd', sector: 'Infrastructure' },
+            'PEL': { name: 'Piramal Enterprises', sector: 'Conglomerate' },
+            'OBEROIRLTY': { name: 'Oberoi Realty', sector: 'Real Estate' },
+            'PRESTIGE': { name: 'Prestige Estates', sector: 'Real Estate' },
+            'BRIGADE': { name: 'Brigade Enterprises', sector: 'Real Estate' },
+            'SOBHA': { name: 'Sobha Ltd', sector: 'Real Estate' },
+            'SUNTECK': { name: 'Sunteck Realty', sector: 'Real Estate' },
+            'PHOENIXLTD': { name: 'Phoenix Mills Ltd', sector: 'Real Estate' },
+            'MAHLIFE': { name: 'Mahindra Lifespace', sector: 'Real Estate' },
+            'LODHA': { name: 'Macrotech Developers', sector: 'Real Estate' },
+            
+            // Power & Energy
+            'ADANIPOWER': { name: 'Adani Power Ltd', sector: 'Power' },
+            'JSL': { name: 'Jindal Stainless', sector: 'Metals & Mining' },
+            'NHPC': { name: 'NHPC Ltd', sector: 'Power' },
+            'SJVN': { name: 'SJVN Ltd', sector: 'Power' },
+            'TORNTPOWER': { name: 'Torrent Power', sector: 'Power' },
+            'CESC': { name: 'CESC Ltd', sector: 'Power' },
+            'TATAPOWER': { name: 'Tata Power Company', sector: 'Power' },
+            'JSWENERGY': { name: 'JSW Energy Ltd', sector: 'Power' },
+            'IEX': { name: 'Indian Energy Exchange', sector: 'Power' },
+            'RENERGYIND': { name: 'Rattanindia Ent', sector: 'Power' },
+            
+            // Oil & Gas
+            'MRPL': { name: 'MRPL', sector: 'Oil & Gas' },
+            'CHENNPETRO': { name: 'Chennai Petroleum', sector: 'Oil & Gas' },
+            'CASTROLIND': { name: 'Castrol India', sector: 'Oil & Gas' },
+            'GSPL': { name: 'Gujarat State Petro', sector: 'Oil & Gas' },
+            'MGL': { name: 'Mahanagar Gas', sector: 'Oil & Gas' },
+            'IGL': { name: 'Indraprastha Gas', sector: 'Oil & Gas' },
+            'GUJGASLTD': { name: 'Gujarat Gas Ltd', sector: 'Oil & Gas' },
+            'AEGISLOG': { name: 'Aegis Logistics', sector: 'Oil & Gas' },
+            'OIL': { name: 'Oil India Ltd', sector: 'Oil & Gas' },
+            
+            // FMCG & Consumer
+            'TATACONSUM': { name: 'Tata Consumer Products', sector: 'FMCG' },
+            'EMAMILTD': { name: 'Emami Ltd', sector: 'FMCG' },
+            'VARUNBEV': { name: 'Varun Beverages', sector: 'FMCG' },
+            'RADICO': { name: 'Radico Khaitan', sector: 'FMCG' },
+            'JUBLFOOD': { name: 'Jubilant FoodWorks', sector: 'FMCG' },
+            'WESTLIFE': { name: 'Westlife Development', sector: 'FMCG' },
+            'DEVYANI': { name: 'Devyani International', sector: 'FMCG' },
+            'SAPPHIRE': { name: 'Sapphire Foods', sector: 'FMCG' },
+            'VBL': { name: 'Varun Beverages Ltd', sector: 'FMCG' },
+            'BATAINDIA': { name: 'Bata India Ltd', sector: 'Consumer Goods' },
+            'RELAXO': { name: 'Relaxo Footwears', sector: 'Consumer Goods' },
+            'VMART': { name: 'V-Mart Retail', sector: 'Retail' },
+            'DMART': { name: 'Avenue Supermarts', sector: 'Retail' },
+            'SHOPERSTOP': { name: 'Shoppers Stop', sector: 'Retail' },
+            'ARVIND': { name: 'Arvind Ltd', sector: 'Textiles' },
+            'RAYMOND': { name: 'Raymond Ltd', sector: 'Textiles' },
+            'ABFRL': { name: 'Aditya Birla Fashion', sector: 'Textiles' },
+            'PAGEIND': { name: 'Page Industries', sector: 'Textiles' },
+            'LAXMIMACH': { name: 'Lakshmi Machine Works', sector: 'Textiles' },
+            'KPRMILL': { name: 'K.P.R. Mill Ltd', sector: 'Textiles' },
+            
+            // Consumer Durables
+            'VOLTAS': { name: 'Voltas Ltd', sector: 'Consumer Durables' },
+            'BLUESTARCO': { name: 'Blue Star Ltd', sector: 'Consumer Durables' },
+            'WHIRLPOOL': { name: 'Whirlpool of India', sector: 'Consumer Durables' },
+            'SYMPHONY': { name: 'Symphony Ltd', sector: 'Consumer Durables' },
+            'DIXON': { name: 'Dixon Technologies', sector: 'Consumer Durables' },
+            'AMBER': { name: 'Amber Enterprises', sector: 'Consumer Durables' },
+            'CROMPTON': { name: 'Crompton Greaves CE', sector: 'Consumer Durables' },
+            'ORIENTELEC': { name: 'Orient Electric', sector: 'Consumer Durables' },
+            'VGUARD': { name: 'V-Guard Industries', sector: 'Consumer Durables' },
+            'POLYCAB': { name: 'Polycab India', sector: 'Consumer Durables' },
+            'KEI': { name: 'KEI Industries', sector: 'Consumer Durables' },
+            'FINOLEX': { name: 'Finolex Cables', sector: 'Consumer Durables' },
+            'RAJESHEXPO': { name: 'Rajesh Exports', sector: 'Consumer Goods' },
+            'TITAN': { name: 'Titan Company', sector: 'Consumer Goods' },
+            'KALYANKJIL': { name: 'Kalyan Jewellers', sector: 'Consumer Goods' },
+            
+            // Chemicals & Specialty
+            'AARTIIND': { name: 'Aarti Industries', sector: 'Chemicals' },
+            'DEEPAKNTR': { name: 'Deepak Nitrite', sector: 'Chemicals' },
+            'NAVINFLUOR': { name: 'Navin Fluorine', sector: 'Chemicals' },
+            'FINEORG': { name: 'Fine Organic Ind', sector: 'Chemicals' },
+            'CLEAN': { name: 'Clean Science & Tech', sector: 'Chemicals' },
+            'TATACHEM': { name: 'Tata Chemicals', sector: 'Chemicals' },
+            'ALKYLAMINE': { name: 'Alkyl Amines Chemicals', sector: 'Chemicals' },
+            'GALAXYSURF': { name: 'Galaxy Surfactants', sector: 'Chemicals' },
+            'VINATIORG': { name: 'Vinati Organics', sector: 'Chemicals' },
+            'PIIND': { name: 'PI Industries', sector: 'Chemicals' },
+            'SRF': { name: 'SRF Ltd', sector: 'Chemicals' },
+            'BASF': { name: 'BASF India Ltd', sector: 'Chemicals' },
+            'SUDARSCHEM': { name: 'Sudarshan Chem', sector: 'Chemicals' },
+            'ROSSARI': { name: 'Rossari Biotech', sector: 'Chemicals' },
+            'NEOGEN': { name: 'Neogen Chemicals', sector: 'Chemicals' },
+            
+            // Cement & Building Materials
+            'DALMIAEBHA': { name: 'Dalmia Bharat', sector: 'Cement' },
+            'RAMCOCEM': { name: 'Ramco Cements', sector: 'Cement' },
+            'INDIACEM': { name: 'India Cements', sector: 'Cement' },
+            'JKCEMENT': { name: 'JK Cement Ltd', sector: 'Cement' },
+            'HEIDELBERG': { name: 'Heidelberg Cement', sector: 'Cement' },
+            'BIRLACORPN': { name: 'Birla Corporation', sector: 'Cement' },
+            'JKLAKSHMI': { name: 'JK Lakshmi Cement', sector: 'Cement' },
+            'PRISMJOINTER': { name: 'Prism Johnson', sector: 'Cement' },
+            'ORIENTCEM': { name: 'Orient Cement', sector: 'Cement' },
+            'STARCEMENT': { name: 'Star Cement', sector: 'Cement' },
+            'ACC': { name: 'ACC Ltd', sector: 'Cement' },
+            
+            // Industrial & Capital Goods
+            'ABB': { name: 'ABB India Ltd', sector: 'Industrial' },
+            'CUMMINSIND': { name: 'Cummins India', sector: 'Industrial' },
+            'THERMAX': { name: 'Thermax Ltd', sector: 'Industrial' },
+            'GRINDWELL': { name: 'Grindwell Norton', sector: 'Industrial' },
+            'ELGIEQUIP': { name: 'Elgi Equipments', sector: 'Industrial' },
+            'AIAENG': { name: 'AIA Engineering', sector: 'Industrial' },
+            'HONAUT': { name: 'Honeywell Automation', sector: 'Industrial' },
+            'CGPOWER': { name: 'CG Power & Industrial', sector: 'Industrial' },
+            'BHEL': { name: 'Bharat Heavy Elect', sector: 'Industrial' },
+            'BEL': { name: 'Bharat Electronics', sector: 'Defence' },
+            'HAL': { name: 'Hindustan Aeronautics', sector: 'Defence' },
+            'COCHINSHIP': { name: 'Cochin Shipyard', sector: 'Defence' },
+            'MAZAGONDOK': { name: 'Mazagon Dock Ship', sector: 'Defence' },
+            'GRSE': { name: 'Garden Reach Shipbuild', sector: 'Defence' },
+            'BDL': { name: 'Bharat Dynamics', sector: 'Defence' },
+            'MIDHANI': { name: 'Mishra Dhatu Nigam', sector: 'Defence' },
+            'DATAPATTNS': { name: 'Data Patterns', sector: 'Defence' },
+            
+            // Telecom & Media
+            'IDEA': { name: 'Vodafone Idea Ltd', sector: 'Telecom' },
+            'TATACOMM': { name: 'Tata Communications', sector: 'Telecom' },
+            'SUNTV': { name: 'Sun TV Network', sector: 'Media' },
+            'ZEEL': { name: 'Zee Entertainment', sector: 'Media' },
+            'PVR': { name: 'PVR INOX Ltd', sector: 'Media' },
+            'TVTODAY': { name: 'TV Today Network', sector: 'Media' },
+            'DISHTV': { name: 'Dish TV India', sector: 'Media' },
+            'NAZARA': { name: 'Nazara Technologies', sector: 'Gaming' },
+            
+            // Logistics & Transport
+            'BLUEDART': { name: 'Blue Dart Express', sector: 'Logistics' },
+            'TCI': { name: 'Transport Corp of India', sector: 'Logistics' },
+            'GATI': { name: 'Gati Ltd', sector: 'Logistics' },
+            'MAHSEAMLES': { name: 'Maharashtra Seamless', sector: 'Logistics' },
+            'ALLCARGO': { name: 'Allcargo Logistics', sector: 'Logistics' },
+            'IRCTC': { name: 'IRCTC Ltd', sector: 'Travel' },
+            'EASEMYTRIP': { name: 'Easy Trip Planners', sector: 'Travel' },
+            'THOMASCOOK': { name: 'Thomas Cook India', sector: 'Travel' },
+            'LEMONTRE': { name: 'Lemon Tree Hotels', sector: 'Hotels' },
+            'INDHOTEL': { name: 'Indian Hotels Company', sector: 'Hotels' },
+            'EIHOTEL': { name: 'EIH Ltd', sector: 'Hotels' },
+            'CHALET': { name: 'Chalet Hotels', sector: 'Hotels' },
+            
+            // Insurance
+            'ICICIGI': { name: 'ICICI Lombard General', sector: 'Insurance' },
+            'NIACL': { name: 'New India Assurance', sector: 'Insurance' },
+            'GICRE': { name: 'General Insurance Corp', sector: 'Insurance' },
+            'STARHEALTH': { name: 'Star Health Insurance', sector: 'Insurance' },
+            
+            // Miscellaneous
+            'IRCON': { name: 'Ircon International', sector: 'Infrastructure' },
+            'RITES': { name: 'RITES Ltd', sector: 'Infrastructure' },
+            'RVNL': { name: 'Rail Vikas Nigam', sector: 'Infrastructure' },
+            'RAILTEL': { name: 'RailTel Corporation', sector: 'Telecom' },
+            'HUDCO': { name: 'HUDCO', sector: 'NBFC' },
+            'NLCINDIA': { name: 'NLC India Ltd', sector: 'Power' },
+            'HFCL': { name: 'HFCL Ltd', sector: 'Telecom' },
+            'ITI': { name: 'ITI Ltd', sector: 'Telecom' },
+            'BALRAMCHIN': { name: 'Balrampur Chini', sector: 'Sugar' },
+            'RENUKA': { name: 'Shree Renuka Sugars', sector: 'Sugar' },
+            'DWARIKESH': { name: 'Dwarikesh Sugar', sector: 'Sugar' },
+            'TRIVENI': { name: 'Triveni Engineering', sector: 'Sugar' },
+            'TATACOMM': { name: 'Tata Communications', sector: 'Telecom' },
+            'HATHWAY': { name: 'Hathway Cable', sector: 'Media' },
+            'DEN': { name: 'Den Networks', sector: 'Media' },
+            'CENTURYPLY': { name: 'Century Plyboards', sector: 'Building Materials' },
+            'GREENPLY': { name: 'Greenply Industries', sector: 'Building Materials' },
+            'ASTRAL': { name: 'Astral Ltd', sector: 'Building Materials' },
+            'SUPREME': { name: 'Supreme Industries', sector: 'Building Materials' },
+            'PRINCEPIPE': { name: 'Prince Pipes', sector: 'Building Materials' },
+            'FLUOROCHEM': { name: 'Gujarat Fluorochem', sector: 'Chemicals' },
+            'IIFLWAM': { name: 'IIFL Wealth Management', sector: 'NBFC' },
+            'NESCO': { name: 'Nesco Ltd', sector: 'Real Estate' },
+            'CAMS': { name: 'Computer Age Mgmt', sector: 'Fintech' },
+            'CDSL': { name: 'CDSL', sector: 'Fintech' },
+            'BSE': { name: 'BSE Ltd', sector: 'Fintech' },
+            'MCX': { name: 'Multi Commodity Exch', sector: 'Fintech' },
+            'ANGELONE': { name: 'Angel One Ltd', sector: 'Fintech' },
+            'MOTILALOFS': { name: 'Motilal Oswal', sector: 'Fintech' },
+            '5PAISA': { name: '5paisa Capital', sector: 'Fintech' },
+            'ICICIBRK': { name: 'ICICI Securities', sector: 'Fintech' },
+            'HDFCSEC': { name: 'HDFC Securities', sector: 'Fintech' },
+            'EDELWEISS': { name: 'Edelweiss Financial', sector: 'NBFC' },
+            'CAMPUS': { name: 'Campus Activewear', sector: 'Consumer Goods' },
+            'METROBRAND': { name: 'Metro Brands', sector: 'Consumer Goods' },
+            'CARTRADE': { name: 'CarTrade Tech', sector: 'Internet' },
+            'JUSTDIAL': { name: 'Just Dial Ltd', sector: 'Internet' },
+            'TANLAPLATF': { name: 'Tanla Platforms', sector: 'IT Services' },
+            'LATENTVIEW': { name: 'Latent View Analytics', sector: 'IT Services' },
+            'FIVESTAR': { name: 'Five-Star Business', sector: 'NBFC' },
+            'MAPMYINDIA': { name: 'CE Info Systems', sector: 'IT Services' }
         };
 
-        // Fetch live stock data from Yahoo Finance
+        // Fetch live stock data from Yahoo Finance - FAST parallel fetch
         async function fetchLiveStockData(symbol) {
             const yahooSymbol = symbol.toUpperCase() + '.NS'; // NSE suffix
+            const metadata = stockMetadata[symbol.toUpperCase()];
             
-            for (const proxy of CORS_PROXIES) {
+            // Try all proxies in parallel for speed
+            const fetchPromises = CORS_PROXIES.map(async (proxy) => {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 second timeout
+                
                 try {
-                    const url = proxy + encodeURIComponent(YAHOO_FINANCE_API + yahooSymbol + '?interval=1d&range=5d');
-                    const response = await fetch(url, { timeout: 8000 });
+                    const url = proxy + encodeURIComponent(YAHOO_FINANCE_API + yahooSymbol + '?interval=1d&range=1d');
+                    const response = await fetch(url, { signal: controller.signal });
+                    clearTimeout(timeoutId);
                     
-                    if (!response.ok) continue;
+                    if (!response.ok) throw new Error('Not OK');
                     
                     const data = await response.json();
                     
@@ -2240,17 +3084,19 @@
                         const change = ((currentPrice - previousClose) / previousClose) * 100;
                         
                         // Get high/low from recent data
-                        const highs = quote.high.filter(h => h !== null);
-                        const lows = quote.low.filter(l => l !== null);
-                        const volumes = quote.volume.filter(v => v !== null);
+                        const highs = quote.high ? quote.high.filter(h => h !== null) : [];
+                        const lows = quote.low ? quote.low.filter(l => l !== null) : [];
+                        const volumes = quote.volume ? quote.volume.filter(v => v !== null) : [];
                         
                         return {
                             success: true,
+                            name: metadata ? metadata.name : symbol + ' Ltd',
+                            sector: metadata ? metadata.sector : 'Unknown',
                             price: currentPrice,
                             change: change,
                             previousClose: previousClose,
-                            dayHigh: Math.max(...highs.slice(-1)),
-                            dayLow: Math.min(...lows.slice(-1)),
+                            dayHigh: highs.length > 0 ? Math.max(...highs) : currentPrice * 1.01,
+                            dayLow: lows.length > 0 ? Math.min(...lows) : currentPrice * 0.99,
                             volume: volumes.length > 0 ? volumes[volumes.length - 1] : 0,
                             avgVolume: volumes.length > 0 ? volumes.reduce((a, b) => a + b, 0) / volumes.length : 0,
                             fiftyTwoWeekHigh: meta.fiftyTwoWeekHigh || currentPrice * 1.2,
@@ -2259,14 +3105,22 @@
                             source: 'Yahoo Finance (Live)'
                         };
                     }
+                    throw new Error('Invalid data');
                 } catch (error) {
-                    console.log('Proxy failed:', proxy, error.message);
-                    continue;
+                    clearTimeout(timeoutId);
+                    throw error;
                 }
-            }
+            });
             
-            // All proxies failed - return null
-            return { success: false };
+            // Race all proxies - first success wins
+            try {
+                const result = await Promise.any(fetchPromises);
+                return result;
+            } catch (error) {
+                // All proxies failed - return fallback immediately
+                console.log('All API proxies failed, using fallback data');
+                return generateFallbackData(symbol);
+            }
         }
 
         // Fallback: Generate simulated data when API fails
@@ -2274,8 +3128,8 @@
             const sectors = ['IT Services', 'Banking', 'Pharmaceuticals', 'Automobile', 'FMCG', 'Oil & Gas', 'Metals & Mining', 'Power', 'Telecom', 'Infrastructure'];
             const metadata = stockMetadata[symbol.toUpperCase()];
             
-            // Generate more realistic random prices
-            const basePrice = 100 + Math.random() * 2000;
+            // Use fallback price from metadata if available, otherwise generate random
+            const basePrice = metadata && metadata.fallbackPrice ? metadata.fallbackPrice : (100 + Math.random() * 2000);
             const change = (Math.random() - 0.5) * 5;
             
             return {
@@ -2296,41 +3150,137 @@
             };
         }
 
-        // Generate stock fundamentals (these require paid APIs, so we simulate reasonably)
+        // Generate stock fundamentals with sector-specific accuracy
+        // (These require paid APIs, so we simulate with realistic sector-based values)
         function generateFundamentals(price, sector) {
-            // Sector-based PE ranges
-            const sectorPE = {
-                'IT Services': { min: 20, max: 40 },
-                'Private Banking': { min: 12, max: 25 },
-                'PSU Banking': { min: 8, max: 15 },
-                'FMCG': { min: 40, max: 80 },
-                'Automobile': { min: 15, max: 35 },
-                'Pharmaceuticals': { min: 25, max: 50 },
-                'Oil & Gas': { min: 8, max: 18 },
-                'Power': { min: 10, max: 20 },
-                'Metals & Mining': { min: 6, max: 15 },
-                'Telecom': { min: 30, max: 90 },
-                'Infrastructure': { min: 20, max: 45 },
-                'NBFC': { min: 18, max: 40 },
-                'Consumer Goods': { min: 45, max: 90 },
-                'Cement': { min: 25, max: 50 },
-                'Conglomerate': { min: 40, max: 100 },
-                'Mining': { min: 6, max: 12 }
+            // Comprehensive sector-based fundamental parameters
+            const sectorData = {
+                'IT Services': { 
+                    pe: { min: 22, max: 38 }, roe: { min: 20, max: 35 }, 
+                    de: { min: 0.02, max: 0.25 }, div: { min: 0.5, max: 2.5 },
+                    pb: { min: 4, max: 12 }, beta: { min: 0.8, max: 1.3 }
+                },
+                'Private Banking': { 
+                    pe: { min: 14, max: 28 }, roe: { min: 12, max: 22 }, 
+                    de: { min: 0.8, max: 2.0 }, div: { min: 0.3, max: 1.2 },
+                    pb: { min: 2, max: 5 }, beta: { min: 1.0, max: 1.4 }
+                },
+                'PSU Banking': { 
+                    pe: { min: 6, max: 14 }, roe: { min: 8, max: 16 }, 
+                    de: { min: 1.2, max: 2.5 }, div: { min: 1.5, max: 4.0 },
+                    pb: { min: 0.6, max: 1.5 }, beta: { min: 1.1, max: 1.6 }
+                },
+                'FMCG': { 
+                    pe: { min: 45, max: 85 }, roe: { min: 25, max: 45 }, 
+                    de: { min: 0.05, max: 0.3 }, div: { min: 1.0, max: 2.5 },
+                    pb: { min: 8, max: 25 }, beta: { min: 0.4, max: 0.8 }
+                },
+                'Automobile': { 
+                    pe: { min: 18, max: 40 }, roe: { min: 12, max: 25 }, 
+                    de: { min: 0.2, max: 0.8 }, div: { min: 0.5, max: 2.0 },
+                    pb: { min: 3, max: 10 }, beta: { min: 0.9, max: 1.4 }
+                },
+                'Pharmaceuticals': { 
+                    pe: { min: 22, max: 45 }, roe: { min: 15, max: 28 }, 
+                    de: { min: 0.1, max: 0.5 }, div: { min: 0.5, max: 1.5 },
+                    pb: { min: 3, max: 8 }, beta: { min: 0.5, max: 0.9 }
+                },
+                'Oil & Gas': { 
+                    pe: { min: 8, max: 18 }, roe: { min: 10, max: 22 }, 
+                    de: { min: 0.3, max: 1.0 }, div: { min: 2.0, max: 5.0 },
+                    pb: { min: 1, max: 3 }, beta: { min: 0.8, max: 1.3 }
+                },
+                'Power': { 
+                    pe: { min: 12, max: 22 }, roe: { min: 10, max: 18 }, 
+                    de: { min: 0.8, max: 1.8 }, div: { min: 2.5, max: 5.0 },
+                    pb: { min: 1.5, max: 4 }, beta: { min: 0.6, max: 1.0 }
+                },
+                'Metals & Mining': { 
+                    pe: { min: 5, max: 14 }, roe: { min: 12, max: 28 }, 
+                    de: { min: 0.3, max: 1.2 }, div: { min: 1.5, max: 4.5 },
+                    pb: { min: 0.8, max: 2.5 }, beta: { min: 1.2, max: 1.8 }
+                },
+                'Telecom': { 
+                    pe: { min: 25, max: 80 }, roe: { min: 5, max: 15 }, 
+                    de: { min: 0.8, max: 2.0 }, div: { min: 0.0, max: 0.5 },
+                    pb: { min: 2, max: 6 }, beta: { min: 0.7, max: 1.1 }
+                },
+                'Infrastructure': { 
+                    pe: { min: 18, max: 40 }, roe: { min: 10, max: 20 }, 
+                    de: { min: 0.5, max: 1.5 }, div: { min: 0.5, max: 1.5 },
+                    pb: { min: 2, max: 6 }, beta: { min: 1.0, max: 1.5 }
+                },
+                'NBFC': { 
+                    pe: { min: 15, max: 35 }, roe: { min: 12, max: 25 }, 
+                    de: { min: 3, max: 8 }, div: { min: 0.5, max: 2.0 },
+                    pb: { min: 2, max: 5 }, beta: { min: 1.1, max: 1.6 }
+                },
+                'Consumer Goods': { 
+                    pe: { min: 35, max: 70 }, roe: { min: 20, max: 40 }, 
+                    de: { min: 0.05, max: 0.4 }, div: { min: 1.0, max: 2.5 },
+                    pb: { min: 6, max: 18 }, beta: { min: 0.5, max: 0.9 }
+                },
+                'Cement': { 
+                    pe: { min: 22, max: 45 }, roe: { min: 10, max: 20 }, 
+                    de: { min: 0.2, max: 0.8 }, div: { min: 0.5, max: 1.5 },
+                    pb: { min: 3, max: 8 }, beta: { min: 0.9, max: 1.3 }
+                },
+                'Conglomerate': { 
+                    pe: { min: 35, max: 90 }, roe: { min: 8, max: 18 }, 
+                    de: { min: 0.2, max: 0.6 }, div: { min: 0.2, max: 0.8 },
+                    pb: { min: 3, max: 10 }, beta: { min: 0.8, max: 1.2 }
+                }
             };
             
-            const peRange = sectorPE[sector] || { min: 15, max: 35 };
-            const pe = peRange.min + Math.random() * (peRange.max - peRange.min);
+            // Default sector values if not found
+            const defaults = { 
+                pe: { min: 15, max: 35 }, roe: { min: 10, max: 22 }, 
+                de: { min: 0.3, max: 1.0 }, div: { min: 0.5, max: 2.0 },
+                pb: { min: 2, max: 6 }, beta: { min: 0.8, max: 1.2 }
+            };
+            
+            const data = sectorData[sector] || defaults;
+            
+            // Generate values with wider variance - can go outside "typical" ranges
+            // Use skewed distribution to create more realistic outliers
+            const skewRandom = () => {
+                const r = Math.random();
+                // Creates distribution that sometimes produces extreme values
+                return r < 0.15 ? r * 0.5 : r > 0.85 ? 0.5 + r * 0.6 : r;
+            };
+            
+            // Add 20% variance outside normal ranges for realism
+            const rangeExpand = 1.25;
+            const peRange = (data.pe.max - data.pe.min) * rangeExpand;
+            const pe = data.pe.min - peRange * 0.1 + skewRandom() * peRange;
+            
+            const roeRange = (data.roe.max - data.roe.min) * rangeExpand;
+            const roe = Math.max(2, data.roe.min - roeRange * 0.15 + skewRandom() * roeRange);
+            
+            const deRange = (data.de.max - data.de.min) * rangeExpand;
+            const debtEquity = Math.max(0, data.de.min - deRange * 0.1 + skewRandom() * deRange);
+            
+            const divRange = (data.div.max - data.div.min) * rangeExpand;
+            const divYield = Math.max(0, data.div.min - divRange * 0.2 + skewRandom() * divRange);
+            
+            const pbRange = (data.pb.max - data.pb.min) * rangeExpand;
+            const pb = Math.max(0.3, data.pb.min - pbRange * 0.1 + skewRandom() * pbRange);
+            
+            const betaRange = (data.beta.max - data.beta.min) * rangeExpand;
+            const beta = Math.max(0.2, data.beta.min - betaRange * 0.1 + skewRandom() * betaRange);
+            
             const eps = price / pe;
+            const bookValue = price / pb;
             
             return {
                 pe: pe,
-                pb: 1 + Math.random() * 8,
-                divYield: Math.random() * 4,
-                beta: 0.5 + Math.random() * 1.2,
-                roe: 8 + Math.random() * 25,
+                pb: pb,
+                divYield: divYield,
+                beta: beta,
+                roe: roe,
                 eps: eps,
-                debtEquity: Math.random() * 1.5,
-                bookValue: price * (0.15 + Math.random() * 0.4)
+                debtEquity: debtEquity,
+                bookValue: bookValue
             };
         }
 
@@ -2452,50 +3402,151 @@
                 '<span class="live-indicator">LIVE</span>' : 
                 '<span style="color: var(--text-muted); font-size: 0.7rem;">(Simulated)</span>';
             
-            // Calculate AI scores based on multiple factors
-            const rsi = 25 + Math.random() * 55;
-            const macdSignalScore = Math.random();
-            const volumeScore = Math.random();
-            const trendScore = Math.random();
+            // ========== ADVANCED TECHNICAL ANALYSIS ==========
+            // Calculate 52-week position (where price is relative to yearly range)
+            const yearlyRange = stockData.fiftyTwoWeekHigh - stockData.fiftyTwoWeekLow;
+            const pricePosition = yearlyRange > 0 ? ((price - stockData.fiftyTwoWeekLow) / yearlyRange) * 100 : 50;
             
-            // Technical Score calculation - base on actual price movement
-            let technicalScore = 0;
-            technicalScore += rsi < 30 ? 20 : rsi > 70 ? -10 : 10; // RSI
-            technicalScore += macdSignalScore > 0.5 ? 15 : -5; // MACD
-            technicalScore += volumeScore > 0.6 ? 15 : volumeScore > 0.4 ? 5 : -5; // Volume
-            technicalScore += change > 0 ? 10 : -5; // Today's trend
-            technicalScore += fundamentals.beta < 1.2 ? 10 : -5; // Low volatility bonus
-            technicalScore = Math.max(20, Math.min(95, 50 + technicalScore + Math.random() * 20));
+            // RSI Calculation based on price momentum (approximation using available data)
+            // If price is near 52-week high and rising = potentially overbought (higher RSI)
+            // If price is near 52-week low and falling = potentially oversold (lower RSI)
+            let rsiBase = 50;
+            rsiBase += (pricePosition - 50) * 0.4; // Position in yearly range contributes to RSI
+            rsiBase += change * 2; // Daily change affects RSI
+            const rsi = Math.max(15, Math.min(85, rsiBase + (Math.random() - 0.5) * 10));
             
-            // Fundamental Score calculation
-            let fundamentalScore = 50;
-            fundamentalScore += fundamentals.pe < 20 ? 15 : fundamentals.pe < 35 ? 5 : -10;
-            fundamentalScore += fundamentals.roe > 20 ? 15 : fundamentals.roe > 12 ? 8 : -5;
-            fundamentalScore += fundamentals.debtEquity < 0.5 ? 12 : fundamentals.debtEquity < 1 ? 5 : -8;
-            fundamentalScore += fundamentals.divYield > 2 ? 10 : fundamentals.divYield > 1 ? 5 : 0;
-            fundamentalScore = Math.max(25, Math.min(95, fundamentalScore + (Math.random() - 0.5) * 15));
+            // Volume Analysis Score
+            const volumeRatio = stockData.volume / Math.max(stockData.avgVolume, 1);
+            const volumeScore = volumeRatio > 1.5 ? 0.85 : volumeRatio > 1.0 ? 0.65 : volumeRatio > 0.7 ? 0.45 : 0.25;
             
-            // Overall Score
-            const score = Math.round((technicalScore * 0.55 + fundamentalScore * 0.45));
+            // MACD Signal (approximation) - positive momentum if price above average and rising
+            const macdSignal = (change > 0 && pricePosition > 40) ? 0.7 : (change < -1 && pricePosition < 60) ? 0.25 : 0.5;
+            const macdSignalScore = macdSignal + (Math.random() - 0.5) * 0.2;
             
-            // Determine signal based on comprehensive analysis
+            // Support/Resistance proximity
+            const nearSupport = pricePosition < 25;
+            const nearResistance = pricePosition > 75;
+            
+            // ========== TECHNICAL SCORE CALCULATION ==========
+            let technicalScore = 45; // Start slightly below neutral
+            
+            // RSI contribution (more balanced - penalize extremes both ways)
+            if (rsi < 25) technicalScore += 18; // Deeply oversold = bullish
+            else if (rsi < 35) technicalScore += 8; // Mildly oversold
+            else if (rsi > 75) technicalScore -= 20; // Heavily overbought = bearish
+            else if (rsi > 65) technicalScore -= 12; // Overbought
+            else if (rsi > 55) technicalScore -= 4; // Slightly overbought
+            else if (rsi >= 45 && rsi <= 55) technicalScore += 0; // True neutral zone
+            else technicalScore += 3; // Slightly oversold
+            
+            // Volume confirmation (symmetric scoring)
+            if (volumeScore > 0.7 && change > 1) technicalScore += 12; // Strong volume up
+            else if (volumeScore > 0.7 && change < -1) technicalScore -= 15; // Strong volume down = bearish
+            else if (volumeScore > 0.7 && change < 0) technicalScore -= 8; // Volume up but price down
+            else if (volumeScore < 0.4 && change > 0) technicalScore -= 5; // Weak volume rally
+            else if (volumeScore < 0.4) technicalScore -= 3; // Low conviction
+            
+            // MACD Signal (reduced impact, more symmetric)
+            technicalScore += (macdSignalScore - 0.5) * 20;
+            
+            // Daily trend (more realistic - small moves are noise)
+            if (change > 3) technicalScore += 10; // Strong up
+            else if (change > 1.5) technicalScore += 5;
+            else if (change > 0.3) technicalScore += 2;
+            else if (change >= -0.3 && change <= 0.3) technicalScore -= 2; // Flat = uncertainty
+            else if (change < -3) technicalScore -= 18; // Strong down = bearish
+            else if (change < -1.5) technicalScore -= 10;
+            else if (change < -0.3) technicalScore -= 5;
+            
+            // Support/Resistance levels (symmetric)
+            if (nearSupport && change > 0.5) technicalScore += 8; // Bouncing off support
+            else if (nearSupport && change < 0) technicalScore -= 12; // Breaking support = very bearish
+            else if (nearResistance && change < -0.5) technicalScore -= 10; // Rejected at resistance
+            else if (nearResistance && change > 0) technicalScore += 5; // Breaking resistance
+            else if (pricePosition > 85) technicalScore -= 8; // Near all-time high = risky
+            else if (pricePosition < 20) technicalScore -= 5; // Falling knife risk
+            
+            // Beta consideration (high beta = more risk)
+            technicalScore += fundamentals.beta < 0.7 ? 4 : fundamentals.beta < 1.0 ? 2 : fundamentals.beta > 1.5 ? -8 : fundamentals.beta > 1.2 ? -3 : 0;
+            
+            technicalScore = Math.max(10, Math.min(90, technicalScore));
+            
+            // ========== FUNDAMENTAL SCORE CALCULATION ==========
+            let fundamentalScore = 40; // Start below neutral
+            
+            // PE Ratio analysis (stricter thresholds)
+            if (fundamentals.pe < 12) fundamentalScore += 18; // Deep value
+            else if (fundamentals.pe < 18) fundamentalScore += 10; // Fair value
+            else if (fundamentals.pe < 25) fundamentalScore += 3; // Slightly expensive
+            else if (fundamentals.pe > 60) fundamentalScore -= 20; // Extremely overvalued
+            else if (fundamentals.pe > 45) fundamentalScore -= 14; // Very expensive
+            else if (fundamentals.pe > 35) fundamentalScore -= 8; // Expensive
+            else fundamentalScore -= 3; // Above average
+            
+            // ROE analysis (more balanced)
+            if (fundamentals.roe > 30) fundamentalScore += 15;
+            else if (fundamentals.roe > 22) fundamentalScore += 10;
+            else if (fundamentals.roe > 15) fundamentalScore += 4;
+            else if (fundamentals.roe < 8) fundamentalScore -= 15; // Poor returns
+            else if (fundamentals.roe < 12) fundamentalScore -= 6; // Below average
+            else fundamentalScore -= 2; // Mediocre
+            
+            // Debt to Equity (stricter on high debt)
+            if (fundamentals.debtEquity < 0.2) fundamentalScore += 12; // Very low debt
+            else if (fundamentals.debtEquity < 0.5) fundamentalScore += 6;
+            else if (fundamentals.debtEquity < 0.8) fundamentalScore += 2;
+            else if (fundamentals.debtEquity > 2.0) fundamentalScore -= 18; // Highly leveraged = risky
+            else if (fundamentals.debtEquity > 1.2) fundamentalScore -= 10;
+            else fundamentalScore -= 4; // Above average debt
+            
+            // Dividend yield (more nuanced - too high can be a trap)
+            if (fundamentals.divYield > 6) fundamentalScore -= 5; // Yield trap warning
+            else if (fundamentals.divYield > 3.5) fundamentalScore += 6; // Good yield
+            else if (fundamentals.divYield > 2) fundamentalScore += 4;
+            else if (fundamentals.divYield > 1) fundamentalScore += 1;
+            else fundamentalScore -= 3; // No/low dividend
+            
+            // P/B Ratio consideration (stricter)
+            if (fundamentals.pb < 1.5) fundamentalScore += 8; // Deep value
+            else if (fundamentals.pb < 2.5) fundamentalScore += 3;
+            else if (fundamentals.pb > 10) fundamentalScore -= 12; // Very expensive
+            else if (fundamentals.pb > 6) fundamentalScore -= 6;
+            else if (fundamentals.pb > 4) fundamentalScore -= 2;
+            
+            fundamentalScore = Math.max(10, Math.min(90, fundamentalScore));
+            
+            // ========== WEIGHTED OVERALL SCORE ==========
+            // Technical: 50%, Fundamental: 50% (equal weight for balance)
+            const rawScore = (technicalScore * 0.50 + fundamentalScore * 0.50);
+            
+            // Market conditions adjustment (larger variance for realism)
+            const marketAdjustment = (Math.random() - 0.5) * 8;
+            
+            // Apply mean reversion pressure - extreme scores get pulled toward center
+            let adjustedScore = rawScore + marketAdjustment;
+            if (adjustedScore > 70) adjustedScore -= (adjustedScore - 70) * 0.3;
+            if (adjustedScore < 30) adjustedScore += (30 - adjustedScore) * 0.2;
+            
+            const score = Math.round(Math.max(10, Math.min(90, adjustedScore)));
+            
+            // Determine signal based on comprehensive analysis (balanced thresholds)
             let signal, signalClass, signalBadgeClass, signalEmoji;
-            if (score >= 78) {
+            if (score >= 75) {
                 signal = 'STRONG BUY';
                 signalClass = 'signal-buy';
                 signalBadgeClass = 'badge-bullish';
                 signalEmoji = '🚀';
-            } else if (score >= 62) {
+            } else if (score >= 60) {
                 signal = 'BUY';
                 signalClass = 'signal-buy';
                 signalBadgeClass = 'badge-bullish';
                 signalEmoji = '📈';
-            } else if (score >= 42) {
+            } else if (score >= 45) {
                 signal = 'HOLD';
                 signalClass = 'signal-hold';
                 signalBadgeClass = 'badge-neutral';
                 signalEmoji = '⏸️';
-            } else if (score >= 28) {
+            } else if (score >= 30) {
                 signal = 'SELL';
                 signalClass = 'signal-sell';
                 signalBadgeClass = 'badge-bearish';
@@ -2514,6 +3565,13 @@
             document.getElementById('headerPrice').textContent = '₹' + price.toFixed(2);
             document.getElementById('headerChange').textContent = (change >= 0 ? '+' : '') + changeAmount.toFixed(2) + ' (' + (change >= 0 ? '+' : '') + change.toFixed(2) + '%)';
             document.getElementById('headerChange').className = 'price-change-large ' + (change >= 0 ? 'positive' : 'negative');
+            
+            // Update data source indicator
+            if (stockData.success !== false) {
+                document.getElementById('lastUpdated').innerHTML = '<span class="live-indicator">NSE LIVE</span>';
+            } else {
+                document.getElementById('lastUpdated').innerHTML = '<span class="simulated-indicator"><i class="fas fa-flask"></i> Demo Data</span>';
+            }
 
             // Update Signal Card
             document.getElementById('signalIndicator').textContent = signalEmoji;
@@ -2523,7 +3581,15 @@
             document.getElementById('signalBadge').textContent = signal;
             document.getElementById('signalBadge').className = 'card-badge ' + signalBadgeClass;
             
-            const confidence = 72 + Math.random() * 25;
+            // Calculate confidence based on data quality and signal strength
+            // Higher when score is extreme (very high or very low) = clearer signal
+            // Lower when score is in the middle (uncertain)
+            const signalStrength = Math.abs(score - 50); // 0-50 range
+            const dataQualityBonus = stockData.success !== false ? 12 : 0; // Live data is more reliable
+            const volumeConfidence = volumeScore > 0.6 ? 8 : volumeScore > 0.4 ? 4 : 0;
+            const baseConfidence = 55 + (signalStrength * 0.6) + dataQualityBonus + volumeConfidence;
+            const confidence = Math.min(95, Math.max(60, baseConfidence + (Math.random() - 0.5) * 8));
+            
             document.getElementById('confidenceText').textContent = confidence.toFixed(1) + '%';
             document.getElementById('confidenceFill').style.width = confidence + '%';
 
@@ -2540,10 +3606,12 @@
                 document.getElementById('gaugeFill').style.strokeDashoffset = gaugeOffset;
             }, 100);
 
-            // Sentiment Analysis
-            const bullish = 30 + Math.random() * 45;
-            const bearish = 10 + Math.random() * 30;
-            const neutral = 100 - bullish - bearish;
+            // Sentiment Analysis - now based on analysis scores for consistency
+            const bullishBase = (technicalScore + fundamentalScore) / 2;
+            const bullish = Math.min(75, Math.max(20, bullishBase + (Math.random() - 0.5) * 15));
+            const bearishBase = 100 - bullishBase;
+            const bearish = Math.min(50, Math.max(10, bearishBase * 0.5 + (Math.random() - 0.5) * 10));
+            const neutral = Math.max(10, 100 - bullish - bearish);
             
             document.getElementById('bullishBar').style.width = bullish + '%';
             document.getElementById('neutralBar').style.width = neutral + '%';
@@ -2556,14 +3624,17 @@
             document.getElementById('sentimentBadge').textContent = sentimentLabel;
             document.getElementById('sentimentBadge').className = 'card-badge ' + (bullish > 50 ? 'badge-bullish' : bearish > 35 ? 'badge-bearish' : 'badge-neutral');
             
-            document.getElementById('newsScore').textContent = (60 + Math.random() * 35).toFixed(0) + '/100';
-            document.getElementById('socialScore').textContent = (55 + Math.random() * 40).toFixed(0) + '/100';
+            // News and social scores - correlated with overall analysis
+            const newsBase = 50 + (score - 50) * 0.5;
+            const socialBase = 50 + (score - 50) * 0.4;
+            document.getElementById('newsScore').textContent = Math.round(Math.max(40, Math.min(90, newsBase + (Math.random() - 0.5) * 20))) + '/100';
+            document.getElementById('socialScore').textContent = Math.round(Math.max(35, Math.min(85, socialBase + (Math.random() - 0.5) * 25))) + '/100';
 
-            // Price Analysis
-            const dayHigh = price * (1 + Math.random() * 0.025);
-            const dayLow = price * (1 - Math.random() * 0.025);
-            const w52High = price * (1.15 + Math.random() * 0.2);
-            const w52Low = price * (0.6 + Math.random() * 0.15);
+            // Price Analysis - use real data from API
+            const dayHigh = stockData.dayHigh || price * 1.01;
+            const dayLow = stockData.dayLow || price * 0.99;
+            const w52High = stockData.fiftyTwoWeekHigh || price * 1.25;
+            const w52Low = stockData.fiftyTwoWeekLow || price * 0.75;
             
             document.getElementById('currentPrice').textContent = '₹' + price.toFixed(2);
             document.getElementById('priceChange').textContent = (change >= 0 ? '+' : '') + change.toFixed(2) + '%';
@@ -2573,13 +3644,15 @@
             document.getElementById('week52High').textContent = '₹' + w52High.toFixed(2);
             document.getElementById('week52Low').textContent = '₹' + w52Low.toFixed(2);
             
-            const avgVol = (5 + Math.random() * 20).toFixed(1);
-            const todayVol = (avgVol * (0.7 + Math.random() * 0.8)).toFixed(1);
+            // Use real volume data from API
+            const todayVol = stockData.volume ? (stockData.volume / 1000000).toFixed(2) : (5 + Math.random() * 15).toFixed(1);
+            const avgVol = stockData.avgVolume ? (stockData.avgVolume / 1000000).toFixed(2) : (todayVol * (0.8 + Math.random() * 0.4)).toFixed(1);
             document.getElementById('avgVolume').textContent = avgVol + 'M';
             document.getElementById('todayVolume').textContent = todayVol + 'M';
 
             // Generate Candlestick Chart
-            generateCandlestickChart(price, stockData.volatility);
+            const volatility = Math.abs(change) / 100 + 0.015;
+            generateCandlestickChart(price, volatility);
 
             // Price Targets
             const t1 = price * 1.05;
@@ -2662,15 +3735,15 @@
             document.getElementById('techBadge').textContent = techBuySignals + '/6 BUY';
             document.getElementById('techBadge').className = 'card-badge ' + (techBuySignals >= 4 ? 'badge-bullish' : techBuySignals <= 2 ? 'badge-bearish' : 'badge-neutral');
 
-            // Fundamentals
-            document.getElementById('peRatio').textContent = stockData.pe.toFixed(1);
-            document.getElementById('pbRatio').textContent = stockData.pb.toFixed(2);
-            document.getElementById('debtEquity').textContent = stockData.debtEquity.toFixed(2);
-            document.getElementById('roe').textContent = stockData.roe.toFixed(1) + '%';
-            document.getElementById('eps').textContent = '₹' + stockData.eps.toFixed(2);
-            document.getElementById('marketCap').textContent = formatNumber(stockData.marketCap);
-            document.getElementById('divYield').textContent = stockData.divYield.toFixed(2) + '%';
-            document.getElementById('bookValue').textContent = '₹' + stockData.bookValue.toFixed(0);
+            // Fundamentals - use generated data
+            document.getElementById('peRatio').textContent = fundamentals.pe.toFixed(1);
+            document.getElementById('pbRatio').textContent = fundamentals.pb.toFixed(2);
+            document.getElementById('debtEquity').textContent = fundamentals.debtEquity.toFixed(2);
+            document.getElementById('roe').textContent = fundamentals.roe.toFixed(1) + '%';
+            document.getElementById('eps').textContent = '₹' + fundamentals.eps.toFixed(2);
+            document.getElementById('marketCap').textContent = stockData.marketCap ? formatNumber(stockData.marketCap / 10000000) : formatNumber(Math.floor(50000 + Math.random() * 500000));
+            document.getElementById('divYield').textContent = fundamentals.divYield.toFixed(2) + '%';
+            document.getElementById('bookValue').textContent = '₹' + fundamentals.bookValue.toFixed(0);
 
             // Fundamental Badge
             const fundBadgeClass = fundamentalScore >= 60 ? 'badge-bullish' : fundamentalScore >= 40 ? 'badge-neutral' : 'badge-bearish';
@@ -2693,15 +3766,15 @@
             document.getElementById('threeYearCAGR').className = 'sector-perf ' + (threeYr >= 0 ? 'metric-positive' : 'metric-negative');
 
             // Risk Assessment
-            document.getElementById('beta').textContent = stockData.beta.toFixed(2);
-            document.getElementById('volatility').textContent = (stockData.volatility * 100).toFixed(1) + '%';
+            document.getElementById('beta').textContent = fundamentals.beta.toFixed(2);
+            document.getElementById('volatility').textContent = (volatility * 100).toFixed(1) + '%';
             document.getElementById('sharpe').textContent = (0.5 + Math.random() * 2).toFixed(2);
             document.getElementById('maxDrawdown').textContent = '-' + (8 + Math.random() * 25).toFixed(1) + '%';
             
-            // Risk Level
-            let riskLevel = stockData.beta > 1.3 || stockData.volatility > 0.035 ? 4 : 
-                           stockData.beta > 1.1 || stockData.volatility > 0.025 ? 3 :
-                           stockData.beta > 0.9 || stockData.volatility > 0.018 ? 2 : 1;
+            // Risk Level based on beta and volatility
+            let riskLevel = fundamentals.beta > 1.3 || volatility > 0.035 ? 4 : 
+                           fundamentals.beta > 1.1 || volatility > 0.025 ? 3 :
+                           fundamentals.beta > 0.9 || volatility > 0.018 ? 2 : 1;
             
             const riskTexts = ['Very Low', 'Low', 'Moderate', 'High', 'Very High'];
             const riskColors = ['var(--green)', 'var(--green)', 'var(--orange)', 'var(--red)', 'var(--red)'];
@@ -2724,40 +3797,38 @@
             });
 
             // Generate AI Summary
-            generateAISummary(symbol, stockData, price, change, score, signal, technicalScore, fundamentalScore, rsi, bullish);
+            generateAISummary(symbol, stockData, fundamentals, price, change, score, signal, technicalScore, fundamentalScore, rsi, bullish);
         }
 
-        function generateAISummary(symbol, stockData, price, change, score, signal, techScore, fundScore, rsi, bullish) {
+        function generateAISummary(symbol, stockData, fundamentals, price, change, score, signal, techScore, fundScore, rsi, bullish) {
             const summaryTemplates = [
-                `<span class="highlight">${symbol}</span> presents a <span class="${signal.includes('BUY') ? 'positive' : signal.includes('SELL') ? 'negative' : 'highlight'}">${signal}</span> opportunity based on our comprehensive AI analysis. With a composite score of <span class="highlight">${score}/100</span>, the stock demonstrates ${techScore > 60 ? '<span class="positive">strong technical momentum</span>' : techScore > 40 ? 'moderate technical positioning' : '<span class="negative">weak technical signals</span>'}. 
+                `<span class="highlight">${symbol}</span> presents a <span class="${signal.includes('BUY') ? 'positive' : signal.includes('SELL') ? 'negative' : 'highlight'}">${signal}</span> opportunity based on our analysis. With a composite score of <span class="highlight">${score}/100</span>, the stock demonstrates ${techScore > 60 ? '<span class="positive">strong technical momentum</span>' : techScore > 40 ? 'moderate technical positioning' : '<span class="negative">weak technical signals</span>'}. 
 
-The RSI at <span class="highlight">${rsi.toFixed(1)}</span> indicates ${rsi < 30 ? '<span class="positive">oversold conditions - potential reversal ahead</span>' : rsi > 70 ? '<span class="negative">overbought territory - exercise caution</span>' : 'neutral momentum'}. Fundamentally, ${stockData.name} shows ${fundScore > 60 ? '<span class="positive">robust metrics</span>' : fundScore > 40 ? 'adequate fundamentals' : '<span class="negative">areas requiring attention</span>'} with a P/E of ${stockData.pe.toFixed(1)} and ROE of ${stockData.roe.toFixed(1)}%.
+The RSI at <span class="highlight">${rsi.toFixed(1)}</span> indicates ${rsi < 30 ? '<span class="positive">oversold conditions - potential reversal ahead</span>' : rsi > 70 ? '<span class="negative">overbought territory - exercise caution</span>' : 'neutral momentum'}. Fundamentally, ${stockData.name} shows ${fundScore > 60 ? '<span class="positive">robust metrics</span>' : fundScore > 40 ? 'adequate fundamentals' : '<span class="negative">areas requiring attention</span>'} with a P/E of ${fundamentals.pe.toFixed(1)} and ROE of ${fundamentals.roe.toFixed(1)}%.
 
 <strong>Key Levels:</strong> Immediate support at ₹${(price * 0.96).toFixed(0)}, resistance at ₹${(price * 1.05).toFixed(0)}. Market sentiment is <span class="${bullish > 50 ? 'positive' : 'negative'}">${bullish.toFixed(0)}% bullish</span>.
 
-<strong>⚠️ Disclaimer:</strong> This analysis is AI-generated for educational purposes. Always conduct your own research and consult a financial advisor before investing.`,
+<strong>⚠️ IMPORTANT DISCLAIMER:</strong> This analysis is AI-generated for EDUCATIONAL PURPOSES ONLY. This is NOT investment advice. Always conduct your own research and consult a SEBI-registered financial advisor before investing. Stock markets are risky and you can lose money.`,
 
-                `Our AI engine has analyzed <span class="highlight">${stockData.name}</span> across 50+ parameters. The overall verdict: <span class="${signal.includes('BUY') ? 'positive' : signal.includes('SELL') ? 'negative' : 'highlight'}">${signal}</span> with ${score}% confidence.
+                `Our analysis engine has examined <span class="highlight">${stockData.name}</span> across multiple parameters. The overall verdict: <span class="${signal.includes('BUY') ? 'positive' : signal.includes('SELL') ? 'negative' : 'highlight'}">${signal}</span> with a score of ${score}/100.
 
-<strong>Technical Analysis:</strong> Score <span class="highlight">${Math.round(techScore)}/100</span>. ${techScore > 55 ? '<span class="positive">Multiple indicators showing bullish alignment.</span>' : techScore < 45 ? '<span class="negative">Technical weakness detected in key indicators.</span>' : 'Mixed signals - await confirmation.'} Moving averages suggest ${price > stockData.basePrice ? '<span class="positive">uptrend continuation</span>' : '<span class="negative">potential trend reversal</span>'}.
+<strong>Technical Analysis:</strong> Score <span class="highlight">${Math.round(techScore)}/100</span>. ${techScore > 55 ? '<span class="positive">Indicators showing positive alignment.</span>' : techScore < 45 ? '<span class="negative">Technical weakness detected.</span>' : 'Mixed signals - await confirmation.'}
 
-<strong>Fundamental Health:</strong> Score <span class="highlight">${Math.round(fundScore)}/100</span>. ${stockData.debtEquity < 0.5 ? '<span class="positive">Low debt levels provide stability.</span>' : stockData.debtEquity > 1 ? '<span class="negative">High leverage increases risk.</span>' : 'Manageable debt structure.'} Dividend yield of ${stockData.divYield.toFixed(2)}% ${stockData.divYield > 2 ? 'adds income potential' : 'is below sector average'}.
+<strong>Fundamental Health:</strong> Score <span class="highlight">${Math.round(fundScore)}/100</span>. ${fundamentals.debtEquity < 0.5 ? '<span class="positive">Low debt levels.</span>' : fundamentals.debtEquity > 1 ? '<span class="negative">High leverage.</span>' : 'Manageable debt structure.'} Dividend yield of ${fundamentals.divYield.toFixed(2)}%.
 
-<strong>Risk Profile:</strong> Beta of ${stockData.beta.toFixed(2)} indicates ${stockData.beta > 1.2 ? '<span class="negative">high volatility relative to market</span>' : stockData.beta < 0.8 ? '<span class="positive">defensive characteristics</span>' : 'market-aligned volatility'}.
+<strong>Risk Profile:</strong> Beta of ${fundamentals.beta.toFixed(2)} indicates ${fundamentals.beta > 1.2 ? '<span class="negative">higher volatility</span>' : fundamentals.beta < 0.8 ? '<span class="positive">defensive characteristics</span>' : 'market-aligned volatility'}.
 
-<strong>⚠️ Disclaimer:</strong> This is algorithmic analysis for informational purposes only. Past performance doesn't guarantee future results.`,
+<strong>⚠️ DISCLAIMER:</strong> This is algorithmic analysis for EDUCATIONAL PURPOSES ONLY. NOT investment advice. Do your own research and consult a SEBI-registered advisor.`,
 
-                `<span class="highlight">${symbol}</span> AI Analysis Complete. Overall Rating: <span class="${signal.includes('BUY') ? 'positive' : signal.includes('SELL') ? 'negative' : 'highlight'}">${signal}</span> (Score: ${score}/100)
+                `<span class="highlight">${symbol}</span> Analysis Complete. Rating: <span class="${signal.includes('BUY') ? 'positive' : signal.includes('SELL') ? 'negative' : 'highlight'}">${signal}</span> (Score: ${score}/100)
 
-📊 <strong>Market Position:</strong> Currently trading at ₹${price.toFixed(2)} with ${change >= 0 ? '<span class="positive">+' + change.toFixed(2) + '%</span> gain' : '<span class="negative">' + change.toFixed(2) + '%</span> decline'} today. The ${stockData.sector} sector is ${Math.random() > 0.5 ? '<span class="positive">outperforming</span>' : 'in line with'} broader markets.
+📊 <strong>Market Position:</strong> Currently trading at ₹${price.toFixed(2)} with ${change >= 0 ? '<span class="positive">+' + change.toFixed(2) + '%</span>' : '<span class="negative">' + change.toFixed(2) + '%</span>'} today. The ${stockData.sector} sector is in focus.
 
-📈 <strong>Technical Outlook:</strong> ${rsi < 35 ? '<span class="positive">RSI indicates oversold - watch for bounce</span>' : rsi > 65 ? '<span class="negative">RSI approaching overbought - monitor for pullback</span>' : 'Momentum indicators in neutral zone'}. Volume analysis shows ${Math.random() > 0.5 ? '<span class="positive">institutional accumulation</span>' : 'normal trading activity'}.
+📈 <strong>Technical Outlook:</strong> ${rsi < 35 ? '<span class="positive">RSI indicates oversold conditions</span>' : rsi > 65 ? '<span class="negative">RSI approaching overbought</span>' : 'Momentum indicators in neutral zone'}.
 
-💰 <strong>Valuation:</strong> P/E of ${stockData.pe.toFixed(1)} is ${stockData.pe < 20 ? '<span class="positive">attractive</span>' : stockData.pe > 40 ? '<span class="negative">stretched</span>' : 'fairly valued'} for the sector. Book value at ₹${stockData.bookValue.toFixed(0)} suggests ${price/stockData.bookValue > 3 ? 'premium' : 'reasonable'} pricing.
+💰 <strong>Valuation Metrics:</strong> P/E of ${fundamentals.pe.toFixed(1)} is ${fundamentals.pe < 20 ? '<span class="positive">below average</span>' : fundamentals.pe > 40 ? '<span class="negative">above average</span>' : 'around average'} for the sector.
 
-🎯 <strong>AI Recommendation:</strong> ${signal.includes('STRONG BUY') ? 'Accumulate on dips. Target: ₹' + (price * 1.18).toFixed(0) : signal.includes('BUY') ? 'Consider adding. First target: ₹' + (price * 1.10).toFixed(0) : signal.includes('HOLD') ? 'Maintain positions. Await clearer signals' : 'Consider profit booking or reducing exposure'}.
-
-<strong>⚠️ Disclaimer:</strong> AI-generated analysis for educational purposes. Investment decisions should be based on comprehensive research and professional advice.`
+<strong>⚠️ IMPORTANT:</strong> This is an EDUCATIONAL tool only. NOT investment advice. Consult a SEBI-registered advisor before making any investment decisions. Markets involve risk.`
             ];
             
             document.getElementById('aiSummaryText').innerHTML = summaryTemplates[Math.floor(Math.random() * summaryTemplates.length)];

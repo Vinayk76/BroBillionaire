@@ -1,0 +1,2587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategy Backtesting Tool - Test Trading Strategies | BroBillionaire</title>
+    <meta name="description" content="Free professional strategy backtesting tool. Test MA Crossover, RSI, MACD, Bollinger Bands strategies on NIFTY, Bank NIFTY, Bitcoin & more. Accurate metrics & visualizations.">
+    <link rel="canonical" href="https://brobillionaire.com/strategy-backtesting-tool.html">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        /* ============================================
+           STRATEGY BACKTESTING TOOL - PREMIUM THEME
+           BroBillionaire Black & Gold Design
+           ============================================ */
+        
+        :root {
+            --gold: #C9A227;
+            --gold-light: #E8D5A3;
+            --gold-dark: #A68B1E;
+            --bg-primary: #0d0d0d;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --bg-card: #161616;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.4);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-gold: rgba(201, 162, 39, 0.3);
+            --green: #22c55e;
+            --green-light: #4ade80;
+            --red: #ef4444;
+            --red-light: #f87171;
+            --blue: #3b82f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-top: 0;
+        }
+
+        /* Animated Background */
+        .tool-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .tool-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(201, 162, 39, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(201, 162, 39, 0.05) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 50%, rgba(201, 162, 39, 0.03) 0%, transparent 60%);
+            animation: bgPulse 20s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+            50% { transform: scale(1.1) rotate(3deg); opacity: 0.7; }
+        }
+
+        /* Grid Pattern Overlay */
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: 
+                linear-gradient(rgba(201, 162, 39, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(201, 162, 39, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* Navigation */
+        .tool-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-gold);
+            padding: 15px 40px;
+        }
+
+        .tool-nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .tool-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .tool-logo img {
+            height: 36px;
+            width: auto;
+        }
+
+        .tool-logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tool-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.15), rgba(201, 162, 39, 0.05));
+            border: 1px solid var(--border-gold);
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        .tool-badge i {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* Hero Section */
+        .tool-hero {
+            text-align: center;
+            padding: 60px 20px 40px;
+            position: relative;
+        }
+
+        .tool-hero::before {
+            content: '📊';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 120px;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        .tool-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .tool-hero h1 .gold {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .tool-hero p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Main Container */
+        .tool-container {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 0 30px 60px;
+        }
+
+        /* Layout Grid */
+        .tool-layout {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 30px;
+        }
+
+        /* Sidebar */
+        .tool-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Premium Card Style */
+        .premium-card {
+            background: linear-gradient(145deg, var(--bg-card), var(--bg-tertiary));
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 28px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .premium-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .premium-card:hover {
+            border-color: var(--border-gold);
+            box-shadow: 0 20px 60px rgba(201, 162, 39, 0.1);
+        }
+
+        .premium-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.2), rgba(201, 162, 39, 0.05));
+            border: 1px solid var(--border-gold);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            appearance: none;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(201, 162, 39, 0.15);
+        }
+
+        select.form-control {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23C9A227' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 18px center;
+            padding-right: 45px;
+        }
+
+        /* Range Slider */
+        .range-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .range-slider {
+            flex: 1;
+            -webkit-appearance: none;
+            height: 6px;
+            background: linear-gradient(90deg, var(--bg-tertiary), rgba(201, 162, 39, 0.3));
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(201, 162, 39, 0.5);
+            transition: transform 0.2s ease;
+        }
+
+        .range-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+        }
+
+        .range-value {
+            min-width: 55px;
+            padding: 8px 14px;
+            background: rgba(201, 162, 39, 0.1);
+            border: 1px solid var(--border-gold);
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gold);
+            text-align: center;
+        }
+
+        /* Strategy Grid */
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .strategy-btn {
+            padding: 16px 12px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid var(--border-color);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .strategy-btn:hover {
+            border-color: var(--border-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(201, 162, 39, 0.1);
+        }
+
+        .strategy-btn.active {
+            border-color: var(--gold);
+            background: rgba(201, 162, 39, 0.1);
+            box-shadow: 0 0 30px rgba(201, 162, 39, 0.2);
+        }
+
+        .strategy-btn .icon {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .strategy-btn .name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .strategy-btn.active .name {
+            color: var(--gold);
+        }
+
+        /* Strategy Parameters */
+        .strategy-params {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .params-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        /* Run Button */
+        .btn-backtest {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            border: none;
+            border-radius: 14px;
+            color: #000;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-backtest::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-backtest:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 50px rgba(201, 162, 39, 0.4);
+        }
+
+        .btn-backtest:hover::before {
+            left: 100%;
+        }
+
+        .btn-backtest.loading {
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        .btn-backtest .spinner {
+            display: none;
+            width: 22px;
+            height: 22px;
+            border: 3px solid transparent;
+            border-top-color: #000;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .btn-backtest.loading .spinner {
+            display: block;
+        }
+
+        .btn-backtest.loading .btn-text {
+            display: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Progress Bar */
+        .progress-wrapper {
+            display: none;
+            margin-top: 16px;
+        }
+
+        .progress-wrapper.active {
+            display: block;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--bg-tertiary);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+            background-size: 200% 100%;
+            animation: progressShimmer 1.5s linear infinite;
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+
+        @keyframes progressShimmer {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .progress-text {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* Main Content */
+        .tool-main {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Empty State */
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            text-align: center;
+            padding: 60px;
+        }
+
+        .empty-state .icon {
+            font-size: 5rem;
+            margin-bottom: 24px;
+            opacity: 0.3;
+        }
+
+        .empty-state h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .empty-state p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Chart Container */
+        .chart-card {
+            background: linear-gradient(145deg, var(--bg-card), var(--bg-tertiary));
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 28px;
+            transition: all 0.4s ease;
+        }
+
+        .chart-card:hover {
+            border-color: var(--border-gold);
+        }
+
+        .chart-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        .chart-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .chart-title h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .chart-title .icon {
+            font-size: 1.4rem;
+        }
+
+        .chart-legend {
+            display: flex;
+            gap: 24px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .chart-wrapper {
+            height: 420px;
+            position: relative;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .stat-card {
+            background: linear-gradient(145deg, var(--bg-card), var(--bg-tertiary));
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+        }
+
+        .stat-card.positive::before {
+            background: linear-gradient(90deg, var(--green), var(--green-light));
+        }
+
+        .stat-card.negative::before {
+            background: linear-gradient(90deg, var(--red), var(--red-light));
+        }
+
+        .stat-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--border-gold);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.2;
+        }
+
+        .stat-value.positive {
+            color: var(--green);
+        }
+
+        .stat-value.negative {
+            color: var(--red);
+        }
+
+        .stat-value.gold {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-sub {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        /* Charts Row */
+        .charts-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .small-chart-wrapper {
+            height: 280px;
+        }
+
+        /* Monthly Heatmap */
+        .heatmap-grid {
+            display: grid;
+            grid-template-columns: 70px repeat(12, 1fr);
+            gap: 5px;
+            margin-top: 20px;
+        }
+
+        .heatmap-cell {
+            aspect-ratio: 1.2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            transition: transform 0.2s ease;
+        }
+
+        .heatmap-cell:hover {
+            transform: scale(1.1);
+            z-index: 10;
+        }
+
+        .heatmap-header {
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .heatmap-year {
+            background: transparent;
+            color: var(--gold);
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        /* Trade Log */
+        .trade-log-wrapper {
+            max-height: 450px;
+            overflow-y: auto;
+        }
+
+        .trade-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .trade-table th {
+            text-align: left;
+            padding: 16px 18px;
+            background: rgba(201, 162, 39, 0.08);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: sticky;
+            top: 0;
+        }
+
+        .trade-table th:first-child {
+            border-radius: 12px 0 0 12px;
+        }
+
+        .trade-table th:last-child {
+            border-radius: 0 12px 12px 0;
+        }
+
+        .trade-table td {
+            padding: 16px 18px;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border-color);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .trade-table tbody tr:hover {
+            background: rgba(201, 162, 39, 0.03);
+        }
+
+        .trade-type {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .trade-type.long {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--green);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .trade-type.short {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--red);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .pnl-positive {
+            color: var(--green);
+        }
+
+        .pnl-negative {
+            color: var(--red);
+        }
+
+        .trade-count-badge {
+            padding: 8px 16px;
+            background: rgba(201, 162, 39, 0.1);
+            border: 1px solid var(--border-gold);
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-gold);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gold);
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .tool-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .charts-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .tool-nav {
+                padding: 12px 20px;
+            }
+            
+            .tool-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .tool-container {
+                padding: 0 16px 40px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .strategy-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .heatmap-grid {
+                overflow-x: auto;
+            }
+        }
+
+        /* Hidden Class */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="tool-bg"></div>
+    <div class="grid-overlay"></div>
+
+    <!-- Navigation -->
+    <nav class="tool-nav">
+        <div class="tool-nav-inner">
+            <a href="index.html" class="tool-logo">
+                <img src="logo.png" alt="BroBillionaire" onerror="this.style.display='none'">
+                <span class="tool-logo-text">BroBillionaire</span>
+            </a>
+            <div class="tool-badge">
+                <i class="fas fa-chart-line"></i>
+                <span>Strategy Backtester Pro</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="tool-hero">
+        <h1>Strategy <span class="gold">Backtesting</span> Tool</h1>
+        <p>Test your trading strategies with precision. Analyze performance metrics, visualize trades, and optimize your approach before risking real capital.</p>
+    </section>
+
+    <!-- Main Container -->
+    <div class="tool-container">
+        <div class="tool-layout">
+            <!-- Sidebar -->
+            <aside class="tool-sidebar">
+                <!-- Asset Selection -->
+                <div class="premium-card">
+                    <div class="card-header">
+                        <div class="card-icon">📊</div>
+                        <div class="card-title">Asset & Timeframe</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Select Asset</label>
+                        <select class="form-control" id="asset">
+                            <optgroup label="Indian Indices">
+                                <option value="NIFTY50">NIFTY 50</option>
+                                <option value="BANKNIFTY">Bank NIFTY</option>
+                                <option value="FINNIFTY">Fin NIFTY</option>
+                            </optgroup>
+                            <optgroup label="Indian Stocks">
+                                <option value="RELIANCE">Reliance Industries</option>
+                                <option value="TCS">TCS</option>
+                                <option value="HDFCBANK">HDFC Bank</option>
+                                <option value="INFY">Infosys</option>
+                                <option value="ICICIBANK">ICICI Bank</option>
+                                <option value="SBIN">SBI</option>
+                            </optgroup>
+                            <optgroup label="Crypto">
+                                <option value="BTCUSD" selected>Bitcoin (BTC/USD)</option>
+                                <option value="ETHUSD">Ethereum (ETH/USD)</option>
+                                <option value="SOLUSD">Solana (SOL/USD)</option>
+                            </optgroup>
+                            <optgroup label="US Markets">
+                                <option value="SPY">S&P 500 ETF</option>
+                                <option value="QQQ">NASDAQ 100 ETF</option>
+                                <option value="AAPL">Apple Inc</option>
+                                <option value="TSLA">Tesla Inc</option>
+                                <option value="NVDA">NVIDIA</option>
+                            </optgroup>
+                            <optgroup label="Commodities">
+                                <option value="GOLD">Gold</option>
+                                <option value="SILVER">Silver</option>
+                                <option value="CRUDEOIL">Crude Oil</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Timeframe</label>
+                        <select class="form-control" id="timeframe">
+                            <option value="1m">1 Minute</option>
+                            <option value="5m">5 Minutes</option>
+                            <option value="15m">15 Minutes</option>
+                            <option value="1h" selected>1 Hour</option>
+                            <option value="4h">4 Hours</option>
+                            <option value="1d">Daily</option>
+                            <option value="1w">Weekly</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Backtest Period</label>
+                        <select class="form-control" id="period">
+                            <option value="1m">1 Month</option>
+                            <option value="3m">3 Months</option>
+                            <option value="6m">6 Months</option>
+                            <option value="1y" selected>1 Year</option>
+                            <option value="2y">2 Years</option>
+                            <option value="5y">5 Years</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Strategy Selection -->
+                <div class="premium-card">
+                    <div class="card-header">
+                        <div class="card-icon">🎯</div>
+                        <div class="card-title">Trading Strategy</div>
+                    </div>
+                    
+                    <div class="strategy-grid">
+                        <div class="strategy-btn active" data-strategy="sma_crossover">
+                            <span class="icon">📈</span>
+                            <span class="name">SMA Cross</span>
+                        </div>
+                        <div class="strategy-btn" data-strategy="ema_crossover">
+                            <span class="icon">⚡</span>
+                            <span class="name">EMA Cross</span>
+                        </div>
+                        <div class="strategy-btn" data-strategy="rsi">
+                            <span class="icon">📉</span>
+                            <span class="name">RSI</span>
+                        </div>
+                        <div class="strategy-btn" data-strategy="macd">
+                            <span class="icon">🔀</span>
+                            <span class="name">MACD</span>
+                        </div>
+                        <div class="strategy-btn" data-strategy="bollinger">
+                            <span class="icon">🎰</span>
+                            <span class="name">Bollinger</span>
+                        </div>
+                        <div class="strategy-btn" data-strategy="supertrend">
+                            <span class="icon">🚀</span>
+                            <span class="name">SuperTrend</span>
+                        </div>
+                    </div>
+
+                    <div class="strategy-params" id="strategyParams">
+                        <!-- Dynamic parameters will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Risk Management -->
+                <div class="premium-card">
+                    <div class="card-header">
+                        <div class="card-icon">🛡️</div>
+                        <div class="card-title">Risk Management</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Initial Capital (₹)</label>
+                        <input type="number" class="form-control" id="capital" value="100000" min="10000" step="10000">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Position Size</label>
+                        <div class="range-wrapper">
+                            <input type="range" class="range-slider" id="positionSize" min="5" max="100" value="20">
+                            <span class="range-value" id="positionSizeVal">20%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Stop Loss</label>
+                        <div class="range-wrapper">
+                            <input type="range" class="range-slider" id="stopLoss" min="0.5" max="10" value="2" step="0.5">
+                            <span class="range-value" id="stopLossVal">2%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Take Profit</label>
+                        <div class="range-wrapper">
+                            <input type="range" class="range-slider" id="takeProfit" min="1" max="20" value="4" step="0.5">
+                            <span class="range-value" id="takeProfitVal">4%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Run Button -->
+                <button class="btn-backtest" id="runBacktest">
+                    <span class="btn-text"><i class="fas fa-rocket"></i> Run Backtest</span>
+                    <span class="spinner"></span>
+                </button>
+                
+                <div class="progress-wrapper" id="progressWrapper">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">Initializing...</div>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="tool-main" id="mainContent">
+                <!-- Empty State -->
+                <div class="chart-card" id="emptyStateCard">
+                    <div class="empty-state">
+                        <div class="icon">📊</div>
+                        <h3>Ready to Backtest</h3>
+                        <p>Configure your strategy parameters and click "Run Backtest" to see detailed results</p>
+                    </div>
+                </div>
+
+                <!-- Results (Hidden Initially) -->
+                <div id="resultsContainer" class="hidden">
+                    <!-- Price Chart -->
+                    <div class="chart-card fade-in" id="priceChartCard">
+                        <div class="chart-header">
+                            <div class="chart-title">
+                                <span class="icon">📈</span>
+                                <h3>Price Chart with Trading Signals</h3>
+                            </div>
+                            <div class="chart-legend">
+                                <div class="legend-item">
+                                    <div class="legend-dot" style="background: var(--green);"></div>
+                                    <span>Buy Signal</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-dot" style="background: var(--red);"></div>
+                                    <span>Sell Signal</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="priceChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Stats Grid -->
+                    <div class="stats-grid" id="statsGrid"></div>
+
+                    <!-- Equity & Drawdown Charts -->
+                    <div class="charts-row">
+                        <div class="chart-card fade-in">
+                            <div class="chart-header">
+                                <div class="chart-title">
+                                    <span class="icon">💰</span>
+                                    <h3>Equity Curve</h3>
+                                </div>
+                            </div>
+                            <div class="small-chart-wrapper">
+                                <canvas id="equityChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-card fade-in">
+                            <div class="chart-header">
+                                <div class="chart-title">
+                                    <span class="icon">📉</span>
+                                    <h3>Drawdown Chart</h3>
+                                </div>
+                            </div>
+                            <div class="small-chart-wrapper">
+                                <canvas id="drawdownChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Monthly Returns & Distribution -->
+                    <div class="charts-row">
+                        <div class="chart-card fade-in">
+                            <div class="chart-header">
+                                <div class="chart-title">
+                                    <span class="icon">🗓️</span>
+                                    <h3>Monthly Returns Heatmap</h3>
+                                </div>
+                            </div>
+                            <div class="heatmap-grid" id="heatmapGrid"></div>
+                        </div>
+                        
+                        <div class="chart-card fade-in">
+                            <div class="chart-header">
+                                <div class="chart-title">
+                                    <span class="icon">🎯</span>
+                                    <h3>Win/Loss Distribution</h3>
+                                </div>
+                            </div>
+                            <div class="small-chart-wrapper">
+                                <canvas id="distributionChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trade Log -->
+                    <div class="chart-card fade-in">
+                        <div class="chart-header">
+                            <div class="chart-title">
+                                <span class="icon">📋</span>
+                                <h3>Trade Log</h3>
+                            </div>
+                            <div class="trade-count-badge" id="tradeCount">0 trades</div>
+                        </div>
+                        <div class="trade-log-wrapper">
+                            <table class="trade-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Entry Date</th>
+                                        <th>Exit Date</th>
+                                        <th>Type</th>
+                                        <th>Entry Price</th>
+                                        <th>Exit Price</th>
+                                        <th>P&L</th>
+                                        <th>Cumulative</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tradeTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ====================================================================
+        // PROFESSIONAL BACKTESTING ENGINE - MATHEMATICALLY ACCURATE
+        // ====================================================================
+
+        class PrecisionBacktester {
+            constructor() {
+                this.priceData = [];
+                this.trades = [];
+                this.equity = [];
+                this.drawdown = [];
+                this.monthlyReturns = {};
+                this.indicators = {};
+            }
+
+            // Generate realistic OHLC price data with proper market dynamics
+            generateMarketData(asset, period, timeframe) {
+                const periodDays = { '1m': 30, '3m': 90, '6m': 180, '1y': 365, '2y': 730, '5y': 1825 };
+                const tfBars = { '1m': 375, '5m': 75, '15m': 25, '1h': 6, '4h': 1.5, '1d': 1, '1w': 0.2 };
+                
+                const days = periodDays[period] || 365;
+                const barsPerDay = tfBars[timeframe] || 6;
+                const totalBars = Math.max(100, Math.floor(days * barsPerDay));
+                
+                // Asset configurations with realistic parameters
+                const assets = {
+                    'NIFTY50': { price: 24500, vol: 0.011, drift: 0.00015, currency: '₹' },
+                    'BANKNIFTY': { price: 52000, vol: 0.016, drift: 0.0001, currency: '₹' },
+                    'FINNIFTY': { price: 23500, vol: 0.014, drift: 0.00012, currency: '₹' },
+                    'RELIANCE': { price: 2950, vol: 0.018, drift: 0.0002, currency: '₹' },
+                    'TCS': { price: 4350, vol: 0.014, drift: 0.00018, currency: '₹' },
+                    'HDFCBANK': { price: 1720, vol: 0.015, drift: 0.00015, currency: '₹' },
+                    'INFY': { price: 1920, vol: 0.018, drift: 0.0002, currency: '₹' },
+                    'ICICIBANK': { price: 1280, vol: 0.016, drift: 0.00015, currency: '₹' },
+                    'SBIN': { price: 820, vol: 0.02, drift: 0.0001, currency: '₹' },
+                    'BTCUSD': { price: 98000, vol: 0.032, drift: 0.0003, currency: '$' },
+                    'ETHUSD': { price: 3400, vol: 0.038, drift: 0.00025, currency: '$' },
+                    'SOLUSD': { price: 195, vol: 0.045, drift: 0.0004, currency: '$' },
+                    'SPY': { price: 595, vol: 0.009, drift: 0.0002, currency: '$' },
+                    'QQQ': { price: 520, vol: 0.012, drift: 0.00025, currency: '$' },
+                    'AAPL': { price: 235, vol: 0.018, drift: 0.0003, currency: '$' },
+                    'TSLA': { price: 395, vol: 0.042, drift: 0.0001, currency: '$' },
+                    'NVDA': { price: 145, vol: 0.035, drift: 0.0005, currency: '$' },
+                    'GOLD': { price: 2720, vol: 0.008, drift: 0.0001, currency: '$' },
+                    'SILVER': { price: 31.5, vol: 0.015, drift: 0.00008, currency: '$' },
+                    'CRUDEOIL': { price: 78, vol: 0.022, drift: 0.00005, currency: '$' }
+                };
+                
+                const config = assets[asset] || { price: 1000, vol: 0.02, drift: 0.0002, currency: '₹' };
+                this.currency = config.currency;
+                
+                let price = config.price;
+                const data = [];
+                const startDate = new Date();
+                startDate.setDate(startDate.getDate() - days);
+                
+                // Market regime simulation
+                let regime = 0; // -1: bear, 0: neutral, 1: bull
+                let regimeLength = 0;
+                const maxRegimeLength = Math.floor(totalBars / 8);
+                
+                // Volatility clustering (GARCH-like)
+                let currentVol = config.vol;
+                
+                for (let i = 0; i < totalBars; i++) {
+                    // Regime switching
+                    regimeLength++;
+                    if (regimeLength > maxRegimeLength || Math.random() < 0.02) {
+                        regime = Math.floor(Math.random() * 3) - 1;
+                        regimeLength = 0;
+                    }
+                    
+                    // Volatility clustering
+                    const volShock = (Math.random() - 0.5) * 0.3;
+                    currentVol = currentVol * 0.95 + config.vol * 0.05 + Math.abs(volShock) * config.vol;
+                    currentVol = Math.max(config.vol * 0.5, Math.min(config.vol * 2, currentVol));
+                    
+                    // Price movement using geometric Brownian motion
+                    const drift = config.drift * regime;
+                    const shock = this.normalRandom() * currentVol;
+                    const meanReversion = (config.price - price) / config.price * 0.0005;
+                    
+                    const returnVal = drift + shock + meanReversion;
+                    price = price * Math.exp(returnVal);
+                    
+                    // Generate OHLC
+                    const intraVol = currentVol * 0.4;
+                    const open = price * (1 + (Math.random() - 0.5) * intraVol * 0.5);
+                    const high = Math.max(open, price) * (1 + Math.random() * intraVol);
+                    const low = Math.min(open, price) * (1 - Math.random() * intraVol);
+                    const close = price;
+                    const volume = Math.floor(500000 + Math.random() * 3000000 * (1 + Math.abs(returnVal) * 10));
+                    
+                    // Calculate bar timestamp
+                    const barMinutes = { '1m': 1, '5m': 5, '15m': 15, '1h': 60, '4h': 240, '1d': 1440, '1w': 10080 };
+                    const barDate = new Date(startDate);
+                    barDate.setMinutes(barDate.getMinutes() + i * (barMinutes[timeframe] || 60));
+                    
+                    data.push({
+                        date: barDate,
+                        open: this.round(open),
+                        high: this.round(high),
+                        low: this.round(low),
+                        close: this.round(close),
+                        volume: volume
+                    });
+                }
+                
+                this.priceData = data;
+                return data;
+            }
+
+            // Box-Muller transform for normal distribution
+            normalRandom() {
+                let u = 0, v = 0;
+                while (u === 0) u = Math.random();
+                while (v === 0) v = Math.random();
+                return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+            }
+
+            round(num) {
+                return Math.round(num * 100) / 100;
+            }
+
+            // ============ TECHNICAL INDICATORS (Precise Calculations) ============
+
+            // Simple Moving Average
+            calculateSMA(data, period) {
+                const result = new Array(data.length).fill(null);
+                for (let i = period - 1; i < data.length; i++) {
+                    let sum = 0;
+                    for (let j = 0; j < period; j++) {
+                        sum += data[i - j];
+                    }
+                    result[i] = sum / period;
+                }
+                return result;
+            }
+
+            // Exponential Moving Average
+            calculateEMA(data, period) {
+                const result = new Array(data.length).fill(null);
+                const multiplier = 2 / (period + 1);
+                
+                // First EMA is SMA
+                let sum = 0;
+                for (let i = 0; i < period; i++) {
+                    sum += data[i];
+                }
+                result[period - 1] = sum / period;
+                
+                // Calculate EMA
+                for (let i = period; i < data.length; i++) {
+                    result[i] = (data[i] - result[i - 1]) * multiplier + result[i - 1];
+                }
+                return result;
+            }
+
+            // RSI - Relative Strength Index
+            calculateRSI(data, period) {
+                const result = new Array(data.length).fill(null);
+                const gains = [];
+                const losses = [];
+                
+                for (let i = 1; i < data.length; i++) {
+                    const change = data[i] - data[i - 1];
+                    gains.push(change > 0 ? change : 0);
+                    losses.push(change < 0 ? Math.abs(change) : 0);
+                }
+                
+                for (let i = period; i < data.length; i++) {
+                    const avgGain = gains.slice(i - period, i).reduce((a, b) => a + b, 0) / period;
+                    const avgLoss = losses.slice(i - period, i).reduce((a, b) => a + b, 0) / period;
+                    
+                    if (avgLoss === 0) {
+                        result[i] = 100;
+                    } else {
+                        const rs = avgGain / avgLoss;
+                        result[i] = 100 - (100 / (1 + rs));
+                    }
+                }
+                return result;
+            }
+
+            // MACD
+            calculateMACD(data, fastPeriod, slowPeriod, signalPeriod) {
+                const fastEMA = this.calculateEMA(data, fastPeriod);
+                const slowEMA = this.calculateEMA(data, slowPeriod);
+                
+                const macdLine = new Array(data.length).fill(null);
+                for (let i = 0; i < data.length; i++) {
+                    if (fastEMA[i] !== null && slowEMA[i] !== null) {
+                        macdLine[i] = fastEMA[i] - slowEMA[i];
+                    }
+                }
+                
+                // Signal line is EMA of MACD
+                const validMACD = macdLine.filter(x => x !== null);
+                const signalEMA = this.calculateEMA(validMACD, signalPeriod);
+                
+                const signalLine = new Array(data.length).fill(null);
+                let signalIdx = 0;
+                for (let i = 0; i < data.length; i++) {
+                    if (macdLine[i] !== null) {
+                        if (signalIdx >= signalPeriod - 1) {
+                            signalLine[i] = signalEMA[signalIdx];
+                        }
+                        signalIdx++;
+                    }
+                }
+                
+                const histogram = new Array(data.length).fill(null);
+                for (let i = 0; i < data.length; i++) {
+                    if (macdLine[i] !== null && signalLine[i] !== null) {
+                        histogram[i] = macdLine[i] - signalLine[i];
+                    }
+                }
+                
+                return { macdLine, signalLine, histogram };
+            }
+
+            // Bollinger Bands
+            calculateBollingerBands(data, period, stdDev) {
+                const sma = this.calculateSMA(data, period);
+                const upper = new Array(data.length).fill(null);
+                const lower = new Array(data.length).fill(null);
+                
+                for (let i = period - 1; i < data.length; i++) {
+                    const slice = data.slice(i - period + 1, i + 1);
+                    const mean = sma[i];
+                    const variance = slice.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / period;
+                    const std = Math.sqrt(variance);
+                    
+                    upper[i] = mean + stdDev * std;
+                    lower[i] = mean - stdDev * std;
+                }
+                
+                return { middle: sma, upper, lower };
+            }
+
+            // SuperTrend Indicator
+            calculateSuperTrend(data, period, multiplier) {
+                const atr = this.calculateATR(data, period);
+                const superTrend = new Array(data.length).fill(null);
+                const trend = new Array(data.length).fill(0);
+                
+                let prevUpperBand = 0;
+                let prevLowerBand = 0;
+                let prevSuperTrend = 0;
+                let prevTrend = 1;
+                
+                for (let i = period; i < data.length; i++) {
+                    const hl2 = (data[i].high + data[i].low) / 2;
+                    const upperBand = hl2 + multiplier * atr[i];
+                    const lowerBand = hl2 - multiplier * atr[i];
+                    
+                    const finalUpperBand = (upperBand < prevUpperBand || data[i - 1].close > prevUpperBand) 
+                        ? upperBand : prevUpperBand;
+                    const finalLowerBand = (lowerBand > prevLowerBand || data[i - 1].close < prevLowerBand) 
+                        ? lowerBand : prevLowerBand;
+                    
+                    if (prevSuperTrend === prevUpperBand) {
+                        trend[i] = data[i].close > finalUpperBand ? 1 : -1;
+                    } else {
+                        trend[i] = data[i].close < finalLowerBand ? -1 : 1;
+                    }
+                    
+                    superTrend[i] = trend[i] === 1 ? finalLowerBand : finalUpperBand;
+                    
+                    prevUpperBand = finalUpperBand;
+                    prevLowerBand = finalLowerBand;
+                    prevSuperTrend = superTrend[i];
+                    prevTrend = trend[i];
+                }
+                
+                return { superTrend, trend };
+            }
+
+            // ATR - Average True Range
+            calculateATR(data, period) {
+                const tr = new Array(data.length).fill(0);
+                const atr = new Array(data.length).fill(null);
+                
+                for (let i = 1; i < data.length; i++) {
+                    const high = data[i].high;
+                    const low = data[i].low;
+                    const prevClose = data[i - 1].close;
+                    
+                    tr[i] = Math.max(
+                        high - low,
+                        Math.abs(high - prevClose),
+                        Math.abs(low - prevClose)
+                    );
+                }
+                
+                // First ATR is simple average
+                let sum = 0;
+                for (let i = 1; i <= period; i++) {
+                    sum += tr[i];
+                }
+                atr[period] = sum / period;
+                
+                // Subsequent ATRs use smoothing
+                for (let i = period + 1; i < data.length; i++) {
+                    atr[i] = (atr[i - 1] * (period - 1) + tr[i]) / period;
+                }
+                
+                return atr;
+            }
+
+            // ============ STRATEGY SIGNAL GENERATION ============
+
+            generateSignals(strategy, params) {
+                const closes = this.priceData.map(d => d.close);
+                const signals = [];
+                
+                switch (strategy) {
+                    case 'sma_crossover':
+                        return this.smaCrossoverSignals(closes, params.fastPeriod, params.slowPeriod);
+                    case 'ema_crossover':
+                        return this.emaCrossoverSignals(closes, params.fastPeriod, params.slowPeriod);
+                    case 'rsi':
+                        return this.rsiSignals(closes, params.period, params.oversold, params.overbought);
+                    case 'macd':
+                        return this.macdSignals(closes, params.fastPeriod, params.slowPeriod, params.signalPeriod);
+                    case 'bollinger':
+                        return this.bollingerSignals(closes, params.period, params.stdDev);
+                    case 'supertrend':
+                        return this.supertrendSignals(params.period, params.multiplier);
+                    default:
+                        return this.smaCrossoverSignals(closes, 10, 20);
+                }
+            }
+
+            smaCrossoverSignals(closes, fastPeriod, slowPeriod) {
+                const fastMA = this.calculateSMA(closes, fastPeriod);
+                const slowMA = this.calculateSMA(closes, slowPeriod);
+                const signals = [];
+                
+                this.indicators = { fastMA, slowMA };
+                
+                for (let i = 1; i < closes.length; i++) {
+                    if (fastMA[i] !== null && fastMA[i - 1] !== null && 
+                        slowMA[i] !== null && slowMA[i - 1] !== null) {
+                        
+                        // Bullish crossover
+                        if (fastMA[i] > slowMA[i] && fastMA[i - 1] <= slowMA[i - 1]) {
+                            signals.push({ index: i, type: 'buy', price: closes[i] });
+                        }
+                        // Bearish crossover
+                        else if (fastMA[i] < slowMA[i] && fastMA[i - 1] >= slowMA[i - 1]) {
+                            signals.push({ index: i, type: 'sell', price: closes[i] });
+                        }
+                    }
+                }
+                return signals;
+            }
+
+            emaCrossoverSignals(closes, fastPeriod, slowPeriod) {
+                const fastMA = this.calculateEMA(closes, fastPeriod);
+                const slowMA = this.calculateEMA(closes, slowPeriod);
+                const signals = [];
+                
+                this.indicators = { fastMA, slowMA };
+                
+                for (let i = 1; i < closes.length; i++) {
+                    if (fastMA[i] !== null && fastMA[i - 1] !== null && 
+                        slowMA[i] !== null && slowMA[i - 1] !== null) {
+                        
+                        if (fastMA[i] > slowMA[i] && fastMA[i - 1] <= slowMA[i - 1]) {
+                            signals.push({ index: i, type: 'buy', price: closes[i] });
+                        }
+                        else if (fastMA[i] < slowMA[i] && fastMA[i - 1] >= slowMA[i - 1]) {
+                            signals.push({ index: i, type: 'sell', price: closes[i] });
+                        }
+                    }
+                }
+                return signals;
+            }
+
+            rsiSignals(closes, period, oversold, overbought) {
+                const rsi = this.calculateRSI(closes, period);
+                const signals = [];
+                
+                this.indicators = { rsi };
+                
+                for (let i = 1; i < closes.length; i++) {
+                    if (rsi[i] !== null && rsi[i - 1] !== null) {
+                        // Buy when RSI crosses above oversold
+                        if (rsi[i] > oversold && rsi[i - 1] <= oversold) {
+                            signals.push({ index: i, type: 'buy', price: closes[i] });
+                        }
+                        // Sell when RSI crosses below overbought
+                        else if (rsi[i] < overbought && rsi[i - 1] >= overbought) {
+                            signals.push({ index: i, type: 'sell', price: closes[i] });
+                        }
+                    }
+                }
+                return signals;
+            }
+
+            macdSignals(closes, fastPeriod, slowPeriod, signalPeriod) {
+                const { macdLine, signalLine, histogram } = this.calculateMACD(closes, fastPeriod, slowPeriod, signalPeriod);
+                const signals = [];
+                
+                this.indicators = { macdLine, signalLine };
+                
+                for (let i = 1; i < closes.length; i++) {
+                    if (macdLine[i] !== null && macdLine[i - 1] !== null && 
+                        signalLine[i] !== null && signalLine[i - 1] !== null) {
+                        
+                        // Bullish crossover
+                        if (macdLine[i] > signalLine[i] && macdLine[i - 1] <= signalLine[i - 1]) {
+                            signals.push({ index: i, type: 'buy', price: closes[i] });
+                        }
+                        // Bearish crossover
+                        else if (macdLine[i] < signalLine[i] && macdLine[i - 1] >= signalLine[i - 1]) {
+                            signals.push({ index: i, type: 'sell', price: closes[i] });
+                        }
+                    }
+                }
+                return signals;
+            }
+
+            bollingerSignals(closes, period, stdDev) {
+                const { middle, upper, lower } = this.calculateBollingerBands(closes, period, stdDev);
+                const signals = [];
+                
+                this.indicators = { middle, upper, lower };
+                
+                for (let i = 1; i < closes.length; i++) {
+                    if (lower[i] !== null && upper[i] !== null) {
+                        // Buy when price touches lower band
+                        if (closes[i] <= lower[i] && closes[i - 1] > lower[i - 1]) {
+                            signals.push({ index: i, type: 'buy', price: closes[i] });
+                        }
+                        // Sell when price touches upper band
+                        else if (closes[i] >= upper[i] && closes[i - 1] < upper[i - 1]) {
+                            signals.push({ index: i, type: 'sell', price: closes[i] });
+                        }
+                    }
+                }
+                return signals;
+            }
+
+            supertrendSignals(period, multiplier) {
+                const { superTrend, trend } = this.calculateSuperTrend(this.priceData, period, multiplier);
+                const signals = [];
+                
+                this.indicators = { superTrend, trend };
+                
+                for (let i = 1; i < this.priceData.length; i++) {
+                    if (trend[i] !== 0 && trend[i - 1] !== 0) {
+                        // Trend change to bullish
+                        if (trend[i] === 1 && trend[i - 1] === -1) {
+                            signals.push({ index: i, type: 'buy', price: this.priceData[i].close });
+                        }
+                        // Trend change to bearish
+                        else if (trend[i] === -1 && trend[i - 1] === 1) {
+                            signals.push({ index: i, type: 'sell', price: this.priceData[i].close });
+                        }
+                    }
+                }
+                return signals;
+            }
+
+            // ============ BACKTEST EXECUTION ENGINE ============
+
+            executeBacktest(signals, initialCapital, positionSizePct, stopLossPct, takeProfitPct) {
+                const trades = [];
+                let capital = initialCapital;
+                let position = null;
+                const equity = [initialCapital];
+                let peakEquity = initialCapital;
+                const drawdowns = [0];
+                const monthlyReturns = {};
+                
+                const data = this.priceData;
+                
+                for (let i = 0; i < data.length; i++) {
+                    const bar = data[i];
+                    const currentPrice = bar.close;
+                    
+                    // Check stop loss / take profit for open position
+                    if (position) {
+                        let exitReason = null;
+                        let exitPrice = currentPrice;
+                        
+                        if (position.type === 'long') {
+                            const pnlPct = ((currentPrice - position.entryPrice) / position.entryPrice) * 100;
+                            
+                            // Check if SL/TP was hit during the bar
+                            const slPrice = position.entryPrice * (1 - stopLossPct / 100);
+                            const tpPrice = position.entryPrice * (1 + takeProfitPct / 100);
+                            
+                            if (bar.low <= slPrice) {
+                                exitPrice = slPrice;
+                                exitReason = 'Stop Loss';
+                            } else if (bar.high >= tpPrice) {
+                                exitPrice = tpPrice;
+                                exitReason = 'Take Profit';
+                            }
+                        } else {
+                            const pnlPct = ((position.entryPrice - currentPrice) / position.entryPrice) * 100;
+                            
+                            const slPrice = position.entryPrice * (1 + stopLossPct / 100);
+                            const tpPrice = position.entryPrice * (1 - takeProfitPct / 100);
+                            
+                            if (bar.high >= slPrice) {
+                                exitPrice = slPrice;
+                                exitReason = 'Stop Loss';
+                            } else if (bar.low <= tpPrice) {
+                                exitPrice = tpPrice;
+                                exitReason = 'Take Profit';
+                            }
+                        }
+                        
+                        if (exitReason) {
+                            const pnl = position.type === 'long'
+                                ? (exitPrice - position.entryPrice) * position.quantity
+                                : (position.entryPrice - exitPrice) * position.quantity;
+                            
+                            capital += pnl;
+                            
+                            trades.push({
+                                entryDate: position.entryDate,
+                                exitDate: bar.date,
+                                type: position.type,
+                                entryPrice: position.entryPrice,
+                                exitPrice: this.round(exitPrice),
+                                quantity: position.quantity,
+                                pnl: this.round(pnl),
+                                pnlPercent: this.round(((exitPrice - position.entryPrice) / position.entryPrice) * 100 * (position.type === 'long' ? 1 : -1)),
+                                exitReason: exitReason
+                            });
+                            
+                            position = null;
+                        }
+                    }
+                    
+                    // Check for new signals
+                    const signal = signals.find(s => s.index === i);
+                    
+                    if (signal) {
+                        // Close existing position on opposite signal
+                        if (position) {
+                            const pnl = position.type === 'long'
+                                ? (currentPrice - position.entryPrice) * position.quantity
+                                : (position.entryPrice - currentPrice) * position.quantity;
+                            
+                            capital += pnl;
+                            
+                            trades.push({
+                                entryDate: position.entryDate,
+                                exitDate: bar.date,
+                                type: position.type,
+                                entryPrice: position.entryPrice,
+                                exitPrice: currentPrice,
+                                quantity: position.quantity,
+                                pnl: this.round(pnl),
+                                pnlPercent: this.round(((currentPrice - position.entryPrice) / position.entryPrice) * 100 * (position.type === 'long' ? 1 : -1)),
+                                exitReason: 'Signal'
+                            });
+                            
+                            position = null;
+                        }
+                        
+                        // Open new position
+                        if (signal.type === 'buy' && !position) {
+                            const positionValue = capital * (positionSizePct / 100);
+                            const quantity = positionValue / currentPrice;
+                            
+                            position = {
+                                type: 'long',
+                                entryDate: bar.date,
+                                entryPrice: currentPrice,
+                                quantity: quantity
+                            };
+                        } else if (signal.type === 'sell' && !position) {
+                            const positionValue = capital * (positionSizePct / 100);
+                            const quantity = positionValue / currentPrice;
+                            
+                            position = {
+                                type: 'short',
+                                entryDate: bar.date,
+                                entryPrice: currentPrice,
+                                quantity: quantity
+                            };
+                        }
+                    }
+                    
+                    // Calculate current equity
+                    let currentEquity = capital;
+                    if (position) {
+                        const unrealizedPnL = position.type === 'long'
+                            ? (currentPrice - position.entryPrice) * position.quantity
+                            : (position.entryPrice - currentPrice) * position.quantity;
+                        currentEquity += unrealizedPnL;
+                    }
+                    
+                    equity.push(currentEquity);
+                    peakEquity = Math.max(peakEquity, currentEquity);
+                    const dd = ((peakEquity - currentEquity) / peakEquity) * 100;
+                    drawdowns.push(dd);
+                    
+                    // Track monthly returns
+                    const monthKey = `${bar.date.getFullYear()}-${String(bar.date.getMonth() + 1).padStart(2, '0')}`;
+                    if (!monthlyReturns[monthKey]) {
+                        monthlyReturns[monthKey] = { start: currentEquity, end: currentEquity };
+                    } else {
+                        monthlyReturns[monthKey].end = currentEquity;
+                    }
+                }
+                
+                // Close any remaining position
+                if (position) {
+                    const lastBar = data[data.length - 1];
+                    const pnl = position.type === 'long'
+                        ? (lastBar.close - position.entryPrice) * position.quantity
+                        : (position.entryPrice - lastBar.close) * position.quantity;
+                    
+                    capital += pnl;
+                    
+                    trades.push({
+                        entryDate: position.entryDate,
+                        exitDate: lastBar.date,
+                        type: position.type,
+                        entryPrice: position.entryPrice,
+                        exitPrice: lastBar.close,
+                        quantity: position.quantity,
+                        pnl: this.round(pnl),
+                        pnlPercent: this.round(((lastBar.close - position.entryPrice) / position.entryPrice) * 100 * (position.type === 'long' ? 1 : -1)),
+                        exitReason: 'End of Test'
+                    });
+                }
+                
+                this.trades = trades;
+                this.equity = equity;
+                this.drawdown = drawdowns;
+                this.monthlyReturns = monthlyReturns;
+                
+                return {
+                    trades,
+                    equity,
+                    drawdowns,
+                    monthlyReturns,
+                    finalCapital: capital
+                };
+            }
+
+            // ============ PERFORMANCE METRICS ============
+
+            calculateMetrics(initialCapital, finalCapital, trades, equity, drawdowns) {
+                const totalReturn = ((finalCapital - initialCapital) / initialCapital) * 100;
+                const profitableTrades = trades.filter(t => t.pnl > 0);
+                const losingTrades = trades.filter(t => t.pnl <= 0);
+                
+                const winRate = trades.length > 0 ? (profitableTrades.length / trades.length) * 100 : 0;
+                
+                const grossProfit = profitableTrades.reduce((sum, t) => sum + t.pnl, 0);
+                const grossLoss = Math.abs(losingTrades.reduce((sum, t) => sum + t.pnl, 0));
+                
+                const avgWin = profitableTrades.length > 0 ? grossProfit / profitableTrades.length : 0;
+                const avgLoss = losingTrades.length > 0 ? grossLoss / losingTrades.length : 0;
+                
+                const profitFactor = grossLoss > 0 ? grossProfit / grossLoss : grossProfit > 0 ? Infinity : 0;
+                const maxDrawdown = Math.max(...drawdowns, 0);
+                
+                // Calculate daily returns for Sharpe/Sortino
+                const returns = [];
+                for (let i = 1; i < equity.length; i++) {
+                    if (equity[i - 1] > 0) {
+                        returns.push((equity[i] - equity[i - 1]) / equity[i - 1]);
+                    }
+                }
+                
+                const avgReturn = returns.length > 0 ? returns.reduce((a, b) => a + b, 0) / returns.length : 0;
+                const variance = returns.length > 0 
+                    ? returns.reduce((sum, r) => sum + Math.pow(r - avgReturn, 2), 0) / returns.length 
+                    : 0;
+                const stdDev = Math.sqrt(variance);
+                
+                // Annualized Sharpe Ratio (assuming 252 trading days)
+                const sharpeRatio = stdDev > 0 ? (avgReturn / stdDev) * Math.sqrt(252) : 0;
+                
+                // Sortino Ratio (downside deviation)
+                const negativeReturns = returns.filter(r => r < 0);
+                const downsideVariance = negativeReturns.length > 0
+                    ? negativeReturns.reduce((sum, r) => sum + r * r, 0) / negativeReturns.length
+                    : 0;
+                const downsideDeviation = Math.sqrt(downsideVariance);
+                const sortinoRatio = downsideDeviation > 0 ? (avgReturn / downsideDeviation) * Math.sqrt(252) : 0;
+                
+                // Calmar Ratio
+                const annualizedReturn = totalReturn; // Simplified for demo
+                const calmarRatio = maxDrawdown > 0 ? annualizedReturn / maxDrawdown : 0;
+                
+                // Expectancy
+                const expectancy = trades.length > 0
+                    ? (winRate / 100 * avgWin) - ((1 - winRate / 100) * avgLoss)
+                    : 0;
+                
+                // Payoff Ratio
+                const payoffRatio = avgLoss > 0 ? avgWin / avgLoss : avgWin > 0 ? Infinity : 0;
+                
+                return {
+                    totalReturn: this.round(totalReturn),
+                    finalCapital: this.round(finalCapital),
+                    totalTrades: trades.length,
+                    profitableTrades: profitableTrades.length,
+                    losingTrades: losingTrades.length,
+                    winRate: this.round(winRate),
+                    grossProfit: this.round(grossProfit),
+                    grossLoss: this.round(grossLoss),
+                    avgWin: this.round(avgWin),
+                    avgLoss: this.round(avgLoss),
+                    profitFactor: this.round(profitFactor),
+                    maxDrawdown: this.round(maxDrawdown),
+                    sharpeRatio: this.round(sharpeRatio),
+                    sortinoRatio: this.round(sortinoRatio),
+                    calmarRatio: this.round(calmarRatio),
+                    expectancy: this.round(expectancy),
+                    payoffRatio: this.round(payoffRatio)
+                };
+            }
+        }
+
+        // ====================================================================
+        // UI CONTROLLER
+        // ====================================================================
+
+        class BacktestUI {
+            constructor() {
+                this.engine = new PrecisionBacktester();
+                this.charts = {};
+                this.selectedStrategy = 'sma_crossover';
+                this.strategyParams = this.getDefaultParams('sma_crossover');
+                
+                this.initEventListeners();
+                this.renderStrategyParams();
+            }
+
+            getDefaultParams(strategy) {
+                const params = {
+                    'sma_crossover': { fastPeriod: 10, slowPeriod: 25 },
+                    'ema_crossover': { fastPeriod: 12, slowPeriod: 26 },
+                    'rsi': { period: 14, oversold: 30, overbought: 70 },
+                    'macd': { fastPeriod: 12, slowPeriod: 26, signalPeriod: 9 },
+                    'bollinger': { period: 20, stdDev: 2 },
+                    'supertrend': { period: 10, multiplier: 3 }
+                };
+                return params[strategy] || params['sma_crossover'];
+            }
+
+            initEventListeners() {
+                // Strategy buttons
+                document.querySelectorAll('.strategy-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        document.querySelectorAll('.strategy-btn').forEach(b => b.classList.remove('active'));
+                        e.currentTarget.classList.add('active');
+                        this.selectedStrategy = e.currentTarget.dataset.strategy;
+                        this.strategyParams = this.getDefaultParams(this.selectedStrategy);
+                        this.renderStrategyParams();
+                    });
+                });
+
+                // Range sliders
+                document.getElementById('positionSize').addEventListener('input', (e) => {
+                    document.getElementById('positionSizeVal').textContent = e.target.value + '%';
+                });
+                
+                document.getElementById('stopLoss').addEventListener('input', (e) => {
+                    document.getElementById('stopLossVal').textContent = e.target.value + '%';
+                });
+                
+                document.getElementById('takeProfit').addEventListener('input', (e) => {
+                    document.getElementById('takeProfitVal').textContent = e.target.value + '%';
+                });
+
+                // Run button
+                document.getElementById('runBacktest').addEventListener('click', () => this.runBacktest());
+            }
+
+            renderStrategyParams() {
+                const container = document.getElementById('strategyParams');
+                let html = '<div class="params-title">Strategy Parameters</div>';
+                const p = this.strategyParams;
+                
+                switch (this.selectedStrategy) {
+                    case 'sma_crossover':
+                    case 'ema_crossover':
+                        html += `
+                            <div class="form-group">
+                                <label class="form-label">Fast Period</label>
+                                <input type="number" class="form-control" id="param_fastPeriod" value="${p.fastPeriod}" min="2" max="100">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Slow Period</label>
+                                <input type="number" class="form-control" id="param_slowPeriod" value="${p.slowPeriod}" min="5" max="200">
+                            </div>
+                        `;
+                        break;
+                    case 'rsi':
+                        html += `
+                            <div class="form-group">
+                                <label class="form-label">RSI Period</label>
+                                <input type="number" class="form-control" id="param_period" value="${p.period}" min="2" max="50">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Oversold Level</label>
+                                <input type="number" class="form-control" id="param_oversold" value="${p.oversold}" min="10" max="40">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Overbought Level</label>
+                                <input type="number" class="form-control" id="param_overbought" value="${p.overbought}" min="60" max="90">
+                            </div>
+                        `;
+                        break;
+                    case 'macd':
+                        html += `
+                            <div class="form-group">
+                                <label class="form-label">Fast EMA</label>
+                                <input type="number" class="form-control" id="param_fastPeriod" value="${p.fastPeriod}" min="2" max="50">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Slow EMA</label>
+                                <input type="number" class="form-control" id="param_slowPeriod" value="${p.slowPeriod}" min="10" max="100">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Signal Period</label>
+                                <input type="number" class="form-control" id="param_signalPeriod" value="${p.signalPeriod}" min="2" max="20">
+                            </div>
+                        `;
+                        break;
+                    case 'bollinger':
+                        html += `
+                            <div class="form-group">
+                                <label class="form-label">BB Period</label>
+                                <input type="number" class="form-control" id="param_period" value="${p.period}" min="5" max="50">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Std Dev Multiplier</label>
+                                <input type="number" class="form-control" id="param_stdDev" value="${p.stdDev}" min="1" max="4" step="0.5">
+                            </div>
+                        `;
+                        break;
+                    case 'supertrend':
+                        html += `
+                            <div class="form-group">
+                                <label class="form-label">ATR Period</label>
+                                <input type="number" class="form-control" id="param_period" value="${p.period}" min="5" max="50">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Multiplier</label>
+                                <input type="number" class="form-control" id="param_multiplier" value="${p.multiplier}" min="1" max="6" step="0.5">
+                            </div>
+                        `;
+                        break;
+                }
+                
+                container.innerHTML = html;
+                
+                // Add event listeners to update params
+                container.querySelectorAll('input').forEach(input => {
+                    input.addEventListener('change', (e) => {
+                        const paramName = e.target.id.replace('param_', '');
+                        this.strategyParams[paramName] = parseFloat(e.target.value);
+                    });
+                });
+            }
+
+            async runBacktest() {
+                const btn = document.getElementById('runBacktest');
+                const progressWrapper = document.getElementById('progressWrapper');
+                const progressFill = document.getElementById('progressFill');
+                const progressText = document.getElementById('progressText');
+                
+                btn.classList.add('loading');
+                progressWrapper.classList.add('active');
+                
+                const updateProgress = (pct, text) => {
+                    progressFill.style.width = pct + '%';
+                    progressText.textContent = text;
+                };
+                
+                try {
+                    updateProgress(5, 'Initializing backtester...');
+                    await this.delay(200);
+                    
+                    // Get inputs
+                    const asset = document.getElementById('asset').value;
+                    const period = document.getElementById('period').value;
+                    const timeframe = document.getElementById('timeframe').value;
+                    const capital = parseFloat(document.getElementById('capital').value);
+                    const positionSize = parseFloat(document.getElementById('positionSize').value);
+                    const stopLoss = parseFloat(document.getElementById('stopLoss').value);
+                    const takeProfit = parseFloat(document.getElementById('takeProfit').value);
+                    
+                    // Update params from inputs
+                    document.querySelectorAll('#strategyParams input').forEach(input => {
+                        const paramName = input.id.replace('param_', '');
+                        this.strategyParams[paramName] = parseFloat(input.value);
+                    });
+                    
+                    updateProgress(15, 'Generating market data...');
+                    await this.delay(300);
+                    
+                    // Generate data
+                    this.engine.generateMarketData(asset, period, timeframe);
+                    
+                    updateProgress(35, 'Computing technical indicators...');
+                    await this.delay(250);
+                    
+                    // Generate signals
+                    const signals = this.engine.generateSignals(this.selectedStrategy, this.strategyParams);
+                    
+                    updateProgress(55, 'Executing backtest simulation...');
+                    await this.delay(300);
+                    
+                    // Run backtest
+                    const result = this.engine.executeBacktest(signals, capital, positionSize, stopLoss, takeProfit);
+                    
+                    updateProgress(75, 'Calculating performance metrics...');
+                    await this.delay(200);
+                    
+                    // Calculate metrics
+                    const metrics = this.engine.calculateMetrics(capital, result.finalCapital, result.trades, result.equity, result.drawdowns);
+                    
+                    updateProgress(90, 'Rendering visualizations...');
+                    await this.delay(200);
+                    
+                    // Render results
+                    this.showResults();
+                    this.renderPriceChart(signals);
+                    this.renderStatsGrid(metrics);
+                    this.renderEquityChart(result.equity);
+                    this.renderDrawdownChart(result.drawdowns);
+                    this.renderHeatmap(result.monthlyReturns);
+                    this.renderDistributionChart(result.trades);
+                    this.renderTradeLog(result.trades);
+                    
+                    updateProgress(100, 'Backtest complete!');
+                    await this.delay(400);
+                    
+                } catch (error) {
+                    console.error('Backtest error:', error);
+                    progressText.textContent = 'Error: ' + error.message;
+                }
+                
+                btn.classList.remove('loading');
+                progressWrapper.classList.remove('active');
+            }
+
+            delay(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+            showResults() {
+                document.getElementById('emptyStateCard').classList.add('hidden');
+                document.getElementById('resultsContainer').classList.remove('hidden');
+            }
+
+            renderPriceChart(signals) {
+                const ctx = document.getElementById('priceChart').getContext('2d');
+                
+                if (this.charts.price) this.charts.price.destroy();
+                
+                const data = this.engine.priceData;
+                const labels = data.map(d => d.date.toLocaleDateString());
+                const closes = data.map(d => d.close);
+                
+                const datasets = [{
+                    label: 'Price',
+                    data: closes,
+                    borderColor: '#C9A227',
+                    backgroundColor: 'rgba(201, 162, 39, 0.1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.1,
+                    pointRadius: 0
+                }];
+                
+                // Add buy signals
+                datasets.push({
+                    label: 'Buy',
+                    data: data.map((d, i) => {
+                        const sig = signals.find(s => s.index === i && s.type === 'buy');
+                        return sig ? sig.price : null;
+                    }),
+                    borderColor: 'transparent',
+                    backgroundColor: '#22c55e',
+                    pointRadius: 8,
+                    pointStyle: 'triangle',
+                    showLine: false
+                });
+                
+                // Add sell signals
+                datasets.push({
+                    label: 'Sell',
+                    data: data.map((d, i) => {
+                        const sig = signals.find(s => s.index === i && s.type === 'sell');
+                        return sig ? sig.price : null;
+                    }),
+                    borderColor: 'transparent',
+                    backgroundColor: '#ef4444',
+                    pointRadius: 8,
+                    pointStyle: 'triangle',
+                    rotation: 180,
+                    showLine: false
+                });
+                
+                // Add indicator lines
+                const ind = this.engine.indicators;
+                if (ind.fastMA) {
+                    datasets.push({
+                        label: 'Fast MA',
+                        data: ind.fastMA,
+                        borderColor: '#3b82f6',
+                        borderWidth: 1.5,
+                        fill: false,
+                        pointRadius: 0,
+                        tension: 0.1
+                    });
+                }
+                if (ind.slowMA) {
+                    datasets.push({
+                        label: 'Slow MA',
+                        data: ind.slowMA,
+                        borderColor: '#8b5cf6',
+                        borderWidth: 1.5,
+                        fill: false,
+                        pointRadius: 0,
+                        tension: 0.1
+                    });
+                }
+                if (ind.upper) {
+                    datasets.push({
+                        label: 'Upper BB',
+                        data: ind.upper,
+                        borderColor: 'rgba(239, 68, 68, 0.5)',
+                        borderWidth: 1,
+                        borderDash: [5, 5],
+                        fill: false,
+                        pointRadius: 0
+                    });
+                }
+                if (ind.lower) {
+                    datasets.push({
+                        label: 'Lower BB',
+                        data: ind.lower,
+                        borderColor: 'rgba(34, 197, 94, 0.5)',
+                        borderWidth: 1,
+                        borderDash: [5, 5],
+                        fill: false,
+                        pointRadius: 0
+                    });
+                }
+                if (ind.superTrend) {
+                    datasets.push({
+                        label: 'SuperTrend',
+                        data: ind.superTrend,
+                        borderColor: '#f59e0b',
+                        borderWidth: 2,
+                        fill: false,
+                        pointRadius: 0
+                    });
+                }
+                
+                this.charts.price = new Chart(ctx, {
+                    type: 'line',
+                    data: { labels, datasets },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: { intersect: false, mode: 'index' },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: 'rgba(22, 22, 22, 0.95)',
+                                borderColor: 'rgba(201, 162, 39, 0.5)',
+                                borderWidth: 1,
+                                titleColor: '#fff',
+                                bodyColor: '#a1a1aa',
+                                padding: 12
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                                ticks: { color: '#71717a', maxTicksLimit: 10 }
+                            },
+                            y: {
+                                grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                                ticks: { color: '#71717a' }
+                            }
+                        }
+                    }
+                });
+            }
+
+            renderStatsGrid(metrics) {
+                const container = document.getElementById('statsGrid');
+                const currency = this.engine.currency || '₹';
+                
+                container.innerHTML = `
+                    <div class="stat-card ${metrics.totalReturn >= 0 ? 'positive' : 'negative'} fade-in">
+                        <div class="stat-label">Total Return</div>
+                        <div class="stat-value ${metrics.totalReturn >= 0 ? 'positive' : 'negative'}">
+                            ${metrics.totalReturn >= 0 ? '+' : ''}${metrics.totalReturn.toFixed(2)}%
+                        </div>
+                        <div class="stat-sub">${currency}${metrics.finalCapital.toLocaleString()}</div>
+                    </div>
+                    <div class="stat-card fade-in">
+                        <div class="stat-label">Win Rate</div>
+                        <div class="stat-value gold">${metrics.winRate.toFixed(1)}%</div>
+                        <div class="stat-sub">${metrics.profitableTrades}W / ${metrics.losingTrades}L</div>
+                    </div>
+                    <div class="stat-card fade-in">
+                        <div class="stat-label">Total Trades</div>
+                        <div class="stat-value gold">${metrics.totalTrades}</div>
+                        <div class="stat-sub">Avg Win: ${currency}${metrics.avgWin.toLocaleString()}</div>
+                    </div>
+                    <div class="stat-card negative fade-in">
+                        <div class="stat-label">Max Drawdown</div>
+                        <div class="stat-value negative">-${metrics.maxDrawdown.toFixed(2)}%</div>
+                        <div class="stat-sub">Peak to Trough</div>
+                    </div>
+                    <div class="stat-card ${metrics.sharpeRatio >= 1 ? 'positive' : ''} fade-in">
+                        <div class="stat-label">Sharpe Ratio</div>
+                        <div class="stat-value gold">${metrics.sharpeRatio.toFixed(2)}</div>
+                        <div class="stat-sub">Risk-Adjusted Return</div>
+                    </div>
+                    <div class="stat-card ${metrics.profitFactor >= 1.5 ? 'positive' : metrics.profitFactor < 1 ? 'negative' : ''} fade-in">
+                        <div class="stat-label">Profit Factor</div>
+                        <div class="stat-value gold">${metrics.profitFactor === Infinity ? '∞' : metrics.profitFactor.toFixed(2)}</div>
+                        <div class="stat-sub">Gross Profit / Loss</div>
+                    </div>
+                    <div class="stat-card fade-in">
+                        <div class="stat-label">Sortino Ratio</div>
+                        <div class="stat-value gold">${metrics.sortinoRatio.toFixed(2)}</div>
+                        <div class="stat-sub">Downside Risk</div>
+                    </div>
+                    <div class="stat-card fade-in">
+                        <div class="stat-label">Expectancy</div>
+                        <div class="stat-value ${metrics.expectancy >= 0 ? 'positive' : 'negative'}">${currency}${metrics.expectancy.toLocaleString()}</div>
+                        <div class="stat-sub">Per Trade</div>
+                    </div>
+                `;
+            }
+
+            renderEquityChart(equity) {
+                const ctx = document.getElementById('equityChart').getContext('2d');
+                
+                if (this.charts.equity) this.charts.equity.destroy();
+                
+                this.charts.equity = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: equity.map((_, i) => i),
+                        datasets: [{
+                            label: 'Equity',
+                            data: equity,
+                            borderColor: '#22c55e',
+                            backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.1,
+                            pointRadius: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            x: { display: false },
+                            y: {
+                                grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                                ticks: { color: '#71717a' }
+                            }
+                        }
+                    }
+                });
+            }
+
+            renderDrawdownChart(drawdowns) {
+                const ctx = document.getElementById('drawdownChart').getContext('2d');
+                
+                if (this.charts.drawdown) this.charts.drawdown.destroy();
+                
+                this.charts.drawdown = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: drawdowns.map((_, i) => i),
+                        datasets: [{
+                            label: 'Drawdown',
+                            data: drawdowns.map(d => -d),
+                            borderColor: '#ef4444',
+                            backgroundColor: 'rgba(239, 68, 68, 0.15)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.1,
+                            pointRadius: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            x: { display: false },
+                            y: {
+                                grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                                ticks: { 
+                                    color: '#71717a',
+                                    callback: v => v + '%'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            renderHeatmap(monthlyReturns) {
+                const container = document.getElementById('heatmapGrid');
+                const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                const years = [...new Set(Object.keys(monthlyReturns).map(k => k.split('-')[0]))].sort();
+                
+                let html = '<div class="heatmap-cell heatmap-header"></div>';
+                months.forEach(m => html += `<div class="heatmap-cell heatmap-header">${m}</div>`);
+                
+                years.forEach(year => {
+                    html += `<div class="heatmap-cell heatmap-year">${year}</div>`;
+                    
+                    for (let m = 1; m <= 12; m++) {
+                        const key = `${year}-${String(m).padStart(2, '0')}`;
+                        const data = monthlyReturns[key];
+                        
+                        if (data && data.start > 0) {
+                            const ret = ((data.end - data.start) / data.start) * 100;
+                            const intensity = Math.min(Math.abs(ret) / 8, 1);
+                            const color = ret >= 0 
+                                ? `rgba(34, 197, 94, ${intensity})`
+                                : `rgba(239, 68, 68, ${intensity})`;
+                            const textColor = intensity > 0.4 ? '#fff' : 'var(--text-secondary)';
+                            
+                            html += `<div class="heatmap-cell" style="background: ${color}; color: ${textColor}">${ret.toFixed(1)}%</div>`;
+                        } else {
+                            html += `<div class="heatmap-cell" style="background: rgba(255,255,255,0.03); color: var(--text-muted)">-</div>`;
+                        }
+                    }
+                });
+                
+                container.innerHTML = html;
+            }
+
+            renderDistributionChart(trades) {
+                const ctx = document.getElementById('distributionChart').getContext('2d');
+                
+                if (this.charts.distribution) this.charts.distribution.destroy();
+                
+                const wins = trades.filter(t => t.pnl > 0).length;
+                const losses = trades.filter(t => t.pnl <= 0).length;
+                
+                this.charts.distribution = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Winning Trades', 'Losing Trades'],
+                        datasets: [{
+                            data: [wins, losses],
+                            backgroundColor: ['#22c55e', '#ef4444'],
+                            borderWidth: 0,
+                            hoverOffset: 8
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '65%',
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: { color: '#a1a1aa', padding: 20, usePointStyle: true }
+                            }
+                        }
+                    }
+                });
+            }
+
+            renderTradeLog(trades) {
+                const tbody = document.getElementById('tradeTableBody');
+                const countBadge = document.getElementById('tradeCount');
+                const currency = this.engine.currency || '₹';
+                
+                countBadge.textContent = `${trades.length} trades`;
+                
+                let html = '';
+                let cumulative = 0;
+                
+                trades.forEach((trade, i) => {
+                    cumulative += trade.pnl;
+                    
+                    html += `
+                        <tr>
+                            <td>${i + 1}</td>
+                            <td>${trade.entryDate.toLocaleDateString()}</td>
+                            <td>${trade.exitDate.toLocaleDateString()}</td>
+                            <td>
+                                <span class="trade-type ${trade.type}">
+                                    ${trade.type === 'long' ? '📈 LONG' : '📉 SHORT'}
+                                </span>
+                            </td>
+                            <td>${currency}${trade.entryPrice.toLocaleString()}</td>
+                            <td>${currency}${trade.exitPrice.toLocaleString()}</td>
+                            <td class="${trade.pnl >= 0 ? 'pnl-positive' : 'pnl-negative'}">
+                                ${trade.pnl >= 0 ? '+' : ''}${currency}${trade.pnl.toLocaleString()}
+                                <br><small>(${trade.pnlPercent >= 0 ? '+' : ''}${trade.pnlPercent}%)</small>
+                            </td>
+                            <td class="${cumulative >= 0 ? 'pnl-positive' : 'pnl-negative'}">
+                                ${cumulative >= 0 ? '+' : ''}${currency}${Math.round(cumulative).toLocaleString()}
+                            </td>
+                        </tr>
+                    `;
+                });
+                
+                tbody.innerHTML = html || '<tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 40px;">No trades executed</td></tr>';
+            }
+        }
+
+        // Initialize on DOM ready
+        document.addEventListener('DOMContentLoaded', () => {
+            new BacktestUI();
+        });
+    </script>
+</body>
+</html>
