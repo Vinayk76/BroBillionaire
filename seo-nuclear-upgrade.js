@@ -545,8 +545,10 @@ function processArticle(filename) {
         console.log(`💳 Added FinancialProduct schema to: ${filename}`);
     }
     
-    // Add Video schema placeholder to all articles
-    additionalSchemas.push(generateVideoSchema(title, description, filename));
+    // NOTE: Video schema disabled - was causing Google Search Console errors
+    // "Invalid object type for field <parent_node>" in Review snippets
+    // Only add VideoObject schema when actual videos exist for articles
+    // additionalSchemas.push(generateVideoSchema(title, description, filename));
     
     // Insert schemas before </head>
     const schemasHtml = schemaMarker + '\n' + additionalSchemas.join('\n');
