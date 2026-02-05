@@ -3739,6 +3739,69 @@
                             <span class="investor-chip-style">India Bull</span>
                         </div>
                     </div>
+                    <div class="investor-chip" data-investor="munger" onclick="selectInvestor('munger')">
+                        <div class="investor-chip-avatar">🧠</div>
+                        <div class="investor-chip-info">
+                            <span class="investor-chip-name">Charlie Munger</span>
+                            <span class="investor-chip-style">Mental Models</span>
+                        </div>
+                    </div>
+                    <div class="investor-chip" data-investor="graham" onclick="selectInvestor('graham')">
+                        <div class="investor-chip-avatar">📚</div>
+                        <div class="investor-chip-info">
+                            <span class="investor-chip-name">Benjamin Graham</span>
+                            <span class="investor-chip-style">Father of Value</span>
+                        </div>
+                    </div>
+                    <div class="investor-chip" data-investor="druckenmiller" onclick="selectInvestor('druckenmiller')">
+                        <div class="investor-chip-avatar">🎯</div>
+                        <div class="investor-chip-info">
+                            <span class="investor-chip-name">Stanley Druckenmiller</span>
+                            <span class="investor-chip-style">Macro Conviction</span>
+                        </div>
+                    </div>
+                    <div class="investor-chip" data-investor="marks" onclick="selectInvestor('marks')">
+                        <div class="investor-chip-avatar">📝</div>
+                        <div class="investor-chip-info">
+                            <span class="investor-chip-name">Howard Marks</span>
+                            <span class="investor-chip-style">Second-Level Thinking</span>
+                        </div>
+                    </div>
+                    <div class="investor-chip" data-investor="ackman" onclick="selectInvestor('ackman')">
+                        <div class="investor-chip-avatar">🏢</div>
+                        <div class="investor-chip-info">
+                            <span class="investor-chip-name">Bill Ackman</span>
+                            <span class="investor-chip-style">Concentrated Activist</span>
+                        </div>
+                    </div>
+                    <div class="investor-chip" data-investor="simons" onclick="selectInvestor('simons')">
+                        <div class="investor-chip-avatar">🔢</div>
+                        <div class="investor-chip-info">
+                            <span class="investor-chip-name">Jim Simons</span>
+                            <span class="investor-chip-style">Quant Trading</span>
+                        </div>
+                    </div>
+                    <div class="investor-chip" data-investor="templeton" onclick="selectInvestor('templeton')">
+                        <div class="investor-chip-avatar">🌍</div>
+                        <div class="investor-chip-info">
+                            <span class="investor-chip-name">John Templeton</span>
+                            <span class="investor-chip-style">Global Contrarian</span>
+                        </div>
+                    </div>
+                    <div class="investor-chip" data-investor="fisher" onclick="selectInvestor('fisher')">
+                        <div class="investor-chip-avatar">🔬</div>
+                        <div class="investor-chip-info">
+                            <span class="investor-chip-name">Philip Fisher</span>
+                            <span class="investor-chip-style">Growth Pioneer</span>
+                        </div>
+                    </div>
+                    <div class="investor-chip" data-investor="tudor" onclick="selectInvestor('tudor')">
+                        <div class="investor-chip-avatar">📉</div>
+                        <div class="investor-chip-info">
+                            <span class="investor-chip-name">Paul Tudor Jones</span>
+                            <span class="investor-chip-style">Macro Technician</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="investor-advice-container" id="investorAdviceContainer">
@@ -7771,7 +7834,7 @@
                 title: 'The Big Bull of India',
                 avatar: '🇮🇳',
                 style: 'India Growth + Value',
-                quotes: ["Respect the market. Have an open mind.", "Never invest at unreasonable valuations.", "India is the best place to invest."],
+                quotes: ["Respect the market. Have an open mind.", "Never invest at unreasonable valuations.", "India is the best place to invest.", "The biggest risk is not taking any risk. In a world that is changing quickly, the only strategy that is guaranteed to fail is not taking risks."],
                 analyze: function(data) {
                     const { pe, roe, score, techScore, change, name, sector } = data;
                     let verdict = 'hold', verdictText = 'MONITOR - Wait for Entry', rkjScore = 0, analysis = [];
@@ -7803,6 +7866,463 @@
                             { label: 'ROE', value: roe.toFixed(1) + '%', class: roe > 15 ? 'positive' : 'neutral' },
                             { label: 'P/E Ratio', value: pe.toFixed(1), class: pe < 20 ? 'positive' : 'neutral' },
                             { label: 'Score', value: score + '/100', class: score > 55 ? 'positive' : 'neutral' }
+                        ]
+                    };
+                }
+            },
+            munger: {
+                name: 'Charlie Munger',
+                title: 'The Abominable No-Man',
+                avatar: '🧠',
+                style: 'Mental Models & Quality',
+                quotes: [
+                    "The big money is not in the buying and selling, but in the waiting.",
+                    "Invert, always invert. Turn a situation or problem upside down.",
+                    "A great business at a fair price is superior to a fair business at a great price.",
+                    "It is remarkable how much long-term advantage people like us have gotten by trying to be consistently not stupid, instead of trying to be very intelligent."
+                ],
+                analyze: function(data) {
+                    const { pe, roe, debtEquity, divYield, pb, name, sector, fundScore } = data;
+                    let verdict = 'hold', verdictText = 'HOLD - Think Harder', mungerScore = 0, analysis = [];
+                    
+                    // Quality focus - Munger loves high-quality businesses
+                    if (roe > 25) { mungerScore += 30; analysis.push('<span class="positive">✓ Exceptional ROE ' + roe.toFixed(1) + '% - wonderful business</span>'); }
+                    else if (roe > 18) { mungerScore += 15; analysis.push('<span class="positive">✓ ROE of ' + roe.toFixed(1) + '% shows quality</span>'); }
+                    else if (roe > 12) { mungerScore += 5; analysis.push('• ROE is acceptable'); }
+                    else { mungerScore -= 15; analysis.push('<span class="negative">✗ Poor ROE - not a quality business</span>'); }
+                    
+                    // Fair price, not necessarily cheap
+                    if (pe < 25 && roe > 18) { mungerScore += 20; analysis.push('<span class="positive">✓ Fair price for quality</span>'); }
+                    else if (pe > 40) { mungerScore -= 10; analysis.push('<span class="negative">✗ Too expensive even for quality</span>'); }
+                    
+                    // Low debt preference
+                    if (debtEquity < 0.3) { mungerScore += 15; analysis.push('<span class="positive">✓ Fortress balance sheet</span>'); }
+                    else if (debtEquity > 1.5) { mungerScore -= 20; analysis.push('<span class="negative">✗ Too much financial engineering</span>'); }
+                    
+                    // Simple understandable business
+                    if (['FMCG', 'Banking', 'IT', 'Pharma'].includes(sector)) { mungerScore += 10; analysis.push('• ' + sector + ' - understandable moat'); }
+                    
+                    if (mungerScore >= 50) { verdict = 'buy'; verdictText = 'BUY - Wonderful Business'; }
+                    else if (mungerScore >= 30) { verdict = 'hold'; verdictText = 'WATCHLIST - Quality Present'; }
+                    else if (mungerScore >= 10) { verdict = 'hold'; verdictText = 'HOLD - Mediocre'; }
+                    else { verdict = 'avoid'; verdictText = 'AVOID - Stupid Investment'; }
+                    
+                    return {
+                        verdict, verdictText, analysis: analysis.join('<br>'),
+                        summary: `<span class="highlight">${name}</span> - All I want to know is where I'm going to die, so I'll never go there. ${roe > 20 ? 'This business generates excellent returns - a sign of competitive advantage. ' : 'Returns are not exceptional. '}${debtEquity < 0.5 ? 'The balance sheet shows discipline. ' : ''}${mungerScore >= 40 ? 'Sit on your hands and wait for the right pitch. Quality compounds.' : 'Invert - ask what could destroy this business.'}`,
+                        keyMetrics: [
+                            { label: 'ROE', value: roe.toFixed(1) + '%', class: roe > 20 ? 'positive' : roe > 12 ? 'neutral' : 'negative' },
+                            { label: 'P/E Ratio', value: pe.toFixed(1), class: pe < 25 ? 'positive' : pe < 35 ? 'neutral' : 'negative' },
+                            { label: 'Debt/Equity', value: debtEquity.toFixed(2), class: debtEquity < 0.3 ? 'positive' : debtEquity < 1 ? 'neutral' : 'negative' },
+                            { label: 'Quality', value: fundScore > 60 ? 'HIGH' : 'MEDIUM', class: fundScore > 60 ? 'positive' : 'neutral' }
+                        ]
+                    };
+                }
+            },
+            graham: {
+                name: 'Benjamin Graham',
+                title: 'The Father of Value Investing',
+                avatar: '📚',
+                style: 'Deep Value & Net-Nets',
+                quotes: [
+                    "The intelligent investor is a realist who sells to optimists and buys from pessimists.",
+                    "In the short run, the market is a voting machine but in the long run, it is a weighing machine.",
+                    "The margin of safety is always dependent on the price paid.",
+                    "The individual investor should act consistently as an investor and not as a speculator."
+                ],
+                analyze: function(data) {
+                    const { pe, pb, debtEquity, divYield, roe, name } = data;
+                    let verdict = 'hold', verdictText = 'HOLD - Insufficient Margin', grahamScore = 0, analysis = [];
+                    
+                    // Graham Number approximation
+                    const grahamNumber = Math.sqrt(22.5 * (pe > 0 ? pe : 15) * pb);
+                    const netCurrentAssetValue = pb < 0.67; // Proxy for NCAV
+                    
+                    // Strict P/E requirement
+                    if (pe < 10) { grahamScore += 30; analysis.push('<span class="positive">✓ P/E of ' + pe.toFixed(1) + ' - deep value territory</span>'); }
+                    else if (pe < 15) { grahamScore += 20; analysis.push('<span class="positive">✓ P/E of ' + pe.toFixed(1) + ' - defensive range</span>'); }
+                    else if (pe > 25) { grahamScore -= 20; analysis.push('<span class="negative">✗ P/E of ' + pe.toFixed(1) + ' - speculative</span>'); }
+                    else { grahamScore += 5; analysis.push('• P/E is borderline acceptable'); }
+                    
+                    // Book value analysis
+                    if (pb < 1) { grahamScore += 25; analysis.push('<span class="positive">✓ Trading below book value!</span>'); }
+                    else if (pb < 1.5) { grahamScore += 10; analysis.push('• P/B of ' + pb.toFixed(2) + ' near book'); }
+                    else if (pb > 3) { grahamScore -= 15; analysis.push('<span class="negative">✗ P/B of ' + pb.toFixed(2) + ' - paying premium for intangibles</span>'); }
+                    
+                    // Dividend requirement
+                    if (divYield > 3) { grahamScore += 15; analysis.push('<span class="positive">✓ Strong dividend yield ' + divYield.toFixed(2) + '%</span>'); }
+                    else if (divYield > 1.5) { grahamScore += 8; analysis.push('• Dividend provides some income'); }
+                    else { grahamScore -= 5; analysis.push('• Prefer dividend-paying stocks'); }
+                    
+                    // Conservative balance sheet
+                    if (debtEquity < 0.5) { grahamScore += 15; analysis.push('<span class="positive">✓ Conservative debt levels</span>'); }
+                    else if (debtEquity > 1.5) { grahamScore -= 15; analysis.push('<span class="negative">✗ Excessive leverage</span>'); }
+                    
+                    if (grahamScore >= 55) { verdict = 'buy'; verdictText = 'BUY - Classic Value'; }
+                    else if (grahamScore >= 35) { verdict = 'buy'; verdictText = 'ACCUMULATE - Defensive'; }
+                    else if (grahamScore >= 15) { verdict = 'hold'; verdictText = 'HOLD - Wait for Discount'; }
+                    else { verdict = 'avoid'; verdictText = 'AVOID - Too Speculative'; }
+                    
+                    return {
+                        verdict, verdictText, analysis: analysis.join('<br>'),
+                        summary: `<span class="highlight">${name}</span> - I evaluate securities with mathematical precision. ${pb < 1.2 ? 'Trading near or below book value provides tangible protection. ' : 'Premium to book value requires careful analysis. '}${pe < 15 ? 'Earnings yield is attractive versus bonds. ' : ''}${divYield > 2 ? 'Dividend provides return while waiting. ' : ''}${grahamScore >= 40 ? 'This meets my criteria for a defensive investor.' : 'An enterprising investor might find better opportunities.'}`,
+                        keyMetrics: [
+                            { label: 'P/E Ratio', value: pe.toFixed(1), class: pe < 15 ? 'positive' : pe < 20 ? 'neutral' : 'negative' },
+                            { label: 'P/B Ratio', value: pb.toFixed(2), class: pb < 1 ? 'positive' : pb < 1.5 ? 'neutral' : 'negative' },
+                            { label: 'Div Yield', value: divYield.toFixed(2) + '%', class: divYield > 3 ? 'positive' : divYield > 1 ? 'neutral' : 'negative' },
+                            { label: 'Debt/Eq', value: debtEquity.toFixed(2), class: debtEquity < 0.5 ? 'positive' : debtEquity < 1 ? 'neutral' : 'negative' }
+                        ]
+                    };
+                }
+            },
+            druckenmiller: {
+                name: 'Stanley Druckenmiller',
+                title: '30 Years, No Losing Year',
+                avatar: '🎯',
+                style: 'Macro Conviction Bets',
+                quotes: [
+                    "The way to build superior long-term returns is through preservation of capital and home runs.",
+                    "I've learned many things from George Soros, but perhaps the most significant is that it's not whether you're right or wrong, but how much money you make when you're right and how much you lose when you're wrong.",
+                    "Never, ever invest in the present. It doesn't matter what a company is earning today.",
+                    "The key is to wait. Sometimes the best thing to do is nothing."
+                ],
+                analyze: function(data) {
+                    const { change, techScore, rsi, volumeRatio, pricePosition, roe, pe, name, sector } = data;
+                    let verdict = 'hold', verdictText = 'WAIT - No Conviction', druckScore = 0, analysis = [];
+                    
+                    // Looking for asymmetric opportunities
+                    const momentum = change * (volumeRatio > 1 ? 1.5 : 1);
+                    
+                    if (techScore > 65 && change > 1) { druckScore += 25; analysis.push('<span class="positive">✓ Strong momentum setup</span>'); }
+                    else if (techScore > 55) { druckScore += 10; analysis.push('• Technical picture improving'); }
+                    else if (techScore < 40) { druckScore -= 10; analysis.push('<span class="negative">✗ Weak technicals</span>'); }
+                    
+                    // Price position for conviction
+                    if (pricePosition > 80) { druckScore += 15; analysis.push('<span class="positive">✓ Near highs - strength attracts strength</span>'); }
+                    else if (pricePosition < 20 && rsi < 35) { druckScore += 20; analysis.push('<span class="positive">✓ Extreme pessimism - contrarian opportunity</span>'); }
+                    
+                    // Volume confirmation
+                    if (volumeRatio > 1.5 && change > 0) { druckScore += 15; analysis.push('<span class="positive">✓ Institutional accumulation</span>'); }
+                    else if (volumeRatio > 1.3 && change < -2) { druckScore -= 15; analysis.push('<span class="negative">✗ Heavy distribution</span>'); }
+                    
+                    // Growth sectors for big moves
+                    if (['IT', 'Pharma', 'Auto', 'Banking'].includes(sector)) { druckScore += 10; analysis.push('• ' + sector + ' - can deliver asymmetric returns'); }
+                    
+                    if (druckScore >= 40) { verdict = 'buy'; verdictText = 'BUY BIG - High Conviction'; }
+                    else if (druckScore >= 25) { verdict = 'buy'; verdictText = 'POSITION - Building Thesis'; }
+                    else if (druckScore >= 5) { verdict = 'hold'; verdictText = 'WATCH - Wait for Setup'; }
+                    else { verdict = 'avoid'; verdictText = 'AVOID - No Edge'; }
+                    
+                    return {
+                        verdict, verdictText, analysis: analysis.join('<br>'),
+                        summary: `<span class="highlight">${name}</span> - I'm looking for the fat pitch. ${pricePosition > 70 ? 'Relative strength is powerful. ' : pricePosition < 30 ? 'Beaten down but needs catalyst. ' : ''}${druckScore >= 30 ? 'When I see it, I bet big. Risk management is about sizing, not avoiding bets.' : 'No clear asymmetric opportunity. I preserve capital until conviction appears.'}`,
+                        keyMetrics: [
+                            { label: 'Momentum', value: (change >= 0 ? '+' : '') + change.toFixed(2) + '%', class: change > 2 ? 'positive' : change < -2 ? 'negative' : 'neutral' },
+                            { label: 'Volume', value: (volumeRatio * 100).toFixed(0) + '%', class: volumeRatio > 1.3 ? 'positive' : 'neutral' },
+                            { label: '52W Pos', value: pricePosition.toFixed(0) + '%', class: pricePosition > 70 ? 'positive' : pricePosition < 30 ? 'negative' : 'neutral' },
+                            { label: 'Tech Score', value: techScore.toFixed(0), class: techScore > 60 ? 'positive' : 'neutral' }
+                        ]
+                    };
+                }
+            },
+            marks: {
+                name: 'Howard Marks',
+                title: 'The Memo Writer',
+                avatar: '📝',
+                style: 'Second-Level Thinking',
+                quotes: [
+                    "The most important thing is understanding where we are in the cycle.",
+                    "Second-level thinking is deep, complex and convoluted. It asks 'Who doesn't know that?'",
+                    "Being too far ahead of your time is indistinguishable from being wrong.",
+                    "There's a big difference between probability and outcome. Probable things fail to happen—and improbable things happen—all the time."
+                ],
+                analyze: function(data) {
+                    const { pe, pb, rsi, pricePosition, change, volatility, name, sector } = data;
+                    let verdict = 'hold', verdictText = 'ANALYZE - Check the Cycle', marksScore = 0, analysis = [];
+                    
+                    // Cycle positioning
+                    const marketCyclePosition = (pricePosition + (100 - rsi)) / 2;
+                    
+                    if (rsi < 30 && pricePosition < 30) { marksScore += 30; analysis.push('<span class="positive">✓ Extreme fear - cycle bottom signals</span>'); }
+                    else if (rsi > 70 && pricePosition > 80) { marksScore -= 25; analysis.push('<span class="negative">✗ Euphoria zone - cycle top warning</span>'); }
+                    else if (rsi > 60 && pricePosition > 70) { marksScore -= 10; analysis.push('• Getting crowded - first-level thinking'); }
+                    else { marksScore += 5; analysis.push('• Middle of the cycle - be selective'); }
+                    
+                    // Value consciousness
+                    if (pe < 12 && pb < 1.5) { marksScore += 25; analysis.push('<span class="positive">✓ Contrarian value opportunity</span>'); }
+                    else if (pe > 35) { marksScore -= 15; analysis.push('<span class="negative">✗ Consensus optimism priced in</span>'); }
+                    
+                    // Risk awareness
+                    if (volatility > 0.03 && pricePosition < 40) { marksScore += 10; analysis.push('• Volatility creates opportunity'); }
+                    else if (volatility < 0.01 && pricePosition > 70) { marksScore -= 10; analysis.push('<span class="negative">✗ Low vol at highs - complacency</span>'); }
+                    
+                    if (marksScore >= 35) { verdict = 'buy'; verdictText = 'BUY - Contrarian Opportunity'; }
+                    else if (marksScore >= 15) { verdict = 'hold'; verdictText = 'HOLD - Second-Level Analysis'; }
+                    else if (marksScore >= 0) { verdict = 'hold'; verdictText = 'CAUTION - Cycle Awareness'; }
+                    else { verdict = 'avoid'; verdictText = 'AVOID - Wrong Part of Cycle'; }
+                    
+                    return {
+                        verdict, verdictText, analysis: analysis.join('<br>'),
+                        summary: `<span class="highlight">${name}</span> - Ask yourself: what does the consensus think, and are they right? ${rsi < 35 ? 'Fear is high - that\'s when I get interested. ' : rsi > 65 ? 'Too much optimism. First-level thinkers are buying. ' : ''}${marksScore >= 25 ? 'Remember: you can\'t predict, but you can prepare.' : 'Understanding risk means knowing when you\'re being paid to take it.'}`,
+                        keyMetrics: [
+                            { label: 'RSI', value: rsi.toFixed(0), class: rsi < 35 ? 'positive' : rsi > 65 ? 'negative' : 'neutral' },
+                            { label: 'Cycle Pos', value: marketCyclePosition.toFixed(0), class: marketCyclePosition < 40 ? 'positive' : marketCyclePosition > 70 ? 'negative' : 'neutral' },
+                            { label: 'P/E Ratio', value: pe.toFixed(1), class: pe < 15 ? 'positive' : pe < 25 ? 'neutral' : 'negative' },
+                            { label: 'Volatility', value: (volatility * 100).toFixed(1) + '%', class: 'neutral' }
+                        ]
+                    };
+                }
+            },
+            ackman: {
+                name: 'Bill Ackman',
+                title: 'Pershing Square',
+                avatar: '🏢',
+                style: 'Concentrated Activism',
+                quotes: [
+                    "I don't look to invest in mediocre businesses.",
+                    "We try to buy businesses that have large competitive moats and pricing power.",
+                    "The best ideas are simple. We focus on a handful of positions.",
+                    "I think the best way to protect capital is to own great businesses at reasonable prices."
+                ],
+                analyze: function(data) {
+                    const { pe, roe, debtEquity, pb, fundScore, name, sector, marketCap } = data;
+                    let verdict = 'hold', verdictText = 'PASS - No Catalyst', ackmanScore = 0, analysis = [];
+                    
+                    // Quality business focus
+                    if (roe > 20) { ackmanScore += 25; analysis.push('<span class="positive">✓ Excellent ROE ' + roe.toFixed(1) + '% - quality moat</span>'); }
+                    else if (roe > 15) { ackmanScore += 12; analysis.push('• Decent returns on capital'); }
+                    else if (roe < 10) { ackmanScore -= 10; analysis.push('<span class="negative">✗ Weak returns - activist opportunity?</span>'); }
+                    
+                    // Reasonable valuation for quality
+                    if (pe < 20 && roe > 15) { ackmanScore += 20; analysis.push('<span class="positive">✓ Quality at fair price</span>'); }
+                    else if (pe < 15) { ackmanScore += 15; analysis.push('<span class="positive">✓ Compelling valuation</span>'); }
+                    else if (pe > 35) { ackmanScore -= 15; analysis.push('<span class="negative">✗ Too expensive for my style</span>'); }
+                    
+                    // Balance sheet strength
+                    if (debtEquity < 0.5) { ackmanScore += 15; analysis.push('<span class="positive">✓ Strong balance sheet</span>'); }
+                    else if (debtEquity > 1.5) { ackmanScore -= 10; analysis.push('<span class="negative">✗ Leverage concerns</span>'); }
+                    
+                    // Sector preference
+                    if (['FMCG', 'Retail', 'IT', 'Pharma'].includes(sector)) { ackmanScore += 10; analysis.push('• ' + sector + ' - simple, understandable'); }
+                    
+                    if (ackmanScore >= 45) { verdict = 'buy'; verdictText = 'BUY BIG - Concentrated Bet'; }
+                    else if (ackmanScore >= 30) { verdict = 'buy'; verdictText = 'ACCUMULATE - Core Position'; }
+                    else if (ackmanScore >= 10) { verdict = 'hold'; verdictText = 'MONITOR - Needs Catalyst'; }
+                    else { verdict = 'avoid'; verdictText = 'PASS - Not My Type'; }
+                    
+                    return {
+                        verdict, verdictText, analysis: analysis.join('<br>'),
+                        summary: `<span class="highlight">${name}</span> - I run a concentrated portfolio. ${roe > 18 ? 'High returns on capital suggest a competitive moat. ' : ''}${pe < 20 ? 'Valuation is reasonable. ' : 'Valuation needs to compress. '}${ackmanScore >= 35 ? 'This could be a core holding. I do deep research and take big swings on high-conviction ideas.' : 'I prefer to wait for better opportunities or a catalyst.'}`,
+                        keyMetrics: [
+                            { label: 'ROE', value: roe.toFixed(1) + '%', class: roe > 18 ? 'positive' : roe > 12 ? 'neutral' : 'negative' },
+                            { label: 'P/E Ratio', value: pe.toFixed(1), class: pe < 18 ? 'positive' : pe < 28 ? 'neutral' : 'negative' },
+                            { label: 'Debt/Eq', value: debtEquity.toFixed(2), class: debtEquity < 0.5 ? 'positive' : debtEquity < 1 ? 'neutral' : 'negative' },
+                            { label: 'Quality', value: fundScore > 60 ? 'HIGH' : 'MEDIUM', class: fundScore > 60 ? 'positive' : 'neutral' }
+                        ]
+                    };
+                }
+            },
+            simons: {
+                name: 'Jim Simons',
+                title: 'Renaissance Technologies',
+                avatar: '🔢',
+                style: 'Quantitative Trading',
+                quotes: [
+                    "We search through historical data looking for anomalous patterns.",
+                    "The things we are doing will not go away. We might have a bad period, but the underlying technology is robust.",
+                    "I don't predict the future, I just try to figure out the odds.",
+                    "Good mathematics pays off enormously. The better the math, the better the model."
+                ],
+                analyze: function(data) {
+                    const { techScore, rsi, volumeRatio, change, volatility, sharpe, beta, name } = data;
+                    let verdict = 'hold', verdictText = 'NEUTRAL - No Signal', simonsScore = 0, analysis = [];
+                    
+                    // Statistical edge detection
+                    const momentumSignal = (techScore - 50) * 0.5 + (50 - rsi) * 0.3;
+                    
+                    // Sharpe ratio priority
+                    if (sharpe > 2) { simonsScore += 30; analysis.push('<span class="positive">✓ Exceptional Sharpe ratio ' + sharpe.toFixed(2) + '</span>'); }
+                    else if (sharpe > 1.2) { simonsScore += 18; analysis.push('<span class="positive">✓ Good risk-adjusted returns</span>'); }
+                    else if (sharpe < 0.5) { simonsScore -= 15; analysis.push('<span class="negative">✗ Poor Sharpe - insufficient edge</span>'); }
+                    
+                    // Volume anomalies
+                    if (volumeRatio > 2 && Math.abs(change) > 2) { simonsScore += 20; analysis.push('<span class="positive">✓ Volume spike detected - pattern forming</span>'); }
+                    else if (volumeRatio > 1.5) { simonsScore += 10; analysis.push('• Above-average activity'); }
+                    
+                    // Mean reversion signals
+                    if (rsi < 25) { simonsScore += 15; analysis.push('<span class="positive">✓ Extreme RSI - mean reversion probable</span>'); }
+                    else if (rsi > 75) { simonsScore += 10; analysis.push('• Extended - reversion or breakout'); }
+                    
+                    // Beta optimization
+                    if (beta < 0.7 && sharpe > 1) { simonsScore += 10; analysis.push('<span class="positive">✓ Low beta, good Sharpe - efficient</span>'); }
+                    
+                    if (simonsScore >= 40) { verdict = 'buy'; verdictText = 'LONG SIGNAL - Statistical Edge'; }
+                    else if (simonsScore >= 20) { verdict = 'hold'; verdictText = 'MONITOR - Pattern Developing'; }
+                    else if (simonsScore >= 0) { verdict = 'hold'; verdictText = 'NEUTRAL - No Statistical Edge'; }
+                    else { verdict = 'avoid'; verdictText = 'AVOID - Negative Expectancy'; }
+                    
+                    return {
+                        verdict, verdictText, analysis: analysis.join('<br>'),
+                        summary: `<span class="highlight">${name}</span> - I don't care about stories, only statistics. ${sharpe > 1.2 ? 'Risk-adjusted returns are favorable. ' : 'Need better risk-adjusted profile. '}${volumeRatio > 1.5 ? 'Volume patterns show anomalies worth investigating. ' : ''}${simonsScore >= 25 ? 'The data suggests positive expected value. We size positions based on Kelly criterion and edge magnitude.' : 'No clear statistical advantage. Markets are efficient most of the time.'}`,
+                        keyMetrics: [
+                            { label: 'Sharpe', value: sharpe.toFixed(2), class: sharpe > 1.5 ? 'positive' : sharpe > 0.8 ? 'neutral' : 'negative' },
+                            { label: 'RSI', value: rsi.toFixed(0), class: rsi < 30 || rsi > 70 ? 'positive' : 'neutral' },
+                            { label: 'Vol Ratio', value: (volumeRatio * 100).toFixed(0) + '%', class: volumeRatio > 1.5 ? 'positive' : 'neutral' },
+                            { label: 'Beta', value: beta.toFixed(2), class: beta < 0.8 ? 'positive' : 'neutral' }
+                        ]
+                    };
+                }
+            },
+            templeton: {
+                name: 'John Templeton',
+                title: 'Pioneer of Global Investing',
+                avatar: '🌍',
+                style: 'Maximum Pessimism',
+                quotes: [
+                    "The time of maximum pessimism is the best time to buy, and the time of maximum optimism is the best time to sell.",
+                    "Bull markets are born on pessimism, grown on skepticism, mature on optimism, and die on euphoria.",
+                    "If you want to have a better performance than the crowd, you must do things differently from the crowd.",
+                    "To buy when others are despondently selling and sell when others are greedily buying requires the greatest fortitude."
+                ],
+                analyze: function(data) {
+                    const { pe, pb, rsi, pricePosition, change, divYield, name, sector } = data;
+                    let verdict = 'hold', verdictText = 'WAIT - Pessimism Needed', templetonScore = 0, analysis = [];
+                    
+                    // Maximum pessimism indicators
+                    if (rsi < 25) { templetonScore += 35; analysis.push('<span class="positive">✓ RSI ' + rsi.toFixed(0) + ' - maximum pessimism zone!</span>'); }
+                    else if (rsi < 35) { templetonScore += 20; analysis.push('<span class="positive">✓ RSI ' + rsi.toFixed(0) + ' - fear building</span>'); }
+                    else if (rsi > 70) { templetonScore -= 25; analysis.push('<span class="negative">✗ RSI ' + rsi.toFixed(0) + ' - too much optimism</span>'); }
+                    
+                    // Price position from lows
+                    if (pricePosition < 20) { templetonScore += 25; analysis.push('<span class="positive">✓ Near 52W lows - contrarian territory</span>'); }
+                    else if (pricePosition < 35) { templetonScore += 12; analysis.push('• Below average - some pessimism'); }
+                    else if (pricePosition > 80) { templetonScore -= 20; analysis.push('<span class="negative">✗ Near highs - optimism peaked</span>'); }
+                    
+                    // Value support
+                    if (pe < 10) { templetonScore += 20; analysis.push('<span class="positive">✓ Deep discount P/E</span>'); }
+                    else if (pe < 15) { templetonScore += 10; analysis.push('• Reasonable valuation'); }
+                    
+                    // Dividend income while waiting
+                    if (divYield > 4) { templetonScore += 15; analysis.push('<span class="positive">✓ High yield ' + divYield.toFixed(2) + '% - paid to wait</span>'); }
+                    else if (divYield > 2) { templetonScore += 5; analysis.push('• Some dividend support'); }
+                    
+                    if (templetonScore >= 50) { verdict = 'buy'; verdictText = 'BUY - Maximum Pessimism'; }
+                    else if (templetonScore >= 30) { verdict = 'buy'; verdictText = 'ACCUMULATE - Fear Present'; }
+                    else if (templetonScore >= 10) { verdict = 'hold'; verdictText = 'WATCH - Need More Fear'; }
+                    else { verdict = 'avoid'; verdictText = 'AVOID - Too Much Optimism'; }
+                    
+                    return {
+                        verdict, verdictText, analysis: analysis.join('<br>'),
+                        summary: `<span class="highlight">${name}</span> - I search the world for maximum pessimism. ${rsi < 35 ? 'Fear is elevated - that\'s when fortunes are made. ' : rsi > 60 ? 'Too much optimism here. ' : ''}${pricePosition < 30 ? 'Beaten down prices often precede recoveries. ' : ''}${templetonScore >= 35 ? 'This requires courage - buying when everyone else is selling. Bull markets begin in despair.' : 'I wait for capitulation. Patience is essential for contrarian investing.'}`,
+                        keyMetrics: [
+                            { label: 'RSI', value: rsi.toFixed(0), class: rsi < 30 ? 'positive' : rsi > 60 ? 'negative' : 'neutral' },
+                            { label: '52W Pos', value: pricePosition.toFixed(0) + '%', class: pricePosition < 25 ? 'positive' : pricePosition > 75 ? 'negative' : 'neutral' },
+                            { label: 'P/E Ratio', value: pe.toFixed(1), class: pe < 12 ? 'positive' : pe < 20 ? 'neutral' : 'negative' },
+                            { label: 'Div Yield', value: divYield.toFixed(2) + '%', class: divYield > 3 ? 'positive' : 'neutral' }
+                        ]
+                    };
+                }
+            },
+            fisher: {
+                name: 'Philip Fisher',
+                title: 'Author of Common Stocks',
+                avatar: '🔬',
+                style: 'Scuttlebutt Research',
+                quotes: [
+                    "The stock market is filled with individuals who know the price of everything, but the value of nothing.",
+                    "I don't want a lot of good investments; I want a few outstanding ones.",
+                    "More money has been made by purchasing outstanding companies and holding them through thick and thin.",
+                    "Conservative investors sleep well."
+                ],
+                analyze: function(data) {
+                    const { pe, roe, score, fundScore, name, sector, debtEquity } = data;
+                    let verdict = 'hold', verdictText = 'RESEARCH MORE', fisherScore = 0, analysis = [];
+                    
+                    // Outstanding business characteristics
+                    if (roe > 25) { fisherScore += 30; analysis.push('<span class="positive">✓ Exceptional ROE ' + roe.toFixed(1) + '% - outstanding company</span>'); }
+                    else if (roe > 18) { fisherScore += 18; analysis.push('<span class="positive">✓ Strong ROE - quality management</span>'); }
+                    else if (roe > 12) { fisherScore += 5; analysis.push('• Acceptable returns'); }
+                    else { fisherScore -= 15; analysis.push('<span class="negative">✗ Poor returns - not outstanding</span>'); }
+                    
+                    // Growth potential (sectors with R&D, innovation)
+                    if (['IT', 'Pharma', 'Auto', 'FMCG'].includes(sector)) { fisherScore += 15; analysis.push('<span class="positive">✓ ' + sector + ' - growth & innovation potential</span>'); }
+                    
+                    // Management quality proxy
+                    if (fundScore > 70) { fisherScore += 20; analysis.push('<span class="positive">✓ Strong fundamentals - good management</span>'); }
+                    else if (fundScore > 55) { fisherScore += 8; analysis.push('• Fundamentals acceptable'); }
+                    else { fisherScore -= 10; analysis.push('• Fundamentals need investigation'); }
+                    
+                    // Don't overpay, but don't be too cheap
+                    if (pe > 10 && pe < 35 && roe > 18) { fisherScore += 15; analysis.push('• Willing to pay fair price for quality'); }
+                    else if (pe > 50) { fisherScore -= 10; analysis.push('<span class="negative">✗ Price too high even for growth</span>'); }
+                    
+                    // Financial strength
+                    if (debtEquity < 0.4) { fisherScore += 10; analysis.push('<span class="positive">✓ Conservative financial policy</span>'); }
+                    
+                    if (fisherScore >= 50) { verdict = 'buy'; verdictText = 'BUY & HOLD - Outstanding'; }
+                    else if (fisherScore >= 30) { verdict = 'buy'; verdictText = 'ACCUMULATE - Quality Growth'; }
+                    else if (fisherScore >= 15) { verdict = 'hold'; verdictText = 'RESEARCH - Scuttlebutt Needed'; }
+                    else { verdict = 'avoid'; verdictText = 'PASS - Not Outstanding'; }
+                    
+                    return {
+                        verdict, verdictText, analysis: analysis.join('<br>'),
+                        summary: `<span class="highlight">${name}</span> - I spend 90% of my time on research, talking to customers, suppliers, and competitors. ${roe > 20 ? 'High returns suggest competitive advantage and capable management. ' : ''}${['IT', 'Pharma'].includes(sector) ? 'This sector rewards innovation. ' : ''}${fisherScore >= 40 ? 'An outstanding company at a fair price is worth holding for many years. I rarely sell.' : 'Need to understand the business better through scuttlebutt before committing.'}`,
+                        keyMetrics: [
+                            { label: 'ROE', value: roe.toFixed(1) + '%', class: roe > 20 ? 'positive' : roe > 12 ? 'neutral' : 'negative' },
+                            { label: 'Quality', value: fundScore > 65 ? 'HIGH' : fundScore > 50 ? 'MED' : 'LOW', class: fundScore > 65 ? 'positive' : fundScore > 50 ? 'neutral' : 'negative' },
+                            { label: 'P/E Ratio', value: pe.toFixed(1), class: pe < 30 ? 'neutral' : 'negative' },
+                            { label: 'Sector', value: sector.substring(0, 6), class: ['IT', 'Pharma', 'FMCG'].includes(sector) ? 'positive' : 'neutral' }
+                        ]
+                    };
+                }
+            },
+            tudor: {
+                name: 'Paul Tudor Jones',
+                title: 'Macro Trading Legend',
+                avatar: '📉',
+                style: 'Technical Macro',
+                quotes: [
+                    "The secret to being successful from a trading perspective is to have an indefatigable and an undying and unquenchable thirst for information.",
+                    "Don't focus on making money; focus on protecting what you have.",
+                    "I believe the very best money is made at the market turns. I get real, real cautious when I see numbers coming in much below or above expectations.",
+                    "The whole trick in investing is: How do I keep from losing everything?"
+                ],
+                analyze: function(data) {
+                    const { change, techScore, rsi, volumeRatio, pricePosition, ema20, sma50, price, name, volatility } = data;
+                    let verdict = 'hold', verdictText = 'FLAT - No Edge', tudorScore = 0, analysis = [];
+                    const trend = price > ema20 && price > sma50;
+                    const downtrend = price < ema20 && price < sma50;
+                    
+                    // 200-day moving average religion
+                    if (trend) { tudorScore += 20; analysis.push('<span class="positive">✓ Above key MAs - trend is your friend</span>'); }
+                    else if (downtrend) { tudorScore -= 15; analysis.push('<span class="negative">✗ Below MAs - defensive mode</span>'); }
+                    else { analysis.push('• No clear trend - reduced position'); }
+                    
+                    // Market turn detection
+                    if (rsi < 25 && pricePosition < 25) { tudorScore += 25; analysis.push('<span class="positive">✓ Potential market turn - extreme oversold</span>'); }
+                    else if (rsi > 80 && pricePosition > 85) { tudorScore += 15; analysis.push('• Euphoria - look for reversal signs'); }
+                    
+                    // Volume and momentum
+                    if (volumeRatio > 1.5 && change > 1.5 && trend) { tudorScore += 20; analysis.push('<span class="positive">✓ Breakout with conviction</span>'); }
+                    else if (volumeRatio > 1.5 && change < -1.5) { tudorScore -= 10; analysis.push('<span class="negative">✗ Distribution - reduce exposure</span>'); }
+                    
+                    // Volatility management
+                    if (volatility > 0.04) { tudorScore -= 5; analysis.push('• High volatility - reduce size'); }
+                    else if (volatility < 0.02 && trend) { tudorScore += 10; analysis.push('<span class="positive">✓ Low vol uptrend - ideal setup</span>'); }
+                    
+                    if (tudorScore >= 35) { verdict = 'buy'; verdictText = 'LONG - Trend Confirmed'; }
+                    else if (tudorScore >= 15) { verdict = 'hold'; verdictText = 'POSITION - Scale In'; }
+                    else if (tudorScore >= 0) { verdict = 'hold'; verdictText = 'FLAT - Wait for Setup'; }
+                    else { verdict = 'sell'; verdictText = 'SHORT/AVOID - Risk Off'; }
+                    
+                    return {
+                        verdict, verdictText, analysis: analysis.join('<br>'),
+                        summary: `<span class="highlight">${name}</span> - I'm a tape reader first. ${trend ? 'Price above moving averages - stay long. ' : downtrend ? 'Below MAs - I\'m either short or flat. ' : ''}${rsi < 30 ? 'Extreme fear creates opportunity for a turn. ' : ''}${tudorScore >= 25 ? 'Risk management is key. I never risk more than 2% on any trade. Cut losses fast, let winners run.' : 'Protecting capital is paramount. No setup, no trade.'}`,
+                        keyMetrics: [
+                            { label: 'Trend', value: trend ? 'UP' : downtrend ? 'DOWN' : 'FLAT', class: trend ? 'positive' : downtrend ? 'negative' : 'neutral' },
+                            { label: 'RSI', value: rsi.toFixed(0), class: rsi < 30 ? 'positive' : rsi > 70 ? 'negative' : 'neutral' },
+                            { label: 'Volume', value: (volumeRatio * 100).toFixed(0) + '%', class: volumeRatio > 1.3 ? 'positive' : 'neutral' },
+                            { label: 'Volatility', value: (volatility * 100).toFixed(1) + '%', class: volatility < 0.025 ? 'positive' : 'neutral' }
                         ]
                     };
                 }
