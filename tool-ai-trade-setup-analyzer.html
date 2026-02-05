@@ -719,8 +719,16 @@
                     
                     <div class="form-row">
                         <div class="form-group" style="margin-top:0;">
-                            <label class="form-label" style="font-size:0.85rem;"><i class="fas fa-sign-in-alt"></i> Your Entry/Buy Price</label>
-                            <input type="number" class="form-input" id="existingEntryPrice" placeholder="e.g., 55000" step="0.01">
+                            <label class="form-label" style="font-size:0.85rem;"><i class="fas fa-arrow-up"></i> Position Type</label>
+                            <select class="form-select" id="existingPositionType">
+                                <option value="none">No Existing Position</option>
+                                <option value="long_call">BOUGHT CALL Option</option>
+                                <option value="long_put">BOUGHT PUT Option</option>
+                                <option value="short_call">SOLD CALL Option</option>
+                                <option value="short_put">SOLD PUT Option</option>
+                                <option value="long_futures">LONG Futures</option>
+                                <option value="short_futures">SHORT Futures</option>
+                            </select>
                         </div>
                         <div class="form-group" style="margin-top:0;">
                             <label class="form-label" style="font-size:0.85rem;"><i class="fas fa-hashtag"></i> Quantity/Lots</label>
@@ -730,14 +738,21 @@
                     
                     <div class="form-row">
                         <div class="form-group" style="margin-top:0;">
-                            <label class="form-label" style="font-size:0.85rem;"><i class="fas fa-arrow-up"></i> Position Type</label>
-                            <select class="form-select" id="existingPositionType">
-                                <option value="none">No Existing Position</option>
-                                <option value="long">LONG (Bought Call / Bought Futures)</option>
-                                <option value="short">SHORT (Bought Put / Sold Futures)</option>
-                                <option value="call_sell">SOLD CALL (Short Call)</option>
-                                <option value="put_sell">SOLD PUT (Short Put)</option>
-                            </select>
+                            <label class="form-label" style="font-size:0.85rem;"><i class="fas fa-rupee-sign"></i> Your Buy/Entry Premium</label>
+                            <input type="number" class="form-input" id="existingEntryPrice" placeholder="e.g., 250" step="0.05">
+                            <small style="color:#666; font-size:0.7rem;">Premium you paid per lot</small>
+                        </div>
+                        <div class="form-group" style="margin-top:0;">
+                            <label class="form-label" style="font-size:0.85rem;"><i class="fas fa-tag"></i> Current Premium (LTP)</label>
+                            <input type="number" class="form-input" id="existingCurrentPrice" placeholder="e.g., 180" step="0.05">
+                            <small style="color:#666; font-size:0.7rem;">Current market premium</small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group" style="margin-top:0;">
+                            <label class="form-label" style="font-size:0.85rem;"><i class="fas fa-bullseye"></i> Strike Price</label>
+                            <input type="number" class="form-input" id="existingStrike" placeholder="e.g., 55000" step="50">
                         </div>
                         <div class="form-group" style="margin-top:0;">
                             <label class="form-label" style="font-size:0.85rem;"><i class="fas fa-calendar-alt"></i> Days to Expiry</label>
@@ -802,6 +817,36 @@
                             <div class="signal-label">AI Pattern Assessment</div>
                             <div class="trade-badge long" id="tradeBadge">BULLISH BIAS</div>
                         </div>
+                    </div>
+                </div>
+                
+                <!-- Existing Position Advice (Hidden by default) -->
+                <div id="existingPositionAdviceBox" style="display:none; background: linear-gradient(135deg, rgba(139,92,246,0.2) 0%, rgba(59,130,246,0.15) 100%); border: 2px solid #a78bfa; border-radius: 16px; padding: 25px; margin-bottom: 25px;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                        <i class="fas fa-hand-holding-dollar" style="color: #a78bfa; font-size: 1.3rem;"></i>
+                        <span style="color: #a78bfa; font-weight: 700; font-size: 1.1rem;">📊 Existing Position Recommendation</span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <div style="background: var(--bg-dark); border-radius: 12px; padding: 18px; text-align: center;">
+                            <div style="color: #888; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 8px;">Recommendation</div>
+                            <div id="existingAdviceRec" style="font-size: 1.5rem; font-weight: 800;"></div>
+                        </div>
+                        <div style="background: var(--bg-dark); border-radius: 12px; padding: 18px; text-align: center;">
+                            <div style="color: #888; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 8px;">Probability of Profit</div>
+                            <div id="existingAdviceProb" style="color: #fff; font-size: 1.4rem; font-weight: 700;"></div>
+                        </div>
+                        <div style="background: var(--bg-dark); border-radius: 12px; padding: 18px; text-align: center;">
+                            <div style="color: #888; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 8px;">Suggested Exit</div>
+                            <div id="existingAdviceExit" style="color: var(--gold); font-size: 1.4rem; font-weight: 700; font-family: 'JetBrains Mono', monospace;"></div>
+                        </div>
+                        <div style="background: var(--bg-dark); border-radius: 12px; padding: 18px; text-align: center;">
+                            <div style="color: #888; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 8px;">Theta Impact</div>
+                            <div id="existingAdviceTheta" style="font-size: 1.4rem; font-weight: 700;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; padding: 12px; background: rgba(0,0,0,0.3); border-radius: 10px;">
+                        <div style="color: #888; font-size: 0.8rem; margin-bottom: 5px;">REASON</div>
+                        <div id="existingAdviceReason" style="color: #ddd; font-size: 0.95rem; line-height: 1.5;"></div>
                     </div>
                 </div>
                 
@@ -1514,7 +1559,7 @@
     </div>
     
     <script>
-        const OPENAI_API_KEY = 'YOUR_API_KEY_HERE';
+        const OPENAI_API_KEY = 'YOUR_API_KEY_HERE'; // Replace with your API key - DO NOT commit real keys!
         
         let uploadedImageBase64 = null;
         let currentAnalysis = null;
@@ -1858,14 +1903,16 @@
         
         // Existing Position Calculator
         function updateExistingPositionSummary() {
-            const entryPrice = parseFloat(document.getElementById('existingEntryPrice').value);
-            const currentPrice = parseFloat(document.getElementById('referencePriceInput').value);
+            const entryPremium = parseFloat(document.getElementById('existingEntryPrice').value);
+            const currentPremium = parseFloat(document.getElementById('existingCurrentPrice').value);
+            const strikePrice = parseFloat(document.getElementById('existingStrike').value);
+            const spotPrice = parseFloat(document.getElementById('referencePriceInput').value);
             const qty = parseFloat(document.getElementById('existingQty').value) || 1;
             const posType = document.getElementById('existingPositionType').value;
             const daysToExpiry = parseInt(document.getElementById('daysToExpiry').value) || 0;
             const summaryDiv = document.getElementById('existingPositionSummary');
             
-            if (!entryPrice || !currentPrice || posType === 'none') {
+            if (!entryPremium || !currentPremium || posType === 'none') {
                 summaryDiv.style.display = 'none';
                 return;
             }
@@ -1873,25 +1920,66 @@
             let pnl = 0;
             let pnlPct = 0;
             let direction = '';
-            let breakeven = entryPrice;
+            let breakeven = 0;
+            let intrinsicValue = 0;
+            let timeValue = 0;
+            let moneyness = '';
             
-            if (posType === 'long') {
-                pnl = (currentPrice - entryPrice) * qty;
-                pnlPct = ((currentPrice - entryPrice) / entryPrice * 100);
-                direction = 'LONG';
-            } else if (posType === 'short') {
-                pnl = (entryPrice - currentPrice) * qty;
-                pnlPct = ((entryPrice - currentPrice) / entryPrice * 100);
-                direction = 'SHORT';
-            } else if (posType === 'call_sell') {
-                pnl = (entryPrice - currentPrice) * qty; // Premium received - current premium
-                pnlPct = ((entryPrice - currentPrice) / entryPrice * 100);
+            // Lot size for BANKNIFTY is 15, NIFTY is 25
+            const lotSize = qty;
+            
+            if (posType === 'long_call') {
+                // Bought Call: Profit when premium increases
+                pnl = (currentPremium - entryPremium) * lotSize;
+                pnlPct = ((currentPremium - entryPremium) / entryPremium * 100);
+                direction = 'LONG CALL';
+                breakeven = strikePrice ? strikePrice + entryPremium : entryPremium;
+                if (strikePrice && spotPrice) {
+                    intrinsicValue = Math.max(0, spotPrice - strikePrice);
+                    timeValue = currentPremium - intrinsicValue;
+                    moneyness = spotPrice > strikePrice ? 'ITM' : spotPrice < strikePrice ? 'OTM' : 'ATM';
+                }
+            } else if (posType === 'long_put') {
+                // Bought Put: Profit when premium increases (underlying falls)
+                pnl = (currentPremium - entryPremium) * lotSize;
+                pnlPct = ((currentPremium - entryPremium) / entryPremium * 100);
+                direction = 'LONG PUT';
+                breakeven = strikePrice ? strikePrice - entryPremium : entryPremium;
+                if (strikePrice && spotPrice) {
+                    intrinsicValue = Math.max(0, strikePrice - spotPrice);
+                    timeValue = currentPremium - intrinsicValue;
+                    moneyness = spotPrice < strikePrice ? 'ITM' : spotPrice > strikePrice ? 'OTM' : 'ATM';
+                }
+            } else if (posType === 'short_call') {
+                // Sold Call: Profit when premium decreases
+                pnl = (entryPremium - currentPremium) * lotSize;
+                pnlPct = ((entryPremium - currentPremium) / entryPremium * 100);
                 direction = 'SHORT CALL';
-                breakeven = entryPrice; // Simplified
-            } else if (posType === 'put_sell') {
-                pnl = (entryPrice - currentPrice) * qty;
-                pnlPct = ((entryPrice - currentPrice) / entryPrice * 100);
+                breakeven = strikePrice ? strikePrice + entryPremium : entryPremium;
+                if (strikePrice && spotPrice) {
+                    moneyness = spotPrice > strikePrice ? 'ITM ⚠️' : spotPrice < strikePrice ? 'OTM ✓' : 'ATM';
+                }
+            } else if (posType === 'short_put') {
+                // Sold Put: Profit when premium decreases
+                pnl = (entryPremium - currentPremium) * lotSize;
+                pnlPct = ((entryPremium - currentPremium) / entryPremium * 100);
                 direction = 'SHORT PUT';
+                breakeven = strikePrice ? strikePrice - entryPremium : entryPremium;
+                if (strikePrice && spotPrice) {
+                    moneyness = spotPrice < strikePrice ? 'ITM ⚠️' : spotPrice > strikePrice ? 'OTM ✓' : 'ATM';
+                }
+            } else if (posType === 'long_futures') {
+                // Long Futures: Profit when price increases
+                pnl = (currentPremium - entryPremium) * lotSize;
+                pnlPct = ((currentPremium - entryPremium) / entryPremium * 100);
+                direction = 'LONG FUTURES';
+                breakeven = entryPremium;
+            } else if (posType === 'short_futures') {
+                // Short Futures: Profit when price decreases
+                pnl = (entryPremium - currentPremium) * lotSize;
+                pnlPct = ((entryPremium - currentPremium) / entryPremium * 100);
+                direction = 'SHORT FUTURES';
+                breakeven = entryPremium;
             }
             
             const isProfit = pnl >= 0;
@@ -1900,40 +1988,55 @@
             
             // Time decay warning for options
             let timeDecayNote = '';
-            if (daysToExpiry <= 3 && daysToExpiry > 0 && (posType === 'long')) {
-                timeDecayNote = `<div style="color:#f59e0b; margin-top:8px;">⚠️ ${daysToExpiry} days to expiry - High theta decay!</div>`;
-            } else if (daysToExpiry === 0 && posType === 'long') {
-                timeDecayNote = `<div style="color:#ef4444; margin-top:8px;">🔥 EXPIRY DAY - Maximum theta decay!</div>`;
+            if (daysToExpiry <= 3 && daysToExpiry > 0 && (posType.includes('long'))) {
+                timeDecayNote = `<div style="color:#f59e0b; margin-top:10px; padding:8px; background:rgba(245,158,11,0.1); border-radius:6px;">⚠️ <strong>${daysToExpiry} days to expiry</strong> - High theta decay! Time value eroding fast.</div>`;
+            } else if (daysToExpiry === 0 && posType.includes('long')) {
+                timeDecayNote = `<div style="color:#ef4444; margin-top:10px; padding:8px; background:rgba(239,68,68,0.1); border-radius:6px;">🔥 <strong>EXPIRY DAY</strong> - Maximum theta decay! Exit before 3:30 PM if OTM.</div>`;
+            }
+            
+            // Moneyness indicator
+            let moneynessNote = '';
+            if (moneyness) {
+                const mColor = moneyness.includes('ITM') ? '#22c55e' : moneyness.includes('OTM') ? '#ef4444' : '#f59e0b';
+                moneynessNote = `<div style="margin-top:8px;"><span style="color:${mColor}; font-weight:600;">${moneyness}</span> ${intrinsicValue > 0 ? `| IV: ₹${intrinsicValue.toFixed(2)} | TV: ₹${timeValue.toFixed(2)}` : ''}</div>`;
             }
             
             summaryDiv.style.display = 'block';
             summaryDiv.innerHTML = `
-                <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:12px; text-align:center;">
+                <div style="display:grid; grid-template-columns: repeat(5, 1fr); gap:12px; text-align:center;">
                     <div>
-                        <div style="color:#888; font-size:0.75rem;">POSITION</div>
-                        <div style="color:#a78bfa; font-weight:700;">${direction}</div>
+                        <div style="color:#888; font-size:0.7rem;">POSITION</div>
+                        <div style="color:#a78bfa; font-weight:700; font-size:0.9rem;">${direction}</div>
                     </div>
                     <div>
-                        <div style="color:#888; font-size:0.75rem;">P&L</div>
+                        <div style="color:#888; font-size:0.7rem;">P&L</div>
                         <div style="color:${pnlColor}; font-weight:700;">${pnlIcon} ₹${pnl.toLocaleString('en-IN', {maximumFractionDigits: 0})}</div>
                     </div>
                     <div>
-                        <div style="color:#888; font-size:0.75rem;">P&L %</div>
+                        <div style="color:#888; font-size:0.7rem;">P&L %</div>
                         <div style="color:${pnlColor}; font-weight:700;">${pnlPct >= 0 ? '+' : ''}${pnlPct.toFixed(2)}%</div>
                     </div>
                     <div>
-                        <div style="color:#888; font-size:0.75rem;">BREAKEVEN</div>
+                        <div style="color:#888; font-size:0.7rem;">BREAKEVEN</div>
                         <div style="color:#fff; font-weight:700;">${breakeven.toFixed(2)}</div>
                     </div>
+                    <div>
+                        <div style="color:#888; font-size:0.7rem;">PREMIUM CHANGE</div>
+                        <div style="color:${pnlColor}; font-weight:700;">₹${entryPremium} → ₹${currentPremium}</div>
+                    </div>
                 </div>
+                ${moneynessNote}
                 ${timeDecayNote}
             `;
         }
         
         // Add event listeners for existing position inputs
-        ['existingEntryPrice', 'existingQty', 'existingPositionType', 'daysToExpiry', 'referencePriceInput'].forEach(id => {
-            document.getElementById(id).addEventListener('input', updateExistingPositionSummary);
-            document.getElementById(id).addEventListener('change', updateExistingPositionSummary);
+        ['existingEntryPrice', 'existingCurrentPrice', 'existingQty', 'existingPositionType', 'daysToExpiry', 'referencePriceInput', 'existingStrike'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.addEventListener('input', updateExistingPositionSummary);
+                el.addEventListener('change', updateExistingPositionSummary);
+            }
         });
         
         async function analyzeChart() {
@@ -2133,6 +2236,13 @@ RETURN JSON RESPONSE:
     "probSL": "30%",
     "marketPhase": "Markup",
     "tradeGrade": "A",
+    "existingPositionAdvice": {
+        "recommendation": "HOLD / BOOK_PROFIT / BOOK_PARTIAL / CUT_LOSS / N/A",
+        "reason": "Why this recommendation based on chart",
+        "probabilityOfProfit": "60%",
+        "suggestedExitLevel": "price level to exit",
+        "timeDecayImpact": "Low/Medium/High/Critical"
+    },
     "checklist": [
         {"item": "Trend alignment", "status": "pass"},
         {"item": "Pattern visible", "status": "pass"},
@@ -2145,14 +2255,15 @@ RETURN JSON RESPONSE:
         {"item": "SL at logical level", "status": "pass"},
         {"item": "Target achievable", "status": "pass"}
     ],
-    "analysis": "Detailed 2-3 paragraph analysis explaining: 1) EXACTLY what price action and patterns you observe, 2) WHY you chose these specific entry/target/SL levels based on chart structure, 3) Key risks and what would invalidate this setup."
+    "analysis": "Detailed 2-3 paragraph analysis explaining: 1) EXACTLY what price action and patterns you observe, 2) WHY you chose these specific entry/target/SL levels based on chart structure, 3) Key risks and what would invalidate this setup. 4) If existing position provided, give specific advice on whether to hold, book profit, or cut loss."
 }
-
+${existingPosAnalysis}
 IMPORTANT: 
 - Entry MUST be ${referencePrice} (the current price provided)
 - Adjust targets based on whether you recommend LONG or SHORT
 - For LONG: targets are above entry, SL is below
-- For SHORT: targets are below entry, SL is above`;
+- For SHORT: targets are below entry, SL is above
+- BE OBJECTIVE: If chart shows bearish signals, recommend SHORT. Don't always default to LONG.`;
 
             try {
                 // Helper function to make API call with retry logic
@@ -2565,6 +2676,53 @@ Analyze objectively and give SHORT recommendations when bearish evidence exists.
             const tradeBadge = document.getElementById('tradeBadge');
             tradeBadge.className = `trade-badge ${tradeType.toLowerCase() === 'long' ? 'long' : tradeType.toLowerCase() === 'short' ? 'short' : 'wait'}`;
             tradeBadge.textContent = tradeType === 'LONG' ? 'GO LONG' : tradeType === 'SHORT' ? 'GO SHORT' : 'WAIT';
+            
+            // Display Existing Position Advice if available
+            const existingPosAdvice = analysis.existingPositionAdvice;
+            const adviceBox = document.getElementById('existingPositionAdviceBox');
+            if (existingPosAdvice && existingPosAdvice.recommendation && existingPosAdvice.recommendation !== 'N/A') {
+                adviceBox.style.display = 'block';
+                
+                const rec = existingPosAdvice.recommendation?.toUpperCase() || 'N/A';
+                const recEl = document.getElementById('existingAdviceRec');
+                
+                if (rec.includes('HOLD')) {
+                    recEl.style.color = '#3b82f6';
+                    recEl.textContent = '🔄 HOLD';
+                } else if (rec.includes('PROFIT') || rec.includes('BOOK')) {
+                    recEl.style.color = '#22c55e';
+                    recEl.textContent = '💰 BOOK PROFIT';
+                } else if (rec.includes('LOSS') || rec.includes('CUT') || rec.includes('EXIT')) {
+                    recEl.style.color = '#ef4444';
+                    recEl.textContent = '🛑 EXIT/CUT LOSS';
+                } else if (rec.includes('PARTIAL')) {
+                    recEl.style.color = '#f59e0b';
+                    recEl.textContent = '📊 BOOK PARTIAL';
+                } else {
+                    recEl.style.color = '#888';
+                    recEl.textContent = rec;
+                }
+                
+                document.getElementById('existingAdviceProb').textContent = existingPosAdvice.probabilityOfProfit || 'N/A';
+                document.getElementById('existingAdviceExit').textContent = existingPosAdvice.suggestedExitLevel || 'N/A';
+                
+                const theta = existingPosAdvice.timeDecayImpact?.toUpperCase() || 'N/A';
+                const thetaEl = document.getElementById('existingAdviceTheta');
+                if (theta.includes('CRITICAL') || theta.includes('HIGH')) {
+                    thetaEl.style.color = '#ef4444';
+                    thetaEl.textContent = '🔥 ' + theta;
+                } else if (theta.includes('MEDIUM')) {
+                    thetaEl.style.color = '#f59e0b';
+                    thetaEl.textContent = '⚠️ ' + theta;
+                } else {
+                    thetaEl.style.color = '#22c55e';
+                    thetaEl.textContent = '✅ ' + theta;
+                }
+                
+                document.getElementById('existingAdviceReason').textContent = existingPosAdvice.reason || 'Based on current chart analysis';
+            } else {
+                adviceBox.style.display = 'none';
+            }
             
             document.getElementById('entryLevel').textContent = analysis.entry || '--';
             document.getElementById('target1Level').textContent = analysis.target1 || '--';
