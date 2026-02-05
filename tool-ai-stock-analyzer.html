@@ -214,8 +214,6 @@
             margin-bottom: 22px;
             flex-wrap: wrap;
             position: relative;
-            z-index: 1;;
-            position: relative;
             z-index: 1;
         }
 
@@ -366,6 +364,7 @@
             flex: 1;
             min-width: 280px;
             position: relative;
+            z-index: 10;
         }
 
         .search-input-wrapper::before {
@@ -479,9 +478,10 @@
         .autocomplete-item {
             padding: 14px 20px;
             cursor: pointer;
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: minmax(80px, auto) 1fr auto;
             align-items: center;
+            gap: 12px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
             transition: all 0.2s ease;
         }
@@ -493,13 +493,8 @@
 
         .autocomplete-item:hover,
         .autocomplete-item.selected {
-            background: rgba(201, 162, 39, 0.1);
-        }
-
-        .autocomplete-item-left {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
+            background: rgba(201, 162, 39, 0.15);
+            border-left: 3px solid var(--gold);
         }
 
         .autocomplete-symbol {
@@ -507,19 +502,26 @@
             color: var(--gold);
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.95rem;
+            white-space: nowrap;
         }
 
         .autocomplete-name {
-            font-size: 0.8rem;
-            color: var(--text-tertiary);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            min-width: 0;
         }
 
         .autocomplete-sector {
             font-size: 0.7rem;
             color: var(--text-muted);
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.08);
             padding: 4px 10px;
             border-radius: 12px;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .autocomplete-empty {
@@ -671,29 +673,33 @@
         }
 
         .stock-details h2 {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 6px;
             background: linear-gradient(135deg, #fff, #e0e0e0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            word-break: break-word;
+            line-height: 1.3;
         }
 
         .stock-details .stock-meta {
             display: flex;
-            gap: 18px;
+            flex-wrap: wrap;
+            gap: 10px;
             color: var(--text-tertiary);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
 
         .stock-details .stock-meta span {
             display: flex;
             align-items: center;
-            gap: 6px;
-            padding: 4px 10px;
+            gap: 5px;
+            padding: 4px 8px;
             background: rgba(255, 255, 255, 0.03);
             border-radius: 6px;
+            white-space: nowrap;
         }
 
         .stock-price-info {
@@ -814,30 +820,36 @@
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            margin-bottom: 20px; 
-            padding-bottom: 15px; 
+            margin-bottom: 18px; 
+            padding-bottom: 14px; 
             border-bottom: 1px solid var(--border-color);
+            gap: 12px;
+            flex-wrap: wrap;
         }
         
         .card-title { 
-            font-size: 1rem; 
+            font-size: 0.95rem; 
             font-weight: 600; 
             color: var(--text-primary);
             display: flex; 
             align-items: center; 
             gap: 8px;
+            white-space: nowrap;
         }
 
         .card-title .icon {
-            font-size: 1.1rem;
+            font-size: 1rem;
+            flex-shrink: 0;
         }
         
         .card-badge { 
-            padding: 6px 12px; 
+            padding: 5px 10px; 
             border-radius: 8px; 
-            font-size: 0.75rem; 
+            font-size: 0.7rem; 
             font-weight: 700;
             letter-spacing: 0.5px;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
         
         .badge-bullish { 
@@ -999,13 +1011,14 @@
         
         .metric-item { 
             background: linear-gradient(145deg, rgba(26, 26, 26, 0.9), rgba(18, 18, 18, 0.95));
-            padding: 18px; 
+            padding: 16px 12px; 
             border-radius: 12px; 
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
+            min-width: 0;
         }
 
         .metric-item::before {
@@ -1030,20 +1043,26 @@
         }
         
         .metric-value { 
-            font-size: 1.5rem; 
+            font-size: 1.3rem; 
             font-weight: 700; 
             color: var(--text-primary);
             font-family: 'JetBrains Mono', monospace;
             text-shadow: 0 2px 10px rgba(201, 162, 39, 0.2);
+            word-break: break-word;
+            overflow-wrap: break-word;
+            line-height: 1.2;
         }
         
         .metric-label { 
-            font-size: 0.7rem; 
+            font-size: 0.68rem; 
             color: var(--text-tertiary);
             margin-top: 6px;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
+            letter-spacing: 0.5px;
             font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .metric-positive { color: var(--green) !important; }
@@ -1053,8 +1072,17 @@
         .gauge-container { 
             position: relative; 
             width: 220px; 
-            height: 120px; 
+            height: 150px; 
             margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .gauge-svg-wrapper {
+            position: relative;
+            width: 100%;
+            height: 110px;
         }
         
         .gauge-bg { 
@@ -1073,54 +1101,55 @@
         
         .gauge-value { 
             position: absolute; 
-            bottom: 20px; 
+            bottom: 8px; 
             left: 50%; 
             transform: translateX(-50%); 
-            font-size: 2.5rem; 
+            font-size: 2.2rem; 
             font-weight: 800;
             font-family: 'JetBrains Mono', monospace;
             background: linear-gradient(135deg, var(--gold), #ffd700, var(--gold-light));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 30px rgba(201, 162, 39, 0.5);
+            line-height: 1;
+            white-space: nowrap;
         }
 
         .gauge-label {
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
+            margin-top: 8px;
             font-size: 0.65rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 2px;
             font-weight: 600;
+            white-space: nowrap;
         }
 
         /* Price Targets */
         .price-targets { 
             background: linear-gradient(145deg, rgba(26, 26, 26, 0.9), rgba(18, 18, 18, 0.95));
-            padding: 20px; 
+            padding: 16px; 
             border-radius: 14px;
             border: 1px solid rgba(255, 255, 255, 0.03);
+            overflow: hidden;
         }
         
         .target-row { 
             display: flex; 
             justify-content: space-between;
             align-items: center;
-            padding: 16px 18px; 
+            padding: 14px 16px; 
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
             border-radius: 10px;
-            margin: 4px 0;
+            margin: 3px 0;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             background: transparent;
+            gap: 12px;
         }
         
         .target-row:hover {
             background: rgba(201, 162, 39, 0.05);
-            transform: translateX(5px);
+            transform: translateX(3px);
         }
         
         .target-row:last-child { border-bottom: none; }
@@ -1130,9 +1159,11 @@
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 0.95rem;
-            min-width: 140px;
+            gap: 8px;
+            font-size: 0.85rem;
+            min-width: 110px;
+            flex-shrink: 0;
+            white-space: nowrap;
         }
 
         .target-label .dot {
@@ -1149,19 +1180,22 @@
         .target-value { 
             font-weight: 700;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 1.1rem;
+            font-size: 1rem;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            flex-wrap: nowrap;
+            white-space: nowrap;
         }
 
         .target-percent {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
-            padding: 4px 10px;
+            padding: 3px 8px;
             border-radius: 6px;
-            min-width: 55px;
+            min-width: 50px;
             text-align: center;
+            flex-shrink: 0;
         }
         
         .target-upside { color: var(--green); }
@@ -1172,8 +1206,8 @@
         .target-current {
             background: linear-gradient(135deg, rgba(201, 162, 39, 0.15), rgba(201, 162, 39, 0.05));
             border: 1px solid rgba(201, 162, 39, 0.3);
-            margin: 8px 0;
-            padding: 16px 16px;
+            margin: 6px 0;
+            padding: 14px 16px;
             border-left: 3px solid var(--gold);
         }
 
@@ -1189,16 +1223,17 @@
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            padding: 14px 12px; 
+            padding: 12px 12px; 
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
             border-radius: 8px;
             margin: 2px 0;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            gap: 10px;
         }
 
         .indicator-row:hover {
             background: rgba(201, 162, 39, 0.03);
-            transform: translateX(5px);
+            transform: translateX(3px);
         }
 
         .indicator-row:last-child { border-bottom: none; }
@@ -1208,39 +1243,45 @@
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 0.9rem;
+            gap: 8px;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+            white-space: nowrap;
         }
 
         .indicator-name .indicator-icon {
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: var(--gold);
             opacity: 0.8;
+            width: 18px;
+            text-align: center;
         }
 
         .indicator-values {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
+            flex-shrink: 0;
         }
 
         .indicator-num {
             font-family: 'JetBrains Mono', monospace;
             color: var(--text-tertiary);
-            font-size: 0.85rem;
-            min-width: 50px;
+            font-size: 0.82rem;
+            min-width: 45px;
             text-align: right;
         }
         
         .indicator-signal { 
-            padding: 6px 14px; 
+            padding: 5px 12px; 
             border-radius: 8px; 
-            font-size: 0.75rem; 
+            font-size: 0.7rem; 
             font-weight: 700;
-            min-width: 75px;
+            min-width: 70px;
             text-align: center;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            white-space: nowrap;
         }
         
         .ind-buy { 
@@ -1980,27 +2021,98 @@
             .analysis-card.span-2 {
                 grid-column: span 1;
             }
+            .metric-grid.cols-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .target-label {
+                font-size: 0.8rem;
+                min-width: 100px;
+            }
+            .target-value {
+                font-size: 0.9rem;
+            }
+            .indicator-row {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .indicator-values {
+                width: 100%;
+                justify-content: flex-end;
+            }
         }
 
         @media (max-width: 768px) {
             .tool-container { padding: 15px; }
-            .tool-header { padding: 40px 25px; }
-            .tool-header h1 { font-size: 1.8rem; }
-            .header-stats { flex-direction: column; gap: 20px; }
-            .search-section { padding: 20px; }
+            .tool-header { padding: 35px 20px; }
+            .tool-header h1 { font-size: 1.7rem; }
+            .tool-header p { font-size: 1rem; }
+            .header-stats { flex-direction: row; gap: 15px; flex-wrap: wrap; justify-content: center; }
+            .header-stat { min-width: 60px; }
+            .search-section { padding: 18px; }
             .search-box { flex-direction: column; }
             .search-input-wrapper { min-width: 100%; }
-            .analyze-btn { width: 100%; justify-content: center; }
-            .results-grid { grid-template-columns: 1fr; }
+            .search-input { padding: 16px 18px 16px 50px; font-size: 1rem; }
+            .analyze-btn { width: 100%; justify-content: center; padding: 16px 30px; }
+            .results-grid { grid-template-columns: 1fr; gap: 15px; }
+            .analysis-card { padding: 20px; }
             .analysis-card.span-2 { grid-column: span 1; }
-            .metric-grid { grid-template-columns: repeat(2, 1fr); }
+            .metric-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
             .metric-grid.cols-4 { grid-template-columns: repeat(2, 1fr); }
-            .stock-header { flex-direction: column; text-align: center; }
+            .metric-item { padding: 14px 10px; }
+            .metric-value { font-size: 1.1rem; }
+            .stock-header { flex-direction: column; text-align: center; padding: 20px; gap: 15px; }
+            .stock-info { flex-direction: column; text-align: center; }
             .stock-price-info { text-align: center; }
-            .faq-section { padding: 25px 20px; }
-            .back-btn { padding: 8px 15px; font-size: 0.8rem; }
-            .sector-comparison { flex-wrap: wrap; }
-            .sector-item { min-width: calc(50% - 6px); }
+            .current-price-large { font-size: 2rem; }
+            .faq-section { padding: 25px 15px; }
+            .back-btn { padding: 8px 12px; font-size: 0.75rem; top: 10px; left: 10px; }
+            .sector-comparison { flex-wrap: wrap; gap: 8px; }
+            .sector-item { min-width: calc(50% - 4px); padding: 12px 10px; }
+            .target-row { padding: 12px 14px; }
+            .target-label { font-size: 0.78rem; min-width: 90px; gap: 6px; }
+            .target-label .dot { width: 8px; height: 8px; }
+            .target-value { font-size: 0.88rem; gap: 6px; }
+            .target-percent { font-size: 0.65rem; min-width: 45px; padding: 2px 6px; }
+            .quick-stocks { gap: 8px; }
+            .quick-stock { padding: 6px 12px; font-size: 0.78rem; }
+            .gauge-container { width: 180px; height: 130px; }
+            .gauge-value { font-size: 1.8rem; }
+            .gauge-label { font-size: 0.6rem; letter-spacing: 1px; }
+            .autocomplete-item { padding: 12px 15px; gap: 10px; }
+            .autocomplete-symbol { font-size: 0.85rem; }
+            .autocomplete-name { font-size: 0.78rem; }
+            .autocomplete-sector { font-size: 0.65rem; padding: 3px 8px; }
+            .indicator-row { padding: 12px 10px; }
+            .indicator-name { font-size: 0.82rem; }
+            .indicator-signal { font-size: 0.7rem; padding: 5px 10px; min-width: 65px; }
+            .signal-indicator { font-size: 3.5rem; }
+            .signal-label { font-size: 1.2rem; letter-spacing: 2px; }
+            .ai-summary { padding: 25px 20px; }
+            .share-btn { padding: 12px 20px; font-size: 0.85rem; min-width: 120px; }
+        }
+
+        @media (max-width: 480px) {
+            .tool-header { padding: 30px 15px; }
+            .tool-header h1 { font-size: 1.5rem; }
+            .badge-container { gap: 8px; }
+            .premium-badge { padding: 6px 12px; font-size: 0.7rem; }
+            .header-stats { gap: 10px; }
+            .header-stat-value { font-size: 1.3rem; }
+            .header-stat-label { font-size: 0.65rem; }
+            .metric-value { font-size: 1rem; }
+            .metric-label { font-size: 0.6rem; }
+            .target-label { min-width: 80px; font-size: 0.72rem; }
+            .target-value { font-size: 0.82rem; }
+            .gauge-container { width: 160px; height: 120px; }
+            .gauge-value { font-size: 1.6rem; }
+            .quick-stock { padding: 5px 10px; font-size: 0.72rem; }
+            .stock-details h2 { font-size: 1.2rem; }
+            .current-price-large { font-size: 1.7rem; }
+            .price-change-large { font-size: 1rem; }
+            .card-title { font-size: 0.9rem; }
         }
 
         /* Custom Scrollbar */
@@ -2169,21 +2281,23 @@
                         <span class="card-badge badge-neutral" id="scoreBadge">-/100</span>
                     </div>
                     <div class="gauge-container">
-                        <svg viewBox="0 0 200 110" style="width: 100%; height: 100%;">
-                            <defs>
-                                <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" style="stop-color:#ff3b5c"/>
-                                    <stop offset="50%" style="stop-color:#ffd700"/>
-                                    <stop offset="100%" style="stop-color:#00d68f"/>
-                                </linearGradient>
-                            </defs>
-                            <path class="gauge-bg" d="M20 90 A70 70 0 0 1 180 90"></path>
-                            <path class="gauge-fill" id="gaugeFill" d="M20 90 A70 70 0 0 1 180 90" style="stroke: url(#gaugeGradient); stroke-dasharray: 220; stroke-dashoffset: 220;"></path>
-                        </svg>
-                        <div class="gauge-value" id="gaugeValue">0</div>
+                        <div class="gauge-svg-wrapper">
+                            <svg viewBox="0 0 200 110" style="width: 100%; height: 100%;">
+                                <defs>
+                                    <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" style="stop-color:#ff3b5c"/>
+                                        <stop offset="50%" style="stop-color:#ffd700"/>
+                                        <stop offset="100%" style="stop-color:#00d68f"/>
+                                    </linearGradient>
+                                </defs>
+                                <path class="gauge-bg" d="M20 90 A70 70 0 0 1 180 90"></path>
+                                <path class="gauge-fill" id="gaugeFill" d="M20 90 A70 70 0 0 1 180 90" style="stroke: url(#gaugeGradient); stroke-dasharray: 220; stroke-dashoffset: 220;"></path>
+                            </svg>
+                            <div class="gauge-value" id="gaugeValue">0</div>
+                        </div>
                         <div class="gauge-label">OVERALL SCORE</div>
                     </div>
-                    <div class="metric-grid" style="margin-top: 1.5rem;">
+                    <div class="metric-grid" style="margin-top: 1rem;">
                         <div class="metric-item">
                             <div class="metric-value" id="technicalScore">-</div>
                             <div class="metric-label">Technical</div>
@@ -3858,9 +3972,124 @@ The RSI at <span class="highlight">${rsi.toFixed(1)}</span> indicates ${rsi < 30
             setTimeout(() => btn.innerHTML = originalText, 2000);
         }
 
-        // Enter key support
+        // =============================================
+        // TYPEAHEAD AUTOCOMPLETE FUNCTIONALITY
+        // =============================================
+        
+        const stockInput = document.getElementById('stockInput');
+        const autocompleteDropdown = document.getElementById('autocompleteDropdown');
+        let selectedIndex = -1;
+        let filteredStocks = [];
+        
+        // Build searchable stock list
+        const stockList = Object.entries(stockMetadata).map(([symbol, data]) => ({
+            symbol: symbol,
+            name: data.name,
+            sector: data.sector
+        }));
+        
+        // Update stock count in badge
+        const stockCountBadge = document.querySelector('.stock-count-badge span');
+        if (stockCountBadge) {
+            stockCountBadge.textContent = `${stockList.length}+ NSE Stocks Available`;
+        }
+        
+        // Filter stocks based on input
+        function filterStocks(query) {
+            if (!query || query.length < 1) return [];
+            
+            const q = query.toLowerCase();
+            return stockList.filter(stock => 
+                stock.symbol.toLowerCase().includes(q) ||
+                stock.name.toLowerCase().includes(q) ||
+                stock.sector.toLowerCase().includes(q)
+            ).slice(0, 10); // Limit to 10 results for performance
+        }
+        
+        // Render autocomplete dropdown
+        function renderAutocomplete(stocks) {
+            if (stocks.length === 0) {
+                autocompleteDropdown.style.display = 'none';
+                return;
+            }
+            
+            autocompleteDropdown.innerHTML = stocks.map((stock, index) => `
+                <div class="autocomplete-item ${index === selectedIndex ? 'selected' : ''}" 
+                     data-symbol="${stock.symbol}"
+                     onclick="selectStock('${stock.symbol}')">
+                    <span class="autocomplete-symbol">${stock.symbol}</span>
+                    <span class="autocomplete-name">${stock.name}</span>
+                    <span class="autocomplete-sector">${stock.sector}</span>
+                </div>
+            `).join('');
+            
+            autocompleteDropdown.style.display = 'block';
+        }
+        
+        // Select a stock from autocomplete
+        function selectStock(symbol) {
+            stockInput.value = symbol;
+            autocompleteDropdown.style.display = 'none';
+            selectedIndex = -1;
+            stockInput.focus();
+            
+            // Auto-analyze after selection
+            analyzeStock();
+        }
+        
+        // Handle input events
+        stockInput.addEventListener('input', function(e) {
+            const query = e.target.value.trim();
+            filteredStocks = filterStocks(query);
+            selectedIndex = -1;
+            renderAutocomplete(filteredStocks);
+        });
+        
+        // Handle keyboard navigation
+        stockInput.addEventListener('keydown', function(e) {
+            if (!filteredStocks.length) return;
+            
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                selectedIndex = Math.min(selectedIndex + 1, filteredStocks.length - 1);
+                renderAutocomplete(filteredStocks);
+                // Scroll selected item into view
+                const selected = autocompleteDropdown.querySelector('.autocomplete-item.selected');
+                if (selected) selected.scrollIntoView({ block: 'nearest' });
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                selectedIndex = Math.max(selectedIndex - 1, 0);
+                renderAutocomplete(filteredStocks);
+                const selected = autocompleteDropdown.querySelector('.autocomplete-item.selected');
+                if (selected) selected.scrollIntoView({ block: 'nearest' });
+            } else if (e.key === 'Enter' && selectedIndex >= 0) {
+                e.preventDefault();
+                selectStock(filteredStocks[selectedIndex].symbol);
+            } else if (e.key === 'Escape') {
+                autocompleteDropdown.style.display = 'none';
+                selectedIndex = -1;
+            }
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.search-container')) {
+                autocompleteDropdown.style.display = 'none';
+                selectedIndex = -1;
+            }
+        });
+        
+        // Show dropdown on focus if there's text
+        stockInput.addEventListener('focus', function() {
+            if (stockInput.value.trim()) {
+                filteredStocks = filterStocks(stockInput.value.trim());
+                renderAutocomplete(filteredStocks);
+            }
+        });
+
+        // Enter key support (when no autocomplete selection)
         document.getElementById('stockInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') analyzeStock();
+            if (e.key === 'Enter' && selectedIndex < 0) analyzeStock();
         });
 
         // Auto-focus on load
