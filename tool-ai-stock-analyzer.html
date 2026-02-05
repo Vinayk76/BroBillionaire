@@ -364,7 +364,7 @@
             flex: 1;
             min-width: 280px;
             position: relative;
-            z-index: 10;
+            z-index: 100;
         }
 
         .search-input-wrapper::before {
@@ -458,17 +458,17 @@
             top: 100%;
             left: 0;
             right: 0;
-            background: linear-gradient(145deg, rgba(26, 26, 26, 0.98), rgba(18, 18, 18, 0.98));
+            background: #1a1a1a;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(201, 162, 39, 0.3);
+            border: 2px solid rgba(201, 162, 39, 0.5);
             border-top: none;
             border-radius: 0 0 14px 14px;
             max-height: 350px;
             overflow-y: auto;
-            z-index: 1000;
+            z-index: 9999;
             display: none;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
         }
 
         .autocomplete-dropdown.active {
@@ -482,7 +482,7 @@
             grid-template-columns: minmax(80px, auto) 1fr auto;
             align-items: center;
             gap: 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
             transition: all 0.2s ease;
         }
 
@@ -493,21 +493,22 @@
 
         .autocomplete-item:hover,
         .autocomplete-item.selected {
-            background: rgba(201, 162, 39, 0.15);
+            background: rgba(201, 162, 39, 0.2);
             border-left: 3px solid var(--gold);
         }
 
         .autocomplete-symbol {
             font-weight: 700;
-            color: var(--gold);
+            color: #ffd700;
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.95rem;
             white-space: nowrap;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
 
         .autocomplete-name {
             font-size: 0.85rem;
-            color: var(--text-secondary);
+            color: #ffffff;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -516,8 +517,8 @@
 
         .autocomplete-sector {
             font-size: 0.7rem;
-            color: var(--text-muted);
-            background: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.15);
             padding: 4px 10px;
             border-radius: 12px;
             white-space: nowrap;
@@ -527,7 +528,7 @@
         .autocomplete-empty {
             padding: 20px;
             text-align: center;
-            color: var(--text-muted);
+            color: rgba(255, 255, 255, 0.6);
             font-size: 0.9rem;
         }
 
@@ -568,7 +569,7 @@
             margin-top: 22px;
             align-items: center;
             position: relative;
-            z-index: 1;
+            z-index: 0;
         }
 
         .quick-stocks-label {

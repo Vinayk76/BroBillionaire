@@ -130,20 +130,107 @@
         /* Main Dashboard Grid */
         .dashboard-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 1.5rem; }
         
-        /* Fear & Greed Gauge */
-        .fear-greed-card { grid-column: span 2; background: linear-gradient(135deg, #1e1e2f 0%, #16161f 100%); border-radius: 20px; padding: 2rem; border: 1px solid #333; position: relative; overflow: hidden; }
-        .fear-greed-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #ef4444, #fbbf24, #10b981); }
+        /* Fear & Greed Gauge - Premium */
+        .fear-greed-card { 
+            grid-column: span 2; 
+            background: linear-gradient(135deg, #1e1e2f 0%, #12121f 100%); 
+            border-radius: 24px; 
+            padding: 2rem; 
+            border: 1px solid rgba(201, 162, 39, 0.2); 
+            position: relative; 
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        .fear-greed-card::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            height: 4px; 
+            background: linear-gradient(90deg, #dc2626, #ef4444, #f97316, #fbbf24, #84cc16, #22c55e, #10b981); 
+        }
+        .fear-greed-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 30% 0%, rgba(201, 162, 39, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
         
-        .gauge-wrapper { display: flex; align-items: center; justify-content: center; gap: 2rem; }
-        .gauge-container { display: flex; flex-direction: column; align-items: center; width: 220px; }
-        .gauge-svg { width: 100%; height: auto; overflow: visible; display: block; }
-        .gauge-bg { fill: none; stroke: #2a2a4a; stroke-width: 20; }
-        .gauge-fill { fill: none; stroke-width: 20; stroke-linecap: butt; transition: all 1s ease-out; }
-        .gauge-center { text-align: center; margin-top: 5px; position: relative; z-index: 10; padding: 8px 15px; border-radius: 8px; }
-        .gauge-value { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, #C9A227, #ffd700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; margin-bottom: 0.25rem; }
-        .gauge-label { font-size: 0.95rem; font-weight: 700; margin-top: 0.5rem; line-height: 1.2; }
-        #gaugeNeedle line { filter: drop-shadow(0 0 4px rgba(201, 162, 39, 0.6)); }
-        #gaugeNeedle circle { filter: drop-shadow(0 0 6px rgba(201, 162, 39, 0.8)); }
+        .gauge-wrapper { display: flex; align-items: center; justify-content: center; gap: 2rem; position: relative; z-index: 1; }
+        .gauge-container { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            width: 240px;
+            position: relative;
+        }
+        .gauge-container::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 100px;
+            background: radial-gradient(ellipse at 50% 100%, rgba(201, 162, 39, 0.15) 0%, transparent 70%);
+            filter: blur(20px);
+            pointer-events: none;
+        }
+        .gauge-svg { width: 100%; height: auto; overflow: visible; display: block; filter: drop-shadow(0 5px 20px rgba(0, 0, 0, 0.3)); }
+        .gauge-bg { fill: none; stroke: #1a1a2e; stroke-width: 22; }
+        .gauge-fill { fill: none; stroke-width: 20; stroke-linecap: butt; transition: all 1.5s ease-out; filter: drop-shadow(0 0 8px currentColor); }
+        .gauge-ticks { stroke: rgba(255, 255, 255, 0.3); stroke-width: 2; }
+        .gauge-center { 
+            text-align: center; 
+            margin-top: 8px; 
+            position: relative; 
+            z-index: 10; 
+            padding: 12px 20px; 
+            border-radius: 16px;
+            background: rgba(22, 22, 31, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .gauge-value { 
+            font-size: 3rem; 
+            font-weight: 900; 
+            background: linear-gradient(135deg, #C9A227, #ffd700, #fff); 
+            background-size: 200% 200%;
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            background-clip: text; 
+            line-height: 1; 
+            margin-bottom: 0.25rem;
+            animation: valueShimmer 3s ease-in-out infinite;
+            text-shadow: 0 0 40px rgba(201, 162, 39, 0.5);
+        }
+        @keyframes valueShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .gauge-label { 
+            font-size: 0.85rem; 
+            font-weight: 800; 
+            margin-top: 0.5rem; 
+            line-height: 1.2;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        .gauge-label.extreme-fear { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+        .gauge-label.fear { background: rgba(249, 115, 22, 0.2); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.3); }
+        .gauge-label.neutral { background: rgba(251, 191, 36, 0.2); color: #fcd34d; border: 1px solid rgba(251, 191, 36, 0.3); }
+        .gauge-label.greed { background: rgba(132, 204, 22, 0.2); color: #a3e635; border: 1px solid rgba(132, 204, 22, 0.3); }
+        .gauge-label.extreme-greed { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+        #gaugeNeedle line { filter: drop-shadow(0 0 6px rgba(201, 162, 39, 0.8)); }
+        #gaugeNeedle circle { filter: drop-shadow(0 0 10px rgba(201, 162, 39, 1)); }
         
         .sentiment-details { flex: 1; }
         .sentiment-title { font-size: 1.4rem; color: #C9A227; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
@@ -339,19 +426,48 @@
                         <svg class="gauge-svg" viewBox="0 0 200 120">
                             <defs>
                                 <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" style="stop-color:#ef4444"/>
-                                    <stop offset="25%" style="stop-color:#f97316"/>
-                                    <stop offset="50%" style="stop-color:#fbbf24"/>
-                                    <stop offset="75%" style="stop-color:#84cc16"/>
+                                    <stop offset="0%" style="stop-color:#dc2626"/>
+                                    <stop offset="15%" style="stop-color:#ef4444"/>
+                                    <stop offset="30%" style="stop-color:#f97316"/>
+                                    <stop offset="45%" style="stop-color:#fbbf24"/>
+                                    <stop offset="60%" style="stop-color:#84cc16"/>
+                                    <stop offset="80%" style="stop-color:#22c55e"/>
                                     <stop offset="100%" style="stop-color:#10b981"/>
                                 </linearGradient>
+                                <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                                    <feMerge>
+                                        <feMergeNode in="coloredBlur"/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
+                                <linearGradient id="needleGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#fff"/>
+                                    <stop offset="50%" style="stop-color:#ffd700"/>
+                                    <stop offset="100%" style="stop-color:#C9A227"/>
+                                </linearGradient>
                             </defs>
+                            <!-- Outer glow ring -->
+                            <path d="M18 100 A82 82 0 0 1 182 100" fill="none" stroke="rgba(201, 162, 39, 0.1)" stroke-width="26" filter="url(#glow)"/>
+                            <!-- Background track -->
                             <path class="gauge-bg" d="M20 100 A80 80 0 0 1 180 100"></path>
-                            <path class="gauge-fill" id="fearGreedGauge" d="M20 100 A80 80 0 0 1 180 100" style="stroke: url(#gaugeGradient); stroke-dasharray: 251; stroke-dashoffset: 251;"></path>
+                            <!-- Colored fill -->
+                            <path class="gauge-fill" id="fearGreedGauge" d="M20 100 A80 80 0 0 1 180 100" style="stroke: url(#gaugeGradient); stroke-dasharray: 251; stroke-dashoffset: 251;" filter="url(#glow)"></path>
+                            <!-- Tick marks -->
+                            <g class="gauge-ticks">
+                                <line x1="20" y1="100" x2="28" y2="100" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+                                <line x1="36" y1="55" x2="42" y2="60" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+                                <line x1="70" y1="28" x2="74" y2="35" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+                                <line x1="100" y1="20" x2="100" y2="28" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+                                <line x1="130" y1="28" x2="126" y2="35" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+                                <line x1="164" y1="55" x2="158" y2="60" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+                                <line x1="180" y1="100" x2="172" y2="100" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+                            </g>
                             <!-- Needle -->
                             <g id="gaugeNeedle" transform="rotate(-90, 100, 100)">
-                                <line x1="100" y1="100" x2="100" y2="45" stroke="#C9A227" stroke-width="3" stroke-linecap="round"/>
-                                <circle cx="100" cy="100" r="6" fill="#C9A227"/>
+                                <line x1="100" y1="100" x2="100" y2="40" stroke="url(#needleGradient)" stroke-width="4" stroke-linecap="round"/>
+                                <circle cx="100" cy="100" r="10" fill="url(#needleGradient)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                                <circle cx="100" cy="100" r="5" fill="#fff"/>
                             </g>
                         </svg>
                         <div class="gauge-center">
@@ -567,6 +683,21 @@
         const FEAR_GREED_API = 'https://api.alternative.me/fng/';
         const EXCHANGE_RATE_API = 'https://api.exchangerate-api.com/v4/latest/USD';
         
+        // Cache Configuration
+        const CACHE_KEYS = {
+            fearGreed: 'mpd_feargreed',
+            crypto: 'mpd_crypto',
+            global: 'mpd_global',
+            currency: 'mpd_currency'
+        };
+        const CACHE_DURATION = {
+            fearGreed: 5 * 60 * 1000,  // 5 minutes
+            crypto: 2 * 60 * 1000,      // 2 minutes
+            global: 5 * 60 * 1000,      // 5 minutes
+            currency: 30 * 60 * 1000    // 30 minutes (rates don't change often)
+        };
+        const REQUEST_TIMEOUT = 8000; // 8 seconds timeout
+        
         // Store data for AI analysis
         let marketData = {
             fearGreed: null,
@@ -575,32 +706,98 @@
             globalData: null
         };
 
+        // Cache utilities
+        function getCache(key) {
+            try {
+                const cached = localStorage.getItem(key);
+                if (!cached) return null;
+                const { data, timestamp } = JSON.parse(cached);
+                return { data, timestamp };
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function setCache(key, data) {
+            try {
+                localStorage.setItem(key, JSON.stringify({
+                    data,
+                    timestamp: Date.now()
+                }));
+            } catch (e) {
+                console.warn('Cache write failed:', e);
+            }
+        }
+
+        function isCacheValid(key, duration) {
+            const cached = getCache(key);
+            if (!cached) return false;
+            return (Date.now() - cached.timestamp) < duration;
+        }
+
+        // Fetch with timeout
+        async function fetchWithTimeout(url, timeout = REQUEST_TIMEOUT) {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), timeout);
+            
+            try {
+                const response = await fetch(url, { signal: controller.signal });
+                clearTimeout(timeoutId);
+                return response;
+            } catch (error) {
+                clearTimeout(timeoutId);
+                throw error;
+            }
+        }
+
         // Fetch Fear & Greed Index
         async function fetchFearGreedIndex() {
+            const cacheKey = CACHE_KEYS.fearGreed;
+            
+            // Use cache if valid
+            if (isCacheValid(cacheKey, CACHE_DURATION.fearGreed)) {
+                const cached = getCache(cacheKey);
+                if (cached) {
+                    applyFearGreedData(cached.data);
+                    return;
+                }
+            }
+            
             try {
-                const response = await fetch(FEAR_GREED_API + '?limit=31');
+                const response = await fetchWithTimeout(FEAR_GREED_API + '?limit=31');
                 const data = await response.json();
                 
                 if (data.data && data.data.length > 0) {
-                    marketData.fearGreed = data.data;
-                    
-                    const current = data.data[0];
-                    const yesterday = data.data[1];
-                    const week = data.data[7] || data.data[data.data.length - 1];
-                    const month = data.data[30] || data.data[data.data.length - 1];
-                    
-                    updateFearGreedGauge(parseInt(current.value), current.value_classification);
-                    
-                    document.getElementById('fgNow').textContent = `${current.value} - ${current.value_classification}`;
-                    document.getElementById('fgYesterday').textContent = `${yesterday.value} - ${yesterday.value_classification}`;
-                    document.getElementById('fgWeek').textContent = `${week.value} - ${week.value_classification}`;
-                    document.getElementById('fgMonth').textContent = `${month.value} - ${month.value_classification}`;
+                    setCache(cacheKey, data.data);
+                    applyFearGreedData(data.data);
                 }
             } catch (error) {
                 console.error('Fear & Greed API Error:', error);
-                document.getElementById('fearGreedValue').textContent = 'N/A';
-                document.getElementById('fearGreedLabel').textContent = 'Unable to load';
+                // Try to use stale cache
+                const cached = getCache(cacheKey);
+                if (cached) {
+                    applyFearGreedData(cached.data);
+                } else {
+                    document.getElementById('fearGreedValue').textContent = 'N/A';
+                    document.getElementById('fearGreedLabel').textContent = 'Unable to load';
+                }
             }
+        }
+
+        function applyFearGreedData(data) {
+            marketData.fearGreed = data;
+            
+            const current = data[0];
+            const yesterday = data[1];
+            const week = data[7] || data[data.length - 1];
+            const month = data[30] || data[data.length - 1];
+            
+            updateFearGreedGauge(parseInt(current.value), current.value_classification);
+            
+            document.getElementById('fgNow').textContent = `${current.value} - ${current.value_classification}`;
+            document.getElementById('fgYesterday').textContent = `${yesterday.value} - ${yesterday.value_classification}`;
+            document.getElementById('fgWeek').textContent = `${week.value} - ${week.value_classification}`;
+            document.getElementById('fgMonth').textContent = `${month.value} - ${month.value_classification}`;
         }
 
         function updateFearGreedGauge(value, label) {
@@ -621,141 +818,316 @@
             valueEl.textContent = value;
             labelEl.textContent = label;
             
-            // Color based on sentiment
-            let color = '#fbbf24'; // neutral
-            if (value <= 25) color = '#ef4444'; // extreme fear
-            else if (value <= 45) color = '#f97316'; // fear
-            else if (value >= 75) color = '#10b981'; // extreme greed
-            else if (value >= 55) color = '#84cc16'; // greed
+            // Remove all sentiment classes first
+            labelEl.classList.remove('extreme-fear', 'fear', 'neutral', 'greed', 'extreme-greed');
             
-            labelEl.style.color = color;
+            // Color based on sentiment with class
+            let colorClass = 'neutral';
+            if (value <= 25) colorClass = 'extreme-fear';
+            else if (value <= 45) colorClass = 'fear';
+            else if (value >= 75) colorClass = 'extreme-greed';
+            else if (value >= 55) colorClass = 'greed';
+            
+            labelEl.classList.add(colorClass);
         }
 
         // Fetch Crypto Data
         async function fetchCryptoData() {
+            const cacheKey = CACHE_KEYS.crypto;
+            
+            // Use cache if valid
+            if (isCacheValid(cacheKey, CACHE_DURATION.crypto)) {
+                const cached = getCache(cacheKey);
+                if (cached) {
+                    applyCryptoData(cached.data);
+                    return;
+                }
+            }
+            
             try {
-                const response = await fetch(`${COINGECKO_API}/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=6&page=1&sparkline=false&price_change_percentage=24h`);
+                const response = await fetchWithTimeout(`${COINGECKO_API}/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=6&page=1&sparkline=false&price_change_percentage=24h`);
                 const data = await response.json();
                 
-                marketData.crypto = data;
-                
-                const cryptoGrid = document.getElementById('cryptoGrid');
-                cryptoGrid.innerHTML = data.map(coin => `
-                    <div class="crypto-item">
-                        <img class="crypto-icon" src="${coin.image}" alt="${coin.name}">
-                        <div class="crypto-info">
-                            <div class="crypto-name">${coin.name}</div>
-                            <div class="crypto-symbol">${coin.symbol.toUpperCase()}</div>
-                        </div>
-                        <div class="crypto-price-col">
-                            <div class="crypto-price">₹${formatNumber(coin.current_price)}</div>
-                            <div class="crypto-change ${coin.price_change_percentage_24h >= 0 ? 'positive' : 'negative'}">
-                                ${coin.price_change_percentage_24h >= 0 ? '▲' : '▼'} ${Math.abs(coin.price_change_percentage_24h).toFixed(2)}%
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
+                setCache(cacheKey, data);
+                applyCryptoData(data);
                 
             } catch (error) {
                 console.error('Crypto API Error:', error);
+                // Try to use stale cache
+                const cached = getCache(cacheKey);
+                if (cached) {
+                    applyCryptoData(cached.data);
+                }
             }
+        }
+
+        function applyCryptoData(data) {
+            marketData.crypto = data;
+            
+            const cryptoGrid = document.getElementById('cryptoGrid');
+            cryptoGrid.innerHTML = data.map(coin => `
+                <div class="crypto-item">
+                    <img class="crypto-icon" src="${coin.image}" alt="${coin.name}" loading="lazy">
+                    <div class="crypto-info">
+                        <div class="crypto-name">${coin.name}</div>
+                        <div class="crypto-symbol">${coin.symbol.toUpperCase()}</div>
+                    </div>
+                    <div class="crypto-price-col">
+                        <div class="crypto-price">₹${formatNumber(coin.current_price)}</div>
+                        <div class="crypto-change ${coin.price_change_percentage_24h >= 0 ? 'positive' : 'negative'}">
+                            ${coin.price_change_percentage_24h >= 0 ? '▲' : '▼'} ${Math.abs(coin.price_change_percentage_24h).toFixed(2)}%
+                        </div>
+                    </div>
+                </div>
+            `).join('');
         }
 
         // Fetch Global Market Data
         async function fetchGlobalData() {
+            const cacheKey = CACHE_KEYS.global;
+            
+            // Use cache if valid
+            if (isCacheValid(cacheKey, CACHE_DURATION.global)) {
+                const cached = getCache(cacheKey);
+                if (cached) {
+                    applyGlobalData(cached.data);
+                    return;
+                }
+            }
+            
             try {
-                const response = await fetch(`${COINGECKO_API}/global`);
+                const response = await fetchWithTimeout(`${COINGECKO_API}/global`);
                 const data = await response.json();
                 
-                marketData.globalData = data.data;
-                
-                // BTC Dominance
-                const btcDom = data.data.market_cap_percentage.btc.toFixed(1);
-                document.getElementById('btcDomValue').textContent = btcDom + '%';
-                document.getElementById('btcDomBar').style.width = btcDom + '%';
-                
-                // Total Volume
-                const volume = data.data.total_volume.inr;
-                document.getElementById('volumeValue').textContent = '₹' + formatLargeNumber(volume);
-                document.getElementById('volumeBar').style.width = '65%';
-                
-                // Market Cap Change
-                const mcapChange = data.data.market_cap_change_percentage_24h_usd.toFixed(2);
-                document.getElementById('mcapChangeValue').textContent = (mcapChange >= 0 ? '+' : '') + mcapChange + '%';
-                const mcapBar = document.getElementById('mcapChangeBar');
-                mcapBar.style.width = Math.min(50 + (mcapChange * 5), 100) + '%';
-                mcapBar.className = 'mood-bar ' + (mcapChange >= 0 ? 'greed' : 'fear');
-                
-                // Altcoin Season (calculated from BTC dominance)
-                const altseasonIndex = Math.round(100 - data.data.market_cap_percentage.btc);
-                document.getElementById('altseasonValue').textContent = altseasonIndex;
-                document.getElementById('altseasonBar').style.width = altseasonIndex + '%';
-                document.getElementById('altseasonBar').className = 'mood-bar ' + (altseasonIndex > 50 ? 'greed' : altseasonIndex < 30 ? 'fear' : 'neutral');
-                document.getElementById('altseasonText').textContent = altseasonIndex > 60 ? 'Altcoin Season!' : altseasonIndex > 40 ? 'Balanced Market' : 'Bitcoin Season';
+                setCache(cacheKey, data.data);
+                applyGlobalData(data.data);
                 
             } catch (error) {
                 console.error('Global Data API Error:', error);
+                // Try to use stale cache
+                const cached = getCache(cacheKey);
+                if (cached) {
+                    applyGlobalData(cached.data);
+                }
             }
+        }
+
+        function applyGlobalData(data) {
+            marketData.globalData = data;
+            
+            // BTC Dominance
+            const btcDom = data.market_cap_percentage.btc.toFixed(1);
+            document.getElementById('btcDomValue').textContent = btcDom + '%';
+            document.getElementById('btcDomBar').style.width = btcDom + '%';
+            
+            // Total Volume
+            const volume = data.total_volume.inr;
+            document.getElementById('volumeValue').textContent = '₹' + formatLargeNumber(volume);
+            document.getElementById('volumeBar').style.width = '65%';
+            
+            // Market Cap Change
+            const mcapChange = data.market_cap_change_percentage_24h_usd.toFixed(2);
+            document.getElementById('mcapChangeValue').textContent = (mcapChange >= 0 ? '+' : '') + mcapChange + '%';
+            const mcapBar = document.getElementById('mcapChangeBar');
+            mcapBar.style.width = Math.min(50 + (mcapChange * 5), 100) + '%';
+            mcapBar.className = 'mood-bar ' + (mcapChange >= 0 ? 'greed' : 'fear');
+            
+            // Altcoin Season (calculated from BTC dominance)
+            const altseasonIndex = Math.round(100 - data.market_cap_percentage.btc);
+            document.getElementById('altseasonValue').textContent = altseasonIndex;
+            document.getElementById('altseasonBar').style.width = altseasonIndex + '%';
+            document.getElementById('altseasonBar').className = 'mood-bar ' + (altseasonIndex > 50 ? 'greed' : altseasonIndex < 30 ? 'fear' : 'neutral');
+            document.getElementById('altseasonText').textContent = altseasonIndex > 60 ? 'Altcoin Season!' : altseasonIndex > 40 ? 'Balanced Market' : 'Bitcoin Season';
         }
 
         // Fetch Currency Rates
         async function fetchCurrencyRates() {
+            const cacheKey = CACHE_KEYS.currency;
+            
+            // Use cache if valid (currency rates are more stable)
+            if (isCacheValid(cacheKey, CACHE_DURATION.currency)) {
+                const cached = getCache(cacheKey);
+                if (cached) {
+                    applyCurrencyData(cached.data);
+                    return;
+                }
+            }
+            
             try {
-                const response = await fetch(EXCHANGE_RATE_API);
+                const response = await fetchWithTimeout(EXCHANGE_RATE_API);
                 const data = await response.json();
                 
-                marketData.currencies = data.rates;
-                
-                const inrRate = data.rates.INR;
-                
-                document.getElementById('usdInr').textContent = '₹' + inrRate.toFixed(2);
-                document.getElementById('eurInr').textContent = '₹' + (inrRate / data.rates.EUR).toFixed(2);
-                document.getElementById('gbpInr').textContent = '₹' + (inrRate / data.rates.GBP).toFixed(2);
-                document.getElementById('jpyInr').textContent = '₹' + (inrRate / data.rates.JPY * 100).toFixed(2);
-                document.getElementById('aedInr').textContent = '₹' + (inrRate / data.rates.AED).toFixed(2);
-                document.getElementById('chfInr').textContent = '₹' + (inrRate / data.rates.CHF).toFixed(2);
+                setCache(cacheKey, data.rates);
+                applyCurrencyData(data.rates);
                 
             } catch (error) {
                 console.error('Currency API Error:', error);
+                // Try to use stale cache
+                const cached = getCache(cacheKey);
+                if (cached) {
+                    applyCurrencyData(cached.data);
+                }
             }
         }
 
-        // Fetch Market Indices (simulated with realistic data pattern)
+        function applyCurrencyData(rates) {
+            marketData.currencies = rates;
+            
+            const inrRate = rates.INR;
+            
+            document.getElementById('usdInr').textContent = '₹' + inrRate.toFixed(2);
+            document.getElementById('eurInr').textContent = '₹' + (inrRate / rates.EUR).toFixed(2);
+            document.getElementById('gbpInr').textContent = '₹' + (inrRate / rates.GBP).toFixed(2);
+            document.getElementById('jpyInr').textContent = '₹' + (inrRate / rates.JPY * 100).toFixed(2);
+            document.getElementById('aedInr').textContent = '₹' + (inrRate / rates.AED).toFixed(2);
+            document.getElementById('chfInr').textContent = '₹' + (inrRate / rates.CHF).toFixed(2);
+        }
+
+        // Fetch Market Indices using Yahoo Finance API via CORS proxy
         async function fetchIndices() {
-            // Using Finnhub or similar would require API key
-            // For demo, using simulated realistic data
+            const symbols = [
+                { symbol: '^GSPC', key: 'sp500' },      // S&P 500
+                { symbol: '^IXIC', key: 'nasdaq' },     // NASDAQ
+                { symbol: '^NSEI', key: 'nifty' },      // NIFTY 50
+                { symbol: '^BSESN', key: 'sensex' }     // SENSEX
+            ];
+            
             const indices = {
-                sp500: { value: 5876.32, change: 0.42 },
-                nasdaq: { value: 18945.67, change: 0.68 },
-                nifty: { value: 24532.15, change: -0.23 },
-                sensex: { value: 81234.56, change: -0.18 }
+                sp500: { value: null, change: null },
+                nasdaq: { value: null, change: null },
+                nifty: { value: null, change: null },
+                sensex: { value: null, change: null }
             };
             
-            // Try to fetch real data from Yahoo Finance (CORS may block)
+            // Fetch real data using Yahoo Finance via CORS proxy
             try {
-                // This is a placeholder - real implementation would use a proxy or backend
-                updateIndicesUI(indices);
+                const fetchPromises = symbols.map(async ({ symbol, key }) => {
+                    try {
+                        // Using corsproxy.io to bypass CORS
+                        const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?interval=1d&range=1d`;
+                        const response = await fetchWithTimeout(`https://corsproxy.io/?${encodeURIComponent(yahooUrl)}`);
+                        const data = await response.json();
+                        
+                        if (data.chart && data.chart.result && data.chart.result[0]) {
+                            const result = data.chart.result[0];
+                            const meta = result.meta;
+                            const currentPrice = meta.regularMarketPrice;
+                            const previousClose = meta.chartPreviousClose || meta.previousClose;
+                            const changePercent = previousClose ? ((currentPrice - previousClose) / previousClose) * 100 : 0;
+                            
+                            indices[key] = {
+                                value: currentPrice,
+                                change: changePercent
+                            };
+                        }
+                    } catch (err) {
+                        console.log(`Failed to fetch ${symbol}:`, err);
+                    }
+                });
+                
+                await Promise.all(fetchPromises);
+                
+                // Check if we got any valid data
+                const hasValidData = Object.values(indices).some(idx => idx.value !== null);
+                
+                if (!hasValidData) {
+                    // Fallback: Use alternative free API for indices
+                    await fetchIndicesFallback(indices);
+                }
+                
             } catch (error) {
-                updateIndicesUI(indices);
+                console.error('Indices API Error:', error);
+                // Use fallback
+                await fetchIndicesFallback(indices);
+            }
+            
+            updateIndicesUI(indices);
+        }
+        
+        // Fallback function to fetch indices from alternative sources
+        async function fetchIndicesFallback(indices) {
+            try {
+                // Try alternative CORS proxy
+                const symbols = [
+                    { symbol: '^GSPC', key: 'sp500' },
+                    { symbol: '^IXIC', key: 'nasdaq' },
+                    { symbol: '^NSEI', key: 'nifty' },
+                    { symbol: '^BSESN', key: 'sensex' }
+                ];
+                
+                for (const { symbol, key } of symbols) {
+                    if (indices[key].value !== null) continue;
+                    
+                    try {
+                        const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?interval=1d&range=1d`;
+                        const response = await fetchWithTimeout(`https://api.allorigins.win/raw?url=${encodeURIComponent(yahooUrl)}`);
+                        const data = await response.json();
+                        
+                        if (data.chart && data.chart.result && data.chart.result[0]) {
+                            const meta = data.chart.result[0].meta;
+                            const currentPrice = meta.regularMarketPrice;
+                            const previousClose = meta.chartPreviousClose || meta.previousClose;
+                            const changePercent = previousClose ? ((currentPrice - previousClose) / previousClose) * 100 : 0;
+                            
+                            indices[key] = {
+                                value: currentPrice,
+                                change: changePercent
+                            };
+                        }
+                    } catch (err) {
+                        console.log(`Fallback failed for ${symbol}:`, err);
+                    }
+                }
+                
+            } catch (error) {
+                console.error('Fallback API also failed:', error);
             }
         }
 
         function updateIndicesUI(indices) {
-            document.getElementById('sp500Value').textContent = formatNumber(indices.sp500.value);
-            document.getElementById('sp500Change').textContent = (indices.sp500.change >= 0 ? '+' : '') + indices.sp500.change.toFixed(2) + '%';
-            document.getElementById('sp500Change').className = 'index-change ' + (indices.sp500.change >= 0 ? 'positive' : 'negative');
+            // S&P 500
+            if (indices.sp500.value !== null) {
+                document.getElementById('sp500Value').textContent = formatNumber(indices.sp500.value);
+                document.getElementById('sp500Change').textContent = (indices.sp500.change >= 0 ? '+' : '') + indices.sp500.change.toFixed(2) + '%';
+                document.getElementById('sp500Change').className = 'index-change ' + (indices.sp500.change >= 0 ? 'positive' : 'negative');
+            } else {
+                document.getElementById('sp500Value').textContent = 'N/A';
+                document.getElementById('sp500Change').textContent = '--';
+                document.getElementById('sp500Change').className = 'index-change';
+            }
             
-            document.getElementById('nasdaqValue').textContent = formatNumber(indices.nasdaq.value);
-            document.getElementById('nasdaqChange').textContent = (indices.nasdaq.change >= 0 ? '+' : '') + indices.nasdaq.change.toFixed(2) + '%';
-            document.getElementById('nasdaqChange').className = 'index-change ' + (indices.nasdaq.change >= 0 ? 'positive' : 'negative');
+            // NASDAQ
+            if (indices.nasdaq.value !== null) {
+                document.getElementById('nasdaqValue').textContent = formatNumber(indices.nasdaq.value);
+                document.getElementById('nasdaqChange').textContent = (indices.nasdaq.change >= 0 ? '+' : '') + indices.nasdaq.change.toFixed(2) + '%';
+                document.getElementById('nasdaqChange').className = 'index-change ' + (indices.nasdaq.change >= 0 ? 'positive' : 'negative');
+            } else {
+                document.getElementById('nasdaqValue').textContent = 'N/A';
+                document.getElementById('nasdaqChange').textContent = '--';
+                document.getElementById('nasdaqChange').className = 'index-change';
+            }
             
-            document.getElementById('niftyValue').textContent = formatNumber(indices.nifty.value);
-            document.getElementById('niftyChange').textContent = (indices.nifty.change >= 0 ? '+' : '') + indices.nifty.change.toFixed(2) + '%';
-            document.getElementById('niftyChange').className = 'index-change ' + (indices.nifty.change >= 0 ? 'positive' : 'negative');
+            // NIFTY 50
+            if (indices.nifty.value !== null) {
+                document.getElementById('niftyValue').textContent = formatNumber(indices.nifty.value);
+                document.getElementById('niftyChange').textContent = (indices.nifty.change >= 0 ? '+' : '') + indices.nifty.change.toFixed(2) + '%';
+                document.getElementById('niftyChange').className = 'index-change ' + (indices.nifty.change >= 0 ? 'positive' : 'negative');
+            } else {
+                document.getElementById('niftyValue').textContent = 'N/A';
+                document.getElementById('niftyChange').textContent = '--';
+                document.getElementById('niftyChange').className = 'index-change';
+            }
             
-            document.getElementById('sensexValue').textContent = formatNumber(indices.sensex.value);
-            document.getElementById('sensexChange').textContent = (indices.sensex.change >= 0 ? '+' : '') + indices.sensex.change.toFixed(2) + '%';
-            document.getElementById('sensexChange').className = 'index-change ' + (indices.sensex.change >= 0 ? 'positive' : 'negative');
+            // SENSEX
+            if (indices.sensex.value !== null) {
+                document.getElementById('sensexValue').textContent = formatNumber(indices.sensex.value);
+                document.getElementById('sensexChange').textContent = (indices.sensex.change >= 0 ? '+' : '') + indices.sensex.change.toFixed(2) + '%';
+                document.getElementById('sensexChange').className = 'index-change ' + (indices.sensex.change >= 0 ? 'positive' : 'negative');
+            } else {
+                document.getElementById('sensexValue').textContent = 'N/A';
+                document.getElementById('sensexChange').textContent = '--';
+                document.getElementById('sensexChange').className = 'index-change';
+            }
         }
 
         // Generate AI Insight based on all data
@@ -855,21 +1227,46 @@
             });
         }
 
+        // Load cached data immediately for instant display
+        function loadCachedDataFirst() {
+            const fearGreedCache = getCache(CACHE_KEYS.fearGreed);
+            const cryptoCache = getCache(CACHE_KEYS.crypto);
+            const globalCache = getCache(CACHE_KEYS.global);
+            const currencyCache = getCache(CACHE_KEYS.currency);
+            
+            // Show cached data immediately
+            if (fearGreedCache) applyFearGreedData(fearGreedCache.data);
+            if (cryptoCache) applyCryptoData(cryptoCache.data);
+            if (globalCache) applyGlobalData(globalCache.data);
+            if (currencyCache) applyCurrencyData(currencyCache.data);
+            
+            // Generate AI insight if we have some data
+            if (marketData.fearGreed || marketData.crypto.length > 0) {
+                generateAIInsight();
+            }
+        }
+
         // Initialize Dashboard
         async function initDashboard() {
             updateLastUpdated();
             
-            // Fetch all data in parallel
-            await Promise.all([
+            // Load cached data immediately for instant display
+            loadCachedDataFirst();
+            
+            // Fetch all data in parallel (non-blocking)
+            const fetchPromises = [
                 fetchFearGreedIndex(),
                 fetchCryptoData(),
                 fetchGlobalData(),
                 fetchCurrencyRates(),
                 fetchIndices()
-            ]);
+            ];
+            
+            // Use Promise.allSettled to not block on failed requests
+            await Promise.allSettled(fetchPromises);
             
             // Generate AI insight after all data is loaded
-            setTimeout(generateAIInsight, 1000);
+            generateAIInsight();
             updateLastUpdated();
         }
 
