@@ -8338,11 +8338,244 @@
             if (currentAnalysisData) generateInvestorAdvice(investorId);
         }
         
-        function generateInvestorAdvice(investorId) {
+        // AI-powered personalized investor advice generation
+        async function generateAIInvestorAdvice(investorId, stockData, verdict) {
+            const investor = legendaryInvestors[investorId];
+            if (!investor) return null;
+            
+            // Investor personality profiles for AI prompt
+            const investorProfiles = {
+                buffett: {
+                    personality: "Warren Buffett - speaks simply and folksy, uses Omaha/Midwest expressions, references See's Candies and Coca-Cola, talks about 'wonderful businesses at fair prices', 'economic moats', 'Mr. Market', and holding forever. Uses phrases like 'our shareholders' and 'Charlie and I'.",
+                    focus: "P/E ratio, ROE, debt levels, dividend yield, business quality, competitive moat"
+                },
+                lynch: {
+                    personality: "Peter Lynch - enthusiastic and accessible, uses 'tenbagger' often, talks about 'invest in what you know', PEG ratio obsession, references walking through malls to find ideas. Very practical, common-sense approach.",
+                    focus: "PEG ratio, growth rate, consumer-facing businesses, understandable products"
+                },
+                soros: {
+                    personality: "George Soros - intellectual, talks about 'reflexivity', market psychology, boom-bust cycles. References 'being wrong is not the problem', macro trends, and going for the jugular when right.",
+                    focus: "momentum, RSI, market sentiment, macro trends, when to go big"
+                },
+                dalio: {
+                    personality: "Ray Dalio - systematic, uses 'principles', talks about 'radical transparency', 'pain + reflection = progress', diversification, understanding cycles, and 'beautiful deleveraging'.",
+                    focus: "risk parity, diversification, Sharpe ratio, volatility, portfolio fit"
+                },
+                livermore: {
+                    personality: "Jesse Livermore - dramatic old-school trader speak, references 'reading the tape', 'the trend is your friend', sitting tight with winners, talks about 'bucket shops' and being a 'plunger'.",
+                    focus: "trend direction, price action, volume confirmation, breakouts"
+                },
+                icahn: {
+                    personality: "Carl Icahn - aggressive, confrontational, talks about 'shaking up management', 'unlocking value', being a 'raider'. Uses corporate warfare language.",
+                    focus: "undervalued assets, P/B ratio, activist potential, poor management"
+                },
+                klarman: {
+                    personality: "Seth Klarman - cautious intellectual, obsessed with 'margin of safety', references Ben Graham constantly, talks about 'edge', patience, and waiting for fat pitches.",
+                    focus: "margin of safety, downside protection, deep value, patience"
+                },
+                jhunjhunwala: {
+                    personality: "Rakesh Jhunjhunwala - enthusiastic about India, uses Hindi expressions like 'Arre yaar!', 'Bahut accha!', talks about India's growth story, multibaggers, and being bullish on Bharat.",
+                    focus: "India growth sectors, ROE, long-term potential, betting on India"
+                },
+                munger: {
+                    personality: "Charlie Munger - curmudgeonly, uses 'invert, always invert', calls things 'stupid' or 'idiotic', references mental models, talks about 'consistently not being stupid'. Very direct and dismissive of bad ideas.",
+                    focus: "quality businesses, high ROE, avoiding stupidity, mental models"
+                },
+                graham: {
+                    personality: "Benjamin Graham - academic and precise, references 'The Intelligent Investor', talks about 'Mr. Market', 'defensive investor' vs 'enterprising investor', obsessed with margin of safety and net-net stocks.",
+                    focus: "P/E below 15, P/B below 1.5, dividend yield, conservative balance sheet"
+                },
+                druckenmiller: {
+                    personality: "Stanley Druckenmiller - confident, talks about 'betting big when you're right', 'home runs', learned from Soros. References preservation of capital and being 'in the zone'.",
+                    focus: "momentum, asymmetric bets, conviction sizing, when to go all-in"
+                },
+                marks: {
+                    personality: "Howard Marks - thoughtful memo-writer style, asks 'what does the consensus think?', talks about 'second-level thinking', cycles, and 'being too early is indistinguishable from being wrong'.",
+                    focus: "cycle positioning, contrarian thinking, risk awareness, market psychology"
+                },
+                ackman: {
+                    personality: "Bill Ackman - confident activist, talks about 'simple, predictable businesses', 'concentrated portfolios', and 'pricing power'. References Pershing Square and doing deep research.",
+                    focus: "quality moats, concentrated bets, pricing power, activist potential"
+                },
+                simons: {
+                    personality: "Jim Simons - mathematical and cryptic, talks about 'patterns in the data', 'statistical edge', 'models'. Very secretive about methods, references 'the Medallion Fund' approach.",
+                    focus: "Sharpe ratio, statistical patterns, quantitative signals, edge detection"
+                },
+                templeton: {
+                    personality: "John Templeton - wise and patient, talks about 'maximum pessimism', 'bull markets born on pessimism', and investing globally. References finding value in crisis.",
+                    focus: "extreme fear indicators, contrarian timing, RSI oversold, beaten-down prices"
+                },
+                fisher: {
+                    personality: "Philip Fisher - methodical researcher, talks about 'scuttlebutt' method, 'outstanding companies', holding for years. References talking to customers/competitors/suppliers.",
+                    focus: "quality management, growth potential, R&D focus, long-term holding"
+                },
+                tudor: {
+                    personality: "Paul Tudor Jones - intense trader, obsessed with '200-day moving average', talks about 'protecting capital first', 'market turns', and documentary style intensity.",
+                    focus: "trend following, moving averages, risk management, capital preservation"
+                }
+            };
+            
+            const profile = investorProfiles[investorId];
+            if (!profile) return null;
+            
+            const prompt = `You are ${investor.name}. Speak EXACTLY in their voice and personality.
+
+${profile.personality}
+
+A stock called "${stockData.name}" (${stockData.symbol}) in ${stockData.sector} sector has these metrics:
+- Price: ₹${stockData.price?.toFixed(2) || 'N/A'}
+- P/E Ratio: ${stockData.pe?.toFixed(1) || 'N/A'}
+- P/B Ratio: ${stockData.pb?.toFixed(2) || 'N/A'}  
+- ROE: ${stockData.roe?.toFixed(1) || 'N/A'}%
+- Debt/Equity: ${stockData.debtEquity?.toFixed(2) || 'N/A'}
+- Dividend Yield: ${stockData.divYield?.toFixed(2) || 'N/A'}%
+- RSI: ${stockData.rsi?.toFixed(0) || 'N/A'}
+- Today's Change: ${stockData.change >= 0 ? '+' : ''}${stockData.change?.toFixed(2) || 'N/A'}%
+- 52-Week Position: ${stockData.pricePosition?.toFixed(0) || 'N/A'}%
+- Analysis Verdict: ${verdict}
+
+Focus on: ${profile.focus}
+
+Give exactly 3-4 lines of investment advice about this specific stock in ${investor.name}'s authentic voice, personality, and philosophy. Be specific about the numbers. Use their catchphrases and speaking style. Do NOT use quotation marks or say "I would say". Just speak as them directly.`;
+
+            try {
+                // Using a free AI API endpoint (Groq or similar)
+                const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer gsk_placeholder_key' // User needs to add their key
+                    },
+                    body: JSON.stringify({
+                        model: 'llama-3.1-8b-instant',
+                        messages: [{ role: 'user', content: prompt }],
+                        max_tokens: 200,
+                        temperature: 0.8
+                    })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    return data.choices?.[0]?.message?.content || null;
+                }
+            } catch (error) {
+                console.log('AI advice generation skipped:', error.message);
+            }
+            
+            return null;
+        }
+        
+        // Enhanced pre-written AI-style personalized advice for each investor
+        function getPersonalizedAdvice(investorId, data, verdict) {
+            const { name, symbol, pe, pb, roe, debtEquity, divYield, rsi, change, sector, pricePosition } = data;
+            
+            const adviceTemplates = {
+                buffett: () => {
+                    if (verdict === 'buy') return `Well, Charlie and I have always said - when you find a wonderful business, you want to own it. ${name} with its ${roe?.toFixed(1)}% return on equity reminds me of the kind of capital allocators we love. At ${pe?.toFixed(1)}x earnings, this isn't expensive for quality. Our favorite holding period is forever, and I'd be comfortable adding this to the portfolio for our shareholders.`;
+                    if (verdict === 'hold') return `${name} is like a fair business at a fair price - not what excites us. The ${roe?.toFixed(1)}% ROE is acceptable, but Charlie would say we can do better. We'll keep watching. Remember, the stock market is a device for transferring money from the impatient to the patient. No rush here.`;
+                    return `I'd pass on ${name}. At ${pe?.toFixed(1)}x earnings with ${roe?.toFixed(1)}% ROE, this doesn't have the economic moat we look for. Rule number one is don't lose money. Rule number two is don't forget rule number one. There are 3,000 stocks out there - we'll find something better.`;
+                },
+                lynch: () => {
+                    if (verdict === 'buy') return `Now THIS is interesting! ${name} in ${sector} - something I could understand walking through a mall. With growth implied from that ${roe?.toFixed(1)}% ROE, the PEG ratio looks favorable. Could be a tenbagger in the making! Do your homework, but I like what I see here.`;
+                    if (verdict === 'hold') return `${name} is what I'd call a stalwart - steady but not spectacular. The ${pe?.toFixed(1)}x P/E is fair. Know what you own and why you own it. If you own it already, no need to sell. If not, there might be faster growers out there.`;
+                    return `${name} doesn't excite me at these prices. The numbers don't scream "tenbagger" to me. Remember - behind every stock is a company. Make sure you understand what this company is doing before jumping in. I'd look elsewhere.`;
+                },
+                soros: () => {
+                    if (verdict === 'buy') return `The reflexivity here is interesting. ${name} at RSI ${rsi?.toFixed(0)} with ${change >= 0 ? '+' : ''}${change?.toFixed(2)}% today shows the market is waking up. When I see momentum confirming, I don't nibble - I go for the jugular. Size this appropriately but be ready to cut if wrong.`;
+                    if (verdict === 'hold') return `Markets are in constant flux. ${name} shows no clear trend yet - RSI at ${rsi?.toFixed(0)} is neutral territory. It's not whether you're right or wrong that matters, but how much you make when right and lose when wrong. Wait for a cleaner setup.`;
+                    return `${name} looks like a crowded trade. RSI at ${rsi?.toFixed(0)} and near ${pricePosition?.toFixed(0)}% of 52-week range - the easy money has been made. When everyone is on one side of the boat, I prefer the other side. Or I simply wait.`;
+                },
+                dalio: () => {
+                    if (verdict === 'buy') return `From a risk parity perspective, ${name} fits well. The Sharpe ratio and beta suggest good risk-adjusted returns. In my All Weather approach, this could provide diversification benefit. Remember - diversifying well is the most important thing you can do.`;
+                    if (verdict === 'hold') return `${name} presents moderate risk-reward. I think about portfolio construction holistically. Pain plus reflection equals progress - if this position hasn't worked, understand why before adding. Size it appropriately for your risk tolerance.`;
+                    return `The risk metrics on ${name} concern me. Understanding what you don't know matters more than what you do know. This would add volatility without commensurate return potential. An All Weather portfolio needs better balance than this.`;
+                },
+                livermore: () => {
+                    if (verdict === 'buy') return `The tape doesn't lie! ${name} above its moving averages with volume confirming - this is what I wait for. The trend is up, and the big money is made by sitting tight with winners. Enter here with a tight stop. Let the position work.`;
+                    if (verdict === 'hold') return `${name} is consolidating - the tape shows indecision. It was never my thinking that made big money, it was my sitting. Patience. Wait for the stock to prove itself. No confirmation, no position. The market will tell us when it's ready.`;
+                    return `${name} is breaking down. Below its averages, trend is against us. Never argue with the tape! The market is never wrong - only opinions are. I'm either short or flat here. Preserve your capital for better setups.`;
+                },
+                icahn: () => {
+                    if (verdict === 'buy') return `Now we're talking! ${name} at ${pb?.toFixed(2)}x book with weak ROE at ${roe?.toFixed(1)}% - this screams activist opportunity. Management is probably asleep. I make money studying natural stupidity. Get a board seat, shake things up, unlock that hidden value.`;
+                    if (verdict === 'hold') return `${name} has some value but no clear catalyst for change. The ${pb?.toFixed(2)}x book value is interesting, but we need management to make mistakes we can exploit. Keep it on the radar. If you want a friend on Wall Street, get a dog.`;
+                    return `${name} is too well-run for my style. ROE of ${roe?.toFixed(1)}% shows competent management - no angle for activism. I look for the broken and undervalued, not the polished. Moving on to find real opportunities.`;
+                },
+                klarman: () => {
+                    if (verdict === 'buy') return `${name} at ${pb?.toFixed(2)}x book provides meaningful margin of safety. The ${pe?.toFixed(1)}x P/E shows the market's pessimism - that's when I get interested. Value investing is the marriage of a contrarian streak and a calculator. The math works here.`;
+                    if (verdict === 'hold') return `${name} offers some value but insufficient margin of safety for my taste. At ${pe?.toFixed(1)}x earnings, I need more discount to compensate for what could go wrong. The single greatest edge is a long-term orientation. I can wait for a better price.`;
+                    return `No margin of safety in ${name}. At ${pb?.toFixed(2)}x book and ${pe?.toFixed(1)}x earnings, where's the protection if I'm wrong? Being too far ahead of your time is indistinguishable from being wrong. I pass and wait for genuine fear in the market.`;
+                },
+                jhunjhunwala: () => {
+                    if (verdict === 'buy') return `Arre yaar! ${name} in ${sector} - this is India's growth story! ${roe?.toFixed(1)}% ROE shows quality management. At ${pe?.toFixed(1)}x, I'm getting a good business at reasonable price. India ka future bright hai! This could be 10x in ten years. I'm bullish!`;
+                    if (verdict === 'hold') return `${name} is decent yaar, but not exceptional. ${roe?.toFixed(1)}% ROE - theek hai, nothing special. I respect the market, have an open mind. Wait for better entry. Never invest at unreasonable valuations. Patience is key, India has thousands of opportunities!`;
+                    return `${name} at these valuations? Nahi yaar! P/E of ${pe?.toFixed(1)}x with ${roe?.toFixed(1)}% ROE doesn't excite me. The biggest risk is overpaying. Better opportunities exist in India - banking, pharma, IT. We are selective here.`;
+                },
+                munger: () => {
+                    if (verdict === 'buy') return `This isn't stupid, which already puts it ahead of most ideas I see. ${name} with ${roe?.toFixed(1)}% ROE suggests a real business, not financial engineering. The big money is in the waiting. Buy it and sit on your hands. Don't be an idiot by trading it.`;
+                    if (verdict === 'hold') return `${name} is mediocre. ${roe?.toFixed(1)}% ROE - not terrible, not wonderful. Invert, always invert - what would make this a disaster? If you can't answer that quickly, maybe you don't understand it. We can do better.`;
+                    return `${name} would be idiotic to own. ${roe?.toFixed(1)}% ROE? That's not a business, that's a destruction of capital. It's remarkable how much long-term advantage we've gotten by just consistently avoiding stupidity. This is stupid. Pass.`;
+                },
+                graham: () => {
+                    if (verdict === 'buy') return `${name} meets my criteria for the defensive investor. P/E of ${pe?.toFixed(1)}x, P/B of ${pb?.toFixed(2)}x - we're buying assets at a discount. The margin of safety is always dependent on price paid. At these levels, Mr. Market is being pessimistic. We should be buyers.`;
+                    if (verdict === 'hold') return `${name} is fairly valued - not cheap enough for the defensive investor, not expensive enough to sell. P/E of ${pe?.toFixed(1)}x is borderline. In the short run, the market is a voting machine. Be patient. Wait for Mr. Market to offer better prices.`;
+                    return `${name} at ${pe?.toFixed(1)}x P/E is speculative, not investment. The intelligent investor is a realist who buys from pessimists. Currently, optimism is priced in. This provides no margin of safety. I would require at least 30% discount to consider.`;
+                },
+                druckenmiller: () => {
+                    if (verdict === 'buy') return `I see the setup. ${name} showing strength with momentum confirming - when I see this, I don't nibble, I bet big. ${pricePosition?.toFixed(0)}% of 52-week range with positive technicals. The way to build returns is preservation of capital AND home runs. This could be a home run.`;
+                    if (verdict === 'hold') return `${name} is still developing its thesis. No clear asymmetric opportunity yet. The key is to wait - sometimes the best thing to do is nothing. Preserve capital until conviction appears. I need to see cleaner confirmation before sizing up.`;
+                    return `No edge in ${name} right now. ${rsi?.toFixed(0)} RSI, ${pricePosition?.toFixed(0)}% 52-week position - where's the asymmetry? I learned from Soros that it's about how much you make when right. This setup doesn't offer that. Sitting in cash.`;
+                },
+                marks: () => {
+                    if (verdict === 'buy') return `Second-level thinking here: everyone hates ${name} - RSI ${rsi?.toFixed(0)}, ${pricePosition?.toFixed(0)}% of 52-week range. First-level thinkers are selling. But ask yourself - who doesn't know that it's struggling? Bull markets are born on pessimism. This is that moment.`;
+                    if (verdict === 'hold') return `Where are we in the cycle? ${name} is in the middle - not peak optimism, not maximum pessimism. Understanding cycles is crucial. The consensus is neutral here, and the consensus is usually already in the price. Wait for extreme positioning.`;
+                    return `${name} at RSI ${rsi?.toFixed(0)} near ${pricePosition?.toFixed(0)}% of highs - this is where first-level thinkers are buying. But second-level thinking asks: what's already priced in? Too much optimism here. Being too early is indistinguishable from being wrong, but so is being too late.`;
+                },
+                ackman: () => {
+                    if (verdict === 'buy') return `${name} is the kind of business I build positions in. ${roe?.toFixed(1)}% ROE suggests competitive moat, P/E of ${pe?.toFixed(1)}x is reasonable for quality. I don't diversify across 50 stocks - I go deep on 8-10 high-conviction ideas. This deserves concentration.`;
+                    if (verdict === 'hold') return `${name} is decent but not compelling enough for my concentrated approach. ${roe?.toFixed(1)}% ROE and ${pe?.toFixed(1)}x P/E - I need to see more pricing power or an activist angle. The best way to protect capital is owning great businesses. This is good, not great.`;
+                    return `I don't invest in mediocre businesses, and ${name} looks mediocre. ${roe?.toFixed(1)}% ROE doesn't scream competitive advantage. I need simple, predictable businesses with pricing power. This isn't it. Passing for now.`;
+                },
+                simons: () => {
+                    if (verdict === 'buy') return `The patterns are favorable. ${name} showing Sharpe ratio signals with volume anomalies worth investigating. Our models don't predict the future - they calculate probabilities. Current probabilities suggest positive expected value. Size according to Kelly criterion.`;
+                    if (verdict === 'hold') return `${name} shows no clear statistical edge currently. RSI at ${rsi?.toFixed(0)}, volume patterns neutral. We search for anomalies in the data - there's no anomaly here to exploit. Good mathematics requires good data. The data says wait.`;
+                    return `Negative expectancy on ${name}. The models suggest poor risk-adjusted returns. I don't care about stories or narratives - only statistics. The statistics here are unfavorable. Markets are efficient most of the time. This is one of those times.`;
+                },
+                templeton: () => {
+                    if (verdict === 'buy') return `${name} at maximum pessimism! RSI ${rsi?.toFixed(0)}, ${pricePosition?.toFixed(0)}% of 52-week range - everyone is despondently selling. This requires fortitude. Bull markets are born on pessimism, grow on skepticism. We are buying when others cannot imagine buying.`;
+                    if (verdict === 'hold') return `${name} is not at maximum pessimism yet. RSI ${rsi?.toFixed(0)} shows fear, but not capitulation. The time to buy is when blood is in the streets. Keep watching. If you want better performance than the crowd, you must do things differently from the crowd.`;
+                    return `${name} near ${pricePosition?.toFixed(0)}% of 52-week highs with RSI ${rsi?.toFixed(0)} - this is optimism, not pessimism. I search the world for maximum pessimism. This is the opposite. Markets die on euphoria. I wait for genuine fear.`;
+                },
+                fisher: () => {
+                    if (verdict === 'buy') return `${name} shows the hallmarks of an outstanding company. ${roe?.toFixed(1)}% ROE indicates capable management. I'd want to do scuttlebutt - talk to customers, competitors, suppliers. But the numbers suggest quality. I hold these for years, through thick and thin.`;
+                    if (verdict === 'hold') return `${name} has potential but needs more research. ${roe?.toFixed(1)}% ROE is acceptable. I don't want many good investments - I want a few outstanding ones. More scuttlebutt needed. Is management truly excellent? Is R&D producing results?`;
+                    return `${name} doesn't look outstanding. ${roe?.toFixed(1)}% ROE, ${sector} sector - where's the exceptional quality? The stock market is filled with people who know the price of everything but the value of nothing. This doesn't have the value I seek.`;
+                },
+                tudor: () => {
+                    if (verdict === 'buy') return `${name} above its moving averages, RSI ${rsi?.toFixed(0)} confirming - the 200-day average is my religion, and price is respecting it. Trend is UP. Don't focus on making money, focus on protecting what you have - tight stop here, let it run.`;
+                    if (verdict === 'hold') return `${name} is chopping around. RSI ${rsi?.toFixed(0)}, no clear trend. The best money is made at market turns - we're not at a turn yet. I get cautious when numbers are mixed. Stay flat or small until the trend declares itself.`;
+                    return `${name} breaking below key averages. The whole trick in investing is: how do I keep from losing everything? Answer: don't fight the trend. This trend is down. I'm either short or flat. No longs in a downtrend. Capital preservation comes first.`;
+                }
+            };
+            
+            const template = adviceTemplates[investorId];
+            return template ? template() : null;
+        }
+        
+        async function generateInvestorAdvice(investorId) {
             if (!currentAnalysisData || !legendaryInvestors[investorId]) return;
             const investor = legendaryInvestors[investorId];
             const advice = investor.analyze(currentAnalysisData);
             const randomQuote = investor.quotes[Math.floor(Math.random() * investor.quotes.length)];
+            
+            // Get personalized AI-style advice
+            const personalizedAdvice = getPersonalizedAdvice(investorId, currentAnalysisData, advice.verdict);
+            
+            // Try to get dynamic AI advice (will gracefully fallback to personalized templates)
+            let aiAdvice = null;
+            // Uncomment below to enable live AI calls (requires API key)
+            // aiAdvice = await generateAIInvestorAdvice(investorId, currentAnalysisData, advice.verdictText);
+            
+            const finalAdvice = aiAdvice || personalizedAdvice || advice.summary;
             
             document.getElementById('investorAdviceContainer').innerHTML = `
                 <div class="investor-advice-card visible">
@@ -8354,15 +8587,17 @@
                         </div>
                     </div>
                     <div class="investor-verdict ${advice.verdict}">${advice.verdictText}</div>
-                    <div class="investor-advice-text">${advice.summary}</div>
+                    <div class="investor-advice-text" style="font-style: italic; line-height: 1.8; padding: 15px 0; border-left: 3px solid var(--gold); padding-left: 20px; margin: 15px 0; background: rgba(201,162,39,0.05); border-radius: 0 8px 8px 0;">
+                        "${finalAdvice}"
+                    </div>
                     <div style="margin: 20px 0; padding: 15px; background: rgba(40,40,40,0.4); border-radius: 12px;">
-                        <div style="font-size: 0.8rem; color: var(--text-tertiary); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px;">Key Analysis Points</div>
+                        <div style="font-size: 0.8rem; color: var(--text-tertiary); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px;">📊 Key Analysis Points</div>
                         <div style="color: var(--text-secondary); line-height: 1.8; font-size: 0.9rem;">${advice.analysis}</div>
                     </div>
                     <div class="investor-key-metrics">
                         ${advice.keyMetrics.map(m => `<div class="investor-metric"><div class="investor-metric-label">${m.label}</div><div class="investor-metric-value ${m.class}">${m.value}</div></div>`).join('')}
                     </div>
-                    <div class="investor-quote">${randomQuote}<cite>— ${investor.name}</cite></div>
+                    <div class="investor-quote">"${randomQuote}"<cite>— ${investor.name}</cite></div>
                 </div>
             `;
             document.getElementById('noInvestorMessage').style.display = 'none';
