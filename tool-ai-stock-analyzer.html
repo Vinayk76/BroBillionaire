@@ -3101,7 +3101,8 @@
             'TATACOMM': { name: 'Tata Communications', sector: 'Telecom' },
             'SUNTV': { name: 'Sun TV Network', sector: 'Media' },
             'ZEEL': { name: 'Zee Entertainment', sector: 'Media' },
-            'PVR': { name: 'PVR INOX Ltd', sector: 'Media' },
+            'PVR': { name: 'PVR INOX Ltd', sector: 'Media', yahooSymbol: 'PVRINOX' },
+            'PVRINOX': { name: 'PVR INOX Ltd', sector: 'Media' },
             'TVTODAY': { name: 'TV Today Network', sector: 'Media' },
             'DISHTV': { name: 'Dish TV India', sector: 'Media' },
             'NAZARA': { name: 'Nazara Technologies', sector: 'Gaming' },
@@ -3172,8 +3173,9 @@
 
         // Fetch live stock data from Yahoo Finance - FAST parallel fetch
         async function fetchLiveStockData(symbol) {
-            const yahooSymbol = symbol.toUpperCase() + '.NS'; // NSE suffix
             const metadata = stockMetadata[symbol.toUpperCase()];
+            // Use custom Yahoo symbol if defined in metadata, otherwise use standard NSE symbol
+            const yahooSymbol = (metadata && metadata.yahooSymbol ? metadata.yahooSymbol : symbol.toUpperCase()) + '.NS';
             
             // Try all proxies in parallel for speed
             const fetchPromises = CORS_PROXIES.map(async (proxy) => {
