@@ -737,9 +737,10 @@
         /* Results Grid */
         .results-grid { 
             display: grid; 
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 20px; 
             margin-bottom: 25px;
+            overflow: visible;
         }
         
         .analysis-card { 
@@ -751,7 +752,7 @@
             border: 1px solid rgba(201, 162, 39, 0.15);
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            overflow: hidden;
+            overflow: visible;
             box-shadow: 
                 0 4px 30px rgba(0, 0, 0, 0.3),
                 inset 0 1px 0 rgba(255, 255, 255, 0.05);
@@ -767,15 +768,18 @@
             background: var(--gold-gradient);
             opacity: 0;
             transition: opacity 0.3s;
+            border-radius: 20px 20px 0 0;
         }
 
         .analysis-card::after {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            pointer-events: none;
             background: conic-gradient(
                 from 0deg,
                 transparent 0deg,
@@ -908,6 +912,8 @@
             position: relative;
             z-index: 1;
             animation: signalBounce 2s ease-in-out infinite;
+            font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", sans-serif;
+            line-height: 1;
         }
 
         @keyframes signalBounce {
@@ -1002,17 +1008,17 @@
         /* Metric Grid */
         .metric-grid { 
             display: grid; 
-            grid-template-columns: repeat(2, 1fr); 
+            grid-template-columns: repeat(2, minmax(0, 1fr)); 
             gap: 12px;
         }
 
         .metric-grid.cols-4 {
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(4, minmax(0, 1fr));
         }
         
         .metric-item { 
             background: linear-gradient(145deg, rgba(26, 26, 26, 0.9), rgba(18, 18, 18, 0.95));
-            padding: 14px 10px; 
+            padding: 14px 8px; 
             border-radius: 12px; 
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -1020,6 +1026,10 @@
             position: relative;
             overflow: hidden;
             min-width: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .metric-item::before {
@@ -1044,29 +1054,23 @@
         }
         
         .metric-value { 
-            font-size: 1rem; 
+            font-size: clamp(0.75rem, 2vw, 0.85rem); 
             font-weight: 700; 
             color: var(--text-primary);
             font-family: 'JetBrains Mono', monospace;
             text-shadow: 0 2px 10px rgba(201, 162, 39, 0.2);
-            word-break: break-word;
-            overflow-wrap: break-word;
             line-height: 1.3;
             white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
         
         .metric-label { 
-            font-size: 0.65rem; 
+            font-size: clamp(0.55rem, 1.5vw, 0.65rem); 
             color: var(--text-tertiary);
             margin-top: 4px;
             text-transform: uppercase;
             letter-spacing: 0.3px;
             font-weight: 600;
             white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
         
         .metric-positive { color: var(--green) !important; }
@@ -1419,6 +1423,400 @@
             font-weight: 600;
         }
 
+        /* ============================================
+           LEGENDARY INVESTOR INSIGHTS - Premium Feature
+           ============================================ */
+        .investor-insights-section {
+            margin-top: 28px;
+            background: linear-gradient(145deg, rgba(18, 18, 18, 0.98), rgba(26, 26, 26, 0.95));
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            padding: 35px;
+            border-radius: 20px;
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                0 15px 50px rgba(201, 162, 39, 0.1),
+                0 5px 25px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .investor-insights-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #c9a227, #ffd700, #c9a227);
+        }
+
+        .investor-insights-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .investor-insights-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .investor-crown {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #c9a227, #ffd700);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            box-shadow: 0 8px 25px rgba(201, 162, 39, 0.3);
+        }
+
+        .investor-insights-title h3 {
+            background: linear-gradient(135deg, var(--gold), #ffd700, var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .investor-insights-title h3 span {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            font-weight: 500;
+            display: block;
+            margin-top: 3px;
+            -webkit-text-fill-color: var(--text-tertiary);
+        }
+
+        .premium-badge-investor {
+            background: linear-gradient(135deg, #c9a227, #ffd700);
+            color: #000;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 15px rgba(201, 162, 39, 0.4);
+        }
+
+        .investor-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .investor-chip {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 18px;
+            background: linear-gradient(145deg, rgba(40, 40, 40, 0.9), rgba(30, 30, 30, 0.95));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+        }
+
+        .investor-chip:hover {
+            border-color: rgba(201, 162, 39, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 162, 39, 0.15);
+        }
+
+        .investor-chip.active {
+            background: linear-gradient(145deg, rgba(201, 162, 39, 0.2), rgba(201, 162, 39, 0.1));
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(201, 162, 39, 0.2);
+        }
+
+        .investor-chip-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.3), rgba(201, 162, 39, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            border: 2px solid rgba(201, 162, 39, 0.3);
+        }
+
+        .investor-chip.active .investor-chip-avatar {
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(201, 162, 39, 0.5);
+        }
+
+        .investor-chip-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .investor-chip-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .investor-chip-style {
+            font-size: 0.7rem;
+            color: var(--text-tertiary);
+        }
+
+        .investor-advice-container {
+            display: grid;
+            gap: 20px;
+        }
+
+        .investor-advice-card {
+            background: linear-gradient(145deg, rgba(30, 30, 30, 0.9), rgba(20, 20, 20, 0.95));
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+            display: none;
+        }
+
+        .investor-advice-card.visible {
+            display: block;
+            animation: fadeInUp 0.4s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .investor-advice-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gold-gradient);
+        }
+
+        .investor-card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .investor-avatar-large {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.3), rgba(201, 162, 39, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            border: 3px solid rgba(201, 162, 39, 0.4);
+            box-shadow: 0 8px 25px rgba(201, 162, 39, 0.2);
+        }
+
+        .investor-card-info h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin: 0 0 4px 0;
+        }
+
+        .investor-card-info span {
+            font-size: 0.8rem;
+            color: var(--text-tertiary);
+        }
+
+        .investor-verdict {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .investor-verdict.buy {
+            background: rgba(74, 222, 128, 0.15);
+            color: var(--green);
+            border: 1px solid rgba(74, 222, 128, 0.3);
+        }
+
+        .investor-verdict.hold {
+            background: rgba(201, 162, 39, 0.15);
+            color: var(--gold);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+        }
+
+        .investor-verdict.sell {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--red);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .investor-verdict.avoid {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--red);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+        }
+
+        .investor-advice-text {
+            color: var(--text-secondary);
+            line-height: 1.85;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .investor-advice-text strong {
+            color: var(--text-primary);
+        }
+
+        .investor-advice-text .highlight {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .investor-key-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .investor-metric {
+            background: rgba(40, 40, 40, 0.5);
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .investor-metric-label {
+            font-size: 0.7rem;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .investor-metric-value {
+            font-size: 0.9rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .investor-metric-value.positive { color: var(--green); }
+        .investor-metric-value.negative { color: var(--red); }
+        .investor-metric-value.neutral { color: var(--gold); }
+
+        .investor-quote {
+            margin-top: 20px;
+            padding: 18px 22px;
+            background: linear-gradient(145deg, rgba(201, 162, 39, 0.08), rgba(201, 162, 39, 0.03));
+            border-left: 4px solid var(--gold);
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .investor-quote::before {
+            content: '"';
+            font-size: 2rem;
+            color: var(--gold);
+            font-family: Georgia, serif;
+            line-height: 0;
+            margin-right: 5px;
+            vertical-align: -0.3em;
+        }
+
+        .investor-quote cite {
+            display: block;
+            margin-top: 10px;
+            font-style: normal;
+            font-size: 0.8rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .no-investor-selected {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-tertiary);
+        }
+
+        .no-investor-selected i {
+            font-size: 3rem;
+            color: rgba(201, 162, 39, 0.3);
+            margin-bottom: 15px;
+        }
+
+        .no-investor-selected p {
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .investor-insights-section {
+                padding: 25px 18px;
+            }
+
+            .investor-insights-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .investor-chip {
+                padding: 10px 14px;
+            }
+
+            .investor-chip-avatar {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+
+            .investor-chip-name {
+                font-size: 0.8rem;
+            }
+
+            .investor-advice-card {
+                padding: 20px 16px;
+            }
+
+            .investor-key-metrics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         /* Sentiment Bars */
         .sentiment-bars {
             display: flex;
@@ -1526,28 +1924,7 @@
             margin-bottom: 15px;
         }
 
-        .chart-timeframes {
-            display: flex;
-            gap: 6px;
-        }
 
-        .timeframe-btn {
-            padding: 5px 12px;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            color: var(--text-tertiary);
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .timeframe-btn.active,
-        .timeframe-btn:hover {
-            background: var(--gold);
-            color: var(--bg-primary);
-            border-color: var(--gold);
-        }
 
         .candlestick-container {
             display: flex;
@@ -1716,16 +2093,19 @@
         /* Analyst Consensus Styles */
         .analyst-container {
             margin-top: 15px;
+            overflow: visible;
         }
 
         .analyst-target-main {
             display: flex;
             gap: 20px;
             margin-bottom: 20px;
+            flex-wrap: wrap;
         }
 
         .target-price-box {
-            flex: 1;
+            flex: 1 1 200px;
+            min-width: 180px;
             background: linear-gradient(135deg, var(--bg-secondary), rgba(201, 162, 39, 0.08));
             border: 1px solid var(--border-gold);
             border-radius: 12px;
@@ -1756,7 +2136,8 @@
         .target-upside.negative { color: var(--red); }
 
         .target-range {
-            flex: 1;
+            flex: 1 1 200px;
+            min-width: 180px;
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -1770,17 +2151,20 @@
             background: var(--bg-secondary);
             border-radius: 10px;
             border: 1px solid var(--border-color);
+            flex: 1;
         }
 
         .range-label {
             font-size: 0.85rem;
             color: var(--text-secondary);
+            white-space: nowrap;
         }
 
         .range-value {
             font-size: 1rem;
             font-weight: 600;
             font-family: 'JetBrains Mono', monospace;
+            white-space: nowrap;
         }
 
         .range-value.positive { color: var(--green); }
@@ -1846,6 +2230,20 @@
                 width: 32px;
                 height: 32px;
                 font-size: 1rem;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .analyst-target-main {
+                flex-direction: column;
+            }
+            
+            .target-range {
+                flex-direction: row;
+            }
+            
+            .range-item {
+                flex: 1;
             }
         }
 
@@ -2048,8 +2446,14 @@
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
+            gap: 15px;
             font-weight: 600;
             transition: all 0.3s;
+        }
+
+        .faq-question span:first-child {
+            flex: 1;
+            text-align: left;
         }
         
         .faq-question:hover { 
@@ -2068,6 +2472,7 @@
         .faq-icon { 
             transition: transform 0.3s;
             color: var(--gold);
+            flex-shrink: 0;
         }
         
         .faq-item.active .faq-icon { transform: rotate(180deg); }
@@ -2333,10 +2738,10 @@
             .results-grid { grid-template-columns: 1fr; gap: 15px; }
             .analysis-card { padding: 20px; }
             .analysis-card.span-2 { grid-column: span 1; }
-            .metric-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .metric-grid.cols-4 { grid-template-columns: repeat(2, 1fr); }
-            .metric-item { padding: 14px 10px; }
-            .metric-value { font-size: 0.95rem; }
+            .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+            .metric-grid.cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .metric-item { padding: 12px 6px; }
+            .metric-value { font-size: 0.75rem; }
             .stock-header { flex-direction: column; text-align: center; padding: 20px; gap: 15px; }
             .stock-info { flex-direction: column; text-align: center; }
             .stock-price-info { text-align: center; }
@@ -2376,9 +2781,9 @@
             .header-stats { gap: 10px; }
             .header-stat-value { font-size: 1.3rem; }
             .header-stat-label { font-size: 0.65rem; }
-            .metric-value { font-size: 0.78rem; }
-            .metric-label { font-size: 0.52rem; letter-spacing: 0; }
-            .metric-item { padding: 12px 8px; }
+            .metric-value { font-size: 0.65rem; }
+            .metric-label { font-size: 0.5rem; letter-spacing: 0; }
+            .metric-item { padding: 10px 4px; }
             .target-label { min-width: 80px; font-size: 0.72rem; }
             .target-value { font-size: 0.82rem; }
             .gauge-container { width: 160px; height: 120px; }
@@ -2391,10 +2796,10 @@
         }
 
         @media (max-width: 380px) {
-            .metric-value { font-size: 0.72rem; }
-            .metric-label { font-size: 0.48rem; letter-spacing: 0; }
-            .metric-item { padding: 10px 6px; }
-            .metric-grid { gap: 6px; }
+            .metric-value { font-size: 0.58rem; }
+            .metric-label { font-size: 0.42rem; letter-spacing: 0; }
+            .metric-item { padding: 8px 3px; }
+            .metric-grid { gap: 5px; }
         }
 
         /* Custom Scrollbar */
@@ -2423,7 +2828,18 @@
         
         [data-tooltip] {
             position: relative;
+        }
+        
+        /* Only show help cursor on non-interactive tooltip elements */
+        [data-tooltip]:not(button):not(.analyze-btn):not(.quick-stock):not(.search-input-wrapper) {
             cursor: help;
+        }
+        
+        /* Ensure interactive elements keep their cursor */
+        button[data-tooltip],
+        .analyze-btn[data-tooltip],
+        .quick-stock[data-tooltip] {
+            cursor: pointer !important;
         }
         
         [data-tooltip]::before,
@@ -2698,26 +3114,26 @@
         <div class="tool-container">
             <div class="tool-header">
                 <div class="badge-container">
-                    <div class="premium-badge"><i class="fas fa-flask"></i> BETA</div>
-                    <div class="premium-badge ai-badge"><i class="fas fa-brain"></i> AI-Powered</div>
-                    <div class="premium-badge live-badge"><i class="fas fa-circle"></i> LIVE NSE + FINNHUB</div>
+                    <div class="premium-badge" data-tooltip="This tool is in Beta - we're constantly improving it based on user feedback. Report any bugs to help us make it better!"><i class="fas fa-flask"></i> BETA</div>
+                    <div class="premium-badge ai-badge" data-tooltip="Powered by advanced algorithms that analyze 50+ indicators to give you intelligent insights about any stock."><i class="fas fa-brain"></i> AI-Powered</div>
+                    <div class="premium-badge live-badge" data-tooltip="Real-time price data from NSE (National Stock Exchange) combined with Finnhub's financial analytics for accurate analysis."><i class="fas fa-circle"></i> LIVE NSE + FINNHUB</div>
                 </div>
                 <h1><span class="gold-text">AI Stock</span> Analyzer</h1>
                 <p>Educational Tool • Real-Time NSE Data • Finnhub Analytics • Live News Feed</p>
                 <div class="header-stats">
-                    <div class="header-stat">
+                    <div class="header-stat" data-tooltip="We analyze over 50 different technical and fundamental indicators including RSI, MACD, Moving Averages, P/E Ratio, ROE, and many more.">
                         <div class="header-stat-value">50+</div>
                         <div class="header-stat-label">Indicators</div>
                     </div>
-                    <div class="header-stat">
+                    <div class="header-stat" data-tooltip="Stock prices are fetched in real-time from NSE (National Stock Exchange of India) for accurate current prices.">
                         <div class="header-stat-value">NSE</div>
                         <div class="header-stat-label">Live Data</div>
                     </div>
-                    <div class="header-stat">
+                    <div class="header-stat" data-tooltip="Get the latest financial news about any stock from multiple sources, automatically analyzed for positive, negative, or neutral sentiment.">
                         <div class="header-stat-value"><i class="fas fa-newspaper"></i></div>
                         <div class="header-stat-label">Live News</div>
                     </div>
-                    <div class="header-stat">
+                    <div class="header-stat" data-tooltip="100% free to use! No registration, no credit card, no hidden fees. Use as many times as you want.">
                         <div class="header-stat-value">FREE</div>
                         <div class="header-stat-label">No Signup</div>
                     </div>
@@ -2725,30 +3141,30 @@
             </div>
 
             <div class="search-section">
-                <div class="search-box">
+                <div class="search-box search-container">
                     <div class="search-input-wrapper">
-                        <input type="text" id="stockInput" class="search-input" placeholder="Type stock symbol or company name (e.g., RELIANCE, TCS...)" autocomplete="off">
+                        <input type="text" id="stockInput" class="search-input" placeholder="Type stock symbol or company name (e.g., RELIANCE, TCS...)" autocomplete="off" title="Type any NSE stock symbol (like RELIANCE, TCS, INFY) or company name">
                         <div id="autocompleteDropdown" class="autocomplete-dropdown"></div>
                     </div>
-                    <button class="analyze-btn" id="analyzeBtn" onclick="analyzeStock()">
+                    <button class="analyze-btn" id="analyzeBtn" onclick="analyzeStock()" title="Click to start AI analysis">
                         <span class="btn-icon"><i class="fas fa-rocket"></i></span> Analyze Now
                     </button>
                 </div>
                 <div class="quick-stocks">
-                    <span class="quick-stocks-label"><i class="fas fa-fire"></i> Popular:</span>
-                    <span class="quick-stock" onclick="selectStock('RELIANCE')">RELIANCE</span>
-                    <span class="quick-stock" onclick="selectStock('TCS')">TCS</span>
-                    <span class="quick-stock" onclick="selectStock('HDFCBANK')">HDFCBANK</span>
-                    <span class="quick-stock" onclick="selectStock('INFY')">INFY</span>
-                    <span class="quick-stock" onclick="selectStock('ICICIBANK')">ICICIBANK</span>
-                    <span class="quick-stock" onclick="selectStock('BHARTIARTL')">BHARTIARTL</span>
-                    <span class="quick-stock" onclick="selectStock('SBIN')">SBIN</span>
-                    <span class="quick-stock" onclick="selectStock('TATAMOTORS')">TATAMOTORS</span>
-                    <span class="quick-stock" onclick="selectStock('ADANIENT')">ADANIENT</span>
-                    <span class="quick-stock" onclick="selectStock('OLAELEC')">OLA</span>
+                    <span class="quick-stocks-label" title="Click any stock below for instant analysis"><i class="fas fa-fire"></i> Popular:</span>
+                    <span class="quick-stock" onclick="selectStock('RELIANCE')" title="Click to analyze">RELIANCE</span>
+                    <span class="quick-stock" onclick="selectStock('TCS')" title="Click to analyze">TCS</span>
+                    <span class="quick-stock" onclick="selectStock('HDFCBANK')" title="Click to analyze">HDFCBANK</span>
+                    <span class="quick-stock" onclick="selectStock('INFY')" title="Click to analyze">INFY</span>
+                    <span class="quick-stock" onclick="selectStock('ICICIBANK')" title="Click to analyze">ICICIBANK</span>
+                    <span class="quick-stock" onclick="selectStock('BHARTIARTL')" title="Click to analyze">BHARTIARTL</span>
+                    <span class="quick-stock" onclick="selectStock('SBIN')" title="Click to analyze">SBIN</span>
+                    <span class="quick-stock" onclick="selectStock('TATAMOTORS')" title="Click to analyze">TATAMOTORS</span>
+                    <span class="quick-stock" onclick="selectStock('ADANIENT')" title="Click to analyze">ADANIENT</span>
+                    <span class="quick-stock" onclick="selectStock('OLAELEC')" title="Click to analyze">OLA</span>
                 </div>
                 <div style="margin-top: 12px; text-align: center;">
-                    <span class="stock-count-badge"><i class="fas fa-database"></i> 500+ NSE Stocks Available</span>
+                    <span class="stock-count-badge" title="500+ NSE-listed stocks covering IT, Banking, Pharma, Auto, FMCG, and more!"><i class="fas fa-database"></i> 500+ NSE Stocks Available</span>
                 </div>
             </div>
 
@@ -2756,17 +3172,17 @@
                 <!-- Stock Header Info -->
                 <div class="stock-header" id="stockHeader">
                     <div class="stock-info">
-                        <div class="stock-logo" id="stockLogo">RE</div>
+                        <div class="stock-logo" id="stockLogo" data-tooltip="Stock symbol abbreviation. Each listed company has a unique trading symbol on NSE.">RE</div>
                         <div class="stock-details">
                             <h2 id="stockName">Loading...</h2>
                             <div class="stock-meta">
-                                <span><i class="fas fa-chart-pie"></i> <span id="stockSector">-</span></span>
-                                <span><i class="fas fa-building"></i> NSE</span>
-                                <span id="lastUpdated"><i class="fas fa-clock"></i> Live</span>
+                                <span data-tooltip="The industry sector this company belongs to. Useful for comparing with similar companies."><i class="fas fa-chart-pie"></i> <span id="stockSector">-</span></span>
+                                <span data-tooltip="This stock is listed on NSE (National Stock Exchange), India's largest stock exchange."><i class="fas fa-building"></i> NSE</span>
+                                <span id="lastUpdated" data-tooltip="Shows if data is live from NSE or simulated for educational purposes."><i class="fas fa-clock"></i> Live</span>
                             </div>
                         </div>
                     </div>
-                    <div class="stock-price-info">
+                    <div class="stock-price-info" data-tooltip="Current market price and today's change. Green = price is up from yesterday, Red = price is down.">
                         <div class="current-price-large" id="headerPrice">₹0.00</div>
                         <div class="price-change-large positive" id="headerChange">+0.00 (0.00%)</div>
                     </div>
@@ -2871,7 +3287,7 @@
                 <!-- Live Stock News Card -->
                 <div class="analysis-card">
                     <div class="card-header">
-                        <span class="card-title"><span class="icon"><i class="fas fa-newspaper"></i></span> Live News Feed</span>
+                        <span class="card-title" data-tooltip="Real-time news articles about this stock from financial sources. Green icon = positive news, Red = negative, Gold = neutral. Stay updated with what's happening!"><span class="icon"><i class="fas fa-newspaper"></i></span> Live News Feed</span>
                         <span class="card-badge badge-neutral" id="newsBadge">Loading...</span>
                     </div>
                     <div class="news-feed-container" id="newsFeedContainer">
@@ -2885,41 +3301,41 @@
                 </div>
 
                 <!-- Analyst Targets Card -->
-                <div class="analysis-card">
+                <div class="analysis-card span-2">
                     <div class="card-header">
-                        <span class="card-title"><span class="icon"><i class="fas fa-chart-line"></i></span> Analyst Consensus</span>
+                        <span class="card-title" data-tooltip="Professional analysts from banks and brokerages share their price targets and recommendations. This shows what the experts think about this stock's future."><span class="icon"><i class="fas fa-chart-line"></i></span> Analyst Consensus</span>
                         <span class="card-badge badge-neutral" id="analystBadge">-</span>
                     </div>
                     <div class="analyst-container">
                         <div class="analyst-target-main">
-                            <div class="target-price-box">
+                            <div class="target-price-box" data-tooltip="This is the average price target set by professional analysts. If current price is below this, analysts expect it to go UP. The percentage shows expected upside or downside.">
                                 <div class="target-label">Average Target</div>
                                 <div class="target-price" id="avgTargetPrice">₹-</div>
                                 <div class="target-upside" id="targetUpside">-</div>
                             </div>
                             <div class="target-range">
-                                <div class="range-item">
+                                <div class="range-item" data-tooltip="The highest price target among all analysts. This represents the most optimistic view of where the stock could go.">
                                     <span class="range-label">High Target</span>
                                     <span class="range-value positive" id="highTarget">₹-</span>
                                 </div>
-                                <div class="range-item">
+                                <div class="range-item" data-tooltip="The lowest price target among all analysts. This represents the most conservative or bearish view.">
                                     <span class="range-label">Low Target</span>
                                     <span class="range-value negative" id="lowTarget">₹-</span>
                                 </div>
                             </div>
                         </div>
                         <div class="analyst-recommendations" id="analystRecommendations">
-                            <div class="rec-item">
+                            <div class="rec-item" data-tooltip="Number of analysts recommending to BUY this stock. More buy recommendations = more confidence from experts.">
                                 <div class="rec-bar buy" style="width: 0%" id="recBuyBar"></div>
                                 <span class="rec-label">Buy</span>
                                 <span class="rec-count" id="recBuyCount">0</span>
                             </div>
-                            <div class="rec-item">
+                            <div class="rec-item" data-tooltip="Number of analysts recommending to HOLD this stock. They're not bullish but not bearish either - waiting for better signals.">
                                 <div class="rec-bar hold" style="width: 0%" id="recHoldBar"></div>
                                 <span class="rec-label">Hold</span>
                                 <span class="rec-count" id="recHoldCount">0</span>
                             </div>
-                            <div class="rec-item">
+                            <div class="rec-item" data-tooltip="Number of analysts recommending to SELL this stock. More sell recommendations = caution advised.">
                                 <div class="rec-bar sell" style="width: 0%" id="recSellBar"></div>
                                 <span class="rec-label">Sell</span>
                                 <span class="rec-count" id="recSellCount">0</span>
@@ -2931,51 +3347,46 @@
                 <!-- Price Information Card -->
                 <div class="analysis-card">
                     <div class="card-header">
-                        <span class="card-title"><span class="icon"><i class="fas fa-coins"></i></span> Price Analysis</span>
+                        <span class="card-title" data-tooltip="Key price levels and trading volume data. These help you understand where the stock is trading today and how actively it's being bought and sold."><span class="icon"><i class="fas fa-coins"></i></span> Price Analysis</span>
                     </div>
                     <div class="metric-grid cols-4">
-                        <div class="metric-item">
+                        <div class="metric-item" data-tooltip="The last traded price of this stock on the exchange. This is what you would pay if you bought right now.">
                             <div class="metric-value" id="currentPrice">₹-</div>
                             <div class="metric-label">Current</div>
                         </div>
-                        <div class="metric-item">
+                        <div class="metric-item" data-tooltip="How much the price has moved today compared to yesterday's close. Green = up, Red = down.">
                             <div class="metric-value" id="priceChange">-</div>
                             <div class="metric-label">Change</div>
                         </div>
-                        <div class="metric-item">
+                        <div class="metric-item" data-tooltip="The highest price this stock reached during today's trading session.">
                             <div class="metric-value" id="dayHigh">₹-</div>
                             <div class="metric-label">Day High</div>
                         </div>
-                        <div class="metric-item">
+                        <div class="metric-item" data-tooltip="The lowest price this stock fell to during today's trading session.">
                             <div class="metric-value" id="dayLow">₹-</div>
                             <div class="metric-label">Day Low</div>
                         </div>
-                        <div class="metric-item">
+                        <div class="metric-item" data-tooltip="The highest price this stock reached in the last 52 weeks (1 year). Useful to see how far it is from its peak.">
                             <div class="metric-value" id="week52High">₹-</div>
                             <div class="metric-label">52W High</div>
                         </div>
-                        <div class="metric-item">
+                        <div class="metric-item" data-tooltip="The lowest price this stock fell to in the last 52 weeks (1 year). Useful to see how far it's recovered from its bottom.">
                             <div class="metric-value" id="week52Low">₹-</div>
                             <div class="metric-label">52W Low</div>
                         </div>
-                        <div class="metric-item">
+                        <div class="metric-item" data-tooltip="Average number of shares traded daily over a period. Helps understand normal trading activity for this stock.">
                             <div class="metric-value" id="avgVolume">-</div>
                             <div class="metric-label">Avg Vol</div>
                         </div>
-                        <div class="metric-item">
+                        <div class="metric-item" data-tooltip="Number of shares traded today. Higher than average = increased interest. Lower = quiet day.">
                             <div class="metric-value" id="todayVolume">-</div>
                             <div class="metric-label">Today Vol</div>
                         </div>
                     </div>
                     <!-- Mini Candlestick Chart -->
-                    <div class="mini-chart">
+                    <div class="mini-chart" data-tooltip="Candlestick chart shows price movements. Green candles = price went UP that day, Red candles = price went DOWN. Tall candles = big move, short candles = small move.">
                         <div class="mini-chart-header">
                             <span style="color: var(--text-muted); font-size: 0.85rem;">Price Movement (Last 20 Sessions)</span>
-                            <div class="chart-timeframes">
-                                <span class="timeframe-btn active">1D</span>
-                                <span class="timeframe-btn">1W</span>
-                                <span class="timeframe-btn">1M</span>
-                            </div>
                         </div>
                         <div class="candlestick-container" id="candlestickChart"></div>
                     </div>
@@ -2984,34 +3395,34 @@
                 <!-- AI Price Targets Card -->
                 <div class="analysis-card">
                     <div class="card-header">
-                        <span class="card-title"><span class="icon"><i class="fas fa-crosshairs"></i></span> AI Price Targets</span>
+                        <span class="card-title" data-tooltip="AI-calculated price targets based on technical analysis. Targets show where price might go UP, Support shows where it might find a floor, and Stop Loss is a suggested exit point to limit losses."><span class="icon"><i class="fas fa-crosshairs"></i></span> AI Price Targets</span>
                     </div>
                     <div class="price-targets">
-                        <div class="target-row">
+                        <div class="target-row" data-tooltip="Target 3 (Strong): If the stock breaks through Target 1 and 2, this is the next major resistance level. This is the most optimistic upside target.">
                             <span class="target-label"><span class="dot green"></span> Target 3 (Strong)</span>
                             <span class="target-value target-upside" id="resistance3">₹-<span class="target-percent" id="res3Pct">+0%</span></span>
                         </div>
-                        <div class="target-row">
+                        <div class="target-row" data-tooltip="Target 2: The second resistance level. If the stock crosses Target 1, this becomes the next goal. Percentage shows potential profit from current price.">
                             <span class="target-label"><span class="dot green"></span> Target 2</span>
                             <span class="target-value target-upside" id="resistance2">₹-<span class="target-percent" id="res2Pct">+0%</span></span>
                         </div>
-                        <div class="target-row">
+                        <div class="target-row" data-tooltip="Target 1: The first resistance level above current price. This is where the stock might face selling pressure. Good for short-term traders.">
                             <span class="target-label"><span class="dot green"></span> Target 1</span>
                             <span class="target-value target-upside" id="resistance1">₹-<span class="target-percent" id="res1Pct">+0%</span></span>
                         </div>
-                        <div class="target-row target-current">
+                        <div class="target-row target-current" data-tooltip="The current trading price of the stock. All targets are calculated relative to this price.">
                             <span class="target-label"><span class="dot gold"></span> Current Price</span>
                             <span class="target-value" id="targetCurrent">₹-</span>
                         </div>
-                        <div class="target-row">
+                        <div class="target-row" data-tooltip="Support 1: The first support level below current price. This is where buyers might step in to prevent further fall.">
                             <span class="target-label"><span class="dot red"></span> Support 1</span>
                             <span class="target-value target-downside" id="support1">₹-<span class="target-percent" id="sup1Pct">-0%</span></span>
                         </div>
-                        <div class="target-row">
+                        <div class="target-row" data-tooltip="Support 2: A stronger support level below Support 1. If Support 1 breaks, the stock might fall to this level before finding buyers.">
                             <span class="target-label"><span class="dot red"></span> Support 2</span>
                             <span class="target-value target-downside" id="support2">₹-<span class="target-percent" id="sup2Pct">-0%</span></span>
                         </div>
-                        <div class="target-row">
+                        <div class="target-row" data-tooltip="Stop Loss: A suggested exit point to limit your losses. If price falls below this level, the trend might be broken and further downside is possible.">
                             <span class="target-label"><span class="dot red"></span> Stop Loss</span>
                             <span class="target-value target-downside" id="stopLoss">₹-<span class="target-percent" id="slPct">-0%</span></span>
                         </div>
@@ -3021,60 +3432,60 @@
                 <!-- Technical Indicators Card -->
                 <div class="analysis-card">
                     <div class="card-header">
-                        <span class="card-title"><span class="icon"><i class="fas fa-chart-line"></i></span> Technical Indicators</span>
+                        <span class="card-title" data-tooltip="Technical indicators are mathematical calculations based on price and volume. Traders use these to predict future price movements and find good entry/exit points."><span class="icon"><i class="fas fa-chart-line"></i></span> Technical Indicators</span>
                         <span class="card-badge" id="techBadge">-</span>
                     </div>
                     <div class="technical-indicators">
-                        <div class="indicator-row">
+                        <div class="indicator-row" data-tooltip="RSI (Relative Strength Index): Measures if a stock is overbought or oversold. Below 30 = Oversold (good buy), Above 70 = Overbought (may fall). Range: 0-100.">
                             <span class="indicator-name"><span class="indicator-icon"><i class="fas fa-chart-bar"></i></span> RSI (14)</span>
                             <div class="indicator-values">
                                 <span class="indicator-num" id="rsiValue">-</span>
                                 <span class="indicator-signal" id="rsiSignal">-</span>
                             </div>
                         </div>
-                        <div class="indicator-row">
+                        <div class="indicator-row" data-tooltip="MACD (Moving Average Convergence Divergence): Shows momentum and trend direction. Positive = Bullish momentum, Negative = Bearish momentum. Crossovers signal trend changes.">
                             <span class="indicator-name"><span class="indicator-icon"><i class="fas fa-wave-square"></i></span> MACD</span>
                             <div class="indicator-values">
                                 <span class="indicator-num" id="macdValue">-</span>
                                 <span class="indicator-signal" id="macdSignal">-</span>
                             </div>
                         </div>
-                        <div class="indicator-row">
+                        <div class="indicator-row" data-tooltip="EMA 20 (Exponential Moving Average): Average price of last 20 days, giving more weight to recent prices. Price above EMA = Uptrend, Price below = Downtrend.">
                             <span class="indicator-name"><span class="indicator-icon"><i class="fas fa-chart-area"></i></span> EMA (20)</span>
                             <div class="indicator-values">
                                 <span class="indicator-num" id="ema20Value">-</span>
                                 <span class="indicator-signal" id="ma20Signal">-</span>
                             </div>
                         </div>
-                        <div class="indicator-row">
+                        <div class="indicator-row" data-tooltip="SMA 50 (Simple Moving Average): Average price of last 50 days. This is a medium-term trend indicator. Price above SMA50 = Healthy uptrend.">
                             <span class="indicator-name"><span class="indicator-icon"><i class="fas fa-chart-area"></i></span> SMA (50)</span>
                             <div class="indicator-values">
                                 <span class="indicator-num" id="sma50Value">-</span>
                                 <span class="indicator-signal" id="ma50Signal">-</span>
                             </div>
                         </div>
-                        <div class="indicator-row">
+                        <div class="indicator-row" data-tooltip="Bollinger Bands: Shows if price is high or low relative to recent trading. Lower band = potential buy zone, Upper band = potential sell zone, Middle = neutral.">
                             <span class="indicator-name"><span class="indicator-icon"><i class="fas fa-bell"></i></span> Bollinger Bands</span>
                             <div class="indicator-values">
                                 <span class="indicator-num" id="bbValue">-</span>
                                 <span class="indicator-signal" id="bbSignal">-</span>
                             </div>
                         </div>
-                        <div class="indicator-row">
+                        <div class="indicator-row" data-tooltip="Stochastic Oscillator: Similar to RSI but more sensitive. Below 20 = Oversold (buy signal), Above 80 = Overbought (sell signal). Good for timing entries.">
                             <span class="indicator-name"><span class="indicator-icon"><i class="fas fa-percentage"></i></span> Stochastic</span>
                             <div class="indicator-values">
                                 <span class="indicator-num" id="stochValue">-</span>
                                 <span class="indicator-signal" id="stochSignal">-</span>
                             </div>
                         </div>
-                        <div class="indicator-row">
+                        <div class="indicator-row" data-tooltip="ADX (Average Directional Index): Measures trend STRENGTH, not direction. Above 25 = Strong trend, Below 20 = Weak/No trend. Helps confirm if a trend is real.">
                             <span class="indicator-name"><span class="indicator-icon"><i class="fas fa-signal"></i></span> ADX</span>
                             <div class="indicator-values">
                                 <span class="indicator-num" id="adxValue">-</span>
                                 <span class="indicator-signal" id="adxSignal">-</span>
                             </div>
                         </div>
-                        <div class="indicator-row">
+                        <div class="indicator-row" data-tooltip="Volume Trend: Compares today's volume to average volume. High volume confirms price moves. Low volume means less conviction in the move.">
                             <span class="indicator-name"><span class="indicator-icon"><i class="fas fa-database"></i></span> Volume Trend</span>
                             <div class="indicator-values">
                                 <span class="indicator-num" id="volTrendValue">-</span>
@@ -3087,60 +3498,60 @@
                 <!-- Advanced Technical Indicators Card (NEW) -->
                 <div class="analysis-card">
                     <div class="card-header">
-                        <span class="card-title"><span class="icon"><i class="fas fa-cogs"></i></span> Advanced Indicators</span>
+                        <span class="card-title" data-tooltip="Advanced indicators for experienced traders. These provide deeper insights into price momentum, volume patterns, and potential reversals."><span class="icon"><i class="fas fa-cogs"></i></span> Advanced Indicators</span>
                         <span class="card-badge badge-neutral" id="advTechBadge">LIVE</span>
                     </div>
                     <div class="technical-indicators">
-                        <div class="indicator-row">
+                        <div class="indicator-row" data-tooltip="Williams %R: Similar to Stochastic but inverted. Values from -100 to 0. Below -80 = Oversold (buy zone), Above -20 = Overbought (sell zone).">
                             <span class="indicator-name"><span class="indicator-icon"><i class="fas fa-arrows-alt-v"></i></span> Williams %R</span>
                             <div class="indicator-values">
                                 <span class="indicator-num" id="williamsRValue">-</span>
                                 <span class="indicator-signal" id="williamsRSignal">-</span>
                             </div>
                         </div>
-                        <div class="indicator-row">
+                        <div class="indicator-row" data-tooltip="CCI (Commodity Channel Index): Measures price deviation from average. Above +100 = Overbought, Below -100 = Oversold. Used to spot trend reversals.">
                             <span class="indicator-name"><span class="indicator-icon"><i class="fas fa-random"></i></span> CCI (20)</span>
                             <div class="indicator-values">
                                 <span class="indicator-num" id="cciValue">-</span>
                                 <span class="indicator-signal" id="cciSignal">-</span>
                             </div>
                         </div>
-                        <div class="indicator-row">
+                        <div class="indicator-row" data-tooltip="OBV (On-Balance Volume): Tracks cumulative volume to predict price direction. Rising OBV = Buying pressure, Falling OBV = Selling pressure.">
                             <span class="indicator-name"><span class="indicator-icon"><i class="fas fa-layer-group"></i></span> OBV Trend</span>
                             <div class="indicator-values">
                                 <span class="indicator-num" id="obvValue">-</span>
                                 <span class="indicator-signal" id="obvSignal">-</span>
                             </div>
                         </div>
-                        <div class="indicator-row">
+                        <div class="indicator-row" data-tooltip="MFI (Money Flow Index): Like RSI but includes volume. Shows if money is flowing IN or OUT of the stock. Below 20 = Oversold, Above 80 = Overbought.">
                             <span class="indicator-name"><span class="indicator-icon"><i class="fas fa-coins"></i></span> MFI (14)</span>
                             <div class="indicator-values">
                                 <span class="indicator-num" id="mfiValue">-</span>
                                 <span class="indicator-signal" id="mfiSignal">-</span>
                             </div>
                         </div>
-                        <div class="indicator-row">
+                        <div class="indicator-row" data-tooltip="VWAP (Volume Weighted Average Price): Average price weighted by volume. Used by institutions. Price above VWAP = Bullish, Below = Bearish.">
                             <span class="indicator-name"><span class="indicator-icon"><i class="fas fa-balance-scale"></i></span> VWAP</span>
                             <div class="indicator-values">
                                 <span class="indicator-num" id="vwapValue">-</span>
                                 <span class="indicator-signal" id="vwapSignal">-</span>
                             </div>
                         </div>
-                        <div class="indicator-row">
+                        <div class="indicator-row" data-tooltip="ROC (Rate of Change): Measures the speed of price change over 10 periods. Positive = Upward momentum, Negative = Downward momentum.">
                             <span class="indicator-name"><span class="indicator-icon"><i class="fas fa-tachometer-alt"></i></span> ROC (10)</span>
                             <div class="indicator-values">
                                 <span class="indicator-num" id="rocValue">-</span>
                                 <span class="indicator-signal" id="rocSignal">-</span>
                             </div>
                         </div>
-                        <div class="indicator-row">
+                        <div class="indicator-row" data-tooltip="AROON Oscillator: Measures trend strength and direction. Positive = Uptrend, Negative = Downtrend. Closer to ±100 = Stronger trend.">
                             <span class="indicator-name"><span class="indicator-icon"><i class="fas fa-sun"></i></span> AROON Osc</span>
                             <div class="indicator-values">
                                 <span class="indicator-num" id="aroonValue">-</span>
                                 <span class="indicator-signal" id="aroonSignal">-</span>
                             </div>
                         </div>
-                        <div class="indicator-row">
+                        <div class="indicator-row" data-tooltip="Pivot Point: A key price level calculated from yesterday's high, low, and close. Price above Pivot = Bullish bias, Below = Bearish bias. Used by day traders.">
                             <span class="indicator-name"><span class="indicator-icon"><i class="fas fa-crosshairs"></i></span> Pivot Point</span>
                             <div class="indicator-values">
                                 <span class="indicator-num" id="pivotValue">-</span>
@@ -3153,57 +3564,57 @@
                 <!-- Fundamental Analysis Card -->
                 <div class="analysis-card span-2">
                     <div class="card-header">
-                        <span class="card-title"><span class="icon"><i class="fas fa-clipboard-list"></i></span> Fundamental Analysis</span>
+                        <span class="card-title" data-tooltip="Fundamental analysis looks at the company's financials - how profitable it is, how much debt it has, and if the stock is fairly priced. These help determine the real value of a company."><span class="icon"><i class="fas fa-clipboard-list"></i></span> Fundamental Analysis</span>
                         <span class="card-badge" id="fundBadge">-</span>
                     </div>
                     <div class="metric-grid cols-4">
-                        <div class="metric-item">
+                        <div class="metric-item" data-tooltip="P/E Ratio (Price to Earnings): Shows how expensive a stock is relative to its profits. Lower P/E = cheaper stock. Below 15 = value stock, Above 30 = growth/expensive stock.">
                             <div class="metric-value" id="peRatio">-</div>
                             <div class="metric-label">P/E Ratio</div>
                         </div>
-                        <div class="metric-item">
+                        <div class="metric-item" data-tooltip="P/B Ratio (Price to Book): Compares stock price to the company's net assets. Below 1 = stock trades below asset value (potential bargain). Above 3 = premium valuation.">
                             <div class="metric-value" id="pbRatio">-</div>
                             <div class="metric-label">P/B Ratio</div>
                         </div>
-                        <div class="metric-item">
+                        <div class="metric-item" data-tooltip="Debt to Equity: How much the company relies on debt vs. its own money. Below 0.5 = healthy, Above 1 = high debt (risky). Banks typically have higher D/E.">
                             <div class="metric-value" id="debtEquity">-</div>
                             <div class="metric-label">Debt/Equity</div>
                         </div>
-                        <div class="metric-item">
+                        <div class="metric-item" data-tooltip="ROE (Return on Equity): How efficiently the company uses investor money to generate profits. Above 15% = good, Above 20% = excellent. Higher is better.">
                             <div class="metric-value" id="roe">-</div>
                             <div class="metric-label">ROE</div>
                         </div>
-                        <div class="metric-item">
+                        <div class="metric-item" data-tooltip="EPS (Earnings Per Share): Profit earned per share of stock. Growing EPS over years = healthy company. This affects stock price directly.">
                             <div class="metric-value" id="eps">-</div>
                             <div class="metric-label">EPS (TTM)</div>
                         </div>
-                        <div class="metric-item">
+                        <div class="metric-item" data-tooltip="Market Cap: Total value of all company shares. Large Cap (>₹20K Cr) = stable, Mid Cap (₹5K-20K Cr) = growth potential, Small Cap (<₹5K Cr) = high risk/reward.">
                             <div class="metric-value" id="marketCap">-</div>
                             <div class="metric-label">Market Cap</div>
                         </div>
-                        <div class="metric-item">
+                        <div class="metric-item" data-tooltip="Dividend Yield: Annual dividend payment as % of stock price. Above 2% = income-generating stock. 0% = growth stock that reinvests profits.">
                             <div class="metric-value" id="divYield">-</div>
                             <div class="metric-label">Div Yield</div>
                         </div>
-                        <div class="metric-item">
+                        <div class="metric-item" data-tooltip="Book Value: Net asset value per share (Assets - Liabilities). If stock price < book value, the stock might be undervalued.">
                             <div class="metric-value" id="bookValue">-</div>
                             <div class="metric-label">Book Value</div>
                         </div>
                     </div>
                     <div class="sector-comparison" style="margin-top: 1.5rem;">
-                        <div class="sector-item">
+                        <div class="sector-item" data-tooltip="How this stock has performed compared to other companies in the same industry/sector. Positive = outperforming peers.">
                             <div class="sector-name">Stock vs Sector</div>
                             <div class="sector-perf metric-positive" id="vsSector">+0%</div>
                         </div>
-                        <div class="sector-item">
+                        <div class="sector-item" data-tooltip="How this stock has performed compared to Nifty 50 index. Positive = beating the market, Negative = underperforming.">
                             <div class="sector-name">Stock vs Nifty</div>
                             <div class="sector-perf metric-positive" id="vsNifty">+0%</div>
                         </div>
-                        <div class="sector-item">
+                        <div class="sector-item" data-tooltip="Total return in the last 1 year including price change and dividends. Shows recent performance trend.">
                             <div class="sector-name">1Y Return</div>
                             <div class="sector-perf metric-positive" id="oneYearReturn">+0%</div>
                         </div>
-                        <div class="sector-item">
+                        <div class="sector-item" data-tooltip="CAGR (Compound Annual Growth Rate) over 3 years. Shows consistent long-term performance. Above 15% = excellent growth.">
                             <div class="sector-name">3Y CAGR</div>
                             <div class="sector-perf metric-positive" id="threeYearCAGR">+0%</div>
                         </div>
@@ -3213,23 +3624,23 @@
                 <!-- Risk Assessment Card -->
                 <div class="analysis-card">
                     <div class="card-header">
-                        <span class="card-title"><span class="icon"><i class="fas fa-shield-halved"></i></span> Risk Assessment</span>
+                        <span class="card-title" data-tooltip="Risk Assessment measures how volatile and risky this stock is. Higher risk can mean bigger gains OR bigger losses. Lower risk is more stable but with smaller returns."><span class="icon"><i class="fas fa-shield-halved"></i></span> Risk Assessment</span>
                         <span class="card-badge" id="riskBadge">-</span>
                     </div>
                     <div class="metric-grid">
-                        <div class="metric-item">
+                        <div class="metric-item" data-tooltip="Beta: Measures stock volatility vs. market. Beta 1 = moves with market. Above 1 = more volatile (riskier), Below 1 = less volatile (defensive).">
                             <div class="metric-value" id="beta">-</div>
                             <div class="metric-label">Beta</div>
                         </div>
-                        <div class="metric-item">
+                        <div class="metric-item" data-tooltip="Volatility: How much the stock price swings daily. Higher % = bigger price moves = more risk. Low volatility stocks are more predictable.">
                             <div class="metric-value" id="volatility">-</div>
                             <div class="metric-label">Volatility</div>
                         </div>
-                        <div class="metric-item">
+                        <div class="metric-item" data-tooltip="Sharpe Ratio: Risk-adjusted returns. Above 1 = good, Above 2 = great. It shows how much return you get for the risk you take. Higher is better.">
                             <div class="metric-value" id="sharpe">-</div>
                             <div class="metric-label">Sharpe Ratio</div>
                         </div>
-                        <div class="metric-item">
+                        <div class="metric-item" data-tooltip="Max Drawdown: The biggest drop from peak to bottom in a period. Shows worst-case scenario. -20% means at some point, you'd have lost 20% from the peak.">
                             <div class="metric-value" id="maxDrawdown">-</div>
                             <div class="metric-label">Max Drawdown</div>
                         </div>
@@ -3239,7 +3650,7 @@
                             <span style="color: var(--text-muted); font-size: 0.85rem;">Risk Level</span>
                             <span style="color: var(--orange); font-weight: 600;" id="riskLevelText">Moderate</span>
                         </div>
-                        <div class="risk-meter" id="riskMeter">
+                        <div class="risk-meter" id="riskMeter" data-tooltip="Visual risk meter: 1-2 bars = Low risk (safe), 3 bars = Moderate risk, 4-5 bars = High risk (volatile). Match your risk tolerance to the stock.">
                             <div class="risk-bar"></div>
                             <div class="risk-bar"></div>
                             <div class="risk-bar"></div>
@@ -3256,18 +3667,96 @@
 
             <!-- AI Summary -->
             <div class="ai-summary">
-                <div class="ai-summary-header">
+                <div class="ai-summary-header" data-tooltip="Our AI engine analyzes all the indicators above and writes a human-readable summary explaining what's happening with this stock and what it might mean for you.">
                     <div class="ai-avatar"><i class="fas fa-robot"></i></div>
                     <h3>AI Analysis Report<span>Generated by BroBillionaire AI Engine v5.0</span></h3>
                 </div>
                 <div class="ai-summary-content" id="aiSummaryText">Loading AI analysis...</div>
+            </div>
+
+            <!-- Legendary Investor Insights - Premium Feature -->
+            <div class="investor-insights-section" id="investorInsightsSection" style="display: none;">
+                <div class="investor-insights-header">
+                    <div class="investor-insights-title">
+                        <div class="investor-crown">👑</div>
+                        <h3>Legendary Investor Insights<span>What would the masters say about this stock?</span></h3>
+                    </div>
+                    <div class="premium-badge-investor"><i class="fas fa-star"></i> Premium Analysis</div>
+                </div>
+
+                <div class="investor-selector" id="investorSelector">
+                    <div class="investor-chip active" data-investor="buffett" onclick="selectInvestor('buffett')">
+                        <div class="investor-chip-avatar">🎩</div>
+                        <div class="investor-chip-info">
+                            <span class="investor-chip-name">Warren Buffett</span>
+                            <span class="investor-chip-style">Value Investing</span>
+                        </div>
+                    </div>
+                    <div class="investor-chip" data-investor="lynch" onclick="selectInvestor('lynch')">
+                        <div class="investor-chip-avatar">📊</div>
+                        <div class="investor-chip-info">
+                            <span class="investor-chip-name">Peter Lynch</span>
+                            <span class="investor-chip-style">Growth at GARP</span>
+                        </div>
+                    </div>
+                    <div class="investor-chip" data-investor="soros" onclick="selectInvestor('soros')">
+                        <div class="investor-chip-avatar">🌊</div>
+                        <div class="investor-chip-info">
+                            <span class="investor-chip-name">George Soros</span>
+                            <span class="investor-chip-style">Macro Trading</span>
+                        </div>
+                    </div>
+                    <div class="investor-chip" data-investor="dalio" onclick="selectInvestor('dalio')">
+                        <div class="investor-chip-avatar">⚖️</div>
+                        <div class="investor-chip-info">
+                            <span class="investor-chip-name">Ray Dalio</span>
+                            <span class="investor-chip-style">All Weather</span>
+                        </div>
+                    </div>
+                    <div class="investor-chip" data-investor="livermore" onclick="selectInvestor('livermore')">
+                        <div class="investor-chip-avatar">📈</div>
+                        <div class="investor-chip-info">
+                            <span class="investor-chip-name">Jesse Livermore</span>
+                            <span class="investor-chip-style">Trend Trading</span>
+                        </div>
+                    </div>
+                    <div class="investor-chip" data-investor="icahn" onclick="selectInvestor('icahn')">
+                        <div class="investor-chip-avatar">🦈</div>
+                        <div class="investor-chip-info">
+                            <span class="investor-chip-name">Carl Icahn</span>
+                            <span class="investor-chip-style">Activist Investing</span>
+                        </div>
+                    </div>
+                    <div class="investor-chip" data-investor="klarman" onclick="selectInvestor('klarman')">
+                        <div class="investor-chip-avatar">🛡️</div>
+                        <div class="investor-chip-info">
+                            <span class="investor-chip-name">Seth Klarman</span>
+                            <span class="investor-chip-style">Margin of Safety</span>
+                        </div>
+                    </div>
+                    <div class="investor-chip" data-investor="jhunjhunwala" onclick="selectInvestor('jhunjhunwala')">
+                        <div class="investor-chip-avatar">🇮🇳</div>
+                        <div class="investor-chip-info">
+                            <span class="investor-chip-name">Rakesh Jhunjhunwala</span>
+                            <span class="investor-chip-style">India Bull</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="investor-advice-container" id="investorAdviceContainer">
+                    <!-- Advice cards will be dynamically inserted here -->
+                    <div class="no-investor-selected" id="noInvestorMessage" style="display: none;">
+                        <i class="fas fa-user-tie"></i>
+                        <p>Select a legendary investor above to see their perspective on this stock</p>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- FAQ Section -->
         <div class="faq-section">
             <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
-            <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-item">
                 <div class="faq-question">
                     <span>What is AI Stock Analyzer and what does it do?</span>
                     <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
@@ -3276,7 +3765,7 @@
                     AI Stock Analyzer is an educational tool that uses algorithms to analyze technical indicators, fundamental metrics, and market patterns for NSE/BSE stocks. <strong>Important:</strong> This tool is for educational purposes only. Stock markets are inherently unpredictable, and this tool should NOT be used as the sole basis for investment decisions. Always do your own research and consult a SEBI-registered investment advisor.
                 </div>
             </div>
-            <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-item">
                 <div class="faq-question">
                     <span>Is this AI Stock Analyzer completely free?</span>
                     <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
@@ -3285,7 +3774,7 @@
                     Yes! This AI Stock Analyzer is 100% free to use. There's no registration required and no hidden fees. However, please note that this is an educational tool and should not be used for making actual investment decisions without consulting a qualified financial advisor.
                 </div>
             </div>
-            <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-item">
                 <div class="faq-question">
                     <span>What technical indicators does the tool analyze?</span>
                     <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
@@ -3294,7 +3783,7 @@
                     The tool displays various indicators including RSI (Relative Strength Index), MACD (Moving Average Convergence Divergence), EMA & SMA (Exponential & Simple Moving Averages), Bollinger Bands, Stochastic Oscillator, Volume Analysis, and Support & Resistance levels. Note: Some indicators are simulated for educational demonstration purposes.
                 </div>
             </div>
-            <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-item">
                 <div class="faq-question">
                     <span>Which stocks can I analyze with this tool?</span>
                     <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
@@ -3303,7 +3792,7 @@
                     You can enter any stock symbol listed on NSE (National Stock Exchange). The tool attempts to fetch live price data from Yahoo Finance for NSE-listed stocks. For stocks where live data is unavailable, the tool generates simulated data for educational purposes.
                 </div>
             </div>
-            <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-item">
                 <div class="faq-question">
                     <span>Where does the price data come from?</span>
                     <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
@@ -3312,7 +3801,7 @@
                     Stock price data is fetched from Yahoo Finance API where available. However, there may be delays, inaccuracies, or API failures. <strong>Always verify prices with official NSE/BSE sources before making any trading decisions.</strong> Fundamental data like PE ratio, ROE, etc. is simulated for educational purposes.
                 </div>
             </div>
-            <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-item">
                 <div class="faq-question">
                     <span>What do the different signals mean?</span>
                     <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
@@ -3326,7 +3815,7 @@
                     <strong>DISCLAIMER:</strong> These signals are for educational purposes only and should NOT be considered investment advice.
                 </div>
             </div>
-            <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-item">
                 <div class="faq-question">
                     <span>Should I use this for trading decisions?</span>
                     <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
@@ -3394,9 +3883,24 @@
         const GNEWS_API = 'https://gnews.io/api/v4/search?q=';
         const GNEWS_KEY = 'demo'; // Free demo key
         
-        // NewsData.io - Free tier (200 credits/day)
-        const NEWSDATA_API = 'https://newsdata.io/api/1/news?apikey=';
-        const NEWSDATA_KEY = 'demo'; // Free demo key
+        // NewsData.io - Free tier (200 credits/day) - Great for Indian news
+        // Get free API key at: https://newsdata.io/register (takes 30 seconds)
+        const NEWSDATA_API = 'https://newsdata.io/api/1/latest';
+        const NEWSDATA_KEY = 'pub_7094b03556174e9097a8ca7504cf3631';
+        
+        // Mediastack - Free tier (500 requests/month) - Backup for Indian news
+        // Get free API key at: https://mediastack.com/signup/free
+        const MEDIASTACK_API = 'http://api.mediastack.com/v1/news';
+        const MEDIASTACK_KEY = ''; // Add your free key from mediastack.com
+        
+        // Indian RSS News Sources (Free, no API key needed)
+        const INDIAN_NEWS_RSS = {
+            economicTimes: 'https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms',
+            moneycontrol: 'https://www.moneycontrol.com/rss/marketreports.xml',
+            livemint: 'https://www.livemint.com/rss/markets',
+            businessStandard: 'https://www.business-standard.com/rss/markets-106.rss',
+            ndtvProfit: 'https://feeds.feedburner.com/ndtvprofit-latest'
+        };
         
         const CORS_PROXIES = [
             'https://api.allorigins.win/raw?url=',
@@ -4165,6 +4669,37 @@
                 console.log('Finnhub news fetch failed, trying alternatives:', error);
             }
             
+            // Try NewsData.io API for Indian stock news (Free: 200 req/day)
+            if (allNews.length === 0 && NEWSDATA_KEY && NEWSDATA_KEY !== 'demo') {
+                try {
+                    const query = encodeURIComponent(`${stockName.split(' ')[0]} stock`);
+                    const newsDataUrl = `${NEWSDATA_API}?apikey=${NEWSDATA_KEY}&q=${query}&country=in&language=en&category=business`;
+                    
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 6000);
+                    
+                    const response = await fetch(newsDataUrl, { signal: controller.signal });
+                    clearTimeout(timeoutId);
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.status === 'success' && data.results && data.results.length > 0) {
+                            allNews = data.results.slice(0, 6).map(item => ({
+                                title: item.title,
+                                source: item.source_id || 'NewsData.io',
+                                time: formatNewsTime(new Date(item.pubDate).getTime()),
+                                url: item.link,
+                                sentiment: analyzeNewsSentiment(item.title),
+                                summary: item.description
+                            }));
+                            console.log('✅ NewsData.io news loaded:', allNews.length, 'articles');
+                        }
+                    }
+                } catch (error) {
+                    console.log('NewsData.io fetch failed:', error);
+                }
+            }
+            
             // Fallback to Yahoo Finance news if Finnhub fails
             if (allNews.length === 0) {
                 try {
@@ -4264,22 +4799,45 @@
         async function fetchIndianMarketNews() {
             const marketNews = [];
             
-            // Try Google News RSS for Indian stock market news
-            const marketSearchTerms = [
-                'Indian stock market today',
-                'Nifty Sensex today',
-                'NSE BSE market news'
-            ];
+            // Priority 1: Try NewsData.io for Indian business news (Free: 200 req/day)
+            if (NEWSDATA_KEY && NEWSDATA_KEY !== 'demo' && NEWSDATA_KEY !== '') {
+                try {
+                    const newsDataUrl = `${NEWSDATA_API}?apikey=${NEWSDATA_KEY}&country=in&language=en&category=business`;
+                    
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 6000);
+                    
+                    const response = await fetch(newsDataUrl, { signal: controller.signal });
+                    clearTimeout(timeoutId);
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.status === 'success' && data.results && data.results.length > 0) {
+                            data.results.slice(0, 6).forEach(item => {
+                                if (!marketNews.some(n => n.title === item.title)) {
+                                    marketNews.push({
+                                        title: item.title,
+                                        source: item.source_id || 'NewsData.io',
+                                        time: formatNewsTime(new Date(item.pubDate).getTime()),
+                                        url: item.link,
+                                        sentiment: analyzeNewsSentiment(item.title)
+                                    });
+                                }
+                            });
+                            console.log('✅ NewsData.io Indian market news loaded:', marketNews.length);
+                        }
+                    }
+                } catch (error) {
+                    console.log('NewsData.io market news failed:', error);
+                }
+            }
             
-            for (const searchTerm of marketSearchTerms) {
-                if (marketNews.length >= 5) break;
-                
+            // Priority 2: Try Livemint RSS (Great for Indian markets)
+            if (marketNews.length < 4) {
                 try {
                     for (const proxy of CORS_PROXIES) {
                         try {
-                            const searchQuery = encodeURIComponent(searchTerm);
-                            const rssUrl = `https://news.google.com/rss/search?q=${searchQuery}&hl=en-IN&gl=IN&ceid=IN:en`;
-                            const url = proxy + encodeURIComponent(rssUrl);
+                            const url = proxy + encodeURIComponent(INDIAN_NEWS_RSS.livemint);
                             
                             const controller = new AbortController();
                             const timeoutId = setTimeout(() => controller.abort(), 5000);
@@ -4293,35 +4851,141 @@
                                 const xml = parser.parseFromString(text, 'text/xml');
                                 const items = xml.querySelectorAll('item');
                                 
-                                if (items.length > 0) {
-                                    items.forEach((item, index) => {
-                                        if (marketNews.length < 6) {
-                                            const title = item.querySelector('title')?.textContent || '';
-                                            const pubDate = item.querySelector('pubDate')?.textContent || '';
-                                            const source = item.querySelector('source')?.textContent || 'Google News';
-                                            const link = item.querySelector('link')?.textContent || '#';
-                                            
-                                            // Avoid duplicates
-                                            if (!marketNews.some(n => n.title === title)) {
-                                                marketNews.push({
-                                                    title: title,
-                                                    source: source,
-                                                    time: formatNewsTime(new Date(pubDate).getTime()),
-                                                    url: link,
-                                                    sentiment: analyzeNewsSentiment(title)
-                                                });
-                                            }
+                                items.forEach((item, index) => {
+                                    if (marketNews.length < 6) {
+                                        const title = item.querySelector('title')?.textContent || '';
+                                        const pubDate = item.querySelector('pubDate')?.textContent || '';
+                                        const link = item.querySelector('link')?.textContent || '#';
+                                        
+                                        if (title && !marketNews.some(n => n.title === title)) {
+                                            marketNews.push({
+                                                title: title,
+                                                source: 'Livemint',
+                                                time: formatNewsTime(new Date(pubDate).getTime()),
+                                                url: link,
+                                                sentiment: analyzeNewsSentiment(title)
+                                            });
                                         }
-                                    });
-                                    if (marketNews.length >= 5) break;
-                                }
+                                    }
+                                });
+                                if (marketNews.length >= 4) break;
                             }
                         } catch (e) {
                             continue;
                         }
                     }
                 } catch (error) {
-                    console.log('Market news fetch attempt failed:', error);
+                    console.log('Livemint RSS fetch failed:', error);
+                }
+            }
+            
+            // Priority 3: Try Business Standard RSS
+            if (marketNews.length < 4) {
+                try {
+                    for (const proxy of CORS_PROXIES) {
+                        try {
+                            const url = proxy + encodeURIComponent(INDIAN_NEWS_RSS.businessStandard);
+                            
+                            const controller = new AbortController();
+                            const timeoutId = setTimeout(() => controller.abort(), 5000);
+                            
+                            const response = await fetch(url, { signal: controller.signal });
+                            clearTimeout(timeoutId);
+                            
+                            if (response.ok) {
+                                const text = await response.text();
+                                const parser = new DOMParser();
+                                const xml = parser.parseFromString(text, 'text/xml');
+                                const items = xml.querySelectorAll('item');
+                                
+                                items.forEach((item) => {
+                                    if (marketNews.length < 6) {
+                                        const title = item.querySelector('title')?.textContent || '';
+                                        const pubDate = item.querySelector('pubDate')?.textContent || '';
+                                        const link = item.querySelector('link')?.textContent || '#';
+                                        
+                                        if (title && !marketNews.some(n => n.title === title)) {
+                                            marketNews.push({
+                                                title: title,
+                                                source: 'Business Standard',
+                                                time: formatNewsTime(new Date(pubDate).getTime()),
+                                                url: link,
+                                                sentiment: analyzeNewsSentiment(title)
+                                            });
+                                        }
+                                    }
+                                });
+                                if (marketNews.length >= 4) break;
+                            }
+                        } catch (e) {
+                            continue;
+                        }
+                    }
+                } catch (error) {
+                    console.log('Business Standard RSS fetch failed:', error);
+                }
+            }
+            
+            // Priority 4: Try Google News RSS for Indian stock market news
+            if (marketNews.length < 3) {
+                const marketSearchTerms = [
+                    'Indian stock market today',
+                    'Nifty Sensex today',
+                    'NSE BSE market news'
+                ];
+                
+                for (const searchTerm of marketSearchTerms) {
+                    if (marketNews.length >= 5) break;
+                    
+                    try {
+                        for (const proxy of CORS_PROXIES) {
+                            try {
+                                const searchQuery = encodeURIComponent(searchTerm);
+                                const rssUrl = `https://news.google.com/rss/search?q=${searchQuery}&hl=en-IN&gl=IN&ceid=IN:en`;
+                                const url = proxy + encodeURIComponent(rssUrl);
+                                
+                                const controller = new AbortController();
+                                const timeoutId = setTimeout(() => controller.abort(), 5000);
+                                
+                                const response = await fetch(url, { signal: controller.signal });
+                                clearTimeout(timeoutId);
+                                
+                                if (response.ok) {
+                                    const text = await response.text();
+                                    const parser = new DOMParser();
+                                    const xml = parser.parseFromString(text, 'text/xml');
+                                    const items = xml.querySelectorAll('item');
+                                    
+                                    if (items.length > 0) {
+                                        items.forEach((item, index) => {
+                                            if (marketNews.length < 6) {
+                                                const title = item.querySelector('title')?.textContent || '';
+                                                const pubDate = item.querySelector('pubDate')?.textContent || '';
+                                                const source = item.querySelector('source')?.textContent || 'Google News';
+                                                const link = item.querySelector('link')?.textContent || '#';
+                                                
+                                                // Avoid duplicates
+                                                if (!marketNews.some(n => n.title === title)) {
+                                                    marketNews.push({
+                                                        title: title,
+                                                        source: source,
+                                                        time: formatNewsTime(new Date(pubDate).getTime()),
+                                                        url: link,
+                                                        sentiment: analyzeNewsSentiment(title)
+                                                    });
+                                                }
+                                            }
+                                        });
+                                        if (marketNews.length >= 5) break;
+                                    }
+                                }
+                            } catch (e) {
+                                continue;
+                            }
+                        }
+                    } catch (error) {
+                        console.log('Market news fetch attempt failed:', error);
+                    }
                 }
             }
             
@@ -5631,11 +6295,6 @@
             }, 500);
         }
 
-        function selectStock(symbol) {
-            document.getElementById('stockInput').value = symbol;
-            analyzeStock();
-        }
-
         async function analyzeStock() {
             const input = document.getElementById('stockInput').value.trim().toUpperCase();
             if (!input) {
@@ -5648,10 +6307,18 @@
             document.getElementById('resultsSection').classList.add('hidden');
             animateLoadingSteps(input);
 
+            // Failsafe: Always remove loading after 15 seconds max
+            const failsafeTimeout = setTimeout(() => {
+                console.log('Failsafe timeout triggered');
+                clearInterval(loadingInterval);
+                document.getElementById('loadingOverlay').classList.remove('active');
+            }, 15000);
+
             try {
                 // Fetch live data from API
                 const stockData = await fetchLiveStockData(input);
                 
+                clearTimeout(failsafeTimeout);
                 clearInterval(loadingInterval);
                 displayAnalysis(input, stockData);
                 document.getElementById('loadingOverlay').classList.remove('active');
@@ -5665,11 +6332,16 @@
                 
             } catch (error) {
                 console.error('Analysis error:', error);
+                clearTimeout(failsafeTimeout);
                 clearInterval(loadingInterval);
                 
                 // Use fallback data on error
                 const fallbackData = generateFallbackData(input);
-                displayAnalysis(input, fallbackData);
+                try {
+                    displayAnalysis(input, fallbackData);
+                } catch (displayError) {
+                    console.error('Display error:', displayError);
+                }
                 document.getElementById('loadingOverlay').classList.remove('active');
                 document.getElementById('resultsSection').classList.remove('hidden');
                 document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -6780,6 +7452,13 @@
 
             // Generate AI Summary
             generateAISummary(symbol, stockData, fundamentals, price, change, score, signal, technicalScore, fundamentalScore, rsi, bullish);
+            
+            // Update Legendary Investor Insights (wrapped in try-catch to prevent breaking main analysis)
+            try {
+                updateInvestorInsights(stockData, fundamentals, score, technicalScore, fundamentalScore, rsi, pricePosition, volumeRatio, ema20, sma50, fundamentals.beta, volatility, sharpe, maxDrawdown);
+            } catch (investorError) {
+                console.error('Investor insights error:', investorError);
+            }
         }
 
         function generateAISummary(symbol, stockData, fundamentals, price, change, score, signal, techScore, fundScore, rsi, bullish) {
@@ -6794,8 +7473,393 @@
             document.getElementById('aiSummaryText').innerHTML = summaryTemplates[Math.floor(Math.random() * summaryTemplates.length)];
         }
 
-        function toggleFaq(element) {
-            element.classList.toggle('active');
+        // =============================================
+        // LEGENDARY INVESTOR INSIGHTS - Premium Feature
+        // =============================================
+        
+        let currentAnalysisData = null;
+        let currentSelectedInvestor = 'buffett';
+        
+        const legendaryInvestors = {
+            buffett: {
+                name: 'Warren Buffett',
+                title: 'The Oracle of Omaha',
+                avatar: '🎩',
+                style: 'Value Investing',
+                quotes: [
+                    "Be fearful when others are greedy and greedy when others are fearful.",
+                    "Price is what you pay; value is what you get.",
+                    "Our favorite holding period is forever.",
+                    "It's far better to buy a wonderful company at a fair price than a fair company at a wonderful price.",
+                    "Rule No. 1: Never lose money. Rule No. 2: Never forget Rule No. 1."
+                ],
+                analyze: function(data) {
+                    const { pe, roe, debtEquity, divYield, pb, name, sector, fundScore } = data;
+                    let verdict = 'hold', verdictText = 'HOLD - Study Further', buffettScore = 0, analysis = [];
+                    
+                    if (pe < 15) { buffettScore += 25; analysis.push('<span class="positive">✓ P/E of ' + pe.toFixed(1) + ' shows value pricing</span>'); }
+                    else if (pe < 25) { buffettScore += 10; analysis.push('• P/E of ' + pe.toFixed(1) + ' is fair'); }
+                    else { buffettScore -= 15; analysis.push('<span class="negative">✗ P/E of ' + pe.toFixed(1) + ' is expensive for my taste</span>'); }
+                    
+                    if (roe > 20) { buffettScore += 25; analysis.push('<span class="positive">✓ Excellent ROE of ' + roe.toFixed(1) + '% - great capital efficiency</span>'); }
+                    else if (roe > 15) { buffettScore += 10; analysis.push('• ROE of ' + roe.toFixed(1) + '% is acceptable'); }
+                    else { buffettScore -= 10; analysis.push('<span class="negative">✗ ROE of ' + roe.toFixed(1) + '% is below my standards</span>'); }
+                    
+                    if (debtEquity < 0.5) { buffettScore += 20; analysis.push('<span class="positive">✓ Low debt (D/E: ' + debtEquity.toFixed(2) + ') - conservative balance sheet</span>'); }
+                    else if (debtEquity < 1) { buffettScore += 5; analysis.push('• Debt levels are manageable'); }
+                    else { buffettScore -= 20; analysis.push('<span class="negative">✗ High debt (D/E: ' + debtEquity.toFixed(2) + ') - I prefer less leverage</span>'); }
+                    
+                    if (divYield > 2) { buffettScore += 15; analysis.push('<span class="positive">✓ Dividend yield of ' + divYield.toFixed(2) + '% provides income</span>'); }
+                    else if (divYield > 0.5) { buffettScore += 5; analysis.push('• Some dividend income (' + divYield.toFixed(2) + '%)'); }
+                    
+                    if (fundScore > 60) buffettScore += 10;
+                    
+                    if (buffettScore >= 50) { verdict = 'buy'; verdictText = 'INVEST - Quality Business'; }
+                    else if (buffettScore >= 25) { verdict = 'hold'; verdictText = 'WATCHLIST - Monitor Closely'; }
+                    else if (buffettScore >= 0) { verdict = 'hold'; verdictText = 'HOLD - Not My Style'; }
+                    else { verdict = 'avoid'; verdictText = 'AVOID - Too Risky'; }
+                    
+                    return {
+                        verdict, verdictText, analysis: analysis.join('<br>'),
+                        summary: `Looking at <span class="highlight">${name}</span>, I would evaluate it through my value investing lens. ${buffettScore >= 40 ? 'This company shows characteristics I look for - ' : 'This company has some concerns - '}${pe < 20 ? 'reasonable valuation, ' : 'premium valuation, '}${roe > 15 ? 'good returns on capital, ' : 'mediocre capital returns, '}and ${debtEquity < 0.8 ? 'a solid balance sheet.' : 'concerning debt levels.'} ${sector === 'Banking' || sector === 'IT' || sector === 'FMCG' ? 'The ' + sector + ' sector is one I understand well.' : 'I prefer to invest in businesses I truly understand.'} Remember, I never invest based on short-term price movements - I focus on the business quality and holding for decades.`,
+                        keyMetrics: [
+                            { label: 'P/E Ratio', value: pe.toFixed(1), class: pe < 20 ? 'positive' : pe < 30 ? 'neutral' : 'negative' },
+                            { label: 'ROE', value: roe.toFixed(1) + '%', class: roe > 15 ? 'positive' : roe > 10 ? 'neutral' : 'negative' },
+                            { label: 'Debt/Equity', value: debtEquity.toFixed(2), class: debtEquity < 0.5 ? 'positive' : debtEquity < 1 ? 'neutral' : 'negative' },
+                            { label: 'Div Yield', value: divYield.toFixed(2) + '%', class: divYield > 2 ? 'positive' : divYield > 0 ? 'neutral' : 'negative' }
+                        ]
+                    };
+                }
+            },
+            lynch: {
+                name: 'Peter Lynch',
+                title: 'The Magellan Fund Legend',
+                avatar: '📊',
+                style: 'Growth at Reasonable Price',
+                quotes: ["Know what you own, and know why you own it.", "The best stock to buy is the one you already own.", "Go for a business that any idiot can run.", "Behind every stock is a company. Find out what it's doing."],
+                analyze: function(data) {
+                    const { pe, roe, score, techScore, name, sector } = data;
+                    let verdict = 'hold', verdictText = 'HOLD - Research More', lynchScore = 0, analysis = [];
+                    const estGrowth = Math.min(roe * 0.8, 30);
+                    const pegRatio = pe / Math.max(estGrowth, 1);
+                    
+                    if (pegRatio < 1) { lynchScore += 30; analysis.push('<span class="positive">✓ PEG ratio of ' + pegRatio.toFixed(2) + ' - potential tenbagger!</span>'); }
+                    else if (pegRatio < 1.5) { lynchScore += 15; analysis.push('• PEG of ' + pegRatio.toFixed(2) + ' is reasonable'); }
+                    else if (pegRatio < 2) { lynchScore += 5; analysis.push('• PEG of ' + pegRatio.toFixed(2) + ' - fairly valued'); }
+                    else { lynchScore -= 10; analysis.push('<span class="negative">✗ PEG of ' + pegRatio.toFixed(2) + ' - overvalued</span>'); }
+                    
+                    if (estGrowth > 20) { lynchScore += 20; analysis.push('<span class="positive">✓ Strong growth (~' + estGrowth.toFixed(0) + '% implied)</span>'); }
+                    else if (estGrowth > 12) { lynchScore += 10; analysis.push('• Moderate growth'); }
+                    
+                    if (['FMCG', 'Retail', 'Auto', 'IT'].includes(sector)) { lynchScore += 10; analysis.push('<span class="positive">✓ ' + sector + ' - consumer understandable</span>'); }
+                    if (score > 60) lynchScore += 10;
+                    
+                    if (lynchScore >= 45) { verdict = 'buy'; verdictText = 'BUY - Potential Tenbagger'; }
+                    else if (lynchScore >= 25) { verdict = 'buy'; verdictText = 'BUY - Growth Story'; }
+                    else if (lynchScore >= 10) { verdict = 'hold'; verdictText = 'HOLD - Stalwart'; }
+                    else { verdict = 'sell'; verdictText = 'AVOID - Better Options'; }
+                    
+                    return {
+                        verdict, verdictText, analysis: analysis.join('<br>'),
+                        summary: `<span class="highlight">${name}</span> - ${pegRatio < 1.5 ? 'With PEG under 1.5, could be a "fast grower." ' : 'Not a classic growth bargain. '}${estGrowth > 15 ? 'Growth looks promising. ' : ''}${lynchScore >= 30 ? 'Do your homework - could reward patient investors.' : 'Keep on radar, better opportunities may exist.'}`,
+                        keyMetrics: [
+                            { label: 'PEG Ratio', value: pegRatio.toFixed(2), class: pegRatio < 1 ? 'positive' : pegRatio < 2 ? 'neutral' : 'negative' },
+                            { label: 'Est. Growth', value: estGrowth.toFixed(0) + '%', class: estGrowth > 15 ? 'positive' : 'neutral' },
+                            { label: 'P/E Ratio', value: pe.toFixed(1), class: pe < 25 ? 'positive' : 'neutral' },
+                            { label: 'Score', value: score + '/100', class: score > 60 ? 'positive' : 'neutral' }
+                        ]
+                    };
+                }
+            },
+            soros: {
+                name: 'George Soros',
+                title: 'The Man Who Broke the Bank of England',
+                avatar: '🌊',
+                style: 'Macro Trading & Reflexivity',
+                quotes: ["It's not whether you're right or wrong, but how much you make when right.", "Markets are constantly in uncertainty and flux.", "I'm only rich because I know when I'm wrong."],
+                analyze: function(data) {
+                    const { change, techScore, rsi, beta, volatility, name } = data;
+                    let verdict = 'hold', verdictText = 'OBSERVE - Wait for Setup', sorosScore = 0, analysis = [];
+                    
+                    if (Math.abs(change) > 2) {
+                        if (change > 2) { sorosScore += 20; analysis.push('<span class="positive">✓ Strong momentum (+' + change.toFixed(2) + '%)</span>'); }
+                        else { sorosScore += 10; analysis.push('• Bearish momentum - short opportunity'); }
+                    } else { analysis.push('• Markets consolidating'); }
+                    
+                    if (rsi < 30) { sorosScore += 25; analysis.push('<span class="positive">✓ RSI ' + rsi.toFixed(0) + ' - contrarian opportunity</span>'); }
+                    else if (rsi > 70) { sorosScore -= 10; analysis.push('<span class="negative">✗ RSI ' + rsi.toFixed(0) + ' - crowded trade</span>'); }
+                    else if (techScore > 60 && change > 0) { sorosScore += 15; analysis.push('• Technical strength with momentum'); }
+                    
+                    if (beta > 1.3) { sorosScore += 10; analysis.push('• High beta - leveraged to market'); }
+                    
+                    if (sorosScore >= 35) { verdict = 'buy'; verdictText = 'LONG - Ride the Wave'; }
+                    else if (sorosScore >= 15) { verdict = 'hold'; verdictText = 'POSITION - Scale In'; }
+                    else if (sorosScore >= 0) { verdict = 'hold'; verdictText = 'WAIT - No Edge'; }
+                    else { verdict = 'sell'; verdictText = 'SHORT/AVOID'; }
+                    
+                    return {
+                        verdict, verdictText, analysis: analysis.join('<br>'),
+                        summary: `<span class="highlight">${name}</span> - I care about what the market BELIEVES. ${rsi < 35 ? 'Extreme pessimism creates opportunity. ' : rsi > 65 ? 'Crowd too optimistic - be careful. ' : ''}${sorosScore >= 25 ? 'I see potential - size appropriately, cut losses fast if wrong.' : 'Wait for cleaner setup.'}`,
+                        keyMetrics: [
+                            { label: 'Momentum', value: (change >= 0 ? '+' : '') + change.toFixed(2) + '%', class: change > 1 ? 'positive' : change < -1 ? 'negative' : 'neutral' },
+                            { label: 'RSI', value: rsi.toFixed(0), class: rsi < 30 ? 'positive' : rsi > 70 ? 'negative' : 'neutral' },
+                            { label: 'Beta', value: beta.toFixed(2), class: 'neutral' },
+                            { label: 'Tech Score', value: techScore.toFixed(0), class: techScore > 55 ? 'positive' : 'neutral' }
+                        ]
+                    };
+                }
+            },
+            dalio: {
+                name: 'Ray Dalio',
+                title: 'Founder of Bridgewater',
+                avatar: '⚖️',
+                style: 'All Weather & Risk Parity',
+                quotes: ["He who lives by the crystal ball will eat shattered glass.", "Pain + Reflection = Progress.", "Diversifying well is most important."],
+                analyze: function(data) {
+                    const { beta, volatility, sharpe, divYield, name, sector } = data;
+                    let verdict = 'hold', verdictText = 'ANALYZE - Risk Metrics', dalioScore = 0, analysis = [];
+                    
+                    if (beta < 0.8) { dalioScore += 20; analysis.push('<span class="positive">✓ Low beta (' + beta.toFixed(2) + ') - defensive</span>'); }
+                    else if (beta < 1.1) { dalioScore += 10; analysis.push('• Beta ' + beta.toFixed(2) + ' - market aligned'); }
+                    else { dalioScore -= 5; analysis.push('• High beta - increases portfolio risk'); }
+                    
+                    if (sharpe > 1.5) { dalioScore += 25; analysis.push('<span class="positive">✓ Excellent Sharpe (' + sharpe.toFixed(2) + ')</span>'); }
+                    else if (sharpe > 1) { dalioScore += 15; analysis.push('• Good Sharpe (' + sharpe.toFixed(2) + ')'); }
+                    else if (sharpe > 0.5) { dalioScore += 5; analysis.push('• Modest Sharpe'); }
+                    
+                    if (volatility < 0.02) { dalioScore += 15; analysis.push('<span class="positive">✓ Low volatility</span>'); }
+                    else if (volatility > 0.04) { dalioScore -= 10; analysis.push('<span class="negative">✗ High volatility</span>'); }
+                    
+                    if (divYield > 2) { dalioScore += 10; analysis.push('<span class="positive">✓ Dividend income</span>'); }
+                    
+                    if (dalioScore >= 40) { verdict = 'buy'; verdictText = 'ALLOCATE - Portfolio Fit'; }
+                    else if (dalioScore >= 20) { verdict = 'hold'; verdictText = 'CONSIDER - Partial Position'; }
+                    else if (dalioScore >= 0) { verdict = 'hold'; verdictText = 'NEUTRAL - Size Carefully'; }
+                    else { verdict = 'avoid'; verdictText = 'UNDERWEIGHT - Too Risky'; }
+                    
+                    return {
+                        verdict, verdictText, analysis: analysis.join('<br>'),
+                        summary: `For <span class="highlight">${name}</span>, I think about portfolio fit. ${beta < 1 ? 'Lower beta reduces volatility. ' : 'Higher beta adds risk. '}${sharpe > 1 ? 'Risk-adjusted returns look favorable. ' : ''}${dalioScore >= 25 ? 'Reasonable allocation in diversified portfolio.' : 'Be careful with sizing.'}`,
+                        keyMetrics: [
+                            { label: 'Beta', value: beta.toFixed(2), class: beta < 0.8 ? 'positive' : beta < 1.2 ? 'neutral' : 'negative' },
+                            { label: 'Volatility', value: (volatility * 100).toFixed(1) + '%', class: volatility < 0.02 ? 'positive' : 'neutral' },
+                            { label: 'Sharpe', value: sharpe.toFixed(2), class: sharpe > 1 ? 'positive' : 'neutral' },
+                            { label: 'Div Yield', value: divYield.toFixed(2) + '%', class: divYield > 2 ? 'positive' : 'neutral' }
+                        ]
+                    };
+                }
+            },
+            livermore: {
+                name: 'Jesse Livermore',
+                title: 'The Boy Plunger',
+                avatar: '📈',
+                style: 'Trend Following',
+                quotes: ["The market is never wrong – opinions often are.", "It never was my thinking that made big money. It was my sitting.", "The big money is in the waiting."],
+                analyze: function(data) {
+                    const { price, change, rsi, volumeRatio, pricePosition, ema20, sma50, name } = data;
+                    let verdict = 'hold', verdictText = 'WAIT - No Setup', livermoreScore = 0, analysis = [];
+                    const inUptrend = price > ema20 && price > sma50;
+                    const inDowntrend = price < ema20 && price < sma50;
+                    
+                    if (inUptrend && change > 0) { livermoreScore += 30; analysis.push('<span class="positive">✓ Above MAs - confirmed uptrend</span>'); }
+                    else if (inDowntrend) { livermoreScore -= 20; analysis.push('<span class="negative">✗ Below MAs - avoid longs</span>'); }
+                    else { analysis.push('• No clear trend - wait for confirmation'); }
+                    
+                    if (change > 2 && volumeRatio > 1.3) { livermoreScore += 25; analysis.push('<span class="positive">✓ Breakout on volume!</span>'); }
+                    else if (change < -2 && volumeRatio > 1.3) { livermoreScore -= 15; analysis.push('<span class="negative">✗ Breakdown on volume</span>'); }
+                    
+                    if (pricePosition > 70) { livermoreScore += 10; analysis.push('• Near 52W highs - strength'); }
+                    else if (pricePosition < 30) { livermoreScore -= 10; analysis.push('• Near lows - falling knife'); }
+                    
+                    if (rsi > 50 && rsi < 70) { livermoreScore += 10; analysis.push('• Momentum intact'); }
+                    
+                    if (livermoreScore >= 40) { verdict = 'buy'; verdictText = 'BUY - Trend Confirmed'; }
+                    else if (livermoreScore >= 20) { verdict = 'buy'; verdictText = 'BUY - Early Entry'; }
+                    else if (livermoreScore >= 0) { verdict = 'hold'; verdictText = 'WAIT - Patience Pays'; }
+                    else { verdict = 'sell'; verdictText = 'AVOID/SHORT'; }
+                    
+                    return {
+                        verdict, verdictText, analysis: analysis.join('<br>'),
+                        summary: `<span class="highlight">${name}</span> - I read the tape. ${inUptrend ? 'Trend is UP - that\'s all that matters. ' : inDowntrend ? 'Trend is DOWN - never fight it. ' : 'No clear trend - I wait. '}${livermoreScore >= 30 ? 'Enter with tight stop. Big money is sitting tight with winners.' : 'No clean setup. Patience is the edge.'}`,
+                        keyMetrics: [
+                            { label: 'Trend', value: inUptrend ? 'BULLISH' : inDowntrend ? 'BEARISH' : 'NEUTRAL', class: inUptrend ? 'positive' : inDowntrend ? 'negative' : 'neutral' },
+                            { label: 'Day Move', value: (change >= 0 ? '+' : '') + change.toFixed(2) + '%', class: change > 1 ? 'positive' : change < -1 ? 'negative' : 'neutral' },
+                            { label: 'Volume', value: (volumeRatio * 100).toFixed(0) + '%', class: volumeRatio > 1.2 ? 'positive' : 'neutral' },
+                            { label: '52W Pos', value: pricePosition.toFixed(0) + '%', class: pricePosition > 60 ? 'positive' : pricePosition < 40 ? 'negative' : 'neutral' }
+                        ]
+                    };
+                }
+            },
+            icahn: {
+                name: 'Carl Icahn',
+                title: 'The Corporate Raider',
+                avatar: '🦈',
+                style: 'Activist Investing',
+                quotes: ["My philosophy is to buy when no one wants it.", "If you want a friend, get a dog.", "I make money studying natural stupidity."],
+                analyze: function(data) {
+                    const { pe, pb, roe, debtEquity, fundScore, divYield, name } = data;
+                    let verdict = 'hold', verdictText = 'MONITOR - Look for Catalyst', icahnScore = 0, analysis = [];
+                    
+                    if (pb < 1) { icahnScore += 30; analysis.push('<span class="positive">✓ Below book value - hidden assets!</span>'); }
+                    else if (pb < 1.5) { icahnScore += 15; analysis.push('• P/B ' + pb.toFixed(2) + ' shows value'); }
+                    else if (pb > 4) { icahnScore -= 10; analysis.push('<span class="negative">✗ No asset play here</span>'); }
+                    
+                    if (pe < 12 && roe < 12) { icahnScore += 20; analysis.push('<span class="positive">✓ Cheap + underperforming - activist target!</span>'); }
+                    else if (pe < 15) { icahnScore += 10; analysis.push('• Reasonably valued'); }
+                    
+                    if (roe < 10 && fundScore < 50) { icahnScore += 15; analysis.push('<span class="positive">✓ Poor fundamentals = opportunity</span>'); }
+                    else if (roe > 20) { icahnScore -= 5; analysis.push('• Well-managed - less opportunity'); }
+                    
+                    if (icahnScore >= 40) { verdict = 'buy'; verdictText = 'ACCUMULATE - Activist Potential'; }
+                    else if (icahnScore >= 20) { verdict = 'buy'; verdictText = 'BUY - Value Unlock'; }
+                    else if (icahnScore >= 5) { verdict = 'hold'; verdictText = 'WATCH - Wait for Dislocation'; }
+                    else { verdict = 'hold'; verdictText = 'PASS - No Angle'; }
+                    
+                    return {
+                        verdict, verdictText, analysis: analysis.join('<br>'),
+                        summary: `<span class="highlight">${name}</span> - I look for activist opportunities. ${pb < 1.5 ? 'Near book value is interesting. ' : ''}${roe < 12 && pe < 15 ? 'Underperforming at cheap price - classic setup. ' : ''}${icahnScore >= 30 ? 'Best investments are ones everyone hates.' : 'Not my typical target.'}`,
+                        keyMetrics: [
+                            { label: 'P/B Ratio', value: pb.toFixed(2), class: pb < 1 ? 'positive' : pb < 2 ? 'neutral' : 'negative' },
+                            { label: 'P/E Ratio', value: pe.toFixed(1), class: pe < 12 ? 'positive' : 'neutral' },
+                            { label: 'ROE', value: roe.toFixed(1) + '%', class: roe < 10 ? 'positive' : 'neutral' },
+                            { label: 'Debt/Eq', value: debtEquity.toFixed(2), class: debtEquity < 0.5 ? 'positive' : 'neutral' }
+                        ]
+                    };
+                }
+            },
+            klarman: {
+                name: 'Seth Klarman',
+                title: 'Author of Margin of Safety',
+                avatar: '🛡️',
+                style: 'Deep Value',
+                quotes: ["Value investing is the marriage of a contrarian streak and a calculator.", "Most investors pay little attention to risk.", "The single greatest edge is a long-term orientation."],
+                analyze: function(data) {
+                    const { pe, pb, debtEquity, pricePosition, name } = data;
+                    let verdict = 'hold', verdictText = 'WAIT - Insufficient Margin', klarmanScore = 0, analysis = [];
+                    const marginOfSafety = Math.max(0, (1 - pb) * 100);
+                    
+                    if (pb < 0.8) { klarmanScore += 30; analysis.push('<span class="positive">✓ P/B ' + pb.toFixed(2) + ' - significant margin (' + marginOfSafety.toFixed(0) + '%)</span>'); }
+                    else if (pb < 1.2) { klarmanScore += 15; analysis.push('• Modest margin of safety'); }
+                    else { klarmanScore -= 10; analysis.push('<span class="negative">✗ No margin of safety</span>'); }
+                    
+                    if (pe < 10) { klarmanScore += 25; analysis.push('<span class="positive">✓ Deep value territory</span>'); }
+                    else if (pe < 15) { klarmanScore += 12; analysis.push('• Reasonable P/E'); }
+                    else if (pe > 30) { klarmanScore -= 15; analysis.push('<span class="negative">✗ No safety cushion</span>'); }
+                    
+                    if (pricePosition < 35) { klarmanScore += 15; analysis.push('<span class="positive">✓ Near lows - contrarian</span>'); }
+                    else if (pricePosition > 80) { klarmanScore -= 10; analysis.push('<span class="negative">✗ Near highs - no safety</span>'); }
+                    
+                    if (debtEquity < 0.4) { klarmanScore += 10; analysis.push('<span class="positive">✓ Low debt cushion</span>'); }
+                    
+                    if (klarmanScore >= 45) { verdict = 'buy'; verdictText = 'BUY - Deep Value'; }
+                    else if (klarmanScore >= 25) { verdict = 'buy'; verdictText = 'ACCUMULATE - Value Present'; }
+                    else if (klarmanScore >= 5) { verdict = 'hold'; verdictText = 'WAIT - Need Discount'; }
+                    else { verdict = 'avoid'; verdictText = 'AVOID - No Safety'; }
+                    
+                    return {
+                        verdict, verdictText, analysis: analysis.join('<br>'),
+                        summary: `<span class="highlight">${name}</span> - I ask "what could go wrong?" ${pb < 1 ? 'Below book provides margin. ' : 'Valuation lacks protection. '}${pe < 12 ? 'Low P/E suggests pessimism - I get interested. ' : ''}${klarmanScore >= 30 ? 'Warrants deeper analysis. Value investing requires patience.' : 'Need larger discount to get excited.'}`,
+                        keyMetrics: [
+                            { label: 'Margin', value: marginOfSafety.toFixed(0) + '%', class: marginOfSafety > 20 ? 'positive' : 'neutral' },
+                            { label: 'P/E Ratio', value: pe.toFixed(1), class: pe < 12 ? 'positive' : 'neutral' },
+                            { label: 'P/B Ratio', value: pb.toFixed(2), class: pb < 1 ? 'positive' : 'neutral' },
+                            { label: 'Debt/Eq', value: debtEquity.toFixed(2), class: debtEquity < 0.5 ? 'positive' : 'neutral' }
+                        ]
+                    };
+                }
+            },
+            jhunjhunwala: {
+                name: 'Rakesh Jhunjhunwala',
+                title: 'The Big Bull of India',
+                avatar: '🇮🇳',
+                style: 'India Growth + Value',
+                quotes: ["Respect the market. Have an open mind.", "Never invest at unreasonable valuations.", "India is the best place to invest."],
+                analyze: function(data) {
+                    const { pe, roe, score, techScore, change, name, sector } = data;
+                    let verdict = 'hold', verdictText = 'MONITOR - Wait for Entry', rkjScore = 0, analysis = [];
+                    const growthSectors = ['Banking', 'Finance', 'FMCG', 'Pharma', 'IT', 'Infra', 'Auto'];
+                    
+                    if (growthSectors.includes(sector)) { rkjScore += 15; analysis.push('<span class="positive">✓ ' + sector + ' - India growth story</span>'); }
+                    
+                    if (roe > 18) { rkjScore += 20; analysis.push('<span class="positive">✓ Strong ROE ' + roe.toFixed(1) + '%</span>'); }
+                    else if (roe > 12) { rkjScore += 8; analysis.push('• Decent ROE'); }
+                    else { rkjScore -= 5; analysis.push('• ROE needs improvement'); }
+                    
+                    if (pe < 20 && roe > 15) { rkjScore += 25; analysis.push('<span class="positive">✓ Good business, reasonable price</span>'); }
+                    else if (pe < 30) { rkjScore += 10; analysis.push('• Valuation acceptable'); }
+                    else { rkjScore -= 5; analysis.push('• P/E on higher side'); }
+                    
+                    if (techScore > 55 && change > 0) { rkjScore += 10; analysis.push('• Momentum with bulls'); }
+                    if (score > 60) { rkjScore += 10; analysis.push('• Overall positive'); }
+                    
+                    if (rkjScore >= 45) { verdict = 'buy'; verdictText = 'BUY - India Winner'; }
+                    else if (rkjScore >= 25) { verdict = 'buy'; verdictText = 'ACCUMULATE - Long Term'; }
+                    else if (rkjScore >= 10) { verdict = 'hold'; verdictText = 'HOLD - Needs Time'; }
+                    else { verdict = 'hold'; verdictText = 'WAIT - Better Options'; }
+                    
+                    return {
+                        verdict, verdictText, analysis: analysis.join('<br>'),
+                        summary: `<span class="highlight">${name}</span> - Arre yaar! ${growthSectors.includes(sector) ? sector + ' is India\'s growth story. ' : ''}${roe > 15 ? 'Returns are impressive - quality business. ' : ''}${rkjScore >= 35 ? 'Could be multibagger in 5-10 years. India ka future bright hai!' : 'Wait for better entry. Patience is key.'}`,
+                        keyMetrics: [
+                            { label: 'Sector', value: sector.substring(0, 8), class: growthSectors.includes(sector) ? 'positive' : 'neutral' },
+                            { label: 'ROE', value: roe.toFixed(1) + '%', class: roe > 15 ? 'positive' : 'neutral' },
+                            { label: 'P/E Ratio', value: pe.toFixed(1), class: pe < 20 ? 'positive' : 'neutral' },
+                            { label: 'Score', value: score + '/100', class: score > 55 ? 'positive' : 'neutral' }
+                        ]
+                    };
+                }
+            }
+        };
+        
+        function selectInvestor(investorId) {
+            currentSelectedInvestor = investorId;
+            document.querySelectorAll('.investor-chip').forEach(chip => {
+                chip.classList.remove('active');
+                if (chip.dataset.investor === investorId) chip.classList.add('active');
+            });
+            if (currentAnalysisData) generateInvestorAdvice(investorId);
+        }
+        
+        function generateInvestorAdvice(investorId) {
+            if (!currentAnalysisData || !legendaryInvestors[investorId]) return;
+            const investor = legendaryInvestors[investorId];
+            const advice = investor.analyze(currentAnalysisData);
+            const randomQuote = investor.quotes[Math.floor(Math.random() * investor.quotes.length)];
+            
+            document.getElementById('investorAdviceContainer').innerHTML = `
+                <div class="investor-advice-card visible">
+                    <div class="investor-card-header">
+                        <div class="investor-avatar-large">${investor.avatar}</div>
+                        <div class="investor-card-info">
+                            <h4>${investor.name}</h4>
+                            <span>${investor.title} • ${investor.style}</span>
+                        </div>
+                    </div>
+                    <div class="investor-verdict ${advice.verdict}">${advice.verdictText}</div>
+                    <div class="investor-advice-text">${advice.summary}</div>
+                    <div style="margin: 20px 0; padding: 15px; background: rgba(40,40,40,0.4); border-radius: 12px;">
+                        <div style="font-size: 0.8rem; color: var(--text-tertiary); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px;">Key Analysis Points</div>
+                        <div style="color: var(--text-secondary); line-height: 1.8; font-size: 0.9rem;">${advice.analysis}</div>
+                    </div>
+                    <div class="investor-key-metrics">
+                        ${advice.keyMetrics.map(m => `<div class="investor-metric"><div class="investor-metric-label">${m.label}</div><div class="investor-metric-value ${m.class}">${m.value}</div></div>`).join('')}
+                    </div>
+                    <div class="investor-quote">${randomQuote}<cite>— ${investor.name}</cite></div>
+                </div>
+            `;
+            document.getElementById('noInvestorMessage').style.display = 'none';
+        }
+        
+        function updateInvestorInsights(stockData, fundamentals, score, techScore, fundScore, rsi, pricePosition, volumeRatio, ema20, sma50, beta, volatility, sharpe, maxDrawdown) {
+            currentAnalysisData = {
+                symbol: stockData.symbol || document.getElementById('stockInput').value.toUpperCase(),
+                name: stockData.name, sector: stockData.sector, price: stockData.price, change: stockData.change,
+                pe: fundamentals.pe, pb: fundamentals.pb, roe: fundamentals.roe, debtEquity: fundamentals.debtEquity,
+                divYield: fundamentals.divYield, beta: fundamentals.beta || beta, marketCap: stockData.marketCap,
+                score, techScore, fundScore, rsi, pricePosition, volumeRatio, ema20, sma50, volatility, sharpe, maxDrawdown
+            };
+            document.getElementById('investorInsightsSection').style.display = 'block';
+            generateInvestorAdvice(currentSelectedInvestor);
         }
 
         function shareTwitter() {
@@ -6822,125 +7886,163 @@
         // TYPEAHEAD AUTOCOMPLETE FUNCTIONALITY
         // =============================================
         
-        const stockInput = document.getElementById('stockInput');
-        const autocompleteDropdown = document.getElementById('autocompleteDropdown');
-        let selectedIndex = -1;
-        let filteredStocks = [];
-        
-        // Build searchable stock list
-        const stockList = Object.entries(stockMetadata).map(([symbol, data]) => ({
-            symbol: symbol,
-            name: data.name,
-            sector: data.sector
-        }));
-        
-        // Update stock count in badge
-        const stockCountBadge = document.querySelector('.stock-count-badge span');
-        if (stockCountBadge) {
-            stockCountBadge.textContent = `${stockList.length}+ NSE Stocks Available`;
-        }
-        
-        // Filter stocks based on input
-        function filterStocks(query) {
-            if (!query || query.length < 1) return [];
+        // Initialize after DOM is ready
+        (function initAutocomplete() {
+            const stockInput = document.getElementById('stockInput');
+            const autocompleteDropdown = document.getElementById('autocompleteDropdown');
+            let selectedIndex = -1;
+            let filteredStocks = [];
             
-            const q = query.toLowerCase();
-            return stockList.filter(stock => 
-                stock.symbol.toLowerCase().includes(q) ||
-                stock.name.toLowerCase().includes(q) ||
-                stock.sector.toLowerCase().includes(q)
-            ).slice(0, 10); // Limit to 10 results for performance
-        }
-        
-        // Render autocomplete dropdown
-        function renderAutocomplete(stocks) {
-            if (stocks.length === 0) {
-                autocompleteDropdown.style.display = 'none';
+            // Debug: Check if elements exist
+            console.log('Autocomplete init:', { stockInput: !!stockInput, autocompleteDropdown: !!autocompleteDropdown });
+            
+            if (!stockInput || !autocompleteDropdown) {
+                console.error('Autocomplete elements not found!');
                 return;
             }
             
-            autocompleteDropdown.innerHTML = stocks.map((stock, index) => `
-                <div class="autocomplete-item ${index === selectedIndex ? 'selected' : ''}" 
-                     data-symbol="${stock.symbol}"
-                     onclick="selectStock('${stock.symbol}')">
-                    <span class="autocomplete-symbol">${stock.symbol}</span>
-                    <span class="autocomplete-name">${stock.name}</span>
-                    <span class="autocomplete-sector">${stock.sector}</span>
-                </div>
-            `).join('');
+            // Build searchable stock list
+            const stockList = Object.entries(stockMetadata).map(([symbol, data]) => ({
+                symbol: symbol,
+                name: data.name,
+                sector: data.sector
+            }));
             
-            autocompleteDropdown.style.display = 'block';
-        }
-        
-        // Select a stock from autocomplete
-        function selectStock(symbol) {
-            stockInput.value = symbol;
-            autocompleteDropdown.style.display = 'none';
-            selectedIndex = -1;
-            stockInput.focus();
+            console.log('Stock list built:', stockList.length, 'stocks');
             
-            // Auto-analyze after selection
-            analyzeStock();
-        }
-        
-        // Handle input events
-        stockInput.addEventListener('input', function(e) {
-            const query = e.target.value.trim();
-            filteredStocks = filterStocks(query);
-            selectedIndex = -1;
-            renderAutocomplete(filteredStocks);
-        });
-        
-        // Handle keyboard navigation
-        stockInput.addEventListener('keydown', function(e) {
-            if (!filteredStocks.length) return;
+            // Update stock count in badge
+            const stockCountBadge = document.querySelector('.stock-count-badge');
+            if (stockCountBadge) {
+                stockCountBadge.innerHTML = '<i class="fas fa-database"></i> ' + stockList.length + '+ NSE Stocks Available';
+            }
             
-            if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                selectedIndex = Math.min(selectedIndex + 1, filteredStocks.length - 1);
-                renderAutocomplete(filteredStocks);
-                // Scroll selected item into view
-                const selected = autocompleteDropdown.querySelector('.autocomplete-item.selected');
-                if (selected) selected.scrollIntoView({ block: 'nearest' });
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                selectedIndex = Math.max(selectedIndex - 1, 0);
-                renderAutocomplete(filteredStocks);
-                const selected = autocompleteDropdown.querySelector('.autocomplete-item.selected');
-                if (selected) selected.scrollIntoView({ block: 'nearest' });
-            } else if (e.key === 'Enter' && selectedIndex >= 0) {
-                e.preventDefault();
-                selectStock(filteredStocks[selectedIndex].symbol);
-            } else if (e.key === 'Escape') {
+            // Filter stocks based on input
+            function filterStocks(query) {
+                if (!query || query.length < 1) return [];
+                
+                const q = query.toLowerCase();
+                return stockList.filter(stock => 
+                    stock.symbol.toLowerCase().includes(q) ||
+                    stock.name.toLowerCase().includes(q) ||
+                    stock.sector.toLowerCase().includes(q)
+                ).slice(0, 10);
+            }
+            
+            // Render autocomplete dropdown
+            function renderDropdown(stocks) {
+                if (stocks.length === 0) {
+                    autocompleteDropdown.style.display = 'none';
+                    return;
+                }
+                
+                autocompleteDropdown.innerHTML = stocks.map((stock, index) => `
+                    <div class="autocomplete-item ${index === selectedIndex ? 'selected' : ''}" 
+                         data-symbol="${stock.symbol}">
+                        <span class="autocomplete-symbol">${stock.symbol}</span>
+                        <span class="autocomplete-name">${stock.name}</span>
+                        <span class="autocomplete-sector">${stock.sector}</span>
+                    </div>
+                `).join('');
+                
+                autocompleteDropdown.style.display = 'block';
+                console.log('Dropdown rendered with', stocks.length, 'items');
+            }
+            
+            // Make selectStock global for onclick handlers
+            window.selectStock = function(symbol) {
+                console.log('selectStock called:', symbol);
+                stockInput.value = symbol;
                 autocompleteDropdown.style.display = 'none';
                 selectedIndex = -1;
-            }
-        });
-        
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.search-container')) {
-                autocompleteDropdown.style.display = 'none';
+                stockInput.focus();
+                analyzeStock();
+            };
+            
+            // Event delegation for autocomplete clicks
+            autocompleteDropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const item = e.target.closest('.autocomplete-item');
+                if (item) {
+                    const symbol = item.getAttribute('data-symbol');
+                    console.log('Autocomplete item clicked:', symbol);
+                    if (symbol) {
+                        window.selectStock(symbol);
+                    }
+                }
+            });
+            
+            // Handle input events
+            stockInput.addEventListener('input', function(e) {
+                const query = e.target.value.trim();
+                console.log('Input event:', query);
+                filteredStocks = filterStocks(query);
                 selectedIndex = -1;
-            }
-        });
-        
-        // Show dropdown on focus if there's text
-        stockInput.addEventListener('focus', function() {
-            if (stockInput.value.trim()) {
-                filteredStocks = filterStocks(stockInput.value.trim());
-                renderAutocomplete(filteredStocks);
-            }
-        });
+                renderDropdown(filteredStocks);
+            });
+            
+            // Handle keyboard navigation
+            stockInput.addEventListener('keydown', function(e) {
+                if (!filteredStocks.length) return;
+                
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    selectedIndex = Math.min(selectedIndex + 1, filteredStocks.length - 1);
+                    renderDropdown(filteredStocks);
+                    const selected = autocompleteDropdown.querySelector('.autocomplete-item.selected');
+                    if (selected) selected.scrollIntoView({ block: 'nearest' });
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    selectedIndex = Math.max(selectedIndex - 1, 0);
+                    renderDropdown(filteredStocks);
+                    const selected = autocompleteDropdown.querySelector('.autocomplete-item.selected');
+                    if (selected) selected.scrollIntoView({ block: 'nearest' });
+                } else if (e.key === 'Enter' && selectedIndex >= 0) {
+                    e.preventDefault();
+                    window.selectStock(filteredStocks[selectedIndex].symbol);
+                } else if (e.key === 'Escape') {
+                    autocompleteDropdown.style.display = 'none';
+                    selectedIndex = -1;
+                }
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.search-container') && !e.target.closest('.autocomplete-dropdown')) {
+                    autocompleteDropdown.style.display = 'none';
+                    selectedIndex = -1;
+                }
+            });
+            
+            // Show dropdown on focus if there's text
+            stockInput.addEventListener('focus', function() {
+                if (stockInput.value.trim()) {
+                    filteredStocks = filterStocks(stockInput.value.trim());
+                    renderDropdown(filteredStocks);
+                }
+            });
 
-        // Enter key support (when no autocomplete selection)
-        document.getElementById('stockInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' && selectedIndex < 0) analyzeStock();
-        });
+            // Enter key support (when no autocomplete selection)
+            stockInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && selectedIndex < 0) {
+                    analyzeStock();
+                }
+            });
+            
+            console.log('Autocomplete initialized successfully');
+        })();
 
-        // Auto-focus on load
+        // Auto-focus on load and initialize FAQ
         window.addEventListener('load', function() {
             document.getElementById('stockInput').focus();
+            
+            // FAQ Toggle functionality
+            document.querySelectorAll('.faq-question').forEach(function(question) {
+                question.addEventListener('click', function() {
+                    const faqItem = this.parentElement;
+                    faqItem.classList.toggle('active');
+                });
+            });
+            console.log('FAQ initialized');
         });
     </script>
 </body>
