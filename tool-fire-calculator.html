@@ -1,44 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
-    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
     <meta charset="UTF-8">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     
-    <title>FIRE Calculator 2026 - Financial Independence Retire Early Calculator India | BroBillionaire</title>
-    <meta name="description" content="FREE FIRE Calculator 2026! Calculate your Financial Independence Retire Early number. Find when you can retire, your FIRE number, savings rate needed & coast FIRE age. Best FIRE calculator India with visual retirement countdown.">
-    <meta name="keywords" content="FIRE calculator, financial independence calculator, retire early calculator, FIRE number India, early retirement calculator, financial freedom calculator, coast FIRE calculator, lean FIRE calculator, fat FIRE calculator 2026">
+    <!-- Primary Meta Tags -->
+    <title>FIRE Calculator FREE 2026 - Financial Independence Retire Early India | BroBillionaire</title>
+    <meta name="title" content="FIRE Calculator FREE 2026 - Financial Independence Retire Early Calculator">
+    <meta name="description" content="🔥 FREE FIRE Calculator 2026 - Calculate your FIRE number, years to financial independence, savings rate analysis. AI-powered early retirement planning.">
+    <meta name="keywords" content="FIRE calculator, financial independence calculator, retire early calculator, FIRE number India, savings rate calculator, early retirement planning, wealth independence">
     <meta name="author" content="BroBillionaire">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="https://brobillionaire.com/tool-fire-calculator.html">
-    
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://brobillionaire.com/tool-fire-calculator.html">
-    <meta property="og:title" content="FIRE Calculator - When Can You Retire Early?">
-    <meta property="og:description" content="Calculate your path to Financial Independence. Find your FIRE number and retirement timeline.">
-    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
-    
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="FIRE Calculator | BroBillionaire">
-    
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "FIRE Calculator - Financial Independence Retire Early",
-        "applicationCategory": "FinanceApplication",
-        "operatingSystem": "Web Browser",
-        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "INR"}
-    }
-    </script>
     
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <style>
         :root {
@@ -46,11 +35,9 @@
             --gold-light: #E8D5A3;
             --gold-dark: #A68B1E;
             --bg-primary: #0d0d0d;
-            --bg-secondary: #1a1a1a;
-            --bg-card: #161616;
             --text-primary: #fff;
             --text-secondary: #999;
-            --border-color: #2a2a2a;
+            --text-tertiary: #666;
             --green: #10b981;
             --red: #ef4444;
             --blue: #3b82f6;
@@ -61,12 +48,12 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
-            min-height: 100vh;
             padding-top: 140px;
+            min-height: 100vh;
         }
         
         .navbar {
@@ -90,19 +77,15 @@
             justify-content: space-between;
         }
         
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-        
-        .logo-img { width: 40px; height: 40px; border-radius: 10px; }
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-img { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; }
         .logo-text { font-size: 1.25rem; font-weight: 600; color: var(--text-primary); }
         
         .nav-links { display: flex; gap: 35px; }
-        .nav-link { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+        .nav-link { color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.2s ease; }
         .nav-link:hover, .nav-link.active { color: var(--gold); }
+        
+        .mobile-menu-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; }
         
         .breadcrumb-nav {
             position: fixed;
@@ -118,422 +101,492 @@
         }
         
         .breadcrumb-container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
-        .breadcrumb-nav a, .breadcrumb-nav span { color: rgba(255,255,255,0.6); text-decoration: none; padding: 0 8px; }
+        .breadcrumb-nav a, .breadcrumb-nav span { color: rgba(255, 255, 255, 0.6); text-decoration: none; padding: 0 8px; }
+        .breadcrumb-nav a:first-child { padding-left: 0; }
         .breadcrumb-nav a:hover { color: var(--gold); }
-        .breadcrumb-nav span { color: var(--gold); }
+        .breadcrumb-nav span.current { color: var(--gold); }
         
-        .tool-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px 80px; }
+        .calculator-container { max-width: 1400px; margin: 0 auto; padding: 40px 20px 80px; }
         
-        .tool-hero { text-align: center; margin-bottom: 50px; position: relative; }
-        
-        .tool-hero::before {
-            content: '';
-            position: absolute;
-            top: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(249, 115, 22, 0.1) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        
-        .fire-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, rgba(249, 115, 22, 0.2), rgba(249, 115, 22, 0.1));
-            border: 1px solid rgba(249, 115, 22, 0.3);
-            padding: 8px 20px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            color: var(--orange);
-            margin-bottom: 20px;
-        }
-        
-        .tool-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            font-weight: 700;
-            background: linear-gradient(135deg, #fff 0%, var(--orange) 50%, #fff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 15px;
-        }
-        
-        .tool-subtitle { color: var(--text-secondary); font-size: 1.1rem; max-width: 700px; margin: 0 auto; }
-        
-        .input-section {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            padding: 40px;
+        .tool-hero {
+            background: linear-gradient(145deg, #13131d 0%, #0d0d15 50%, #111120 100%);
+            border: 1px solid rgba(201, 162, 39, 0.15);
+            border-radius: 28px;
+            padding: 55px 50px;
             margin-bottom: 40px;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
         }
         
-        .input-section::before {
+        .tool-hero::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--orange), #fbbf24, var(--orange));
+            background: linear-gradient(90deg, transparent, var(--orange), var(--gold), var(--orange), transparent);
         }
         
-        .input-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
+        .tool-hero::after {
+            content: '🔥';
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            font-size: 6rem;
+            opacity: 0.08;
         }
         
-        .input-group { display: flex; flex-direction: column; gap: 10px; }
+        .premium-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--orange) 0%, var(--red) 100%);
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            animation: fireGlow 2s infinite;
+        }
         
-        .input-label {
+        @keyframes fireGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(249, 115, 22, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(249, 115, 22, 0.6); }
+        }
+        
+        .tool-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--orange) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        
+        .tool-hero p { color: var(--text-secondary); font-size: 1.15rem; max-width: 700px; }
+        
+        .fire-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(249, 115, 22, 0.15);
+            color: var(--orange);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
             font-weight: 600;
-            color: var(--text-primary);
+            margin-top: 20px;
+            border: 1px solid rgba(249, 115, 22, 0.3);
+        }
+        
+        .main-grid {
+            display: grid;
+            grid-template-columns: 480px 1fr;
+            gap: 35px;
+        }
+        
+        .card {
+            background: linear-gradient(145deg, #161620 0%, #12121a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-header {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
+            margin-bottom: 28px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        
+        .card-icon {
+            width: 54px;
+            height: 54px;
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.2) 0%, rgba(249, 115, 22, 0.08) 100%);
+            border: 1px solid rgba(249, 115, 22, 0.2);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+        }
+        
+        .card-title { font-size: 1.25rem; font-weight: 700; color: var(--text-primary); }
+        .card-subtitle { font-size: 0.88rem; color: var(--text-secondary); }
+        
+        .form-group { margin-bottom: 24px; }
+        
+        .form-label { 
+            display: block; 
+            color: var(--orange); 
+            font-weight: 700; 
+            margin-bottom: 12px; 
             font-size: 0.95rem;
         }
         
-        .input-label i { color: var(--orange); font-size: 1.1rem; }
+        .form-hint { font-weight: 400; color: var(--text-tertiary); font-size: 0.85rem; margin-left: 6px; }
         
-        .input-field {
-            background: var(--bg-secondary);
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            padding: 16px 20px;
-            font-size: 1.1rem;
-            color: var(--text-primary);
-            transition: all 0.3s ease;
+        .form-input {
             width: 100%;
+            padding: 16px 20px;
+            background: linear-gradient(145deg, #0a0a0f 0%, #0d0d12 100%);
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            color: var(--text-primary);
+            font-size: 1.05rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
         
-        .input-field:focus {
+        .form-input:focus {
             outline: none;
             border-color: var(--orange);
             box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.1);
         }
         
-        .input-hint { font-size: 0.8rem; color: var(--text-secondary); margin-top: 5px; }
-        
-        .fire-types {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        
-        .fire-type-btn {
-            padding: 15px 20px;
-            border-radius: 12px;
-            border: 2px solid var(--border-color);
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .slider-value {
             text-align: center;
-        }
-        
-        .fire-type-btn:hover { border-color: var(--orange); }
-        
-        .fire-type-btn.active {
-            border-color: var(--orange);
-            background: rgba(249, 115, 22, 0.1);
-        }
-        
-        .fire-type-btn .emoji { font-size: 1.5rem; display: block; margin-bottom: 5px; }
-        .fire-type-btn .name { font-weight: 600; font-size: 0.9rem; }
-        .fire-type-btn .multiplier { font-size: 0.8rem; color: var(--text-secondary); }
-        
-        .calculate-btn {
-            width: 100%;
-            padding: 18px 40px;
-            font-size: 1.1rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            border: none;
-            border-radius: 14px;
+            color: var(--orange);
+            margin-bottom: 10px;
+        }
+        
+        .form-slider {
+            width: 100%;
+            height: 8px;
+            -webkit-appearance: none;
+            background: rgba(249, 115, 22, 0.2);
+            border-radius: 4px;
             cursor: pointer;
-            background: linear-gradient(135deg, var(--orange), #ea580c);
-            color: white;
-            transition: all 0.3s ease;
+        }
+        
+        .form-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--orange) 0%, var(--red) 100%);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
+        }
+        
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+        }
+        
+        .btn-primary {
+            width: 100%;
+            padding: 18px 24px;
+            background: linear-gradient(135deg, var(--orange) 0%, var(--red) 100%);
+            border: none;
+            border-radius: 16px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.4s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
+            margin-top: 25px;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
         
-        .calculate-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(249, 115, 22, 0.3);
+        .btn-primary:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 15px 40px rgba(249, 115, 22, 0.4);
         }
         
-        .results-section { display: none; }
-        .results-section.show { display: block; animation: fadeInUp 0.6s ease; }
+        .results-section { display: flex; flex-direction: column; gap: 25px; }
         
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .fire-number-card {
-            background: linear-gradient(135deg, rgba(249, 115, 22, 0.15), rgba(249, 115, 22, 0.05));
+        .big-result-card {
+            background: linear-gradient(180deg, #1a0a0a 0%, #150d0d 50%, #1a1010 100%);
             border: 2px solid var(--orange);
-            border-radius: 24px;
-            padding: 50px 40px;
+            border-radius: 28px;
+            padding: 45px 35px;
             text-align: center;
-            margin-bottom: 40px;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 0 80px rgba(249, 115, 22, 0.08);
         }
         
-        .fire-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(249, 115, 22, 0.2) 0%, transparent 70%);
-            animation: fireGlow 3s infinite;
-        }
-        
-        @keyframes fireGlow {
-            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
-        }
-        
-        .fire-label { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 10px; position: relative; z-index: 1; }
-        
-        .fire-amount {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 10vw, 5rem);
-            font-weight: 700;
-            color: var(--orange);
-            position: relative;
-            z-index: 1;
-            text-shadow: 0 0 60px rgba(249, 115, 22, 0.5);
-        }
-        
-        .fire-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            margin-top: 15px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-        
-        .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 25px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        
-        .stat-card:hover {
-            border-color: var(--orange);
-            transform: translateY(-5px);
-        }
-        
-        .stat-icon { font-size: 2rem; margin-bottom: 15px; }
-        .stat-value { font-size: 1.8rem; font-weight: 700; color: var(--orange); margin-bottom: 5px; }
-        .stat-label { font-size: 0.9rem; color: var(--text-secondary); }
-        
-        .countdown-section { margin-bottom: 40px; }
-        
-        .section-header { text-align: center; margin-bottom: 30px; }
-        .section-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--orange); margin-bottom: 10px; }
-        .section-subtitle { color: var(--text-secondary); }
-        
-        .countdown-display {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-        
-        .countdown-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 30px 40px;
-            text-align: center;
-            min-width: 120px;
-        }
-        
-        .countdown-value {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--orange);
-        }
-        
-        .countdown-label { font-size: 0.9rem; color: var(--text-secondary); margin-top: 5px; }
-        
-        .progress-section { margin-bottom: 40px; }
-        
-        .progress-container {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 40px;
-        }
-        
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .progress-title { font-size: 1.2rem; font-weight: 600; }
-        .progress-percent { font-size: 1.5rem; font-weight: 700; color: var(--orange); }
-        
-        .progress-bar {
-            height: 20px;
-            background: var(--bg-secondary);
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 20px;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--orange), #fbbf24);
-            border-radius: 10px;
-            transition: width 1s ease;
-            position: relative;
-        }
-        
-        .progress-fill::after {
+        .big-result-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            animation: shimmer 2s infinite;
+            height: 200px;
+            background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(249, 115, 22, 0.15) 0%, transparent 70%);
         }
         
-        @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
-        
-        .progress-milestones {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
+        .result-label {
             color: var(--text-secondary);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
         }
         
-        .savings-rate-section { margin-bottom: 40px; }
-        
-        .rate-meter {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-        }
-        
-        .rate-display {
+        .result-value {
             font-family: 'Playfair Display', serif;
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 700;
+            background: linear-gradient(135deg, var(--orange) 0%, var(--gold) 50%, var(--orange) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
         }
         
-        .rate-display.low { color: var(--red); }
-        .rate-display.medium { color: #fbbf24; }
-        .rate-display.high { color: var(--green); }
-        .rate-display.extreme { color: var(--orange); }
+        .result-subtitle { color: var(--text-tertiary); font-size: 0.95rem; }
         
-        .rate-label { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 20px; }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
         
-        .rate-scale {
+        .metric-card {
+            background: linear-gradient(145deg, #161620 0%, #12121a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 24px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+        
+        .metric-card:hover { transform: translateY(-5px); border-color: rgba(249, 115, 22, 0.3); }
+        
+        .metric-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(249, 115, 22, 0.05) 100%);
+            border-radius: 14px;
             display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin: 0 auto 15px;
+        }
+        
+        .metric-title {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        
+        .metric-value { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); }
+        .metric-value.positive { color: var(--green); }
+        .metric-value.negative { color: var(--red); }
+        
+        .savings-rate-card {
+            background: linear-gradient(145deg, #1a1a28 0%, #141422 100%);
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 24px;
+            padding: 30px;
+        }
+        
+        .rate-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .rate-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--green) 0%, #059669 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .rate-title { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); }
+        .rate-subtitle { font-size: 0.85rem; color: var(--green); }
+        
+        .rate-bar-container {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            height: 30px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        
+        .rate-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--green), #10b981);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
             font-size: 0.85rem;
         }
         
-        .rate-scale span { padding: 8px 15px; border-radius: 20px; }
-        .rate-scale .low { background: rgba(239, 68, 68, 0.2); color: var(--red); }
-        .rate-scale .medium { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
-        .rate-scale .high { background: rgba(16, 185, 129, 0.2); color: var(--green); }
-        .rate-scale .extreme { background: rgba(249, 115, 22, 0.2); color: var(--orange); }
-        
-        .chart-section { margin-bottom: 40px; }
+        .rate-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-tertiary);
+        }
         
         .chart-container {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
+            background: linear-gradient(145deg, #161620 0%, #12121a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
             padding: 30px;
-            height: 400px;
         }
         
-        .tips-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+        .chart-title { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 20px; }
+        .chart-wrapper { height: 300px; }
+        
+        .ai-suggestion-box {
+            background: linear-gradient(145deg, #1a1a2e 0%, #16162a 100%);
+            border: 2px solid rgba(139, 92, 246, 0.3);
+            border-radius: 24px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
         }
         
-        .tip-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 25px;
-            transition: all 0.3s ease;
+        .ai-suggestion-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--purple), var(--blue), var(--purple));
         }
         
-        .tip-card:hover { border-color: var(--orange); transform: translateY(-3px); }
-        .tip-icon { width: 50px; height: 50px; border-radius: 12px; background: rgba(249, 115, 22, 0.1); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 15px; }
-        .tip-title { font-weight: 600; font-size: 1.1rem; margin-bottom: 10px; color: var(--text-primary); }
-        .tip-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+        .ai-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
         
-        .tool-footer {
-            text-align: center;
-            padding: 40px 20px;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-secondary);
+        .ai-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            animation: aiPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes aiPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.6); }
+        }
+        
+        .ai-title { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); }
+        .ai-subtitle { font-size: 0.85rem; color: var(--purple); }
+        
+        .ai-badge {
+            background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-left: auto;
+        }
+        
+        .ai-content { background: rgba(0, 0, 0, 0.3); border-radius: 16px; padding: 20px; }
+        
+        .ai-suggestion-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .ai-suggestion-item:last-child { border-bottom: none; }
+        
+        .ai-bullet {
+            width: 28px;
+            height: 28px;
+            background: rgba(139, 92, 246, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 0.9rem;
+            flex-shrink: 0;
         }
         
-        .tool-footer a { color: var(--gold); text-decoration: none; }
+        .ai-text { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+        .ai-text strong { color: var(--gold); }
+        
+        .ai-typing { display: flex; align-items: center; gap: 8px; padding: 15px; color: var(--text-tertiary); }
+        .ai-typing-dots { display: flex; gap: 4px; }
+        .ai-typing-dots span { width: 8px; height: 8px; background: var(--purple); border-radius: 50%; animation: typingBounce 1.4s infinite ease-in-out; }
+        .ai-typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .ai-typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+        
+        @keyframes typingBounce {
+            0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+        
+        .disclaimer-box {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 40px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        
+        .disclaimer-box strong { color: var(--red); }
+        
+        @media (max-width: 1200px) {
+            .main-grid { grid-template-columns: 1fr; }
+        }
         
         @media (max-width: 768px) {
             body { padding-top: 120px; }
-            .input-section { padding: 25px; }
-            .fire-number-card { padding: 30px 20px; }
-            .countdown-display { gap: 15px; }
-            .countdown-item { padding: 20px 25px; min-width: 100px; }
-            .countdown-value { font-size: 2rem; }
+            .calculator-container { padding: 20px 15px; }
+            .tool-hero { padding: 35px 25px; }
+            .tool-hero h1 { font-size: 2rem; }
+            .tool-hero::after { display: none; }
+            .metrics-grid { grid-template-columns: 1fr; }
+            .result-value { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .mobile-menu-toggle { display: block; }
         }
     </style>
 </head>
 <body>
-
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">
-                <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                <img src="logo.jpg" alt="BroBillionaire Logo" class="logo-img">
                 <span class="logo-text">BroBillionaire</span>
             </a>
             <div class="nav-links">
@@ -542,409 +595,266 @@
                 <a href="tools.html" class="nav-link active">Tools</a>
                 <a href="about.html" class="nav-link">About</a>
             </div>
-        </div>
-    </nav>
-    
-    <nav class="breadcrumb-nav">
-        <div class="breadcrumb-container">
-            <a href="index.html">Home</a> /
-            <a href="tools.html">Tools</a> /
-            <span>FIRE Calculator</span>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </nav>
 
-    <div class="tool-container">
-        
+    <nav class="breadcrumb-nav">
+        <div class="breadcrumb-container">
+            <a href="index.html">Home</a> › 
+            <a href="tools.html">Tools</a> › 
+            <span class="current">FIRE Calculator</span>
+        </div>
+    </nav>
+
+    <div class="calculator-container">
         <div class="tool-hero">
+            <div class="premium-tag">
+                <i class="fas fa-fire-alt"></i> FIRE MOVEMENT
+            </div>
+            <h1>FIRE Calculator</h1>
+            <p>Calculate your Financial Independence, Retire Early (FIRE) number. Find out how many years until you can quit your job and live off your investments.</p>
             <div class="fire-badge">
-                <i class="fas fa-fire"></i>
-                Financial Independence • Retire Early
+                <i class="fas fa-rocket"></i>
+                4% Safe Withdrawal Rate • AI-Powered Analysis
             </div>
-            <h1 class="tool-title">🔥 FIRE Calculator</h1>
-            <p class="tool-subtitle">
-                Calculate your path to Financial Independence and Early Retirement. Find your FIRE number, see your countdown to freedom, and plan your escape from the 9-5.
-            </p>
         </div>
-        
-        <div class="input-section">
-            <h3 style="color: var(--orange); margin-bottom: 20px; font-size: 1.1rem;">
-                <i class="fas fa-fire-alt"></i> Choose Your FIRE Type
-            </h3>
-            
-            <div class="fire-types">
-                <button class="fire-type-btn active" onclick="selectFireType(this, 25)" data-type="lean">
-                    <span class="emoji">🌿</span>
-                    <span class="name">Lean FIRE</span>
-                    <span class="multiplier">25x Expenses</span>
+
+        <div class="main-grid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🔥</div>
+                    <div>
+                        <div class="card-title">Your Financial Details</div>
+                        <div class="card-subtitle">Current situation & goals</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Current Age</label>
+                    <input type="number" id="currentAge" class="form-input" value="30" min="18" max="65" oninput="calculate()">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Monthly Income (₹)</label>
+                    <input type="number" id="monthlyIncome" class="form-input" value="150000" min="10000" step="5000" oninput="calculate()">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Monthly Expenses (₹)</label>
+                    <input type="number" id="monthlyExpenses" class="form-input" value="60000" min="5000" step="5000" oninput="calculate()">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Current Savings/Investments (₹)</label>
+                    <input type="number" id="currentSavings" class="form-input" value="2000000" min="0" step="100000" oninput="calculate()">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Expected Returns <span class="form-hint">(% per annum)</span></label>
+                    <div class="slider-value" id="returnsDisplay">12%</div>
+                    <input type="range" id="expectedReturns" class="form-slider" min="6" max="18" step="0.5" value="12" oninput="updateSlider('expectedReturns', 'returnsDisplay', '%'); calculate()">
+                    <div class="slider-labels"><span>6%</span><span>10%</span><span>14%</span><span>18%</span></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Inflation Rate <span class="form-hint">(% per annum)</span></label>
+                    <div class="slider-value" id="inflationDisplay">6%</div>
+                    <input type="range" id="inflationRate" class="form-slider" min="3" max="10" step="0.5" value="6" oninput="updateSlider('inflationRate', 'inflationDisplay', '%'); calculate()">
+                    <div class="slider-labels"><span>3%</span><span>5%</span><span>7%</span><span>10%</span></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Safe Withdrawal Rate <span class="form-hint">(%)</span></label>
+                    <div class="slider-value" id="swrDisplay">4%</div>
+                    <input type="range" id="withdrawalRate" class="form-slider" min="2.5" max="5" step="0.25" value="4" oninput="updateSlider('withdrawalRate', 'swrDisplay', '%'); calculate()">
+                    <div class="slider-labels"><span>2.5%</span><span>3.5%</span><span>4%</span><span>5%</span></div>
+                </div>
+
+                <button class="btn-primary" onclick="calculate()">
+                    <i class="fas fa-fire"></i> Calculate FIRE Number
                 </button>
-                <button class="fire-type-btn" onclick="selectFireType(this, 30)" data-type="regular">
-                    <span class="emoji">🔥</span>
-                    <span class="name">Regular FIRE</span>
-                    <span class="multiplier">30x Expenses</span>
-                </button>
-                <button class="fire-type-btn" onclick="selectFireType(this, 35)" data-type="fat">
-                    <span class="emoji">💎</span>
-                    <span class="name">Fat FIRE</span>
-                    <span class="multiplier">35x Expenses</span>
-                </button>
-                <button class="fire-type-btn" onclick="selectFireType(this, 50)" data-type="obese">
-                    <span class="emoji">👑</span>
-                    <span class="name">Obese FIRE</span>
-                    <span class="multiplier">50x Expenses</span>
-                </button>
             </div>
-            
-            <div class="input-grid">
-                <div class="input-group">
-                    <label class="input-label">
-                        <i class="fas fa-birthday-cake"></i>
-                        Your Current Age
-                    </label>
-                    <input type="number" class="input-field" id="currentAge" placeholder="e.g., 28" min="18" max="70">
+
+            <div class="results-section">
+                <div class="big-result-card">
+                    <div class="result-label">Your FIRE Number</div>
+                    <div class="result-value" id="fireNumber">₹1.80 Cr</div>
+                    <div class="result-subtitle">25x your annual expenses at retirement</div>
                 </div>
-                
-                <div class="input-group">
-                    <label class="input-label">
-                        <i class="fas fa-rupee-sign"></i>
-                        Monthly Expenses
-                    </label>
-                    <input type="text" class="input-field" id="monthlyExpenses" placeholder="₹ e.g., 50,000">
-                    <span class="input-hint">Your current lifestyle expenses per month</span>
-                </div>
-                
-                <div class="input-group">
-                    <label class="input-label">
-                        <i class="fas fa-wallet"></i>
-                        Current Investments
-                    </label>
-                    <input type="text" class="input-field" id="currentInvestments" placeholder="₹ e.g., 15,00,000">
-                    <span class="input-hint">Total of all investments (stocks, MF, FD, etc.)</span>
-                </div>
-                
-                <div class="input-group">
-                    <label class="input-label">
-                        <i class="fas fa-piggy-bank"></i>
-                        Monthly Savings/Investment
-                    </label>
-                    <input type="text" class="input-field" id="monthlySavings" placeholder="₹ e.g., 30,000">
-                    <span class="input-hint">How much you invest every month</span>
-                </div>
-                
-                <div class="input-group">
-                    <label class="input-label">
-                        <i class="fas fa-money-bill-wave"></i>
-                        Monthly Income
-                    </label>
-                    <input type="text" class="input-field" id="monthlyIncome" placeholder="₹ e.g., 80,000">
-                </div>
-                
-                <div class="input-group">
-                    <label class="input-label">
-                        <i class="fas fa-chart-line"></i>
-                        Expected Annual Return (%)
-                    </label>
-                    <input type="number" class="input-field" id="expectedReturn" placeholder="e.g., 12" min="4" max="25" value="12">
-                    <span class="input-hint">Historical equity returns: 12-15%</span>
-                </div>
-            </div>
-            
-            <button class="calculate-btn" onclick="calculateFIRE()">
-                <i class="fas fa-fire"></i>
-                Calculate My FIRE Number
-            </button>
-        </div>
-        
-        <div class="results-section" id="resultsSection">
-            
-            <div class="fire-number-card">
-                <div class="fire-glow"></div>
-                <div class="fire-label">Your FIRE Number</div>
-                <div class="fire-amount" id="fireNumber">₹0</div>
-                <div class="fire-subtitle" id="fireSubtitle">This is your target to achieve financial independence</div>
-            </div>
-            
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon">📅</div>
-                    <div class="stat-value" id="fireAge">0</div>
-                    <div class="stat-label">FIRE Age</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">⏱️</div>
-                    <div class="stat-value" id="yearsToFire">0</div>
-                    <div class="stat-label">Years to FIRE</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">💰</div>
-                    <div class="stat-value" id="monthlyWithdrawal">₹0</div>
-                    <div class="stat-label">Safe Monthly Withdrawal</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">🏖️</div>
-                    <div class="stat-value" id="coastFireAge">0</div>
-                    <div class="stat-label">Coast FIRE Age</div>
-                </div>
-            </div>
-            
-            <div class="countdown-section">
-                <div class="section-header">
-                    <h2 class="section-title">⏰ Countdown to Freedom</h2>
-                    <p class="section-subtitle">Time until you can retire</p>
-                </div>
-                
-                <div class="countdown-display">
-                    <div class="countdown-item">
-                        <div class="countdown-value" id="countYears">0</div>
-                        <div class="countdown-label">Years</div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon">⏰</div>
+                        <div class="metric-title">Years to FIRE</div>
+                        <div class="metric-value positive" id="yearsToFire">12.5</div>
                     </div>
-                    <div class="countdown-item">
-                        <div class="countdown-value" id="countMonths">0</div>
-                        <div class="countdown-label">Months</div>
+                    <div class="metric-card">
+                        <div class="metric-icon">🎂</div>
+                        <div class="metric-title">FIRE Age</div>
+                        <div class="metric-value" id="fireAge">42.5</div>
                     </div>
-                    <div class="countdown-item">
-                        <div class="countdown-value" id="countDays">0</div>
-                        <div class="countdown-label">Days</div>
+                    <div class="metric-card">
+                        <div class="metric-icon">💰</div>
+                        <div class="metric-title">Monthly Passive Income</div>
+                        <div class="metric-value positive" id="passiveIncome">₹60,000</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">📊</div>
+                        <div class="metric-title">Current Savings Rate</div>
+                        <div class="metric-value" id="savingsRate">60%</div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="progress-section">
-                <div class="section-header">
-                    <h2 class="section-title">📊 FIRE Progress</h2>
-                    <p class="section-subtitle">How close are you to financial independence?</p>
-                </div>
-                
-                <div class="progress-container">
-                    <div class="progress-header">
-                        <span class="progress-title">Progress to FIRE Number</span>
-                        <span class="progress-percent" id="progressPercent">0%</span>
+
+                <div class="savings-rate-card">
+                    <div class="rate-header">
+                        <div class="rate-icon">📈</div>
+                        <div>
+                            <div class="rate-title">Your Savings Rate</div>
+                            <div class="rate-subtitle">Higher = Faster to FIRE</div>
+                        </div>
                     </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                    <div class="rate-bar-container">
+                        <div class="rate-bar" id="savingsRateBar" style="width: 60%;">60%</div>
                     </div>
-                    <div class="progress-milestones">
-                        <span>Start</span>
-                        <span>25%</span>
-                        <span>50%</span>
-                        <span>75%</span>
-                        <span>🔥 FIRE!</span>
+                    <div class="rate-labels">
+                        <span>0% (Never FIRE)</span>
+                        <span>50% (17 yrs)</span>
+                        <span>75% (7 yrs)</span>
                     </div>
                 </div>
-            </div>
-            
-            <div class="savings-rate-section">
-                <div class="section-header">
-                    <h2 class="section-title">💪 Your Savings Rate</h2>
-                    <p class="section-subtitle">Higher savings rate = faster FIRE</p>
-                </div>
-                
-                <div class="rate-meter">
-                    <div class="rate-display" id="savingsRate">0%</div>
-                    <div class="rate-label" id="savingsRateLabel">Your savings rate determines how fast you can FIRE</div>
-                    <div class="rate-scale">
-                        <span class="low">&lt;20% Slow</span>
-                        <span class="medium">20-40% Average</span>
-                        <span class="high">40-60% Fast</span>
-                        <span class="extreme">60%+ Turbo</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="chart-section">
-                <div class="section-header">
-                    <h2 class="section-title">📈 Your Path to FIRE</h2>
-                    <p class="section-subtitle">Visualize your wealth growth</p>
-                </div>
+
                 <div class="chart-container">
-                    <canvas id="fireChart"></canvas>
+                    <div class="chart-title">Path to FIRE</div>
+                    <div class="chart-wrapper">
+                        <canvas id="fireChart"></canvas>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="tips-section">
-                <div class="section-header">
-                    <h2 class="section-title">🚀 Accelerate Your FIRE</h2>
-                    <p class="section-subtitle">Tips to reach financial independence faster</p>
-                </div>
-                
-                <div class="tips-grid">
-                    <div class="tip-card">
-                        <div class="tip-icon">📈</div>
-                        <h4 class="tip-title">Increase Savings Rate</h4>
-                        <p class="tip-desc">Every 10% increase in savings rate can shave 5+ years off your FIRE timeline. Focus on the big 3: housing, transport, food.</p>
+
+                <div class="ai-suggestion-box">
+                    <div class="ai-header">
+                        <div class="ai-icon">🤖</div>
+                        <div>
+                            <div class="ai-title">AI FIRE Insights</div>
+                            <div class="ai-subtitle">Personalized early retirement tips</div>
+                        </div>
+                        <div class="ai-badge">POWERED BY AI</div>
                     </div>
-                    <div class="tip-card">
-                        <div class="tip-icon">💼</div>
-                        <h4 class="tip-title">Boost Your Income</h4>
-                        <p class="tip-desc">Skills that pay more, side hustles, or career switches can dramatically accelerate FIRE while maintaining lifestyle.</p>
-                    </div>
-                    <div class="tip-card">
-                        <div class="tip-icon">🏠</div>
-                        <h4 class="tip-title">Geo-Arbitrage</h4>
-                        <p class="tip-desc">Moving to a lower cost-of-living area (tier 2/3 cities) can reduce your FIRE number by 30-50%.</p>
-                    </div>
-                    <div class="tip-card">
-                        <div class="tip-icon">📊</div>
-                        <h4 class="tip-title">Stay Invested in Equities</h4>
-                        <p class="tip-desc">Higher equity allocation (especially when young) means higher expected returns and faster compounding.</p>
+                    <div class="ai-content" id="aiSuggestions">
+                        <div class="ai-typing">
+                            <div class="ai-typing-dots"><span></span><span></span><span></span></div>
+                            Analyzing your FIRE journey...
+                        </div>
                     </div>
                 </div>
             </div>
-            
         </div>
-        
+
+        <div class="disclaimer-box">
+            <strong>⚠️ Disclaimer:</strong> FIRE calculations are based on assumptions. Market returns vary, and the 4% rule has limitations. Consider consulting a financial advisor. This tool is for educational purposes only.
+        </div>
     </div>
-    
-    <footer class="tool-footer">
-        <p>Made with 🔥 by <a href="index.html">BroBillionaire</a> • Your path to Financial Independence</p>
-        <p style="margin-top: 10px;">
-            <a href="tools.html">More Tools</a> • 
-            <a href="articles.html">Read Articles</a> • 
-            <a href="disclaimer.html">Disclaimer</a>
-        </p>
-    </footer>
-    
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+
+    <script src="common-footer.js" defer></script>
+
     <script>
-        let fireMultiplier = 25;
         let fireChart = null;
-        
-        function selectFireType(btn, multiplier) {
-            document.querySelectorAll('.fire-type-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            fireMultiplier = multiplier;
-        }
-        
-        function formatIndianCurrency(num) {
-            if (num >= 10000000) return '₹' + (num / 10000000).toFixed(2) + ' Cr';
-            if (num >= 100000) return '₹' + (num / 100000).toFixed(2) + ' L';
-            return '₹' + Math.round(num).toLocaleString('en-IN');
-        }
-        
-        function parseIndianCurrency(str) {
-            if (!str) return 0;
-            return parseFloat(str.replace(/[₹,\s]/g, '')) || 0;
-        }
-        
-        ['monthlyExpenses', 'currentInvestments', 'monthlySavings', 'monthlyIncome'].forEach(id => {
-            document.getElementById(id).addEventListener('blur', function() {
-                const value = parseIndianCurrency(this.value);
-                if (value > 0) this.value = '₹' + value.toLocaleString('en-IN');
-            });
-            document.getElementById(id).addEventListener('focus', function() {
-                const value = parseIndianCurrency(this.value);
-                this.value = value > 0 ? value : '';
-            });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            calculate();
         });
-        
-        function calculateFIRE() {
-            const currentAge = parseInt(document.getElementById('currentAge').value) || 28;
-            const monthlyExpenses = parseIndianCurrency(document.getElementById('monthlyExpenses').value);
-            const currentInvestments = parseIndianCurrency(document.getElementById('currentInvestments').value);
-            const monthlySavings = parseIndianCurrency(document.getElementById('monthlySavings').value);
-            const monthlyIncome = parseIndianCurrency(document.getElementById('monthlyIncome').value);
-            const expectedReturn = parseFloat(document.getElementById('expectedReturn').value) / 100 || 0.12;
-            
-            if (monthlyExpenses <= 0 || monthlySavings <= 0) {
-                alert('Please enter your monthly expenses and savings');
-                return;
+
+        function updateSlider(inputId, displayId, suffix) {
+            const value = document.getElementById(inputId).value;
+            document.getElementById(displayId).textContent = value + suffix;
+        }
+
+        function formatCurrency(amount) {
+            if (amount >= 10000000) {
+                return '₹' + (amount / 10000000).toFixed(2) + ' Cr';
+            } else if (amount >= 100000) {
+                return '₹' + (amount / 100000).toFixed(2) + ' L';
             }
+            return '₹' + Math.round(amount).toLocaleString('en-IN');
+        }
+
+        function calculate() {
+            const currentAge = parseInt(document.getElementById('currentAge').value);
+            const monthlyIncome = parseFloat(document.getElementById('monthlyIncome').value);
+            const monthlyExpenses = parseFloat(document.getElementById('monthlyExpenses').value);
+            const currentSavings = parseFloat(document.getElementById('currentSavings').value);
+            const expectedReturns = parseFloat(document.getElementById('expectedReturns').value) / 100;
+            const inflationRate = parseFloat(document.getElementById('inflationRate').value) / 100;
+            const withdrawalRate = parseFloat(document.getElementById('withdrawalRate').value) / 100;
+
+            const monthlySavings = monthlyIncome - monthlyExpenses;
+            const savingsRate = (monthlySavings / monthlyIncome) * 100;
+            const annualExpenses = monthlyExpenses * 12;
             
-            // Calculate FIRE number
-            const yearlyExpenses = monthlyExpenses * 12;
-            const fireNumber = yearlyExpenses * fireMultiplier;
+            // FIRE Number = Annual Expenses / Withdrawal Rate
+            const fireNumber = annualExpenses / withdrawalRate;
+            
+            // Real returns (after inflation)
+            const realReturns = (1 + expectedReturns) / (1 + inflationRate) - 1;
             
             // Calculate years to FIRE
-            const monthlyRate = expectedReturn / 12;
-            let wealth = currentInvestments;
-            let months = 0;
-            const maxMonths = 600;
+            let years = 0;
+            let corpus = currentSavings;
+            const monthlyRealReturns = realReturns / 12;
             
-            while (wealth < fireNumber && months < maxMonths) {
-                wealth = wealth * (1 + monthlyRate) + monthlySavings;
-                months++;
+            while (corpus < fireNumber && years < 100) {
+                corpus = corpus * (1 + monthlyRealReturns) + monthlySavings;
+                years += 1/12;
             }
             
-            const yearsToFire = months / 12;
-            const fireAge = currentAge + yearsToFire;
+            const yearsToFire = Math.round(years * 10) / 10;
+            const fireAge = Math.round((currentAge + yearsToFire) * 10) / 10;
+            const passiveIncome = fireNumber * withdrawalRate / 12;
+
+            // Update display
+            document.getElementById('fireNumber').textContent = formatCurrency(fireNumber);
+            document.getElementById('yearsToFire').textContent = yearsToFire;
+            document.getElementById('fireAge').textContent = fireAge;
+            document.getElementById('passiveIncome').textContent = formatCurrency(passiveIncome);
+            document.getElementById('savingsRate').textContent = savingsRate.toFixed(0) + '%';
             
-            // Calculate Coast FIRE (when you can stop saving and still hit FIRE at 60)
-            const targetAge = 60;
-            const yearsToTarget = targetAge - currentAge;
-            const coastFireNumber = fireNumber / Math.pow(1 + expectedReturn, yearsToTarget);
+            // Update savings rate bar
+            const bar = document.getElementById('savingsRateBar');
+            bar.style.width = Math.min(savingsRate, 100) + '%';
+            bar.textContent = savingsRate.toFixed(0) + '%';
             
-            let coastWealth = currentInvestments;
-            let coastMonths = 0;
-            while (coastWealth < coastFireNumber && coastMonths < maxMonths) {
-                coastWealth = coastWealth * (1 + monthlyRate) + monthlySavings;
-                coastMonths++;
+            if (savingsRate < 30) {
+                bar.style.background = 'linear-gradient(90deg, var(--red), #ef4444)';
+            } else if (savingsRate < 50) {
+                bar.style.background = 'linear-gradient(90deg, var(--orange), var(--orange))';
+            } else {
+                bar.style.background = 'linear-gradient(90deg, var(--green), #10b981)';
             }
-            const coastFireAge = currentAge + (coastMonths / 12);
-            
-            // Savings rate
-            const savingsRate = monthlyIncome > 0 ? (monthlySavings / monthlyIncome) * 100 : 0;
-            
-            // Safe withdrawal (4% rule monthly)
-            const monthlyWithdrawal = fireNumber * 0.04 / 12;
-            
-            // Progress
-            const progressPercent = Math.min((currentInvestments / fireNumber) * 100, 100);
-            
-            // Display results
-            document.getElementById('resultsSection').classList.add('show');
-            document.getElementById('fireNumber').textContent = formatIndianCurrency(fireNumber);
-            document.getElementById('fireAge').textContent = Math.round(fireAge);
-            document.getElementById('yearsToFire').textContent = yearsToFire.toFixed(1);
-            document.getElementById('monthlyWithdrawal').textContent = formatIndianCurrency(monthlyWithdrawal);
-            document.getElementById('coastFireAge').textContent = Math.round(coastFireAge);
-            
-            // Countdown
-            const totalMonths = Math.floor(yearsToFire * 12);
-            document.getElementById('countYears').textContent = Math.floor(yearsToFire);
-            document.getElementById('countMonths').textContent = totalMonths % 12;
-            document.getElementById('countDays').textContent = Math.floor((yearsToFire * 365) % 30);
-            
-            // Progress bar
-            document.getElementById('progressPercent').textContent = progressPercent.toFixed(1) + '%';
-            document.getElementById('progressFill').style.width = progressPercent + '%';
-            
-            // Savings rate
-            const rateDisplay = document.getElementById('savingsRate');
-            rateDisplay.textContent = savingsRate.toFixed(0) + '%';
-            rateDisplay.className = 'rate-display';
-            if (savingsRate < 20) rateDisplay.classList.add('low');
-            else if (savingsRate < 40) rateDisplay.classList.add('medium');
-            else if (savingsRate < 60) rateDisplay.classList.add('high');
-            else rateDisplay.classList.add('extreme');
-            
-            // Render chart
-            renderFireChart(currentAge, currentInvestments, monthlySavings, monthlyRate, fireNumber, yearsToFire);
-            
-            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            updateChart(currentSavings, monthlySavings, realReturns, fireNumber, Math.ceil(yearsToFire));
+            generateAISuggestions(savingsRate, yearsToFire, fireAge, fireNumber, monthlyExpenses, currentSavings, passiveIncome);
         }
-        
-        function renderFireChart(startAge, startWealth, monthlySavings, monthlyRate, fireNumber, yearsToFire) {
+
+        function updateChart(currentSavings, monthlySavings, realReturns, fireNumber, maxYears) {
             const ctx = document.getElementById('fireChart').getContext('2d');
-            
             if (fireChart) fireChart.destroy();
-            
+
             const labels = [];
-            const wealthData = [];
+            const corpusData = [];
             const fireLineData = [];
             
-            let wealth = startWealth;
-            const maxYears = Math.ceil(Math.max(yearsToFire, 20));
+            let corpus = currentSavings;
+            const years = Math.min(maxYears + 5, 50);
             
-            for (let year = 0; year <= maxYears; year++) {
-                labels.push('Age ' + (startAge + year));
-                wealthData.push(Math.round(wealth));
+            for (let y = 0; y <= years; y++) {
+                labels.push('Year ' + y);
+                corpusData.push(corpus);
                 fireLineData.push(fireNumber);
-                
-                for (let m = 0; m < 12; m++) {
-                    wealth = wealth * (1 + monthlyRate) + monthlySavings;
-                }
+                corpus = corpus * (1 + realReturns) + (monthlySavings * 12);
             }
-            
+
             fireChart = new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -952,22 +862,23 @@
                     datasets: [
                         {
                             label: 'Your Wealth',
-                            data: wealthData,
-                            borderColor: '#f97316',
-                            backgroundColor: 'rgba(249, 115, 22, 0.1)',
-                            borderWidth: 3,
+                            data: corpusData,
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
                             fill: true,
                             tension: 0.4,
-                            pointRadius: 0
+                            pointRadius: 0,
+                            borderWidth: 3
                         },
                         {
-                            label: 'FIRE Number',
+                            label: 'FIRE Target',
                             data: fireLineData,
-                            borderColor: '#10b981',
-                            borderWidth: 2,
+                            borderColor: '#f97316',
                             borderDash: [10, 5],
                             fill: false,
-                            pointRadius: 0
+                            tension: 0,
+                            pointRadius: 0,
+                            borderWidth: 2
                         }
                     ]
                 },
@@ -975,33 +886,66 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     interaction: { intersect: false, mode: 'index' },
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                            labels: { color: '#fff', usePointStyle: true, padding: 20 }
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(26, 26, 26, 0.95)',
-                            titleColor: '#f97316',
-                            bodyColor: '#fff',
-                            borderColor: '#f97316',
-                            borderWidth: 1,
-                            callbacks: {
-                                label: function(context) {
-                                    return context.dataset.label + ': ' + formatIndianCurrency(context.raw);
-                                }
-                            }
-                        }
-                    },
                     scales: {
-                        x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#666', maxTicksLimit: 10 } },
-                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#666', callback: v => formatIndianCurrency(v) } }
+                        x: { grid: { display: false }, ticks: { color: '#666', maxTicksLimit: 10 } },
+                        y: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#666', callback: function(value) { return formatCurrency(value); } } }
+                    },
+                    plugins: {
+                        legend: { position: 'top', labels: { color: '#999', usePointStyle: true } },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                            titleColor: '#f97316',
+                            callbacks: { label: function(context) { return context.dataset.label + ': ' + formatCurrency(context.raw); } }
+                        }
                     }
                 }
             });
         }
-    </script>
 
-<script src="common-footer.js" defer></script>
+        function generateAISuggestions(savingsRate, yearsToFire, fireAge, fireNumber, monthlyExpenses, currentSavings, passiveIncome) {
+            const container = document.getElementById('aiSuggestions');
+            container.innerHTML = `<div class="ai-typing"><div class="ai-typing-dots"><span></span><span></span><span></span></div>Analyzing your FIRE journey...</div>`;
+
+            setTimeout(() => {
+                const suggestions = [];
+
+                // Savings rate analysis
+                if (savingsRate < 30) {
+                    suggestions.push({ icon: '⚠️', text: `<strong>Low Savings Rate Alert:</strong> At ${savingsRate.toFixed(0)}%, you're saving too little. Aim for at least 50% to reach FIRE in a reasonable timeframe. Each 10% increase cuts years off your journey!` });
+                } else if (savingsRate >= 70) {
+                    suggestions.push({ icon: '🏆', text: `<strong>Impressive!</strong> Your ${savingsRate.toFixed(0)}% savings rate is exceptional! You're on the fast track to FIRE. Most people never achieve this level of financial discipline.` });
+                } else {
+                    suggestions.push({ icon: '✅', text: `<strong>Good Progress:</strong> Your ${savingsRate.toFixed(0)}% savings rate is solid. Consider small lifestyle optimizations to push it higher and shave years off your FIRE date.` });
+                }
+
+                // FIRE age analysis
+                if (fireAge < 40) {
+                    suggestions.push({ icon: '🚀', text: `<strong>Early FIRE!</strong> Retiring at ${fireAge} is amazing! Make sure you have health insurance sorted and consider coast FIRE or barista FIRE options.` });
+                } else if (fireAge > 55) {
+                    suggestions.push({ icon: '💡', text: `<strong>Accelerate Your Path:</strong> FIRE at ${fireAge} is possible, but consider increasing income through side hustles or reducing expenses to retire earlier.` });
+                }
+
+                // Expense reduction
+                const reducedExpense = monthlyExpenses * 0.8;
+                const newFireNumber = (reducedExpense * 12) / 0.04;
+                const saving = fireNumber - newFireNumber;
+                suggestions.push({ icon: '📉', text: `<strong>Expense Hack:</strong> Reducing expenses by just 20% to ₹${reducedExpense.toLocaleString()}/month would lower your FIRE number by <strong>${formatCurrency(saving)}</strong>!` });
+
+                // Current savings assessment
+                const percentToFire = (currentSavings / fireNumber) * 100;
+                suggestions.push({ icon: '📊', text: `<strong>Progress Check:</strong> You're currently at <strong>${percentToFire.toFixed(1)}%</strong> of your FIRE number. Every rupee invested now compounds towards your freedom!` });
+
+                // SWR warning
+                suggestions.push({ icon: '⚖️', text: `<strong>4% Rule Note:</strong> The 4% safe withdrawal rate is based on US data. For India, consider 3-3.5% for extra safety, or plan for some side income in early FIRE years.` });
+
+                // Geographic arbitrage
+                suggestions.push({ icon: '🌍', text: `<strong>Geo-Arbitrage Option:</strong> With ${formatCurrency(passiveIncome)}/month passive income, you could live very comfortably in tier-2 cities or travel to low-cost countries!` });
+
+                container.innerHTML = suggestions.map(s => `<div class="ai-suggestion-item"><div class="ai-bullet">${s.icon}</div><div class="ai-text">${s.text}</div></div>`).join('');
+            }, 1000);
+        }
+
+        function toggleMobileMenu() { document.querySelector('.nav-links').classList.toggle('active'); }
+    </script>
 </body>
 </html>

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <title>FD Calculator FREE - Fixed Deposit Calculator with Interest Rates 2026 | BroBillionaire</title>
+    <meta name="description" content="FREE FD Calculator - Calculate fixed deposit returns, maturity amount & interest earned. Compare bank FD rates, tenure options. Best FD calculator India 2026.">
+    <meta name="keywords" content="fd calculator, fixed deposit calculator, fd interest calculator, bank fd calculator india, fd maturity calculator, fd returns calculator, sbi fd calculator, hdfc fd calculator, best fd rates india 2026">
+    <meta name="author" content="BroBillionaire">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://brobillionaire.com/tool-fd-calculator.html">
+    
+    <meta property="og:title" content="FREE FD Calculator - Fixed Deposit Returns">
+    <meta property="og:description" content="Calculate FD returns, maturity amount & interest instantly.">
+    <meta property="og:url" content="https://brobillionaire.com/tool-fd-calculator.html">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="responsive.css">
+    
+    <style>
+        .tool-container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+        .tool-header {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 50%, var(--bg-secondary) 100%);
+            padding: 140px 20px 80px; text-align: center; border-bottom: 1px solid var(--border-gold);
+        }
+        .tool-category {
+            display: inline-block; background: rgba(201, 162, 39, 0.15); color: var(--gold);
+            padding: 8px 20px; border-radius: 25px; font-size: 0.8rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 1.5rem; border: 1px solid var(--border-gold);
+        }
+        .tool-title {
+            font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-bottom: 20px; font-weight: 700;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .tool-subtitle { font-size: 1.15rem; color: var(--text-secondary); max-width: 800px; margin: 0 auto; line-height: 1.8; }
+        .main-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 60px 40px; }
+        .calculator-section, .results-section {
+            background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 40px;
+        }
+        .section-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 30px; color: var(--text-primary); }
+        .input-group { margin-bottom: 25px; }
+        label { display: block; font-weight: 600; margin-bottom: 10px; color: var(--text-primary); }
+        .label-info { font-weight: 400; color: var(--text-tertiary); font-size: 0.85rem; display: block; margin-top: 3px; }
+        input, select {
+            width: 100%; padding: 14px 18px; border: 1px solid var(--border-color); border-radius: 8px;
+            background: var(--bg-tertiary); color: var(--text-primary); font-family: 'Inter', sans-serif;
+        }
+        input:focus, select:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.1); }
+        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .result-card {
+            background: var(--bg-tertiary); padding: 25px; border-radius: 12px;
+            border: 1px solid var(--border-color); margin-bottom: 20px;
+        }
+        .result-main {
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.2), rgba(74, 222, 128, 0.05));
+            border: 2px solid rgba(74, 222, 128, 0.5);
+        }
+        .result-label { font-size: 0.85rem; font-weight: 700; color: var(--text-tertiary); margin-bottom: 8px; text-transform: uppercase; }
+        .result-value {
+            font-size: 3rem; font-weight: 800;
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .stat-card { background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 10px; padding: 20px; text-align: center; }
+        .stat-title { font-size: 0.8rem; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; color: var(--text-tertiary); }
+        .stat-value { font-size: 1.8rem; font-weight: 800; color: var(--text-primary); }
+        .btn-primary {
+            padding: 14px 32px; border: none; border-radius: 8px; font-weight: 600;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--bg-primary); width: 100%; margin-top: 20px; cursor: pointer;
+            font-family: 'Inter', sans-serif; transition: all 0.3s;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(201, 162, 39, 0.4); }
+        .tips-section { background: var(--bg-secondary); padding: 80px 40px; }
+        .tips-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
+        .tip-card { background: var(--bg-card); padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); transition: all 0.3s; }
+        .tip-card:hover { transform: translateY(-5px); border-color: var(--border-gold); }
+        .tip-icon { font-size: 2.5rem; margin-bottom: 20px; }
+        .tip-title { font-weight: 700; margin-bottom: 12px; color: var(--gold); }
+        .tip-text { color: var(--text-secondary); line-height: 1.7; }
+        .rate-table {
+            width: 100%; margin-top: 20px; border-collapse: collapse;
+            background: var(--bg-card); border-radius: 10px; overflow: hidden;
+        }
+        .rate-table th {
+            background: var(--bg-tertiary); padding: 15px; text-align: left;
+            font-weight: 700; color: var(--gold); font-size: 0.85rem;
+        }
+        .rate-table td { padding: 12px 15px; border-bottom: 1px solid var(--border-color); color: var(--text-primary); }
+        @media (max-width: 968px) {
+            .main-content, .tips-grid, .input-row, .stats-grid { grid-template-columns: 1fr; }
+            .tool-title { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                <span class="logo-text">BroBillionaire</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="articles.html" class="nav-link">Articles</a>
+                <a href="tools.html" class="nav-link active">Tools</a>
+                <a href="about.html" class="nav-link">About</a>
+            </div>
+            <button class="cta-btn gold-btn" onclick="window.location.href='articles.html'">Read Free</button>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+    <div class="mobile-nav-dropdown" id="mobileNavDropdown">
+        <a href="index.html">Home</a><a href="articles.html">Articles</a>
+        <a href="tools.html">Tools</a><a href="about.html">About</a>
+    </div>
+
+    <header class="tool-header">
+        <div class="tool-container">
+            <div class="tool-category">🏦 FREE INVESTMENT TOOL</div>
+            <h1 class="tool-title">FD Calculator</h1>
+            <p class="tool-subtitle">Calculate fixed deposit returns with accurate interest calculations. Compare tenure options, compounding frequencies for all major Indian banks.</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="tool-container">
+            <div class="main-content">
+                <div class="calculator-section">
+                    <h2 class="section-title">💰 FD Details</h2>
+
+                    <div class="input-group">
+                        <label for="principal">
+                            Principal Amount (₹)
+                            <span class="label-info">Initial deposit amount</span>
+                        </label>
+                        <input type="number" id="principal" value="100000" min="1000" step="1000">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="interestRate">
+                            Annual Interest Rate (%)
+                            <span class="label-info">Rate offered by bank</span>
+                        </label>
+                        <input type="number" id="interestRate" value="7.0" min="1" max="15" step="0.1">
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="tenure">Tenure</label>
+                            <input type="number" id="tenure" value="5" min="1" max="30" step="1">
+                        </div>
+                        <div class="input-group">
+                            <label for="tenureType">Tenure Type</label>
+                            <select id="tenureType">
+                                <option value="years" selected>Years</option>
+                                <option value="months">Months</option>
+                                <option value="days">Days</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="compounding">Compounding Frequency</label>
+                        <select id="compounding">
+                            <option value="1">Annual</option>
+                            <option value="2">Half-Yearly</option>
+                            <option value="4" selected>Quarterly</option>
+                            <option value="12">Monthly</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="seniorCitizen">Depositor Type</label>
+                        <select id="seniorCitizen">
+                            <option value="no">Regular</option>
+                            <option value="yes">Senior Citizen (+0.5%)</option>
+                        </select>
+                    </div>
+
+                    <button class="btn-primary" onclick="calculate()">Calculate Returns</button>
+                </div>
+
+                <div class="results-section">
+                    <h2 class="section-title">📊 Maturity Details</h2>
+
+                    <div class="result-card result-main">
+                        <div class="result-label">MATURITY AMOUNT</div>
+                        <div class="result-value" id="maturityAmount">₹0</div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-title">Interest Earned</div>
+                            <div class="stat-value" id="interestEarned">₹0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-title">Effective Rate</div>
+                            <div class="stat-value" id="effectiveRate">0%</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-title">Total Returns</div>
+                            <div class="stat-value" id="totalReturns">0%</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-title">CAGR</div>
+                            <div class="stat-value" id="cagr">0%</div>
+                        </div>
+                    </div>
+
+                    <div style="background: var(--bg-tertiary); padding: 25px; border-radius: 12px; margin-top: 20px; border: 1px solid var(--border-color);">
+                        <h3 style="margin-bottom: 15px; color: var(--text-primary);">📈 Year-by-Year Growth</h3>
+                        <table style="width: 100%; color: var(--text-primary);" id="yearTable">
+                            <!-- Generated by JS -->
+                        </table>
+                    </div>
+
+                    <div style="background: rgba(74, 222, 128, 0.1); padding: 20px; border-radius: 12px; margin-top: 20px; border: 1px solid rgba(74, 222, 128, 0.3);">
+                        <h4 style="color: var(--green); margin-bottom: 10px;">💡 Tax Note</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">FD interest is taxable as per your income slab. TDS of 10% deducted if interest > ₹40,000/year (₹50,000 for senior citizens). Calculate post-tax returns for accurate planning.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="padding: 40px;">
+                <h2 class="section-title">🏦 Popular Bank FD Rates (2026)</h2>
+                <table class="rate-table">
+                    <thead>
+                        <tr>
+                            <th>Bank</th>
+                            <th>1 Year</th>
+                            <th>3 Years</th>
+                            <th>5 Years</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>SBI</td><td>6.5%</td><td>6.75%</td><td>6.5%</td></tr>
+                        <tr><td>HDFC Bank</td><td>6.6%</td><td>7.0%</td><td>7.0%</td></tr>
+                        <tr><td>ICICI Bank</td><td>6.7%</td><td>7.0%</td><td>6.8%</td></tr>
+                        <tr><td>Axis Bank</td><td>6.75%</td><td>7.0%</td><td>6.75%</td></tr>
+                        <tr><td>Kotak Mahindra</td><td>6.7%</td><td>7.0%</td><td>6.9%</td></tr>
+                        <tr><td>Punjab National Bank</td><td>6.5%</td><td>6.75%</td><td>6.75%</td></tr>
+                    </tbody>
+                </table>
+                <p style="color: var(--text-tertiary); font-size: 0.85rem; margin-top: 15px;">*Rates are indicative and subject to change. Senior citizens get additional 0.25-0.5% interest.</p>
+            </div>
+        </div>
+
+        <div class="tips-section">
+            <div class="tool-container">
+                <h2 class="section-title">🎓 FD Investment Tips</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <div class="tip-icon">🏦</div>
+                        <div class="tip-title">Safety First</div>
+                        <div class="tip-text">FDs are safest investments - guaranteed by DICGC up to ₹5 lakhs per bank. Zero market risk. Perfect for emergency funds, short-term goals, and risk-averse investors. Capital + interest guaranteed.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">📊</div>
+                        <div class="tip-title">Compounding Power</div>
+                        <div class="tip-text">Quarterly compounding beats annual. On ₹1L at 7% for 5 years: Annual = ₹40,255 interest. Quarterly = ₹41,478. Extra ₹1,223 just from compounding frequency. Always choose quarterly/monthly.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">💰</div>
+                        <div class="tip-title">Tax Impact</div>
+                        <div class="tip-text">FD interest is fully taxable. In 30% bracket, 7% FD = 4.9% post-tax. Compare with tax-free instruments like PPF (7.1%), debt funds (indexation benefit). Tax efficiency matters more than nominal rates.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">🪜</div>
+                        <div class="tip-title">FD Laddering</div>
+                        <div class="tip-text">Don't lock all money in one FD. Create ladder: ₹1L each for 1,2,3,4,5 years. Ensures liquidity + captures rising rates. One FD matures yearly, can reinvest at higher rates or use funds.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">⚠️</div>
+                        <div class="tip-title">Inflation Enemy</div>
+                        <div class="tip-text">7% FD vs 6% inflation = 1% real return. 7% FD at 30% tax = 4.9% post-tax vs 6% inflation = -1.1% real loss. FDs preserve capital but don't beat inflation long-term. Use for stability, not growth.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">🎯</div>
+                        <div class="tip-title">Optimal Usage</div>
+                        <div class="tip-text">FDs perfect for: Emergency fund, goals 1-3 years away, senior citizens needing regular income, risk-averse investors. NOT for: Long-term wealth creation (use equity), tax savings (use ELSS, PPF).</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    
+    <!-- Related Articles Section -->
+    <section style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border-radius: 16px; padding: 2.5rem; margin: 3rem 0; border: 2px solid #C9A227; max-width: 1200px; margin-left: auto; margin-right: auto;">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #C9A227; margin-bottom: 1.5rem; text-align: center;">
+            📚 Learn More: Essential Reading
+        </h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+            <div style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
+                <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
+                    <span style="font-size: 2rem; margin-right: 0.5rem;">📖</span>
+                    <h3 style="color: #C9A227; font-size: 1.1rem; margin: 0;">Stock Market Beginners</h3>
+                </div>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 0.9rem;">
+                    Master the fundamentals with expert insights and real-world examples
+                </p>
+                <a href="article-stock-market-beginners.html" style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
+                    Read Article →
+                </a>
+            </div>
+            <div style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
+                <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
+                    <span style="font-size: 2rem; margin-right: 0.5rem;">💡</span>
+                    <h3 style="color: #C9A227; font-size: 1.1rem; margin: 0;">Fear Easy Money</h3>
+                </div>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 0.9rem;">
+                    Deep dive into advanced strategies used by professional traders
+                </p>
+                <a href="article-fear-easy-money.html" style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
+                    Read Article →
+                </a>
+            </div>
+            <div style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
+                <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
+                    <span style="font-size: 2rem; margin-right: 0.5rem;">🎓</span>
+                    <h3 style="color: #C9A227; font-size: 1.1rem; margin: 0;">Inflation Calculator</h3>
+                </div>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 0.9rem;">
+                    Learn from market history and avoid costly mistakes
+                </p>
+                <a href="tool-inflation-calculator.html" style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
+                    Read Article →
+                </a>
+            </div>
+        </div>
+    </section>
+<footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand-section">
+                <div class="logo">
+                    <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                    <span class="logo-text">BroBillionaire</span>
+                </div>
+                <p class="tagline">Master the markets with free trading education.</p>
+            </div>
+            <nav class="footer-nav">
+                <a href="index.html">Home</a>
+                <a href="articles.html">Articles</a>
+                <a href="tools.html">Tools</a>
+                <a href="about.html">About</a>
+            </nav>
+        </div>
+    </footer>
+    <div class="footer-disclaimer">
+        <p>&copy; 2026 BroBillionaire. Check latest FD rates with your bank.</p>
+    </div>
+
+    <script>
+        document.querySelectorAll('input, select').forEach(el => {
+            el.addEventListener('input', calculate);
+        });
+        calculate();
+
+        function calculate() {
+            let principal = parseFloat(document.getElementById('principal').value) || 0;
+            let rate = parseFloat(document.getElementById('interestRate').value) || 0;
+            const tenure = parseFloat(document.getElementById('tenure').value) || 0;
+            const tenureType = document.getElementById('tenureType').value;
+            const compounding = parseFloat(document.getElementById('compounding').value);
+            const isSenior = document.getElementById('seniorCitizen').value === 'yes';
+
+            if (isSenior) rate += 0.5;
+
+            let years = tenure;
+            if (tenureType === 'months') years = tenure / 12;
+            else if (tenureType === 'days') years = tenure / 365;
+
+            const n = compounding;
+            const maturity = principal * Math.pow((1 + rate / (n * 100)), n * years);
+            const interest = maturity - principal;
+            const totalReturn = (interest / principal) * 100;
+            const cagr = (Math.pow(maturity / principal, 1 / years) - 1) * 100;
+            const effectiveRate = (Math.pow(1 + rate / (n * 100), n) - 1) * 100;
+
+            document.getElementById('maturityAmount').textContent = '₹' + maturity.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('interestEarned').textContent = '₹' + interest.toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('effectiveRate').textContent = effectiveRate.toFixed(2) + '%';
+            document.getElementById('totalReturns').textContent = totalReturn.toFixed(2) + '%';
+            document.getElementById('cagr').textContent = cagr.toFixed(2) + '%';
+
+            // Year table
+            let tableHTML = '<tr style="border-bottom: 1px solid var(--border-color);"><th style="padding: 10px; text-align: left;">Year</th><th style="padding: 10px; text-align: right;">Value</th></tr>';
+            const displayYears = Math.min(Math.ceil(years), 10);
+            for (let y = 1; y <= displayYears; y++) {
+                const value = principal * Math.pow((1 + rate / (n * 100)), n * y);
+                tableHTML += `<tr style="border-bottom: 1px solid var(--border-color);"><td style="padding: 10px;">Year ${y}</td><td style="padding: 10px; text-align: right;">₹${value.toLocaleString('en-IN', {maximumFractionDigits: 0})}</td></tr>`;
+            }
+            document.getElementById('yearTable').innerHTML = tableHTML;
+        }
+
+        function toggleMobileMenu() {
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            const dropdown = document.getElementById('mobileNavDropdown');
+            if (toggle && dropdown) {
+                toggle.classList.toggle('active');
+                dropdown.classList.toggle('active');
+            }
+        }
+    </script>
+<script src="common-footer.js" defer></script>
+</body>
+</html>

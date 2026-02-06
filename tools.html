@@ -692,6 +692,51 @@
                 left: 12px;
             }
         }
+
+        /* Ultra Premium AI Stock Analyzer Animations */
+        @keyframes premiumGlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes diamondShine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 6px 25px rgba(255, 215, 0, 0.6); }
+        }
+
+        @keyframes floatParticle {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.6; }
+            50% { transform: translateY(-15px) scale(1.2); opacity: 1; }
+        }
+
+        @keyframes iconGlow {
+            0%, 100% { box-shadow: 0 10px 40px rgba(255, 215, 0, 0.3); }
+            50% { box-shadow: 0 15px 60px rgba(255, 215, 0, 0.5), 0 0 30px rgba(255, 140, 0, 0.3); }
+        }
+
+        .premium-diamond-card {
+            transition: all 0.4s ease !important;
+        }
+
+        .premium-diamond-card:hover {
+            transform: translateY(-12px) scale(1.02) !important;
+            box-shadow: 0 30px 80px rgba(255, 215, 0, 0.2), 0 0 60px rgba(95, 39, 205, 0.15) !important;
+        }
+
+        .premium-diamond-card::before {
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            .premium-diamond-card {
+                grid-column: span 1 !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -823,15 +868,6 @@
                         <div class="calc-input-group">
                             <label>Why are you taking this trade?</label>
                             <textarea id="journalReason" placeholder="Breakout pattern, support bounce, news catalyst..." style="width: 100%; padding: 12px 15px; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 10px; color: var(--text-primary); font-size: 0.95rem; min-height: 80px; resize: vertical; font-family: inherit;"></textarea>
-                        </div>
-                        <div class="calc-input-group">
-                            <label>Confidence Level (1-10)</label>
-                            <input type="range" id="journalConfidence" min="1" max="10" value="5" style="width: 100%; accent-color: var(--gold);">
-                            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; font-size: 0.8rem; color: var(--text-secondary); margin-top: 5px;">
-                                <span>Low</span>
-                                <span id="confidenceValue">5</span>
-                                <span>High</span>
-                            </div>
                         </div>
                         <button class="calc-btn" onclick="generateJournalEntry()">Generate Entry</button>
                         <div class="calc-result insight-result" id="journalResult" style="display:none;">
@@ -1024,14 +1060,6 @@
                         <span class="tool-link">Analyze News <i class="fas fa-arrow-right"></i></span>
                     </div>
                     
-                    <div class="tool-card" onclick="window.location.href='tool-correlation-heatmap.html'" style="background: linear-gradient(135deg, var(--bg-card) 0%, rgba(139, 92, 246, 0.15) 100%); border-color: #8b5cf6;">
-                        <span class="tool-tag" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa); color: #fff;">📊 LIVE</span>
-                        <div class="tool-icon" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa); color: #fff;"><i class="fas fa-th"></i></div>
-                        <h3>Crypto Correlation Heatmap - LIVE</h3>
-                        <p>Visualize how crypto assets move together! Interactive correlation matrix, diversification score, find uncorrelated assets for safer portfolios.</p>
-                        <span class="tool-link">View Heatmap <i class="fas fa-arrow-right"></i></span>
-                    </div>
-                    
                     <div class="tool-card" onclick="window.location.href='tool-portfolio-risk-analyzer.html'" style="background: linear-gradient(135deg, var(--bg-card) 0%, rgba(239, 68, 68, 0.15) 100%); border-color: #ef4444;">
                         <span class="tool-tag" style="background: linear-gradient(135deg, #ef4444, #f87171); color: #fff;">⚠️ RISK</span>
                         <div class="tool-icon" style="background: linear-gradient(135deg, #ef4444, #f87171); color: #fff;"><i class="fas fa-exclamation-triangle"></i></div>
@@ -1102,12 +1130,32 @@
                         <span class="tool-link">Calculate Profit <i class="fas fa-arrow-right"></i></span>
                     </div>
 
-                    <div class="tool-card" onclick="window.location.href='tool-ai-stock-analyzer.html'" style="background: linear-gradient(135deg, var(--bg-card) 0%, rgba(249, 115, 22, 0.15) 100%); border-color: #f97316;">
-                        <span class="tool-tag" style="background: linear-gradient(135deg, #f97316, #fb923c); color: #000;">🤖 AI POWERED</span>
-                        <div class="tool-icon" style="background: linear-gradient(135deg, #f97316, #fb923c); color: #000;"><i class="fas fa-robot"></i></div>
-                        <h3>AI Stock Analyzer</h3>
-                        <p>Get instant AI-powered buy/sell signals! Technical analysis, price targets, risk assessment & sentiment score. Like having your own quant analyst!</p>
-                        <span class="tool-link">Analyze Stock <i class="fas fa-arrow-right"></i></span>
+                    <!-- 🌟 ULTRA PREMIUM AI STOCK ANALYZER -->
+                    <div class="tool-card premium-diamond-card" onclick="window.location.href='tool-ai-stock-analyzer.html'" style="grid-column: span 2; background: linear-gradient(165deg, #0f0f0f 0%, #1a1a2e 50%, #16213e 100%); border: 1px solid rgba(201, 162, 39, 0.3); position: relative; overflow: hidden; padding: 35px 40px;">
+                        <!-- Subtle corner accent -->
+                        <div style="position: absolute; top: 0; right: 0; width: 200px; height: 200px; background: radial-gradient(circle at top right, rgba(201, 162, 39, 0.15) 0%, transparent 70%); pointer-events: none;"></div>
+                        <div style="position: absolute; bottom: 0; left: 0; width: 150px; height: 150px; background: radial-gradient(circle at bottom left, rgba(201, 162, 39, 0.08) 0%, transparent 70%); pointer-events: none;"></div>
+                        
+                        <!-- Premium badge - elegant & minimal -->
+                        <span class="tool-tag" style="background: linear-gradient(135deg, #C9A227, #E8D5A3); color: #0f0f0f; font-weight: 700; font-size: 0.7rem; padding: 5px 12px; letter-spacing: 1px; text-transform: uppercase; border-radius: 4px;">✦ PRO</span>
+                        
+                        <!-- Clean icon -->
+                        <div class="tool-icon" style="background: linear-gradient(135deg, #C9A227, #D4AF37); color: #0f0f0f; width: 70px; height: 70px; font-size: 1.8rem; box-shadow: 0 8px 32px rgba(201, 162, 39, 0.25); border-radius: 14px;"><i class="fas fa-chart-line"></i></div>
+                        
+                        <h3 style="font-size: 1.5rem; color: #ffffff; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.5px;">AI Stock Analyzer <span style="color: #C9A227; font-weight: 400;">Pro</span></h3>
+                        
+                        <p style="font-size: 0.95rem; color: rgba(255,255,255,0.7); line-height: 1.7; max-width: 90%;">Advanced stock analysis with 50+ technical indicators, fundamental metrics, and AI-powered signals. Real-time data, price targets & comprehensive risk assessment — trusted by <strong style="color: #C9A227;">100,000+ traders</strong>.</p>
+                        
+                        <span class="tool-link" style="font-size: 0.95rem; color: #C9A227; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; margin-top: 8px;">Launch Analyzer <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i></span>
+                        
+                        <!-- Feature badges - professional monochrome style -->
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px;">
+                            <span style="background: rgba(201, 162, 39, 0.1); color: rgba(255,255,255,0.85); padding: 6px 14px; border-radius: 6px; font-size: 0.75rem; border: 1px solid rgba(201, 162, 39, 0.2); font-weight: 500;">50+ Indicators</span>
+                            <span style="background: rgba(201, 162, 39, 0.1); color: rgba(255,255,255,0.85); padding: 6px 14px; border-radius: 6px; font-size: 0.75rem; border: 1px solid rgba(201, 162, 39, 0.2); font-weight: 500;">AI-Powered</span>
+                            <span style="background: rgba(201, 162, 39, 0.1); color: rgba(255,255,255,0.85); padding: 6px 14px; border-radius: 6px; font-size: 0.75rem; border: 1px solid rgba(201, 162, 39, 0.2); font-weight: 500;">Price Targets</span>
+                            <span style="background: rgba(201, 162, 39, 0.1); color: rgba(255,255,255,0.85); padding: 6px 14px; border-radius: 6px; font-size: 0.75rem; border: 1px solid rgba(201, 162, 39, 0.2); font-weight: 500;">Real-Time</span>
+                            <span style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 6px 14px; border-radius: 6px; font-size: 0.75rem; border: 1px solid rgba(16, 185, 129, 0.25); font-weight: 600;">FREE</span>
+                        </div>
                     </div>
 
                     <div class="tool-card" onclick="window.location.href='tool-bmi-calculator.html'" style="background: linear-gradient(135deg, var(--bg-card) 0%, rgba(16, 185, 129, 0.15) 100%); border-color: #10b981;">
@@ -1869,44 +1917,6 @@
                         <p>Calculate P&L for 5 spread strategies: Bull Call, Bear Put, Credit Spreads, Calendar Spread with max profit/loss.</p>
                         <span class="tool-link">Calculate Now <i class="fas fa-arrow-right"></i></span>
                     </div>
-
-                    <div class="tool-card" onclick="window.location.href='tool-trading-journal-analyzer.html'">
-                        <span class="tool-tag" style="background: #C9A227; color: #000;">⭐ PRO</span>
-                        <div class="tool-icon"><i class="fas fa-book"></i></div>
-                        <h3>Trading Journal Analyzer</h3>
-                        <p>Comprehensive performance tracker. Add trades & get win rate, profit factor, expectancy with AI insights.</p>
-                        <span class="tool-link">Analyze Performance <i class="fas fa-arrow-right"></i></span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Media Tools -->
-            <div class="tools-category">
-                <h2 class="category-title"><i class="fas fa-download"></i> Media Download Tools</h2>
-                <div class="tools-grid">
-                    <div class="tool-card" onclick="window.location.href='tool-youtube-downloader.html'">
-                        <span class="tool-tag" style="background: #ef4444; color: #fff;">🔥 NEW</span>
-                        <div class="tool-icon"><i class="fas fa-download"></i></div>
-                        <h3>YouTube Downloader</h3>
-                        <p>Download YouTube videos in HD, 4K, 1080p, 720p or convert to MP3 audio. Fast & secure!</p>
-                        <span class="tool-link">Download Now <i class="fas fa-arrow-right"></i></span>
-                    </div>
-
-                    <div class="tool-card" onclick="window.location.href='tool-youtube-to-mp3.html'">
-                        <span class="tool-tag" style="background: #ef4444; color: #fff;">🔥 NEW</span>
-                        <div class="tool-icon"><i class="fas fa-music"></i></div>
-                        <h3>YouTube to MP3 Converter</h3>
-                        <p>Convert YouTube to high-quality 320kbps MP3. Perfect for music lovers!</p>
-                        <span class="tool-link">Convert Now <i class="fas fa-arrow-right"></i></span>
-                    </div>
-
-                    <div class="tool-card" onclick="window.location.href='tool-youtube-to-wav.html'">
-                        <span class="tool-tag" style="background: #ef4444; color: #fff;">🔥 NEW</span>
-                        <div class="tool-icon"><i class="fas fa-wave-square"></i></div>
-                        <h3>YouTube to WAV Converter</h3>
-                        <p>Download uncompressed WAV audio for professional music production & editing.</p>
-                        <span class="tool-link">Convert Now <i class="fas fa-arrow-right"></i></span>
-                    </div>
                 </div>
             </div>
 
@@ -1978,14 +1988,6 @@
                         <span class="tool-link">Open Tool <i class="fas fa-arrow-right"></i></span>
                     </div>
 
-                    <div class="tool-card" onclick="window.open('https://www.stockcharts.com/school/doku.php', '_blank')">
-                        <span class="tool-tag">Learn</span>
-                        <div class="tool-icon"><i class="fas fa-graduation-cap"></i></div>
-                        <h3>Chart School</h3>
-                        <p>Learn technical analysis from basics to advanced patterns.</p>
-                        <span class="tool-link">Open Tool <i class="fas fa-arrow-right"></i></span>
-                    </div>
-
                     <div class="tool-card" onclick="window.open('https://www.notion.so', '_blank')">
                         <span class="tool-tag">Journaling</span>
                         <div class="tool-icon"><i class="fas fa-book"></i></div>
@@ -2009,52 +2011,6 @@
                         <p>Quick stock quotes, news, and portfolio tracking.</p>
                         <span class="tool-link">Open Tool <i class="fas fa-arrow-right"></i></span>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SEBI Compliance Disclaimer Section -->
-        <div class="sebi-disclaimer-section" style="max-width: 1200px; margin: 60px auto 0; padding: 0 20px;">
-            <div class="sebi-disclaimer-container" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(239, 68, 68, 0.03) 100%); border: 2px solid rgba(239, 68, 68, 0.25); border-radius: 20px; padding: 30px;">
-                <div class="sebi-disclaimer-header" style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
-                    <div class="sebi-disclaimer-icon" style="width: 50px; height: 50px; background: rgba(239, 68, 68, 0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">
-                        ⚠️
-                    </div>
-                    <div class="sebi-disclaimer-title" style="color: #ef4444; font-size: 1.2rem; font-weight: 700;">⚠️ Important SEBI Disclaimer & Risk Warning</div>
-                </div>
-                <div class="sebi-disclaimer-content" style="margin-bottom: 25px;">
-                    <p style="color: #999; line-height: 1.8; margin-bottom: 15px; font-size: 0.92rem;"><strong style="color: #ccc;">For Educational Purposes Only:</strong> All tools, calculators, and content on BroBillionaire.com are designed for educational and informational purposes only. They do not constitute investment advice, financial advice, trading advice, or any other sort of advice.</p>
-                    
-                    <p style="color: #999; line-height: 1.8; margin-bottom: 15px; font-size: 0.92rem;"><strong style="color: #ccc;">No SEBI Registration:</strong> BroBillionaire is <strong style="color: #fff;">NOT</strong> a SEBI (Securities and Exchange Board of India) registered investment advisor, research analyst, or portfolio manager. We do not hold any SEBI registration or license to provide investment advisory services.</p>
-                    
-                    <p style="color: #999; line-height: 1.8; margin-bottom: 15px; font-size: 0.92rem;"><strong style="color: #ccc;">Risk Warning:</strong> Trading and investing in securities markets involves substantial risk of loss. According to SEBI's 2023 study, <strong style="color: #ef4444;">93% of individual F&O traders in India incurred net losses</strong> with an average loss of ₹1.81 lakh per trader. Past performance is not indicative of future results.</p>
-                    
-                    <p style="color: #999; line-height: 1.8; margin-bottom: 15px; font-size: 0.92rem;"><strong style="color: #ccc;">No Guarantee:</strong> Calculations, projections, and analysis provided by our tools are based on mathematical models and historical data. They do not guarantee future performance or protect against losses.</p>
-                    
-                    <p style="color: #999; line-height: 1.8; margin-bottom: 0; font-size: 0.92rem;"><strong style="color: #ccc;">Consult Professionals:</strong> Before making any investment decisions, consult with a SEBI-registered investment advisor and/or a qualified financial professional who can assess your specific situation and risk tolerance.</p>
-                </div>
-                
-                <div class="sebi-disclaimer-badges" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 25px;">
-                    <div class="sebi-badge-item" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 12px; padding: 15px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;">
-                        <i class="fas fa-shield-alt" style="color: #ef4444; font-size: 1.2rem;"></i>
-                        <span style="color: #999; font-size: 0.85rem; font-weight: 600;">Not SEBI Registered</span>
-                    </div>
-                    <div class="sebi-badge-item" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 12px; padding: 15px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;">
-                        <i class="fas fa-graduation-cap" style="color: #ef4444; font-size: 1.2rem;"></i>
-                        <span style="color: #999; font-size: 0.85rem; font-weight: 600;">Educational Only</span>
-                    </div>
-                    <div class="sebi-badge-item" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 12px; padding: 15px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;">
-                        <i class="fas fa-chart-line" style="color: #ef4444; font-size: 1.2rem;"></i>
-                        <span style="color: #999; font-size: 0.85rem; font-weight: 600;">No Investment Advice</span>
-                    </div>
-                    <div class="sebi-badge-item" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 12px; padding: 15px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;">
-                        <i class="fas fa-balance-scale" style="color: #ef4444; font-size: 1.2rem;"></i>
-                        <span style="color: #999; font-size: 0.85rem; font-weight: 600;">Consult SEBI RIA</span>
-                    </div>
-                </div>
-                
-                <div class="sebi-disclaimer-footer" style="background: rgba(0, 0, 0, 0.3); border-radius: 12px; padding: 20px;">
-                    <p style="color: #888; font-size: 0.88rem; margin: 0;">📊 <strong>SEBI Reference:</strong> For registered investment advisors, visit <a href="https://www.sebi.gov.in/sebiweb/other/OtherAction.do?doRecognised=yes" target="_blank" rel="noopener" style="color: var(--gold); text-decoration: none;">SEBI's Official Website</a></p>
                 </div>
             </div>
         </div>
@@ -2136,31 +2092,34 @@
             document.getElementById('rrResult').style.display = 'block';
         }
 
-        // Confidence slider update
-        document.getElementById('journalConfidence')?.addEventListener('input', function() {
-            document.getElementById('confidenceValue').textContent = this.value;
-        });
-
         // Trade Journal Entry Generator
         function generateJournalEntry() {
-            const symbol = document.getElementById('journalSymbol').value || 'N/A';
+            const symbol = document.getElementById('journalSymbol').value.trim();
             const direction = document.getElementById('journalDirection').value;
             const reason = document.getElementById('journalReason').value || 'No reason provided';
-            const confidence = document.getElementById('journalConfidence').value;
+            
+            // Require symbol - don't allow empty
+            if (!symbol) {
+                document.getElementById('journalOutput').innerHTML = `
+                    <div style="color: #ff6b6b; padding: 15px; background: rgba(255, 107, 107, 0.1); border-radius: 8px; border-left: 3px solid #ff6b6b;">
+                        ⚠️ <strong>Please enter a stock/asset symbol</strong> (e.g., AAPL, BTC, NIFTY)
+                    </div>
+                `;
+                document.getElementById('journalResult').style.display = 'block';
+                return;
+            }
             
             const now = new Date();
             const dateStr = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
             const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
             
             const directionEmoji = direction === 'long' ? '📈 LONG' : '📉 SHORT';
-            const confidenceEmoji = confidence >= 8 ? '🔥' : confidence >= 5 ? '👍' : '⚠️';
             
             const entry = `
                 <div style="margin-bottom: 15px;">
                     <div style="font-size: 0.75rem; color: var(--gold);">${dateStr} • ${timeStr}</div>
                     <div style="font-size: 1.1rem; font-weight: 600; margin: 8px 0;">${symbol.toUpperCase()} ${directionEmoji}</div>
                     <div style="margin: 10px 0;"><strong>Reason:</strong> ${reason}</div>
-                    <div><strong>Confidence:</strong> ${confidence}/10 ${confidenceEmoji}</div>
                 </div>
                 <div style="padding: 10px; background: rgba(201, 162, 39, 0.08); border-radius: 8px; font-size: 0.8rem; border-left: 3px solid var(--gold);">
                     💡 <strong>Pro Tip:</strong> Come back after the trade to record your exit and lessons learned!

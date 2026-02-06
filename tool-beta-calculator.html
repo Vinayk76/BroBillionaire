@@ -24,45 +24,138 @@
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="https://brobillionaire.com/tool-beta-calculator.html">
     
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://brobillionaire.com/tool-beta-calculator.html">
-    <meta property="og:title" content="Beta Coefficient Calculator - Stock Market Risk Tool">
-    <meta property="og:description" content="Calculate beta coefficient to measure stock volatility relative to the market. Assess systematic risk and portfolio diversification.">
-    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
-    <meta property="og:site_name" content="BroBillionaire">
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://brobillionaire.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://brobillionaire.com/tools.html"},
+            {"@type": "ListItem", "position": 3, "name": "Beta Calculator"}
+        ]
+    }
+    </script>
     
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://brobillionaire.com/tool-beta-calculator.html">
-    <meta property="twitter:title" content="Beta Coefficient Calculator - Stock Market Risk Tool">
-    <meta property="twitter:description" content="Calculate beta coefficient to measure stock volatility relative to the market. Assess systematic risk and portfolio diversification.">
-    <meta property="twitter:image" content="https://brobillionaire.com/og-image.jpg">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --gold: #C9A227;
+            --gold-dark: #8B7520;
+            --bg-primary: #0d0d0d;
+            --bg-secondary: #1a1a1a;
+            --text-primary: #fff;
+            --text-secondary: #999;
+            --border-color: #2a2a2a;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding-top: 80px;
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-img { width: 40px; height: 40px; border-radius: 10px; }
+        .logo-text { font-size: 1.25rem; font-weight: 600; color: var(--text-primary); }
+        
+        .nav-links { display: flex; gap: 35px; }
+        .nav-link { color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.2s ease; }
+        .nav-link:hover, .nav-link.active { color: var(--gold); }
+        
+        .mobile-menu-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; }
+        
+        .breadcrumb-nav { background: var(--bg-secondary); padding: 12px 0; border-bottom: 1px solid var(--border-color); }
+        .breadcrumb-container { max-width: 1200px; margin: 0 auto; padding: 0 40px; font-size: 0.85rem; color: var(--text-secondary); }
+        .breadcrumb-container a { color: var(--gold); text-decoration: none; }
+        
         .calculator-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
-        .calculator-card { background: #1a1a1a; border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid #2a2a2a; }
-        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 10px; }
-        .calculator-subtitle { color: #999; font-size: 1.1rem; margin-bottom: 40px; }
+        .calculator-card { background: var(--bg-secondary); border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid var(--border-color); }
+        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--gold); margin-bottom: 10px; }
+        .calculator-subtitle { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 40px; }
         .input-group { margin-bottom: 25px; }
-        .input-label { display: block; color: #C9A227; font-weight: 600; margin-bottom: 10px; }
-        .input-field { width: 100%; padding: 15px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #fff; font-size: 1rem; }
-        .calculate-btn { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; font-weight: 700; padding: 18px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; }
+        .input-label { display: block; color: var(--gold); font-weight: 600; margin-bottom: 10px; }
+        .input-field { width: 100%; padding: 15px; background: var(--bg-primary); border: 2px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 1rem; }
+        .input-field:focus { outline: none; border-color: var(--gold); }
+        .calculate-btn { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: #000; font-weight: 700; padding: 18px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; transition: all 0.3s; }
+        .calculate-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(201, 162, 39, 0.3); }
         .results-section { display: none; margin-top: 40px; }
-        .result-card { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 30px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid; text-align: center; }
+        .result-card { background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%); padding: 30px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid; text-align: center; }
         .beta-low { border-left-color: #3498db; }
         .beta-moderate { border-left-color: #f39c12; }
         .beta-high { border-left-color: #e74c3c; }
         .result-value { color: #fff; font-size: 4rem; font-weight: 700; margin: 15px 0; }
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
         .beta-scale { height: 60px; background: linear-gradient(to right, #3498db, #2ecc71, #f39c12, #e74c3c); border-radius: 12px; position: relative; margin: 30px 0; }
-        .beta-marker { position: absolute; top: -10px; width: 4px; height: 80px; background: #C9A227; transition: left 0.5s; }
-        .beta-label { text-align: center; margin-top: 10px; color: #C9A227; font-weight: 600; }
+        .beta-marker { position: absolute; top: -10px; width: 4px; height: 80px; background: var(--gold); transition: left 0.5s; }
+        .beta-label { text-align: center; margin-top: 10px; color: var(--gold); font-weight: 600; }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu-toggle { display: block; }
+            .calculator-card { padding: 25px; }
+            .calculator-title { font-size: 1.8rem; }
+            body { padding-top: 70px; }
+        }
     </style>
 </head>
 <body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="logo">
+            <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
+            <span class="logo-text">BroBillionaire</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="articles.html" class="nav-link">Articles</a>
+            <a href="tools.html" class="nav-link active">Tools</a>
+            <a href="about.html" class="nav-link">About</a>
+        </div>
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</nav>
+
+<!-- Breadcrumb -->
+<div class="breadcrumb-nav">
+    <div class="breadcrumb-container">
+        <a href="index.html">Home</a> / 
+        <a href="tools.html">Tools</a> / 
+        <span>Beta Calculator</span>
+    </div>
+</div>
+
     <div class="calculator-container">
         <div class="calculator-card">
             <h1 class="calculator-title">Beta Coefficient Calculator</h1>

@@ -70,147 +70,839 @@
     }
     </script>
 
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #161616;
+            --bg-tertiary: #1a1a1a;
+            --gold: #C9A227;
+            --gold-light: #e6c54d;
+            --gold-dark: #a68a1f;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-gold: rgba(201, 162, 39, 0.3);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.5);
+            --green: #22c55e;
+            --green-soft: rgba(34, 197, 94, 0.15);
+            --red: #ef4444;
+            --red-soft: rgba(239, 68, 68, 0.15);
+            --blue: #3b82f6;
+            --orange: #f97316;
+            --gold-gradient: linear-gradient(135deg, #C9A227 0%, #e6c54d 50%, #C9A227 100%);
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); color: #e0e0e0; line-height: 1.6; min-height: 100vh; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: var(--bg-primary);
+            color: var(--text-primary); 
+            line-height: 1.6; 
+            min-height: 100vh; 
+        }
+
+        .gold-text {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         .container { max-width: 1400px; margin: 0 auto; padding: 1.5rem; }
         
-        .premium-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: linear-gradient(135deg, #C9A227 0%, #ffd700 100%); color: #000; padding: 0.5rem 1rem; border-radius: 50px; font-weight: 700; font-size: 0.85rem; margin-bottom: 1rem; animation: pulse 2s infinite; }
+        /* Back Button */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            color: var(--gold);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            z-index: 100;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: var(--gold);
+            color: var(--bg-primary);
+            transform: translateX(-5px);
+        }
+        
+        .premium-badge { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+            background: var(--gold-gradient);
+            color: #000; 
+            padding: 0.5rem 1rem; 
+            border-radius: 50px; 
+            font-weight: 700; 
+            font-size: 0.85rem; 
+            margin-bottom: 1rem; 
+            animation: pulse 2s infinite; 
+        }
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
         
-        .header { text-align: center; padding: 2rem 1.5rem; background: linear-gradient(135deg, #1e1e2f 0%, #2a2a4a 100%); border-radius: 20px; margin-bottom: 1.5rem; border: 2px solid #C9A227; position: relative; overflow: hidden; }
-        .header::before { content: '📰'; position: absolute; top: 10px; right: 20px; font-size: 4rem; opacity: 0.1; }
-        .header h1 { font-size: 2.5rem; background: linear-gradient(135deg, #C9A227 0%, #ffd700 50%, #C9A227 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem; }
-        .header p { font-size: 1.1rem; color: #a0a0b0; }
+        .header { 
+            text-align: center; 
+            padding: 80px 1.5rem 2rem; 
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            border-radius: 20px; 
+            margin-bottom: 1.5rem; 
+            border: 1px solid var(--border-gold);
+            position: relative; 
+            overflow: hidden; 
+        }
+        .header::before { 
+            content: ''; 
+            position: absolute; 
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(201, 162, 39, 0.03) 0%, transparent 50%);
+            animation: pulse-bg 8s ease-in-out infinite;
+        }
+        @keyframes pulse-bg {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+        .header h1 { 
+            font-size: clamp(2rem, 5vw, 3rem);
+            background: var(--gold-gradient);
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            background-clip: text; 
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+        .header p { 
+            font-size: 1.1rem; 
+            color: var(--text-secondary);
+            position: relative;
+        }
         
-        .live-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-top: 0.5rem; }
-        .live-dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; animation: livePulse 1.5s infinite; }
+        .live-badge { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+            background: var(--green-soft);
+            color: var(--green); 
+            padding: 0.5rem 1rem; 
+            border-radius: 20px; 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            margin-top: 1rem;
+            position: relative;
+        }
+        .live-dot { 
+            width: 8px; 
+            height: 8px; 
+            background: var(--green); 
+            border-radius: 50%; 
+            animation: livePulse 1.5s infinite; 
+        }
         @keyframes livePulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
         
+        /* API Status */
+        .api-status {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+            position: relative;
+        }
+        .api-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(255,255,255,0.05);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+        }
+        .api-badge.connected { color: var(--green); }
+        .api-badge.error { color: var(--red); }
+        .api-badge i { font-size: 0.7rem; }
+
+        /* Market Data Bar */
+        .market-data-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+        .market-item {
+            text-align: center;
+            padding: 0.5rem;
+        }
+        .market-item-label {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+        .market-item-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .market-item-change {
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .market-item-change.positive { color: var(--green); }
+        .market-item-change.negative { color: var(--red); }
+        
         /* Sentiment Overview */
-        .sentiment-overview { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
-        .sentiment-card { background: linear-gradient(135deg, #1e1e2f 0%, #16161f 100%); border-radius: 15px; padding: 1.5rem; text-align: center; border: 1px solid #333; transition: all 0.3s; }
-        .sentiment-card:hover { border-color: #C9A227; transform: translateY(-3px); }
+        .sentiment-overview { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 1rem; 
+            margin-bottom: 1.5rem; 
+        }
+        .sentiment-card { 
+            background: var(--bg-card);
+            border-radius: 15px; 
+            padding: 1.5rem; 
+            text-align: center; 
+            border: 1px solid var(--border-color);
+            transition: all 0.3s; 
+        }
+        .sentiment-card:hover { 
+            border-color: var(--gold); 
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(201, 162, 39, 0.1);
+        }
         .sentiment-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
         .sentiment-value { font-size: 2rem; font-weight: 800; }
-        .sentiment-value.bullish { color: #22c55e; }
-        .sentiment-value.bearish { color: #ef4444; }
-        .sentiment-value.neutral { color: #fbbf24; }
-        .sentiment-label { color: #888; font-size: 0.9rem; margin-top: 0.3rem; }
+        .sentiment-value.bullish { color: var(--green); }
+        .sentiment-value.bearish { color: var(--red); }
+        .sentiment-value.neutral { color: var(--orange); }
+        .sentiment-label { color: var(--text-tertiary); font-size: 0.9rem; margin-top: 0.3rem; }
         
         /* Custom Analysis Input */
-        .analyze-section { background: #1e1e2f; border-radius: 20px; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid #333; }
-        .analyze-title { color: #C9A227; font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
-        .analyze-input { width: 100%; padding: 1.2rem; background: #16161f; border: 2px solid #333; border-radius: 12px; color: #fff; font-size: 1rem; margin-bottom: 1rem; transition: all 0.3s; resize: vertical; min-height: 100px; }
-        .analyze-input:focus { border-color: #C9A227; outline: none; box-shadow: 0 0 20px rgba(201, 162, 39, 0.2); }
-        .analyze-input::placeholder { color: #666; }
-        .analyze-btn { background: linear-gradient(135deg, #C9A227, #a68b1e); color: #000; border: none; padding: 1rem 2rem; border-radius: 10px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 0.5rem; }
-        .analyze-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(201, 162, 39, 0.3); }
-        .analyze-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .analyze-section { 
+            background: var(--bg-card);
+            border-radius: 20px; 
+            padding: 2rem; 
+            margin-bottom: 1.5rem; 
+            border: 1px solid var(--border-color);
+        }
+        .analyze-title { 
+            color: var(--gold); 
+            font-size: 1.2rem; 
+            font-weight: 600; 
+            margin-bottom: 1rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+        }
+        .analyze-input { 
+            width: 100%; 
+            padding: 1.2rem; 
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px; 
+            color: var(--text-primary); 
+            font-size: 1rem; 
+            font-family: inherit;
+            margin-bottom: 1rem; 
+            transition: all 0.3s; 
+            resize: vertical; 
+            min-height: 100px; 
+        }
+        .analyze-input:focus { 
+            border-color: var(--gold); 
+            outline: none; 
+            box-shadow: 0 0 20px rgba(201, 162, 39, 0.2); 
+        }
+        .analyze-input::placeholder { color: var(--text-tertiary); }
+        .analyze-btn { 
+            background: var(--gold-gradient);
+            color: #000; 
+            border: none; 
+            padding: 1rem 2rem; 
+            border-radius: 10px; 
+            font-weight: 700; 
+            font-size: 1rem; 
+            cursor: pointer; 
+            transition: all 0.3s; 
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+        }
+        .analyze-btn:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 10px 30px rgba(201, 162, 39, 0.3); 
+        }
+        .analyze-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
         
         /* Analysis Result */
-        .analysis-result { background: #16161f; border-radius: 15px; padding: 1.5rem; margin-top: 1rem; display: none; }
+        .analysis-result { 
+            background: var(--bg-tertiary);
+            border-radius: 15px; 
+            padding: 1.5rem; 
+            margin-top: 1rem; 
+            display: none;
+            border: 1px solid var(--border-color);
+        }
         .analysis-result.visible { display: block; animation: fadeIn 0.5s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        .result-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #2a2a4a; }
+        .result-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 1rem; 
+            padding-bottom: 1rem; 
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
         .result-sentiment { display: flex; align-items: center; gap: 1rem; }
-        .sentiment-gauge { font-size: 3rem; }
+        .sentiment-gauge-icon { font-size: 3rem; }
         .sentiment-details h3 { font-size: 1.3rem; font-weight: 700; }
-        .sentiment-score { font-size: 0.9rem; color: #888; }
+        .sentiment-score { font-size: 0.9rem; color: var(--text-tertiary); }
         .confidence-meter { display: flex; align-items: center; gap: 0.5rem; }
-        .confidence-label { font-size: 0.85rem; color: #888; }
-        .confidence-bar { width: 100px; height: 8px; background: #2a2a4a; border-radius: 10px; overflow: hidden; }
+        .confidence-label { font-size: 0.85rem; color: var(--text-tertiary); }
+        .confidence-bar { width: 100px; height: 8px; background: var(--bg-card); border-radius: 10px; overflow: hidden; }
         .confidence-fill { height: 100%; border-radius: 10px; transition: width 0.5s ease-out; }
-        .result-analysis { color: #d0d0e0; line-height: 1.8; }
+        .result-analysis { color: var(--text-secondary); line-height: 1.8; }
         .result-keywords { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
         .keyword { padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.8rem; font-weight: 600; }
-        .keyword.bullish { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
-        .keyword.bearish { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+        .keyword.bullish { background: var(--green-soft); color: var(--green); }
+        .keyword.bearish { background: var(--red-soft); color: var(--red); }
+        .keyword.neutral { background: rgba(249, 115, 22, 0.15); color: var(--orange); }
         
         /* Category Filters */
-        .category-filters { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; justify-content: center; }
-        .category-btn { background: #1e1e2f; border: 1px solid #333; color: #888; padding: 0.6rem 1.2rem; border-radius: 20px; cursor: pointer; font-size: 0.9rem; transition: all 0.3s; }
-        .category-btn:hover { border-color: #C9A227; color: #C9A227; }
-        .category-btn.active { background: linear-gradient(135deg, #C9A227, #a68b1e); color: #000; border-color: #C9A227; }
+        .category-filters { 
+            display: flex; 
+            gap: 0.5rem; 
+            flex-wrap: wrap; 
+            margin-bottom: 1.5rem; 
+            justify-content: center; 
+        }
+        .category-btn { 
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-tertiary);
+            padding: 0.6rem 1.2rem; 
+            border-radius: 20px; 
+            cursor: pointer; 
+            font-size: 0.9rem; 
+            transition: all 0.3s; 
+        }
+        .category-btn:hover { 
+            border-color: var(--gold); 
+            color: var(--gold); 
+        }
+        .category-btn.active { 
+            background: var(--gold-gradient);
+            color: #000; 
+            border-color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* Refresh Controls */
+        .refresh-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .last-updated {
+            color: var(--text-tertiary);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .refresh-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            color: var(--gold);
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+        .refresh-btn:hover {
+            background: var(--gold);
+            color: var(--bg-primary);
+        }
+        .refresh-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .refresh-btn i.spinning {
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
         
         /* News Grid */
-        .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem; }
+        .news-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
+            gap: 1.5rem; 
+            margin-bottom: 1.5rem; 
+        }
         
-        .news-card { background: linear-gradient(135deg, #1e1e2f 0%, #16161f 100%); border-radius: 15px; overflow: hidden; border: 1px solid #333; transition: all 0.3s; cursor: pointer; }
-        .news-card:hover { border-color: #C9A227; transform: translateY(-5px); box-shadow: 0 10px 30px rgba(201, 162, 39, 0.1); }
+        .news-card { 
+            background: var(--bg-card);
+            border-radius: 15px; 
+            overflow: hidden; 
+            border: 1px solid var(--border-color);
+            transition: all 0.3s; 
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+        .news-card:hover { 
+            border-color: var(--gold); 
+            transform: translateY(-5px); 
+            box-shadow: 0 15px 40px rgba(201, 162, 39, 0.15);
+        }
         
-        .news-image { width: 100%; height: 160px; background: #2a2a4a; position: relative; overflow: hidden; }
-        .news-image img { width: 100%; height: 100%; object-fit: cover; }
-        .news-sentiment-badge { position: absolute; top: 10px; right: 10px; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700; backdrop-filter: blur(10px); }
+        .news-image { 
+            width: 100%; 
+            height: 180px; 
+            background: var(--bg-tertiary);
+            position: relative; 
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .news-image img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        .news-card:hover .news-image img {
+            transform: scale(1.05);
+        }
+        .news-image-placeholder {
+            font-size: 4rem;
+            opacity: 0.2;
+        }
+        .news-sentiment-badge { 
+            position: absolute; 
+            top: 10px; 
+            right: 10px; 
+            padding: 0.4rem 0.8rem; 
+            border-radius: 20px; 
+            font-size: 0.75rem; 
+            font-weight: 700; 
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
         .news-sentiment-badge.bullish { background: rgba(34, 197, 94, 0.9); color: #fff; }
         .news-sentiment-badge.bearish { background: rgba(239, 68, 68, 0.9); color: #fff; }
         .news-sentiment-badge.neutral { background: rgba(251, 191, 36, 0.9); color: #000; }
         
         .news-content { padding: 1.2rem; }
-        .news-source { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
-        .source-name { color: #C9A227; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
-        .news-time { color: #666; font-size: 0.75rem; }
-        .news-title { font-size: 1rem; font-weight: 600; line-height: 1.4; margin-bottom: 0.8rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        .news-source { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 0.5rem; 
+        }
+        .source-name { 
+            color: var(--gold); 
+            font-size: 0.75rem; 
+            font-weight: 600; 
+            text-transform: uppercase; 
+        }
+        .news-time { color: var(--text-tertiary); font-size: 0.75rem; }
+        .news-title { 
+            font-size: 1rem; 
+            font-weight: 600; 
+            line-height: 1.4; 
+            margin-bottom: 0.8rem; 
+            display: -webkit-box; 
+            -webkit-line-clamp: 3; 
+            -webkit-box-orient: vertical; 
+            overflow: hidden;
+            color: var(--text-primary);
+        }
+        .news-description {
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+            line-height: 1.5;
+            margin-bottom: 0.8rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
         
-        .news-impact { display: flex; justify-content: space-between; align-items: center; padding-top: 0.8rem; border-top: 1px solid #2a2a4a; }
-        .impact-label { font-size: 0.8rem; color: #888; }
+        .news-impact { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding-top: 0.8rem; 
+            border-top: 1px solid var(--border-color);
+        }
+        .impact-label { font-size: 0.8rem; color: var(--text-tertiary); }
         .impact-meter { display: flex; gap: 3px; }
-        .impact-dot { width: 8px; height: 8px; border-radius: 50%; background: #333; }
-        .impact-dot.active.high { background: #ef4444; }
-        .impact-dot.active.medium { background: #fbbf24; }
-        .impact-dot.active.low { background: #22c55e; }
+        .impact-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border-color); }
+        .impact-dot.active.high { background: var(--red); }
+        .impact-dot.active.medium { background: var(--orange); }
+        .impact-dot.active.low { background: var(--green); }
         
-        .affected-assets { display: flex; gap: 0.3rem; }
-        .asset-tag { background: rgba(201, 162, 39, 0.15); color: #C9A227; padding: 0.2rem 0.5rem; border-radius: 8px; font-size: 0.7rem; font-weight: 600; }
+        .affected-assets { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+        .asset-tag { 
+            background: rgba(201, 162, 39, 0.15); 
+            color: var(--gold); 
+            padding: 0.2rem 0.5rem; 
+            border-radius: 8px; 
+            font-size: 0.7rem; 
+            font-weight: 600; 
+        }
         
         /* Market Mood Meter */
-        .mood-section { background: linear-gradient(135deg, #1e1e2f 0%, #2a2a4a 100%); border-radius: 20px; padding: 2rem; margin-bottom: 1.5rem; border: 2px solid #C9A227; text-align: center; }
-        .mood-title { color: #C9A227; font-size: 1.3rem; font-weight: 600; margin-bottom: 1.5rem; }
-        .mood-gauge { position: relative; width: 300px; height: 150px; margin: 0 auto; }
+        .mood-section { 
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-tertiary) 100%);
+            border-radius: 20px; 
+            padding: 2rem; 
+            margin-bottom: 1.5rem; 
+            border: 1px solid var(--border-gold);
+            text-align: center; 
+        }
+        .mood-title { 
+            color: var(--gold); 
+            font-size: 1.3rem; 
+            font-weight: 600; 
+            margin-bottom: 1.5rem; 
+        }
+        .mood-gauge { 
+            position: relative; 
+            width: 300px; 
+            height: 150px; 
+            margin: 0 auto; 
+        }
         .mood-gauge svg { width: 100%; height: 100%; overflow: visible; }
-        .gauge-bg { fill: none; stroke: #2a2a4a; stroke-width: 25; }
+        .gauge-bg { fill: none; stroke: var(--border-color); stroke-width: 25; }
         .gauge-fill { fill: none; stroke-width: 25; stroke-linecap: round; transition: all 1s ease-out; }
         .mood-needle { transform-origin: center bottom; transition: transform 1s ease-out; }
-        .mood-value { font-size: 2.5rem; font-weight: 800; margin-top: 1rem; }
+        .mood-value { 
+            font-size: 2.5rem; 
+            font-weight: 800; 
+            margin-top: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
         .mood-label { font-size: 1.2rem; font-weight: 600; margin-top: 0.3rem; }
-        .mood-scale { display: flex; justify-content: space-between; max-width: 300px; margin: 1rem auto 0; color: #888; font-size: 0.8rem; }
+        .mood-scale { 
+            display: flex; 
+            justify-content: space-between; 
+            max-width: 300px; 
+            margin: 1rem auto 0; 
+            color: var(--text-tertiary);
+            font-size: 0.8rem; 
+        }
+
+        /* Fear & Greed from Alternative.me */
+        .fear-greed-section {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        .fear-greed-title {
+            color: var(--gold);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .fear-greed-value {
+            font-size: 4rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .fear-greed-label {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        .fear-greed-bar {
+            height: 12px;
+            background: linear-gradient(90deg, #ef4444 0%, #f97316 25%, #fbbf24 50%, #84cc16 75%, #22c55e 100%);
+            border-radius: 10px;
+            margin: 1rem auto;
+            max-width: 300px;
+            position: relative;
+        }
+        .fear-greed-indicator {
+            position: absolute;
+            top: -5px;
+            width: 4px;
+            height: 22px;
+            background: white;
+            border-radius: 2px;
+            transition: left 1s ease-out;
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+        .fear-greed-updated {
+            color: var(--text-tertiary);
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
         
         /* AI Insights */
-        .ai-insights { background: linear-gradient(135deg, #1e1e2f 0%, #2a2a4a 100%); border-radius: 15px; padding: 1.5rem; border: 2px solid #C9A227; position: relative; }
-        .ai-insights::before { content: '🧠'; position: absolute; top: 1rem; right: 1rem; font-size: 2.5rem; opacity: 0.15; }
-        .ai-title { font-size: 1.2rem; color: #C9A227; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
-        .ai-content { color: #d0d0e0; font-size: 1rem; line-height: 1.8; }
-        .ai-signals { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
-        .ai-signal { padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
-        .ai-signal.bullish { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
-        .ai-signal.bearish { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+        .ai-insights { 
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-tertiary) 100%);
+            border-radius: 15px; 
+            padding: 1.5rem; 
+            border: 1px solid var(--border-gold);
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        .ai-insights::before { 
+            content: '🧠'; 
+            position: absolute; 
+            top: 1rem; 
+            right: 1rem; 
+            font-size: 2.5rem; 
+            opacity: 0.15; 
+        }
+        .ai-title { 
+            font-size: 1.2rem; 
+            color: var(--gold); 
+            margin-bottom: 1rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+        }
+        .ai-content { 
+            color: var(--text-secondary);
+            font-size: 1rem; 
+            line-height: 1.8; 
+        }
+        .ai-signals { 
+            display: flex; 
+            gap: 0.5rem; 
+            flex-wrap: wrap; 
+            margin-top: 1rem; 
+        }
+        .ai-signal { 
+            padding: 0.4rem 1rem; 
+            border-radius: 20px; 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+        }
+        .ai-signal.bullish { background: var(--green-soft); color: var(--green); }
+        .ai-signal.bearish { background: var(--red-soft); color: var(--red); }
         .ai-signal.neutral { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+
+        /* Error State */
+        .error-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-tertiary);
+        }
+        .error-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--orange);
+        }
+        .error-state h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        .retry-btn {
+            background: var(--gold-gradient);
+            color: #000;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s;
+        }
+        .retry-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(201, 162, 39, 0.3);
+        }
+
+        /* No News State */
+        .no-news {
+            text-align: center;
+            padding: 3rem;
+            background: var(--bg-card);
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+        }
+        .no-news i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--text-tertiary);
+        }
         
         /* Responsive */
         @media (max-width: 1000px) {
             .sentiment-overview { grid-template-columns: repeat(2, 1fr); }
+            .market-data-bar { grid-template-columns: repeat(3, 1fr); }
         }
         @media (max-width: 768px) {
+            .header { padding: 70px 1rem 1.5rem; }
             .header h1 { font-size: 1.8rem; }
             .news-grid { grid-template-columns: 1fr; }
             .sentiment-overview { grid-template-columns: repeat(2, 1fr); }
             .mood-gauge { width: 250px; height: 125px; }
+            .back-btn { top: 10px; left: 10px; padding: 8px 15px; font-size: 0.8rem; }
+            .market-data-bar { grid-template-columns: repeat(2, 1fr); }
+            .result-header { flex-direction: column; align-items: flex-start; }
         }
         
         /* Skeleton */
-        .skeleton { background: linear-gradient(90deg, #2a2a4a 0%, #3a3a5a 50%, #2a2a4a 100%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 8px; }
+        .skeleton { 
+            background: linear-gradient(90deg, var(--bg-tertiary) 0%, var(--bg-card) 50%, var(--bg-tertiary) 100%); 
+            background-size: 200% 100%; 
+            animation: shimmer 1.5s infinite; 
+            border-radius: 15px; 
+        }
         @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+        /* Loading overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        .loading-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .loading-content {
+            text-align: center;
+            color: white;
+        }
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--border-color);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
     </style>
 </head>
 <body>
+    <!-- Back Button -->
+    <a href="tools.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Tools
+    </a>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Fetching Live News...</p>
+        </div>
+    </div>
+
     <div class="container">
         <div class="header">
-            <div class="premium-badge">⚡ AI-POWERED SENTIMENT - 100% FREE</div>
+            <div class="premium-badge">⚡ LIVE AI-POWERED SENTIMENT - 100% FREE</div>
             <h1>📰 News Sentiment Analyzer</h1>
-            <p>AI Analyzes Trading News • Bullish or Bearish? • Know Before You Trade</p>
+            <p>Real-Time Financial News • AI Sentiment Analysis • Make Informed Trades</p>
             <div class="live-badge">
                 <span class="live-dot"></span>
-                AI Analysis Active
+                <span id="liveStatus">Fetching Live Data...</span>
+            </div>
+            <div class="api-status" id="apiStatus">
+                <div class="api-badge" id="newsApiStatus">
+                    <i class="fas fa-circle"></i> News API
+                </div>
+                <div class="api-badge" id="cryptoApiStatus">
+                    <i class="fas fa-circle"></i> Crypto Data
+                </div>
+                <div class="api-badge" id="fgApiStatus">
+                    <i class="fas fa-circle"></i> Fear & Greed
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Market Data Bar -->
+        <div class="market-data-bar" id="marketDataBar">
+            <div class="market-item">
+                <div class="market-item-label">Bitcoin</div>
+                <div class="market-item-value" id="btcPrice">--</div>
+                <div class="market-item-change" id="btcChange">--</div>
+            </div>
+            <div class="market-item">
+                <div class="market-item-label">Ethereum</div>
+                <div class="market-item-value" id="ethPrice">--</div>
+                <div class="market-item-change" id="ethChange">--</div>
+            </div>
+            <div class="market-item">
+                <div class="market-item-label">Gold</div>
+                <div class="market-item-value" id="goldPrice">--</div>
+                <div class="market-item-change" id="goldChange">--</div>
+            </div>
+            <div class="market-item">
+                <div class="market-item-label">S&P 500</div>
+                <div class="market-item-value" id="spyPrice">--</div>
+                <div class="market-item-change" id="spyChange">--</div>
+            </div>
+            <div class="market-item">
+                <div class="market-item-label">VIX</div>
+                <div class="market-item-value" id="vixPrice">--</div>
+                <div class="market-item-change" id="vixChange">--</div>
             </div>
         </div>
 
@@ -233,14 +925,27 @@
             </div>
             <div class="sentiment-card">
                 <div class="sentiment-icon">🎯</div>
-                <div class="sentiment-value" id="avgScore" style="color: #C9A227;">0</div>
-                <div class="sentiment-label">Avg Sentiment Score</div>
+                <div class="sentiment-value" id="avgScore" style="color: var(--gold);">0</div>
+                <div class="sentiment-label">Sentiment Score</div>
             </div>
+        </div>
+
+        <!-- Fear & Greed Index -->
+        <div class="fear-greed-section" id="fearGreedSection">
+            <div class="fear-greed-title">
+                <i class="fas fa-chart-line"></i> Crypto Fear & Greed Index (Live)
+            </div>
+            <div class="fear-greed-value" id="fgValue">--</div>
+            <div class="fear-greed-label" id="fgLabel">Loading...</div>
+            <div class="fear-greed-bar">
+                <div class="fear-greed-indicator" id="fgIndicator" style="left: 50%;"></div>
+            </div>
+            <div class="fear-greed-updated" id="fgUpdated">Updated: --</div>
         </div>
 
         <!-- Custom Analysis -->
         <div class="analyze-section">
-            <div class="analyze-title">🔍 Analyze Any News Headline</div>
+            <div class="analyze-title"><i class="fas fa-search"></i> Analyze Any News Headline</div>
             <textarea class="analyze-input" id="customNews" placeholder="Paste any financial news headline or article here to analyze its sentiment...
 
 Examples:
@@ -248,13 +953,13 @@ Examples:
 • 'Fed signals potential rate cuts amid cooling inflation'
 • 'Major crypto exchange files for bankruptcy protection'"></textarea>
             <button class="analyze-btn" id="analyzeBtn" onclick="analyzeCustomNews()">
-                <span>🧠</span> Analyze Sentiment
+                <i class="fas fa-brain"></i> Analyze Sentiment
             </button>
             
             <div class="analysis-result" id="analysisResult">
                 <div class="result-header">
                     <div class="result-sentiment">
-                        <div class="sentiment-gauge" id="resultEmoji">📊</div>
+                        <div class="sentiment-gauge-icon" id="resultEmoji">📊</div>
                         <div class="sentiment-details">
                             <h3 id="resultTitle">Analyzing...</h3>
                             <div class="sentiment-score" id="resultScore">Sentiment Score: --</div>
@@ -263,7 +968,7 @@ Examples:
                     <div class="confidence-meter">
                         <span class="confidence-label">Confidence:</span>
                         <div class="confidence-bar">
-                            <div class="confidence-fill" id="confidenceFill" style="width: 0%; background: #C9A227;"></div>
+                            <div class="confidence-fill" id="confidenceFill" style="width: 0%; background: var(--gold);"></div>
                         </div>
                         <span id="confidenceValue">--%</span>
                     </div>
@@ -277,7 +982,7 @@ Examples:
 
         <!-- Market Mood Meter -->
         <div class="mood-section">
-            <div class="mood-title">📊 Overall Market Mood (Based on Today's News)</div>
+            <div class="mood-title">📊 Overall Market Mood (Based on Live News)</div>
             <div class="mood-gauge">
                 <svg viewBox="0 0 200 110">
                     <defs>
@@ -298,37 +1003,48 @@ Examples:
             <div class="mood-value" id="moodValue">50</div>
             <div class="mood-label" id="moodLabel">Neutral</div>
             <div class="mood-scale">
-                <span>😨 Extreme Fear</span>
+                <span>😨 Fear</span>
                 <span>😐 Neutral</span>
-                <span>🤑 Extreme Greed</span>
+                <span>🤑 Greed</span>
             </div>
         </div>
 
         <!-- Category Filters -->
         <div class="category-filters">
-            <button class="category-btn active" onclick="filterNews('all')">📰 All News</button>
-            <button class="category-btn" onclick="filterNews('crypto')">₿ Crypto</button>
-            <button class="category-btn" onclick="filterNews('stocks')">📈 Stocks</button>
-            <button class="category-btn" onclick="filterNews('forex')">💱 Forex</button>
-            <button class="category-btn" onclick="filterNews('economy')">🏦 Economy</button>
-            <button class="category-btn" onclick="filterNews('commodities')">🥇 Commodities</button>
+            <button class="category-btn active" data-category="all">📰 All News</button>
+            <button class="category-btn" data-category="crypto">₿ Crypto</button>
+            <button class="category-btn" data-category="stocks">📈 Stocks</button>
+            <button class="category-btn" data-category="forex">💱 Forex</button>
+            <button class="category-btn" data-category="economy">🏦 Economy</button>
+            <button class="category-btn" data-category="commodities">🥇 Commodities</button>
+        </div>
+
+        <!-- Refresh Controls -->
+        <div class="refresh-controls">
+            <div class="last-updated">
+                <i class="fas fa-clock"></i>
+                <span id="lastUpdated">Last updated: --</span>
+            </div>
+            <button class="refresh-btn" id="refreshBtn" onclick="refreshAllData()">
+                <i class="fas fa-sync-alt" id="refreshIcon"></i> Refresh News
+            </button>
         </div>
 
         <!-- News Grid -->
         <div class="news-grid" id="newsGrid">
-            <div class="skeleton" style="height: 300px;"></div>
-            <div class="skeleton" style="height: 300px;"></div>
-            <div class="skeleton" style="height: 300px;"></div>
-            <div class="skeleton" style="height: 300px;"></div>
-            <div class="skeleton" style="height: 300px;"></div>
-            <div class="skeleton" style="height: 300px;"></div>
+            <div class="skeleton" style="height: 320px;"></div>
+            <div class="skeleton" style="height: 320px;"></div>
+            <div class="skeleton" style="height: 320px;"></div>
+            <div class="skeleton" style="height: 320px;"></div>
+            <div class="skeleton" style="height: 320px;"></div>
+            <div class="skeleton" style="height: 320px;"></div>
         </div>
 
         <!-- AI Insights -->
         <div class="ai-insights">
-            <div class="ai-title">🧠 AI Market Sentiment Summary</div>
+            <div class="ai-title"><i class="fas fa-robot"></i> AI Market Sentiment Summary</div>
             <div class="ai-content" id="aiSummary">
-                Analyzing news sentiment patterns...
+                Analyzing live news sentiment patterns...
             </div>
             <div class="ai-signals" id="aiSignals">
                 <span class="ai-signal neutral">Loading...</span>
@@ -337,270 +1053,351 @@ Examples:
     </div>
 
     <script>
-        // Sentiment Keywords Database
-        const sentimentKeywords = {
-            bullish: [
-                'surge', 'soar', 'rally', 'breakout', 'bullish', 'gain', 'growth', 'record high',
-                'all-time high', 'ath', 'moon', 'pump', 'buy signal', 'accumulation', 'inflows',
-                'adoption', 'institutional', 'approval', 'partnership', 'upgrade', 'beat expectations',
-                'outperform', 'strong', 'positive', 'optimistic', 'recovery', 'rebound', 'breakthrough',
-                'innovation', 'expansion', 'profit', 'revenue beat', 'upgrade', 'buy rating', 'bullish crossover'
-            ],
-            bearish: [
-                'crash', 'plunge', 'dump', 'bearish', 'decline', 'drop', 'fall', 'loss', 'sell-off',
-                'correction', 'pullback', 'red', 'blood', 'fear', 'panic', 'outflows', 'bankruptcy',
-                'hack', 'exploit', 'rug pull', 'scam', 'fraud', 'regulation', 'ban', 'crackdown',
-                'lawsuit', 'investigation', 'miss expectations', 'underperform', 'weak', 'negative',
-                'downgrade', 'sell rating', 'death cross', 'capitulation', 'liquidation', 'default'
-            ],
-            neutral: [
-                'unchanged', 'stable', 'consolidation', 'sideways', 'range-bound', 'mixed',
-                'wait and see', 'cautious', 'uncertain', 'volatility', 'hold rating'
-            ]
+        // ==================== CONFIGURATION ====================
+        const CONFIG = {
+            // GNews.io - Free tier: 100 requests/day
+            GNEWS_API_KEY: 'aa0df2dcca34fff77fd6d1b8b89ba8f1',
+            GNEWS_BASE_URL: 'https://gnews.io/api/v4',
+            
+            // CoinGecko - Free, no key needed
+            COINGECKO_BASE_URL: 'https://api.coingecko.com/api/v3',
+            
+            // Alternative.me Fear & Greed - Free, no key needed
+            FEAR_GREED_URL: 'https://api.alternative.me/fng/',
+            
+            // CryptoCompare News - Free tier available
+            CRYPTOCOMPARE_NEWS_URL: 'https://min-api.cryptocompare.com/data/v2/news/?lang=EN',
+            
+            // Refresh intervals
+            NEWS_REFRESH_INTERVAL: 5 * 60 * 1000, // 5 minutes
+            MARKET_REFRESH_INTERVAL: 60 * 1000, // 1 minute
+            
+            // Cache duration
+            CACHE_DURATION: 5 * 60 * 1000, // 5 minutes
         };
 
-        // Simulated News Data (In production, would come from NewsAPI or similar)
-        const newsDatabase = [
-            {
-                title: "Bitcoin ETF Records $2.1 Billion Inflows as Institutional Demand Surges",
-                source: "Bloomberg",
-                category: "crypto",
-                time: "2 hours ago",
-                image: "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=400",
-                sentiment: "bullish",
-                score: 85,
-                impact: "high",
-                assets: ["BTC", "ETH"]
-            },
-            {
-                title: "Federal Reserve Signals Potential Rate Cuts in Q2 2026",
-                source: "Reuters",
-                category: "economy",
-                time: "3 hours ago",
-                image: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=400",
-                sentiment: "bullish",
-                score: 72,
-                impact: "high",
-                assets: ["SPY", "USD"]
-            },
-            {
-                title: "Major Crypto Exchange Faces Regulatory Scrutiny Over Trading Practices",
-                source: "CoinDesk",
-                category: "crypto",
-                time: "4 hours ago",
-                image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400",
-                sentiment: "bearish",
-                score: 28,
-                impact: "medium",
-                assets: ["BTC", "Altcoins"]
-            },
-            {
-                title: "Apple Reports Record Q4 Revenue, Beats Wall Street Estimates",
-                source: "CNBC",
-                category: "stocks",
-                time: "5 hours ago",
-                image: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400",
-                sentiment: "bullish",
-                score: 88,
-                impact: "high",
-                assets: ["AAPL", "NASDAQ"]
-            },
-            {
-                title: "Gold Prices Consolidate Near All-Time Highs Amid Geopolitical Tensions",
-                source: "Financial Times",
-                category: "commodities",
-                time: "6 hours ago",
-                image: "https://images.unsplash.com/photo-1610375461246-83df859d849d?w=400",
-                sentiment: "neutral",
-                score: 55,
-                impact: "medium",
-                assets: ["GOLD", "Silver"]
-            },
-            {
-                title: "EUR/USD Drops as ECB Hints at Extended Accommodative Policy",
-                source: "Forex Live",
-                category: "forex",
-                time: "7 hours ago",
-                image: "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?w=400",
-                sentiment: "bearish",
-                score: 35,
-                impact: "medium",
-                assets: ["EUR", "USD"]
-            },
-            {
-                title: "Ethereum Layer 2 Solutions See 500% Growth in Total Value Locked",
-                source: "The Block",
-                category: "crypto",
-                time: "8 hours ago",
-                image: "https://images.unsplash.com/photo-1622630998477-20aa696ecb05?w=400",
-                sentiment: "bullish",
-                score: 82,
-                impact: "medium",
-                assets: ["ETH", "ARB", "OP"]
-            },
-            {
-                title: "Oil Prices Tumble on Weaker China Demand Outlook",
-                source: "Bloomberg",
-                category: "commodities",
-                time: "9 hours ago",
-                image: "https://images.unsplash.com/photo-1584193869785-c16c6a13d3a2?w=400",
-                sentiment: "bearish",
-                score: 25,
-                impact: "high",
-                assets: ["OIL", "Energy"]
-            },
-            {
-                title: "NVIDIA Announces Next-Gen AI Chips, Stock Hits New Record",
-                source: "TechCrunch",
-                category: "stocks",
-                time: "10 hours ago",
-                image: "https://images.unsplash.com/photo-1591238372338-22d30c883a86?w=400",
-                sentiment: "bullish",
-                score: 92,
-                impact: "high",
-                assets: ["NVDA", "Tech"]
-            },
-            {
-                title: "Japanese Yen Strengthens as BoJ Hints at Policy Shift",
-                source: "Nikkei",
-                category: "forex",
-                time: "11 hours ago",
-                image: "https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?w=400",
-                sentiment: "neutral",
-                score: 48,
-                impact: "medium",
-                assets: ["JPY", "USD/JPY"]
-            },
-            {
-                title: "DeFi Protocol Suffers $50M Exploit, Token Crashes 80%",
-                source: "CryptoSlate",
-                category: "crypto",
-                time: "12 hours ago",
-                image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400",
-                sentiment: "bearish",
-                score: 12,
-                impact: "high",
-                assets: ["DeFi", "ETH"]
-            },
-            {
-                title: "RBI Keeps Interest Rates Unchanged, Maintains Growth Focus",
-                source: "Economic Times",
-                category: "economy",
-                time: "13 hours ago",
-                image: "https://images.unsplash.com/photo-1604594849809-dfedbc827105?w=400",
-                sentiment: "neutral",
-                score: 52,
-                impact: "medium",
-                assets: ["INR", "NIFTY"]
-            }
-        ];
-
+        // ==================== STATE ====================
+        let allNews = [];
+        let displayedNews = [];
         let currentCategory = 'all';
-        let displayedNews = [...newsDatabase];
+        let isLoading = false;
+        let lastFetchTime = null;
 
-        // Analyze custom news
-        function analyzeCustomNews() {
-            const text = document.getElementById('customNews').value.trim().toLowerCase();
-            if (!text) return;
+        // ==================== ENHANCED SENTIMENT ANALYSIS ====================
+        const sentimentEngine = {
+            // Weighted keywords for more accurate sentiment analysis
+            bullishKeywords: {
+                strong: ['surge', 'soar', 'skyrocket', 'moon', 'explode', 'breakthrough', 'record high', 'all-time high', 'ath', 'parabolic', 'massive gains'],
+                medium: ['rally', 'bullish', 'gain', 'rise', 'climb', 'jump', 'growth', 'outperform', 'beat', 'exceed', 'positive', 'optimistic', 'upgrade', 'buy', 'accumulation', 'inflows'],
+                mild: ['up', 'higher', 'green', 'advance', 'recover', 'rebound', 'support', 'stable growth', 'steady', 'improve', 'strengthen']
+            },
+            bearishKeywords: {
+                strong: ['crash', 'plunge', 'collapse', 'tank', 'bloodbath', 'capitulation', 'bankruptcy', 'insolvency', 'fraud', 'scam', 'rug pull', 'hack', 'exploit', 'death cross'],
+                medium: ['drop', 'fall', 'decline', 'bearish', 'sell-off', 'selloff', 'dump', 'tumble', 'slide', 'downgrade', 'miss', 'weak', 'negative', 'outflows', 'correction', 'fear', 'panic'],
+                mild: ['down', 'lower', 'red', 'dip', 'pullback', 'retreat', 'slip', 'concern', 'worry', 'caution', 'risk', 'uncertain']
+            },
+            neutralKeywords: ['unchanged', 'stable', 'consolidate', 'sideways', 'range', 'mixed', 'hold', 'flat', 'steady', 'maintain', 'wait'],
             
-            const btn = document.getElementById('analyzeBtn');
-            btn.disabled = true;
-            btn.innerHTML = '<span>⏳</span> Analyzing...';
+            // Category detection keywords
+            categoryKeywords: {
+                crypto: ['bitcoin', 'btc', 'ethereum', 'eth', 'crypto', 'blockchain', 'defi', 'nft', 'altcoin', 'token', 'wallet', 'exchange', 'binance', 'coinbase', 'solana', 'xrp', 'dogecoin', 'meme coin', 'stablecoin', 'usdt', 'usdc'],
+                stocks: ['stock', 'share', 'equity', 'nasdaq', 'dow', 's&p', 'nyse', 'ipo', 'earnings', 'dividend', 'market cap', 'apple', 'tesla', 'nvidia', 'microsoft', 'amazon', 'google', 'meta', 'tech stocks'],
+                forex: ['forex', 'currency', 'fx', 'eur', 'usd', 'gbp', 'jpy', 'dollar', 'euro', 'yen', 'pound', 'exchange rate', 'central bank', 'fed', 'ecb', 'boj', 'monetary policy'],
+                economy: ['economy', 'gdp', 'inflation', 'interest rate', 'employment', 'unemployment', 'recession', 'growth', 'fed', 'treasury', 'fiscal', 'budget', 'debt', 'trade', 'tariff'],
+                commodities: ['gold', 'silver', 'oil', 'crude', 'natural gas', 'commodity', 'metal', 'platinum', 'copper', 'wheat', 'corn', 'agriculture', 'energy']
+            },
             
-            setTimeout(() => {
+            // Asset detection
+            assetPatterns: {
+                crypto: { BTC: /bitcoin|btc/i, ETH: /ethereum|eth(?!er)/i, SOL: /solana|sol/i, XRP: /xrp|ripple/i, DOGE: /doge|dogecoin/i, ADA: /cardano|ada/i },
+                stocks: { AAPL: /apple|aapl/i, TSLA: /tesla|tsla/i, NVDA: /nvidia|nvda/i, MSFT: /microsoft|msft/i, AMZN: /amazon|amzn/i, GOOGL: /google|googl|alphabet/i, META: /meta|facebook/i },
+                indices: { SPY: /s&p|spy|sp500/i, NASDAQ: /nasdaq|qqq/i, DOW: /dow jones|djia/i, NIFTY: /nifty|sensex/i },
+                forex: { USD: /dollar|usd/i, EUR: /euro|eur/i, GBP: /pound|gbp/i, JPY: /yen|jpy/i },
+                commodities: { GOLD: /gold|xau/i, SILVER: /silver|xag/i, OIL: /oil|crude|wti|brent/i }
+            },
+
+            analyze(text) {
+                if (!text) return { sentiment: 'neutral', score: 50, confidence: 30, keywords: [], category: 'economy', assets: [], impact: 'low' };
+                
+                const lowerText = text.toLowerCase();
                 let bullishScore = 0;
                 let bearishScore = 0;
-                let foundBullish = [];
-                let foundBearish = [];
+                let foundKeywords = [];
                 
-                sentimentKeywords.bullish.forEach(keyword => {
-                    if (text.includes(keyword)) {
-                        bullishScore += 10;
-                        foundBullish.push(keyword);
+                // Score bullish keywords
+                for (const [strength, keywords] of Object.entries(this.bullishKeywords)) {
+                    const weight = strength === 'strong' ? 15 : strength === 'medium' ? 10 : 5;
+                    for (const keyword of keywords) {
+                        if (lowerText.includes(keyword)) {
+                            bullishScore += weight;
+                            foundKeywords.push({ word: keyword, type: 'bullish', weight });
+                        }
                     }
-                });
-                
-                sentimentKeywords.bearish.forEach(keyword => {
-                    if (text.includes(keyword)) {
-                        bearishScore += 10;
-                        foundBearish.push(keyword);
-                    }
-                });
-                
-                const netScore = Math.min(100, Math.max(0, 50 + (bullishScore - bearishScore)));
-                const confidence = Math.min(95, 60 + (foundBullish.length + foundBearish.length) * 5);
-                
-                let sentiment, emoji, color, analysis;
-                
-                if (netScore >= 65) {
-                    sentiment = 'BULLISH';
-                    emoji = '🚀';
-                    color = '#22c55e';
-                    analysis = `This news appears to be <strong>bullish</strong> for the market. The language suggests positive momentum, growth potential, or favorable conditions. Traders might interpret this as a buy signal or confirmation of an uptrend.`;
-                } else if (netScore <= 35) {
-                    sentiment = 'BEARISH';
-                    emoji = '📉';
-                    color = '#ef4444';
-                    analysis = `This news appears to be <strong>bearish</strong> for the market. The language suggests negative pressure, risk, or unfavorable conditions. Traders might interpret this as a sell signal or warning of potential downside.`;
-                } else {
-                    sentiment = 'NEUTRAL';
-                    emoji = '⚖️';
-                    color = '#fbbf24';
-                    analysis = `This news appears to be <strong>neutral</strong> or mixed. It doesn't strongly indicate bullish or bearish direction. Markets might not react significantly, or the impact could go either way depending on interpretation.`;
                 }
                 
-                document.getElementById('resultEmoji').textContent = emoji;
-                document.getElementById('resultTitle').textContent = sentiment;
-                document.getElementById('resultTitle').style.color = color;
-                document.getElementById('resultScore').textContent = `Sentiment Score: ${netScore}/100`;
-                document.getElementById('confidenceFill').style.width = confidence + '%';
-                document.getElementById('confidenceValue').textContent = confidence + '%';
-                document.getElementById('resultAnalysis').innerHTML = analysis;
+                // Score bearish keywords
+                for (const [strength, keywords] of Object.entries(this.bearishKeywords)) {
+                    const weight = strength === 'strong' ? 15 : strength === 'medium' ? 10 : 5;
+                    for (const keyword of keywords) {
+                        if (lowerText.includes(keyword)) {
+                            bearishScore += weight;
+                            foundKeywords.push({ word: keyword, type: 'bearish', weight });
+                        }
+                    }
+                }
                 
-                let keywordsHtml = '';
-                foundBullish.forEach(k => {
-                    keywordsHtml += `<span class="keyword bullish">📈 ${k}</span>`;
-                });
-                foundBearish.forEach(k => {
-                    keywordsHtml += `<span class="keyword bearish">📉 ${k}</span>`;
-                });
-                document.getElementById('resultKeywords').innerHTML = keywordsHtml || '<span class="keyword">No strong keywords detected</span>';
+                // Calculate final score (0-100, 50 is neutral)
+                const totalWeight = bullishScore + bearishScore;
+                let score = 50;
+                if (totalWeight > 0) {
+                    score = Math.round(50 + ((bullishScore - bearishScore) / Math.max(totalWeight, 1)) * 50);
+                    score = Math.max(0, Math.min(100, score));
+                }
                 
-                document.getElementById('analysisResult').classList.add('visible');
+                // Determine sentiment
+                let sentiment = 'neutral';
+                if (score >= 60) sentiment = 'bullish';
+                else if (score <= 40) sentiment = 'bearish';
                 
-                btn.disabled = false;
-                btn.innerHTML = '<span>🧠</span> Analyze Sentiment';
-            }, 1500);
+                // Calculate confidence based on keyword matches
+                const confidence = Math.min(95, 40 + (foundKeywords.length * 8) + (totalWeight / 3));
+                
+                // Detect category
+                let category = 'economy';
+                let maxCategoryScore = 0;
+                for (const [cat, keywords] of Object.entries(this.categoryKeywords)) {
+                    let catScore = 0;
+                    for (const keyword of keywords) {
+                        if (lowerText.includes(keyword)) catScore++;
+                    }
+                    if (catScore > maxCategoryScore) {
+                        maxCategoryScore = catScore;
+                        category = cat;
+                    }
+                }
+                
+                // Detect assets
+                const assets = [];
+                for (const [assetClass, patterns] of Object.entries(this.assetPatterns)) {
+                    for (const [symbol, pattern] of Object.entries(patterns)) {
+                        if (pattern.test(text) && !assets.includes(symbol)) {
+                            assets.push(symbol);
+                        }
+                    }
+                }
+                
+                // Determine impact
+                let impact = 'low';
+                if (totalWeight >= 30 || foundKeywords.some(k => k.weight >= 15)) impact = 'high';
+                else if (totalWeight >= 15) impact = 'medium';
+                
+                return {
+                    sentiment,
+                    score,
+                    confidence: Math.round(confidence),
+                    keywords: foundKeywords.slice(0, 8),
+                    category,
+                    assets: assets.slice(0, 4),
+                    impact
+                };
+            }
+        };
+
+        // ==================== API FUNCTIONS ====================
+        
+        // Update API status indicators
+        function updateApiStatus(apiId, status) {
+            const el = document.getElementById(apiId);
+            if (el) {
+                el.classList.remove('connected', 'error');
+                el.classList.add(status);
+            }
         }
 
-        // Render news cards
-        function renderNews(news) {
-            const grid = document.getElementById('newsGrid');
+        // Fetch Fear & Greed Index from Alternative.me
+        async function fetchFearGreedIndex() {
+            try {
+                const response = await fetch(CONFIG.FEAR_GREED_URL);
+                if (!response.ok) throw new Error('Fear & Greed API error');
+                
+                const data = await response.json();
+                updateApiStatus('fgApiStatus', 'connected');
+                
+                if (data.data && data.data[0]) {
+                    const fgData = data.data[0];
+                    const value = parseInt(fgData.value);
+                    
+                    document.getElementById('fgValue').textContent = value;
+                    document.getElementById('fgLabel').textContent = fgData.value_classification;
+                    document.getElementById('fgIndicator').style.left = `${value}%`;
+                    document.getElementById('fgUpdated').textContent = `Updated: ${new Date(fgData.timestamp * 1000).toLocaleString()}`;
+                    
+                    // Color based on value
+                    const fgValueEl = document.getElementById('fgValue');
+                    const fgLabelEl = document.getElementById('fgLabel');
+                    let color;
+                    if (value <= 25) color = '#ef4444';
+                    else if (value <= 45) color = '#f97316';
+                    else if (value <= 55) color = '#fbbf24';
+                    else if (value <= 75) color = '#84cc16';
+                    else color = '#22c55e';
+                    
+                    fgValueEl.style.color = color;
+                    fgLabelEl.style.color = color;
+                    
+                    return value;
+                }
+            } catch (error) {
+                console.error('Fear & Greed fetch error:', error);
+                updateApiStatus('fgApiStatus', 'error');
+                document.getElementById('fgValue').textContent = '--';
+                document.getElementById('fgLabel').textContent = 'Unavailable';
+            }
+            return 50;
+        }
+
+        // Fetch market data from CoinGecko
+        async function fetchMarketData() {
+            try {
+                // Fetch crypto prices
+                const cryptoResponse = await fetch(`${CONFIG.COINGECKO_BASE_URL}/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true`);
+                if (cryptoResponse.ok) {
+                    const cryptoData = await cryptoResponse.json();
+                    updateApiStatus('cryptoApiStatus', 'connected');
+                    
+                    if (cryptoData.bitcoin) {
+                        document.getElementById('btcPrice').textContent = '$' + cryptoData.bitcoin.usd.toLocaleString();
+                        const btcChange = cryptoData.bitcoin.usd_24h_change?.toFixed(2) || '0.00';
+                        document.getElementById('btcChange').textContent = (btcChange >= 0 ? '+' : '') + btcChange + '%';
+                        document.getElementById('btcChange').className = 'market-item-change ' + (btcChange >= 0 ? 'positive' : 'negative');
+                    }
+                    
+                    if (cryptoData.ethereum) {
+                        document.getElementById('ethPrice').textContent = '$' + cryptoData.ethereum.usd.toLocaleString();
+                        const ethChange = cryptoData.ethereum.usd_24h_change?.toFixed(2) || '0.00';
+                        document.getElementById('ethChange').textContent = (ethChange >= 0 ? '+' : '') + ethChange + '%';
+                        document.getElementById('ethChange').className = 'market-item-change ' + (ethChange >= 0 ? 'positive' : 'negative');
+                    }
+                }
+                
+                // Fetch global market data for additional info
+                const globalResponse = await fetch(`${CONFIG.COINGECKO_BASE_URL}/global`);
+                if (globalResponse.ok) {
+                    const globalData = await globalResponse.json();
+                    // Market cap change as proxy for overall sentiment
+                    const marketCapChange = globalData.data?.market_cap_change_percentage_24h_usd || 0;
+                    
+                    // Use as rough estimate for other markets when real APIs aren't available
+                    document.getElementById('spyPrice').textContent = '--';
+                    document.getElementById('spyChange').textContent = 'Market data';
+                    document.getElementById('spyChange').className = 'market-item-change';
+                    
+                    document.getElementById('goldPrice').textContent = '--';
+                    document.getElementById('goldChange').textContent = 'Market data';
+                    document.getElementById('goldChange').className = 'market-item-change';
+                    
+                    document.getElementById('vixPrice').textContent = '--';
+                    document.getElementById('vixChange').textContent = 'Market data';
+                    document.getElementById('vixChange').className = 'market-item-change';
+                }
+            } catch (error) {
+                console.error('Market data fetch error:', error);
+                updateApiStatus('cryptoApiStatus', 'error');
+            }
+        }
+
+        // Fetch news from GNews.io
+        async function fetchGNews(query = 'finance OR cryptocurrency OR stock market') {
+            try {
+                const url = `${CONFIG.GNEWS_BASE_URL}/search?q=${encodeURIComponent(query)}&lang=en&country=us&max=10&apikey=${CONFIG.GNEWS_API_KEY}`;
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    if (response.status === 429) {
+                        console.warn('GNews rate limit reached');
+                        return [];
+                    }
+                    throw new Error('GNews API error');
+                }
+                
+                const data = await response.json();
+                updateApiStatus('newsApiStatus', 'connected');
+                
+                return (data.articles || []).map(article => ({
+                    title: article.title,
+                    description: article.description,
+                    source: article.source?.name || 'Unknown',
+                    url: article.url,
+                    image: article.image,
+                    publishedAt: article.publishedAt,
+                    ...sentimentEngine.analyze(article.title + ' ' + (article.description || ''))
+                }));
+            } catch (error) {
+                console.error('GNews fetch error:', error);
+                updateApiStatus('newsApiStatus', 'error');
+                return [];
+            }
+        }
+
+        // Fetch crypto news from CryptoCompare
+        async function fetchCryptoNews() {
+            try {
+                const response = await fetch(CONFIG.CRYPTOCOMPARE_NEWS_URL);
+                if (!response.ok) throw new Error('CryptoCompare API error');
+                
+                const data = await response.json();
+                
+                return (data.Data || []).slice(0, 15).map(article => ({
+                    title: article.title,
+                    description: article.body?.substring(0, 200),
+                    source: article.source_info?.name || article.source || 'Crypto News',
+                    url: article.url,
+                    image: article.imageurl,
+                    publishedAt: new Date(article.published_on * 1000).toISOString(),
+                    ...sentimentEngine.analyze(article.title + ' ' + (article.body || ''))
+                }));
+            } catch (error) {
+                console.error('CryptoCompare news fetch error:', error);
+                return [];
+            }
+        }
+
+        // Fetch top headlines
+        async function fetchTopHeadlines() {
+            try {
+                const url = `${CONFIG.GNEWS_BASE_URL}/top-headlines?category=business&lang=en&country=us&max=10&apikey=${CONFIG.GNEWS_API_KEY}`;
+                const response = await fetch(url);
+                
+                if (!response.ok) return [];
+                
+                const data = await response.json();
+                
+                return (data.articles || []).map(article => ({
+                    title: article.title,
+                    description: article.description,
+                    source: article.source?.name || 'Unknown',
+                    url: article.url,
+                    image: article.image,
+                    publishedAt: article.publishedAt,
+                    ...sentimentEngine.analyze(article.title + ' ' + (article.description || ''))
+                }));
+            } catch (error) {
+                console.error('Top headlines fetch error:', error);
+                return [];
+            }
+        }
+
+        // ==================== UI FUNCTIONS ====================
+        
+        function formatTimeAgo(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const seconds = Math.floor((now - date) / 1000);
             
-            grid.innerHTML = news.map(item => `
-                <div class="news-card" onclick="window.open('#', '_blank')">
-                    <div class="news-image">
-                        <img src="${item.image}" alt="${item.title}" onerror="this.style.display='none'">
-                        <span class="news-sentiment-badge ${item.sentiment}">${item.sentiment.toUpperCase()}</span>
-                    </div>
-                    <div class="news-content">
-                        <div class="news-source">
-                            <span class="source-name">${item.source}</span>
-                            <span class="news-time">${item.time}</span>
-                        </div>
-                        <div class="news-title">${item.title}</div>
-                        <div class="news-impact">
-                            <div>
-                                <span class="impact-label">Impact: </span>
-                                ${getImpactDots(item.impact)}
-                            </div>
-                            <div class="affected-assets">
-                                ${item.assets.map(a => `<span class="asset-tag">${a}</span>`).join('')}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
+            if (seconds < 60) return 'Just now';
+            if (seconds < 3600) return Math.floor(seconds / 60) + ' min ago';
+            if (seconds < 86400) return Math.floor(seconds / 3600) + ' hours ago';
+            return Math.floor(seconds / 86400) + ' days ago';
         }
 
         function getImpactDots(impact) {
@@ -614,39 +1411,76 @@ Examples:
             </div>`;
         }
 
-        // Filter news
-        function filterNews(category) {
-            currentCategory = category;
+        function renderNews(news) {
+            const grid = document.getElementById('newsGrid');
             
-            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            if (category === 'all') {
-                displayedNews = [...newsDatabase];
-            } else {
-                displayedNews = newsDatabase.filter(n => n.category === category);
+            if (!news || news.length === 0) {
+                grid.innerHTML = `
+                    <div class="no-news" style="grid-column: 1 / -1;">
+                        <i class="fas fa-newspaper"></i>
+                        <h3>No news found</h3>
+                        <p>Try selecting a different category or refresh the data.</p>
+                    </div>
+                `;
+                return;
             }
             
-            renderNews(displayedNews);
-            updateStats();
+            grid.innerHTML = news.map(item => `
+                <a class="news-card" href="${item.url || '#'}" target="_blank" rel="noopener noreferrer">
+                    <div class="news-image">
+                        ${item.image 
+                            ? `<img src="${item.image}" alt="${item.title}" onerror="this.parentElement.innerHTML='<div class=\\'news-image-placeholder\\'>📰</div>'">`
+                            : '<div class="news-image-placeholder">📰</div>'
+                        }
+                        <span class="news-sentiment-badge ${item.sentiment}">
+                            ${item.sentiment === 'bullish' ? '📈' : item.sentiment === 'bearish' ? '📉' : '⚖️'}
+                            ${item.sentiment.toUpperCase()} ${item.score}
+                        </span>
+                    </div>
+                    <div class="news-content">
+                        <div class="news-source">
+                            <span class="source-name">${item.source}</span>
+                            <span class="news-time">${formatTimeAgo(item.publishedAt)}</span>
+                        </div>
+                        <div class="news-title">${item.title}</div>
+                        ${item.description ? `<div class="news-description">${item.description}</div>` : ''}
+                        <div class="news-impact">
+                            <div>
+                                <span class="impact-label">Impact: </span>
+                                ${getImpactDots(item.impact)}
+                            </div>
+                            <div class="affected-assets">
+                                ${(item.assets || []).map(a => `<span class="asset-tag">${a}</span>`).join('')}
+                                ${item.assets?.length === 0 ? `<span class="asset-tag">${item.category?.toUpperCase() || 'GENERAL'}</span>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            `).join('');
         }
 
-        // Update statistics
         function updateStats() {
-            const bullish = displayedNews.filter(n => n.sentiment === 'bullish').length;
-            const bearish = displayedNews.filter(n => n.sentiment === 'bearish').length;
-            const neutral = displayedNews.filter(n => n.sentiment === 'neutral').length;
-            const avgScore = Math.round(displayedNews.reduce((sum, n) => sum + n.score, 0) / displayedNews.length);
+            const news = displayedNews.length > 0 ? displayedNews : allNews;
+            
+            if (news.length === 0) {
+                document.getElementById('bullishCount').textContent = '0';
+                document.getElementById('bearishCount').textContent = '0';
+                document.getElementById('neutralCount').textContent = '0';
+                document.getElementById('avgScore').textContent = '50';
+                return;
+            }
+            
+            const bullish = news.filter(n => n.sentiment === 'bullish').length;
+            const bearish = news.filter(n => n.sentiment === 'bearish').length;
+            const neutral = news.filter(n => n.sentiment === 'neutral').length;
+            const avgScore = Math.round(news.reduce((sum, n) => sum + (n.score || 50), 0) / news.length);
             
             document.getElementById('bullishCount').textContent = bullish;
             document.getElementById('bearishCount').textContent = bearish;
             document.getElementById('neutralCount').textContent = neutral;
             document.getElementById('avgScore').textContent = avgScore;
             
-            // Update mood gauge
             updateMoodGauge(avgScore);
-            
-            // Update AI summary
             generateAISummary(bullish, bearish, neutral, avgScore);
         }
 
@@ -669,28 +1503,35 @@ Examples:
         }
 
         function generateAISummary(bullish, bearish, neutral, avgScore) {
+            const total = bullish + bearish + neutral;
             let summary = '';
             const signals = [];
             
+            const categoryLabel = currentCategory === 'all' ? 'the market' : currentCategory;
+            
             if (bullish > bearish * 1.5) {
-                summary = `<strong>📈 Bullish Sentiment Dominates:</strong> ${bullish} out of ${displayedNews.length} news stories are bullish. Market sentiment appears positive with an average score of ${avgScore}. This suggests traders may be optimistic about near-term price action. Consider this as a supportive backdrop for long positions, but always manage risk.`;
+                summary = `<strong>📈 Bullish Sentiment Dominates:</strong> ${bullish} out of ${total} live news stories show bullish sentiment for ${categoryLabel}. The average sentiment score of ${avgScore}/100 indicates positive market momentum. This could be a favorable environment for long positions, but always manage your risk appropriately.`;
                 signals.push({ text: 'Bullish Trend', class: 'bullish' });
                 signals.push({ text: 'Positive Momentum', class: 'bullish' });
+                if (avgScore > 70) signals.push({ text: 'Strong Buy Signal', class: 'bullish' });
             } else if (bearish > bullish * 1.5) {
-                summary = `<strong>📉 Bearish Sentiment Prevails:</strong> ${bearish} out of ${displayedNews.length} news stories are bearish. Market sentiment is negative with an average score of ${avgScore}. Caution is advised as negative headlines often lead to sell pressure. Consider defensive positions or reduced exposure.`;
+                summary = `<strong>📉 Bearish Sentiment Prevails:</strong> ${bearish} out of ${total} live news stories show bearish sentiment for ${categoryLabel}. The average sentiment score of ${avgScore}/100 suggests negative pressure. Consider defensive positions or reduced exposure until sentiment improves.`;
                 signals.push({ text: 'Bearish Pressure', class: 'bearish' });
                 signals.push({ text: 'Risk-Off Mode', class: 'bearish' });
+                if (avgScore < 30) signals.push({ text: 'Caution Advised', class: 'bearish' });
             } else {
-                summary = `<strong>⚖️ Mixed Sentiment:</strong> News sentiment is balanced with ${bullish} bullish, ${bearish} bearish, and ${neutral} neutral stories. Average score of ${avgScore} suggests no strong directional bias. Markets may be in consolidation - wait for clearer signals before making major moves.`;
+                summary = `<strong>⚖️ Mixed Sentiment:</strong> News sentiment is balanced with ${bullish} bullish, ${bearish} bearish, and ${neutral} neutral stories for ${categoryLabel}. The average score of ${avgScore}/100 suggests no strong directional bias. Markets may be consolidating—wait for clearer signals.`;
                 signals.push({ text: 'Mixed Signals', class: 'neutral' });
-                signals.push({ text: 'Consolidation', class: 'neutral' });
+                signals.push({ text: 'Consolidation Phase', class: 'neutral' });
             }
             
-            // Add category-specific insights
+            // Add category-specific signals
             if (currentCategory === 'crypto') {
                 signals.push({ text: 'Crypto Focus', class: 'neutral' });
             } else if (currentCategory === 'stocks') {
                 signals.push({ text: 'Equity Focus', class: 'neutral' });
+            } else if (currentCategory === 'forex') {
+                signals.push({ text: 'FX Focus', class: 'neutral' });
             }
             
             document.getElementById('aiSummary').innerHTML = summary;
@@ -699,9 +1540,191 @@ Examples:
             ).join('');
         }
 
-        // Initialize
-        renderNews(newsDatabase);
-        updateStats();
+        // ==================== CUSTOM NEWS ANALYSIS ====================
+        function analyzeCustomNews() {
+            const text = document.getElementById('customNews').value.trim();
+            if (!text) return;
+            
+            const btn = document.getElementById('analyzeBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
+            
+            setTimeout(() => {
+                const analysis = sentimentEngine.analyze(text);
+                
+                let emoji, color;
+                if (analysis.sentiment === 'bullish') {
+                    emoji = '🚀';
+                    color = '#22c55e';
+                } else if (analysis.sentiment === 'bearish') {
+                    emoji = '📉';
+                    color = '#ef4444';
+                } else {
+                    emoji = '⚖️';
+                    color = '#fbbf24';
+                }
+                
+                // Generate analysis text
+                let analysisText;
+                if (analysis.sentiment === 'bullish') {
+                    analysisText = `This news appears to be <strong style="color:${color}">BULLISH</strong> for the market. The language contains positive signals suggesting growth, gains, or favorable conditions. Traders might interpret this as supportive for long positions. Detected category: <strong>${analysis.category.toUpperCase()}</strong>.`;
+                } else if (analysis.sentiment === 'bearish') {
+                    analysisText = `This news appears to be <strong style="color:${color}">BEARISH</strong> for the market. The language contains negative signals suggesting decline, risk, or unfavorable conditions. Traders might interpret this as a warning signal. Detected category: <strong>${analysis.category.toUpperCase()}</strong>.`;
+                } else {
+                    analysisText = `This news appears to be <strong style="color:${color}">NEUTRAL</strong>. The language doesn't strongly indicate bullish or bearish direction. Markets might not react significantly, or impact could go either way. Detected category: <strong>${analysis.category.toUpperCase()}</strong>.`;
+                }
+                
+                document.getElementById('resultEmoji').textContent = emoji;
+                document.getElementById('resultTitle').textContent = analysis.sentiment.toUpperCase();
+                document.getElementById('resultTitle').style.color = color;
+                document.getElementById('resultScore').textContent = `Sentiment Score: ${analysis.score}/100`;
+                document.getElementById('confidenceFill').style.width = analysis.confidence + '%';
+                document.getElementById('confidenceFill').style.background = color;
+                document.getElementById('confidenceValue').textContent = analysis.confidence + '%';
+                document.getElementById('resultAnalysis').innerHTML = analysisText;
+                
+                // Render keywords
+                let keywordsHtml = '';
+                analysis.keywords.forEach(k => {
+                    keywordsHtml += `<span class="keyword ${k.type}">${k.type === 'bullish' ? '📈' : '📉'} ${k.word}</span>`;
+                });
+                if (analysis.assets.length > 0) {
+                    analysis.assets.forEach(a => {
+                        keywordsHtml += `<span class="keyword neutral">🎯 ${a}</span>`;
+                    });
+                }
+                document.getElementById('resultKeywords').innerHTML = keywordsHtml || '<span class="keyword neutral">No strong keywords detected</span>';
+                
+                document.getElementById('analysisResult').classList.add('visible');
+                
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-brain"></i> Analyze Sentiment';
+            }, 800);
+        }
+
+        // ==================== CATEGORY FILTERING ====================
+        function filterNews(category) {
+            currentCategory = category;
+            
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.category === category);
+            });
+            
+            if (category === 'all') {
+                displayedNews = [...allNews];
+            } else {
+                displayedNews = allNews.filter(n => n.category === category);
+            }
+            
+            renderNews(displayedNews);
+            updateStats();
+        }
+
+        // ==================== MAIN DATA FETCHING ====================
+        async function fetchAllNews() {
+            try {
+                document.getElementById('liveStatus').textContent = 'Fetching Live Data...';
+                
+                // Fetch from multiple sources in parallel
+                const [cryptoNews, financeNews, headlines] = await Promise.all([
+                    fetchCryptoNews(),
+                    fetchGNews('stock market OR forex OR economy OR trading'),
+                    fetchTopHeadlines()
+                ]);
+                
+                // Combine and deduplicate news
+                const combined = [...cryptoNews, ...financeNews, ...headlines];
+                const seen = new Set();
+                allNews = combined.filter(item => {
+                    const key = item.title?.substring(0, 50);
+                    if (seen.has(key)) return false;
+                    seen.add(key);
+                    return true;
+                });
+                
+                // Sort by date
+                allNews.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
+                
+                // Limit to reasonable number
+                allNews = allNews.slice(0, 30);
+                
+                // Apply current filter
+                filterNews(currentCategory);
+                
+                // Update timestamp
+                lastFetchTime = new Date();
+                document.getElementById('lastUpdated').textContent = `Last updated: ${lastFetchTime.toLocaleTimeString()}`;
+                document.getElementById('liveStatus').textContent = `${allNews.length} Live Articles`;
+                
+                return allNews;
+            } catch (error) {
+                console.error('Error fetching news:', error);
+                document.getElementById('liveStatus').textContent = 'Error loading news';
+                throw error;
+            }
+        }
+
+        async function refreshAllData() {
+            if (isLoading) return;
+            
+            isLoading = true;
+            const refreshBtn = document.getElementById('refreshBtn');
+            const refreshIcon = document.getElementById('refreshIcon');
+            
+            refreshBtn.disabled = true;
+            refreshIcon.classList.add('spinning');
+            
+            try {
+                await Promise.all([
+                    fetchAllNews(),
+                    fetchMarketData(),
+                    fetchFearGreedIndex()
+                ]);
+            } catch (error) {
+                console.error('Refresh error:', error);
+            } finally {
+                isLoading = false;
+                refreshBtn.disabled = false;
+                refreshIcon.classList.remove('spinning');
+            }
+        }
+
+        // ==================== INITIALIZATION ====================
+        async function init() {
+            // Setup category filter buttons
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', () => filterNews(btn.dataset.category));
+            });
+            
+            // Initial data fetch
+            try {
+                await Promise.all([
+                    fetchAllNews(),
+                    fetchMarketData(),
+                    fetchFearGreedIndex()
+                ]);
+            } catch (error) {
+                console.error('Initialization error:', error);
+                document.getElementById('newsGrid').innerHTML = `
+                    <div class="error-state" style="grid-column: 1 / -1;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Unable to load live news</h3>
+                        <p>Please check your internet connection and try again.</p>
+                        <button class="retry-btn" onclick="refreshAllData()">
+                            <i class="fas fa-redo"></i> Retry
+                        </button>
+                    </div>
+                `;
+            }
+            
+            // Setup auto-refresh
+            setInterval(fetchMarketData, CONFIG.MARKET_REFRESH_INTERVAL);
+            setInterval(fetchAllNews, CONFIG.NEWS_REFRESH_INTERVAL);
+            setInterval(fetchFearGreedIndex, CONFIG.NEWS_REFRESH_INTERVAL);
+        }
+
+        // Start the app
+        document.addEventListener('DOMContentLoaded', init);
     </script>
 <script src="common-footer.js" defer></script>
 </body>

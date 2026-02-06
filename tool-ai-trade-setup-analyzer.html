@@ -14,14 +14,14 @@
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     
-    <title>AI Trade Setup Analyzer - Educational Chart Analysis Tool with GPT-4 Vision | BroBillionaire</title>
-    <meta name="description" content="Get AI-powered trade setup analysis using GPT-4 Vision. Upload chart screenshots for professional-grade technical analysis, multiple targets, position sizing, risk-reward calculations, and actionable trade ideas in seconds.">
+    <title>AI Trade Setup Analyzer - Educational Chart Analysis Tool with Gemini Vision | BroBillionaire</title>
+    <meta name="description" content="Get AI-powered trade setup analysis using Google Gemini Vision (FREE). Upload chart screenshots for professional-grade technical analysis, multiple targets, position sizing, risk-reward calculations, and actionable trade ideas in seconds.">
     <meta name="keywords" content="AI trade analyzer, GPT-4 trading, AI chart analysis, automated technical analysis, trade setup scanner, AI trading assistant, stock chart analyzer, forex AI analysis, crypto AI trading, swing trade AI, position sizing calculator, risk reward ratio">
     <link rel="canonical" href="https://brobillionaire.com/tool-ai-trade-setup-analyzer.html">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="AI Trade Setup Analyzer - Smart Chart Analysis with GPT-4 Vision">
-    <meta property="og:description" content="Get AI-powered trade setup analysis using GPT-4. Upload charts and receive professional technical analysis with position sizing instantly.">
+    <meta property="og:title" content="AI Trade Setup Analyzer - Smart Chart Analysis with Gemini Vision (FREE)">
+    <meta property="og:description" content="Get AI-powered trade setup analysis using Google Gemini. Upload charts and receive professional technical analysis with position sizing instantly.">
     <meta property="og:url" content="https://brobillionaire.com/tool-ai-trade-setup-analyzer.html">
     <meta property="og:image" content="https://brobillionaire.com/og-ai-analyzer.jpg">
     <meta property="og:type" content="website">
@@ -29,7 +29,7 @@
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="AI Trade Setup Analyzer - GPT-4 Vision Powered">
+    <meta name="twitter:title" content="AI Trade Setup Analyzer - Gemini Vision Powered (FREE)">
     <meta name="twitter:description" content="Upload your trading charts and get instant AI analysis with entry, multiple targets, position sizing, and risk management.">
     
     <link rel="stylesheet" href="styles.css">
@@ -42,7 +42,7 @@
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": "AI Trade Setup Analyzer",
-        "description": "AI-powered trade setup analysis tool using GPT-4 Vision for professional-grade chart analysis with position sizing and risk management",
+        "description": "AI-powered trade setup analysis tool using Google Gemini Vision for professional-grade chart analysis with position sizing and risk management",
         "url": "https://brobillionaire.com/tool-ai-trade-setup-analyzer.html",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Any",
@@ -525,7 +525,7 @@
         <div class="ai-header">
             <div class="ai-badge">
                 <div class="pulse"></div>
-                <i class="fas fa-robot"></i> Powered by GPT-4 Vision AI
+                <i class="fas fa-robot"></i> Powered by Gemini AI (FREE Vision Analysis)
             </div>
             <h1 class="ai-title glow"><i class="fas fa-brain"></i> AI Trade Setup Analyzer</h1>
             <p class="ai-subtitle">Upload your chart screenshot and let our AI analyze patterns for <strong>educational purposes</strong>. Learn to identify key levels, understand position sizing concepts, and study institutional-grade technical analysis with multiple targets. <em>Not financial advice.</em></p>
@@ -1571,7 +1571,8 @@
     </div>
     
     <script>
-        const OPENAI_API_KEY = 'YOUR_API_KEY_HERE'; // Replace with your API key - DO NOT commit real keys!
+        // OpenAI API key is now stored securely in server .env file
+        // All API calls go through /api/openai/chat proxy
         
         let uploadedImageBase64 = null;
         let currentAnalysis = null;
@@ -2275,21 +2276,16 @@ IMPORTANT:
 - Adjust targets based on whether you recommend LONG or SHORT
 - For LONG: targets are above entry, SL is below
 - For SHORT: targets are below entry, SL is above
-- BE OBJECTIVE: If chart shows bearish signals, recommend SHORT. Don't always default to LONG.`;
+- BE OBJECTIVE: If chart shows bearish signals, recommend SHORT. Don't always default to LONG.
+
+Return ONLY the JSON object, no other text.`;
 
             try {
-                // Helper function to make API call with retry logic
-                async function makeAPICall(retryCount = 0) {
-                    const maxRetries = 2;
-                    
-                    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${OPENAI_API_KEY}` },
-                        body: JSON.stringify({
-                            model: 'gpt-4o-2024-11-20',
-                            response_format: { type: "json_object" },
-                            messages: [
-                                { role: 'system', content: `You are an elite technical analyst with 25+ years of experience. You are UNBIASED and recommend SHORT/SELL just as readily as LONG/BUY based on chart evidence.
+                // Use Gemini API (FREE) with fallback to OpenAI
+                console.log('Starting chart analysis with AI...');
+                
+                // Build the full prompt with system instructions
+                const systemPrompt = `You are an elite technical analyst with 25+ years of experience. You are UNBIASED and recommend SHORT/SELL just as readily as LONG/BUY based on chart evidence.
 
 CRITICAL BIAS RULE:
 - If you see BEARISH signals (lower highs, breakdown, resistance rejection, bearish divergence, overbought RSI, death cross, distribution), you MUST recommend SHORT
@@ -2319,81 +2315,86 @@ NEUTRAL/WAIT:
 - Mixed signals from indicators
 - Key level test without confirmation
 
-Analyze objectively and give SHORT recommendations when bearish evidence exists.` },
-                                { role: 'user', content: [{ type: 'text', text: prompt }, { type: 'image_url', image_url: { url: uploadedImageBase64, detail: 'high' } }] }
-                            ],
-                            max_tokens: 4500,
-                            temperature: 0
+Analyze objectively and give SHORT recommendations when bearish evidence exists.
+IMPORTANT: Return ONLY valid JSON, no markdown, no code blocks, no explanation text.`;
+
+                const fullPrompt = systemPrompt + '\n\n' + prompt;
+                
+                // Try Gemini API first (FREE)
+                let content = null;
+                let usedModel = 'gemini';
+                
+                try {
+                    const geminiResponse = await fetch('/api/gemini/analyze', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            prompt: fullPrompt,
+                            imageBase64: uploadedImageBase64
                         })
                     });
                     
-                    // Check for HTTP errors
-                    if (!response.ok) {
-                        const errorText = await response.text();
-                        console.error('HTTP Error:', response.status, errorText);
+                    if (geminiResponse.ok) {
+                        const geminiData = await geminiResponse.json();
+                        if (geminiData.success && geminiData.content) {
+                            content = geminiData.content;
+                            console.log('Gemini API response received');
+                        } else if (geminiData.error) {
+                            throw new Error(geminiData.error);
+                        }
+                    } else {
+                        const errorData = await geminiResponse.json().catch(() => ({}));
+                        throw new Error(errorData.error || `Gemini API error: ${geminiResponse.status}`);
+                    }
+                } catch (geminiError) {
+                    console.log('Gemini API failed:', geminiError.message);
+                    
+                    // Try OpenAI as fallback
+                    try {
+                        console.log('Trying OpenAI fallback...');
+                        usedModel = 'openai';
                         
-                        if (response.status === 429) {
-                            if (retryCount < maxRetries) {
-                                console.log(`Rate limited, retrying in ${(retryCount + 1) * 2} seconds...`);
-                                await new Promise(r => setTimeout(r, (retryCount + 1) * 2000));
-                                return makeAPICall(retryCount + 1);
+                        const openaiResponse = await fetch('/api/openai/chat', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                model: 'gpt-4o-2024-11-20',
+                                response_format: { type: "json_object" },
+                                messages: [
+                                    { role: 'system', content: systemPrompt },
+                                    { role: 'user', content: [{ type: 'text', text: prompt }, { type: 'image_url', image_url: { url: uploadedImageBase64, detail: 'high' } }] }
+                                ],
+                                max_tokens: 4500,
+                                temperature: 0
+                            })
+                        });
+                        
+                        if (openaiResponse.ok) {
+                            const openaiData = await openaiResponse.json();
+                            if (openaiData.choices && openaiData.choices[0] && openaiData.choices[0].message) {
+                                content = openaiData.choices[0].message.content;
+                                console.log('OpenAI fallback successful');
                             }
-                            throw new Error('API rate limit exceeded. Please wait a moment and try again.');
                         }
-                        if (response.status === 401) {
-                            throw new Error('API authentication failed. The service may be temporarily unavailable.');
-                        }
-                        if (response.status === 400) {
-                            throw new Error('The image could not be processed. Please try a different chart screenshot.');
-                        }
-                        if (response.status >= 500) {
-                            if (retryCount < maxRetries) {
-                                console.log(`Server error, retrying in ${(retryCount + 1) * 2} seconds...`);
-                                await new Promise(r => setTimeout(r, (retryCount + 1) * 2000));
-                                return makeAPICall(retryCount + 1);
-                            }
-                            throw new Error('AI service is temporarily unavailable. Please try again in a few minutes.');
-                        }
-                        throw new Error(`API error (${response.status}): Please try again.`);
+                    } catch (openaiError) {
+                        console.log('OpenAI fallback also failed:', openaiError.message);
                     }
                     
-                    return response.json();
+                    // If both failed, show helpful error
+                    if (!content) {
+                        throw new Error(`AI Analysis Failed: ${geminiError.message}\n\nTo fix this:\n1. Get a FREE Gemini API key at: https://aistudio.google.com/app/apikey\n2. Add it to your .env file as GEMINI_API_KEY=your_key\n3. Restart the server`);
+                    }
                 }
                 
-                const data = await makeAPICall();
-                console.log('API Response:', data); // Debug log
-                
-                if (data.error) {
-                    if (data.error.code === 'insufficient_quota') {
-                        throw new Error('API quota exceeded. The service is temporarily at capacity. Please try again later.');
-                    }
-                    if (data.error.code === 'invalid_api_key') {
-                        throw new Error('Service configuration issue. Please contact support.');
-                    }
-                    if (data.error.code === 'content_policy_violation') {
-                        throw new Error('The image could not be analyzed. Please try a standard chart screenshot without any overlays or watermarks.');
-                    }
-                    if (data.error.type === 'invalid_request_error') {
-                        throw new Error('The image format is not supported. Please try a PNG or JPEG chart screenshot.');
-                    }
-                    throw new Error(data.error.message || 'An error occurred during analysis.');
-                }
-                
-                // Validate response structure
-                if (!data.choices || !data.choices[0] || !data.choices[0].message) {
-                    console.error('Invalid API response structure:', data);
-                    throw new Error('Received invalid response from AI. Please try again.');
-                }
-                
-                const content = data.choices[0].message.content;
-                console.log('AI Response:', content); // Debug log
+                console.log('AI Response received from:', usedModel);
+                console.log('Raw content:', content.substring(0, 500) + '...');
                 
                 // Check if response is empty
                 if (!content || content.trim().length === 0) {
                     throw new Error('AI returned empty response. Please try with a clearer chart image.');
                 }
                 
-                // Check if OpenAI refused the request (only catch definite refusals)
+                // Check if AI refused the request
                 const refusalPhrases = ["i cannot analyze this image", "i'm not able to analyze", "unable to process this image", "cannot identify a chart", "not a trading chart", "doesn't appear to be a chart", "i don't see a chart", "no chart visible"];
                 const contentLower = content.toLowerCase();
                 const isRefusal = refusalPhrases.some(phrase => contentLower.includes(phrase));
@@ -2541,12 +2542,14 @@ Analyze objectively and give SHORT recommendations when bearish evidence exists.
                 let userMessage = error.message;
                 let tips = '';
                 
-                if (error.message.includes('quota') || error.message.includes('rate limit') || error.message.includes('capacity')) {
-                    tips = '\n\n⏳ The service is experiencing high demand. Please wait 30 seconds and try again.';
+                if (error.message.includes('API key not configured') || error.message.includes('GEMINI_API_KEY')) {
+                    tips = '\n\n🔑 Setup Required:\n1. Get a FREE API key at: https://aistudio.google.com/app/apikey\n2. Add to your .env file: GEMINI_API_KEY=your_key_here\n3. Restart the server with: npm start';
+                } else if (error.message.includes('quota') || error.message.includes('rate limit') || error.message.includes('capacity') || error.message.includes('RESOURCE_EXHAUSTED')) {
+                    tips = '\n\n⏳ Rate limit reached (15 requests/minute for free tier). Please wait 60 seconds and try again.';
                 } else if (error.message.includes('image') || error.message.includes('chart')) {
                     tips = '\n\n📸 Tips for better results:\n• Use a clear screenshot from TradingView, Zerodha, or similar\n• Make sure candles/bars are clearly visible\n• Avoid images with personal info or watermarks\n• Try PNG or JPEG format';
-                } else if (error.message.includes('authentication') || error.message.includes('configuration')) {
-                    tips = '\n\n🔧 This is a temporary service issue. Please try again in a few minutes.';
+                } else if (error.message.includes('authentication') || error.message.includes('INVALID_ARGUMENT') || error.message.includes('API_KEY_INVALID')) {
+                    tips = '\n\n🔧 Invalid API key. Please check your GEMINI_API_KEY in the .env file.\nGet a new key at: https://aistudio.google.com/app/apikey';
                 } else {
                     tips = '\n\n💡 Tips:\n• Use a clear, high-quality chart image\n• Make sure the chart shows price candles/bars\n• Try a different timeframe\n• Crop to show only the chart area';
                 }

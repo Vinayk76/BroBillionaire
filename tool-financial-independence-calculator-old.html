@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>FREE FIRE Calculator 2026 - Financial Independence Retire Early India | BroBillionaire</title>
+    <meta name="title" content="FREE FIRE Calculator 2026 - Financial Independence Retire Early India | BroBillionaire">
+    <meta name="description" content="Calculate your FIRE number! FREE financial independence calculator with early retirement planning, corpus calculation & withdrawal strategies. Achieve FIRE India 2026!">
+    <meta name="keywords" content="FIRE calculator India, financial independence calculator, early retirement calculator, FIRE number calculator, 4% rule calculator, retirement corpus calculator, financial freedom calculator India 2026">
+    <meta name="author" content="BroBillionaire">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://brobillionaire.com/tool-financial-independence-calculator.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://brobillionaire.com/tool-financial-independence-calculator.html">
+    <meta property="og:title" content="FREE FIRE Calculator - Financial Independence Retire Early">
+    <meta property="og:description" content="Calculate your FIRE number! FREE financial independence calculator with early retirement planning, corpus calculation & withdrawal strategies.">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    <meta property="og:site_name" content="BroBillionaire">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://brobillionaire.com/tool-financial-independence-calculator.html">
+    <meta property="twitter:title" content="FREE FIRE Calculator - Financial Independence Retire Early">
+    <meta property="twitter:description" content="Calculate your FIRE number! FREE financial independence calculator with early retirement planning, corpus calculation.">
+    <meta property="twitter:image" content="https://brobillionaire.com/og-image.jpg">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --gold: #C9A227;
+            --bg-primary: #0d0d0d;
+            --bg-secondary: #1a1a1a;
+            --bg-card: #1a1a1a;
+            --text-primary: #fff;
+            --text-secondary: #999;
+            --text-tertiary: #666;
+            --border-color: #2a2a2a;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding-top: 140px;
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+        }
+        
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--gold);
+        }
+        
+        .mobile-menu-toggle { display: none; }
+        
+        .breadcrumb-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+        }
+        
+        .breadcrumb-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .breadcrumb-nav a:hover {
+            color: var(--gold);
+        }
+        
+        .breadcrumb-nav a::after {
+            content: "›";
+            margin: 0 10px;
+            color: var(--text-tertiary);
+        }
+        
+        .calculator-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .calculator-card { background: var(--bg-card); border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid var(--border-color); }
+        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--gold); margin-bottom: 10px; }
+        .calculator-subtitle { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 40px; line-height: 1.6; }
+        
+        .input-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 30px; }
+        .input-group { margin-bottom: 25px; }
+        .input-label { display: block; color: var(--gold); font-weight: 600; margin-bottom: 10px; font-size: 1rem; }
+        .input-field, .input-select { width: 100%; padding: 15px; background: #0a0a0a; border: 2px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 1rem; transition: border-color 0.3s; }
+        .input-field:focus, .input-select:focus { border-color: var(--gold); outline: none; }
+        .input-hint { color: var(--text-tertiary); font-size: 0.85rem; margin-top: 5px; }
+        
+        .calculate-btn { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; font-weight: 700; padding: 18px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; transition: transform 0.2s; }
+        .calculate-btn:hover { transform: translateY(-2px); }
+        
+        .results-section { display: none; margin-top: 40px; }
+        
+        .fire-number-card { background: linear-gradient(135deg, #C9A227 10%, #8B7520 100%); padding: 50px; border-radius: 16px; text-align: center; margin-bottom: 30px; box-shadow: 0 10px 40px rgba(201, 162, 39, 0.3); }
+        .fire-label { color: #000; font-size: 1.3rem; font-weight: 700; margin-bottom: 15px; text-transform: uppercase; }
+        .fire-value { color: #000; font-size: 4rem; font-weight: 900; font-family: 'Playfair Display', serif; margin: 20px 0; }
+        .fire-subtitle { color: #1a1a1a; font-size: 1.1rem; font-weight: 600; }
+        
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 30px 0; }
+        .metric-card { background: #0a0a0a; padding: 25px; border-radius: 12px; border: 1px solid var(--border-color); text-align: center; }
+        .metric-label { color: var(--gold); font-weight: 600; margin-bottom: 10px; font-size: 0.9rem; text-transform: uppercase; }
+        .metric-value { color: var(--text-primary); font-size: 1.8rem; font-weight: 700; }
+        .metric-subtext { color: var(--text-tertiary); font-size: 0.85rem; margin-top: 5px; }
+        
+        .milestone-section { background: rgba(52, 152, 219, 0.1); border: 2px solid #3498db; padding: 30px; border-radius: 12px; margin: 30px 0; }
+        .milestone-title { color: #3498db; font-size: 1.5rem; margin-bottom: 20px; font-weight: 700; }
+        .milestone-item { background: #0a0a0a; padding: 20px; margin-bottom: 15px; border-radius: 8px; border-left: 4px solid var(--gold); }
+        .milestone-percent { color: var(--gold); font-weight: 700; font-size: 1.3rem; }
+        .milestone-amount { color: var(--text-primary); font-size: 1.5rem; font-weight: 700; margin: 10px 0; }
+        .milestone-desc { color: var(--text-secondary); font-size: 0.95rem; }
+        
+        .chart-container { max-width: 900px; margin: 30px auto; padding: 30px; background: rgba(10, 10, 10, 0.5); border-radius: 12px; }
+        
+        .strategy-box { background: rgba(201, 162, 39, 0.1); border: 2px solid var(--gold); padding: 30px; border-radius: 12px; margin-top: 30px; }
+        .strategy-box h3 { color: var(--gold); margin-bottom: 20px; font-size: 1.5rem; }
+        .strategy-box ul { margin: 10px 0 0 20px; color: var(--text-secondary); line-height: 1.8; }
+        .strategy-box li { margin-bottom: 12px; }
+        .strategy-box strong { color: var(--text-primary); }
+        
+        .info-box { background: rgba(52, 152, 219, 0.1); border: 2px solid #3498db; padding: 25px; border-radius: 12px; margin-top: 30px; }
+        .info-box h3 { color: #3498db; margin-bottom: 15px; }
+        .info-box p { color: var(--text-secondary); line-height: 1.8; margin: 0; }
+        
+        .faq-section { max-width: 1200px; margin: 50px auto; padding: 40px 20px; }
+        .faq-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--gold); margin-bottom: 40px; text-align: center; }
+        .faq-item { background: var(--bg-card); border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--border-color); overflow: hidden; }
+        .faq-question { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--text-primary); font-weight: 600; font-size: 1.1rem; }
+        .faq-question:hover { background: #222; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #0a0a0a; }
+        .faq-answer.active { max-height: 2000px; }
+        .faq-answer p { padding: 25px; margin: 0; color: var(--text-secondary); line-height: 1.8; }
+        
+        @media (max-width: 768px) {
+            body { padding-top: 120px; }
+            .calculator-title { font-size: 2rem; }
+            .nav-links { display: none; }
+            .mobile-menu-toggle { display: block; }
+            .input-grid { grid-template-columns: 1fr; }
+            .fire-value { font-size: 2.5rem; }
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://brobillionaire.com/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Tools",
+                "item": "https://brobillionaire.com/tools.html"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "FIRE Calculator"
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "FIRE Calculator - Financial Independence Retire Early",
+        "description": "Calculate your FIRE number with early retirement planning, corpus calculation and withdrawal strategies for India.",
+        "url": "https://brobillionaire.com/tool-financial-independence-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="BroBillionaire Logo" class="logo-img">
+                <span class="logo-text">BroBillionaire</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="articles.html" class="nav-link">Articles</a>
+                <a href="tools.html" class="nav-link active">Tools</a>
+                <a href="about.html" class="nav-link">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <nav class="breadcrumb-nav">
+        <a href="index.html">Home</a><a href="tools.html">Tools</a><span>FIRE Calculator</span>
+    </nav>
+
+    <div class="calculator-container">
+        <div class="calculator-card">
+            <h1 class="calculator-title"><i class="fas fa-fire"></i> FIRE Number Calculator - Financial Independence Retire Early</h1>
+            <p class="calculator-subtitle">Calculate your FIRE number and discover when you can achieve financial independence! Enter your monthly expenses, current savings, investment returns, and see your path to early retirement with the 4% safe withdrawal rule.</p>
+            
+            <div class="input-grid">
+                <div class="input-group">
+                    <label class="input-label">Current Monthly Expenses (₹)</label>
+                    <input type="number" id="monthlyExpenses" class="input-field" placeholder="50000" value="50000">
+                    <div class="input-hint">Your average monthly living expenses</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Current Savings/Investments (₹)</label>
+                    <input type="number" id="currentSavings" class="input-field" placeholder="1000000" value="1000000">
+                    <div class="input-hint">Total portfolio value today</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Monthly Investment Amount (₹)</label>
+                    <input type="number" id="monthlyInvestment" class="input-field" placeholder="30000" value="30000">
+                    <div class="input-hint">How much you can invest monthly</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Expected Annual Return (%)</label>
+                    <input type="number" id="annualReturn" class="input-field" placeholder="12" value="12" step="0.1">
+                    <div class="input-hint">Expected portfolio returns (10-15%)</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Annual Expense Inflation (%)</label>
+                    <input type="number" id="inflation" class="input-field" placeholder="6" value="6" step="0.1">
+                    <div class="input-hint">Expected inflation rate (5-7%)</div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Safe Withdrawal Rate (%)</label>
+                    <input type="number" id="withdrawalRate" class="input-field" placeholder="4" value="4" step="0.1">
+                    <div class="input-hint">Classic FIRE uses 4% rule</div>
+                </div>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculateFIRE()">
+                <i class="fas fa-calculator"></i> Calculate Your FIRE Number
+            </button>
+            
+            <div id="results" class="results-section">
+                <div class="fire-number-card">
+                    <div class="fire-label">🔥 Your FIRE Number</div>
+                    <div class="fire-value" id="fireNumber">₹0</div>
+                    <div class="fire-subtitle">Corpus needed for financial independence</div>
+                </div>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">Years to FIRE</div>
+                        <div class="metric-value" id="yearsToFIRE">0</div>
+                        <div class="metric-subtext">Based on current plan</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Monthly Passive Income</div>
+                        <div class="metric-value" id="passiveIncome">₹0</div>
+                        <div class="metric-subtext">After achieving FIRE</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Gap to FIRE</div>
+                        <div class="metric-value" id="gapToFIRE">₹0</div>
+                        <div class="metric-subtext">Amount still needed</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">FIRE Progress</div>
+                        <div class="metric-value" id="fireProgress">0%</div>
+                        <div class="metric-subtext">Current achievement</div>
+                    </div>
+                </div>
+                
+                <div class="milestone-section">
+                    <h3 class="milestone-title">🎯 FIRE Milestones</h3>
+                    <div class="milestone-item">
+                        <div class="milestone-percent">25% - Coast FIRE</div>
+                        <div class="milestone-amount" id="milestone25">₹0</div>
+                        <div class="milestone-desc">Investments can grow to FIRE number by retirement age without additional contributions</div>
+                    </div>
+                    <div class="milestone-item">
+                        <div class="milestone-percent">50% - Half FIRE</div>
+                        <div class="milestone-amount" id="milestone50">₹0</div>
+                        <div class="milestone-desc">Halfway to financial independence - consider semi-retirement or career change</div>
+                    </div>
+                    <div class="milestone-item">
+                        <div class="milestone-percent">75% - Lean FIRE</div>
+                        <div class="milestone-amount" id="milestone75">₹0</div>
+                        <div class="milestone-desc">Can retire with frugal lifestyle or move to lower cost location</div>
+                    </div>
+                    <div class="milestone-item">
+                        <div class="milestone-percent">100% - Full FIRE</div>
+                        <div class="milestone-amount" id="milestone100">₹0</div>
+                        <div class="milestone-desc">Complete financial independence - can retire maintaining current lifestyle</div>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <canvas id="fireChart"></canvas>
+                </div>
+                
+                <div class="strategy-box">
+                    <h3><i class="fas fa-lightbulb"></i> Your FIRE Strategy Recommendations</h3>
+                    <ul id="recommendations">
+                        <li>Loading recommendations...</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <h3><i class="fas fa-info-circle"></i> Understanding the 4% Rule</h3>
+                    <p>The 4% rule states you can withdraw 4% of your portfolio annually (adjusted for inflation) for 30+ years without running out of money. Based on the Trinity Study analyzing historical market returns, it provides a safe withdrawal rate for retirement planning. Your FIRE number = Annual Expenses ÷ 0.04. This means if you need ₹6,00,000 per year (₹50,000/month), your FIRE number is ₹1.5 Crore.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="faq-section">
+        <h2 class="faq-title">FIRE Calculator FAQ</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What is FIRE and how does the FIRE calculator work?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>FIRE (Financial Independence Retire Early) is a movement focused on aggressive saving and investing to retire decades earlier than traditional retirement. The FIRE calculator determines your "FIRE number" - the corpus needed to sustain your lifestyle indefinitely using the 4% safe withdrawal rule. Formula: FIRE Number = (Annual Expenses × 25) or (Annual Expenses ÷ 0.04). For ₹50,000 monthly expenses (₹6 lakhs yearly), your FIRE number is ₹1.5 Crore. At 4% withdrawal, you get ₹6 lakhs annually while the corpus continues growing through investments.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Can I achieve FIRE in India with modest income?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Absolutely! FIRE is about savings rate, not absolute income. Key strategies: 1) Increase savings rate to 50%+ of income through frugality, 2) Optimize expenses - housing, food, transport, 3) Build multiple income streams - side hustles, freelancing, 4) Invest aggressively in equity mutual funds/stocks (12-15% returns), 5) Consider "Lean FIRE" with ₹25,000-30,000 monthly expenses in Tier 2/3 cities. Real example: ₹60,000 monthly income, save ₹30,000 (50%), need ₹90 lakhs for Lean FIRE, achievable in 15-18 years with disciplined SIP investing. Start early, live below means, invest the difference!</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Is 4% withdrawal rate safe for India with high inflation?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>4% rule needs adjustment for India's context: 1) Higher inflation (6-7% vs US 3%): Consider 3-3.5% withdrawal rate for extra safety buffer, 2) Portfolio allocation: 60% equity (inflation hedge) + 30% debt + 10% gold/real estate, 3) Dynamic withdrawal: Reduce spending 10-15% during market crashes, increase during booms, 4) Healthcare buffer: Keep ₹10-15 lakhs separate for medical emergencies. Safer approach: Build corpus for 3% withdrawal (FIRE Number × 1.33). Example: ₹1.5 Cr at 4% becomes ₹2 Cr at 3% withdrawal, but provides 33% extra safety margin for India's uncertainties.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What are different types of FIRE - Lean, Fat, Barista FIRE?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>FIRE variants for different lifestyles: 1) Lean FIRE: Minimal expenses (₹25-30K/month), small corpus (₹75L-1Cr), frugal living in Tier 2/3 cities, 2) Regular FIRE: Moderate lifestyle (₹50-60K/month), corpus ₹1.5-2Cr, comfortable living, 3) Fat FIRE: Luxury lifestyle (₹1.5-2L/month), corpus ₹4.5-6Cr+, no compromises, 4) Barista FIRE: Partial retirement, part-time work covers expenses while investments grow, 5) Coast FIRE: Enough invested to reach FIRE by retirement age, no new contributions needed. Choose based on lifestyle preferences, family situation, and risk tolerance. Most Indians aim for Regular or Lean FIRE.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What investments should I hold in my FIRE portfolio?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Optimal FIRE portfolio for India: Accumulation Phase (pre-FIRE): 70% equity (Nifty 50, Nifty Next 50, flexicap funds), 20% debt (PPF, EPF, debt funds), 10% gold/alternate assets. Post-FIRE Withdrawal Phase: 50-60% equity (dividend-paying stocks, balanced funds) for growth, 30-40% debt (FDs, debt funds, bonds) for stability, 10% emergency + healthcare buffer. Withdraw from debt first, let equity grow. Rebalance annually. Tax-efficient: Use LTCG exemption ₹1.25L/year, harvest gains strategically. Diversify across market caps, sectors. Avoid high-fee products. Keep 2 years' expenses in liquid funds for market downturns.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Should I include real estate in FIRE corpus calculation?
+                <i class="fas fa-chevron-down" style="color: var(--gold);"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Real estate considerations for FIRE: Primary residence: DON'T count if living in it (not liquid), but it reduces monthly expenses (no rent = lower FIRE number). Investment properties: YES, count rental income as passive income stream, reduces FIRE corpus needed. Example: ₹20K monthly rent = ₹2.4L yearly = reduces FIRE corpus by ₹60 lakhs (at 4% rule). Best FIRE strategy: 1) Own debt-free primary home = eliminate ₹15-25K monthly rent, 2) 1-2 rental properties generating ₹30-40K/month, 3) Rest in liquid investments (equity/debt) for flexibility. Avoid: Over-allocation to real estate (illiquid, maintenance issues). Ideal: 30-40% net worth in real estate max.</p>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- Related Articles Section -->
+    <section style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border-radius: 16px; padding: 2.5rem; margin: 3rem 0; border: 2px solid #C9A227; max-width: 1200px; margin-left: auto; margin-right: auto;">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #C9A227; margin-bottom: 1.5rem; text-align: center;">
+            📚 Learn More: Essential Reading
+        </h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+            <div style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
+                <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
+                    <span style="font-size: 2rem; margin-right: 0.5rem;">📖</span>
+                    <h3 style="color: #C9A227; font-size: 1.1rem; margin: 0;">Stock Market Beginners</h3>
+                </div>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 0.9rem;">
+                    Master the fundamentals with expert insights and real-world examples
+                </p>
+                <a href="article-stock-market-beginners.html" style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
+                    Read Article →
+                </a>
+            </div>
+            <div style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
+                <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
+                    <span style="font-size: 2rem; margin-right: 0.5rem;">💡</span>
+                    <h3 style="color: #C9A227; font-size: 1.1rem; margin: 0;">Warren Buffett</h3>
+                </div>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 0.9rem;">
+                    Deep dive into advanced strategies used by professional traders
+                </p>
+                <a href="article-intrinsic-value-calculation.html" style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
+                    Read Article →
+                </a>
+            </div>
+            <div style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
+                <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
+                    <span style="font-size: 2rem; margin-right: 0.5rem;">🎓</span>
+                    <h3 style="color: #C9A227; font-size: 1.1rem; margin: 0;">Ray Dalio</h3>
+                </div>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 0.9rem;">
+                    Learn from market history and avoid costly mistakes
+                </p>
+                <a href="article-ray-dalio.html" style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
+                    Read Article →
+                </a>
+            </div>
+        </div>
+    </section>
+<footer style="background: var(--bg-secondary); padding: 60px 40px; text-align: center; border-top: 1px solid var(--border-color); margin-top: 80px;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 40px; text-align: left; margin-bottom: 40px;">
+                <div style="flex: 1; min-width: 250px;">
+                    <h3 style="color: var(--gold); margin-bottom: 20px; font-size: 1.5rem;">BroBillionaire</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">Empowering Indian traders with premium tools, deep market insights, and actionable trading strategies. Master the markets in 2026!</p>
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                    <h4 style="color: var(--gold); margin-bottom: 15px;">Quick Links</h4>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <a href="index.html" style="color: var(--text-secondary); text-decoration: none;">Home</a>
+                        <a href="articles.html" style="color: var(--text-secondary); text-decoration: none;">Articles</a>
+                        <a href="tools.html" style="color: var(--text-secondary); text-decoration: none;">Tools</a>
+                        <a href="about.html" style="color: var(--text-secondary); text-decoration: none;">About</a>
+                    </div>
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                    <h4 style="color: var(--gold); margin-bottom: 15px;">Popular Tools</h4>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <a href="tool-options-strategy-builder.html" style="color: var(--text-secondary); text-decoration: none;">Option Strategy Builder</a>
+                        <a href="tool-position-size-calculator.html" style="color: var(--text-secondary); text-decoration: none;">Position Size Calculator</a>
+                        <a href="tool-sip-calculator.html" style="color: var(--text-secondary); text-decoration: none;">SIP Calculator</a>
+                    </div>
+                </div>
+            </div>
+            <div style="border-top: 1px solid var(--border-color); padding-top: 30px; color: var(--text-tertiary); font-size: 0.9rem;">
+                <p>&copy; 2026 BroBillionaire. All rights reserved. Built for Indian Traders 🇮🇳</p>
+                <p style="margin-top: 10px;">Disclaimer: All tools and content are for educational purposes only. Not financial advice. Invest at your own risk.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let fireChart = null;
+
+        function formatCurrency(amount) {
+            return '₹' + amount.toLocaleString('en-IN', { maximumFractionDigits: 0 });
+        }
+
+        function calculateFIRE() {
+            const monthlyExpenses = parseFloat(document.getElementById('monthlyExpenses').value);
+            const currentSavings = parseFloat(document.getElementById('currentSavings').value);
+            const monthlyInvestment = parseFloat(document.getElementById('monthlyInvestment').value);
+            const annualReturn = parseFloat(document.getElementById('annualReturn').value) / 100;
+            const inflation = parseFloat(document.getElementById('inflation').value) / 100;
+            const withdrawalRate = parseFloat(document.getElementById('withdrawalRate').value) / 100;
+
+            if (!monthlyExpenses || !currentSavings || !monthlyInvestment || !annualReturn) {
+                alert('Please fill all fields with valid numbers');
+                return;
+            }
+
+            const annualExpenses = monthlyExpenses * 12;
+            const fireNumber = annualExpenses / withdrawalRate;
+            const gapToFIRE = Math.max(0, fireNumber - currentSavings);
+            const fireProgress = (currentSavings / fireNumber) * 100;
+
+            let portfolioValue = currentSavings;
+            let years = 0;
+            const maxYears = 50;
+            const monthlyRate = annualReturn / 12;
+            const monthlyInflation = inflation / 12;
+            let currentMonthlyExpenses = monthlyExpenses;
+            
+            const chartData = {
+                years: [0],
+                portfolio: [currentSavings],
+                fireTarget: [fireNumber]
+            };
+
+            while (portfolioValue < fireNumber && years < maxYears) {
+                years++;
+                for (let month = 0; month < 12; month++) {
+                    portfolioValue = portfolioValue * (1 + monthlyRate) + monthlyInvestment;
+                    currentMonthlyExpenses *= (1 + monthlyInflation);
+                }
+                const inflatedFireNumber = (currentMonthlyExpenses * 12) / withdrawalRate;
+                chartData.years.push(years);
+                chartData.portfolio.push(portfolioValue);
+                chartData.fireTarget.push(inflatedFireNumber);
+            }
+
+            const yearsToFIRE = years >= maxYears ? '50+' : years;
+            const passiveIncome = fireNumber * withdrawalRate / 12;
+
+            document.getElementById('fireNumber').textContent = formatCurrency(fireNumber);
+            document.getElementById('yearsToFIRE').textContent = yearsToFIRE;
+            document.getElementById('passiveIncome').textContent = formatCurrency(passiveIncome);
+            document.getElementById('gapToFIRE').textContent = formatCurrency(gapToFIRE);
+            document.getElementById('fireProgress').textContent = fireProgress.toFixed(1) + '%';
+
+            document.getElementById('milestone25').textContent = formatCurrency(fireNumber * 0.25);
+            document.getElementById('milestone50').textContent = formatCurrency(fireNumber * 0.50);
+            document.getElementById('milestone75').textContent = formatCurrency(fireNumber * 0.75);
+            document.getElementById('milestone100').textContent = formatCurrency(fireNumber);
+
+            generateRecommendations(monthlyExpenses, monthlyInvestment, yearsToFIRE, fireProgress, withdrawalRate);
+            createChart(chartData);
+
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function generateRecommendations(monthlyExpenses, monthlyInvestment, years, progress, withdrawalRate) {
+            const recommendations = [];
+            const savingsRate = (monthlyInvestment / (monthlyExpenses + monthlyInvestment)) * 100;
+
+            if (savingsRate < 30) {
+                recommendations.push(`<strong>Increase Savings Rate:</strong> Current savings rate is ${savingsRate.toFixed(0)}%. Target 40-50% to accelerate FIRE. Audit expenses and cut non-essentials.`);
+            } else if (savingsRate > 50) {
+                recommendations.push(`<strong>Excellent Savings Rate:</strong> Your ${savingsRate.toFixed(0)}% savings rate is outstanding! You're on track for early FIRE.`);
+            }
+
+            if (years > 20) {
+                recommendations.push(`<strong>Consider Lean FIRE:</strong> ${years} years is long. Reduce monthly expenses by 20-30% or increase income through side hustles to shorten timeline.`);
+            } else if (years < 10) {
+                recommendations.push(`<strong>FIRE Within Decade:</strong> You can achieve FIRE in ${years} years! Stay disciplined and avoid lifestyle inflation.`);
+            }
+
+            if (withdrawalRate > 0.04) {
+                recommendations.push(`<strong>High Withdrawal Rate Risk:</strong> ${(withdrawalRate*100).toFixed(1)}% withdrawal rate may not be sustainable. Consider 3.5-4% for India's inflation.`);
+            }
+
+            if (progress < 25) {
+                recommendations.push(`<strong>Focus on Accumulation:</strong> Invest aggressively in 70-80% equity mutual funds. You have time to ride market volatility.`);
+            } else if (progress > 75) {
+                recommendations.push(`<strong>Shift to Preservation:</strong> Consider moving to 50-60% equity as you're close to FIRE. Protect your gains.`);
+            }
+
+            recommendations.push(`<strong>Tax Optimization:</strong> Max out Section 80C (₹1.5L), NPS (₹50K), health insurance (₹25-50K). Use LTCG exemption ₹1.25L/year.`);
+            recommendations.push(`<strong>Healthcare Planning:</strong> Keep separate ₹10-15L healthcare corpus. Medical inflation runs at 12-15% in India.`);
+
+            document.getElementById('recommendations').innerHTML = recommendations.map(r => `<li>${r}</li>`).join('');
+        }
+
+        function createChart(data) {
+            const ctx = document.getElementById('fireChart').getContext('2d');
+            
+            if (fireChart) {
+                fireChart.destroy();
+            }
+
+            fireChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.years,
+                    datasets: [
+                        {
+                            label: 'Portfolio Value',
+                            data: data.portfolio,
+                            borderColor: '#C9A227',
+                            backgroundColor: 'rgba(201, 162, 39, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'FIRE Target (Inflation Adjusted)',
+                            data: data.fireTarget,
+                            borderColor: '#e74c3c',
+                            backgroundColor: 'rgba(231, 76, 60, 0.1)',
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            fill: false,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Path to FIRE - Portfolio Growth vs Target',
+                            color: '#C9A227',
+                            font: { size: 18, weight: 'bold' }
+                        },
+                        legend: {
+                            display: true,
+                            labels: { color: '#999', font: { size: 12 } }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + formatCurrency(context.parsed.y);
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Years from Now',
+                                color: '#999'
+                            },
+                            grid: { color: '#2a2a2a' },
+                            ticks: { color: '#999' }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Amount (₹)',
+                                color: '#999'
+                            },
+                            grid: { color: '#2a2a2a' },
+                            ticks: {
+                                color: '#999',
+                                callback: function(value) {
+                                    return '₹' + (value / 100000).toFixed(1) + 'L';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            answer.classList.toggle('active');
+            icon.style.transform = answer.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+    </script>
+<script src="common-footer.js" defer></script>
+</body>
+</html>

@@ -14,6 +14,9 @@
     <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <!-- Primary Meta Tags -->
@@ -111,20 +114,144 @@
     </script>
 
     <style>
+        :root {
+            --gold: #C9A227;
+            --gold-light: #E8D5A3;
+            --gold-dark: #A68B1E;
+            --gold-gradient: linear-gradient(135deg, #C9A227 0%, #E8D5A3 50%, #C9A227 100%);
+            --bg-primary: #0d0d0d;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --bg-card: #161616;
+            --bg-card-hover: #1d1d1d;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.5);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-gold: rgba(201, 162, 39, 0.3);
+            --green: #22c55e;
+            --green-soft: rgba(34, 197, 94, 0.15);
+            --red: #ef4444;
+            --red-soft: rgba(239, 68, 68, 0.15);
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); color: #e0e0e0; line-height: 1.6; min-height: 100vh; }
-        .container { max-width: 1600px; margin: 0 auto; padding: 1.5rem; }
         
-        .premium-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: linear-gradient(135deg, #C9A227 0%, #ffd700 100%); color: #000; padding: 0.5rem 1rem; border-radius: 50px; font-weight: 700; font-size: 0.85rem; margin-bottom: 1rem; animation: pulse 2s infinite; }
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
+            background: var(--bg-primary); 
+            color: var(--text-primary); 
+            line-height: 1.6; 
+            min-height: 100vh; 
+        }
+        
+        .dashboard-container { max-width: 1600px; margin: 0 auto; padding: 80px 1.5rem 2rem; }
+        
+        /* Back Button - Premium Style */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            color: var(--gold);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            z-index: 100;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: var(--gold);
+            color: var(--bg-primary);
+            transform: translateX(-5px);
+        }
+        
+        .premium-badge { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+            background: var(--gold-gradient); 
+            color: #000; 
+            padding: 0.5rem 1rem; 
+            border-radius: 50px; 
+            font-weight: 700; 
+            font-size: 0.85rem; 
+            margin-bottom: 1rem; 
+            animation: pulse 2s infinite; 
+        }
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
         
-        .header { text-align: center; padding: 2rem 1.5rem; background: linear-gradient(135deg, #1e1e2f 0%, #2a2a4a 100%); border-radius: 20px; margin-bottom: 1.5rem; border: 2px solid #C9A227; position: relative; overflow: hidden; }
-        .header::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(201, 162, 39, 0.1), transparent); animation: shine 3s infinite; }
+        .header { 
+            text-align: center; 
+            padding: 2.5rem 2rem; 
+            background: var(--bg-card); 
+            border-radius: 24px; 
+            margin-bottom: 1.5rem; 
+            border: 1px solid var(--border-gold); 
+            position: relative; 
+            overflow: hidden; 
+        }
+        .header::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            height: 4px; 
+            background: var(--gold-gradient); 
+        }
+        .header::after { 
+            content: ''; 
+            position: absolute; 
+            top: -50%; 
+            left: -50%; 
+            width: 200%; 
+            height: 200%; 
+            background: linear-gradient(45deg, transparent, rgba(201, 162, 39, 0.05), transparent); 
+            animation: shine 3s infinite; 
+        }
         @keyframes shine { 0% { transform: translateX(-100%) rotate(45deg); } 100% { transform: translateX(100%) rotate(45deg); } }
-        .header h1 { font-size: 2.5rem; background: linear-gradient(135deg, #C9A227 0%, #ffd700 50%, #C9A227 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem; position: relative; }
-        .header p { font-size: 1.1rem; color: #a0a0b0; }
-        .live-indicator { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-top: 0.5rem; }
-        .live-dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; animation: livePulse 1.5s infinite; }
+        .header h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: clamp(2rem, 5vw, 2.8rem); 
+            background: var(--gold-gradient); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            background-clip: text; 
+            margin-bottom: 0.5rem; 
+            position: relative; 
+            z-index: 1; 
+        }
+        .header h1 .emoji {
+            -webkit-text-fill-color: initial;
+            background: none;
+            -webkit-background-clip: initial;
+            background-clip: initial;
+        }
+        .header p { font-size: 1.1rem; color: var(--text-secondary); position: relative; z-index: 1; }
+        .live-indicator { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+            background: var(--green-soft); 
+            color: var(--green); 
+            padding: 0.4rem 1rem; 
+            border-radius: 20px; 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            margin-top: 1rem; 
+            position: relative; 
+            z-index: 1; 
+        }
+        .live-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: livePulse 1.5s infinite; box-shadow: 0 0 10px var(--green); }
         @keyframes livePulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.2); } }
         
         /* Main Dashboard Grid */
@@ -133,13 +260,17 @@
         /* Fear & Greed Gauge - Premium */
         .fear-greed-card { 
             grid-column: span 2; 
-            background: linear-gradient(135deg, #1e1e2f 0%, #12121f 100%); 
-            border-radius: 24px; 
+            background: var(--bg-card); 
+            border-radius: 20px; 
             padding: 2rem; 
-            border: 1px solid rgba(201, 162, 39, 0.2); 
+            border: 1px solid var(--border-color); 
             position: relative; 
             overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        .fear-greed-card:hover {
+            border-color: var(--border-gold);
+            transform: translateY(-2px);
         }
         .fear-greed-card::before { 
             content: ''; 
@@ -147,8 +278,8 @@
             top: 0; 
             left: 0; 
             right: 0; 
-            height: 4px; 
-            background: linear-gradient(90deg, #dc2626, #ef4444, #f97316, #fbbf24, #84cc16, #22c55e, #10b981); 
+            height: 3px; 
+            background: linear-gradient(90deg, var(--red), #f97316, #fbbf24, #84cc16, var(--green)); 
         }
         .fear-greed-card::after {
             content: '';
@@ -157,7 +288,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(ellipse at 30% 0%, rgba(201, 162, 39, 0.08) 0%, transparent 50%);
+            background: radial-gradient(ellipse at 30% 0%, rgba(201, 162, 39, 0.05) 0%, transparent 50%);
             pointer-events: none;
         }
         
@@ -168,6 +299,7 @@
             align-items: center; 
             width: 240px;
             position: relative;
+            margin-bottom: 20px;
         }
         .gauge-container::before {
             content: '';
@@ -177,52 +309,47 @@
             transform: translateX(-50%);
             width: 200px;
             height: 100px;
-            background: radial-gradient(ellipse at 50% 100%, rgba(201, 162, 39, 0.15) 0%, transparent 70%);
+            background: radial-gradient(ellipse at 50% 100%, rgba(201, 162, 39, 0.1) 0%, transparent 70%);
             filter: blur(20px);
             pointer-events: none;
         }
         .gauge-svg { width: 100%; height: auto; overflow: visible; display: block; filter: drop-shadow(0 5px 20px rgba(0, 0, 0, 0.3)); }
-        .gauge-bg { fill: none; stroke: #1a1a2e; stroke-width: 22; }
+        .gauge-bg { fill: none; stroke: var(--bg-tertiary); stroke-width: 22; }
         .gauge-fill { fill: none; stroke-width: 20; stroke-linecap: butt; transition: all 1.5s ease-out; filter: drop-shadow(0 0 8px currentColor); }
         .gauge-ticks { stroke: rgba(255, 255, 255, 0.3); stroke-width: 2; }
         .gauge-center { 
             text-align: center; 
-            margin-top: 8px; 
-            position: relative; 
+            margin-bottom: 15px;
             z-index: 10; 
-            padding: 12px 20px; 
-            border-radius: 16px;
-            background: rgba(22, 22, 31, 0.8);
+            padding: 12px 24px; 
+            border-radius: 12px;
+            background: rgba(22, 22, 22, 0.95);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
         }
         .gauge-value { 
+            font-family: 'JetBrains Mono', monospace;
             font-size: 3rem; 
-            font-weight: 900; 
-            background: linear-gradient(135deg, #C9A227, #ffd700, #fff); 
-            background-size: 200% 200%;
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            background-clip: text; 
+            font-weight: 700; 
+            color: #C9A227;
             line-height: 1; 
             margin-bottom: 0.25rem;
-            animation: valueShimmer 3s ease-in-out infinite;
-            text-shadow: 0 0 40px rgba(201, 162, 39, 0.5);
+            text-shadow: 0 0 20px rgba(201, 162, 39, 0.5);
         }
         @keyframes valueShimmer {
             0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
         }
         .gauge-label { 
-            font-size: 0.85rem; 
-            font-weight: 800; 
+            font-size: 0.8rem; 
+            font-weight: 700; 
             margin-top: 0.5rem; 
             line-height: 1.2;
             padding: 0.4rem 1rem;
             border-radius: 20px;
             display: inline-block;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
         }
         .gauge-label.extreme-fear { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
         .gauge-label.fear { background: rgba(249, 115, 22, 0.2); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.3); }
@@ -233,86 +360,95 @@
         #gaugeNeedle circle { filter: drop-shadow(0 0 10px rgba(201, 162, 39, 1)); }
         
         .sentiment-details { flex: 1; }
-        .sentiment-title { font-size: 1.4rem; color: #C9A227; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
-        .sentiment-row { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px solid #2a2a4a; }
+        .sentiment-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--gold); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .sentiment-row { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px solid var(--border-color); }
         .sentiment-row:last-child { border-bottom: none; }
-        .sentiment-label { color: #888; }
-        .sentiment-value { font-weight: 600; }
+        .sentiment-label { color: var(--text-tertiary); font-size: 0.9rem; }
+        .sentiment-value { font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; }
         
         /* Crypto Card */
-        .crypto-card { grid-column: span 2; background: linear-gradient(135deg, #1e1e2f 0%, #16161f 100%); border-radius: 20px; padding: 1.5rem; border: 1px solid #333; }
+        .crypto-card { grid-column: span 2; background: var(--bg-card); border-radius: 20px; padding: 1.5rem; border: 1px solid var(--border-color); transition: all 0.3s ease; }
+        .crypto-card:hover { border-color: var(--border-gold); transform: translateY(-2px); }
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-        .card-title { font-size: 1.2rem; color: #C9A227; display: flex; align-items: center; gap: 0.5rem; }
-        .refresh-btn { background: none; border: 1px solid #444; color: #888; padding: 0.4rem 0.8rem; border-radius: 8px; cursor: pointer; font-size: 0.8rem; transition: all 0.3s; }
-        .refresh-btn:hover { border-color: #C9A227; color: #C9A227; }
+        .card-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--gold); display: flex; align-items: center; gap: 0.5rem; }
+        .refresh-btn { background: var(--bg-tertiary); border: 1px solid var(--border-color); color: var(--text-tertiary); padding: 0.4rem 0.8rem; border-radius: 8px; cursor: pointer; font-size: 0.8rem; transition: all 0.3s; }
+        .refresh-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(201, 162, 39, 0.1); }
         
         .crypto-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-        .crypto-item { background: #16161f; border-radius: 12px; padding: 1rem; display: flex; align-items: center; gap: 0.75rem; border: 1px solid transparent; transition: all 0.3s; overflow: hidden; max-width: 100%; box-sizing: border-box; }
-        .crypto-item:hover { border-color: #C9A227; transform: translateY(-2px); }
+        .crypto-item { background: var(--bg-tertiary); border-radius: 12px; padding: 1rem; display: flex; align-items: center; gap: 0.75rem; border: 1px solid var(--border-color); transition: all 0.3s; overflow: hidden; max-width: 100%; box-sizing: border-box; }
+        .crypto-item:hover { border-color: var(--border-gold); transform: translateY(-2px); }
         .crypto-icon { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; object-fit: contain; }
         .crypto-info { flex: 1; min-width: 0; overflow: hidden; }
         .crypto-name { font-weight: 600; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .crypto-symbol { color: #888; font-size: 0.75rem; }
+        .crypto-symbol { color: var(--text-tertiary); font-size: 0.75rem; text-transform: uppercase; }
         .crypto-price-col { text-align: right; flex-shrink: 1; min-width: 0; overflow: hidden; }
-        .crypto-price { font-weight: 700; font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .crypto-change { font-size: 0.8rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .crypto-change.positive { color: #10b981; }
-        .crypto-change.negative { color: #ef4444; }
+        .crypto-price { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .crypto-change { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .crypto-change.positive { color: var(--green); }
+        .crypto-change.negative { color: var(--red); }
         
         /* Market Indices */
-        .indices-card { grid-column: span 2; background: linear-gradient(135deg, #1e1e2f 0%, #16161f 100%); border-radius: 20px; padding: 1.5rem; border: 1px solid #333; }
+        .indices-card { grid-column: span 2; background: var(--bg-card); border-radius: 20px; padding: 1.5rem; border: 1px solid var(--border-color); transition: all 0.3s ease; }
+        .indices-card:hover { border-color: var(--border-gold); transform: translateY(-2px); }
         .indices-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
-        .index-item { background: #16161f; border-radius: 12px; padding: 1rem; border: 1px solid #2a2a4a; transition: all 0.3s; text-align: center; }
-        .index-item:hover { border-color: #C9A227; }
-        .index-name { color: #888; font-size: 0.8rem; margin-bottom: 0.3rem; }
-        .index-value { font-size: 1.3rem; font-weight: 700; }
-        .index-change { font-size: 0.85rem; font-weight: 600; margin-top: 0.2rem; }
+        .index-item { background: var(--bg-tertiary); border-radius: 12px; padding: 1rem; border: 1px solid var(--border-color); transition: all 0.3s; text-align: center; }
+        .index-item:hover { border-color: var(--border-gold); }
+        .index-name { color: var(--text-tertiary); font-size: 0.8rem; margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .index-value { font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; font-weight: 600; }
+        .index-change { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 600; margin-top: 0.2rem; }
+        .index-change.positive { color: var(--green); }
+        .index-change.negative { color: var(--red); }
         
         /* Currency Rates */
-        .currency-card { grid-column: span 2; background: linear-gradient(135deg, #1e1e2f 0%, #16161f 100%); border-radius: 20px; padding: 1.5rem; border: 1px solid #333; }
+        .currency-card { grid-column: span 2; background: var(--bg-card); border-radius: 20px; padding: 1.5rem; border: 1px solid var(--border-color); transition: all 0.3s ease; }
+        .currency-card:hover { border-color: var(--border-gold); transform: translateY(-2px); }
         .currency-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
-        .currency-item { background: #16161f; border-radius: 10px; padding: 0.8rem 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .currency-item { background: var(--bg-tertiary); border-radius: 10px; padding: 0.8rem 1rem; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border-color); transition: all 0.3s; }
+        .currency-item:hover { border-color: var(--border-gold); }
         .currency-pair { display: flex; align-items: center; gap: 0.4rem; }
         .currency-flag { font-size: 1.1rem; }
-        .currency-code { font-weight: 600; font-size: 0.9rem; }
-        .currency-rate { font-weight: 700; font-size: 1rem; color: #C9A227; }
+        .currency-code { font-weight: 600; font-size: 0.85rem; color: var(--text-secondary); }
+        .currency-rate { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.95rem; color: var(--gold); }
         
         /* Market Mood Bars */
-        .mood-card { grid-column: span 4; background: linear-gradient(135deg, #1e1e2f 0%, #16161f 100%); border-radius: 20px; padding: 1.5rem; border: 1px solid #333; }
+        .mood-card { grid-column: span 4; background: var(--bg-card); border-radius: 20px; padding: 1.5rem; border: 1px solid var(--border-color); transition: all 0.3s ease; }
+        .mood-card:hover { border-color: var(--border-gold); }
         .mood-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
         .mood-item { text-align: center; }
-        .mood-label { color: #888; font-size: 0.9rem; margin-bottom: 0.5rem; }
-        .mood-bar-container { height: 12px; background: #2a2a4a; border-radius: 10px; overflow: hidden; margin-bottom: 0.5rem; }
+        .mood-label { color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.5rem; font-weight: 500; }
+        .mood-bar-container { height: 10px; background: var(--bg-tertiary); border-radius: 10px; overflow: hidden; margin-bottom: 0.5rem; }
         .mood-bar { height: 100%; border-radius: 10px; transition: width 1s ease-out; }
-        .mood-bar.fear { background: linear-gradient(90deg, #ef4444, #f87171); }
+        .mood-bar.fear { background: linear-gradient(90deg, var(--red), #f87171); }
         .mood-bar.neutral { background: linear-gradient(90deg, #fbbf24, #fcd34d); }
-        .mood-bar.greed { background: linear-gradient(90deg, #10b981, #34d399); }
-        .mood-value { font-weight: 700; font-size: 1.2rem; }
-        .mood-text { font-size: 0.85rem; color: #888; }
+        .mood-bar.greed { background: linear-gradient(90deg, var(--green), #34d399); }
+        .mood-value { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 1.1rem; }
+        .mood-text { font-size: 0.8rem; color: var(--text-tertiary); }
         
         /* Trending News */
-        .news-card { grid-column: span 4; background: linear-gradient(135deg, #1e1e2f 0%, #16161f 100%); border-radius: 20px; padding: 1.5rem; border: 1px solid #333; }
+        .news-card { grid-column: span 4; background: var(--bg-card); border-radius: 20px; padding: 1.5rem; border: 1px solid var(--border-color); transition: all 0.3s ease; }
+        .news-card:hover { border-color: var(--border-gold); }
         .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-        .news-item { background: #16161f; border-radius: 12px; padding: 1.2rem; border: 1px solid #2a2a4a; transition: all 0.3s; cursor: pointer; }
-        .news-item:hover { border-color: #C9A227; transform: translateY(-3px); }
-        .news-source { color: #C9A227; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem; }
-        .news-title { font-size: 0.95rem; font-weight: 600; line-height: 1.4; margin-bottom: 0.5rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-        .news-time { color: #666; font-size: 0.8rem; }
+        .news-item { background: var(--bg-tertiary); border-radius: 12px; padding: 1.2rem; border: 1px solid var(--border-color); transition: all 0.3s; cursor: pointer; }
+        .news-item:hover { border-color: var(--border-gold); transform: translateY(-3px); }
+        .news-source { color: var(--gold); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.5px; }
+        .news-title { font-size: 0.95rem; font-weight: 600; line-height: 1.4; margin-bottom: 0.5rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; color: var(--text-primary); }
+        .news-time { color: var(--text-tertiary); font-size: 0.8rem; }
         
         /* AI Insight Box */
-        .insight-card { grid-column: span 4; background: linear-gradient(135deg, #1e1e2f 0%, #2a2a4a 100%); border-radius: 20px; padding: 2rem; border: 2px solid #C9A227; position: relative; overflow: hidden; }
-        .insight-card::before { content: '🧠'; position: absolute; top: 1rem; right: 1rem; font-size: 3rem; opacity: 0.15; }
-        .insight-title { color: #C9A227; font-size: 1.3rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
-        .insight-content { color: #d0d0e0; font-size: 1.05rem; line-height: 1.8; }
+        .insight-card { grid-column: span 4; background: var(--bg-card); border-radius: 20px; padding: 2rem; border: 1px solid var(--border-gold); position: relative; overflow: hidden; }
+        .insight-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold-gradient); }
+        .insight-card::after { content: '🧠'; position: absolute; top: 1.5rem; right: 1.5rem; font-size: 2.5rem; opacity: 0.1; }
+        .insight-title { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.3rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .insight-content { color: var(--text-secondary); font-size: 1rem; line-height: 1.8; }
         .insight-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
-        .insight-tag { background: rgba(201, 162, 39, 0.15); color: #C9A227; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.8rem; font-weight: 600; }
+        .insight-tag { background: rgba(201, 162, 39, 0.1); color: var(--gold); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; border: 1px solid var(--border-gold); }
         
         /* Loading States */
-        .skeleton { background: linear-gradient(90deg, #2a2a4a 0%, #3a3a5a 50%, #2a2a4a 100%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 8px; }
+        .skeleton { background: linear-gradient(90deg, var(--bg-tertiary) 0%, var(--bg-card-hover) 50%, var(--bg-tertiary) 100%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 8px; }
         @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
         
         /* Last Updated */
-        .last-updated { text-align: center; color: #666; font-size: 0.85rem; margin-top: 1.5rem; }
+        .last-updated { text-align: center; color: var(--text-tertiary); font-size: 0.85rem; margin-top: 1.5rem; padding: 1rem; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border-color); }
         
         /* Responsive */
         @media (max-width: 1400px) {
@@ -338,49 +474,51 @@
         }
         
         @media (max-width: 768px) {
+            .dashboard-container { padding: 70px 1rem 2rem; }
             .dashboard-grid { grid-template-columns: 1fr; }
             .fear-greed-card, .crypto-card, .indices-card, .currency-card, .mood-card, .news-card, .insight-card { grid-column: span 1; }
             .gauge-wrapper { flex-direction: column; }
             .crypto-grid, .indices-grid, .currency-grid, .mood-grid, .news-grid { grid-template-columns: 1fr; }
-            .header h1 { font-size: 1.8rem; }
+            .header h1 { font-size: 1.6rem; }
             .crypto-item { padding: 0.8rem; gap: 0.5rem; }
             .crypto-price-col { min-width: 0; flex-shrink: 1; }
             .crypto-price { font-size: 0.9rem; }
+            .back-btn { top: 10px; left: 10px; padding: 8px 14px; font-size: 0.8rem; }
         }
         
         /* Tooltips */
         .tooltip { position: relative; cursor: help; }
-        .tooltip::after { content: attr(data-tooltip); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); background: #2a2a4a; color: #fff; padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.8rem; white-space: nowrap; opacity: 0; pointer-events: none; transition: all 0.3s; }
+        .tooltip::after { content: attr(data-tooltip); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); background: var(--bg-tertiary); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.8rem; white-space: nowrap; opacity: 0; pointer-events: none; transition: all 0.3s; border: 1px solid var(--border-color); }
         .tooltip:hover::after { opacity: 1; bottom: calc(100% + 5px); }
         
         /* SEBI Disclaimer */
         .disclaimer {
             margin-top: 25px;
             padding: 25px;
-            background: linear-gradient(135deg, #1e1e2f 0%, #16161f 100%);
+            background: var(--bg-card);
             border-radius: 16px;
-            border: 1px solid rgba(239, 68, 68, 0.3);
+            border: 1px solid var(--border-color);
             text-align: left;
         }
 
         .sebi-disclaimer {
-            border-left: 4px solid #ef4444;
+            border-left: 4px solid var(--red);
         }
 
         .disclaimer-header {
-            color: #ef4444;
+            color: var(--red);
             font-size: 1.1rem;
             font-weight: 700;
             margin-bottom: 20px;
             padding-bottom: 15px;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
         .disclaimer-content p {
-            color: #888;
+            color: var(--text-tertiary);
             font-size: 0.85rem;
             line-height: 1.8;
             margin-bottom: 12px;
@@ -391,14 +529,14 @@
         }
 
         .disclaimer-content strong {
-            color: #C9A227;
+            color: var(--gold);
         }
 
         .disclaimer-footer {
             margin-top: 20px;
             padding-top: 15px;
-            border-top: 1px solid #333;
-            color: #666;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-tertiary);
             font-size: 0.8rem;
             display: flex;
             align-items: center;
@@ -407,10 +545,16 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- Premium Back Button -->
+    <a href="tools.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i>
+        Back to Tools
+    </a>
+    
+    <div class="dashboard-container">
         <div class="header">
             <div class="premium-badge">⚡ LIVE DATA DASHBOARD - 100% FREE</div>
-            <h1>📊 Market Pulse Dashboard</h1>
+            <h1><span class="emoji">📊</span> Market Pulse Dashboard</h1>
             <p>Real-Time Market Intelligence • Fear & Greed • Crypto • Currencies • News</p>
             <div class="live-indicator">
                 <span class="live-dot"></span>
@@ -423,6 +567,10 @@
             <div class="fear-greed-card">
                 <div class="gauge-wrapper">
                     <div class="gauge-container">
+                        <div class="gauge-center">
+                            <div class="gauge-value" id="fearGreedValue">--</div>
+                            <div class="gauge-label" id="fearGreedLabel">Loading...</div>
+                        </div>
                         <svg class="gauge-svg" viewBox="0 0 200 120">
                             <defs>
                                 <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -463,6 +611,14 @@
                                 <line x1="164" y1="55" x2="158" y2="60" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
                                 <line x1="180" y1="100" x2="172" y2="100" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
                             </g>
+                            <!-- Scale labels -->
+                            <g class="gauge-labels" font-family="Inter, sans-serif" font-size="10" fill="rgba(255,255,255,0.7)" text-anchor="middle">
+                                <text x="12" y="115">0</text>
+                                <text x="30" y="52">25</text>
+                                <text x="100" y="12">50</text>
+                                <text x="170" y="52">75</text>
+                                <text x="188" y="115">100</text>
+                            </g>
                             <!-- Needle -->
                             <g id="gaugeNeedle" transform="rotate(-90, 100, 100)">
                                 <line x1="100" y1="100" x2="100" y2="40" stroke="url(#needleGradient)" stroke-width="4" stroke-linecap="round"/>
@@ -470,10 +626,6 @@
                                 <circle cx="100" cy="100" r="5" fill="#fff"/>
                             </g>
                         </svg>
-                        <div class="gauge-center">
-                            <div class="gauge-value" id="fearGreedValue">--</div>
-                            <div class="gauge-label" id="fearGreedLabel">Loading...</div>
-                        </div>
                     </div>
                     <div class="sentiment-details">
                         <div class="sentiment-title">🎯 Crypto Fear & Greed Index</div>
@@ -648,6 +800,7 @@
         </div>
 
         <div class="last-updated">
+            <i class="fas fa-sync-alt" style="margin-right: 8px; color: var(--gold);"></i>
             Last updated: <span id="lastUpdated">--</span> | Data sources: CoinGecko, Alternative.me, ExchangeRate-API
         </div>
 

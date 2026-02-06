@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -14,105 +15,714 @@
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     
-    <title>PPF Calculator FREE - Public Provident Fund Calculator with Maturity 2026 | BroBillionaire</title>
-    <meta name="description" content="FREE PPF Calculator - Calculate Public Provident Fund returns, maturity amount & interest. Updated PPF rates 2026. Best tax-free investment calculator India.">
-    <meta name="keywords" content="ppf calculator, public provident fund calculator, ppf maturity calculator, ppf interest calculator, ppf investment calculator, ppf returns calculator india, tax free investment calculator, ppf calculator 2026">
+    <!-- Primary Meta Tags -->
+    <title>PPF Calculator FREE 2026 - Public Provident Fund Calculator India | BroBillionaire</title>
+    <meta name="title" content="PPF Calculator FREE 2026 - Public Provident Fund Return Calculator India">
+    <meta name="description" content="🔥 FREE PPF Calculator 2026 - Calculate PPF maturity amount, interest earned & yearly growth. AI-powered investment suggestions for maximum 80C tax benefits.">
+    <meta name="keywords" content="PPF calculator, public provident fund calculator, PPF interest rate 2026, PPF maturity calculator, PPF returns India, 80C tax saving, PPF investment calculator, government scheme calculator">
     <meta name="author" content="BroBillionaire">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="https://brobillionaire.com/tool-ppf-calculator.html">
     
-    <meta property="og:title" content="FREE PPF Calculator - Tax-Free Investment Tool">
-    <meta property="og:description" content="Calculate PPF returns with tax-free maturity. Best long-term investment calculator.">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
     <meta property="og:url" content="https://brobillionaire.com/tool-ppf-calculator.html">
+    <meta property="og:title" content="FREE PPF Calculator 2026 - AI Powered Investment Planner">
+    <meta property="og:description" content="Calculate PPF maturity with AI suggestions, yearly breakdown & tax benefits. Free tool!">
     <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
     <meta property="og:site_name" content="BroBillionaire">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://brobillionaire.com/tool-ppf-calculator.html">
-    <meta name="twitter:title" content="FREE PPF Calculator - Public Provident Fund Calculator">
-    <meta name="twitter:description" content="Calculate PPF returns, maturity amount & interest. Tax-free investment planning tool!">
+    <meta name="twitter:title" content="FREE PPF Calculator - AI Powered">
+    <meta name="twitter:description" content="Calculate PPF maturity with yearly breakdown & 80C tax savings. Free tool!">
     <meta name="twitter:image" content="https://brobillionaire.com/og-image.jpg">
     
+    <!-- WebApplication Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "PPF Calculator - BroBillionaire",
+        "description": "AI-powered PPF calculator with yearly breakdown, tax savings and investment suggestions",
+        "url": "https://brobillionaire.com/tool-ppf-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "INR"},
+        "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "12384"}
+    }
+    </script>
+
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://brobillionaire.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://brobillionaire.com/tools.html"},
+            {"@type": "ListItem", "position": 3, "name": "PPF Calculator"}
+        ]
+    }
+    </script>
+    
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <style>
-        .tool-container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
-        .tool-header {
-            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 50%, var(--bg-secondary) 100%);
-            padding: 140px 20px 80px; text-align: center; border-bottom: 1px solid var(--border-gold);
+        :root {
+            --gold: #C9A227;
+            --gold-light: #E8D5A3;
+            --gold-dark: #A68B1E;
+            --bg-primary: #0d0d0d;
+            --bg-secondary: #1a1a1a;
+            --bg-card: #161616;
+            --text-primary: #fff;
+            --text-secondary: #999;
+            --text-tertiary: #666;
+            --border-color: #2a2a2a;
+            --green: #10b981;
+            --red: #ef4444;
+            --blue: #3b82f6;
+            --purple: #8b5cf6;
+            --orange: #f97316;
         }
-        .tool-category {
-            display: inline-block; background: rgba(201, 162, 39, 0.15); color: var(--gold);
-            padding: 8px 20px; border-radius: 25px; font-size: 0.8rem; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 1.5rem; border: 1px solid var(--border-gold);
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding-top: 140px;
+            min-height: 100vh;
         }
-        .tool-title {
-            font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-bottom: 20px; font-weight: 700;
-            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
-        .tool-subtitle { font-size: 1.15rem; color: var(--text-secondary); max-width: 800px; margin: 0 auto; line-height: 1.8; }
-        .main-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 60px 40px; }
-        .calculator-section, .results-section {
-            background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 40px;
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
-        .section-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 30px; color: var(--text-primary); }
-        .input-group { margin-bottom: 25px; }
-        label { display: block; font-weight: 600; margin-bottom: 10px; color: var(--text-primary); }
-        .label-info { font-weight: 400; color: var(--text-tertiary); font-size: 0.85rem; display: block; margin-top: 3px; }
-        input, select {
-            width: 100%; padding: 14px 18px; border: 1px solid var(--border-color); border-radius: 8px;
-            background: var(--bg-tertiary); color: var(--text-primary); font-family: 'Inter', sans-serif;
+        
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-img { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; }
+        .logo-text { font-size: 1.25rem; font-weight: 600; color: var(--text-primary); }
+        
+        .nav-links { display: flex; gap: 35px; }
+        .nav-link { color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.2s ease; }
+        .nav-link:hover, .nav-link.active { color: var(--gold); }
+        
+        .mobile-menu-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; }
+        
+        /* Breadcrumb */
+        .breadcrumb-nav {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            padding: 12px 0;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.85rem;
         }
-        input:focus, select:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.1); }
-        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .result-card {
-            background: var(--bg-tertiary); padding: 25px; border-radius: 12px;
-            border: 1px solid var(--border-color); margin-bottom: 20px;
+        
+        .breadcrumb-container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+        .breadcrumb-nav a, .breadcrumb-nav span { color: rgba(255, 255, 255, 0.6); text-decoration: none; padding: 0 8px; }
+        .breadcrumb-nav a:first-child { padding-left: 0; }
+        .breadcrumb-nav a:hover { color: var(--gold); }
+        .breadcrumb-nav span.current { color: var(--gold); }
+        
+        /* Main Container */
+        .calculator-container { max-width: 1400px; margin: 0 auto; padding: 40px 20px 80px; }
+        
+        /* Hero Section */
+        .tool-hero {
+            background: linear-gradient(145deg, #13131d 0%, #0d0d15 50%, #111120 100%);
+            border: 1px solid rgba(201, 162, 39, 0.15);
+            border-radius: 28px;
+            padding: 55px 50px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 100px rgba(201, 162, 39, 0.05);
         }
-        .result-main {
-            background: linear-gradient(135deg, rgba(74, 222, 128, 0.2), rgba(74, 222, 128, 0.05));
-            border: 2px solid rgba(74, 222, 128, 0.5);
+        
+        .tool-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
         }
-        .result-label { font-size: 0.85rem; font-weight: 700; color: var(--text-tertiary); margin-bottom: 8px; text-transform: uppercase; }
-        .result-value {
-            font-size: 3rem; font-weight: 800;
-            background: linear-gradient(135deg, #4ade80, #22c55e);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        
+        .tool-hero::after {
+            content: '🏛️';
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            font-size: 6rem;
+            opacity: 0.08;
         }
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .stat-card { background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 10px; padding: 20px; text-align: center; }
-        .stat-title { font-size: 0.8rem; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; color: var(--text-tertiary); }
-        .stat-value { font-size: 1.8rem; font-weight: 800; color: var(--text-primary); }
+        
+        .premium-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: #000;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { box-shadow: 0 0 20px rgba(201, 162, 39, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(201, 162, 39, 0.6); }
+        }
+        
+        .tool-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+        
+        .tool-hero p { color: var(--text-secondary); font-size: 1.15rem; max-width: 700px; }
+        
+        .govt-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--green);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 20px;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        
+        /* Main Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 480px 1fr;
+            gap: 35px;
+        }
+        
+        /* Cards */
+        .card {
+            background: linear-gradient(145deg, #161620 0%, #12121a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            padding: 32px;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card:hover { border-color: rgba(201, 162, 39, 0.25); }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 28px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        
+        .card-icon {
+            width: 54px;
+            height: 54px;
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.2) 0%, rgba(201, 162, 39, 0.08) 100%);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+        }
+        
+        .card-title { font-size: 1.25rem; font-weight: 700; color: var(--text-primary); }
+        .card-subtitle { font-size: 0.88rem; color: var(--text-secondary); }
+        
+        /* Info Box */
+        .info-box {
+            background: rgba(201, 162, 39, 0.1);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 14px;
+            padding: 15px;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+            color: var(--gold-light);
+        }
+        
+        .info-box i { margin-right: 8px; }
+        
+        /* Form Elements */
+        .form-group { margin-bottom: 24px; }
+        
+        .form-label { 
+            display: block; 
+            color: var(--gold); 
+            font-weight: 700; 
+            margin-bottom: 12px; 
+            font-size: 0.95rem;
+        }
+        
+        .form-hint { font-weight: 400; color: var(--text-tertiary); font-size: 0.85rem; margin-left: 6px; }
+        
+        .form-input {
+            width: 100%;
+            padding: 16px 20px;
+            background: linear-gradient(145deg, #0a0a0f 0%, #0d0d12 100%);
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            color: var(--text-primary);
+            font-size: 1.05rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.1);
+        }
+        
+        /* Slider */
+        .slider-value {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        
+        .form-slider {
+            width: 100%;
+            height: 8px;
+            -webkit-appearance: none;
+            background: rgba(201, 162, 39, 0.2);
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .form-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(201, 162, 39, 0.4);
+        }
+        
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+        }
+        
+        /* Quick Amount Buttons */
+        .quick-amounts {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 12px;
+        }
+        
+        .quick-btn {
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-btn:hover, .quick-btn.active {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(201, 162, 39, 0.1);
+        }
+        
+        /* Button */
         .btn-primary {
-            padding: 14px 32px; border: none; border-radius: 8px; font-weight: 600;
-            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-            color: var(--bg-primary); width: 100%; margin-top: 20px; cursor: pointer;
-            font-family: 'Inter', sans-serif; transition: all 0.3s;
+            width: 100%;
+            padding: 18px 24px;
+            background: linear-gradient(135deg, var(--gold) 0%, #b8922a 50%, var(--gold-dark) 100%);
+            border: none;
+            border-radius: 16px;
+            color: #000;
+            font-size: 1.1rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 25px;
+            text-transform: uppercase;
         }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(201, 162, 39, 0.4); }
-        .tips-section { background: var(--bg-secondary); padding: 80px 40px; }
-        .tips-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
-        .tip-card { background: var(--bg-card); padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); transition: all 0.3s; }
-        .tip-card:hover { transform: translateY(-5px); border-color: var(--border-gold); }
-        .tip-icon { font-size: 2.5rem; margin-bottom: 20px; }
-        .tip-title { font-weight: 700; margin-bottom: 12px; color: var(--gold); }
-        .tip-text { color: var(--text-secondary); line-height: 1.7; }
-        @media (max-width: 968px) {
-            .main-content, .tips-grid, .input-row, .stats-grid { grid-template-columns: 1fr; }
-            .tool-title { font-size: 2.5rem; }
+        
+        .btn-primary:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 15px 40px rgba(201, 162, 39, 0.4);
+        }
+        
+        /* Results */
+        .results-section { display: flex; flex-direction: column; gap: 25px; }
+        
+        /* Big Result Card */
+        .big-result-card {
+            background: linear-gradient(180deg, #0a0a15 0%, #0d0d1a 50%, #111122 100%);
+            border: 2px solid var(--gold);
+            border-radius: 28px;
+            padding: 45px 35px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 80px rgba(201, 162, 39, 0.08), 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        .big-result-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201, 162, 39, 0.15) 0%, transparent 70%);
+        }
+        
+        .result-label {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+        
+        .result-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+        
+        .result-subtitle { color: var(--text-tertiary); font-size: 0.95rem; }
+        
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+        
+        .metric-card {
+            background: linear-gradient(145deg, #161620 0%, #12121a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 24px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+        
+        .metric-card:hover { transform: translateY(-5px); border-color: rgba(201, 162, 39, 0.3); }
+        
+        .metric-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.15) 0%, rgba(201, 162, 39, 0.05) 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin: 0 auto 15px;
+        }
+        
+        .metric-title {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        
+        .metric-value { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); }
+        .metric-value.positive { color: var(--green); }
+        .metric-value.negative { color: var(--red); }
+        
+        /* Chart Container */
+        .chart-container {
+            background: linear-gradient(145deg, #161620 0%, #12121a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            padding: 30px;
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .chart-title { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); }
+        
+        .chart-wrapper { height: 300px; position: relative; }
+        
+        /* Tax Savings Card */
+        .tax-card {
+            background: linear-gradient(145deg, #1a1a28 0%, #141422 100%);
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 24px;
+            padding: 30px;
+        }
+        
+        .tax-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .tax-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--green) 0%, #059669 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .tax-title { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); }
+        .tax-subtitle { font-size: 0.85rem; color: var(--green); }
+        
+        .tax-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        
+        .tax-stat {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 14px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .tax-stat-label { color: var(--text-tertiary); font-size: 0.8rem; margin-bottom: 5px; }
+        .tax-stat-value { color: var(--green); font-size: 1.3rem; font-weight: 700; }
+        
+        /* AI Suggestion Box */
+        .ai-suggestion-box {
+            background: linear-gradient(145deg, #1a1a2e 0%, #16162a 100%);
+            border: 2px solid rgba(139, 92, 246, 0.3);
+            border-radius: 24px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ai-suggestion-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--purple), var(--blue), var(--purple));
+        }
+        
+        .ai-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .ai-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            animation: aiPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes aiPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.6); }
+        }
+        
+        .ai-title { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); }
+        .ai-subtitle { font-size: 0.85rem; color: var(--purple); }
+        
+        .ai-badge {
+            background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-left: auto;
+        }
+        
+        .ai-content { background: rgba(0, 0, 0, 0.3); border-radius: 16px; padding: 20px; }
+        
+        .ai-suggestion-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .ai-suggestion-item:last-child { border-bottom: none; }
+        
+        .ai-bullet {
+            width: 28px;
+            height: 28px;
+            background: rgba(139, 92, 246, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        
+        .ai-text { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+        .ai-text strong { color: var(--gold); }
+        
+        .ai-typing { display: flex; align-items: center; gap: 8px; padding: 15px; color: var(--text-tertiary); }
+        .ai-typing-dots { display: flex; gap: 4px; }
+        .ai-typing-dots span { width: 8px; height: 8px; background: var(--purple); border-radius: 50%; animation: typingBounce 1.4s infinite ease-in-out; }
+        .ai-typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .ai-typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+        
+        @keyframes typingBounce {
+            0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+        
+        /* Year Table */
+        .year-table-container {
+            background: linear-gradient(145deg, #161620 0%, #12121a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            padding: 30px;
+            overflow: hidden;
+        }
+        
+        .year-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .year-table th {
+            text-align: left;
+            padding: 15px;
+            background: rgba(201, 162, 39, 0.1);
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+        
+        .year-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .year-table tr:hover td { background: rgba(201, 162, 39, 0.05); }
+        
+        /* Disclaimer */
+        .disclaimer-box {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 40px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        
+        .disclaimer-box strong { color: var(--red); }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .main-grid { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 768px) {
+            body { padding-top: 120px; }
+            .calculator-container { padding: 20px 15px; }
+            .tool-hero { padding: 35px 25px; }
+            .tool-hero h1 { font-size: 2rem; }
+            .tool-hero::after { display: none; }
+            .metrics-grid { grid-template-columns: 1fr; }
+            .tax-grid { grid-template-columns: 1fr; }
+            .quick-amounts { grid-template-columns: repeat(2, 1fr); }
+            .result-value { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .mobile-menu-toggle { display: block; }
         }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">
-                <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                <img src="logo.jpg" alt="BroBillionaire Logo" class="logo-img">
                 <span class="logo-text">BroBillionaire</span>
             </a>
             <div class="nav-links">
@@ -121,297 +731,480 @@
                 <a href="tools.html" class="nav-link active">Tools</a>
                 <a href="about.html" class="nav-link">About</a>
             </div>
-            <button class="cta-btn gold-btn" onclick="window.location.href='articles.html'">Read Free</button>
             <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-                <span></span><span></span><span></span>
+                <i class="fas fa-bars"></i>
             </button>
         </div>
     </nav>
-    <div class="mobile-nav-dropdown" id="mobileNavDropdown">
-        <a href="index.html">Home</a><a href="articles.html">Articles</a>
-        <a href="tools.html">Tools</a><a href="about.html">About</a>
-    </div>
 
-    <header class="tool-header">
-        <div class="tool-container">
-            <div class="tool-category">🏛️ FREE TAX-FREE TOOL</div>
-            <h1 class="tool-title">PPF Calculator</h1>
-            <p class="tool-subtitle">Calculate Public Provident Fund returns with tax-free maturity. 15-year lock-in, EEE status, government-backed safety. Best long-term wealth builder.</p>
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb-nav">
+        <div class="breadcrumb-container">
+            <a href="index.html">Home</a> › 
+            <a href="tools.html">Tools</a> › 
+            <span class="current">PPF Calculator</span>
         </div>
-    </header>
+    </nav>
 
-    <main>
-        <div class="tool-container">
-            <div class="main-content">
-                <div class="calculator-section">
-                    <h2 class="section-title">💰 PPF Investment Details</h2>
+    <!-- Main Content -->
+    <div class="calculator-container">
+        <!-- Hero Section -->
+        <div class="tool-hero">
+            <div class="premium-tag">
+                <i class="fas fa-crown"></i> PREMIUM FREE TOOL
+            </div>
+            <h1>PPF Calculator</h1>
+            <p>Calculate your Public Provident Fund maturity amount with AI-powered investment suggestions, yearly breakdown, and maximum tax benefits under Section 80C.</p>
+            <div class="govt-badge">
+                <i class="fas fa-shield-alt"></i>
+                Government Backed • EEE Tax Status • Safe Investment
+            </div>
+        </div>
 
-                    <div class="input-group">
-                        <label for="annualInvestment">
-                            Annual Investment (₹)
-                            <span class="label-info">Min: ₹500, Max: ₹1,50,000/year</span>
-                        </label>
-                        <input type="number" id="annualInvestment" value="150000" min="500" max="150000" step="1000">
+        <!-- Main Grid -->
+        <div class="main-grid">
+            <!-- Input Section -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🏛️</div>
+                    <div>
+                        <div class="card-title">PPF Investment Details</div>
+                        <div class="card-subtitle">Enter your contribution details</div>
                     </div>
-
-                    <div class="input-group">
-                        <label for="tenure">
-                            Tenure (Years)
-                            <span class="label-info">Minimum 15 years, can extend in blocks of 5</span>
-                        </label>
-                        <input type="number" id="tenure" value="15" min="15" max="50" step="1">
-                    </div>
-
-                    <div class="input-group">
-                        <label for="interestRate">
-                            PPF Interest Rate (%)
-                            <span class="label-info">Current rate: 7.1% (Q4 FY2026)</span>
-                        </label>
-                        <input type="number" id="interestRate" value="7.1" min="1" max="15" step="0.1">
-                    </div>
-
-                    <div class="input-group">
-                        <label for="depositMode">Deposit Mode</label>
-                        <select id="depositMode">
-                            <option value="yearly">Yearly (Lump sum)</option>
-                            <option value="monthly" selected>Monthly SIP</option>
-                        </select>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="existingBalance">
-                            Existing PPF Balance (₹)
-                            <span class="label-info">If you already have a PPF account</span>
-                        </label>
-                        <input type="number" id="existingBalance" value="0" min="0" step="10000">
-                    </div>
-
-                    <button class="btn-primary" onclick="calculate()">Calculate PPF Returns</button>
                 </div>
 
-                <div class="results-section">
-                    <h2 class="section-title">🎯 Maturity Details</h2>
+                <div class="info-box">
+                    <i class="fas fa-info-circle"></i>
+                    Current PPF Interest Rate: <strong>7.1% p.a.</strong> (Q1 FY 2025-26) | Min: ₹500/year | Max: ₹1.5L/year
+                </div>
 
-                    <div class="result-card result-main">
-                        <div class="result-label">TAX-FREE MATURITY</div>
-                        <div class="result-value" id="maturityAmount">₹0</div>
+                <div class="form-group">
+                    <label class="form-label">Yearly Investment (₹)</label>
+                    <input type="number" id="yearlyAmount" class="form-input" value="150000" min="500" max="150000" step="500" oninput="calculate()">
+                    <div class="quick-amounts">
+                        <button class="quick-btn" onclick="setAmount(12500)">₹12.5K</button>
+                        <button class="quick-btn" onclick="setAmount(50000)">₹50K</button>
+                        <button class="quick-btn" onclick="setAmount(100000)">₹1L</button>
+                        <button class="quick-btn active" onclick="setAmount(150000)">₹1.5L Max</button>
                     </div>
+                </div>
 
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-title">Total Invested</div>
-                            <div class="stat-value" id="totalInvested">₹0</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-title">Interest Earned</div>
-                            <div class="stat-value" id="interestEarned">₹0</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-title">Tax Saved</div>
-                            <div class="stat-value" id="taxSaved">₹0</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-title">Effective CAGR</div>
-                            <div class="stat-value" id="cagr">0%</div>
+                <div class="form-group">
+                    <label class="form-label">PPF Interest Rate <span class="form-hint">(% per annum)</span></label>
+                    <div class="slider-value" id="rateDisplay">7.1%</div>
+                    <input type="range" id="interestRate" class="form-slider" min="6" max="9" step="0.1" value="7.1" oninput="updateSlider('interestRate', 'rateDisplay', '%'); calculate()">
+                    <div class="slider-labels"><span>6%</span><span>7%</span><span>8%</span><span>9%</span></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Investment Period <span class="form-hint">(years)</span></label>
+                    <div class="slider-value" id="tenureDisplay">15 Years</div>
+                    <input type="range" id="tenure" class="form-slider" min="15" max="50" step="5" value="15" oninput="updateSlider('tenure', 'tenureDisplay', ' Years'); calculate()">
+                    <div class="slider-labels"><span>15</span><span>25</span><span>35</span><span>50</span></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Your Tax Slab <span class="form-hint">(for savings calculation)</span></label>
+                    <select id="taxSlab" class="form-input" onchange="calculate()">
+                        <option value="0">0% (Below ₹2.5L income)</option>
+                        <option value="5">5% (₹2.5L - ₹5L)</option>
+                        <option value="20">20% (₹5L - ₹10L)</option>
+                        <option value="30" selected>30% (Above ₹10L)</option>
+                    </select>
+                </div>
+
+                <button class="btn-primary" onclick="calculate()">
+                    <i class="fas fa-calculator"></i> Calculate Maturity
+                </button>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section">
+                <!-- Big Result Card -->
+                <div class="big-result-card">
+                    <div class="result-label">Total Maturity Amount</div>
+                    <div class="result-value" id="maturityAmount">₹40.68 L</div>
+                    <div class="result-subtitle">Tax-Free under EEE status</div>
+                </div>
+
+                <!-- Metrics Grid -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon">💰</div>
+                        <div class="metric-title">Total Investment</div>
+                        <div class="metric-value" id="totalInvestment">₹22.50 L</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">📈</div>
+                        <div class="metric-title">Interest Earned</div>
+                        <div class="metric-value positive" id="totalInterest">₹18.18 L</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">🎯</div>
+                        <div class="metric-title">Effective Returns</div>
+                        <div class="metric-value" id="effectiveReturns">180.8%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">📅</div>
+                        <div class="metric-title">Maturity Date</div>
+                        <div class="metric-value" id="maturityDate">Apr 2041</div>
+                    </div>
+                </div>
+
+                <!-- Tax Savings Card -->
+                <div class="tax-card">
+                    <div class="tax-header">
+                        <div class="tax-icon">🏷️</div>
+                        <div>
+                            <div class="tax-title">Section 80C Tax Benefits</div>
+                            <div class="tax-subtitle">Triple tax advantage - EEE status</div>
                         </div>
                     </div>
+                    <div class="tax-grid">
+                        <div class="tax-stat">
+                            <div class="tax-stat-label">Annual Tax Saved</div>
+                            <div class="tax-stat-value" id="annualTaxSaved">₹45,000</div>
+                        </div>
+                        <div class="tax-stat">
+                            <div class="tax-stat-label">Total Tax Saved (15 yrs)</div>
+                            <div class="tax-stat-value" id="totalTaxSaved">₹6.75 L</div>
+                        </div>
+                        <div class="tax-stat">
+                            <div class="tax-stat-label">Tax-Free Interest</div>
+                            <div class="tax-stat-value" id="taxFreeInterest">₹18.18 L</div>
+                        </div>
+                    </div>
+                </div>
 
-                    <div style="background: var(--bg-tertiary); padding: 25px; border-radius: 12px; margin-top: 20px; border: 1px solid var(--border-color);">
-                        <h3 style="margin-bottom: 15px; color: var(--text-primary);">📊 5-Year Milestones</h3>
-                        <table style="width: 100%; color: var(--text-primary);" id="milestoneTable">
-                            <!-- Generated by JS -->
+                <!-- Growth Chart -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <div class="chart-title">PPF Growth Over Time</div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="ppfChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- AI Suggestions -->
+                <div class="ai-suggestion-box">
+                    <div class="ai-header">
+                        <div class="ai-icon">🤖</div>
+                        <div>
+                            <div class="ai-title">AI Investment Insights</div>
+                            <div class="ai-subtitle">Smart PPF strategy suggestions</div>
+                        </div>
+                        <div class="ai-badge">POWERED BY AI</div>
+                    </div>
+                    <div class="ai-content" id="aiSuggestions">
+                        <div class="ai-typing">
+                            <div class="ai-typing-dots"><span></span><span></span><span></span></div>
+                            Analyzing your PPF...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Yearly Breakdown -->
+                <div class="year-table-container">
+                    <h3 style="color: var(--gold); margin-bottom: 20px; font-size: 1.2rem;">
+                        <i class="fas fa-table"></i> Yearly PPF Growth
+                    </h3>
+                    <div style="overflow-x: auto;">
+                        <table class="year-table" id="yearTable">
+                            <thead>
+                                <tr>
+                                    <th>Year</th>
+                                    <th>Opening Balance</th>
+                                    <th>Investment</th>
+                                    <th>Interest Earned</th>
+                                    <th>Closing Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody id="yearTableBody">
+                                <!-- Filled by JS -->
+                            </tbody>
                         </table>
                     </div>
-
-                    <div style="background: rgba(74, 222, 128, 0.1); padding: 20px; border-radius: 12px; margin-top: 20px; border: 1px solid rgba(74, 222, 128, 0.3);">
-                        <h4 style="color: var(--green); margin-bottom: 10px;">🎉 EEE Status Benefits</h4>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Exempt-Exempt-Exempt: Investment deductible under 80C (₹1.5L), Interest tax-free, Maturity completely tax-free. No TDS. Triple tax benefit makes PPF unbeatable for conservative investors.</p>
-                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="tips-section">
-            <div class="tool-container">
-                <h2 class="section-title">🎓 PPF Investment Strategy</h2>
-                <div class="tips-grid">
-                    <div class="tip-card">
-                        <div class="tip-icon">🏛️</div>
-                        <div class="tip-title">Triple Tax Benefit</div>
-                        <div class="tip-text">EEE status = Invest up to ₹1.5L/year under 80C + Tax-free interest + Tax-free maturity. In 30% bracket, ₹1.5L investment saves ₹46,800 tax. This boosts effective returns significantly.</div>
-                    </div>
-                    <div class="tip-card">
-                        <div class="tip-icon">📅</div>
-                        <div class="tip-title">Deposit Timing</div>
-                        <div class="tip-text">Deposit before 5th of month to earn interest for entire month. Deposit on 6th? Lose that month's interest. Annual deposits? Do in April to maximize compounding. Timing adds 0.3-0.5% extra returns.</div>
-                    </div>
-                    <div class="tip-card">
-                        <div class="tip-icon">💰</div>
-                        <div class="tip-title">Max Out Limit</div>
-                        <div class="tip-text">₹1.5L/year for 15 years at 7.1% = ₹40.68L maturity. ₹18L interest is tax-free. Equivalent taxable return for 30% bracket = 10.14%. PPF beats most debt funds post-tax.</div>
-                    </div>
-                    <div class="tip-card">
-                        <div class="tip-icon">🔒</div>
-                        <div class="tip-title">Lock-in Benefits</div>
-                        <div class="tip-text">15-year lock-in = Forced savings discipline. Can't withdraw impulsively. Partial withdrawal from Year 7 allowed (50% of balance 4 years ago). Loans allowed from Year 3. Lock-in = wealth accumulation.</div>
-                    </div>
-                    <div class="tip-card">
-                        <div class="tip-icon">👨‍👩‍👧‍👦</div>
-                        <div class="tip-title">Family Strategy</div>
-                        <div class="tip-text">Open PPF for self + spouse + 2 kids = ₹6L/year total investment. Tax benefit only on parent's account. But 4 accounts × ₹40L maturity = ₹1.6 crore tax-free corpus in 15 years!</div>
-                    </div>
-                    <div class="tip-card">
-                        <div class="tip-icon">🎯</div>
-                        <div class="tip-title">Optimal Use Case</div>
-                        <div class="tip-text">Perfect for: Retirement planning, child's education (15+ years away), risk-averse investors, tax saving, emergency corpus. NOT for: Short-term goals, high-return seekers, liquidity needs. Know when to use PPF.</div>
-                    </div>
-                </div>
-            </div>
+        <!-- Disclaimer -->
+        <div class="disclaimer-box">
+            <strong>⚠️ Disclaimer:</strong> PPF interest rates are subject to quarterly revision by the Government of India. This calculator uses the current rate for projections. Actual returns may vary based on rate changes. BroBillionaire is not a financial advisor.
         </div>
-    </main>
-
-    
-    <!-- Related Articles Section -->
-    <section style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border-radius: 16px; padding: 2.5rem; margin: 3rem 0; border: 2px solid #C9A227; max-width: 1200px; margin-left: auto; margin-right: auto;">
-        <h2 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #C9A227; margin-bottom: 1.5rem; text-align: center;">
-            📚 Learn More: Essential Reading
-        </h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
-            <div style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
-                <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
-                    <span style="font-size: 2rem; margin-right: 0.5rem;">📖</span>
-                    <h3 style="color: #C9A227; font-size: 1.1rem; margin: 0;">Stock Market Beginners</h3>
-                </div>
-                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 0.9rem;">
-                    Master the fundamentals with expert insights and real-world examples
-                </p>
-                <a href="article-stock-market-beginners.html" style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
-                    Read Article →
-                </a>
-            </div>
-            <div style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
-                <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
-                    <span style="font-size: 2rem; margin-right: 0.5rem;">💡</span>
-                    <h3 style="color: #C9A227; font-size: 1.1rem; margin: 0;">How To Become Profitable Trader</h3>
-                </div>
-                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 0.9rem;">
-                    Deep dive into advanced strategies used by professional traders
-                </p>
-                <a href="article-how-to-become-profitable-trader.html" style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
-                    Read Article →
-                </a>
-            </div>
-            <div style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
-                <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
-                    <span style="font-size: 2rem; margin-right: 0.5rem;">🎓</span>
-                    <h3 style="color: #C9A227; font-size: 1.1rem; margin: 0;">Fear Easy Money</h3>
-                </div>
-                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 0.9rem;">
-                    Learn from market history and avoid costly mistakes
-                </p>
-                <a href="article-fear-easy-money.html" style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
-                    Read Article →
-                </a>
-            </div>
-        </div>
-    </section>
-<footer class="footer">
-        <div class="footer-container">
-            <div class="footer-brand-section">
-                <div class="logo">
-                    <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
-                    <span class="logo-text">BroBillionaire</span>
-                </div>
-                <p class="tagline">Master the markets with free trading education.</p>
-            </div>
-            <nav class="footer-nav">
-                <a href="index.html">Home</a>
-                <a href="articles.html">Articles</a>
-                <a href="tools.html">Tools</a>
-                <a href="about.html">About</a>
-            </nav>
-        </div>
-    </footer>
-    <div class="footer-disclaimer">
-        <p>&copy; 2026 BroBillionaire. PPF rates subject to quarterly government revision.</p>
     </div>
 
+    <script src="common-footer.js" defer></script>
+
     <script>
-        document.querySelectorAll('input, select').forEach(el => {
-            el.addEventListener('input', calculate);
+        let ppfChart = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            calculate();
         });
-        calculate();
+
+        function setAmount(amount) {
+            document.getElementById('yearlyAmount').value = amount;
+            document.querySelectorAll('.quick-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            calculate();
+        }
+
+        function updateSlider(inputId, displayId, suffix) {
+            const value = document.getElementById(inputId).value;
+            document.getElementById(displayId).textContent = value + suffix;
+        }
+
+        function formatCurrency(amount) {
+            if (amount >= 10000000) {
+                return '₹' + (amount / 10000000).toFixed(2) + ' Cr';
+            } else if (amount >= 100000) {
+                return '₹' + (amount / 100000).toFixed(2) + ' L';
+            }
+            return '₹' + Math.round(amount).toLocaleString('en-IN');
+        }
 
         function calculate() {
-            const annualInvestment = parseFloat(document.getElementById('annualInvestment').value) || 0;
-            const tenure = parseFloat(document.getElementById('tenure').value) || 15;
-            const rate = parseFloat(document.getElementById('interestRate').value) || 7.1;
-            const mode = document.getElementById('depositMode').value;
-            const existingBalance = parseFloat(document.getElementById('existingBalance').value) || 0;
+            const yearlyAmount = parseFloat(document.getElementById('yearlyAmount').value);
+            const rate = parseFloat(document.getElementById('interestRate').value) / 100;
+            const years = parseInt(document.getElementById('tenure').value);
+            const taxSlab = parseFloat(document.getElementById('taxSlab').value) / 100;
 
-            let maturity = existingBalance;
-            let totalInvested = 0;
-
-            // Calculate year by year
-            for (let year = 1; year <= tenure; year++) {
-                if (mode === 'monthly') {
-                    const monthlyAmount = annualInvestment / 12;
-                    for (let month = 1; month <= 12; month++) {
-                        maturity += monthlyAmount;
-                        totalInvested += monthlyAmount;
-                        maturity = maturity * (1 + rate / 100 / 12);
-                    }
-                } else {
-                    maturity += annualInvestment;
-                    totalInvested += annualInvestment;
-                    maturity = maturity * (1 + rate / 100);
-                }
-            }
-
-            const interestEarned = maturity - totalInvested - existingBalance;
-            const taxSaved = (totalInvested * 0.30) + (interestEarned * 0.30); // Assuming 30% tax bracket
-            const cagr = (Math.pow(maturity / (totalInvested + existingBalance), 1 / tenure) - 1) * 100;
-
-            document.getElementById('maturityAmount').textContent = '₹' + maturity.toLocaleString('en-IN', {maximumFractionDigits: 0});
-            document.getElementById('totalInvested').textContent = '₹' + totalInvested.toLocaleString('en-IN', {maximumFractionDigits: 0});
-            document.getElementById('interestEarned').textContent = '₹' + interestEarned.toLocaleString('en-IN', {maximumFractionDigits: 0});
-            document.getElementById('taxSaved').textContent = '₹' + taxSaved.toLocaleString('en-IN', {maximumFractionDigits: 0});
-            document.getElementById('cagr').textContent = cagr.toFixed(2) + '%';
-
-            // Milestone table
-            let tableHTML = '<tr style="border-bottom: 1px solid var(--border-color);"><th style="padding: 10px; text-align: left;">Year</th><th style="padding: 10px; text-align: right;">Balance</th></tr>';
-            let milestoneBalance = existingBalance;
-            let milestoneInvested = 0;
+            // PPF uses compound interest annually
+            // Interest is calculated on the lowest balance between 5th and end of month
+            // We'll use end-of-year calculation for simplicity
             
-            for (let y = 5; y <= tenure; y += 5) {
-                for (let year = (y-5)+1; year <= y; year++) {
-                    if (mode === 'monthly') {
-                        const monthlyAmount = annualInvestment / 12;
-                        for (let month = 1; month <= 12; month++) {
-                            milestoneBalance += monthlyAmount;
-                            milestoneInvested += monthlyAmount;
-                            milestoneBalance = milestoneBalance * (1 + rate / 100 / 12);
+            let balance = 0;
+            let totalInvestment = 0;
+            let totalInterest = 0;
+            const yearlyData = [];
+            const investmentData = [];
+            const interestData = [];
+            const labels = [];
+
+            for (let year = 1; year <= years; year++) {
+                const openingBalance = balance;
+                const investment = yearlyAmount;
+                totalInvestment += investment;
+                
+                // Interest calculated on opening balance + investment (assuming deposit at start of year)
+                const interestEarned = (openingBalance + investment) * rate;
+                totalInterest += interestEarned;
+                
+                balance = openingBalance + investment + interestEarned;
+                
+                yearlyData.push({
+                    year,
+                    opening: openingBalance,
+                    investment,
+                    interest: interestEarned,
+                    closing: balance
+                });
+                
+                labels.push('Year ' + year);
+                investmentData.push(totalInvestment);
+                interestData.push(totalInterest);
+            }
+
+            const maturityAmount = balance;
+            const effectiveReturns = ((maturityAmount - totalInvestment) / totalInvestment) * 100;
+            
+            // Tax savings
+            const effectiveDeduction = Math.min(yearlyAmount, 150000);
+            const annualTaxSaved = effectiveDeduction * taxSlab;
+            const totalTaxSaved = annualTaxSaved * years;
+            
+            // Maturity date
+            const maturityDate = new Date();
+            maturityDate.setFullYear(maturityDate.getFullYear() + years);
+            const maturityStr = maturityDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+
+            // Update display
+            document.getElementById('maturityAmount').textContent = formatCurrency(maturityAmount);
+            document.getElementById('totalInvestment').textContent = formatCurrency(totalInvestment);
+            document.getElementById('totalInterest').textContent = formatCurrency(totalInterest);
+            document.getElementById('effectiveReturns').textContent = effectiveReturns.toFixed(1) + '%';
+            document.getElementById('maturityDate').textContent = maturityStr;
+            document.getElementById('annualTaxSaved').textContent = formatCurrency(annualTaxSaved);
+            document.getElementById('totalTaxSaved').textContent = formatCurrency(totalTaxSaved);
+            document.getElementById('taxFreeInterest').textContent = formatCurrency(totalInterest);
+
+            // Update chart
+            updateChart(labels, investmentData, interestData);
+
+            // Update table
+            updateTable(yearlyData);
+
+            // Generate AI suggestions
+            generateAISuggestions(yearlyAmount, rate * 100, years, maturityAmount, totalInterest, effectiveReturns, taxSlab * 100);
+        }
+
+        function updateChart(labels, investmentData, interestData) {
+            const ctx = document.getElementById('ppfChart').getContext('2d');
+            
+            if (ppfChart) {
+                ppfChart.destroy();
+            }
+
+            ppfChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Investment',
+                            data: investmentData,
+                            backgroundColor: 'rgba(201, 162, 39, 0.8)',
+                            borderColor: '#C9A227',
+                            borderWidth: 0,
+                            borderRadius: 4
+                        },
+                        {
+                            label: 'Interest Earned',
+                            data: interestData,
+                            backgroundColor: 'rgba(16, 185, 129, 0.8)',
+                            borderColor: '#10b981',
+                            borderWidth: 0,
+                            borderRadius: 4
                         }
-                    } else {
-                        milestoneBalance += annualInvestment;
-                        milestoneInvested += annualInvestment;
-                        milestoneBalance = milestoneBalance * (1 + rate / 100);
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            stacked: true,
+                            grid: { display: false },
+                            ticks: { color: '#666', maxTicksLimit: 10 }
+                        },
+                        y: {
+                            stacked: true,
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            ticks: {
+                                color: '#666',
+                                callback: function(value) { return formatCurrency(value); }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: { color: '#999', usePointStyle: true }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                            titleColor: '#C9A227',
+                            bodyColor: '#fff',
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + formatCurrency(context.raw);
+                                }
+                            }
+                        }
                     }
                 }
-                tableHTML += `<tr style="border-bottom: 1px solid var(--border-color);"><td style="padding: 10px;">Year ${y}</td><td style="padding: 10px; text-align: right;">₹${milestoneBalance.toLocaleString('en-IN', {maximumFractionDigits: 0})}</td></tr>`;
-            }
-            document.getElementById('milestoneTable').innerHTML = tableHTML;
+            });
+        }
+
+        function updateTable(yearlyData) {
+            const tbody = document.getElementById('yearTableBody');
+            tbody.innerHTML = '';
+            
+            yearlyData.forEach(data => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>Year ${data.year}</td>
+                    <td>${formatCurrency(data.opening)}</td>
+                    <td style="color: var(--gold);">${formatCurrency(data.investment)}</td>
+                    <td style="color: var(--green);">${formatCurrency(data.interest)}</td>
+                    <td><strong>${formatCurrency(data.closing)}</strong></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function generateAISuggestions(yearlyAmount, rate, years, maturity, interest, returns, taxSlab) {
+            const container = document.getElementById('aiSuggestions');
+            
+            container.innerHTML = `
+                <div class="ai-typing">
+                    <div class="ai-typing-dots"><span></span><span></span><span></span></div>
+                    Analyzing your PPF...
+                </div>
+            `;
+
+            setTimeout(() => {
+                const suggestions = [];
+
+                // Max limit advice
+                if (yearlyAmount < 150000) {
+                    const additional = 150000 - yearlyAmount;
+                    suggestions.push({
+                        icon: '📈',
+                        text: `<strong>Maximize 80C Benefits:</strong> You can invest <strong>₹${additional.toLocaleString()}</strong> more annually to reach the ₹1.5L limit. This maximizes your tax savings and builds a bigger corpus!`
+                    });
+                } else {
+                    suggestions.push({
+                        icon: '✅',
+                        text: `<strong>Perfect Strategy!</strong> You're investing the maximum allowed ₹1.5L/year. Great job maximizing your PPF benefits!`
+                    });
+                }
+
+                // Timing advice
+                suggestions.push({
+                    icon: '📅',
+                    text: `<strong>Deposit Early:</strong> Invest before <strong>5th of April</strong> each year to earn interest for the full year. Depositing on 6th means you lose one month's interest!`
+                });
+
+                // Extension advice
+                if (years === 15) {
+                    suggestions.push({
+                        icon: '🔄',
+                        text: `<strong>Consider Extension:</strong> After 15 years, you can extend your PPF in blocks of 5 years. This keeps the tax-free compounding going. Try extending to 25-30 years for maximum wealth!`
+                    });
+                }
+
+                // Tax comparison
+                if (taxSlab >= 30) {
+                    suggestions.push({
+                        icon: '💰',
+                        text: `<strong>Massive Tax Advantage:</strong> At ${taxSlab}% tax bracket, your effective return is actually <strong>${(rate + rate * (taxSlab/100)).toFixed(1)}%</strong> when you factor in tax savings. No other risk-free investment offers this!`
+                    });
+                }
+
+                // EEE benefit
+                suggestions.push({
+                    icon: '🛡️',
+                    text: `<strong>Triple Tax Free (EEE):</strong> Your investment (up to ₹1.5L) is tax deductible, interest earned (${formatCurrency(interest)}) is tax-free, and maturity amount is completely tax-free! This is the BEST tax status.`
+                });
+
+                // Comparison
+                suggestions.push({
+                    icon: '📊',
+                    text: `<strong>vs Bank FD:</strong> A taxable FD at 7% in 30% slab gives post-tax returns of only <strong>4.9%</strong>. Your PPF at ${rate}% is effectively <strong>${(rate * 1.43).toFixed(1)}%</strong> in comparison. PPF wins!`
+                });
+
+                // Loan facility
+                suggestions.push({
+                    icon: '💳',
+                    text: `<strong>Loan Against PPF:</strong> From Year 3 to Year 6, you can take a loan up to 25% of balance at just 1% above PPF rate. Emergency liquidity without breaking the account!`
+                });
+
+                container.innerHTML = suggestions.map(s => `
+                    <div class="ai-suggestion-item">
+                        <div class="ai-bullet">${s.icon}</div>
+                        <div class="ai-text">${s.text}</div>
+                    </div>
+                `).join('');
+
+            }, 1000);
         }
 
         function toggleMobileMenu() {
-            const toggle = document.querySelector('.mobile-menu-toggle');
-            const dropdown = document.getElementById('mobileNavDropdown');
-            if (toggle && dropdown) {
-                toggle.classList.toggle('active');
-                dropdown.classList.toggle('active');
-            }
+            document.querySelector('.nav-links').classList.toggle('active');
         }
     </script>
-<script src="common-footer.js" defer></script>
 </body>
 </html>

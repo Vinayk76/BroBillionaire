@@ -1,202 +1,1483 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
-    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
     <meta charset="UTF-8">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spread Trading Calculator - Calendar & Vertical Spreads | BroBillionaire</title>
-    <meta name="description" content="Calculate profit/loss for option spreads including vertical spreads, calendar spreads, bull call spread, bear put spread, and more.">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Option Spread Calculator | Bull Call, Bear Put, Credit Spreads | BroBillionaire</title>
+    <meta name="title" content="Option Spread Calculator | Bull Call, Bear Put, Credit Spreads | Free Tool">
+    <meta name="description" content="Calculate profit/loss for option spread strategies - Bull Call Spread, Bear Put Spread, Call Credit Spread, Put Credit Spread, Calendar Spread. Free P&L analysis with max profit, max loss, breakeven points.">
+    <meta name="keywords" content="option spread calculator, bull call spread, bear put spread, credit spread calculator, calendar spread, options trading, options P&L calculator, spread strategy">
+    <meta name="author" content="BroBillionaire">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://brobillionaire.com/tool-spread-calculator.html">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://brobillionaire.com/tool-spread-calculator.html">
+    <meta property="og:title" content="Option Spread Calculator | Bull Call, Bear Put, Credit Spreads">
+    <meta property="og:description" content="Calculate profit/loss for option spread strategies. Analyze Bull Call, Bear Put, Credit Spreads with max profit, max loss, breakeven points.">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    <meta property="og:site_name" content="BroBillionaire">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Option Spread Calculator | Bull Call, Bear Put, Credit Spreads">
+    <meta name="twitter:description" content="Free option spread calculator for Bull Call, Bear Put, Credit Spreads. Calculate max profit, max loss, breakeven & risk-reward.">
+    <meta name="twitter:image" content="https://brobillionaire.com/og-image.jpg">
+    
+    <!-- Schema.org Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Option Spread Calculator",
+        "description": "Calculate profit/loss for option spread strategies including Bull Call Spread, Bear Put Spread, Call Credit Spread, Put Credit Spread, and Calendar Spread.",
+        "url": "https://brobillionaire.com/tool-spread-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "isAccessibleForFree": true,
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "BroBillionaire",
+            "url": "https://brobillionaire.com"
+        }
+    }
+    </script>
+    
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://brobillionaire.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://brobillionaire.com/tools.html"},
+            {"@type": "ListItem", "position": 3, "name": "Option Spread Calculator", "item": "https://brobillionaire.com/tool-spread-calculator.html"}
+        ]
+    }
+    </script>
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        .calculator-container { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
-        .calculator-card { background: #1a1a1a; border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid #2a2a2a; }
-        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #C9A227; margin-bottom: 10px; }
-        .calculator-subtitle { color: #999; font-size: 1.1rem; margin-bottom: 40px; }
-        .input-group { margin-bottom: 25px; }
-        .input-label { display: block; color: #C9A227; font-weight: 600; margin-bottom: 10px; }
-        .input-field { width: 100%; padding: 15px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #fff; font-size: 1rem; }
-        .calculate-btn { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; font-weight: 700; padding: 18px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; }
-        .results-section { display: none; margin-top: 40px; }
-        .result-card { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 30px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid #C9A227; }
-        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .preset-tabs { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
-        .preset-tab { padding: 12px 20px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; cursor: pointer; color: #666; }
-        .preset-tab.active { background: #C9A227; color: #000; border-color: #C9A227; font-weight: 700; }
+        /* ============================================
+           OPTION SPREAD CALCULATOR - BroBillionaire Theme
+           Premium Black & Gold Design
+           ============================================ */
+        
+        :root {
+            --gold: #C9A227;
+            --gold-light: #E8C547;
+            --gold-dark: #8B7520;
+            --gold-gradient: linear-gradient(135deg, #C9A227 0%, #E8C547 50%, #C9A227 100%);
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #1a1a1a;
+            --bg-tertiary: #141414;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --text-tertiary: #777777;
+            --text-muted: #555555;
+            --border-color: #2a2a2a;
+            --border-gold: rgba(201, 162, 39, 0.3);
+            --green: #4ade80;
+            --red: #ef4444;
+            --blue: #3b82f6;
+            --purple: #a855f7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+            padding-top: 80px;
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-img { width: 40px; height: 40px; border-radius: 10px; }
+        .logo-text { font-size: 1.25rem; font-weight: 600; color: var(--text-primary); }
+        
+        .nav-links { display: flex; gap: 35px; }
+        .nav-link { color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.2s ease; }
+        .nav-link:hover, .nav-link.active { color: var(--gold); }
+        
+        .mobile-menu-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; }
+        
+        .breadcrumb-nav { background: var(--bg-secondary); padding: 12px 0; border-bottom: 1px solid var(--border-color); }
+        .breadcrumb-container { max-width: 1200px; margin: 0 auto; padding: 0 40px; font-size: 0.85rem; color: var(--text-secondary); }
+        .breadcrumb-container a { color: var(--gold); text-decoration: none; }
+
+        .tool-page {
+            min-height: 100vh;
+            padding-top: 20px;
+            background: var(--bg-primary);
+            position: relative;
+        }
+
+        /* Animated Background */
+        .tool-page::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(201, 162, 39, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(201, 162, 39, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            color: var(--gold);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            z-index: 100;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: var(--gold);
+            color: var(--bg-primary);
+            transform: translateX(-5px);
+        }
+
+        .tool-container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 2rem; 
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Premium Header */
+        .tool-header { 
+            text-align: center; 
+            padding: 50px 40px; 
+            background: linear-gradient(145deg, rgba(18, 18, 18, 0.98), rgba(26, 26, 26, 0.95));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px; 
+            margin-bottom: 32px; 
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            position: relative; 
+            overflow: hidden;
+            box-shadow: 
+                0 15px 50px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+        
+        .tool-header::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gold-gradient);
+        }
+        
+        .tool-header::after { 
+            content: ''; 
+            position: absolute; 
+            top: -100%; 
+            left: -100%; 
+            width: 300%; 
+            height: 300%; 
+            background: linear-gradient(45deg, transparent 40%, rgba(201, 162, 39, 0.04) 50%, transparent 60%); 
+            animation: headerShine 6s ease-in-out infinite; 
+        }
+        
+        @keyframes headerShine { 
+            0%, 100% { transform: translateX(-50%) translateY(-50%) rotate(45deg); } 
+            50% { transform: translateX(50%) translateY(50%) rotate(45deg); } 
+        }
+
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .premium-badge { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 7px; 
+            background: var(--gold-gradient);
+            color: var(--bg-primary); 
+            padding: 9px 18px; 
+            border-radius: 50px; 
+            font-weight: 700; 
+            font-size: 0.78rem;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(201, 162, 39, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .premium-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(201, 162, 39, 0.35);
+        }
+
+        .premium-badge.pro-badge {
+            background: linear-gradient(135deg, #9d4edd 0%, #c77dff 100%);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(157, 78, 221, 0.3);
+        }
+
+        .tool-header h1 { 
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-weight: 700;
+            margin-bottom: 16px; 
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.5px;
+        }
+
+        .tool-header h1 .gold-text {
+            background: linear-gradient(135deg, var(--gold), #ffd700, var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .tool-header p { 
+            font-size: 1.1rem; 
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            line-height: 1.7;
+        }
+
+        /* Strategy Tabs */
+        .strategy-section {
+            background: linear-gradient(145deg, rgba(18, 18, 18, 0.98), rgba(26, 26, 26, 0.95));
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 28px;
+            border: 1px solid rgba(201, 162, 39, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .strategy-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gold-gradient);
+        }
+
+        .section-title {
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--gold);
+        }
+
+        .strategy-tabs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .strategy-tab {
+            padding: 16px 20px;
+            background: rgba(26, 26, 26, 0.8);
+            border: 2px solid var(--border-color);
+            border-radius: 14px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.92rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .strategy-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .strategy-tab:hover {
+            border-color: rgba(201, 162, 39, 0.4);
+            color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+
+        .strategy-tab:hover::before {
+            left: 100%;
+        }
+
+        .strategy-tab.active {
+            background: var(--gold-gradient);
+            border-color: var(--gold);
+            color: var(--bg-primary);
+            box-shadow: 0 8px 25px rgba(201, 162, 39, 0.3);
+        }
+
+        .strategy-tab i {
+            font-size: 1rem;
+        }
+
+        .strategy-tab.active i {
+            color: var(--bg-primary);
+        }
+
+        /* Strategy Info Box */
+        .strategy-info {
+            background: rgba(201, 162, 39, 0.08);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 14px;
+            padding: 20px 24px;
+            margin-top: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .strategy-info-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--gold-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .strategy-info-content h3 {
+            color: var(--gold);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .strategy-info-content p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        /* Calculator Card */
+        .calculator-card {
+            background: linear-gradient(145deg, rgba(18, 18, 18, 0.98), rgba(26, 26, 26, 0.95));
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 28px;
+            border: 1px solid rgba(201, 162, 39, 0.15);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .calculator-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gold-gradient);
+        }
+
+        .legs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .legs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .leg-section {
+            background: rgba(10, 10, 10, 0.6);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .leg-section.buy-leg {
+            border-left: 4px solid var(--green);
+        }
+
+        .leg-section.sell-leg {
+            border-left: 4px solid var(--red);
+        }
+
+        .leg-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 22px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .leg-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .buy-leg .leg-icon {
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.2), rgba(74, 222, 128, 0.1));
+            color: var(--green);
+            border: 1px solid rgba(74, 222, 128, 0.3);
+        }
+
+        .sell-leg .leg-icon {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.1));
+            color: var(--red);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .leg-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .leg-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-tertiary);
+            margin-top: 2px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .input-label .hint {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 16px 18px;
+            background: rgba(26, 26, 26, 0.9);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1.05rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            border-color: var(--gold);
+            outline: none;
+            box-shadow: 0 0 25px rgba(201, 162, 39, 0.2);
+            background: rgba(30, 30, 30, 0.95);
+        }
+
+        .input-field::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Lot Size Section */
+        .lot-size-section {
+            background: rgba(10, 10, 10, 0.5);
+            border-radius: 14px;
+            padding: 20px 25px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 25px;
+        }
+
+        .lot-size-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .lot-size-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .lot-size-label i {
+            color: var(--gold);
+        }
+
+        .lot-size-presets {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .lot-preset {
+            padding: 6px 14px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-tertiary);
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .lot-preset:hover {
+            background: var(--gold);
+            color: var(--bg-primary);
+            border-color: var(--gold);
+        }
+
+        /* Calculate Button */
+        .calculate-btn {
+            width: 100%;
+            padding: 20px 40px;
+            background: var(--gold-gradient);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            box-shadow: 0 8px 25px rgba(201, 162, 39, 0.3);
+        }
+
+        .calculate-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s;
+        }
+
+        .calculate-btn:hover::before {
+            left: 100%;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(201, 162, 39, 0.45);
+        }
+
+        .calculate-btn:active {
+            transform: translateY(-2px) scale(0.98);
+        }
+
+        .calculate-btn i {
+            font-size: 1.2rem;
+        }
+
+        /* Results Section */
+        .results-section {
+            display: none;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .results-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        .results-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .results-title i {
+            font-size: 1.3rem;
+        }
+
+        /* Results Grid */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .result-card {
+            background: linear-gradient(145deg, rgba(18, 18, 18, 0.95), rgba(26, 26, 26, 0.9));
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .result-card:hover {
+            border-color: rgba(201, 162, 39, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .result-card.profit-card {
+            border-left: 4px solid var(--green);
+        }
+
+        .result-card.loss-card {
+            border-left: 4px solid var(--red);
+        }
+
+        .result-card.highlight-card {
+            border-left: 4px solid var(--gold);
+            background: linear-gradient(145deg, rgba(201, 162, 39, 0.08), rgba(18, 18, 18, 0.95));
+        }
+
+        .result-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .result-card.profit-card .result-label {
+            color: var(--green);
+        }
+
+        .result-card.loss-card .result-label {
+            color: var(--red);
+        }
+
+        .result-card.highlight-card .result-label {
+            color: var(--gold);
+        }
+
+        .result-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+
+        .result-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+            margin-top: 8px;
+        }
+
+        /* Secondary Results Grid */
+        .secondary-results {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        @media (max-width: 900px) {
+            .secondary-results {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .secondary-results {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .secondary-card {
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 14px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .secondary-card:hover {
+            border-color: rgba(201, 162, 39, 0.3);
+            background: rgba(30, 30, 30, 0.9);
+        }
+
+        .secondary-label {
+            font-size: 0.78rem;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 8px;
+        }
+
+        .secondary-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--gold);
+        }
+
+        /* Payoff Diagram */
+        .payoff-section {
+            background: linear-gradient(145deg, rgba(18, 18, 18, 0.98), rgba(26, 26, 26, 0.95));
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 25px;
+            border: 1px solid rgba(201, 162, 39, 0.15);
+            position: relative;
+        }
+
+        .payoff-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gold-gradient);
+        }
+
+        .payoff-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        .payoff-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .payoff-title i {
+            color: var(--gold);
+        }
+
+        .payoff-chart {
+            height: 200px;
+            background: rgba(10, 10, 10, 0.5);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .payoff-canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Educational Section */
+        .education-section {
+            background: linear-gradient(145deg, rgba(18, 18, 18, 0.98), rgba(26, 26, 26, 0.95));
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 25px;
+            border: 1px solid rgba(201, 162, 39, 0.15);
+        }
+
+        .education-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .strategy-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .detail-box {
+            background: rgba(10, 10, 10, 0.5);
+            border-radius: 14px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .detail-box h4 {
+            font-size: 0.9rem;
+            color: var(--gold);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .detail-box p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* SEBI Disclaimer */
+        .sebi-disclaimer {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(239, 68, 68, 0.03) 100%);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 16px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .sebi-disclaimer-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .sebi-disclaimer-icon {
+            font-size: 1.5rem;
+        }
+
+        .sebi-disclaimer-title {
+            color: #ef4444;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .sebi-disclaimer p {
+            color: var(--text-tertiary);
+            font-size: 0.85rem;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        .tool-footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .tool-footer p {
+            color: var(--text-tertiary);
+            font-size: 0.9rem;
+        }
+
+        .tool-footer .gold-text {
+            color: var(--gold);
+        }
+
+        .tool-footer a {
+            color: var(--gold);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .tool-footer a:hover {
+            color: var(--gold-light);
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .tool-container {
+                padding: 1rem;
+            }
+
+            .tool-header {
+                padding: 35px 25px;
+            }
+
+            .calculator-card {
+                padding: 25px 20px;
+            }
+
+            .leg-section {
+                padding: 20px;
+            }
+
+            .result-value {
+                font-size: 1.8rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="calculator-container">
-        <div class="calculator-card">
-            <h1 class="calculator-title">Spread Trading Calculator</h1>
-            <p class="calculator-subtitle">Calculate profit/loss for various option spread strategies.</p>
-            
-            <div class="preset-tabs">
-                <button class="preset-tab active" onclick="setSpread('bullCall')">Bull Call Spread</button>
-                <button class="preset-tab" onclick="setSpread('bearPut')">Bear Put Spread</button>
-                <button class="preset-tab" onclick="setSpread('callCredit')">Call Credit Spread</button>
-                <button class="preset-tab" onclick="setSpread('putCredit')">Put Credit Spread</button>
-                <button class="preset-tab" onclick="setSpread('calendar')">Calendar Spread</button>
-            </div>
-            
-            <div id="spreadInfo" style="background: #0a0a0a; padding: 20px; border-radius: 8px; margin-bottom: 30px; border-left: 4px solid #C9A227;">
-                <strong style="color: #C9A227;">Bull Call Spread</strong>
-                <p style="color: #999; margin-top: 10px;">Buy lower strike call + Sell higher strike call. Bullish strategy with limited risk and reward.</p>
-            </div>
-            
-            <div class="grid-2">
-                <div>
-                    <h3 style="color: #C9A227; margin-bottom: 20px;">Buy Leg</h3>
-                    <div class="input-group">
-                        <label class="input-label">Strike Price (₹)</label>
-                        <input type="number" id="buyStrike" class="input-field" placeholder="50000" step="0.01">
-                    </div>
-                    <div class="input-group">
-                        <label class="input-label">Premium Paid (₹)</label>
-                        <input type="number" id="buyPremium" class="input-field" placeholder="200" step="0.01">
-                    </div>
-                    <div class="input-group">
-                        <label class="input-label">Quantity (Lots)</label>
-                        <input type="number" id="buyQuantity" class="input-field" placeholder="1" value="1" min="1">
-                    </div>
-                </div>
-                
-                <div>
-                    <h3 style="color: #C9A227; margin-bottom: 20px;">Sell Leg</h3>
-                    <div class="input-group">
-                        <label class="input-label">Strike Price (₹)</label>
-                        <input type="number" id="sellStrike" class="input-field" placeholder="50500" step="0.01">
-                    </div>
-                    <div class="input-group">
-                        <label class="input-label">Premium Received (₹)</label>
-                        <input type="number" id="sellPremium" class="input-field" placeholder="100" step="0.01">
-                    </div>
-                    <div class="input-group">
-                        <label class="input-label">Quantity (Lots)</label>
-                        <input type="number" id="sellQuantity" class="input-field" placeholder="1" value="1" min="1">
-                    </div>
-                </div>
-            </div>
-            
-            <div class="input-group">
-                <label class="input-label">Lot Size</label>
-                <input type="number" id="lotSize" class="input-field" placeholder="25" value="25" min="1">
-                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Shares per lot (Nifty: 25, Bank Nifty: 15)</div>
-            </div>
-            
-            <button class="calculate-btn" onclick="calculateSpread()">
-                <i class="fas fa-calculator"></i> Calculate Spread P&L
-            </button>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="logo">
+            <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
+            <span class="logo-text">BroBillionaire</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="articles.html" class="nav-link">Articles</a>
+            <a href="tools.html" class="nav-link active">Tools</a>
+            <a href="about.html" class="nav-link">About</a>
         </div>
-        
-        <div class="results-section" id="resultsSection">
-            <div class="calculator-card">
-                <h2 style="color: #C9A227; margin-bottom: 30px; font-family: 'Playfair Display', serif;">Spread Analysis</h2>
-                
-                <div class="grid-2">
-                    <div class="result-card">
-                        <div style="color: #2ecc71; font-weight: 600; font-size: 1.2rem;">Maximum Profit</div>
-                        <div style="color: #fff; font-size: 2.5rem; font-weight: 700; margin-top: 10px;" id="maxProfit">-</div>
-                        <div style="color: #666; margin-top: 5px;" id="maxProfitAt">-</div>
-                    </div>
-                    
-                    <div class="result-card">
-                        <div style="color: #e74c3c; font-weight: 600; font-size: 1.2rem;">Maximum Loss</div>
-                        <div style="color: #fff; font-size: 2.5rem; font-weight: 700; margin-top: 10px;" id="maxLoss">-</div>
-                        <div style="color: #666; margin-top: 5px;" id="maxLossAt">-</div>
-                    </div>
-                </div>
-                
-                <div class="grid-2">
-                    <div class="result-card">
-                        <div style="color: #C9A227; font-weight: 600;">Net Premium</div>
-                        <div style="color: #fff; font-size: 2rem; font-weight: 700; margin-top: 10px;" id="netPremium">-</div>
-                        <div style="color: #666; margin-top: 5px;">Initial cost/credit</div>
-                    </div>
-                    
-                    <div class="result-card">
-                        <div style="color: #C9A227; font-weight: 600;">Breakeven Point</div>
-                        <div style="color: #fff; font-size: 2rem; font-weight: 700; margin-top: 10px;" id="breakeven">-</div>
-                        <div style="color: #666; margin-top: 5px;">No profit/loss price</div>
-                    </div>
-                    
-                    <div class="result-card">
-                        <div style="color: #C9A227; font-weight: 600;">Risk-Reward Ratio</div>
-                        <div style="color: #fff; font-size: 2rem; font-weight: 700; margin-top: 10px;" id="riskReward">-</div>
-                        <div style="color: #666; margin-top: 5px;">Reward/Risk</div>
-                    </div>
-                    
-                    <div class="result-card">
-                        <div style="color: #C9A227; font-weight: 600;">ROI on Max Risk</div>
-                        <div style="color: #fff; font-size: 2rem; font-weight: 700; margin-top: 10px;" id="roi">-</div>
-                        <div style="color: #666; margin-top: 5px;">Potential return %</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
     </div>
-    
+</nav>
+
+<!-- Breadcrumb -->
+<div class="breadcrumb-nav">
+    <div class="breadcrumb-container">
+        <a href="index.html">Home</a> / 
+        <a href="tools.html">Tools</a> / 
+        <span>Option Spread Calculator</span>
+    </div>
+</div>
+
+    <main class="tool-page">
+        <div class="tool-container">
+            <!-- Header -->
+            <header class="tool-header">
+                <div class="badge-container">
+                    <span class="premium-badge">
+                        <i class="fas fa-crown"></i> PRO Tool
+                    </span>
+                    <span class="premium-badge pro-badge">
+                        <i class="fas fa-layer-group"></i> Multi-Leg Spreads
+                    </span>
+                </div>
+                <h1><span class="gold-text">Option Spread</span> Calculator</h1>
+                <p>Professional P&L analysis for vertical spreads, credit spreads, and calendar spreads. Calculate max profit, max loss, breakeven points and risk-reward ratios.</p>
+            </header>
+
+            <!-- Strategy Selection -->
+            <section class="strategy-section">
+                <div class="section-title">
+                    <i class="fas fa-chess"></i>
+                    Select Your Spread Strategy
+                </div>
+                <div class="strategy-tabs">
+                    <button class="strategy-tab active" onclick="setSpread('bullCall')">
+                        <i class="fas fa-arrow-trend-up"></i>
+                        Bull Call Spread
+                    </button>
+                    <button class="strategy-tab" onclick="setSpread('bearPut')">
+                        <i class="fas fa-arrow-trend-down"></i>
+                        Bear Put Spread
+                    </button>
+                    <button class="strategy-tab" onclick="setSpread('callCredit')">
+                        <i class="fas fa-hand-holding-dollar"></i>
+                        Call Credit Spread
+                    </button>
+                    <button class="strategy-tab" onclick="setSpread('putCredit')">
+                        <i class="fas fa-coins"></i>
+                        Put Credit Spread
+                    </button>
+                    <button class="strategy-tab" onclick="setSpread('calendar')">
+                        <i class="fas fa-calendar-days"></i>
+                        Calendar Spread
+                    </button>
+                </div>
+
+                <div class="strategy-info" id="strategyInfo">
+                    <div class="strategy-info-icon">
+                        <i class="fas fa-arrow-trend-up"></i>
+                    </div>
+                    <div class="strategy-info-content">
+                        <h3>Bull Call Spread</h3>
+                        <p>Buy a lower strike call and sell a higher strike call at the same expiry. This is a bullish strategy with limited risk and limited reward. Profit when stock rises moderately.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Calculator -->
+            <section class="calculator-card">
+                <div class="legs-grid">
+                    <!-- Buy Leg -->
+                    <div class="leg-section buy-leg">
+                        <div class="leg-header">
+                            <div class="leg-icon">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div>
+                                <div class="leg-title">Buy Leg</div>
+                                <div class="leg-subtitle">Long position (Premium paid)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label class="input-label">
+                                Strike Price
+                                <span class="hint">₹</span>
+                            </label>
+                            <input type="number" id="buyStrike" class="input-field" placeholder="50000" step="0.01">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label class="input-label">
+                                Premium Paid
+                                <span class="hint">₹ per share</span>
+                            </label>
+                            <input type="number" id="buyPremium" class="input-field" placeholder="200" step="0.01">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label class="input-label">
+                                Quantity
+                                <span class="hint">Lots</span>
+                            </label>
+                            <input type="number" id="buyQuantity" class="input-field" placeholder="1" value="1" min="1">
+                        </div>
+                    </div>
+
+                    <!-- Sell Leg -->
+                    <div class="leg-section sell-leg">
+                        <div class="leg-header">
+                            <div class="leg-icon">
+                                <i class="fas fa-minus"></i>
+                            </div>
+                            <div>
+                                <div class="leg-title">Sell Leg</div>
+                                <div class="leg-subtitle">Short position (Premium received)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label class="input-label">
+                                Strike Price
+                                <span class="hint">₹</span>
+                            </label>
+                            <input type="number" id="sellStrike" class="input-field" placeholder="50500" step="0.01">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label class="input-label">
+                                Premium Received
+                                <span class="hint">₹ per share</span>
+                            </label>
+                            <input type="number" id="sellPremium" class="input-field" placeholder="100" step="0.01">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label class="input-label">
+                                Quantity
+                                <span class="hint">Lots</span>
+                            </label>
+                            <input type="number" id="sellQuantity" class="input-field" placeholder="1" value="1" min="1">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lot Size -->
+                <div class="lot-size-section">
+                    <div class="lot-size-header">
+                        <div class="lot-size-label">
+                            <i class="fas fa-layer-group"></i>
+                            Lot Size (Shares per lot)
+                        </div>
+                        <div class="lot-size-presets">
+                            <button class="lot-preset" onclick="setLotSize(25)">Nifty (25)</button>
+                            <button class="lot-preset" onclick="setLotSize(15)">Bank Nifty (15)</button>
+                            <button class="lot-preset" onclick="setLotSize(40)">Fin Nifty (40)</button>
+                        </div>
+                    </div>
+                    <input type="number" id="lotSize" class="input-field" placeholder="25" value="25" min="1">
+                </div>
+
+                <button class="calculate-btn" onclick="calculateSpread()">
+                    <i class="fas fa-calculator"></i>
+                    Calculate Spread P&L
+                </button>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="resultsSection">
+                <div class="calculator-card">
+                    <div class="results-header">
+                        <h2 class="results-title">
+                            <i class="fas fa-chart-pie"></i>
+                            Spread Analysis
+                        </h2>
+                    </div>
+
+                    <div class="results-grid">
+                        <div class="result-card profit-card">
+                            <div class="result-label">
+                                <i class="fas fa-arrow-up"></i>
+                                Maximum Profit
+                            </div>
+                            <div class="result-value" id="maxProfit">-</div>
+                            <div class="result-subtitle" id="maxProfitAt">When price expires at or above ₹50,500</div>
+                        </div>
+
+                        <div class="result-card loss-card">
+                            <div class="result-label">
+                                <i class="fas fa-arrow-down"></i>
+                                Maximum Loss
+                            </div>
+                            <div class="result-value" id="maxLoss">-</div>
+                            <div class="result-subtitle" id="maxLossAt">When price expires at or below ₹50,000</div>
+                        </div>
+                    </div>
+
+                    <div class="secondary-results">
+                        <div class="secondary-card">
+                            <div class="secondary-label">Net Premium</div>
+                            <div class="secondary-value" id="netPremium">-</div>
+                        </div>
+                        <div class="secondary-card">
+                            <div class="secondary-label">Breakeven</div>
+                            <div class="secondary-value" id="breakeven">-</div>
+                        </div>
+                        <div class="secondary-card">
+                            <div class="secondary-label">Risk : Reward</div>
+                            <div class="secondary-value" id="riskReward">-</div>
+                        </div>
+                        <div class="secondary-card">
+                            <div class="secondary-label">ROI on Risk</div>
+                            <div class="secondary-value" id="roi">-</div>
+                        </div>
+                    </div>
+
+                    <!-- Payoff Diagram -->
+                    <div class="payoff-section">
+                        <div class="payoff-header">
+                            <div class="payoff-title">
+                                <i class="fas fa-chart-line"></i>
+                                Payoff Diagram at Expiry
+                            </div>
+                        </div>
+                        <div class="payoff-chart">
+                            <canvas id="payoffCanvas" class="payoff-canvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Educational Section -->
+                <div class="education-section">
+                    <h3 class="education-title">
+                        <i class="fas fa-graduation-cap"></i>
+                        Understanding Your Spread
+                    </h3>
+                    <div class="strategy-details" id="strategyEducation">
+                        <div class="detail-box">
+                            <h4><i class="fas fa-bullseye"></i> When to Use</h4>
+                            <p>Bull Call Spread is ideal when you're moderately bullish on a stock. Use when you expect the price to rise but want to reduce the cost of the trade by selling a higher strike call.</p>
+                        </div>
+                        <div class="detail-box">
+                            <h4><i class="fas fa-shield-alt"></i> Risk Management</h4>
+                            <p>Your maximum loss is limited to the net premium paid. This makes spreads less risky than naked options but also caps your potential profit.</p>
+                        </div>
+                        <div class="detail-box">
+                            <h4><i class="fas fa-clock"></i> Time Decay</h4>
+                            <p>Time decay works against you in debit spreads (Bull Call, Bear Put). The closer to expiry, the faster the time value erodes. For credit spreads, time decay works in your favor.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SEBI Disclaimer -->
+                <div class="sebi-disclaimer">
+                    <div class="sebi-disclaimer-header">
+                        <span class="sebi-disclaimer-icon">⚠️</span>
+                        <span class="sebi-disclaimer-title">Important Risk Disclaimer</span>
+                    </div>
+                    <p><strong>Educational Tool Only:</strong> This calculator is for educational and informational purposes only. Options trading involves substantial risk of loss. According to SEBI's 2023 study, 93% of individual F&O traders in India incurred net losses. Always consult a SEBI-registered investment advisor before trading. Past performance does not guarantee future results.</p>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="tool-footer">
+                <p>Made with <span class="gold-text">♥</span> by <a href="index.html">BroBillionaire</a></p>
+                <p style="font-size: 0.8rem; margin-top: 10px;">© 2026 BroBillionaire. All rights reserved. For educational purposes only.</p>
+            </footer>
+        </div>
+    </main>
+
     <script>
+        // Strategy definitions
         const spreadTypes = {
             bullCall: {
                 name: 'Bull Call Spread',
-                description: 'Buy lower strike call + Sell higher strike call. Bullish strategy with limited risk and reward.',
+                icon: 'fa-arrow-trend-up',
+                description: 'Buy a lower strike call and sell a higher strike call at the same expiry. This is a bullish strategy with limited risk and limited reward. Profit when stock rises moderately.',
                 buyStrike: 50000,
                 buyPremium: 200,
                 sellStrike: 50500,
-                sellPremium: 100
+                sellPremium: 100,
+                type: 'debit',
+                education: {
+                    when: 'Bull Call Spread is ideal when you\'re moderately bullish on a stock. Use when you expect the price to rise but want to reduce the cost of the trade by selling a higher strike call.',
+                    risk: 'Your maximum loss is limited to the net premium paid (debit). This makes it less risky than buying a naked call.',
+                    time: 'Time decay (Theta) works against you in this debit spread. The closer to expiry without the stock moving up, the more value you lose.'
+                }
             },
             bearPut: {
                 name: 'Bear Put Spread',
-                description: 'Buy higher strike put + Sell lower strike put. Bearish strategy with limited risk and reward.',
+                icon: 'fa-arrow-trend-down',
+                description: 'Buy a higher strike put and sell a lower strike put at the same expiry. This is a bearish strategy with limited risk and limited reward. Profit when stock falls moderately.',
                 buyStrike: 50500,
                 buyPremium: 250,
                 sellStrike: 50000,
-                sellPremium: 120
+                sellPremium: 120,
+                type: 'debit',
+                education: {
+                    when: 'Bear Put Spread is ideal when you\'re moderately bearish. Use when you expect the price to fall but want to reduce the cost by selling a lower strike put.',
+                    risk: 'Maximum loss is limited to the net premium paid. Less risky than buying a naked put.',
+                    time: 'Time decay works against you. The stock needs to fall before expiry for the spread to be profitable.'
+                }
             },
             callCredit: {
                 name: 'Call Credit Spread (Bear Call)',
-                description: 'Sell lower strike call + Buy higher strike call. Bearish/neutral strategy for premium collection.',
+                icon: 'fa-hand-holding-dollar',
+                description: 'Sell a lower strike call and buy a higher strike call. This is a bearish to neutral strategy. You receive a net credit upfront and profit if the stock stays below the lower strike.',
                 buyStrike: 51000,
                 buyPremium: 80,
                 sellStrike: 50500,
-                sellPremium: 150
+                sellPremium: 150,
+                type: 'credit',
+                education: {
+                    when: 'Use Call Credit Spread when you\'re neutral to bearish. Ideal for range-bound markets or when you expect the stock to stay below a certain level.',
+                    risk: 'Maximum loss is limited to the strike width minus the credit received. You profit if the stock stays below the short strike at expiry.',
+                    time: 'Time decay (Theta) works in your favor! The premium you collected erodes as expiry approaches, benefiting you.'
+                }
             },
             putCredit: {
                 name: 'Put Credit Spread (Bull Put)',
-                description: 'Sell higher strike put + Buy lower strike put. Bullish/neutral strategy for premium collection.',
+                icon: 'fa-coins',
+                description: 'Sell a higher strike put and buy a lower strike put. This is a bullish to neutral strategy. You receive a net credit upfront and profit if the stock stays above the higher strike.',
                 buyStrike: 49500,
                 buyPremium: 80,
                 sellStrike: 50000,
-                sellPremium: 150
+                sellPremium: 150,
+                type: 'credit',
+                education: {
+                    when: 'Use Put Credit Spread when you\'re neutral to bullish. Great for collecting premium when you believe the stock won\'t fall below a certain level.',
+                    risk: 'Maximum loss is limited to strike width minus credit. You profit if the stock stays above the short strike at expiry.',
+                    time: 'Time decay benefits you in credit spreads. As time passes, the options you sold lose value, increasing your profit.'
+                }
             },
             calendar: {
                 name: 'Calendar Spread',
-                description: 'Sell near-term option + Buy far-term option at same strike. Profits from time decay differential.',
+                icon: 'fa-calendar-days',
+                description: 'Sell a near-term option and buy a far-term option at the same strike price. Profits from the faster time decay of the short-term option. Best used in low volatility environments.',
                 buyStrike: 50000,
                 buyPremium: 300,
                 sellStrike: 50000,
-                sellPremium: 200
+                sellPremium: 200,
+                type: 'calendar',
+                education: {
+                    when: 'Calendar Spread is ideal when you expect the stock to stay near a specific price level. Works best in low volatility markets.',
+                    risk: 'Maximum loss is the net debit paid. Profits are maximized when the stock is at the strike price at the near-term expiry.',
+                    time: 'This strategy exploits the faster time decay of the near-term option. The short option decays faster than the long option.'
+                }
             }
         };
-        
+
+        let currentStrategy = 'bullCall';
+
         function setSpread(type) {
+            currentStrategy = type;
             const spread = spreadTypes[type];
-            document.querySelectorAll('.preset-tab').forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
             
-            document.getElementById('spreadInfo').innerHTML = `
-                <strong style="color: #C9A227;">${spread.name}</strong>
-                <p style="color: #999; margin-top: 10px;">${spread.description}</p>
+            // Update active tab
+            document.querySelectorAll('.strategy-tab').forEach(tab => tab.classList.remove('active'));
+            event.target.closest('.strategy-tab').classList.add('active');
+            
+            // Update strategy info
+            document.getElementById('strategyInfo').innerHTML = `
+                <div class="strategy-info-icon">
+                    <i class="fas ${spread.icon}"></i>
+                </div>
+                <div class="strategy-info-content">
+                    <h3>${spread.name}</h3>
+                    <p>${spread.description}</p>
+                </div>
             `;
             
+            // Update input values
             document.getElementById('buyStrike').value = spread.buyStrike;
             document.getElementById('buyPremium').value = spread.buyPremium;
             document.getElementById('sellStrike').value = spread.sellStrike;
             document.getElementById('sellPremium').value = spread.sellPremium;
+            
+            // Update education section if results are visible
+            if (document.getElementById('resultsSection').style.display === 'block') {
+                updateEducation(spread);
+            }
+        }
+
+        function setLotSize(size) {
+            document.getElementById('lotSize').value = size;
+        }
+
+        function updateEducation(spread) {
+            document.getElementById('strategyEducation').innerHTML = `
+                <div class="detail-box">
+                    <h4><i class="fas fa-bullseye"></i> When to Use</h4>
+                    <p>${spread.education.when}</p>
+                </div>
+                <div class="detail-box">
+                    <h4><i class="fas fa-shield-alt"></i> Risk Profile</h4>
+                    <p>${spread.education.risk}</p>
+                </div>
+                <div class="detail-box">
+                    <h4><i class="fas fa-clock"></i> Time Decay Effect</h4>
+                    <p>${spread.education.time}</p>
+                </div>
+            `;
         }
         
         function calculateSpread() {
@@ -207,11 +1488,13 @@
             const sellPremium = parseFloat(document.getElementById('sellPremium').value);
             const sellQty = parseFloat(document.getElementById('sellQuantity').value);
             const lotSize = parseFloat(document.getElementById('lotSize').value);
-            
+
             if (!buyStrike || !buyPremium || !sellStrike || !sellPremium || !lotSize) {
                 alert('Please fill in all fields');
                 return;
             }
+
+            const spread = spreadTypes[currentStrategy];
             
             // Net premium (negative = debit, positive = credit)
             const netPremiumPerShare = sellPremium - buyPremium;
@@ -220,41 +1503,198 @@
             // Strike width
             const strikeWidth = Math.abs(sellStrike - buyStrike);
             
-            // For debit spreads (Bull Call, Bear Put)
             let maxProfit, maxLoss, breakeven;
-            
-            if (buyStrike < sellStrike) {
-                // Bull Call Spread
-                maxProfit = (strikeWidth * lotSize * Math.min(buyQty, sellQty)) - Math.abs(netPremium);
+            let maxProfitText, maxLossText;
+
+            if (currentStrategy === 'bullCall') {
+                // Bull Call Spread (Debit)
+                maxProfit = (strikeWidth * lotSize * Math.min(buyQty, sellQty)) + netPremium;
                 maxLoss = Math.abs(netPremium);
                 breakeven = buyStrike + Math.abs(netPremiumPerShare);
-                
-                document.getElementById('maxProfitAt').textContent = `At or above ₹${sellStrike}`;
-                document.getElementById('maxLossAt').textContent = `At or below ₹${buyStrike}`;
-            } else {
-                // Bear Put Spread
-                maxProfit = (strikeWidth * lotSize * Math.min(buyQty, sellQty)) - Math.abs(netPremium);
+                maxProfitText = `When price expires at or above ₹${sellStrike.toLocaleString('en-IN')}`;
+                maxLossText = `When price expires at or below ₹${buyStrike.toLocaleString('en-IN')}`;
+            } else if (currentStrategy === 'bearPut') {
+                // Bear Put Spread (Debit)
+                maxProfit = (strikeWidth * lotSize * Math.min(buyQty, sellQty)) + netPremium;
                 maxLoss = Math.abs(netPremium);
                 breakeven = buyStrike - Math.abs(netPremiumPerShare);
-                
-                document.getElementById('maxProfitAt').textContent = `At or below ₹${sellStrike}`;
-                document.getElementById('maxLossAt').textContent = `At or above ₹${buyStrike}`;
+                maxProfitText = `When price expires at or below ₹${sellStrike.toLocaleString('en-IN')}`;
+                maxLossText = `When price expires at or above ₹${buyStrike.toLocaleString('en-IN')}`;
+            } else if (currentStrategy === 'callCredit') {
+                // Call Credit Spread (Credit)
+                maxProfit = Math.abs(netPremium);
+                maxLoss = (strikeWidth * lotSize * Math.min(buyQty, sellQty)) - Math.abs(netPremium);
+                breakeven = sellStrike + Math.abs(netPremiumPerShare);
+                maxProfitText = `When price expires at or below ₹${sellStrike.toLocaleString('en-IN')}`;
+                maxLossText = `When price expires at or above ₹${buyStrike.toLocaleString('en-IN')}`;
+            } else if (currentStrategy === 'putCredit') {
+                // Put Credit Spread (Credit)
+                maxProfit = Math.abs(netPremium);
+                maxLoss = (strikeWidth * lotSize * Math.min(buyQty, sellQty)) - Math.abs(netPremium);
+                breakeven = sellStrike - Math.abs(netPremiumPerShare);
+                maxProfitText = `When price expires at or above ₹${sellStrike.toLocaleString('en-IN')}`;
+                maxLossText = `When price expires at or below ₹${buyStrike.toLocaleString('en-IN')}`;
+            } else {
+                // Calendar Spread (simplified calculation)
+                maxLoss = Math.abs(netPremium);
+                maxProfit = Math.abs(netPremium) * 0.5; // Simplified - actual depends on volatility
+                breakeven = buyStrike;
+                maxProfitText = `When price stays near ₹${buyStrike.toLocaleString('en-IN')} at near-term expiry`;
+                maxLossText = `When price moves significantly away from strike`;
             }
-            
+
             const riskReward = maxProfit / maxLoss;
             const roi = (maxProfit / maxLoss) * 100;
-            
-            document.getElementById('maxProfit').textContent = '+₹' + maxProfit.toLocaleString('en-IN', {maximumFractionDigits: 0});
-            document.getElementById('maxLoss').textContent = '-₹' + maxLoss.toLocaleString('en-IN', {maximumFractionDigits: 0});
-            document.getElementById('netPremium').textContent = (netPremium >= 0 ? '+' : '') + '₹' + netPremium.toLocaleString('en-IN', {maximumFractionDigits: 0});
-            document.getElementById('breakeven').textContent = '₹' + breakeven.toFixed(2);
+
+            // Update DOM
+            document.getElementById('maxProfit').textContent = '+₹' + Math.abs(maxProfit).toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('maxLoss').textContent = '-₹' + Math.abs(maxLoss).toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('maxProfitAt').textContent = maxProfitText;
+            document.getElementById('maxLossAt').textContent = maxLossText;
+            document.getElementById('netPremium').textContent = (netPremium >= 0 ? '+' : '-') + '₹' + Math.abs(netPremium).toLocaleString('en-IN', {maximumFractionDigits: 0});
+            document.getElementById('breakeven').textContent = '₹' + breakeven.toLocaleString('en-IN', {maximumFractionDigits: 2});
             document.getElementById('riskReward').textContent = '1:' + riskReward.toFixed(2);
             document.getElementById('roi').textContent = roi.toFixed(1) + '%';
-            
+
+            // Update education
+            updateEducation(spread);
+
+            // Draw payoff diagram
+            drawPayoffDiagram(buyStrike, sellStrike, netPremiumPerShare, maxProfit, maxLoss, breakeven);
+
+            // Show results
             document.getElementById('resultsSection').style.display = 'block';
-            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+
+        function drawPayoffDiagram(buyStrike, sellStrike, netPremiumPerShare, maxProfit, maxLoss, breakeven) {
+            const canvas = document.getElementById('payoffCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size
+            canvas.width = canvas.parentElement.offsetWidth;
+            canvas.height = 200;
+            
+            const width = canvas.width;
+            const height = canvas.height;
+            const padding = 40;
+            
+            // Clear canvas
+            ctx.fillStyle = 'rgba(10, 10, 10, 0.5)';
+            ctx.fillRect(0, 0, width, height);
+            
+            // Calculate price range
+            const minStrike = Math.min(buyStrike, sellStrike);
+            const maxStrike = Math.max(buyStrike, sellStrike);
+            const range = maxStrike - minStrike;
+            const priceMin = minStrike - range * 1.5;
+            const priceMax = maxStrike + range * 1.5;
+            
+            // Scale functions
+            const scaleX = (price) => padding + ((price - priceMin) / (priceMax - priceMin)) * (width - padding * 2);
+            const scaleY = (pnl) => {
+                const maxPnL = Math.max(Math.abs(maxProfit), Math.abs(maxLoss)) * 1.2;
+                return height / 2 - (pnl / maxPnL) * (height / 2 - padding);
+            };
+            
+            // Draw zero line
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(padding, height / 2);
+            ctx.lineTo(width - padding, height / 2);
+            ctx.stroke();
+            
+            // Draw breakeven line
+            ctx.strokeStyle = 'rgba(201, 162, 39, 0.5)';
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.moveTo(scaleX(breakeven), padding);
+            ctx.lineTo(scaleX(breakeven), height - padding);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            
+            // Draw payoff line based on strategy
+            ctx.strokeStyle = '#C9A227';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            
+            if (currentStrategy === 'bullCall') {
+                // Bull Call: Loss at low price, profit at high price
+                ctx.moveTo(scaleX(priceMin), scaleY(-Math.abs(maxLoss)));
+                ctx.lineTo(scaleX(buyStrike), scaleY(-Math.abs(maxLoss)));
+                ctx.lineTo(scaleX(sellStrike), scaleY(maxProfit));
+                ctx.lineTo(scaleX(priceMax), scaleY(maxProfit));
+            } else if (currentStrategy === 'bearPut') {
+                // Bear Put: Profit at low price, loss at high price
+                ctx.moveTo(scaleX(priceMin), scaleY(maxProfit));
+                ctx.lineTo(scaleX(sellStrike), scaleY(maxProfit));
+                ctx.lineTo(scaleX(buyStrike), scaleY(-Math.abs(maxLoss)));
+                ctx.lineTo(scaleX(priceMax), scaleY(-Math.abs(maxLoss)));
+            } else if (currentStrategy === 'callCredit') {
+                // Call Credit: Profit at low price, loss at high price
+                ctx.moveTo(scaleX(priceMin), scaleY(maxProfit));
+                ctx.lineTo(scaleX(sellStrike), scaleY(maxProfit));
+                ctx.lineTo(scaleX(buyStrike), scaleY(-Math.abs(maxLoss)));
+                ctx.lineTo(scaleX(priceMax), scaleY(-Math.abs(maxLoss)));
+            } else if (currentStrategy === 'putCredit') {
+                // Put Credit: Loss at low price, profit at high price
+                ctx.moveTo(scaleX(priceMin), scaleY(-Math.abs(maxLoss)));
+                ctx.lineTo(scaleX(buyStrike), scaleY(-Math.abs(maxLoss)));
+                ctx.lineTo(scaleX(sellStrike), scaleY(maxProfit));
+                ctx.lineTo(scaleX(priceMax), scaleY(maxProfit));
+            } else {
+                // Calendar: Tent shape
+                ctx.moveTo(scaleX(priceMin), scaleY(-Math.abs(maxLoss)));
+                ctx.lineTo(scaleX(buyStrike), scaleY(maxProfit));
+                ctx.lineTo(scaleX(priceMax), scaleY(-Math.abs(maxLoss)));
+            }
+            
+            ctx.stroke();
+            
+            // Add labels
+            ctx.fillStyle = '#C9A227';
+            ctx.font = '12px Inter';
+            ctx.textAlign = 'center';
+            
+            // Breakeven label
+            ctx.fillText('BE: ₹' + breakeven.toFixed(0), scaleX(breakeven), height - 10);
+            
+            // Strike labels
+            ctx.fillStyle = '#4ade80';
+            ctx.fillText('₹' + buyStrike, scaleX(buyStrike), height - 25);
+            ctx.fillStyle = '#ef4444';
+            ctx.fillText('₹' + sellStrike, scaleX(sellStrike), height - 25);
+            
+            // P&L labels
+            ctx.fillStyle = '#4ade80';
+            ctx.textAlign = 'right';
+            ctx.fillText('+₹' + Math.abs(maxProfit).toFixed(0), width - padding + 35, scaleY(maxProfit) + 4);
+            
+            ctx.fillStyle = '#ef4444';
+            ctx.fillText('-₹' + Math.abs(maxLoss).toFixed(0), width - padding + 35, scaleY(-Math.abs(maxLoss)) + 4);
+        }
+
+        // Redraw chart on resize
+        window.addEventListener('resize', () => {
+            if (document.getElementById('resultsSection').style.display === 'block') {
+                const buyStrike = parseFloat(document.getElementById('buyStrike').value);
+                const sellStrike = parseFloat(document.getElementById('sellStrike').value);
+                const buyPremium = parseFloat(document.getElementById('buyPremium').value);
+                const sellPremium = parseFloat(document.getElementById('sellPremium').value);
+                const netPremiumPerShare = sellPremium - buyPremium;
+                
+                // Recalculate for redraw
+                calculateSpread();
+            }
+        });
+
+        // Initialize with default values
+        document.addEventListener('DOMContentLoaded', () => {
+            setSpread('bullCall');
+        });
     </script>
-<script src="common-footer.js" defer></script>
+    
+    <script src="common-footer.js" defer></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 ## Current Reality Check
 
 **Your Assets:**
-- 185+ high-quality articles
+- 245+ high-quality articles
 - 2 calculators (SIP, Home Loan)
 - Good SEO foundation
 - Premium domain

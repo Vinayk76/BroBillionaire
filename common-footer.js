@@ -14,7 +14,7 @@
                 <div class="sebi-disclaimer-icon">
                     ⚠️
                 </div>
-                <div class="sebi-disclaimer-title">⚠️ Important SEBI Disclaimer & Risk Warning</div>
+                <div class="sebi-disclaimer-title">Important SEBI Disclaimer & Risk Warning</div>
             </div>
             <div class="sebi-disclaimer-content">
                 <p><strong>For Educational Purposes Only:</strong> All tools, calculators, articles, and content on BroBillionaire.com are designed for educational and informational purposes only. They do not constitute investment advice, financial advice, trading advice, or any other sort of advice.</p>
@@ -75,7 +75,7 @@
     // Footer CSS styles
     const footerCSS = `
     <style>
-    /* SEBI Disclaimer Section Styles */
+    /* SEBI Disclaimer Section Styles - BroBillionaire Theme */
     .sebi-disclaimer-section {
         max-width: 1200px;
         margin: 60px auto 0;
@@ -83,49 +83,75 @@
     }
     
     .sebi-disclaimer-container {
-        background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(239, 68, 68, 0.03) 100%);
-        border: 2px solid rgba(239, 68, 68, 0.25);
-        border-radius: 20px;
-        padding: 30px;
+        background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0a0a0a 100%);
+        border: 2px solid rgba(201, 162, 39, 0.3);
+        border-radius: 16px;
+        padding: 35px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .sebi-disclaimer-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #C9A227, #E5B946, #C9A227);
     }
     
     .sebi-disclaimer-header {
         display: flex;
         align-items: center;
         gap: 15px;
-        margin-bottom: 20px;
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(201, 162, 39, 0.15);
     }
     
     .sebi-disclaimer-icon {
-        width: 50px;
-        height: 50px;
-        background: rgba(239, 68, 68, 0.15);
+        width: 55px;
+        height: 55px;
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.2) 0%, rgba(201, 162, 39, 0.1) 100%);
+        border: 1px solid rgba(201, 162, 39, 0.3);
         border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 1.8rem;
+        box-shadow: 0 4px 15px rgba(201, 162, 39, 0.15);
     }
     
     .sebi-disclaimer-title {
-        color: #ef4444;
-        font-size: 1.2rem;
+        color: #C9A227;
+        font-size: 1.3rem;
         font-weight: 700;
+        font-family: 'Playfair Display', Georgia, serif;
+        letter-spacing: 0.5px;
     }
     
     .sebi-disclaimer-content {
-        margin-bottom: 25px;
+        margin-bottom: 30px;
     }
     
     .sebi-disclaimer-content p {
-        color: #999;
-        line-height: 1.8;
-        margin-bottom: 15px;
-        font-size: 0.92rem;
+        color: #b8b8b8;
+        line-height: 1.9;
+        margin-bottom: 18px;
+        font-size: 0.95rem;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
     
     .sebi-disclaimer-content strong {
-        color: #ccc;
+        color: #C9A227;
+        font-weight: 600;
+    }
+    
+    .sebi-disclaimer-content p strong:first-child {
+        display: inline-block;
+        margin-right: 3px;
     }
     
     .sebi-disclaimer-badges {
@@ -136,46 +162,59 @@
     }
     
     .sebi-badge-item {
-        background: rgba(239, 68, 68, 0.1);
-        border: 1px solid rgba(239, 68, 68, 0.2);
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.08) 0%, rgba(201, 162, 39, 0.03) 100%);
+        border: 1px solid rgba(201, 162, 39, 0.2);
         border-radius: 12px;
-        padding: 15px;
+        padding: 18px 15px;
         text-align: center;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 8px;
+        gap: 10px;
+        transition: all 0.3s ease;
+    }
+    
+    .sebi-badge-item:hover {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.15) 0%, rgba(201, 162, 39, 0.08) 100%);
+        border-color: rgba(201, 162, 39, 0.4);
+        transform: translateY(-2px);
     }
     
     .sebi-badge-item i {
-        color: #ef4444;
-        font-size: 1.2rem;
+        color: #C9A227;
+        font-size: 1.3rem;
     }
     
     .sebi-badge-item span {
-        color: #999;
+        color: #e0e0e0;
         font-size: 0.85rem;
         font-weight: 600;
+        font-family: 'Inter', sans-serif;
     }
     
     .sebi-disclaimer-footer {
-        background: rgba(0, 0, 0, 0.3);
-        border-radius: 12px;
-        padding: 20px;
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, rgba(201, 162, 39, 0.05) 100%);
+        border: 1px solid rgba(201, 162, 39, 0.2);
+        border-radius: 10px;
+        padding: 20px 25px;
     }
     
     .sebi-disclaimer-footer p {
-        color: #888;
-        font-size: 0.88rem;
+        color: #d0d0d0;
+        font-size: 0.9rem;
         margin: 0;
+        font-family: 'Inter', sans-serif;
     }
     
     .sebi-disclaimer-footer a {
         color: #C9A227;
         text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
     }
     
     .sebi-disclaimer-footer a:hover {
+        color: #E5B946;
         text-decoration: underline;
     }
     
@@ -188,13 +227,19 @@
             text-align: center;
         }
         .sebi-disclaimer-container {
-            padding: 20px;
+            padding: 25px 20px;
+        }
+        .sebi-disclaimer-title {
+            font-size: 1.15rem;
         }
     }
     
     @media (max-width: 480px) {
         .sebi-disclaimer-badges {
             grid-template-columns: 1fr;
+        }
+        .sebi-disclaimer-content p {
+            font-size: 0.9rem;
         }
     }
     

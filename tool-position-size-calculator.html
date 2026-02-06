@@ -738,11 +738,12 @@
             flex-direction: column;
             align-items: center;
             min-width: 60px;
+            height: 100%;
         }
 
         .bar-container {
             width: 100%;
-            height: 100%;
+            height: 160px;
             display: flex;
             align-items: flex-end;
             justify-content: center;
@@ -916,6 +917,10 @@
 
                 <div class="results-section">
                     <h2 class="section-title">💰 Recommended Position Size</h2>
+
+                    <div id="tradeDirection" style="display: none; margin-bottom: 15px;">
+                        <span id="directionBadge" style="display: inline-block; padding: 6px 16px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;"></span>
+                    </div>
 
                     <div class="result-card result-main">
                         <div class="result-label">POSITION SIZE</div>
@@ -1136,56 +1141,173 @@
             const target = parseFloat(document.getElementById('target').value) || 0;
             const winRate = parseFloat(document.getElementById('winRate').value) || 0;
             const portfolioHeat = parseFloat(document.getElementById('portfolioHeat').value) || 0;
+            const instrumentType = document.getElementById('instrumentType').value;
 
-            // Validate inputs
-            if (accountSize <= 0 || entryPrice <= 0 || stopLoss <= 0) {
+            // Clear any previous error states
+            clearValidationErrors();
+
+            // Validate basic inputs
+            if (accountSize <= 0) {
+                showValidationError('accountSize', 'Account size must be greater than 0');
+                resetResults();
+                return;
+            }
+            if (riskPercent <= 0 || riskPercent > 100) {
+                showValidationError('riskPercent', 'Risk must be between 0.1% and 100%');
+                resetResults();
+                return;
+            }
+            if (entryPrice <= 0) {
+                showValidationError('entryPrice', 'Entry price must be greater than 0');
+                resetResults();
+                return;
+            }
+            if (stopLoss <= 0) {
+                showValidationError('stopLoss', 'Stop loss must be greater than 0');
+                resetResults();
+                return;
+            }
+            if (entryPrice === stopLoss) {
+                showValidationError('stopLoss', 'Stop loss cannot equal entry price');
+                resetResults();
                 return;
             }
 
-            // Calculate risk per share
+            // Determine trade direction: LONG or SHORT
+            const isLong = stopLoss < entryPrice;
+            const isShort = stopLoss > entryPrice;
+
+            // Validate target based on trade direction
+            if (target <= 0) {
+                showValidationError('target', 'Target price must be greater than 0');
+                resetResults();
+                return;
+            }
+            if (isLong && target <= entryPrice) {
+                showValidationError('target', 'For long trades, target must be above entry price');
+                resetResults();
+                return;
+            }
+            if (isShort && target >= entryPrice) {
+                showValidationError('target', 'For short trades, target must be below entry price');
+                resetResults();
+                return;
+            }
+
+            // Update trade direction indicator
+            const directionDiv = document.getElementById('tradeDirection');
+            const directionBadge = document.getElementById('directionBadge');
+            directionDiv.style.display = 'block';
+            if (isLong) {
+                directionBadge.textContent = '📈 LONG Trade';
+                directionBadge.style.background = 'rgba(74, 222, 128, 0.2)';
+                directionBadge.style.color = 'var(--green)';
+                directionBadge.style.border = '1px solid rgba(74, 222, 128, 0.5)';
+            } else {
+                directionBadge.textContent = '📉 SHORT Trade';
+                directionBadge.style.background = 'rgba(239, 68, 68, 0.2)';
+                directionBadge.style.color = 'var(--red)';
+                directionBadge.style.border = '1px solid rgba(239, 68, 68, 0.5)';
+            }
+
+            // Calculate risk per share (always positive)
             const riskPerShare = Math.abs(entryPrice - stopLoss);
-            if (riskPerShare === 0) return;
 
             // Calculate position size
             const riskAmount = (accountSize * riskPercent) / 100;
-            const positionSize = Math.floor(riskAmount / riskPerShare);
+            let positionSize = Math.floor(riskAmount / riskPerShare);
 
-            // Calculate reward per share
+            // Check if risk amount is too small for even 1 share
+            if (positionSize === 0 && riskAmount < riskPerShare) {
+                // Show warning but still calculate with 1 unit
+                showValidationError('riskPercent', `Risk amount (₹${riskAmount.toFixed(2)}) is less than 1 share risk (₹${riskPerShare.toFixed(2)}). Showing minimum position.`);
+                positionSize = 1;
+            } else if (positionSize === 0 && riskAmount >= riskPerShare) {
+                positionSize = 1;
+            }
+
+            // Adjust for instrument type
+            let positionLabel = 'shares / units';
+            let lotSize = 1;
+            if (instrumentType === 'options') {
+                // Options contracts typically represent 100 shares
+                // But in India (NSE), lot sizes vary
+                positionLabel = 'contracts';
+            } else if (instrumentType === 'futures') {
+                positionLabel = 'lots';
+            } else if (instrumentType === 'forex') {
+                positionLabel = 'lots';
+            } else if (instrumentType === 'crypto') {
+                positionLabel = 'units';
+                // Crypto can have fractional positions
+                positionSize = (riskAmount / riskPerShare).toFixed(4);
+            }
+
+            // Calculate reward per share (always positive)
             const rewardPerShare = Math.abs(target - entryPrice);
-            const potentialProfit = positionSize * rewardPerShare;
+            const potentialProfit = parseFloat(positionSize) * rewardPerShare;
+            const actualRiskAmount = parseFloat(positionSize) * riskPerShare;
 
-            // Calculate risk:reward
-            const riskRewardRatio = rewardPerShare / riskPerShare;
+            // Calculate risk:reward ratio (reward/risk)
+            const riskRewardRatio = riskPerShare > 0 ? rewardPerShare / riskPerShare : 0;
 
-            // Kelly Criterion
+            // Kelly Criterion Calculation
+            // Formula: Kelly % = (bp - q) / b
+            // Where: p = win probability, q = 1-p, b = risk:reward ratio
             const p = winRate / 100; // Win probability
             const q = 1 - p; // Loss probability
-            const b = riskRewardRatio; // Win/loss ratio
-            const kelly = ((b * p - q) / b) * 100;
+            const b = riskRewardRatio; // Win/loss ratio (R:R)
+            
+            let kelly = 0;
+            let kellyMessage = '';
+            if (b > 0 && p > 0) {
+                kelly = ((b * p - q) / b) * 100;
+                if (kelly < 0) {
+                    kelly = 0;
+                    kellyMessage = 'No edge detected';
+                }
+            } else {
+                kellyMessage = 'Invalid parameters';
+            }
             const halfKelly = kelly / 2;
 
-            // Portfolio heat
+            // Portfolio heat calculation
             const totalHeat = portfolioHeat + riskPercent;
-            const remainingCapacity = Math.max(0, 10 - totalHeat);
+            const remainingCapacity = Math.max(0, 12 - totalHeat); // 12% max recommended heat
+            
+            // Heat status warning
+            let heatStatus = '';
+            if (totalHeat > 12) {
+                heatStatus = ' ⚠️ HIGH';
+            } else if (totalHeat > 8) {
+                heatStatus = ' ⚡ CAUTION';
+            }
 
             // Update DOM
-            document.getElementById('positionSize').textContent = positionSize.toLocaleString('en-IN');
-            document.getElementById('positionSubtext').textContent = `Total Investment: ₹${(positionSize * entryPrice).toLocaleString('en-IN', {maximumFractionDigits: 2})}`;
-            document.getElementById('targetProfit').textContent = `₹${potentialProfit.toLocaleString('en-IN', {maximumFractionDigits: 2})}`;
-            document.getElementById('stopLossAmount').textContent = `₹${riskAmount.toLocaleString('en-IN', {maximumFractionDigits: 2})}`;
+            document.getElementById('positionSize').textContent = instrumentType === 'crypto' 
+                ? parseFloat(positionSize).toLocaleString('en-IN', {maximumFractionDigits: 4})
+                : parseInt(positionSize).toLocaleString('en-IN');
+            
+            const totalInvestment = parseFloat(positionSize) * entryPrice;
+            document.getElementById('positionSubtext').textContent = `Total Investment: ₹${totalInvestment.toLocaleString('en-IN', {maximumFractionDigits: 2})} (${positionLabel})`;
+            
+            document.getElementById('targetProfit').textContent = `+₹${potentialProfit.toLocaleString('en-IN', {maximumFractionDigits: 2})}`;
+            document.getElementById('stopLossAmount').textContent = `-₹${actualRiskAmount.toLocaleString('en-IN', {maximumFractionDigits: 2})}`;
             document.getElementById('riskReward').textContent = `1:${riskRewardRatio.toFixed(2)}`;
-            document.getElementById('riskAmount').textContent = `₹${riskAmount.toLocaleString('en-IN', {maximumFractionDigits: 2})}`;
-            document.getElementById('kellyPercent').textContent = `${Math.max(0, kelly).toFixed(2)}%`;
-            document.getElementById('halfKelly').textContent = `${Math.max(0, halfKelly).toFixed(2)}%`;
-            document.getElementById('totalHeat').textContent = `${totalHeat.toFixed(2)}%`;
+            document.getElementById('riskAmount').textContent = `₹${actualRiskAmount.toLocaleString('en-IN', {maximumFractionDigits: 2})}`;
+            
+            const kellyDisplay = kelly > 0 ? `${kelly.toFixed(2)}%` : (kellyMessage || '0%');
+            document.getElementById('kellyPercent').textContent = kellyDisplay;
+            document.getElementById('halfKelly').textContent = kelly > 0 ? `${halfKelly.toFixed(2)}%` : '0%';
+            document.getElementById('totalHeat').textContent = `${totalHeat.toFixed(2)}%${heatStatus}`;
             document.getElementById('remainingCapacity').textContent = `${remainingCapacity.toFixed(2)}%`;
 
-            // Update risk meter
-            const meterPosition = Math.min(100, (riskPercent / 5) * 100); // 5% = 100% of meter
+            // Update risk meter (based on risk percent, 5% = full red)
+            const meterPosition = Math.min(100, Math.max(0, (riskPercent / 5) * 100));
             document.getElementById('meterIndicator').style.left = `${meterPosition}%`;
 
             // Generate outcome chart
-            generateOutcomeChart(positionSize, entryPrice, riskPerShare, rewardPerShare);
+            generateOutcomeChart(parseFloat(positionSize), entryPrice, riskPerShare, rewardPerShare);
 
             // Save to localStorage for analytics
             saveCalculation();
@@ -1194,21 +1316,34 @@
         function generateOutcomeChart(quantity, entry, riskPerShare, rewardPerShare) {
             const outcomes = [
                 { label: 'Target', amount: quantity * rewardPerShare, color: 'var(--green)' },
+                { label: '75% Target', amount: quantity * rewardPerShare * 0.75, color: '#22c55e' },
                 { label: '50% Target', amount: quantity * rewardPerShare * 0.5, color: 'var(--blue)' },
-                { label: 'Breakeven', amount: 0, color: 'var(--text-tertiary)' },
+                { label: 'Breakeven', amount: 0, color: 'var(--gold)', isBreakeven: true },
                 { label: '50% Stop', amount: -quantity * riskPerShare * 0.5, color: 'var(--warning)' },
                 { label: 'Stop Loss', amount: -quantity * riskPerShare, color: 'var(--red)' }
             ];
 
-            const maxValue = Math.max(...outcomes.map(o => Math.abs(o.amount)));
+            const maxValue = Math.max(...outcomes.filter(o => !o.isBreakeven).map(o => Math.abs(o.amount)));
             const chartHTML = outcomes.map(outcome => {
-                const height = maxValue > 0 ? (Math.abs(outcome.amount) / maxValue) * 100 : 0;
-                const minHeight = height > 0 ? Math.max(height, 15) : 0;
+                let height, minHeight;
+                if (outcome.isBreakeven) {
+                    // Breakeven gets a small fixed height as indicator
+                    height = 8;
+                    minHeight = 8;
+                } else {
+                    height = maxValue > 0 ? (Math.abs(outcome.amount) / maxValue) * 100 : 0;
+                    minHeight = height > 0 ? Math.max(height, 15) : 5;
+                }
+                
+                const amountDisplay = outcome.isBreakeven 
+                    ? '₹0' 
+                    : `${outcome.amount >= 0 ? '+' : ''}₹${outcome.amount.toLocaleString('en-IN', {maximumFractionDigits: 0})}`;
+                
                 return `
                     <div class="bar-wrapper">
                         <div class="bar-container">
                             <div class="bar" style="height: ${minHeight}%; background: ${outcome.color}; width: 60%;">
-                                <div class="bar-value">₹${outcome.amount.toLocaleString('en-IN', {maximumFractionDigits: 0})}</div>
+                                <div class="bar-value">${amountDisplay}</div>
                             </div>
                         </div>
                         <div class="bar-label">${outcome.label}</div>
@@ -1217,6 +1352,47 @@
             }).join('');
 
             document.getElementById('outcomeChart').innerHTML = chartHTML;
+        }
+        
+        function showValidationError(inputId, message) {
+            const input = document.getElementById(inputId);
+            if (input) {
+                input.style.borderColor = 'var(--red)';
+                input.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.2)';
+                // Create or update error message
+                let errorEl = input.parentNode.querySelector('.validation-error');
+                if (!errorEl) {
+                    errorEl = document.createElement('span');
+                    errorEl.className = 'validation-error';
+                    errorEl.style.cssText = 'color: var(--red); font-size: 0.8rem; display: block; margin-top: 5px;';
+                    input.parentNode.appendChild(errorEl);
+                }
+                errorEl.textContent = message;
+            }
+        }
+        
+        function clearValidationErrors() {
+            document.querySelectorAll('input').forEach(input => {
+                input.style.borderColor = '';
+                input.style.boxShadow = '';
+            });
+            document.querySelectorAll('.validation-error').forEach(el => el.remove());
+        }
+        
+        function resetResults() {
+            document.getElementById('positionSize').textContent = '0';
+            document.getElementById('positionSubtext').textContent = 'shares / units';
+            document.getElementById('targetProfit').textContent = '₹0';
+            document.getElementById('stopLossAmount').textContent = '₹0';
+            document.getElementById('riskReward').textContent = '0:0';
+            document.getElementById('riskAmount').textContent = '₹0';
+            document.getElementById('kellyPercent').textContent = '0%';
+            document.getElementById('halfKelly').textContent = '0%';
+            document.getElementById('totalHeat').textContent = '0%';
+            document.getElementById('remainingCapacity').textContent = '12%';
+            document.getElementById('meterIndicator').style.left = '0%';
+            document.getElementById('outcomeChart').innerHTML = '';
+            document.getElementById('tradeDirection').style.display = 'none';
         }
 
         function toggleFAQ(element) {

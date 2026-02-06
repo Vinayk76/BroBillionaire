@@ -109,8 +109,8 @@
     <div class="tool-container">
         <div class="tool-header">
             <h1 class="tool-title"><i class="fas fa-chart-bar"></i> Live NSE Option Chain Analyzer</h1>
-            <div class="tool-badge">🔥 Real-Time OI + PCR + Max Pain + IV Analysis</div>
-            <p class="tool-subtitle">Advanced option chain analysis with automatic unusual activity detection for smart options trading</p>
+            <div class="tool-badge">� LIVE DATA FROM NSE | OI + PCR + Max Pain + IV Analysis</div>
+            <p class="tool-subtitle">Real-time option chain data directly from NSE India | Auto-refreshes every 30 seconds during market hours</p>
         </div>
 
         <!-- Control Panel -->
@@ -270,57 +270,86 @@
 
     <script>
         /*
-         * FREE API INTEGRATIONS USED:
+         * LIVE API INTEGRATIONS:
          * 1. NSE India Option Chain API - Free, no API key required
          *    NIFTY: https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY
          *    BANKNIFTY: https://www.nseindia.com/api/option-chain-indices?symbol=BANKNIFTY
-         *    FINNIFTY: https://www.nseindia.com/api/option-chain-indices?symbol=FINNIFTY
          *    Stocks: https://www.nseindia.com/api/option-chain-equities?symbol={SYMBOL}
-         * 2. CORS Proxy for browser access: https://api.allorigins.win/raw?url=
-         * 3. Fallback: Mock realistic option chain data
+         * 2. Multiple CORS Proxies for browser access (with fallbacks)
          * 
-         * Note: NSE may block frequent requests. Use server-side proxy for production.
-         * Rate limiting: Wait 1-2 seconds between API calls
+         * Data is fetched LIVE from NSE. Updates every 30 seconds during market hours.
          */
         
         let currentSpot = 0;
         let optionChainData = [];
-        let useMockData = true; // Set to false to try real NSE API
+        let lastUpdateTime = null;
+        let dataSource = 'Loading...';
+        
+        // Multiple CORS proxies for fallback
+        const CORS_PROXIES = [
+            'https://api.allorigins.win/raw?url=',
+            'https://corsproxy.io/?',
+            'https://api.codetabs.com/v1/proxy?quest='
+        ];
+        
+        async function fetchWithProxy(url, proxyIndex = 0) {
+            if (proxyIndex >= CORS_PROXIES.length) {
+                throw new Error('All CORS proxies failed');
+            }
+            
+            const proxy = CORS_PROXIES[proxyIndex];
+            try {
+                const response = await fetch(proxy + encodeURIComponent(url), {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const text = await response.text();
+                // Check if response is valid JSON
+                try {
+                    return JSON.parse(text);
+                } catch {
+                    throw new Error('Invalid JSON response');
+                }
+            } catch (error) {
+                console.warn(`Proxy ${proxyIndex + 1} failed:`, error.message);
+                // Try next proxy
+                return fetchWithProxy(url, proxyIndex + 1);
+            }
+        }
         
         async function fetchNSEOptionChain(symbol) {
-            if (useMockData) return null;
-            
             try {
-                const corsProxy = 'https://api.allorigins.win/raw?url=';
-                let nseUrl;
-                
                 // Determine if index or stock
                 const indices = ['NIFTY', 'BANKNIFTY', 'FINNIFTY', 'MIDCPNIFTY'];
+                let nseUrl;
+                
                 if (indices.includes(symbol)) {
                     nseUrl = `https://www.nseindia.com/api/option-chain-indices?symbol=${symbol}`;
                 } else {
                     nseUrl = `https://www.nseindia.com/api/option-chain-equities?symbol=${symbol}`;
                 }
                 
-                const response = await fetch(corsProxy + encodeURIComponent(nseUrl), {
-                    headers: {
-                        'Accept': 'application/json',
-                        'User-Agent': 'Mozilla/5.0',
-                        'Accept-Language': 'en-US,en;q=0.9'
-                    }
-                });
+                const data = await fetchWithProxy(nseUrl);
                 
-                if (response.ok) {
-                    const data = await response.json();
-                    if (data && data.records && data.records.data) {
-                        return {
-                            spot: data.records.underlyingValue,
-                            data: data.records.data
-                        };
-                    }
+                if (data && data.records && data.records.data) {
+                    dataSource = 'NSE Live Data';
+                    lastUpdateTime = new Date();
+                    return {
+                        spot: data.records.underlyingValue,
+                        data: data.records.data,
+                        expiryDates: data.records.expiryDates || [],
+                        timestamp: data.records.timestamp
+                    };
                 }
             } catch (error) {
-                console.error('NSE Option Chain API error:', error);
+                console.error('NSE API error:', error);
             }
             return null;
         }
@@ -331,32 +360,84 @@
             const strikeRange = document.getElementById('strikeRange').value;
 
             // Show loading state
-            document.getElementById('chainTableBody').innerHTML = '<tr><td colspan="11" style="text-align: center; padding: 40px; color: #666;"><i class="fas fa-spinner fa-spin"></i> Loading option chain data...</td></tr>';
-
-            // Try to fetch real NSE data
-            const realData = await fetchNSEOptionChain(symbol);
+            document.getElementById('chainTableBody').innerHTML = `
+                <tr><td colspan="11" style="text-align: center; padding: 40px; color: #666;">
+                    <i class="fas fa-spinner fa-spin"></i> Fetching live data from NSE...
+                </td></tr>`;
             
-            if (realData && realData.data) {
-                // Use real NSE option chain data
-                processRealNSEData(realData, strikeRange);
-                updateUI();
-            } else {
-                // Fallback to mock data
-                setTimeout(() => {
-                    generateMockData(symbol, strikeRange);
+            // Update status
+            updateDataStatus('Connecting to NSE...', 'loading');
+
+            try {
+                // Fetch real NSE data
+                const realData = await fetchNSEOptionChain(symbol);
+                
+                if (realData && realData.data && realData.data.length > 0) {
+                    // Process expiry filter
+                    const filteredData = filterByExpiry(realData, expiry);
+                    processRealNSEData(filteredData, strikeRange);
                     updateUI();
-                }, 800);
+                    updateDataStatus(`Live: ${symbol} | ${realData.timestamp || new Date().toLocaleTimeString()}`, 'success');
+                } else {
+                    throw new Error('No data received from NSE');
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                updateDataStatus('NSE API unavailable - Market may be closed', 'error');
+                showNoDataMessage(symbol);
             }
+        }
+        
+        function filterByExpiry(realData, expiryType) {
+            if (!realData.expiryDates || realData.expiryDates.length === 0) {
+                return realData;
+            }
+            
+            const expiryDates = realData.expiryDates;
+            let targetExpiry;
+            
+            switch(expiryType) {
+                case 'current':
+                    targetExpiry = expiryDates[0]; // Nearest expiry
+                    break;
+                case 'next':
+                    targetExpiry = expiryDates[1] || expiryDates[0];
+                    break;
+                case 'monthly':
+                    // Find the monthly expiry (usually last Thursday of month)
+                    targetExpiry = expiryDates.find(exp => {
+                        const date = new Date(exp);
+                        const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+                        return date.getDate() > 20; // Approximate monthly expiry
+                    }) || expiryDates[expiryDates.length - 1];
+                    break;
+                default:
+                    targetExpiry = expiryDates[0];
+            }
+            
+            // Filter data for selected expiry
+            const filteredRecords = realData.data.filter(item => item.expiryDate === targetExpiry);
+            
+            return {
+                ...realData,
+                data: filteredRecords.length > 0 ? filteredRecords : realData.data,
+                selectedExpiry: targetExpiry
+            };
         }
         
         function processRealNSEData(realData, range) {
             currentSpot = realData.spot;
-            const strikes = range === 'all' ? 30 : parseInt(range) * 2;
+            const strikes = range === 'all' ? 40 : parseInt(range) * 2;
             
-            // Sort by strike price and take the middle strikes around ATM
+            // Sort by strike price and filter items with both CE and PE
             const sortedData = realData.data
-                .filter(item => item.CE && item.PE) // Only items with both Call and Put
+                .filter(item => item.CE || item.PE) // Items with at least Call or Put
                 .sort((a, b) => a.strikePrice - b.strikePrice);
+            
+            if (sortedData.length === 0) {
+                showNoDataMessage();
+                return;
+            }
             
             // Find ATM index
             let atmIndex = 0;
@@ -374,142 +455,110 @@
             const endIdx = Math.min(sortedData.length, startIdx + strikes);
             const selectedStrikes = sortedData.slice(startIdx, endIdx);
             
-            optionChainData = selectedStrikes.map((item, idx) => {
+            const atmStrike = sortedData[atmIndex].strikePrice;
+            
+            optionChainData = selectedStrikes.map((item) => {
                 const strike = item.strikePrice;
-                const atmStrike = sortedData[atmIndex].strikePrice;
+                
+                // Handle cases where CE or PE might be missing
+                const ce = item.CE || {};
+                const pe = item.PE || {};
+                
+                // Calculate OI change percentage
+                const callOIChangePercent = ce.openInterest ? 
+                    (ce.changeinOpenInterest || 0) / ce.openInterest : 0;
+                const putOIChangePercent = pe.openInterest ? 
+                    (pe.changeinOpenInterest || 0) / pe.openInterest : 0;
+                
+                // Detect unusual activity (>30% OI change or high volume/OI ratio)
+                const callVolOIRatio = ce.openInterest ? (ce.totalTradedVolume || 0) / ce.openInterest : 0;
+                const putVolOIRatio = pe.openInterest ? (pe.totalTradedVolume || 0) / pe.openInterest : 0;
                 
                 return {
                     strike: strike,
                     call: {
-                        oi: item.CE.openInterest || 0,
-                        oiChange: item.CE.changeinOpenInterest ? 
-                            item.CE.changeinOpenInterest / (item.CE.openInterest || 1) : 0,
-                        volume: item.CE.totalTradedVolume || 0,
-                        iv: item.CE.impliedVolatility || 0,
-                        ltp: item.CE.lastPrice || 0,
-                        isUnusual: Math.abs(item.CE.changeinOpenInterest || 0) > (item.CE.openInterest * 0.3)
+                        oi: ce.openInterest || 0,
+                        oiChange: callOIChangePercent,
+                        oiChangeAbs: ce.changeinOpenInterest || 0,
+                        volume: ce.totalTradedVolume || 0,
+                        iv: ce.impliedVolatility ? ce.impliedVolatility.toFixed(2) : '0.00',
+                        ltp: ce.lastPrice ? ce.lastPrice.toFixed(2) : '0.00',
+                        bidPrice: ce.bidprice || 0,
+                        askPrice: ce.askPrice || 0,
+                        isUnusual: Math.abs(callOIChangePercent) > 0.3 || callVolOIRatio > 0.5
                     },
                     put: {
-                        oi: item.PE.openInterest || 0,
-                        oiChange: item.PE.changeinOpenInterest ? 
-                            item.PE.changeinOpenInterest / (item.PE.openInterest || 1) : 0,
-                        volume: item.PE.totalTradedVolume || 0,
-                        iv: item.PE.impliedVolatility || 0,
-                        ltp: item.PE.lastPrice || 0,
-                        isUnusual: Math.abs(item.PE.changeinOpenInterest || 0) > (item.PE.openInterest * 0.3)
+                        oi: pe.openInterest || 0,
+                        oiChange: putOIChangePercent,
+                        oiChangeAbs: pe.changeinOpenInterest || 0,
+                        volume: pe.totalTradedVolume || 0,
+                        iv: pe.impliedVolatility ? pe.impliedVolatility.toFixed(2) : '0.00',
+                        ltp: pe.lastPrice ? pe.lastPrice.toFixed(2) : '0.00',
+                        bidPrice: pe.bidprice || 0,
+                        askPrice: pe.askPrice || 0,
+                        isUnusual: Math.abs(putOIChangePercent) > 0.3 || putVolOIRatio > 0.5
                     },
                     isATM: strike === atmStrike
                 };
             });
         }
-
-        function analyzeOptionChain() {
-            const symbol = document.getElementById('symbol').value;
-            const expiry = document.getElementById('expiry').value;
-            const strikeRange = document.getElementById('strikeRange').value;
-
-            // Show loading state
-            document.getElementById('chainTableBody').innerHTML = '<tr><td colspan="11" style="text-align: center; padding: 40px; color: #666;"><i class="fas fa-spinner fa-spin"></i> Loading option chain data...</td></tr>';
-
-            // Simulate API call delay
-            setTimeout(() => {
-                generateMockData(symbol, strikeRange);
-                updateUI();
-            }, 800);
+        
+        function showNoDataMessage(symbol = '') {
+            document.getElementById('chainTableBody').innerHTML = `
+                <tr><td colspan="11" style="text-align: center; padding: 40px; color: #ff6b6b;">
+                    <i class="fas fa-exclamation-circle"></i><br><br>
+                    <strong>Unable to fetch live data</strong><br><br>
+                    <span style="color: #999; font-size: 0.9rem;">
+                        Possible reasons:<br>
+                        • NSE market is closed (Open: Mon-Fri, 9:15 AM - 3:30 PM IST)<br>
+                        • Network connectivity issue<br>
+                        • NSE API temporarily unavailable<br><br>
+                        Please try again during market hours.
+                    </span>
+                </td></tr>`;
         }
-
-        function generateMockData(symbol, range) {
-            // Set spot price based on symbol
-            const spotPrices = {
-                'NIFTY': 24500,
-                'BANKNIFTY': 52000,
-                'FINNIFTY': 21500,
-                'MIDCPNIFTY': 12000,
-                'RELIANCE': 2850,
-                'TCS': 3650,
-                'HDFC': 1680,
-                'INFY': 1450
-            };
-
-            currentSpot = spotPrices[symbol] || 24500;
-            
-            // Determine strike interval
-            const intervals = {
-                'NIFTY': 50,
-                'BANKNIFTY': 100,
-                'FINNIFTY': 50,
-                'MIDCPNIFTY': 25,
-                'RELIANCE': 50,
-                'TCS': 50,
-                'HDFC': 20,
-                'INFY': 20
-            };
-            
-            const interval = intervals[symbol] || 50;
-            const strikes = range === 'all' ? 30 : parseInt(range) * 2;
-            
-            // Generate ATM and surrounding strikes
-            const atmStrike = Math.round(currentSpot / interval) * interval;
-            const startStrike = atmStrike - (strikes / 2 * interval);
-            
-            optionChainData = [];
-            for (let i = 0; i < strikes; i++) {
-                const strike = startStrike + (i * interval);
-                const distanceFromATM = Math.abs(strike - currentSpot);
-                
-                // Generate realistic OI, Volume, IV data
-                const callData = generateOptionData(strike, currentSpot, 'CALL', interval);
-                const putData = generateOptionData(strike, currentSpot, 'PUT', interval);
-                
-                optionChainData.push({
-                    strike: strike,
-                    call: callData,
-                    put: putData,
-                    isATM: strike === atmStrike
-                });
+        
+        function updateDataStatus(message, status) {
+            // Update or create status indicator
+            let statusEl = document.getElementById('dataStatus');
+            if (!statusEl) {
+                const controlPanel = document.querySelector('.control-panel');
+                statusEl = document.createElement('div');
+                statusEl.id = 'dataStatus';
+                statusEl.style.cssText = 'margin-top: 15px; padding: 10px; border-radius: 8px; text-align: center; font-size: 0.9rem;';
+                controlPanel.appendChild(statusEl);
             }
-        }
-
-        function generateOptionData(strike, spot, type, interval) {
-            const distanceFromSpot = strike - spot;
-            const isITM = (type === 'CALL' && strike < spot) || (type === 'PUT' && strike > spot);
             
-            // Base OI - higher near ATM
-            const atmDistance = Math.abs(strike - spot) / interval;
-            const baseOI = Math.max(5000, 50000 - (atmDistance * 3000)) + Math.random() * 10000;
-            
-            // OI Change (-30% to +50%)
-            const oiChange = (Math.random() - 0.4) * 0.8;
-            
-            // Volume - higher near ATM
-            const volume = Math.max(1000, 20000 - (atmDistance * 2000)) + Math.random() * 5000;
-            
-            // IV - higher for OTM options
-            const baseIV = isITM ? 15 + Math.random() * 5 : 18 + Math.random() * 10;
-            
-            // LTP - intrinsic + time value
-            const intrinsic = type === 'CALL' ? Math.max(0, spot - strike) : Math.max(0, strike - spot);
-            const timeValue = Math.max(5, 200 - (atmDistance * 15)) + Math.random() * 50;
-            const ltp = intrinsic + timeValue;
-            
-            // Mark unusual activity (10% chance)
-            const isUnusual = Math.random() > 0.9 || (Math.abs(oiChange) > 0.4);
-            
-            return {
-                oi: Math.round(baseOI),
-                oiChange: oiChange,
-                volume: Math.round(volume),
-                iv: baseIV.toFixed(2),
-                ltp: ltp.toFixed(2),
-                isUnusual: isUnusual
+            const colors = {
+                loading: { bg: 'rgba(201, 162, 39, 0.1)', border: '#C9A227', text: '#C9A227' },
+                success: { bg: 'rgba(34, 197, 94, 0.1)', border: '#22c55e', text: '#22c55e' },
+                error: { bg: 'rgba(239, 68, 68, 0.1)', border: '#ef4444', text: '#ef4444' }
             };
+            
+            const color = colors[status] || colors.loading;
+            statusEl.style.background = color.bg;
+            statusEl.style.border = `1px solid ${color.border}`;
+            statusEl.style.color = color.text;
+            
+            const icon = status === 'loading' ? 'fa-spinner fa-spin' : 
+                        status === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+            
+            statusEl.innerHTML = `<i class="fas ${icon}"></i> ${message}`;
         }
 
         function updateUI() {
+            if (optionChainData.length === 0) {
+                return;
+            }
+            
             // Calculate metrics
             const totalCallOI = optionChainData.reduce((sum, row) => sum + row.call.oi, 0);
             const totalPutOI = optionChainData.reduce((sum, row) => sum + row.put.oi, 0);
-            const pcr = (totalPutOI / totalCallOI).toFixed(2);
+            const pcr = totalCallOI > 0 ? (totalPutOI / totalCallOI).toFixed(2) : '0.00';
+            
+            // Calculate total OI changes
+            const totalCallOIChange = optionChainData.reduce((sum, row) => sum + (row.call.oiChangeAbs || 0), 0);
+            const totalPutOIChange = optionChainData.reduce((sum, row) => sum + (row.put.oiChangeAbs || 0), 0);
             
             // Calculate Max Pain
             const maxPainStrike = calculateMaxPain();
@@ -518,16 +567,16 @@
             document.getElementById('pcrValue').textContent = pcr;
             document.getElementById('callOIValue').textContent = formatNumber(totalCallOI);
             document.getElementById('putOIValue').textContent = formatNumber(totalPutOI);
-            document.getElementById('maxPainValue').textContent = '₹' + maxPainStrike;
+            document.getElementById('maxPainValue').textContent = '₹' + maxPainStrike.toLocaleString('en-IN');
             
             // PCR Signal
             const pcrSignal = document.getElementById('pcrSignal');
             if (pcr > 1.2) {
-                pcrSignal.className = 'metric-change bearish';
-                pcrSignal.innerHTML = '<i class="fas fa-arrow-down"></i> <span>Bearish Sentiment</span>';
+                pcrSignal.className = 'metric-change bullish'; // High PCR = Bullish (more puts = support)
+                pcrSignal.innerHTML = '<i class="fas fa-arrow-up"></i> <span>Bullish Sentiment (High Put OI = Support)</span>';
             } else if (pcr < 0.7) {
-                pcrSignal.className = 'metric-change bullish';
-                pcrSignal.innerHTML = '<i class="fas fa-arrow-up"></i> <span>Bullish Sentiment</span>';
+                pcrSignal.className = 'metric-change bearish'; // Low PCR = Bearish (more calls = resistance)
+                pcrSignal.innerHTML = '<i class="fas fa-arrow-down"></i> <span>Bearish Sentiment (High Call OI = Resistance)</span>';
             } else {
                 pcrSignal.className = 'metric-change neutral';
                 pcrSignal.innerHTML = '<i class="fas fa-circle"></i> <span>Neutral Market</span>';
@@ -536,18 +585,61 @@
             // Max Pain Distance
             const maxPainDist = ((maxPainStrike - currentSpot) / currentSpot * 100).toFixed(2);
             document.getElementById('maxPainDistance').innerHTML = 
-                `<i class="fas fa-crosshairs"></i> <span>${maxPainDist > 0 ? '+' : ''}${maxPainDist}% from Spot</span>`;
+                `<i class="fas fa-crosshairs"></i> <span>Spot: ₹${currentSpot.toLocaleString('en-IN')} | ${maxPainDist > 0 ? '+' : ''}${maxPainDist}% away</span>`;
             
-            // OI Changes
-            const avgCallOIChange = (optionChainData.reduce((sum, row) => sum + row.call.oiChange, 0) / optionChainData.length * 100).toFixed(2);
-            const avgPutOIChange = (optionChainData.reduce((sum, row) => sum + row.put.oiChange, 0) / optionChainData.length * 100).toFixed(2);
-            document.getElementById('callOIChange').textContent = avgCallOIChange + '%';
-            document.getElementById('putOIChange').textContent = avgPutOIChange + '%';
+            // OI Changes (show absolute change)
+            const callChangeClass = totalCallOIChange >= 0 ? 'bullish' : 'bearish';
+            const putChangeClass = totalPutOIChange >= 0 ? 'bearish' : 'bullish';
+            document.getElementById('callOIChange').parentElement.className = `metric-change ${callChangeClass}`;
+            document.getElementById('callOIChange').textContent = (totalCallOIChange >= 0 ? '+' : '') + formatNumber(totalCallOIChange);
+            document.getElementById('putOIChange').parentElement.className = `metric-change ${putChangeClass}`;
+            document.getElementById('putOIChange').textContent = (totalPutOIChange >= 0 ? '+' : '') + formatNumber(totalPutOIChange);
             
             // Update table
             updateTable();
             
             // Check for unusual activity
+            detectUnusualActivity();
+            
+            // Update max pain chart
+            updateMaxPainChart();
+        }
+        
+        function updateMaxPainChart() {
+            const chartContainer = document.querySelector('.max-pain-chart');
+            if (!chartContainer || optionChainData.length === 0) return;
+            
+            // Create a simple bar visualization
+            const maxOI = Math.max(
+                ...optionChainData.map(r => Math.max(r.call.oi, r.put.oi))
+            );
+            
+            const maxPainStrike = calculateMaxPain();
+            
+            let barsHTML = '<div style="display: flex; align-items: flex-end; justify-content: center; height: 100%; width: 100%; gap: 2px; padding: 20px;">';
+            
+            optionChainData.forEach(row => {
+                const callHeight = (row.call.oi / maxOI) * 100;
+                const putHeight = (row.put.oi / maxOI) * 100;
+                const isMaxPain = row.strike === maxPainStrike;
+                const isATM = row.isATM;
+                
+                barsHTML += `
+                    <div style="display: flex; flex-direction: column; align-items: center; flex: 1; max-width: 40px;">
+                        <div style="display: flex; gap: 1px; align-items: flex-end; height: 200px;">
+                            <div style="width: 8px; height: ${callHeight}%; background: ${isMaxPain ? '#C9A227' : '#22c55e'}; border-radius: 2px 2px 0 0;" title="Call OI: ${formatNumber(row.call.oi)}"></div>
+                            <div style="width: 8px; height: ${putHeight}%; background: ${isMaxPain ? '#C9A227' : '#ef4444'}; border-radius: 2px 2px 0 0;" title="Put OI: ${formatNumber(row.put.oi)}"></div>
+                        </div>
+                        <div style="font-size: 0.6rem; color: ${isMaxPain ? '#C9A227' : isATM ? '#fff' : '#666'}; margin-top: 5px; font-weight: ${isMaxPain || isATM ? '700' : '400'}; transform: rotate(-45deg); white-space: nowrap;">
+                            ${row.strike}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            barsHTML += '</div>';
+            chartContainer.innerHTML = barsHTML;
+        }
             detectUnusualActivity();
         }
 
@@ -588,20 +680,29 @@
                 const callClass = row.strike < currentSpot ? 'itm' : 'otm';
                 const putClass = row.strike > currentSpot ? 'itm' : 'otm';
                 
+                // Format OI change with actual numbers
+                const callOIChangeDisplay = row.call.oiChangeAbs !== undefined ? 
+                    (row.call.oiChangeAbs >= 0 ? '+' : '') + formatNumber(row.call.oiChangeAbs) : 
+                    (row.call.oiChange >= 0 ? '+' : '') + (row.call.oiChange * 100).toFixed(1) + '%';
+                    
+                const putOIChangeDisplay = row.put.oiChangeAbs !== undefined ? 
+                    (row.put.oiChangeAbs >= 0 ? '+' : '') + formatNumber(row.put.oiChangeAbs) : 
+                    (row.put.oiChange >= 0 ? '+' : '') + (row.put.oiChange * 100).toFixed(1) + '%';
+                
                 tr.innerHTML = `
                     <td class="${row.call.isUnusual ? 'unusual-activity' : ''} ${callClass}">${formatNumber(row.call.oi)}</td>
-                    <td class="${row.call.isUnusual ? 'unusual-activity' : ''}" style="color: ${row.call.oiChange > 0 ? '#22c55e' : '#ef4444'}">
-                        ${row.call.oiChange > 0 ? '+' : ''}${(row.call.oiChange * 100).toFixed(1)}%
+                    <td class="${row.call.isUnusual ? 'unusual-activity' : ''}" style="color: ${row.call.oiChangeAbs >= 0 || row.call.oiChange > 0 ? '#22c55e' : '#ef4444'}">
+                        ${callOIChangeDisplay}
                     </td>
                     <td class="${row.call.isUnusual ? 'unusual-activity' : ''}">${formatNumber(row.call.volume)}</td>
                     <td class="${row.call.isUnusual ? 'unusual-activity' : ''}">${row.call.iv}%</td>
                     <td class="${row.call.isUnusual ? 'unusual-activity' : ''}" style="border-right: 2px solid #2a2a2a;">₹${row.call.ltp}</td>
-                    <td class="strike-cell">${row.strike}</td>
+                    <td class="strike-cell">${row.strike.toLocaleString('en-IN')}</td>
                     <td class="${row.put.isUnusual ? 'unusual-activity' : ''}" style="border-left: 2px solid #2a2a2a;">₹${row.put.ltp}</td>
                     <td class="${row.put.isUnusual ? 'unusual-activity' : ''}">${row.put.iv}%</td>
                     <td class="${row.put.isUnusual ? 'unusual-activity' : ''}">${formatNumber(row.put.volume)}</td>
-                    <td class="${row.put.isUnusual ? 'unusual-activity' : ''}" style="color: ${row.put.oiChange > 0 ? '#22c55e' : '#ef4444'}">
-                        ${row.put.oiChange > 0 ? '+' : ''}${(row.put.oiChange * 100).toFixed(1)}%
+                    <td class="${row.put.isUnusual ? 'unusual-activity' : ''}" style="color: ${row.put.oiChangeAbs >= 0 || row.put.oiChange > 0 ? '#22c55e' : '#ef4444'}">
+                        ${putOIChangeDisplay}
                     </td>
                     <td class="${row.put.isUnusual ? 'unusual-activity' : ''} ${putClass}">${formatNumber(row.put.oi)}</td>
                 `;
@@ -614,17 +715,19 @@
             const alerts = [];
             
             optionChainData.forEach(row => {
-                if (row.call.isUnusual && Math.abs(row.call.oiChange) > 0.3) {
-                    alerts.push(`<div class="alert-item">🔴 ${row.strike} CALL: ${row.call.oiChange > 0 ? 'Heavy buying' : 'Heavy selling'} detected (${(row.call.oiChange * 100).toFixed(1)}% OI change)</div>`);
+                if (row.call.isUnusual && (Math.abs(row.call.oiChange) > 0.3 || row.call.volume > row.call.oi * 0.5)) {
+                    const action = row.call.oiChangeAbs > 0 ? 'Heavy buying' : 'Heavy selling';
+                    alerts.push(`<div class="alert-item">🔴 ${row.strike} CALL: ${action} detected (OI Change: ${formatNumber(row.call.oiChangeAbs)}, Vol: ${formatNumber(row.call.volume)})</div>`);
                 }
-                if (row.put.isUnusual && Math.abs(row.put.oiChange) > 0.3) {
-                    alerts.push(`<div class="alert-item">🔴 ${row.strike} PUT: ${row.put.oiChange > 0 ? 'Heavy buying' : 'Heavy selling'} detected (${(row.put.oiChange * 100).toFixed(1)}% OI change)</div>`);
+                if (row.put.isUnusual && (Math.abs(row.put.oiChange) > 0.3 || row.put.volume > row.put.oi * 0.5)) {
+                    const action = row.put.oiChangeAbs > 0 ? 'Heavy buying' : 'Heavy selling';
+                    alerts.push(`<div class="alert-item">🔴 ${row.strike} PUT: ${action} detected (OI Change: ${formatNumber(row.put.oiChangeAbs)}, Vol: ${formatNumber(row.put.volume)})</div>`);
                 }
             });
             
             const alertBox = document.getElementById('alertBox');
             if (alerts.length > 0) {
-                document.getElementById('alertsList').innerHTML = alerts.join('');
+                document.getElementById('alertsList').innerHTML = alerts.slice(0, 8).join(''); // Limit to 8 alerts
                 alertBox.style.display = 'block';
             } else {
                 alertBox.style.display = 'none';
@@ -632,22 +735,54 @@
         }
 
         function formatNumber(num) {
+            if (num === undefined || num === null) return '0';
+            num = parseFloat(num);
+            if (isNaN(num)) return '0';
             if (num >= 10000000) return (num / 10000000).toFixed(2) + 'Cr';
             if (num >= 100000) return (num / 100000).toFixed(2) + 'L';
             if (num >= 1000) return (num / 1000).toFixed(2) + 'K';
             return num.toFixed(0);
         }
+        
+        // Check if market is open (Mon-Fri, 9:15 AM - 3:30 PM IST)
+        function isMarketOpen() {
+            const now = new Date();
+            const istOffset = 5.5 * 60 * 60 * 1000; // IST is UTC+5:30
+            const istTime = new Date(now.getTime() + istOffset);
+            
+            const day = istTime.getUTCDay();
+            const hours = istTime.getUTCHours();
+            const minutes = istTime.getUTCMinutes();
+            const totalMinutes = hours * 60 + minutes;
+            
+            // Market hours: 9:15 AM (555 mins) to 3:30 PM (930 mins)
+            const marketOpen = 9 * 60 + 15;
+            const marketClose = 15 * 60 + 30;
+            
+            return day >= 1 && day <= 5 && totalMinutes >= marketOpen && totalMinutes <= marketClose;
+        }
 
-        // Auto-refresh every 30 seconds
-        setInterval(() => {
-            if (optionChainData.length > 0) {
-                analyzeOptionChain();
-            }
-        }, 30000);
+        // Auto-refresh every 30 seconds during market hours
+        let refreshInterval = null;
+        
+        function startAutoRefresh() {
+            if (refreshInterval) clearInterval(refreshInterval);
+            
+            refreshInterval = setInterval(() => {
+                if (optionChainData.length > 0) {
+                    if (isMarketOpen()) {
+                        analyzeOptionChain();
+                    } else {
+                        updateDataStatus('Market Closed - Last data shown', 'error');
+                    }
+                }
+            }, 30000);
+        }
 
         // Load data on page load
         window.addEventListener('load', () => {
             analyzeOptionChain();
+            startAutoRefresh();
         });
     </script>
 
