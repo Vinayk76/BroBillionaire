@@ -5670,7 +5670,7 @@
             
             // Metals & Mining
             'HINDZINC': { name: 'Hindustan Zinc', sector: 'Metals & Mining' },
-            'HZINC': { name: 'Hindustan Zinc', sector: 'Metals & Mining', yahooSymbol: 'HINDZINC' },
+            'HINDCOPPER': { name: 'Hindustan Copper', sector: 'Metals & Mining' },
             'NATIONALUM': { name: 'National Aluminium', sector: 'Metals & Mining' },
             'MOIL': { name: 'MOIL Ltd', sector: 'Mining' },
             'APLAPOLLO': { name: 'APL Apollo Tubes', sector: 'Metals & Mining' },
@@ -10211,8 +10211,10 @@ Give exactly 3-4 lines of investment advice about this specific stock in ${inves
                 return;
             }
             
-            // Build searchable stock list
-            const stockList = Object.entries(stockMetadata).map(([symbol, data]) => ({
+            // Build searchable stock list - exclude aliases (entries with yahooSymbol)
+            const stockList = Object.entries(stockMetadata)
+                .filter(([symbol, data]) => !data.yahooSymbol) // Exclude aliases
+                .map(([symbol, data]) => ({
                 symbol: symbol,
                 name: data.name,
                 sector: data.sector
