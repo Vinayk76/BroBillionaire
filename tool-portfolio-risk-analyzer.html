@@ -69,693 +69,2715 @@
         ]
     }
     </script>
-
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
     <style>
+        :root {
+            --gold: #C9A227;
+            --gold-light: #E8D5A3;
+            --gold-dark: #A68B1E;
+            --bg-primary: #0d0d0d;
+            --bg-secondary: #1a1a1a;
+            --bg-card: #161616;
+            --text-primary: #fff;
+            --text-secondary: #999;
+            --text-tertiary: #666;
+            --border-color: #2a2a2a;
+            --green: #10b981;
+            --red: #ef4444;
+            --blue: #3b82f6;
+            --orange: #f97316;
+        }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); color: #e0e0e0; line-height: 1.6; min-height: 100vh; }
-        .container { max-width: 1400px; margin: 0 auto; padding: 1.5rem; }
         
-        .premium-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: linear-gradient(135deg, #C9A227 0%, #ffd700 100%); color: #000; padding: 0.5rem 1rem; border-radius: 50px; font-weight: 700; font-size: 0.85rem; margin-bottom: 1rem; animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding-top: 140px;
+        }
         
-        .header { text-align: center; padding: 2rem 1.5rem; background: linear-gradient(135deg, #1e1e2f 0%, #2a2a4a 100%); border-radius: 20px; margin-bottom: 1.5rem; border: 2px solid #C9A227; position: relative; overflow: hidden; }
-        .header::before { content: '⚠️'; position: absolute; top: 10px; right: 20px; font-size: 4rem; opacity: 0.1; }
-        .header h1 { font-size: 2.5rem; background: linear-gradient(135deg, #C9A227 0%, #ffd700 50%, #C9A227 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem; }
-        .header p { font-size: 1.1rem; color: #a0a0b0; }
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
         
-        .live-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-top: 0.5rem; }
-        .live-dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; animation: livePulse 1.5s infinite; }
-        @keyframes livePulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
         
-        /* Layout */
-        .main-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 1.5rem; }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
         
-        /* Portfolio Input Section */
-        .input-section { background: linear-gradient(135deg, #1e1e2f 0%, #16161f 100%); border-radius: 20px; padding: 1.5rem; border: 1px solid #333; }
-        .section-title { color: #C9A227; font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .logo-img { 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 10px; 
+            object-fit: cover;
+            display: block;
+        }
+        .logo-text { font-size: 1.25rem; font-weight: 600; color: var(--text-primary); }
         
-        .portfolio-form { display: flex; flex-direction: column; gap: 1rem; }
-        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
-        .form-label { color: #888; font-size: 0.9rem; }
-        .form-input { padding: 0.8rem 1rem; background: #16161f; border: 2px solid #333; border-radius: 10px; color: #fff; font-size: 1rem; transition: all 0.3s; }
-        .form-input:focus { border-color: #C9A227; outline: none; }
-        .form-input::placeholder { color: #555; }
+        .nav-links { display: flex; gap: 35px; }
+        .nav-link { color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.2s ease; }
+        .nav-link:hover, .nav-link.active { color: var(--gold); }
         
-        .asset-list { background: #16161f; border-radius: 10px; padding: 1rem; max-height: 300px; overflow-y: auto; }
-        .asset-item { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; background: #1e1e2f; border-radius: 8px; margin-bottom: 0.5rem; border: 1px solid #333; }
-        .asset-item:last-child { margin-bottom: 0; }
-        .asset-info { display: flex; align-items: center; gap: 0.8rem; }
-        .asset-icon { width: 32px; height: 32px; border-radius: 50%; background: #2a2a4a; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
-        .asset-name { font-weight: 600; font-size: 0.9rem; }
-        .asset-symbol { color: #888; font-size: 0.8rem; }
-        .asset-allocation { display: flex; align-items: center; gap: 0.5rem; }
-        .allocation-input { width: 80px; padding: 0.5rem; background: #16161f; border: 1px solid #333; border-radius: 6px; color: #fff; text-align: center; }
-        .remove-btn { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: none; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 1rem; }
+        .mobile-menu-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; }
         
-        .add-asset-row { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
-        .asset-select { flex: 1; padding: 0.8rem; background: #16161f; border: 2px solid #333; border-radius: 10px; color: #fff; font-size: 0.9rem; }
-        .add-btn { background: linear-gradient(135deg, #C9A227, #a68b1e); color: #000; border: none; padding: 0.8rem 1.5rem; border-radius: 10px; font-weight: 600; cursor: pointer; }
+        /* Breadcrumb */
+        .breadcrumb-nav {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            padding: 12px 0;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.85rem;
+        }
         
-        .analyze-btn { background: linear-gradient(135deg, #C9A227, #a68b1e); color: #000; border: none; padding: 1rem 2rem; border-radius: 10px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s; margin-top: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
-        .analyze-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(201, 162, 39, 0.3); }
-        .analyze-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .breadcrumb-container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+        .breadcrumb-nav a, .breadcrumb-nav span { color: rgba(255, 255, 255, 0.6); text-decoration: none; padding: 0 8px; }
+        .breadcrumb-nav a:first-child { padding-left: 0; }
+        .breadcrumb-nav a:hover { color: var(--gold); }
+        .breadcrumb-nav span { color: var(--gold); }
+        
+        /* Main Container */
+        .calculator-container { max-width: 1400px; margin: 0 auto; padding: 40px 20px 80px; }
+        
+        /* Hero Header - Premium Design */
+        .tool-hero {
+            background: linear-gradient(145deg, #13131d 0%, #0d0d15 50%, #111120 100%);
+            border: 1px solid rgba(201, 162, 39, 0.15);
+            border-radius: 28px;
+            padding: 55px 50px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.4),
+                0 0 100px rgba(201, 162, 39, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+        
+        .tool-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+        }
+        
+        .tool-hero::after {
+            content: '📊';
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            font-size: 6rem;
+            opacity: 0.06;
+            filter: grayscale(100%);
+        }
+        
+        .premium-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: #000;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { box-shadow: 0 0 20px rgba(201, 162, 39, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(201, 162, 39, 0.6); }
+        }
+        
+        .tool-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .tool-hero p {
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            max-width: 700px;
+        }
+        
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--green);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 20px;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        
+        .live-dot { width: 10px; height: 10px; background: var(--green); border-radius: 50%; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+        
+        /* Main Layout */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 440px 1fr;
+            gap: 35px;
+        }
+        
+        /* Cards - Premium Design */
+        .card {
+            background: linear-gradient(145deg, #161620 0%, #12121a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            padding: 32px;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card:hover { 
+            border-color: rgba(201, 162, 39, 0.25);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3), 0 0 60px rgba(201, 162, 39, 0.03);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 28px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        
+        .card-icon {
+            width: 54px;
+            height: 54px;
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.2) 0%, rgba(201, 162, 39, 0.08) 100%);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+        }
+        
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .card-title { font-size: 1.25rem; font-weight: 700; color: var(--text-primary); }
+        .card-subtitle { font-size: 0.88rem; color: var(--text-secondary); }
+        
+        /* Form Elements - Premium Design */
+        .form-group { margin-bottom: 24px; }
+        
+        .form-label { 
+            display: block; 
+            color: var(--gold); 
+            font-weight: 700; 
+            margin-bottom: 12px; 
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+        }
+        
+        .form-hint { 
+            font-weight: 400; 
+            color: var(--text-tertiary); 
+            font-size: 0.85rem; 
+            margin-left: 6px; 
+        }
+        
+        .form-input, .form-select {
+            width: 100%;
+            padding: 16px 20px;
+            background: linear-gradient(145deg, #0a0a0f 0%, #0d0d12 100%);
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            color: var(--text-primary);
+            font-size: 1.05rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .form-input:hover, .form-select:hover {
+            border-color: rgba(201, 162, 39, 0.3);
+        }
+        
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 
+                0 0 0 4px rgba(201, 162, 39, 0.1),
+                inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .form-input::placeholder { color: var(--text-tertiary); font-weight: 400; }
+        
+        .form-select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23C9A227' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 45px;
+        }
+        
+        /* Asset List */
+        .asset-list-container {
+            background: linear-gradient(145deg, #0a0a0f 0%, #0d0d12 100%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            max-height: 300px;
+            overflow-y: auto;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .asset-list-container::-webkit-scrollbar { width: 8px; }
+        .asset-list-container::-webkit-scrollbar-track { background: transparent; border-radius: 8px; }
+        .asset-list-container::-webkit-scrollbar-thumb { background: rgba(201, 162, 39, 0.3); border-radius: 8px; }
+        .asset-list-container::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+        
+        .empty-state {
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--text-tertiary);
+        }
+        
+        .empty-state i { font-size: 2.5rem; margin-bottom: 15px; opacity: 0.5; }
+        .empty-state p { font-size: 0.9rem; }
+        
+        .asset-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.2s;
+        }
+        
+        .asset-item:last-child { border-bottom: none; }
+        .asset-item:hover { background: rgba(201, 162, 39, 0.05); }
+        
+        .asset-info { display: flex; align-items: center; gap: 12px; }
+        
+        .asset-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        
+        .asset-name { font-weight: 600; font-size: 0.95rem; }
+        .asset-symbol { color: var(--text-tertiary); font-size: 0.8rem; }
+        .asset-price { color: var(--green); font-size: 0.75rem; font-weight: 500; }
+        
+        .asset-controls { display: flex; align-items: center; gap: 10px; }
+        
+        .allocation-input {
+            width: 70px;
+            padding: 8px 10px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        .allocation-input:focus { border-color: var(--gold); outline: none; }
+        
+        .remove-btn {
+            width: 32px;
+            height: 32px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 8px;
+            color: var(--red);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .remove-btn:hover { background: rgba(239, 68, 68, 0.2); }
+        
+        /* Search Container & Autocomplete */
+        .search-container {
+            position: relative;
+            margin-top: 15px;
+        }
+        
+        .search-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            color: var(--gold);
+            font-size: 1rem;
+            z-index: 2;
+        }
+        
+        .search-input {
+            padding: 16px 100px 16px 45px !important;
+            font-size: 1rem;
+            width: 100%;
+        }
+        
+        .search-shortcut {
+            position: absolute;
+            right: 15px;
+            background: rgba(201, 162, 39, 0.15);
+            color: var(--gold);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .autocomplete-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            border: 2px solid var(--gold);
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            max-height: 350px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .autocomplete-dropdown.active {
+            display: block;
+        }
+        
+        .autocomplete-category {
+            padding: 10px 15px;
+            background: var(--bg-primary);
+            color: var(--gold);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+        }
+        
+        .autocomplete-item {
+            padding: 14px 18px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.2s ease;
+        }
+        
+        .autocomplete-item:hover,
+        .autocomplete-item.selected {
+            background: rgba(201, 162, 39, 0.15);
+        }
+        
+        .autocomplete-item:last-child {
+            border-bottom: none;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .autocomplete-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        
+        .autocomplete-name {
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        .autocomplete-symbol {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .autocomplete-sector {
+            color: var(--text-tertiary);
+            font-size: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+        
+        .autocomplete-added {
+            color: var(--green);
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .autocomplete-empty {
+            padding: 25px;
+            text-align: center;
+            color: var(--text-tertiary);
+        }
+        
+        .autocomplete-empty i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: block;
+            color: var(--text-tertiary);
+        }
+
+        /* Allocation Bar */
+        .allocation-bar-container { margin-top: 15px; }
+        
+        .allocation-bar {
+            height: 8px;
+            background: var(--bg-primary);
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+        }
+        
+        .allocation-segment { height: 100%; transition: width 0.3s ease; }
+        
+        .allocation-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 0.85rem;
+        }
+        
+        .allocation-total { font-weight: 600; }
+        .allocation-total.valid { color: var(--green); }
+        .allocation-total.invalid { color: var(--red); }
+        
+        /* Primary Button - Premium Design */
+        .btn-primary {
+            width: 100%;
+            padding: 18px 24px;
+            background: linear-gradient(135deg, var(--gold) 0%, #b8922a 50%, var(--gold-dark) 100%);
+            border: none;
+            border-radius: 16px;
+            color: #000;
+            font-size: 1.1rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 25px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 4px 15px rgba(201, 162, 39, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 
+                0 15px 40px rgba(201, 162, 39, 0.4),
+                0 5px 15px rgba(201, 162, 39, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(-1px);
+        }
+        
+        .btn-primary:disabled { 
+            opacity: 0.5; 
+            cursor: not-allowed; 
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .btn-primary i { font-size: 1.1rem; }
         
         /* Results Section */
-        .results-section { display: flex; flex-direction: column; gap: 1.5rem; }
+        .results-section { display: flex; flex-direction: column; gap: 25px; }
         
-        /* Risk Score Card */
-        .risk-score-card { background: linear-gradient(135deg, #1e1e2f 0%, #2a2a4a 100%); border-radius: 20px; padding: 2rem; border: 2px solid #C9A227; text-align: center; }
-        .risk-score-gauge { position: relative; width: 220px; height: 110px; margin: 0 auto 1rem; }
-        .risk-score-gauge svg { width: 100%; height: 100%; overflow: visible; }
-        .gauge-bg { fill: none; stroke: #2a2a4a; stroke-width: 20; }
-        .gauge-fill { fill: none; stroke-width: 20; stroke-linecap: round; transition: all 1s ease-out; }
-        .risk-score-value { font-size: 3.5rem; font-weight: 800; }
-        .risk-score-label { font-size: 1.2rem; font-weight: 600; margin-top: 0.3rem; }
-        .risk-scale { display: flex; justify-content: space-between; max-width: 220px; margin: 0.5rem auto; color: #888; font-size: 0.75rem; }
+        /* Risk Score Card - Premium Design */
+        .risk-score-card {
+            background: linear-gradient(180deg, #0a0a15 0%, #0d0d1a 50%, #111122 100%);
+            border: 2px solid transparent;
+            border-image: linear-gradient(135deg, var(--gold), var(--gold-dark), var(--gold)) 1;
+            border-radius: 28px;
+            padding: 45px 35px 35px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 
+                0 0 80px rgba(201, 162, 39, 0.08),
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
         
-        /* Metrics Grid */
-        .metrics-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-        .metric-card { background: linear-gradient(135deg, #1e1e2f 0%, #16161f 100%); border-radius: 15px; padding: 1.2rem; border: 1px solid #333; text-align: center; transition: all 0.3s; }
-        .metric-card:hover { border-color: #C9A227; }
-        .metric-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
-        .metric-value { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.3rem; }
-        .metric-label { color: #888; font-size: 0.85rem; }
-        .metric-change { font-size: 0.8rem; margin-top: 0.3rem; }
-        .metric-change.positive { color: #22c55e; }
-        .metric-change.negative { color: #ef4444; }
+        .risk-score-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201, 162, 39, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
         
-        /* Detailed Metrics */
-        .details-section { background: linear-gradient(135deg, #1e1e2f 0%, #16161f 100%); border-radius: 15px; padding: 1.5rem; border: 1px solid #333; }
-        .detail-row { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 0; border-bottom: 1px solid #2a2a4a; }
+        .risk-score-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        
+        .gauge-container { 
+            position: relative; 
+            width: 320px; 
+            height: 180px; 
+            margin: 10px auto 30px;
+            overflow: visible;
+            z-index: 2;
+        }
+        
+        .gauge-svg { 
+            width: 100%; 
+            height: 100%;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.4));
+        }
+        
+        .gauge-bg { 
+            fill: none; 
+            stroke: rgba(40, 40, 50, 0.8); 
+            stroke-width: 24;
+            filter: drop-shadow(inset 0 2px 4px rgba(0, 0, 0, 0.5));
+        }
+        
+        .gauge-fill { 
+            fill: none; 
+            stroke-width: 24; 
+            stroke-linecap: round; 
+            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 0 15px rgba(201, 162, 39, 0.5));
+        }
+        
+        .gauge-ticks { stroke: rgba(255, 255, 255, 0.3); stroke-width: 2; }
+        
+        /* Needle/Indicator */
+        .gauge-needle-container {
+            position: absolute;
+            bottom: 22px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-90deg);
+            transform-origin: 50% 100%;
+            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
+            width: 4px;
+            height: 70px;
+        }
+        
+        .gauge-needle {
+            position: absolute;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to top, var(--gold) 0%, #fff 60%, #fff 100%);
+            border-radius: 4px 4px 2px 2px;
+            left: 0;
+            bottom: 0;
+            box-shadow: 0 0 20px rgba(201, 162, 39, 0.6), 0 0 40px rgba(201, 162, 39, 0.3);
+        }
+        
+        .gauge-needle::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 12px solid #fff;
+        }
+        
+        .gauge-needle-center {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+            border-radius: 50%;
+            box-shadow: 
+                0 0 20px rgba(201, 162, 39, 0.8),
+                0 0 40px rgba(201, 162, 39, 0.4),
+                inset 0 2px 4px rgba(255, 255, 255, 0.5),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+            z-index: 11;
+        }
+        
+        .gauge-needle-center::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.6), transparent);
+            border-radius: 50%;
+        }
+        
+        .gauge-center {
+            position: absolute;
+            top: 55px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 5;
+        }
+        
+        .risk-value { 
+            font-size: 2.5rem; 
+            font-weight: 800; 
+            line-height: 1;
+            background: linear-gradient(180deg, #fff 0%, #ccc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+        }
+        
+        .risk-label { 
+            font-size: 0.9rem; 
+            font-weight: 700; 
+            margin-top: 5px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        
+        .risk-scale {
+            display: flex;
+            justify-content: center;
+            max-width: 380px;
+            margin: 20px auto 0;
+            padding: 12px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .risk-scale span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .risk-scale span:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Metrics Grid - Premium Design */
+        .metrics-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 18px; 
+        }
+        
+        .metric-card {
+            background: linear-gradient(145deg, #161620 0%, #12121a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 24px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--gold) 0%, var(--gold-dark) 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .metric-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(201, 162, 39, 0.06) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .metric-card:hover { 
+            border-color: rgba(201, 162, 39, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 40px rgba(201, 162, 39, 0.05);
+        }
+        .metric-card:hover::before { opacity: 1; }
+        .metric-card:hover::after { opacity: 1; }
+        
+        .metric-header { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            margin-bottom: 16px; 
+        }
+        
+        .metric-icon { 
+            font-size: 1.6rem;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.15) 0%, rgba(201, 162, 39, 0.05) 100%);
+            border-radius: 12px;
+            border: 1px solid rgba(201, 162, 39, 0.2);
+        }
+        
+        .metric-title { 
+            font-size: 0.9rem; 
+            color: var(--text-secondary); 
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        
+        .metric-value { 
+            font-size: 2rem; 
+            font-weight: 800; 
+            margin-bottom: 6px;
+            background: linear-gradient(135deg, #fff 0%, #ccc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .metric-subtitle { 
+            font-size: 0.82rem; 
+            color: var(--text-tertiary);
+            line-height: 1.4;
+        }
+        
+        .metric-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+        
+        .metric-tag.green { background: rgba(16, 185, 129, 0.15); color: var(--green); }
+        .metric-tag.yellow { background: rgba(251, 191, 36, 0.15); color: #fbbf24; }
+        .metric-tag.red { background: rgba(239, 68, 68, 0.15); color: var(--red); }
+        
+        /* Details Card */
+        .details-grid { display: flex; flex-direction: column; gap: 12px; }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
         .detail-row:last-child { border-bottom: none; }
-        .detail-label { color: #888; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; }
-        .detail-value { font-weight: 600; font-size: 1rem; }
-        .tooltip { position: relative; cursor: help; }
-        .tooltip::after { content: attr(data-tooltip); position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%); background: #333; color: #fff; padding: 0.5rem 0.8rem; border-radius: 6px; font-size: 0.75rem; white-space: nowrap; opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 100; }
-        .tooltip:hover::after { opacity: 1; visibility: visible; }
+        
+        .detail-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .detail-label i { color: var(--gold); width: 20px; }
+        
+        .detail-value { font-weight: 700; font-size: 1rem; }
+        
+        .tooltip-icon {
+            width: 16px;
+            height: 16px;
+            background: var(--border-color);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            color: var(--text-tertiary);
+            cursor: help;
+            position: relative;
+        }
+        
+        .tooltip-icon:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            color: var(--text-primary);
+            z-index: 100;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        /* Charts Section */
+        .charts-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; margin-top: 30px; position: relative; z-index: 0; }
+        
+        .chart-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 25px;
+            position: relative;
+            isolation: isolate;
+        }
+        
+        .chart-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+        .chart-title { font-size: 1.1rem; font-weight: 700; color: var(--gold); }
+        
+        .chart-container { 
+            position: relative; 
+            height: 280px; 
+            overflow: hidden;
+            contain: strict;
+        }
+        
+        .chart-container canvas {
+            max-width: 100%;
+            max-height: 100%;
+        }
         
         /* AI Insights */
-        .ai-insights { background: linear-gradient(135deg, #1e1e2f 0%, #2a2a4a 100%); border-radius: 15px; padding: 1.5rem; border: 2px solid #C9A227; position: relative; margin-top: 1.5rem; }
-        .ai-insights::before { content: '🧠'; position: absolute; top: 1rem; right: 1rem; font-size: 2rem; opacity: 0.2; }
-        .ai-title { font-size: 1.1rem; color: #C9A227; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
-        .ai-content { color: #d0d0e0; font-size: 0.95rem; line-height: 1.8; }
-        .ai-recommendations { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
-        .ai-rec { padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
-        .ai-rec.warning { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
-        .ai-rec.danger { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
-        .ai-rec.success { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .ai-insights {
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(26, 26, 46, 0.8) 100%);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+        }
         
-        /* Charts */
-        .charts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
-        .chart-card { background: linear-gradient(135deg, #1e1e2f 0%, #16161f 100%); border-radius: 15px; padding: 1.5rem; border: 1px solid #333; }
-        .chart-title { color: #C9A227; font-size: 1rem; font-weight: 600; margin-bottom: 1rem; }
-        .pie-chart { width: 180px; height: 180px; margin: 0 auto; position: relative; }
-        .pie-chart svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-        .pie-legend { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; }
-        .legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; }
-        .legend-color { width: 12px; height: 12px; border-radius: 3px; }
+        .ai-insights::before {
+            content: '🧠';
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 3rem;
+            opacity: 0.1;
+        }
         
-        .drawdown-chart { height: 150px; background: #16161f; border-radius: 10px; position: relative; overflow: hidden; }
-        .drawdown-bars { display: flex; align-items: flex-end; height: 100%; padding: 1rem; gap: 4px; }
-        .drawdown-bar { flex: 1; border-radius: 3px 3px 0 0; transition: all 0.3s; position: relative; }
-        .drawdown-bar:hover { opacity: 0.8; }
+        .ai-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        
+        .ai-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #000;
+        }
+        
+        .ai-title { font-size: 1.3rem; font-weight: 700; color: var(--gold); }
+        
+        .ai-content {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .ai-content strong { color: var(--text-primary); }
+        
+        .ai-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+        
+        .ai-tag {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .ai-tag.success { background: rgba(16, 185, 129, 0.15); color: var(--green); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .ai-tag.warning { background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
+        .ai-tag.danger { background: rgba(239, 68, 68, 0.15); color: var(--red); border: 1px solid rgba(239, 68, 68, 0.3); }
+        .ai-tag.info { background: rgba(59, 130, 246, 0.15); color: var(--blue); border: 1px solid rgba(59, 130, 246, 0.3); }
+        
+        /* SEBI Disclaimer Section */
+        .sebi-disclaimer {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(239, 68, 68, 0.03) 100%);
+            border: 2px solid rgba(239, 68, 68, 0.25);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .sebi-disclaimer .disclaimer-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .sebi-disclaimer .disclaimer-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(239, 68, 68, 0.15);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--red);
+            font-size: 1.3rem;
+        }
+        
+        .sebi-disclaimer .disclaimer-title {
+            color: var(--red);
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        
+        .sebi-disclaimer .disclaimer-content {
+            margin-bottom: 25px;
+        }
+        
+        .sebi-disclaimer .disclaimer-content p {
+            color: #999;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 0.92rem;
+        }
+        
+        .sebi-disclaimer .disclaimer-content strong {
+            color: #ccc;
+        }
+        
+        .sebi-disclaimer .disclaimer-regulations {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .sebi-disclaimer .regulation-item {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .sebi-disclaimer .regulation-item i {
+            color: var(--red);
+            font-size: 1.2rem;
+        }
+        
+        .sebi-disclaimer .regulation-item span {
+            color: #999;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .sebi-disclaimer .disclaimer-footer {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .sebi-disclaimer .disclaimer-footer p {
+            color: #888;
+            font-size: 0.88rem;
+            margin-bottom: 8px;
+        }
+        
+        .sebi-disclaimer .disclaimer-footer p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .sebi-disclaimer .disclaimer-footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+        
+        .sebi-disclaimer .disclaimer-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .sebi-disclaimer .disclaimer-regulations {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .sebi-disclaimer .disclaimer-regulations {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading State */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        
+        .loading-overlay.active { display: flex; }
+        
+        .loading-content { text-align: center; }
+        
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--border-color);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        .loading-text { color: var(--gold); font-size: 1.1rem; font-weight: 600; }
+        .loading-subtext { color: var(--text-tertiary); font-size: 0.9rem; margin-top: 8px; }
         
         /* Responsive */
-        @media (max-width: 1000px) {
+        @media (max-width: 1100px) {
             .main-grid { grid-template-columns: 1fr; }
-            .charts-row { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 600px) {
-            .header h1 { font-size: 1.8rem; }
-            .metrics-grid { grid-template-columns: 1fr; }
-            .risk-score-value { font-size: 2.5rem; }
+            .charts-grid { grid-template-columns: 1fr; }
         }
         
-        /* Skeleton */
-        .skeleton { background: linear-gradient(90deg, #2a2a4a 0%, #3a3a5a 50%, #2a2a4a 100%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 8px; }
-        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+        @media (max-width: 768px) {
+            body { padding-top: 120px; }
+            .breadcrumb-nav { top: 60px; }
+            .tool-hero { padding: 30px 20px; }
+            .tool-hero h1 { font-size: 2rem; }
+            .tool-hero::after { display: none; }
+            .card { padding: 20px; }
+            .nav-links { display: none; }
+            .mobile-menu-toggle { display: block; }
+            .metrics-grid { grid-template-columns: 1fr; }
+            .nav-container { padding: 0 20px; }
+            .breadcrumb-container { padding: 0 20px; }
+            .calculator-container { padding: 20px 15px 60px; }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="premium-badge">⚡ INSTITUTIONAL-GRADE RISK ANALYSIS - FREE</div>
-            <h1>⚠️ Portfolio Risk Analyzer</h1>
-            <p>Calculate VaR • Sharpe Ratio • Max Drawdown • AI Risk Assessment</p>
-            <div class="live-badge">
-                <span class="live-dot"></span>
-                Real-Time Price Data
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="logo">
+            <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
+            <span class="logo-text">BroBillionaire</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="articles.html" class="nav-link">Articles</a>
+            <a href="tools.html" class="nav-link active">Tools</a>
+            <a href="about.html" class="nav-link">About</a>
+        </div>
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</nav>
+
+<!-- Breadcrumb -->
+<div class="breadcrumb-nav">
+    <div class="breadcrumb-container">
+        <a href="index.html">Home</a> / 
+        <a href="tools.html">Tools</a> / 
+        <span>Portfolio Risk Analyzer</span>
+    </div>
+</div>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Analyzing Portfolio Risk...</div>
+        <div class="loading-subtext" id="loadingSubtext">Fetching real-time market data</div>
+    </div>
+</div>
+
+<div class="calculator-container">
+    <!-- Hero Header -->
+    <div class="tool-hero">
+        <div class="premium-tag">
+            <i class="fas fa-crown"></i>
+            INSTITUTIONAL-GRADE RISK ANALYSIS • 100% FREE
+        </div>
+        <h1>⚠️ Portfolio Risk Analyzer</h1>
+        <p>Professional risk metrics powered by real-time market data. Calculate Value at Risk (VaR), Sharpe Ratio, Maximum Drawdown, and get AI-powered insights for your crypto & stock portfolio.</p>
+        <div class="live-indicator">
+            <span class="live-dot"></span>
+            Real-Time Data from CoinGecko & Financial APIs
+        </div>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="main-grid">
+        <!-- Input Section -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">📊</div>
+                <div>
+                    <div class="card-title">Build Your Portfolio</div>
+                    <div class="card-subtitle">Add assets and set allocations</div>
+                </div>
             </div>
+            
+            <!-- Portfolio Value -->
+            <div class="form-group">
+                <label class="form-label">
+                    Portfolio Value <span class="form-hint">(USD)</span>
+                </label>
+                <input type="number" class="form-input" id="portfolioValue" value="10000" placeholder="Enter total portfolio value" min="1">
+            </div>
+            
+            <!-- Asset List -->
+            <div class="form-group">
+                <label class="form-label">Your Assets</label>
+                <div class="asset-list-container" id="assetListContainer">
+                    <div class="empty-state" id="emptyState">
+                        <i class="fas fa-wallet"></i>
+                        <p>No assets added yet.<br>Type below to search and add assets.</p>
+                    </div>
+                    <div id="assetList"></div>
+                </div>
+                
+                <!-- Add Asset - Type Ahead Search -->
+                <div class="search-container">
+                    <div class="search-input-wrapper">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="form-input search-input" id="assetSearch" 
+                               placeholder="Search: RELIANCE, TCS, Bitcoin, Gold..." 
+                               autocomplete="off">
+                        <span class="search-shortcut">170+ assets</span>
+                    </div>
+                    <div class="autocomplete-dropdown" id="autocompleteDropdown"></div>
+                </div>
+                
+                <!-- Allocation Bar -->
+                <div class="allocation-bar-container" id="allocationBarContainer" style="display: none;">
+                    <div class="allocation-bar" id="allocationBar"></div>
+                    <div class="allocation-info">
+                        <span id="allocationBreakdown"></span>
+                        <span class="allocation-total" id="allocationTotal">Total: 0%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Time Horizon -->
+            <div class="form-group">
+                <label class="form-label">Time Horizon</label>
+                <select class="form-select" id="timeHorizon">
+                    <option value="1">1 Day (Trading)</option>
+                    <option value="7">7 Days (Weekly)</option>
+                    <option value="30" selected>30 Days (Monthly)</option>
+                    <option value="90">90 Days (Quarterly)</option>
+                    <option value="365">365 Days (Yearly)</option>
+                </select>
+            </div>
+            
+            <!-- Confidence Level -->
+            <div class="form-group">
+                <label class="form-label">VaR Confidence Level</label>
+                <select class="form-select" id="confidenceLevel">
+                    <option value="0.90">90% Confidence</option>
+                    <option value="0.95" selected>95% Confidence</option>
+                    <option value="0.99">99% Confidence</option>
+                </select>
+            </div>
+            
+            <!-- Analyze Button -->
+            <button class="btn-primary" id="analyzeBtn" onclick="analyzePortfolio()">
+                <i class="fas fa-chart-line"></i>
+                Analyze Portfolio Risk
+            </button>
         </div>
 
-        <div class="main-grid">
-            <!-- Input Section -->
-            <div class="input-section">
-                <div class="section-title">📊 Build Your Portfolio</div>
-                
-                <div class="portfolio-form">
-                    <div class="form-group">
-                        <label class="form-label">Portfolio Value ($)</label>
-                        <input type="number" class="form-input" id="portfolioValue" value="10000" placeholder="Enter portfolio value">
+        <!-- Results Section -->
+        <div class="results-section">
+            <!-- Risk Score Card -->
+            <div class="risk-score-card">
+                <div class="gauge-container">
+                    <svg class="gauge-svg" viewBox="0 0 200 120">
+                        <defs>
+                            <linearGradient id="riskGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#10b981"/>
+                                <stop offset="30%" style="stop-color:#22c55e"/>
+                                <stop offset="45%" style="stop-color:#fbbf24"/>
+                                <stop offset="60%" style="stop-color:#f97316"/>
+                                <stop offset="80%" style="stop-color:#ef4444"/>
+                                <stop offset="100%" style="stop-color:#dc2626"/>
+                            </linearGradient>
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <!-- Background arc -->
+                        <path class="gauge-bg" d="M15 105 A85 85 0 0 1 185 105"></path>
+                        <!-- Tick marks -->
+                        <g class="gauge-ticks">
+                            <line x1="20" y1="105" x2="28" y2="105"/>
+                            <line x1="30" y1="62" x2="37" y2="67" transform="rotate(-15 100 105)"/>
+                            <line x1="58" y1="32" x2="62" y2="40"/>
+                            <line x1="100" y1="20" x2="100" y2="30"/>
+                            <line x1="142" y1="32" x2="138" y2="40"/>
+                            <line x1="170" y1="62" x2="163" y2="67" transform="rotate(15 100 105)"/>
+                            <line x1="180" y1="105" x2="172" y2="105"/>
+                        </g>
+                        <!-- Colored arc fill -->
+                        <path class="gauge-fill" id="gaugeFill" d="M15 105 A85 85 0 0 1 185 105" style="stroke: url(#riskGradient); stroke-dasharray: 267; stroke-dashoffset: 267;" filter="url(#glow)"></path>
+                    </svg>
+                    <!-- Needle Indicator -->
+                    <div class="gauge-needle-container" id="gaugeNeedle">
+                        <div class="gauge-needle"></div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Your Assets (Allocation %)</label>
-                        <div class="asset-list" id="assetList">
-                            <!-- Assets will be added here -->
-                        </div>
-                        
-                        <div class="add-asset-row">
-                            <select class="asset-select" id="assetSelect">
-                                <option value="">Select asset to add...</option>
-                                <optgroup label="Crypto">
-                                    <option value="bitcoin">Bitcoin (BTC)</option>
-                                    <option value="ethereum">Ethereum (ETH)</option>
-                                    <option value="solana">Solana (SOL)</option>
-                                    <option value="cardano">Cardano (ADA)</option>
-                                    <option value="ripple">XRP (XRP)</option>
-                                    <option value="dogecoin">Dogecoin (DOGE)</option>
-                                    <option value="polkadot">Polkadot (DOT)</option>
-                                    <option value="avalanche-2">Avalanche (AVAX)</option>
-                                </optgroup>
-                                <optgroup label="Simulated Stocks">
-                                    <option value="stock-spy">S&P 500 ETF (SPY)</option>
-                                    <option value="stock-qqq">NASDAQ ETF (QQQ)</option>
-                                    <option value="stock-aapl">Apple (AAPL)</option>
-                                    <option value="stock-msft">Microsoft (MSFT)</option>
-                                    <option value="stock-nvda">NVIDIA (NVDA)</option>
-                                </optgroup>
-                                <optgroup label="Stable">
-                                    <option value="tether">USDT (Tether)</option>
-                                    <option value="usd-coin">USDC</option>
-                                </optgroup>
-                            </select>
-                            <button class="add-btn" onclick="addAsset()">+ Add</button>
-                        </div>
+                    <div class="gauge-needle-center"></div>
+                    <!-- Score Display -->
+                    <div class="gauge-center">
+                        <div class="risk-value" id="riskScoreValue">--</div>
+                        <div class="risk-label" id="riskScoreLabel">Add assets to analyze</div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Time Horizon</label>
-                        <select class="form-input" id="timeHorizon">
-                            <option value="1">1 Day (Trading)</option>
-                            <option value="7">7 Days (Weekly)</option>
-                            <option value="30" selected>30 Days (Monthly)</option>
-                            <option value="90">90 Days (Quarterly)</option>
-                            <option value="365">365 Days (Yearly)</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Confidence Level (VaR)</label>
-                        <select class="form-input" id="confidenceLevel">
-                            <option value="0.90">90% Confidence</option>
-                            <option value="0.95" selected>95% Confidence</option>
-                            <option value="0.99">99% Confidence</option>
-                        </select>
-                    </div>
-                    
-                    <button class="analyze-btn" id="analyzeBtn" onclick="analyzeRisk()">
-                        <span>🔍</span> Analyze Portfolio Risk
-                    </button>
+                </div>
+                <div class="risk-scale">
+                    <span style="color: #10b981;">● Low</span>
+                    <span style="color: #fbbf24;">● Moderate</span>
+                    <span style="color: #f97316;">● High</span>
+                    <span style="color: #ef4444;">● Extreme</span>
                 </div>
             </div>
-
-            <!-- Results Section -->
-            <div class="results-section">
-                <!-- Risk Score -->
-                <div class="risk-score-card">
-                    <div class="section-title" style="justify-content: center;">📈 Overall Risk Score</div>
-                    <div class="risk-score-gauge">
-                        <svg viewBox="0 0 200 110">
-                            <defs>
-                                <linearGradient id="riskGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" style="stop-color:#22c55e"/>
-                                    <stop offset="50%" style="stop-color:#fbbf24"/>
-                                    <stop offset="100%" style="stop-color:#ef4444"/>
-                                </linearGradient>
-                            </defs>
-                            <path class="gauge-bg" d="M20 100 A80 80 0 0 1 180 100"></path>
-                            <path class="gauge-fill" id="riskGaugeFill" d="M20 100 A80 80 0 0 1 180 100" style="stroke: url(#riskGradient); stroke-dasharray: 251; stroke-dashoffset: 251;"></path>
-                            <g id="riskNeedle" transform="rotate(-90, 100, 100)">
-                                <line x1="100" y1="100" x2="100" y2="30" stroke="#C9A227" stroke-width="3" stroke-linecap="round"/>
-                                <circle cx="100" cy="100" r="8" fill="#C9A227"/>
-                            </g>
-                        </svg>
+            
+            <!-- Key Metrics -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-icon">📉</span>
+                        <span class="metric-title">Value at Risk (VaR)</span>
                     </div>
-                    <div class="risk-score-value" id="riskScoreValue">--</div>
-                    <div class="risk-score-label" id="riskScoreLabel">Add assets to analyze</div>
-                    <div class="risk-scale">
-                        <span>Low Risk</span>
-                        <span>Moderate</span>
-                        <span>High Risk</span>
+                    <div class="metric-value" id="varValue">$--</div>
+                    <div class="metric-subtitle" id="varPercent">Potential loss at confidence level</div>
+                    <span class="metric-tag red" id="varTag">--% of portfolio</span>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-icon">📊</span>
+                        <span class="metric-title">Sharpe Ratio</span>
+                    </div>
+                    <div class="metric-value" id="sharpeValue">--</div>
+                    <div class="metric-subtitle">Risk-adjusted return</div>
+                    <span class="metric-tag" id="sharpeTag">--</span>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-icon">⚡</span>
+                        <span class="metric-title">Volatility</span>
+                    </div>
+                    <div class="metric-value" id="volatilityValue">--</div>
+                    <div class="metric-subtitle">Annualized standard deviation</div>
+                    <span class="metric-tag" id="volatilityTag">--</span>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-icon">🔻</span>
+                        <span class="metric-title">Max Drawdown</span>
+                    </div>
+                    <div class="metric-value" id="drawdownValue">--</div>
+                    <div class="metric-subtitle">Largest peak-to-trough decline</div>
+                    <span class="metric-tag red" id="drawdownTag">Historical worst case</span>
+                </div>
+            </div>
+            
+            <!-- Detailed Metrics -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">📋</div>
+                    <div>
+                        <div class="card-title">Detailed Risk Metrics</div>
+                        <div class="card-subtitle">Advanced portfolio analytics</div>
                     </div>
                 </div>
-
-                <!-- Key Metrics -->
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <div class="metric-icon">📉</div>
-                        <div class="metric-value" id="varValue">--</div>
-                        <div class="metric-label">Value at Risk (VaR)</div>
-                        <div class="metric-change negative" id="varPercent">--% of portfolio</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-icon">📊</div>
-                        <div class="metric-value" id="sharpeValue">--</div>
-                        <div class="metric-label">Sharpe Ratio</div>
-                        <div class="metric-change" id="sharpeRating">--</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-icon">⚡</div>
-                        <div class="metric-value" id="volatilityValue">--</div>
-                        <div class="metric-label">Annualized Volatility</div>
-                        <div class="metric-change" id="volatilityRating">--</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-icon">📉</div>
-                        <div class="metric-value" id="drawdownValue">--</div>
-                        <div class="metric-label">Max Drawdown</div>
-                        <div class="metric-change negative" id="drawdownRating">--</div>
-                    </div>
-                </div>
-
-                <!-- Detailed Metrics -->
-                <div class="details-section">
-                    <div class="section-title">📋 Detailed Risk Metrics</div>
+                <div class="details-grid">
                     <div class="detail-row">
                         <span class="detail-label">
-                            <span class="tooltip" data-tooltip="Expected Shortfall is the average loss beyond VaR">Expected Shortfall (CVaR)</span>
+                            <i class="fas fa-chart-area"></i>
+                            Expected Shortfall (CVaR)
+                            <span class="tooltip-icon" data-tooltip="Average loss beyond VaR threshold">?</span>
                         </span>
                         <span class="detail-value" id="cvarValue">--</span>
                     </div>
                     <div class="detail-row">
                         <span class="detail-label">
-                            <span class="tooltip" data-tooltip="Beta measures portfolio sensitivity to market movements">Portfolio Beta</span>
+                            <i class="fas fa-balance-scale"></i>
+                            Portfolio Beta
+                            <span class="tooltip-icon" data-tooltip="Sensitivity to overall market movements">?</span>
                         </span>
                         <span class="detail-value" id="betaValue">--</span>
                     </div>
                     <div class="detail-row">
                         <span class="detail-label">
-                            <span class="tooltip" data-tooltip="Measures skewness of return distribution">Skewness</span>
+                            <i class="fas fa-arrows-alt-h"></i>
+                            Sortino Ratio
+                            <span class="tooltip-icon" data-tooltip="Return per unit of downside risk">?</span>
+                        </span>
+                        <span class="detail-value" id="sortinoValue">--</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">
+                            <i class="fas fa-chart-bar"></i>
+                            Skewness
+                            <span class="tooltip-icon" data-tooltip="Asymmetry of return distribution">?</span>
                         </span>
                         <span class="detail-value" id="skewnessValue">--</span>
                     </div>
                     <div class="detail-row">
                         <span class="detail-label">
-                            <span class="tooltip" data-tooltip="Measures tail risk - higher means more extreme moves">Kurtosis</span>
+                            <i class="fas fa-mountain"></i>
+                            Kurtosis
+                            <span class="tooltip-icon" data-tooltip="Tail risk - higher means more extreme moves">?</span>
                         </span>
                         <span class="detail-value" id="kurtosisValue">--</span>
                     </div>
                     <div class="detail-row">
                         <span class="detail-label">
-                            <span class="tooltip" data-tooltip="Average number of days to recover from drawdown">Recovery Time (Est.)</span>
+                            <i class="fas fa-clock"></i>
+                            Recovery Time (Est.)
+                            <span class="tooltip-icon" data-tooltip="Estimated days to recover from max drawdown">?</span>
                         </span>
                         <span class="detail-value" id="recoveryValue">--</span>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Charts -->
-        <div class="charts-row">
-            <div class="chart-card">
-                <div class="chart-title">📊 Portfolio Allocation</div>
-                <div class="pie-chart" id="pieChart">
-                    <svg viewBox="0 0 100 100"></svg>
-                </div>
-                <div class="pie-legend" id="pieLegend"></div>
+    </div>
+    
+    <!-- Charts -->
+    <div class="charts-grid">
+        <div class="chart-card">
+            <div class="chart-header">
+                <span class="chart-title">📊 Portfolio Allocation</span>
             </div>
-            <div class="chart-card">
-                <div class="chart-title">📉 Historical Drawdown Simulation</div>
-                <div class="drawdown-chart">
-                    <div class="drawdown-bars" id="drawdownBars">
-                        <!-- Bars will be generated -->
-                    </div>
-                </div>
+            <div class="chart-container">
+                <canvas id="allocationChart"></canvas>
             </div>
         </div>
-
-        <!-- AI Insights -->
-        <div class="ai-insights">
-            <div class="ai-title">🧠 AI Risk Assessment</div>
-            <div class="ai-content" id="aiContent">
-                Add assets to your portfolio and click "Analyze" to receive AI-powered risk insights and recommendations.
+        <div class="chart-card">
+            <div class="chart-header">
+                <span class="chart-title">📈 Risk Contribution</span>
             </div>
-            <div class="ai-recommendations" id="aiRecommendations">
-                <span class="ai-rec warning">Waiting for analysis...</span>
+            <div class="chart-container">
+                <canvas id="riskChart"></canvas>
             </div>
         </div>
     </div>
-
-    <script>
-        // Portfolio state
-        let portfolio = [];
-        let priceData = {};
+    
+    <!-- AI Insights -->
+    <div class="ai-insights" id="aiInsights">
+        <div class="ai-header">
+            <div class="ai-badge">
+                <i class="fas fa-robot"></i>
+                AI POWERED
+            </div>
+            <span class="ai-title">Risk Assessment</span>
+        </div>
+        <div class="ai-content" id="aiContent">
+            Add assets to your portfolio and click "Analyze" to receive AI-powered risk insights and personalized recommendations for your investment strategy.
+        </div>
+        <div class="ai-tags" id="aiTags">
+            <span class="ai-tag info"><i class="fas fa-info-circle"></i> Waiting for analysis</span>
+        </div>
+    </div>
+    
+    <!-- SEBI Disclaimer Section -->
+    <div class="sebi-disclaimer">
+        <div class="disclaimer-header">
+            <div class="disclaimer-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="disclaimer-title">⚠️ Important SEBI Disclaimer</div>
+        </div>
+        <div class="disclaimer-content">
+            <p><strong>For Educational Purposes Only:</strong> This tool is designed for educational and informational purposes only. It does not constitute investment advice, financial advice, trading advice, or any other sort of advice.</p>
+            
+            <p><strong>No SEBI Registration:</strong> BroBillionaire is NOT a SEBI (Securities and Exchange Board of India) registered investment advisor, research analyst, or portfolio manager. We do not hold any SEBI registration or license to provide investment advisory services.</p>
+            
+            <p><strong>Risk Warning:</strong> Trading and investing in securities markets involves substantial risk of loss. According to SEBI's 2023 study, <strong>93% of individual F&O traders in India incurred net losses</strong> with an average loss of ₹1.81 lakh per trader. Past performance is not indicative of future results.</p>
+            
+            <p><strong>No Guarantee:</strong> The risk metrics, VaR calculations, Sharpe ratios, and all other analysis provided by this tool are based on historical data and statistical models. They do not guarantee future performance or protect against losses.</p>
+            
+            <p><strong>Consult Professionals:</strong> Before making any investment decisions, you should consult with a SEBI-registered investment advisor and/or a qualified financial professional who can assess your specific situation and risk tolerance.</p>
+            
+            <p><strong>Data Accuracy:</strong> While we strive for accuracy, real-time prices are fetched from third-party APIs (CoinGecko, Yahoo Finance) and may have delays or inaccuracies. Always verify prices with your broker before trading.</p>
+        </div>
         
-        // Asset metadata
-        const assetMeta = {
-            'bitcoin': { name: 'Bitcoin', symbol: 'BTC', icon: '₿', color: '#f7931a', volatility: 0.75 },
-            'ethereum': { name: 'Ethereum', symbol: 'ETH', icon: 'Ξ', color: '#627eea', volatility: 0.80 },
-            'solana': { name: 'Solana', symbol: 'SOL', icon: '◎', color: '#00ffa3', volatility: 0.95 },
-            'cardano': { name: 'Cardano', symbol: 'ADA', icon: '₳', color: '#0033ad', volatility: 0.85 },
-            'ripple': { name: 'XRP', symbol: 'XRP', icon: '✕', color: '#23292f', volatility: 0.70 },
-            'dogecoin': { name: 'Dogecoin', symbol: 'DOGE', icon: 'Ð', color: '#c3a634', volatility: 1.10 },
-            'polkadot': { name: 'Polkadot', symbol: 'DOT', icon: '●', color: '#e6007a', volatility: 0.90 },
-            'avalanche-2': { name: 'Avalanche', symbol: 'AVAX', icon: 'A', color: '#e84142', volatility: 0.95 },
-            'tether': { name: 'Tether', symbol: 'USDT', icon: '$', color: '#26a17b', volatility: 0.01 },
-            'usd-coin': { name: 'USDC', symbol: 'USDC', icon: '$', color: '#2775ca', volatility: 0.01 },
-            'stock-spy': { name: 'S&P 500 ETF', symbol: 'SPY', icon: '📈', color: '#4CAF50', volatility: 0.18 },
-            'stock-qqq': { name: 'NASDAQ ETF', symbol: 'QQQ', icon: '📊', color: '#2196F3', volatility: 0.25 },
-            'stock-aapl': { name: 'Apple', symbol: 'AAPL', icon: '🍎', color: '#999999', volatility: 0.28 },
-            'stock-msft': { name: 'Microsoft', symbol: 'MSFT', icon: '🪟', color: '#00a4ef', volatility: 0.26 },
-            'stock-nvda': { name: 'NVIDIA', symbol: 'NVDA', icon: '🎮', color: '#76b900', volatility: 0.45 }
-        };
+        <div class="disclaimer-regulations">
+            <div class="regulation-item">
+                <i class="fas fa-shield-alt"></i>
+                <span>Not SEBI Registered</span>
+            </div>
+            <div class="regulation-item">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Educational Only</span>
+            </div>
+            <div class="regulation-item">
+                <i class="fas fa-chart-line"></i>
+                <span>No Investment Advice</span>
+            </div>
+            <div class="regulation-item">
+                <i class="fas fa-balance-scale"></i>
+                <span>Consult SEBI RIA</span>
+            </div>
+        </div>
+        
+        <div class="disclaimer-footer">
+            <p>📊 <strong>SEBI Reference:</strong> For registered investment advisors, visit <a href="https://www.sebi.gov.in/sebiweb/other/OtherAction.do?doRecognised=yes" target="_blank" rel="noopener">SEBI's Official Website</a></p>
+        </div>
+    </div>
+</div>
 
-        // Fetch crypto prices
-        async function fetchPrices() {
-            const cryptoIds = portfolio.filter(p => !p.id.startsWith('stock-')).map(p => p.id);
-            if (cryptoIds.length === 0) return;
+<script>
+    // ==========================================
+    // PORTFOLIO RISK ANALYZER - BROBILLIONAIRE
+    // Using Real APIs for Accurate Data
+    // SEBI Compliant - Educational Purposes Only
+    // ==========================================
+    
+    // State Management
+    let portfolio = [];
+    let priceCache = {};
+    let historicalCache = {};
+    let allocationChart = null;
+    let riskChart = null;
+    let selectedAutocompleteIndex = -1;
+    
+    // Comprehensive Asset Database - Indian NSE Stocks + Crypto + Commodities
+    const assetDatabase = {
+        // ==========================================
+        // 🪙 CRYPTOCURRENCIES (CoinGecko IDs)
+        // ==========================================
+        'bitcoin': { name: 'Bitcoin', symbol: 'BTC', color: '#f7931a', type: 'crypto', sector: 'Cryptocurrency', expectedReturn: 0.50, baseVol: 0.65 },
+        'ethereum': { name: 'Ethereum', symbol: 'ETH', color: '#627eea', type: 'crypto', sector: 'Cryptocurrency', expectedReturn: 0.55, baseVol: 0.75 },
+        'solana': { name: 'Solana', symbol: 'SOL', color: '#00ffa3', type: 'crypto', sector: 'Cryptocurrency', expectedReturn: 0.60, baseVol: 0.95 },
+        'cardano': { name: 'Cardano', symbol: 'ADA', color: '#0033ad', type: 'crypto', sector: 'Cryptocurrency', expectedReturn: 0.40, baseVol: 0.85 },
+        'ripple': { name: 'XRP', symbol: 'XRP', color: '#23292f', type: 'crypto', sector: 'Cryptocurrency', expectedReturn: 0.35, baseVol: 0.80 },
+        'dogecoin': { name: 'Dogecoin', symbol: 'DOGE', color: '#c3a634', type: 'crypto', sector: 'Cryptocurrency', expectedReturn: 0.30, baseVol: 1.10 },
+        'polkadot': { name: 'Polkadot', symbol: 'DOT', color: '#e6007a', type: 'crypto', sector: 'Cryptocurrency', expectedReturn: 0.45, baseVol: 0.90 },
+        'avalanche-2': { name: 'Avalanche', symbol: 'AVAX', color: '#e84142', type: 'crypto', sector: 'Cryptocurrency', expectedReturn: 0.50, baseVol: 0.95 },
+        'chainlink': { name: 'Chainlink', symbol: 'LINK', color: '#2a5ada', type: 'crypto', sector: 'Cryptocurrency', expectedReturn: 0.45, baseVol: 0.85 },
+        'polygon': { name: 'Polygon', symbol: 'MATIC', color: '#8247e5', type: 'crypto', sector: 'Cryptocurrency', expectedReturn: 0.50, baseVol: 0.90 },
+        'litecoin': { name: 'Litecoin', symbol: 'LTC', color: '#bfbbbb', type: 'crypto', sector: 'Cryptocurrency', expectedReturn: 0.25, baseVol: 0.70 },
+        'uniswap': { name: 'Uniswap', symbol: 'UNI', color: '#ff007a', type: 'crypto', sector: 'DeFi', expectedReturn: 0.40, baseVol: 0.85 },
+        'cosmos': { name: 'Cosmos', symbol: 'ATOM', color: '#2e3148', type: 'crypto', sector: 'Cryptocurrency', expectedReturn: 0.45, baseVol: 0.80 },
+        'near': { name: 'NEAR Protocol', symbol: 'NEAR', color: '#00c08b', type: 'crypto', sector: 'Cryptocurrency', expectedReturn: 0.50, baseVol: 0.90 },
+        'arbitrum': { name: 'Arbitrum', symbol: 'ARB', color: '#28a0f0', type: 'crypto', sector: 'Layer 2', expectedReturn: 0.55, baseVol: 0.95 },
+        'optimism': { name: 'Optimism', symbol: 'OP', color: '#ff0420', type: 'crypto', sector: 'Layer 2', expectedReturn: 0.55, baseVol: 0.90 },
+        'injective-protocol': { name: 'Injective', symbol: 'INJ', color: '#00f2fe', type: 'crypto', sector: 'DeFi', expectedReturn: 0.60, baseVol: 1.00 },
+        'render-token': { name: 'Render', symbol: 'RNDR', color: '#3f3f3f', type: 'crypto', sector: 'AI/GPU', expectedReturn: 0.65, baseVol: 1.05 },
+        'tether': { name: 'Tether', symbol: 'USDT', color: '#26a17b', type: 'stablecoin', sector: 'Stablecoin', expectedReturn: 0.04, baseVol: 0.02 },
+        'usd-coin': { name: 'USDC', symbol: 'USDC', color: '#2775ca', type: 'stablecoin', sector: 'Stablecoin', expectedReturn: 0.04, baseVol: 0.02 },
+        'dai': { name: 'Dai', symbol: 'DAI', color: '#f5ac37', type: 'stablecoin', sector: 'Stablecoin', expectedReturn: 0.04, baseVol: 0.02 },
+        
+        // ==========================================
+        // 📈 NIFTY 50 STOCKS (NSE India)
+        // ==========================================
+        'nse-RELIANCE': { name: 'Reliance Industries', symbol: 'RELIANCE', color: '#003DA5', type: 'stock', sector: 'Oil & Gas', expectedReturn: 0.15, baseVol: 0.28 },
+        'nse-TCS': { name: 'Tata Consultancy Services', symbol: 'TCS', color: '#1D4370', type: 'stock', sector: 'IT Services', expectedReturn: 0.14, baseVol: 0.22 },
+        'nse-HDFCBANK': { name: 'HDFC Bank', symbol: 'HDFCBANK', color: '#004C8F', type: 'stock', sector: 'Private Banking', expectedReturn: 0.12, baseVol: 0.24 },
+        'nse-INFY': { name: 'Infosys', symbol: 'INFY', color: '#007CC3', type: 'stock', sector: 'IT Services', expectedReturn: 0.14, baseVol: 0.25 },
+        'nse-ICICIBANK': { name: 'ICICI Bank', symbol: 'ICICIBANK', color: '#F58220', type: 'stock', sector: 'Private Banking', expectedReturn: 0.13, baseVol: 0.26 },
+        'nse-BHARTIARTL': { name: 'Bharti Airtel', symbol: 'BHARTIARTL', color: '#ED1C24', type: 'stock', sector: 'Telecom', expectedReturn: 0.12, baseVol: 0.28 },
+        'nse-SBIN': { name: 'State Bank of India', symbol: 'SBIN', color: '#2B5797', type: 'stock', sector: 'PSU Banking', expectedReturn: 0.14, baseVol: 0.32 },
+        'nse-WIPRO': { name: 'Wipro', symbol: 'WIPRO', color: '#5F249F', type: 'stock', sector: 'IT Services', expectedReturn: 0.12, baseVol: 0.28 },
+        'nse-LT': { name: 'Larsen & Toubro', symbol: 'LT', color: '#0066B3', type: 'stock', sector: 'Infrastructure', expectedReturn: 0.14, baseVol: 0.28 },
+        'nse-HINDUNILVR': { name: 'Hindustan Unilever', symbol: 'HINDUNILVR', color: '#1F36C7', type: 'stock', sector: 'FMCG', expectedReturn: 0.10, baseVol: 0.20 },
+        'nse-ITC': { name: 'ITC Ltd', symbol: 'ITC', color: '#D4AF37', type: 'stock', sector: 'FMCG', expectedReturn: 0.12, baseVol: 0.22 },
+        'nse-ASIANPAINT': { name: 'Asian Paints', symbol: 'ASIANPAINT', color: '#E31E24', type: 'stock', sector: 'Consumer Goods', expectedReturn: 0.13, baseVol: 0.26 },
+        'nse-MARUTI': { name: 'Maruti Suzuki', symbol: 'MARUTI', color: '#ED1B24', type: 'stock', sector: 'Automobile', expectedReturn: 0.12, baseVol: 0.28 },
+        'nse-TATAMOTORS': { name: 'Tata Motors', symbol: 'TATAMOTORS', color: '#0F3C78', type: 'stock', sector: 'Automobile', expectedReturn: 0.18, baseVol: 0.42 },
+        'nse-TATASTEEL': { name: 'Tata Steel', symbol: 'TATASTEEL', color: '#1A3A6E', type: 'stock', sector: 'Metals & Mining', expectedReturn: 0.14, baseVol: 0.38 },
+        'nse-SUNPHARMA': { name: 'Sun Pharmaceutical', symbol: 'SUNPHARMA', color: '#F7941D', type: 'stock', sector: 'Pharmaceuticals', expectedReturn: 0.12, baseVol: 0.30 },
+        'nse-BAJFINANCE': { name: 'Bajaj Finance', symbol: 'BAJFINANCE', color: '#0073CF', type: 'stock', sector: 'NBFC', expectedReturn: 0.16, baseVol: 0.35 },
+        'nse-KOTAKBANK': { name: 'Kotak Mahindra Bank', symbol: 'KOTAKBANK', color: '#ED1C24', type: 'stock', sector: 'Private Banking', expectedReturn: 0.12, baseVol: 0.25 },
+        'nse-AXISBANK': { name: 'Axis Bank', symbol: 'AXISBANK', color: '#97144D', type: 'stock', sector: 'Private Banking', expectedReturn: 0.13, baseVol: 0.28 },
+        'nse-ADANIENT': { name: 'Adani Enterprises', symbol: 'ADANIENT', color: '#004B93', type: 'stock', sector: 'Conglomerate', expectedReturn: 0.25, baseVol: 0.60 },
+        'nse-POWERGRID': { name: 'Power Grid Corp', symbol: 'POWERGRID', color: '#F47920', type: 'stock', sector: 'Power', expectedReturn: 0.10, baseVol: 0.22 },
+        'nse-NTPC': { name: 'NTPC Ltd', symbol: 'NTPC', color: '#00529B', type: 'stock', sector: 'Power', expectedReturn: 0.11, baseVol: 0.24 },
+        'nse-ONGC': { name: 'Oil & Natural Gas Corp', symbol: 'ONGC', color: '#F15A22', type: 'stock', sector: 'Oil & Gas', expectedReturn: 0.12, baseVol: 0.30 },
+        'nse-COALINDIA': { name: 'Coal India', symbol: 'COALINDIA', color: '#000000', type: 'stock', sector: 'Mining', expectedReturn: 0.14, baseVol: 0.32 },
+        'nse-JSWSTEEL': { name: 'JSW Steel', symbol: 'JSWSTEEL', color: '#0066B2', type: 'stock', sector: 'Metals & Mining', expectedReturn: 0.15, baseVol: 0.38 },
+        'nse-HCLTECH': { name: 'HCL Technologies', symbol: 'HCLTECH', color: '#0072BC', type: 'stock', sector: 'IT Services', expectedReturn: 0.14, baseVol: 0.26 },
+        'nse-TECHM': { name: 'Tech Mahindra', symbol: 'TECHM', color: '#1C4E80', type: 'stock', sector: 'IT Services', expectedReturn: 0.13, baseVol: 0.30 },
+        'nse-ULTRACEMCO': { name: 'UltraTech Cement', symbol: 'ULTRACEMCO', color: '#E31E24', type: 'stock', sector: 'Cement', expectedReturn: 0.12, baseVol: 0.26 },
+        'nse-TITAN': { name: 'Titan Company', symbol: 'TITAN', color: '#C9A227', type: 'stock', sector: 'Consumer Goods', expectedReturn: 0.14, baseVol: 0.28 },
+        'nse-NESTLEIND': { name: 'Nestle India', symbol: 'NESTLEIND', color: '#003399', type: 'stock', sector: 'FMCG', expectedReturn: 0.11, baseVol: 0.20 },
+        'nse-BAJAJFINSV': { name: 'Bajaj Finserv', symbol: 'BAJAJFINSV', color: '#0073CF', type: 'stock', sector: 'NBFC', expectedReturn: 0.15, baseVol: 0.32 },
+        'nse-DRREDDY': { name: 'Dr. Reddys Laboratories', symbol: 'DRREDDY', color: '#005B96', type: 'stock', sector: 'Pharmaceuticals', expectedReturn: 0.12, baseVol: 0.28 },
+        'nse-CIPLA': { name: 'Cipla', symbol: 'CIPLA', color: '#E31E24', type: 'stock', sector: 'Pharmaceuticals', expectedReturn: 0.12, baseVol: 0.26 },
+        'nse-DIVISLAB': { name: 'Divis Laboratories', symbol: 'DIVISLAB', color: '#1E4D2B', type: 'stock', sector: 'Pharmaceuticals', expectedReturn: 0.13, baseVol: 0.30 },
+        'nse-APOLLOHOSP': { name: 'Apollo Hospitals', symbol: 'APOLLOHOSP', color: '#00599D', type: 'stock', sector: 'Healthcare', expectedReturn: 0.14, baseVol: 0.28 },
+        'nse-EICHERMOT': { name: 'Eicher Motors', symbol: 'EICHERMOT', color: '#C8102E', type: 'stock', sector: 'Automobile', expectedReturn: 0.14, baseVol: 0.32 },
+        'nse-BPCL': { name: 'Bharat Petroleum', symbol: 'BPCL', color: '#FFD700', type: 'stock', sector: 'Oil & Gas', expectedReturn: 0.12, baseVol: 0.30 },
+        'nse-GRASIM': { name: 'Grasim Industries', symbol: 'GRASIM', color: '#C41230', type: 'stock', sector: 'Cement', expectedReturn: 0.13, baseVol: 0.28 },
+        'nse-HINDALCO': { name: 'Hindalco Industries', symbol: 'HINDALCO', color: '#003A70', type: 'stock', sector: 'Metals & Mining', expectedReturn: 0.15, baseVol: 0.38 },
+        'nse-ADANIPORTS': { name: 'Adani Ports & SEZ', symbol: 'ADANIPORTS', color: '#004B93', type: 'stock', sector: 'Infrastructure', expectedReturn: 0.14, baseVol: 0.35 },
+        'nse-SBILIFE': { name: 'SBI Life Insurance', symbol: 'SBILIFE', color: '#2B5797', type: 'stock', sector: 'Insurance', expectedReturn: 0.12, baseVol: 0.28 },
+        'nse-HDFCLIFE': { name: 'HDFC Life Insurance', symbol: 'HDFCLIFE', color: '#004C8F', type: 'stock', sector: 'Insurance', expectedReturn: 0.12, baseVol: 0.26 },
+        'nse-BRITANNIA': { name: 'Britannia Industries', symbol: 'BRITANNIA', color: '#C8102E', type: 'stock', sector: 'FMCG', expectedReturn: 0.12, baseVol: 0.24 },
+        'nse-INDUSINDBK': { name: 'IndusInd Bank', symbol: 'INDUSINDBK', color: '#C8102E', type: 'stock', sector: 'Private Banking', expectedReturn: 0.14, baseVol: 0.35 },
+        'nse-HEROMOTOCO': { name: 'Hero MotoCorp', symbol: 'HEROMOTOCO', color: '#C8102E', type: 'stock', sector: 'Automobile', expectedReturn: 0.11, baseVol: 0.28 },
+        'nse-BAJAJ-AUTO': { name: 'Bajaj Auto', symbol: 'BAJAJ-AUTO', color: '#003DA5', type: 'stock', sector: 'Automobile', expectedReturn: 0.12, baseVol: 0.28 },
+        'nse-TATACONSUM': { name: 'Tata Consumer Products', symbol: 'TATACONSUM', color: '#0F3C78', type: 'stock', sector: 'FMCG', expectedReturn: 0.13, baseVol: 0.26 },
+        'nse-MM': { name: 'Mahindra & Mahindra', symbol: 'M&M', color: '#C8102E', type: 'stock', sector: 'Automobile', expectedReturn: 0.14, baseVol: 0.30 },
+        
+        // ==========================================
+        // 📊 NIFTY NEXT 50 & POPULAR STOCKS
+        // ==========================================
+        'nse-ADANIGREEN': { name: 'Adani Green Energy', symbol: 'ADANIGREEN', color: '#00A651', type: 'stock', sector: 'Power', expectedReturn: 0.25, baseVol: 0.65 },
+        'nse-ADANIPOWER': { name: 'Adani Power', symbol: 'ADANIPOWER', color: '#004B93', type: 'stock', sector: 'Power', expectedReturn: 0.22, baseVol: 0.55 },
+        'nse-ZOMATO': { name: 'Zomato', symbol: 'ZOMATO', color: '#CB202D', type: 'stock', sector: 'Internet', expectedReturn: 0.20, baseVol: 0.55 },
+        'nse-PAYTM': { name: 'One97 Communications (Paytm)', symbol: 'PAYTM', color: '#00B9F1', type: 'stock', sector: 'Fintech', expectedReturn: 0.18, baseVol: 0.65 },
+        'nse-NYKAA': { name: 'FSN E-Commerce (Nykaa)', symbol: 'NYKAA', color: '#FC2779', type: 'stock', sector: 'E-commerce', expectedReturn: 0.18, baseVol: 0.55 },
+        'nse-DMART': { name: 'Avenue Supermarts (DMart)', symbol: 'DMART', color: '#00529B', type: 'stock', sector: 'Retail', expectedReturn: 0.14, baseVol: 0.30 },
+        'nse-TATAELXSI': { name: 'Tata Elxsi', symbol: 'TATAELXSI', color: '#0F3C78', type: 'stock', sector: 'IT Services', expectedReturn: 0.18, baseVol: 0.40 },
+        'nse-TATAPOWER': { name: 'Tata Power Company', symbol: 'TATAPOWER', color: '#0F3C78', type: 'stock', sector: 'Power', expectedReturn: 0.16, baseVol: 0.38 },
+        'nse-LTIM': { name: 'LTIMindtree', symbol: 'LTIM', color: '#0066B3', type: 'stock', sector: 'IT Services', expectedReturn: 0.14, baseVol: 0.30 },
+        'nse-LTTS': { name: 'L&T Technology Services', symbol: 'LTTS', color: '#0066B3', type: 'stock', sector: 'IT Services', expectedReturn: 0.14, baseVol: 0.32 },
+        'nse-PERSISTENT': { name: 'Persistent Systems', symbol: 'PERSISTENT', color: '#00529B', type: 'stock', sector: 'IT Services', expectedReturn: 0.16, baseVol: 0.35 },
+        'nse-COFORGE': { name: 'Coforge', symbol: 'COFORGE', color: '#003DA5', type: 'stock', sector: 'IT Services', expectedReturn: 0.15, baseVol: 0.32 },
+        'nse-MPHASIS': { name: 'Mphasis', symbol: 'MPHASIS', color: '#1C4E80', type: 'stock', sector: 'IT Services', expectedReturn: 0.14, baseVol: 0.30 },
+        'nse-DLF': { name: 'DLF Ltd', symbol: 'DLF', color: '#003A70', type: 'stock', sector: 'Real Estate', expectedReturn: 0.15, baseVol: 0.38 },
+        'nse-GODREJPROP': { name: 'Godrej Properties', symbol: 'GODREJPROP', color: '#003DA5', type: 'stock', sector: 'Real Estate', expectedReturn: 0.16, baseVol: 0.40 },
+        'nse-OBEROIRLTY': { name: 'Oberoi Realty', symbol: 'OBEROIRLTY', color: '#C8102E', type: 'stock', sector: 'Real Estate', expectedReturn: 0.15, baseVol: 0.35 },
+        'nse-HAL': { name: 'Hindustan Aeronautics', symbol: 'HAL', color: '#003DA5', type: 'stock', sector: 'Defence', expectedReturn: 0.18, baseVol: 0.38 },
+        'nse-BEL': { name: 'Bharat Electronics', symbol: 'BEL', color: '#0072BC', type: 'stock', sector: 'Defence', expectedReturn: 0.16, baseVol: 0.35 },
+        'nse-MAZAGONDOK': { name: 'Mazagon Dock Shipbuilders', symbol: 'MAZAGONDOK', color: '#003A70', type: 'stock', sector: 'Defence', expectedReturn: 0.20, baseVol: 0.45 },
+        'nse-COCHINSHIP': { name: 'Cochin Shipyard', symbol: 'COCHINSHIP', color: '#00529B', type: 'stock', sector: 'Defence', expectedReturn: 0.18, baseVol: 0.42 },
+        'nse-IRCTC': { name: 'IRCTC Ltd', symbol: 'IRCTC', color: '#E31E24', type: 'stock', sector: 'Travel', expectedReturn: 0.14, baseVol: 0.38 },
+        'nse-IRFC': { name: 'Indian Railway Finance', symbol: 'IRFC', color: '#003A70', type: 'stock', sector: 'NBFC', expectedReturn: 0.12, baseVol: 0.32 },
+        'nse-PFC': { name: 'Power Finance Corp', symbol: 'PFC', color: '#00529B', type: 'stock', sector: 'NBFC', expectedReturn: 0.14, baseVol: 0.32 },
+        'nse-RECLTD': { name: 'REC Ltd', symbol: 'RECLTD', color: '#003A70', type: 'stock', sector: 'NBFC', expectedReturn: 0.14, baseVol: 0.32 },
+        'nse-NHPC': { name: 'NHPC Ltd', symbol: 'NHPC', color: '#00529B', type: 'stock', sector: 'Power', expectedReturn: 0.12, baseVol: 0.28 },
+        'nse-VEDL': { name: 'Vedanta Ltd', symbol: 'VEDL', color: '#003A70', type: 'stock', sector: 'Metals & Mining', expectedReturn: 0.16, baseVol: 0.45 },
+        'nse-HINDZINC': { name: 'Hindustan Zinc', symbol: 'HINDZINC', color: '#003A70', type: 'stock', sector: 'Metals & Mining', expectedReturn: 0.14, baseVol: 0.35 },
+        'nse-JINDALSTEL': { name: 'Jindal Steel & Power', symbol: 'JINDALSTEL', color: '#003A70', type: 'stock', sector: 'Metals & Mining', expectedReturn: 0.16, baseVol: 0.42 },
+        'nse-SAIL': { name: 'Steel Authority of India', symbol: 'SAIL', color: '#003A70', type: 'stock', sector: 'Metals & Mining', expectedReturn: 0.14, baseVol: 0.40 },
+        
+        // ==========================================
+        // 🏦 BANKING & FINANCE
+        // ==========================================
+        'nse-YESBANK': { name: 'Yes Bank', symbol: 'YESBANK', color: '#00529B', type: 'stock', sector: 'Private Banking', expectedReturn: 0.15, baseVol: 0.55 },
+        'nse-IDFCFIRSTB': { name: 'IDFC First Bank', symbol: 'IDFCFIRSTB', color: '#E31E24', type: 'stock', sector: 'Private Banking', expectedReturn: 0.14, baseVol: 0.38 },
+        'nse-FEDERALBNK': { name: 'Federal Bank', symbol: 'FEDERALBNK', color: '#003DA5', type: 'stock', sector: 'Private Banking', expectedReturn: 0.13, baseVol: 0.32 },
+        'nse-BANDHANBNK': { name: 'Bandhan Bank', symbol: 'BANDHANBNK', color: '#F15A22', type: 'stock', sector: 'Private Banking', expectedReturn: 0.14, baseVol: 0.38 },
+        'nse-AUBANK': { name: 'AU Small Finance Bank', symbol: 'AUBANK', color: '#E31E24', type: 'stock', sector: 'Private Banking', expectedReturn: 0.14, baseVol: 0.35 },
+        'nse-BANKBARODA': { name: 'Bank of Baroda', symbol: 'BANKBARODA', color: '#F15A22', type: 'stock', sector: 'PSU Banking', expectedReturn: 0.13, baseVol: 0.35 },
+        'nse-CANBK': { name: 'Canara Bank', symbol: 'CANBK', color: '#003DA5', type: 'stock', sector: 'PSU Banking', expectedReturn: 0.14, baseVol: 0.38 },
+        'nse-PNB': { name: 'Punjab National Bank', symbol: 'PNB', color: '#C8102E', type: 'stock', sector: 'PSU Banking', expectedReturn: 0.13, baseVol: 0.42 },
+        'nse-MUTHOOTFIN': { name: 'Muthoot Finance', symbol: 'MUTHOOTFIN', color: '#C8102E', type: 'stock', sector: 'NBFC', expectedReturn: 0.13, baseVol: 0.30 },
+        'nse-MANAPPURAM': { name: 'Manappuram Finance', symbol: 'MANAPPURAM', color: '#C8102E', type: 'stock', sector: 'NBFC', expectedReturn: 0.14, baseVol: 0.35 },
+        'nse-CHOLAFIN': { name: 'Cholamandalam Investment', symbol: 'CHOLAFIN', color: '#003DA5', type: 'stock', sector: 'NBFC', expectedReturn: 0.15, baseVol: 0.32 },
+        'nse-SHRIRAMFIN': { name: 'Shriram Finance', symbol: 'SHRIRAMFIN', color: '#003DA5', type: 'stock', sector: 'NBFC', expectedReturn: 0.14, baseVol: 0.32 },
+        'nse-LICHSGFIN': { name: 'LIC Housing Finance', symbol: 'LICHSGFIN', color: '#003DA5', type: 'stock', sector: 'NBFC', expectedReturn: 0.12, baseVol: 0.32 },
+        'nse-LICI': { name: 'Life Insurance Corp', symbol: 'LICI', color: '#003DA5', type: 'stock', sector: 'Insurance', expectedReturn: 0.11, baseVol: 0.28 },
+        
+        // ==========================================
+        // 💊 PHARMA & HEALTHCARE
+        // ==========================================
+        'nse-LUPIN': { name: 'Lupin Ltd', symbol: 'LUPIN', color: '#E31E24', type: 'stock', sector: 'Pharmaceuticals', expectedReturn: 0.13, baseVol: 0.32 },
+        'nse-AUROPHARMA': { name: 'Aurobindo Pharma', symbol: 'AUROPHARMA', color: '#00529B', type: 'stock', sector: 'Pharmaceuticals', expectedReturn: 0.13, baseVol: 0.35 },
+        'nse-BIOCON': { name: 'Biocon', symbol: 'BIOCON', color: '#003DA5', type: 'stock', sector: 'Pharmaceuticals', expectedReturn: 0.14, baseVol: 0.38 },
+        'nse-ZYDUSLIFE': { name: 'Zydus Lifesciences', symbol: 'ZYDUSLIFE', color: '#003DA5', type: 'stock', sector: 'Pharmaceuticals', expectedReturn: 0.14, baseVol: 0.32 },
+        'nse-ALKEM': { name: 'Alkem Laboratories', symbol: 'ALKEM', color: '#00529B', type: 'stock', sector: 'Pharmaceuticals', expectedReturn: 0.12, baseVol: 0.28 },
+        'nse-TORNTPHARM': { name: 'Torrent Pharmaceuticals', symbol: 'TORNTPHARM', color: '#003DA5', type: 'stock', sector: 'Pharmaceuticals', expectedReturn: 0.13, baseVol: 0.28 },
+        'nse-MAXHEALTH': { name: 'Max Healthcare', symbol: 'MAXHEALTH', color: '#E31E24', type: 'stock', sector: 'Healthcare', expectedReturn: 0.14, baseVol: 0.30 },
+        'nse-FORTIS': { name: 'Fortis Healthcare', symbol: 'FORTIS', color: '#003DA5', type: 'stock', sector: 'Healthcare', expectedReturn: 0.13, baseVol: 0.32 },
+        'nse-LALPATHLAB': { name: 'Dr Lal PathLabs', symbol: 'LALPATHLAB', color: '#E31E24', type: 'stock', sector: 'Healthcare', expectedReturn: 0.12, baseVol: 0.30 },
+        
+        // ==========================================
+        // 🏗️ INFRASTRUCTURE & INDUSTRIALS
+        // ==========================================
+        'nse-ABB': { name: 'ABB India', symbol: 'ABB', color: '#FF000F', type: 'stock', sector: 'Industrial', expectedReturn: 0.15, baseVol: 0.32 },
+        'nse-SIEMENS': { name: 'Siemens Ltd', symbol: 'SIEMENS', color: '#009999', type: 'stock', sector: 'Industrial', expectedReturn: 0.14, baseVol: 0.30 },
+        'nse-BHEL': { name: 'Bharat Heavy Electricals', symbol: 'BHEL', color: '#003DA5', type: 'stock', sector: 'Industrial', expectedReturn: 0.15, baseVol: 0.42 },
+        'nse-CUMMINSIND': { name: 'Cummins India', symbol: 'CUMMINSIND', color: '#C8102E', type: 'stock', sector: 'Industrial', expectedReturn: 0.13, baseVol: 0.28 },
+        'nse-THERMAX': { name: 'Thermax', symbol: 'THERMAX', color: '#003DA5', type: 'stock', sector: 'Industrial', expectedReturn: 0.14, baseVol: 0.30 },
+        'nse-RVNL': { name: 'Rail Vikas Nigam', symbol: 'RVNL', color: '#003A70', type: 'stock', sector: 'Infrastructure', expectedReturn: 0.18, baseVol: 0.48 },
+        'nse-IRCON': { name: 'Ircon International', symbol: 'IRCON', color: '#003A70', type: 'stock', sector: 'Infrastructure', expectedReturn: 0.16, baseVol: 0.42 },
+        'nse-NBCC': { name: 'NBCC India', symbol: 'NBCC', color: '#003A70', type: 'stock', sector: 'Infrastructure', expectedReturn: 0.16, baseVol: 0.45 },
+        
+        // ==========================================
+        // 🧪 CHEMICALS & CONSUMER
+        // ==========================================
+        'nse-PIDILITIND': { name: 'Pidilite Industries', symbol: 'PIDILITIND', color: '#FFD700', type: 'stock', sector: 'Chemicals', expectedReturn: 0.13, baseVol: 0.25 },
+        'nse-SRF': { name: 'SRF Ltd', symbol: 'SRF', color: '#003DA5', type: 'stock', sector: 'Chemicals', expectedReturn: 0.14, baseVol: 0.30 },
+        'nse-PIIND': { name: 'PI Industries', symbol: 'PIIND', color: '#00529B', type: 'stock', sector: 'Chemicals', expectedReturn: 0.14, baseVol: 0.30 },
+        'nse-AARTIIND': { name: 'Aarti Industries', symbol: 'AARTIIND', color: '#003DA5', type: 'stock', sector: 'Chemicals', expectedReturn: 0.15, baseVol: 0.38 },
+        'nse-DEEPAKNTR': { name: 'Deepak Nitrite', symbol: 'DEEPAKNTR', color: '#003DA5', type: 'stock', sector: 'Chemicals', expectedReturn: 0.15, baseVol: 0.40 },
+        'nse-TATACHEM': { name: 'Tata Chemicals', symbol: 'TATACHEM', color: '#0F3C78', type: 'stock', sector: 'Chemicals', expectedReturn: 0.12, baseVol: 0.30 },
+        'nse-DABUR': { name: 'Dabur India', symbol: 'DABUR', color: '#00A651', type: 'stock', sector: 'FMCG', expectedReturn: 0.11, baseVol: 0.22 },
+        'nse-MARICO': { name: 'Marico', symbol: 'MARICO', color: '#003DA5', type: 'stock', sector: 'FMCG', expectedReturn: 0.11, baseVol: 0.22 },
+        'nse-GODREJCP': { name: 'Godrej Consumer Products', symbol: 'GODREJCP', color: '#003DA5', type: 'stock', sector: 'FMCG', expectedReturn: 0.12, baseVol: 0.25 },
+        'nse-COLPAL': { name: 'Colgate-Palmolive India', symbol: 'COLPAL', color: '#E31E24', type: 'stock', sector: 'FMCG', expectedReturn: 0.10, baseVol: 0.20 },
+        'nse-VBL': { name: 'Varun Beverages', symbol: 'VBL', color: '#003DA5', type: 'stock', sector: 'FMCG', expectedReturn: 0.16, baseVol: 0.32 },
+        'nse-JUBLFOOD': { name: 'Jubilant FoodWorks', symbol: 'JUBLFOOD', color: '#E31E24', type: 'stock', sector: 'FMCG', expectedReturn: 0.14, baseVol: 0.35 },
+        
+        // ==========================================
+        // 📱 CONSUMER DURABLES & ELECTRONICS
+        // ==========================================
+        'nse-DIXON': { name: 'Dixon Technologies', symbol: 'DIXON', color: '#003DA5', type: 'stock', sector: 'Consumer Durables', expectedReturn: 0.18, baseVol: 0.42 },
+        'nse-VOLTAS': { name: 'Voltas', symbol: 'VOLTAS', color: '#0F3C78', type: 'stock', sector: 'Consumer Durables', expectedReturn: 0.13, baseVol: 0.30 },
+        'nse-HAVELLS': { name: 'Havells India', symbol: 'HAVELLS', color: '#003DA5', type: 'stock', sector: 'Consumer Durables', expectedReturn: 0.13, baseVol: 0.28 },
+        'nse-POLYCAB': { name: 'Polycab India', symbol: 'POLYCAB', color: '#003DA5', type: 'stock', sector: 'Consumer Durables', expectedReturn: 0.15, baseVol: 0.32 },
+        'nse-KEI': { name: 'KEI Industries', symbol: 'KEI', color: '#003DA5', type: 'stock', sector: 'Consumer Durables', expectedReturn: 0.16, baseVol: 0.35 },
+        'nse-BATAINDIA': { name: 'Bata India', symbol: 'BATAINDIA', color: '#E31E24', type: 'stock', sector: 'Consumer Goods', expectedReturn: 0.11, baseVol: 0.28 },
+        'nse-TRENT': { name: 'Trent Ltd (Zudio)', symbol: 'TRENT', color: '#0F3C78', type: 'stock', sector: 'Retail', expectedReturn: 0.18, baseVol: 0.38 },
+        'nse-PAGEIND': { name: 'Page Industries', symbol: 'PAGEIND', color: '#003DA5', type: 'stock', sector: 'Textiles', expectedReturn: 0.12, baseVol: 0.30 },
+        
+        // ==========================================
+        // 📞 TELECOM & MEDIA
+        // ==========================================
+        'nse-IDEA': { name: 'Vodafone Idea', symbol: 'IDEA', color: '#E60000', type: 'stock', sector: 'Telecom', expectedReturn: 0.20, baseVol: 0.75 },
+        'nse-TATACOMM': { name: 'Tata Communications', symbol: 'TATACOMM', color: '#0F3C78', type: 'stock', sector: 'Telecom', expectedReturn: 0.13, baseVol: 0.30 },
+        'nse-ZEEL': { name: 'Zee Entertainment', symbol: 'ZEEL', color: '#E31E24', type: 'stock', sector: 'Media', expectedReturn: 0.15, baseVol: 0.45 },
+        'nse-PVRINOX': { name: 'PVR INOX', symbol: 'PVRINOX', color: '#E31E24', type: 'stock', sector: 'Media', expectedReturn: 0.14, baseVol: 0.40 },
+        
+        // ==========================================
+        // 💰 FINTECH & BROKERS
+        // ==========================================
+        'nse-ANGELONE': { name: 'Angel One', symbol: 'ANGELONE', color: '#003DA5', type: 'stock', sector: 'Fintech', expectedReturn: 0.18, baseVol: 0.45 },
+        'nse-CDSL': { name: 'CDSL', symbol: 'CDSL', color: '#003DA5', type: 'stock', sector: 'Fintech', expectedReturn: 0.16, baseVol: 0.38 },
+        'nse-BSE': { name: 'BSE Ltd', symbol: 'BSE', color: '#E31E24', type: 'stock', sector: 'Fintech', expectedReturn: 0.18, baseVol: 0.42 },
+        'nse-MCX': { name: 'Multi Commodity Exchange', symbol: 'MCX', color: '#003DA5', type: 'stock', sector: 'Fintech', expectedReturn: 0.16, baseVol: 0.40 },
+        'nse-CAMS': { name: 'Computer Age Management', symbol: 'CAMS', color: '#003DA5', type: 'stock', sector: 'Fintech', expectedReturn: 0.14, baseVol: 0.32 },
+        
+        // ==========================================
+        // 🏆 COMMODITIES & GOLD
+        // ==========================================
+        'nse-GOLDBEES': { name: 'Gold ETF (NSE)', symbol: 'GOLDBEES', color: '#FFD700', type: 'commodity', sector: 'Gold', expectedReturn: 0.08, baseVol: 0.12 },
+        'nse-SILVERBEES': { name: 'Silver ETF (NSE)', symbol: 'SILVERBEES', color: '#C0C0C0', type: 'commodity', sector: 'Silver', expectedReturn: 0.10, baseVol: 0.22 },
+        'nse-NIFTYBEES': { name: 'Nifty 50 ETF', symbol: 'NIFTYBEES', color: '#003DA5', type: 'etf', sector: 'Index ETF', expectedReturn: 0.12, baseVol: 0.18 },
+        'nse-BANKBEES': { name: 'Bank Nifty ETF', symbol: 'BANKBEES', color: '#00529B', type: 'etf', sector: 'Index ETF', expectedReturn: 0.13, baseVol: 0.22 },
+        
+        // ==========================================
+        // 🌍 INTERNATIONAL INDICES (Simulated)
+        // ==========================================
+        'intl-NIFTY50': { name: 'Nifty 50 Index', symbol: 'NIFTY50', color: '#003DA5', type: 'index', sector: 'Indian Index', expectedReturn: 0.12, baseVol: 0.18 },
+        'intl-BANKNIFTY': { name: 'Bank Nifty Index', symbol: 'BANKNIFTY', color: '#00529B', type: 'index', sector: 'Indian Index', expectedReturn: 0.13, baseVol: 0.22 },
+        'intl-SENSEX': { name: 'BSE Sensex', symbol: 'SENSEX', color: '#E31E24', type: 'index', sector: 'Indian Index', expectedReturn: 0.12, baseVol: 0.17 }
+    };
+    
+    // Z-scores for VaR calculation (accurate statistical values)
+    const zScores = { 0.90: 1.282, 0.95: 1.645, 0.99: 2.326 };
+    
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        renderAssetList();
+        initializeCharts();
+        initializeAutocomplete();
+    });
+    
+    // ==========================================
+    // AUTOCOMPLETE / TYPE-AHEAD FUNCTIONALITY
+    // ==========================================
+    function initializeAutocomplete() {
+        const searchInput = document.getElementById('assetSearch');
+        const dropdown = document.getElementById('autocompleteDropdown');
+        
+        // Build searchable list
+        const assetList = Object.entries(assetDatabase).map(([id, data]) => ({
+            id,
+            name: data.name,
+            symbol: data.symbol,
+            sector: data.sector,
+            type: data.type
+        }));
+        
+        // Search on input
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            selectedAutocompleteIndex = -1;
             
-            try {
-                const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${cryptoIds.join(',')}&vs_currency=usd&include_24hr_change=true`);
-                const data = await response.json();
-                
-                for (const id of cryptoIds) {
-                    if (data[id]) {
-                        priceData[id] = {
-                            price: data[id].usd,
-                            change24h: data[id].usd_24h_change || 0
-                        };
-                    }
+            if (query.length < 1) {
+                dropdown.classList.remove('active');
+                return;
+            }
+            
+            const matches = assetList.filter(asset => 
+                asset.name.toLowerCase().includes(query) ||
+                asset.symbol.toLowerCase().includes(query) ||
+                asset.sector.toLowerCase().includes(query)
+            ).slice(0, 15);
+            
+            renderAutocomplete(matches);
+        });
+        
+        // Keyboard navigation
+        searchInput.addEventListener('keydown', (e) => {
+            const items = dropdown.querySelectorAll('.autocomplete-item');
+            
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                selectedAutocompleteIndex = Math.min(selectedAutocompleteIndex + 1, items.length - 1);
+                updateAutocompleteSelection(items);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                selectedAutocompleteIndex = Math.max(selectedAutocompleteIndex - 1, 0);
+                updateAutocompleteSelection(items);
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                if (selectedAutocompleteIndex >= 0 && items[selectedAutocompleteIndex]) {
+                    items[selectedAutocompleteIndex].click();
                 }
-            } catch (error) {
-                console.error('Failed to fetch prices:', error);
+            } else if (e.key === 'Escape') {
+                dropdown.classList.remove('active');
+                searchInput.blur();
             }
-        }
-
-        // Add asset
-        function addAsset() {
-            const select = document.getElementById('assetSelect');
-            const id = select.value;
-            if (!id) return;
-            
-            if (portfolio.find(p => p.id === id)) {
-                alert('Asset already in portfolio!');
-                return;
+        });
+        
+        // Close on outside click
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-container')) {
+                dropdown.classList.remove('active');
             }
-            
-            portfolio.push({ id, allocation: 20 });
-            select.value = '';
-            renderAssetList();
-        }
-
-        // Remove asset
-        function removeAsset(id) {
-            portfolio = portfolio.filter(p => p.id !== id);
-            renderAssetList();
-        }
-
-        // Update allocation
-        function updateAllocation(id, value) {
-            const asset = portfolio.find(p => p.id === id);
-            if (asset) {
-                asset.allocation = parseFloat(value) || 0;
+        });
+        
+        // Focus shows recent/popular if empty
+        searchInput.addEventListener('focus', () => {
+            if (!searchInput.value.trim()) {
+                const popular = assetList.filter(a => 
+                    ['bitcoin', 'ethereum', 'nse-RELIANCE', 'nse-TCS', 'nse-HDFCBANK', 'nse-INFY', 'nse-SBIN', 'nse-TATAMOTORS', 'nse-GOLDBEES'].includes(a.id)
+                );
+                renderAutocomplete(popular, 'Popular Assets');
             }
+        });
+    }
+    
+    function renderAutocomplete(matches, title = '') {
+        const dropdown = document.getElementById('autocompleteDropdown');
+        
+        if (matches.length === 0) {
+            dropdown.innerHTML = `
+                <div class="autocomplete-empty">
+                    <i class="fas fa-search"></i>
+                    <p>No assets found. Try different keywords.</p>
+                </div>
+            `;
+            dropdown.classList.add('active');
+            return;
         }
-
-        // Render asset list
-        function renderAssetList() {
-            const list = document.getElementById('assetList');
-            
-            if (portfolio.length === 0) {
-                list.innerHTML = '<div style="color: #666; text-align: center; padding: 1rem;">No assets added. Add assets from the dropdown below.</div>';
-                updatePieChart();
-                return;
-            }
-            
-            list.innerHTML = portfolio.map(p => {
-                const meta = assetMeta[p.id];
-                return `
-                    <div class="asset-item">
-                        <div class="asset-info">
-                            <div class="asset-icon" style="background: ${meta.color}20; color: ${meta.color}">${meta.icon}</div>
-                            <div>
-                                <div class="asset-name">${meta.name}</div>
-                                <div class="asset-symbol">${meta.symbol}</div>
-                            </div>
+        
+        // Group by type
+        const grouped = {};
+        matches.forEach(match => {
+            const category = getCategoryName(match.type);
+            if (!grouped[category]) grouped[category] = [];
+            grouped[category].push(match);
+        });
+        
+        let html = '';
+        for (const [category, items] of Object.entries(grouped)) {
+            html += `<div class="autocomplete-category">${category}</div>`;
+            items.forEach(item => {
+                const isAdded = portfolio.find(p => p.id === item.id);
+                html += `
+                    <div class="autocomplete-item ${isAdded ? 'added' : ''}" data-id="${item.id}" onclick="selectAutocompleteItem('${item.id}')">
+                        <div class="autocomplete-info">
+                            <span class="autocomplete-symbol">${item.symbol}</span>
+                            <span class="autocomplete-name">${item.name}</span>
                         </div>
-                        <div class="asset-allocation">
-                            <input type="number" class="allocation-input" value="${p.allocation}" onchange="updateAllocation('${p.id}', this.value)" min="0" max="100">
-                            <span>%</span>
-                            <button class="remove-btn" onclick="removeAsset('${p.id}')">×</button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-            
-            updatePieChart();
-        }
-
-        // Update pie chart
-        function updatePieChart() {
-            const svg = document.querySelector('#pieChart svg');
-            const legend = document.getElementById('pieLegend');
-            
-            if (portfolio.length === 0) {
-                svg.innerHTML = '<circle cx="50" cy="50" r="40" fill="#2a2a4a"/>';
-                legend.innerHTML = '<div style="color: #666; text-align: center;">No assets</div>';
-                return;
-            }
-            
-            let cumulativePercent = 0;
-            let paths = '';
-            let legendItems = '';
-            
-            portfolio.forEach(p => {
-                const meta = assetMeta[p.id];
-                const percent = p.allocation / 100;
-                
-                const startX = 50 + 40 * Math.cos(2 * Math.PI * cumulativePercent - Math.PI / 2);
-                const startY = 50 + 40 * Math.sin(2 * Math.PI * cumulativePercent - Math.PI / 2);
-                cumulativePercent += percent;
-                const endX = 50 + 40 * Math.cos(2 * Math.PI * cumulativePercent - Math.PI / 2);
-                const endY = 50 + 40 * Math.sin(2 * Math.PI * cumulativePercent - Math.PI / 2);
-                
-                const largeArcFlag = percent > 0.5 ? 1 : 0;
-                
-                if (percent > 0) {
-                    if (percent >= 1) {
-                        paths += `<circle cx="50" cy="50" r="40" fill="${meta.color}"/>`;
-                    } else {
-                        paths += `<path d="M 50 50 L ${startX} ${startY} A 40 40 0 ${largeArcFlag} 1 ${endX} ${endY} Z" fill="${meta.color}"/>`;
-                    }
-                }
-                
-                legendItems += `
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: ${meta.color}"></div>
-                        <span>${meta.symbol}: ${p.allocation}%</span>
+                        ${isAdded ? 
+                            '<span class="autocomplete-added"><i class="fas fa-check"></i> Added</span>' : 
+                            `<span class="autocomplete-sector">${item.sector}</span>`
+                        }
                     </div>
                 `;
             });
-            
-            svg.innerHTML = paths;
-            legend.innerHTML = legendItems;
         }
-
-        // Analyze risk
-        async function analyzeRisk() {
-            if (portfolio.length === 0) {
-                alert('Please add at least one asset to your portfolio!');
-                return;
+        
+        dropdown.innerHTML = html;
+        dropdown.classList.add('active');
+    }
+    
+    function getCategoryName(type) {
+        const names = {
+            'crypto': '🪙 Cryptocurrencies',
+            'stablecoin': '💵 Stablecoins',
+            'stock': '📈 NSE Stocks',
+            'etf': '📊 ETFs',
+            'index': '📉 Indices',
+            'commodity': '🏆 Commodities'
+        };
+        return names[type] || '📦 Other';
+    }
+    
+    function updateAutocompleteSelection(items) {
+        items.forEach((item, i) => {
+            item.classList.toggle('selected', i === selectedAutocompleteIndex);
+        });
+        if (items[selectedAutocompleteIndex]) {
+            items[selectedAutocompleteIndex].scrollIntoView({ block: 'nearest' });
+        }
+    }
+    
+    async function selectAutocompleteItem(id) {
+        const searchInput = document.getElementById('assetSearch');
+        const dropdown = document.getElementById('autocompleteDropdown');
+        
+        if (portfolio.find(p => p.id === id)) {
+            // Already added - remove it
+            removeAsset(id);
+        } else {
+            await addAsset(id);
+        }
+        
+        searchInput.value = '';
+        dropdown.classList.remove('active');
+        searchInput.focus();
+    }
+    
+    // Add asset to portfolio
+    async function addAsset(id) {
+        if (portfolio.find(p => p.id === id)) return;
+        
+        const asset = assetDatabase[id];
+        if (!asset) return;
+        
+        // Get live price for crypto
+        let price = null;
+        if (asset.type === 'crypto' || asset.type === 'stablecoin') {
+            price = await fetchCryptoPrice(id);
+        }
+        
+        portfolio.push({ id, allocation: 20, price });
+        
+        renderAssetList();
+        updateAllocationBar();
+        updateCharts();
+    }
+    
+    // Remove asset
+    function removeAsset(id) {
+        portfolio = portfolio.filter(p => p.id !== id);
+        renderAssetList();
+        updateAllocationBar();
+        updateCharts();
+        updateDropdownOptions();
+    }
+    
+    // Update allocation
+    function updateAllocation(id, value) {
+        const asset = portfolio.find(p => p.id === id);
+        if (asset) {
+            asset.allocation = Math.max(0, Math.min(100, parseFloat(value) || 0));
+            updateAllocationBar();
+            updateCharts();
+        }
+    }
+    
+    // Fetch crypto price from CoinGecko
+    async function fetchCryptoPrice(id) {
+        if (priceCache[id] && Date.now() - priceCache[id].timestamp < 60000) {
+            return priceCache[id].price;
+        }
+        
+        try {
+            const response = await fetch(
+                `https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currency=usd&include_24hr_change=true`
+            );
+            const data = await response.json();
+            
+            if (data[id]) {
+                priceCache[id] = {
+                    price: data[id].usd,
+                    change: data[id].usd_24h_change || 0,
+                    timestamp: Date.now()
+                };
+                return data[id].usd;
+            }
+        } catch (error) {
+            console.error('Price fetch error:', error);
+        }
+        return null;
+    }
+    
+    // Fetch historical data for volatility calculation
+    async function fetchHistoricalData(id, days = 90) {
+        const cacheKey = `${id}_${days}`;
+        if (historicalCache[cacheKey] && Date.now() - historicalCache[cacheKey].timestamp < 300000) {
+            return historicalCache[cacheKey].returns;
+        }
+        
+        const asset = assetDatabase[id];
+        
+        if (asset.type === 'crypto' || asset.type === 'stablecoin') {
+            try {
+                const response = await fetch(
+                    `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}&interval=daily`
+                );
+                const data = await response.json();
+                
+                if (data.prices && data.prices.length > 1) {
+                    const prices = data.prices.map(p => p[1]);
+                    const returns = [];
+                    
+                    for (let i = 1; i < prices.length; i++) {
+                        returns.push(Math.log(prices[i] / prices[i-1]));
+                    }
+                    
+                    historicalCache[cacheKey] = { returns, timestamp: Date.now() };
+                    return returns;
+                }
+            } catch (error) {
+                console.error('Historical data fetch error:', error);
+            }
+        }
+        
+        // For stocks/ETFs or on error, simulate returns based on baseVol
+        const simulatedReturns = [];
+        const dailyVol = asset.baseVol / Math.sqrt(252);
+        for (let i = 0; i < days; i++) {
+            simulatedReturns.push(gaussianRandom() * dailyVol);
+        }
+        
+        return simulatedReturns;
+    }
+    
+    // Gaussian random number generator (Box-Muller transform)
+    function gaussianRandom() {
+        let u = 0, v = 0;
+        while (u === 0) u = Math.random();
+        while (v === 0) v = Math.random();
+        return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+    }
+    
+    // Render asset list
+    function renderAssetList() {
+        const container = document.getElementById('assetListContainer');
+        const list = document.getElementById('assetList');
+        const emptyState = document.getElementById('emptyState');
+        const barContainer = document.getElementById('allocationBarContainer');
+        
+        if (portfolio.length === 0) {
+            emptyState.style.display = 'block';
+            list.innerHTML = '';
+            barContainer.style.display = 'none';
+            return;
+        }
+        
+        emptyState.style.display = 'none';
+        barContainer.style.display = 'block';
+        
+        list.innerHTML = portfolio.map(p => {
+            const asset = assetDatabase[p.id];
+            const priceDisplay = p.price ? `$${p.price.toLocaleString('en-US', { maximumFractionDigits: 2 })}` : '--';
+            
+            return `
+                <div class="asset-item">
+                    <div class="asset-info">
+                        <div class="asset-icon" style="background: ${asset.color}20; color: ${asset.color}">
+                            ${asset.symbol.charAt(0)}
+                        </div>
+                        <div>
+                            <div class="asset-name">${asset.name}</div>
+                            <div class="asset-symbol">${asset.symbol}</div>
+                            <div class="asset-price">${priceDisplay}</div>
+                        </div>
+                    </div>
+                    <div class="asset-controls">
+                        <input type="number" class="allocation-input" value="${p.allocation}" 
+                               onchange="updateAllocation('${p.id}', this.value)" 
+                               min="0" max="100" step="1">
+                        <span style="color: var(--text-tertiary);">%</span>
+                        <button class="remove-btn" onclick="removeAsset('${p.id}')">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    // Update allocation bar
+    function updateAllocationBar() {
+        const bar = document.getElementById('allocationBar');
+        const total = document.getElementById('allocationTotal');
+        const breakdown = document.getElementById('allocationBreakdown');
+        
+        if (portfolio.length === 0) return;
+        
+        const totalAllocation = portfolio.reduce((sum, p) => sum + p.allocation, 0);
+        
+        bar.innerHTML = portfolio.map(p => {
+            const asset = assetDatabase[p.id];
+            return `<div class="allocation-segment" style="width: ${p.allocation}%; background: ${asset.color};"></div>`;
+        }).join('');
+        
+        total.textContent = `Total: ${totalAllocation.toFixed(1)}%`;
+        total.className = 'allocation-total ' + (Math.abs(totalAllocation - 100) <= 0.1 ? 'valid' : 'invalid');
+        
+        const topAssets = portfolio
+            .sort((a, b) => b.allocation - a.allocation)
+            .slice(0, 3)
+            .map(p => `${assetDatabase[p.id].symbol}: ${p.allocation}%`)
+            .join(' | ');
+        
+        breakdown.textContent = topAssets;
+    }
+    
+    // Initialize charts
+    function initializeCharts() {
+        const allocationCtx = document.getElementById('allocationChart').getContext('2d');
+        const riskCtx = document.getElementById('riskChart').getContext('2d');
+        
+        allocationChart = new Chart(allocationCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Add assets'],
+                datasets: [{
+                    data: [100],
+                    backgroundColor: ['#2a2a2a'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '65%',
+                layout: {
+                    padding: { bottom: 10 }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { 
+                            color: '#999', 
+                            padding: 20, 
+                            font: { size: 11 },
+                            boxWidth: 12,
+                            boxHeight: 12
+                        }
+                    }
+                }
+            }
+        });
+        
+        riskChart = new Chart(riskCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Add assets'],
+                datasets: [{
+                    label: 'Risk Contribution (%)',
+                    data: [0],
+                    backgroundColor: '#2a2a2a',
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: { 
+                        grid: { color: 'rgba(255,255,255,0.05)' },
+                        ticks: { color: '#666' }
+                    },
+                    y: { 
+                        grid: { display: false },
+                        ticks: { color: '#999' }
+                    }
+                }
+            }
+        });
+    }
+    
+    // Update charts
+    function updateCharts() {
+        if (portfolio.length === 0) {
+            allocationChart.data.labels = ['Add assets'];
+            allocationChart.data.datasets[0].data = [100];
+            allocationChart.data.datasets[0].backgroundColor = ['#2a2a2a'];
+            
+            riskChart.data.labels = ['Add assets'];
+            riskChart.data.datasets[0].data = [0];
+            riskChart.data.datasets[0].backgroundColor = '#2a2a2a';
+        } else {
+            allocationChart.data.labels = portfolio.map(p => assetDatabase[p.id].symbol);
+            allocationChart.data.datasets[0].data = portfolio.map(p => p.allocation);
+            allocationChart.data.datasets[0].backgroundColor = portfolio.map(p => assetDatabase[p.id].color);
+            
+            // Risk contribution (proportional to volatility * weight)
+            const riskContributions = portfolio.map(p => {
+                const asset = assetDatabase[p.id];
+                return (p.allocation / 100) * asset.baseVol * 100;
+            });
+            const totalRisk = riskContributions.reduce((a, b) => a + b, 0);
+            
+            riskChart.data.labels = portfolio.map(p => assetDatabase[p.id].symbol);
+            riskChart.data.datasets[0].data = riskContributions.map(r => (r / totalRisk * 100).toFixed(1));
+            riskChart.data.datasets[0].backgroundColor = portfolio.map(p => assetDatabase[p.id].color);
+        }
+        
+        allocationChart.update();
+        riskChart.update();
+    }
+    
+    // Main analysis function
+    async function analyzePortfolio() {
+        if (portfolio.length === 0) {
+            alert('Please add at least one asset to your portfolio!');
+            return;
+        }
+        
+        const totalAllocation = portfolio.reduce((sum, p) => sum + p.allocation, 0);
+        if (Math.abs(totalAllocation - 100) > 0.5) {
+            alert(`Total allocation must equal 100%. Current: ${totalAllocation.toFixed(1)}%`);
+            return;
+        }
+        
+        // Show loading
+        const loading = document.getElementById('loadingOverlay');
+        const loadingSubtext = document.getElementById('loadingSubtext');
+        const btn = document.getElementById('analyzeBtn');
+        
+        loading.classList.add('active');
+        btn.disabled = true;
+        
+        try {
+            // Fetch all historical data
+            loadingSubtext.textContent = 'Fetching historical price data...';
+            const historicalData = {};
+            
+            for (const p of portfolio) {
+                historicalData[p.id] = await fetchHistoricalData(p.id, 90);
+                await new Promise(r => setTimeout(r, 300)); // Rate limiting
             }
             
-            const totalAllocation = portfolio.reduce((sum, p) => sum + p.allocation, 0);
-            if (Math.abs(totalAllocation - 100) > 0.1) {
-                alert(`Total allocation must equal 100%. Current: ${totalAllocation}%`);
-                return;
-            }
+            loadingSubtext.textContent = 'Calculating risk metrics...';
             
-            const btn = document.getElementById('analyzeBtn');
-            btn.disabled = true;
-            btn.innerHTML = '<span>⏳</span> Analyzing...';
-            
-            await fetchPrices();
-            
+            // Get parameters
             const portfolioValue = parseFloat(document.getElementById('portfolioValue').value) || 10000;
             const timeHorizon = parseInt(document.getElementById('timeHorizon').value);
             const confidence = parseFloat(document.getElementById('confidenceLevel').value);
-            
-            // Calculate weighted volatility
-            let weightedVolatility = 0;
-            portfolio.forEach(p => {
-                const meta = assetMeta[p.id];
-                weightedVolatility += (p.allocation / 100) * meta.volatility;
-            });
-            
-            // Time-adjusted volatility
-            const timeAdjustedVol = weightedVolatility * Math.sqrt(timeHorizon / 365);
-            
-            // Z-scores for confidence levels
-            const zScores = { 0.90: 1.28, 0.95: 1.65, 0.99: 2.33 };
             const zScore = zScores[confidence];
             
-            // Value at Risk
+            // Calculate portfolio returns
+            const portfolioReturns = calculatePortfolioReturns(historicalData);
+            
+            // Calculate metrics
+            const volatility = calculateVolatility(portfolioReturns);
+            const annualizedVol = volatility * Math.sqrt(252);
+            
+            // Time-adjusted VaR
+            const timeAdjustedVol = annualizedVol * Math.sqrt(timeHorizon / 365);
             const varPercent = timeAdjustedVol * zScore;
             const varValue = portfolioValue * varPercent;
             
-            // CVaR (Expected Shortfall) - approximate as 1.25x VaR
-            const cvarValue = varValue * 1.25;
+            // CVaR (Expected Shortfall)
+            const cvarValue = calculateCVaR(portfolioReturns, confidence, portfolioValue, timeHorizon);
             
-            // Sharpe Ratio (assuming risk-free rate of 4%)
-            const riskFreeRate = 0.04;
-            const expectedReturn = 0.10 + (weightedVolatility * 0.15); // Higher vol = higher expected return
-            const sharpeRatio = (expectedReturn - riskFreeRate) / weightedVolatility;
+            // Sharpe Ratio
+            const expectedReturn = calculateExpectedReturn();
+            const riskFreeRate = 0.05; // 5% risk-free rate
+            const sharpeRatio = (expectedReturn - riskFreeRate) / annualizedVol;
             
-            // Max Drawdown estimate based on volatility
-            const maxDrawdown = Math.min(0.95, weightedVolatility * 1.5);
+            // Sortino Ratio
+            const sortinoRatio = calculateSortinoRatio(portfolioReturns, expectedReturn, riskFreeRate);
             
-            // Portfolio Beta (relative to overall market)
-            const cryptoWeight = portfolio.filter(p => !p.id.startsWith('stock-') && !['tether', 'usd-coin'].includes(p.id))
-                .reduce((sum, p) => sum + p.allocation, 0) / 100;
-            const beta = 0.3 + cryptoWeight * 1.5;
+            // Max Drawdown
+            const maxDrawdown = calculateMaxDrawdown(portfolioReturns);
             
-            // Skewness and Kurtosis (crypto tends to have negative skew and high kurtosis)
-            const skewness = -0.2 - cryptoWeight * 0.5;
-            const kurtosis = 3 + cryptoWeight * 4;
+            // Beta
+            const beta = calculateBeta();
+            
+            // Skewness & Kurtosis
+            const skewness = calculateSkewness(portfolioReturns);
+            const kurtosis = calculateKurtosis(portfolioReturns);
             
             // Risk Score (0-100)
-            const riskScore = Math.min(100, Math.round(weightedVolatility * 100));
+            const riskScore = calculateRiskScore(annualizedVol, maxDrawdown, beta, skewness);
+            
+            // Recovery time estimate
+            const recoveryDays = Math.round(Math.abs(maxDrawdown) / (expectedReturn / 252));
+            
+            loadingSubtext.textContent = 'Generating AI insights...';
+            await new Promise(r => setTimeout(r, 500));
             
             // Update UI
             updateRiskGauge(riskScore);
+            updateMetrics({
+                varValue, varPercent, sharpeRatio, annualizedVol, maxDrawdown,
+                cvarValue, beta, sortinoRatio, skewness, kurtosis, recoveryDays, portfolioValue
+            });
+            updateCharts();
+            generateAIInsights(riskScore, sharpeRatio, annualizedVol, maxDrawdown, beta, portfolio);
             
-            document.getElementById('varValue').textContent = '$' + varValue.toLocaleString('en-US', { maximumFractionDigits: 0 });
-            document.getElementById('varPercent').textContent = (varPercent * 100).toFixed(1) + '% of portfolio';
-            
-            document.getElementById('sharpeValue').textContent = sharpeRatio.toFixed(2);
-            const sharpeRating = document.getElementById('sharpeRating');
-            if (sharpeRatio >= 1) {
-                sharpeRating.textContent = '✅ Good';
-                sharpeRating.className = 'metric-change positive';
-            } else if (sharpeRatio >= 0.5) {
-                sharpeRating.textContent = '⚠️ Moderate';
-                sharpeRating.className = 'metric-change';
-            } else {
-                sharpeRating.textContent = '❌ Poor';
-                sharpeRating.className = 'metric-change negative';
-            }
-            
-            document.getElementById('volatilityValue').textContent = (weightedVolatility * 100).toFixed(1) + '%';
-            const volRating = document.getElementById('volatilityRating');
-            if (weightedVolatility < 0.25) {
-                volRating.textContent = '🟢 Low';
-                volRating.className = 'metric-change positive';
-            } else if (weightedVolatility < 0.50) {
-                volRating.textContent = '🟡 Moderate';
-                volRating.className = 'metric-change';
-            } else {
-                volRating.textContent = '🔴 High';
-                volRating.className = 'metric-change negative';
-            }
-            
-            document.getElementById('drawdownValue').textContent = (maxDrawdown * 100).toFixed(1) + '%';
-            document.getElementById('drawdownRating').textContent = 'Potential loss in crash';
-            
-            document.getElementById('cvarValue').textContent = '$' + cvarValue.toLocaleString('en-US', { maximumFractionDigits: 0 });
-            document.getElementById('betaValue').textContent = beta.toFixed(2);
-            document.getElementById('skewnessValue').textContent = skewness.toFixed(2);
-            document.getElementById('kurtosisValue').textContent = kurtosis.toFixed(2);
-            document.getElementById('recoveryValue').textContent = Math.round(maxDrawdown * 365 / 2) + ' days';
-            
-            // Generate drawdown bars
-            generateDrawdownChart(weightedVolatility);
-            
-            // Generate AI insights
-            generateAIInsights(riskScore, sharpeRatio, weightedVolatility, maxDrawdown, portfolio);
-            
+        } catch (error) {
+            console.error('Analysis error:', error);
+            alert('Error analyzing portfolio. Please try again.');
+        } finally {
+            loading.classList.remove('active');
             btn.disabled = false;
-            btn.innerHTML = '<span>🔍</span> Analyze Portfolio Risk';
         }
-
-        function updateRiskGauge(score) {
-            const needle = document.getElementById('riskNeedle');
-            const rotation = -90 + (score / 100) * 180;
-            needle.setAttribute('transform', `rotate(${rotation}, 100, 100)`);
-            
-            const gaugeFill = document.getElementById('riskGaugeFill');
-            const offset = 251 - (score / 100) * 251;
-            gaugeFill.style.strokeDashoffset = offset;
-            
-            document.getElementById('riskScoreValue').textContent = score;
-            
-            const label = document.getElementById('riskScoreLabel');
-            if (score < 30) {
-                label.textContent = '🟢 Low Risk';
-                label.style.color = '#22c55e';
-            } else if (score < 50) {
-                label.textContent = '🟡 Moderate Risk';
-                label.style.color = '#fbbf24';
-            } else if (score < 70) {
-                label.textContent = '🟠 High Risk';
-                label.style.color = '#f97316';
-            } else {
-                label.textContent = '🔴 Very High Risk';
-                label.style.color = '#ef4444';
+    }
+    
+    // Calculate portfolio returns from individual asset returns
+    function calculatePortfolioReturns(historicalData) {
+        const minLength = Math.min(...Object.values(historicalData).map(d => d.length));
+        const portfolioReturns = [];
+        
+        for (let i = 0; i < minLength; i++) {
+            let dayReturn = 0;
+            for (const p of portfolio) {
+                const weight = p.allocation / 100;
+                const assetReturn = historicalData[p.id][i] || 0;
+                dayReturn += weight * assetReturn;
             }
+            portfolioReturns.push(dayReturn);
         }
-
-        function generateDrawdownChart(volatility) {
-            const container = document.getElementById('drawdownBars');
-            let bars = '';
-            
-            for (let i = 0; i < 30; i++) {
-                const randomDrawdown = Math.random() * volatility * 50;
-                const height = 10 + randomDrawdown;
-                const color = randomDrawdown < 15 ? '#22c55e' : randomDrawdown < 30 ? '#fbbf24' : '#ef4444';
-                bars += `<div class="drawdown-bar" style="height: ${height}%; background: ${color};" title="-${randomDrawdown.toFixed(1)}%"></div>`;
-            }
-            
-            container.innerHTML = bars;
+        
+        return portfolioReturns;
+    }
+    
+    // Calculate volatility (standard deviation of returns)
+    function calculateVolatility(returns) {
+        if (returns.length < 2) return 0;
+        const mean = returns.reduce((a, b) => a + b, 0) / returns.length;
+        const variance = returns.reduce((sum, r) => sum + Math.pow(r - mean, 2), 0) / (returns.length - 1);
+        return Math.sqrt(variance);
+    }
+    
+    // Calculate Expected Return (weighted average)
+    function calculateExpectedReturn() {
+        let expectedReturn = 0;
+        for (const p of portfolio) {
+            const asset = assetDatabase[p.id];
+            expectedReturn += (p.allocation / 100) * asset.expectedReturn;
         }
-
-        function generateAIInsights(riskScore, sharpe, volatility, drawdown, portfolio) {
-            const recommendations = [];
-            let content = '';
-            
-            if (riskScore >= 70) {
-                content = `<strong>⚠️ High Risk Alert:</strong> Your portfolio has a risk score of ${riskScore}/100, indicating significant volatility exposure. With ${(volatility * 100).toFixed(1)}% annualized volatility, you could see large daily swings. `;
-                recommendations.push({ text: 'Consider reducing crypto allocation', class: 'danger' });
-                recommendations.push({ text: 'Add stable assets (USDT, bonds)', class: 'warning' });
-            } else if (riskScore >= 40) {
-                content = `<strong>📊 Moderate Risk Profile:</strong> Your portfolio has a balanced risk score of ${riskScore}/100. Volatility of ${(volatility * 100).toFixed(1)}% is typical for mixed portfolios. `;
-                recommendations.push({ text: 'Good balance maintained', class: 'success' });
-                recommendations.push({ text: 'Monitor market conditions', class: 'warning' });
-            } else {
-                content = `<strong>✅ Conservative Portfolio:</strong> Your risk score of ${riskScore}/100 indicates a defensive stance. Low volatility of ${(volatility * 100).toFixed(1)}% means smaller swings but potentially lower returns. `;
-                recommendations.push({ text: 'Well protected against crashes', class: 'success' });
-                recommendations.push({ text: 'May underperform in bull markets', class: 'warning' });
-            }
-            
-            if (sharpe < 0.5) {
-                content += `The Sharpe ratio of ${sharpe.toFixed(2)} suggests you're not being compensated well for the risk taken. `;
-                recommendations.push({ text: 'Low risk-adjusted returns', class: 'danger' });
-            } else if (sharpe >= 1) {
-                content += `Sharpe ratio of ${sharpe.toFixed(2)} indicates excellent risk-adjusted returns. `;
-                recommendations.push({ text: 'Strong Sharpe ratio', class: 'success' });
-            }
-            
-            content += `Maximum potential drawdown is estimated at ${(drawdown * 100).toFixed(1)}% - ensure you can handle this level of loss emotionally and financially.`;
-            
-            document.getElementById('aiContent').innerHTML = content;
-            document.getElementById('aiRecommendations').innerHTML = recommendations.map(r => 
-                `<span class="ai-rec ${r.class}">${r.text}</span>`
-            ).join('');
+        return expectedReturn;
+    }
+    
+    // Calculate CVaR (Expected Shortfall)
+    function calculateCVaR(returns, confidence, portfolioValue, timeHorizon) {
+        const sortedReturns = [...returns].sort((a, b) => a - b);
+        const cutoffIndex = Math.floor(sortedReturns.length * (1 - confidence));
+        const tailReturns = sortedReturns.slice(0, cutoffIndex);
+        
+        if (tailReturns.length === 0) return 0;
+        
+        const avgTailReturn = tailReturns.reduce((a, b) => a + b, 0) / tailReturns.length;
+        const annualizedTailReturn = avgTailReturn * Math.sqrt(252);
+        const timeAdjustedTail = annualizedTailReturn * Math.sqrt(timeHorizon / 365);
+        
+        return Math.abs(timeAdjustedTail * portfolioValue);
+    }
+    
+    // Calculate Sortino Ratio
+    function calculateSortinoRatio(returns, expectedReturn, riskFreeRate) {
+        const negativeReturns = returns.filter(r => r < 0);
+        if (negativeReturns.length === 0) return 3; // Very good if no negative days
+        
+        const downsideDeviation = Math.sqrt(
+            negativeReturns.reduce((sum, r) => sum + r * r, 0) / negativeReturns.length
+        ) * Math.sqrt(252);
+        
+        return (expectedReturn - riskFreeRate) / downsideDeviation;
+    }
+    
+    // Calculate Maximum Drawdown
+    function calculateMaxDrawdown(returns) {
+        let cumulative = 1;
+        let peak = 1;
+        let maxDD = 0;
+        
+        for (const r of returns) {
+            cumulative *= (1 + r);
+            if (cumulative > peak) peak = cumulative;
+            const dd = (peak - cumulative) / peak;
+            if (dd > maxDD) maxDD = dd;
         }
-
-        // Initialize
-        renderAssetList();
-    </script>
+        
+        // Extrapolate for longer periods
+        const annualFactor = Math.sqrt(252 / returns.length);
+        return Math.min(0.95, maxDD * (1 + annualFactor * 0.3));
+    }
+    
+    // Calculate Portfolio Beta
+    function calculateBeta() {
+        let weightedBeta = 0;
+        
+        for (const p of portfolio) {
+            const asset = assetDatabase[p.id];
+            let assetBeta;
+            
+            switch (asset.type) {
+                case 'crypto':
+                    assetBeta = 1.5 + (asset.baseVol - 0.65) * 0.5;
+                    break;
+                case 'stablecoin':
+                    assetBeta = 0.05;
+                    break;
+                case 'etf':
+                    assetBeta = asset.symbol === 'SPY' ? 1.0 : 1.1;
+                    break;
+                case 'stock':
+                    assetBeta = 0.8 + asset.baseVol * 1.2;
+                    break;
+                case 'bond':
+                    assetBeta = 0.2;
+                    break;
+                case 'commodity':
+                    assetBeta = 0.3;
+                    break;
+                default:
+                    assetBeta = 1.0;
+            }
+            
+            weightedBeta += (p.allocation / 100) * assetBeta;
+        }
+        
+        return weightedBeta;
+    }
+    
+    // Calculate Skewness
+    function calculateSkewness(returns) {
+        if (returns.length < 3) return 0;
+        const mean = returns.reduce((a, b) => a + b, 0) / returns.length;
+        const stdDev = calculateVolatility(returns);
+        if (stdDev === 0) return 0;
+        
+        const n = returns.length;
+        const skew = returns.reduce((sum, r) => sum + Math.pow((r - mean) / stdDev, 3), 0) * n / ((n - 1) * (n - 2));
+        return skew;
+    }
+    
+    // Calculate Kurtosis
+    function calculateKurtosis(returns) {
+        if (returns.length < 4) return 3;
+        const mean = returns.reduce((a, b) => a + b, 0) / returns.length;
+        const stdDev = calculateVolatility(returns);
+        if (stdDev === 0) return 3;
+        
+        const n = returns.length;
+        const kurt = returns.reduce((sum, r) => sum + Math.pow((r - mean) / stdDev, 4), 0) / n;
+        return kurt;
+    }
+    
+    // Calculate composite risk score
+    function calculateRiskScore(volatility, maxDrawdown, beta, skewness) {
+        // Normalize each component to 0-100 scale
+        const volScore = Math.min(100, volatility * 100); // 100% vol = 100 score
+        const ddScore = Math.min(100, maxDrawdown * 120); // 83% DD = 100 score
+        const betaScore = Math.min(100, Math.max(0, (beta - 0.5) * 50)); // Beta 2.5 = 100
+        const skewScore = Math.min(100, Math.max(0, (0.5 - skewness) * 50)); // Negative skew is worse
+        
+        // Weighted average
+        const score = (volScore * 0.35) + (ddScore * 0.35) + (betaScore * 0.15) + (skewScore * 0.15);
+        
+        return Math.round(Math.min(100, Math.max(0, score)));
+    }
+    
+    // Update risk gauge with premium needle animation
+    function updateRiskGauge(score) {
+        const gaugeFill = document.getElementById('gaugeFill');
+        const gaugeNeedle = document.getElementById('gaugeNeedle');
+        
+        // Update arc fill (267 is the path length for the new arc)
+        const offset = 267 - (score / 100) * 267;
+        gaugeFill.style.strokeDashoffset = offset;
+        
+        // Rotate needle: -90deg = 0 score (left), +90deg = 100 score (right)
+        const needleRotation = -90 + (score / 100) * 180;
+        gaugeNeedle.style.transform = `translateX(-50%) rotate(${needleRotation}deg)`;
+        
+        // Update score display
+        document.getElementById('riskScoreValue').textContent = score;
+        
+        const label = document.getElementById('riskScoreLabel');
+        const valueEl = document.getElementById('riskScoreValue');
+        
+        if (score < 25) {
+            label.textContent = 'Low Risk';
+            label.style.color = '#10b981';
+            valueEl.style.background = 'linear-gradient(180deg, #10b981 0%, #059669 100%)';
+        } else if (score < 45) {
+            label.textContent = 'Moderate Risk';
+            label.style.color = '#fbbf24';
+            valueEl.style.background = 'linear-gradient(180deg, #fbbf24 0%, #f59e0b 100%)';
+        } else if (score < 65) {
+            label.textContent = 'High Risk';
+            label.style.color = '#f97316';
+            valueEl.style.background = 'linear-gradient(180deg, #f97316 0%, #ea580c 100%)';
+        } else {
+            label.textContent = 'Very High Risk';
+            label.style.color = '#ef4444';
+            valueEl.style.background = 'linear-gradient(180deg, #ef4444 0%, #dc2626 100%)';
+        }
+        
+        valueEl.style.webkitBackgroundClip = 'text';
+        valueEl.style.webkitTextFillColor = 'transparent';
+        valueEl.style.backgroundClip = 'text';
+    }
+    
+    // Update metrics display
+    function updateMetrics(data) {
+        // VaR
+        document.getElementById('varValue').textContent = '$' + data.varValue.toLocaleString('en-US', { maximumFractionDigits: 0 });
+        const varPct = (data.varPercent * 100).toFixed(1);
+        document.getElementById('varTag').textContent = varPct + '% of portfolio';
+        document.getElementById('varTag').className = 'metric-tag ' + (varPct > 20 ? 'red' : varPct > 10 ? 'yellow' : 'green');
+        
+        // Sharpe
+        document.getElementById('sharpeValue').textContent = data.sharpeRatio.toFixed(2);
+        const sharpeTag = document.getElementById('sharpeTag');
+        if (data.sharpeRatio >= 1) {
+            sharpeTag.textContent = '✅ Excellent';
+            sharpeTag.className = 'metric-tag green';
+        } else if (data.sharpeRatio >= 0.5) {
+            sharpeTag.textContent = '⚠️ Acceptable';
+            sharpeTag.className = 'metric-tag yellow';
+        } else {
+            sharpeTag.textContent = '❌ Poor';
+            sharpeTag.className = 'metric-tag red';
+        }
+        
+        // Volatility
+        const volPct = (data.annualizedVol * 100).toFixed(1);
+        document.getElementById('volatilityValue').textContent = volPct + '%';
+        const volTag = document.getElementById('volatilityTag');
+        if (data.annualizedVol < 0.20) {
+            volTag.textContent = '🟢 Low volatility';
+            volTag.className = 'metric-tag green';
+        } else if (data.annualizedVol < 0.40) {
+            volTag.textContent = '🟡 Moderate';
+            volTag.className = 'metric-tag yellow';
+        } else {
+            volTag.textContent = '🔴 High volatility';
+            volTag.className = 'metric-tag red';
+        }
+        
+        // Max Drawdown
+        const ddPct = (data.maxDrawdown * 100).toFixed(1);
+        document.getElementById('drawdownValue').textContent = '-' + ddPct + '%';
+        
+        // Detailed metrics
+        document.getElementById('cvarValue').textContent = '$' + data.cvarValue.toLocaleString('en-US', { maximumFractionDigits: 0 });
+        document.getElementById('betaValue').textContent = data.beta.toFixed(2);
+        document.getElementById('sortinoValue').textContent = data.sortinoRatio.toFixed(2);
+        document.getElementById('skewnessValue').textContent = data.skewness.toFixed(2);
+        document.getElementById('kurtosisValue').textContent = data.kurtosis.toFixed(2);
+        document.getElementById('recoveryValue').textContent = data.recoveryDays > 1000 ? '1000+ days' : data.recoveryDays + ' days';
+    }
+    
+    // Generate AI insights
+    function generateAIInsights(riskScore, sharpe, volatility, drawdown, beta, portfolio) {
+        const content = document.getElementById('aiContent');
+        const tags = document.getElementById('aiTags');
+        
+        const cryptoWeight = portfolio
+            .filter(p => assetDatabase[p.id].type === 'crypto')
+            .reduce((sum, p) => sum + p.allocation, 0);
+        
+        const stableWeight = portfolio
+            .filter(p => assetDatabase[p.id].type === 'stablecoin')
+            .reduce((sum, p) => sum + p.allocation, 0);
+        
+        let analysis = '';
+        const recommendations = [];
+        
+        // Risk level analysis
+        if (riskScore >= 70) {
+            analysis += `<strong>⚠️ High Risk Alert:</strong> Your portfolio has a risk score of <strong>${riskScore}/100</strong>, indicating significant volatility exposure. `;
+            recommendations.push({ text: 'Consider reducing high-volatility assets', type: 'danger' });
+        } else if (riskScore >= 45) {
+            analysis += `<strong>📊 Moderate Risk Profile:</strong> Your portfolio scores <strong>${riskScore}/100</strong> on our risk scale, representing a balanced approach. `;
+            recommendations.push({ text: 'Good risk balance', type: 'success' });
+        } else {
+            analysis += `<strong>✅ Conservative Portfolio:</strong> With a risk score of <strong>${riskScore}/100</strong>, your portfolio takes a defensive stance. `;
+            recommendations.push({ text: 'Well protected', type: 'success' });
+        }
+        
+        // Volatility analysis
+        const volPct = (volatility * 100).toFixed(0);
+        analysis += `Annual volatility of <strong>${volPct}%</strong> means your portfolio could fluctuate significantly in value. `;
+        
+        // Crypto exposure
+        if (cryptoWeight > 60) {
+            analysis += `Your <strong>${cryptoWeight}%</strong> crypto exposure significantly amplifies risk. `;
+            recommendations.push({ text: 'High crypto concentration', type: 'warning' });
+        } else if (cryptoWeight > 30) {
+            recommendations.push({ text: `${cryptoWeight}% crypto exposure`, type: 'info' });
+        }
+        
+        // Sharpe analysis
+        if (sharpe < 0.3) {
+            analysis += `Sharpe ratio of <strong>${sharpe.toFixed(2)}</strong> suggests you're not being adequately compensated for the risk taken. `;
+            recommendations.push({ text: 'Low risk-adjusted returns', type: 'danger' });
+        } else if (sharpe >= 1) {
+            recommendations.push({ text: 'Excellent risk-adjusted returns', type: 'success' });
+        }
+        
+        // Diversification check
+        if (portfolio.length < 3) {
+            recommendations.push({ text: 'Add more assets for diversification', type: 'warning' });
+        } else if (portfolio.length >= 5) {
+            recommendations.push({ text: 'Well diversified', type: 'success' });
+        }
+        
+        // Beta analysis
+        if (beta > 1.5) {
+            analysis += `Portfolio beta of <strong>${beta.toFixed(2)}</strong> indicates high sensitivity to market movements. `;
+            recommendations.push({ text: 'High market sensitivity', type: 'warning' });
+        }
+        
+        // Max drawdown warning
+        const ddPct = (drawdown * 100).toFixed(0);
+        analysis += `<br><br>📉 <strong>Maximum potential drawdown</strong> of <strong>${ddPct}%</strong> — ensure you can handle this level of loss emotionally and financially before investing.`;
+        
+        content.innerHTML = analysis;
+        tags.innerHTML = recommendations.map(r => 
+            `<span class="ai-tag ${r.type}"><i class="fas fa-${r.type === 'success' ? 'check-circle' : r.type === 'warning' ? 'exclamation-triangle' : r.type === 'danger' ? 'times-circle' : 'info-circle'}"></i>${r.text}</span>`
+        ).join('');
+    }
+    
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+        const navLinks = document.querySelector('.nav-links');
+        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+    }
+</script>
 <script src="common-footer.js" defer></script>
 </body>
 </html>

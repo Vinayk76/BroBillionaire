@@ -455,10 +455,10 @@
         /* Premium Needle */
         .gauge-needle { 
             position: absolute; 
-            bottom: 0; 
-            left: calc(50% + 10px); 
+            bottom: 60px;
+            left: 170px;
             width: 4px; 
-            height: 95px; 
+            height: 100px; 
             background: linear-gradient(to top, 
                 #C9A227 0%, 
                 #ffd700 40%,
@@ -506,8 +506,8 @@
         /* Center Hub Details */
         .gauge-center-hub {
             position: absolute;
-            bottom: -8px;
-            left: calc(50% + 10px);
+            bottom: 52px;
+            left: 170px;
             transform: translateX(-50%);
             width: 20px;
             height: 20px;
@@ -944,10 +944,75 @@
         
         .last-updated { 
             text-align: center; 
-            color: #555; 
-            font-size: 0.8rem; 
+            color: #888; 
+            font-size: 0.85rem; 
             margin-top: 1.5rem;
             font-weight: 500;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .last-updated .update-label { color: #aaa; }
+        .last-updated .update-label strong { color: #C9A227; }
+        .last-updated .next-update { color: #666; font-size: 0.75rem; }
+        
+        /* Live Indicator */
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+        }
+        .live-indicator.live {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        .live-indicator.offline {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        .offline-dot {
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        
+        /* Refresh Indicator */
+        .refresh-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: #666;
+            font-size: 0.75rem;
+            cursor: pointer;
+            padding: 0.3rem 0.6rem;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        .refresh-indicator:hover {
+            background: rgba(201, 162, 39, 0.15);
+            color: #C9A227;
+        }
+        .refresh-indicator.refreshing .refresh-icon {
+            animation: spin 1s linear infinite;
         }
         
         /* Share Section */
@@ -1122,6 +1187,12 @@
                     <span>Extreme Greed 🟢</span>
                 </div>
                 
+                <!-- Live Status Indicator -->
+                <div id="liveIndicator" class="live-indicator">
+                    <div class="loading-spinner" style="width: 12px; height: 12px; border-width: 2px;"></div>
+                    <span>Connecting...</span>
+                </div>
+                
                 <div id="sentimentDisplay">
                     <div class="loading">
                         <div class="loading-spinner"></div>
@@ -1130,6 +1201,12 @@
                 </div>
                 
                 <div class="last-updated" id="lastUpdated"></div>
+                
+                <!-- Manual Refresh Button -->
+                <div class="refresh-indicator" onclick="manualRefresh()" title="Click to refresh data">
+                    <span class="refresh-icon">🔄</span>
+                    <span>Refresh</span>
+                </div>
             </div>
             
             <!-- Right Panel -->
@@ -1336,6 +1413,71 @@
         const COINGECKO_API = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=8&page=1&sparkline=false&price_change_percentage=24h';
         const GLOBAL_API = 'https://api.coingecko.com/api/v3/global';
         
+        // CORS Proxy fallback (only used if direct API fails)
+        const CORS_PROXIES = [
+            '', // Try direct first
+            'https://api.allorigins.win/raw?url=',
+            'https://corsproxy.io/?'
+        ];
+        
+        let lastSuccessfulFetch = null;
+        let retryCount = 0;
+        const MAX_RETRIES = 3;
+        
+        // Helper: Fetch with retry and CORS proxy fallback
+        async function fetchWithRetry(url, options = {}) {
+            for (let proxy of CORS_PROXIES) {
+                try {
+                    const fullUrl = proxy ? proxy + encodeURIComponent(url) : url;
+                    const response = await fetch(fullUrl, {
+                        ...options,
+                        signal: AbortSignal.timeout(10000) // 10 second timeout
+                    });
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    return await response.json();
+                } catch (error) {
+                    console.warn(`Fetch failed with ${proxy || 'direct'}: ${error.message}`);
+                    continue;
+                }
+            }
+            throw new Error('All fetch attempts failed');
+        }
+        
+        // Show loading state
+        function showLoading(elementId, message = 'Loading...') {
+            const el = document.getElementById(elementId);
+            if (el) {
+                el.innerHTML = `
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                        <span>${message}</span>
+                    </div>
+                `;
+            }
+        }
+        
+        // Update live indicator
+        function updateLiveIndicator(isLive, timestamp = null) {
+            const indicator = document.getElementById('liveIndicator');
+            if (indicator) {
+                if (isLive && timestamp) {
+                    const now = new Date();
+                    const dataTime = new Date(timestamp * 1000);
+                    const diffHours = Math.round((now - dataTime) / (1000 * 60 * 60));
+                    const timeAgo = diffHours < 1 ? 'Just now' : 
+                                    diffHours === 1 ? '1 hour ago' : 
+                                    diffHours < 24 ? `${diffHours} hours ago` : 
+                                    `${Math.round(diffHours / 24)} days ago`;
+                    
+                    indicator.innerHTML = `<span class="live-dot"></span> LIVE · Data from ${timeAgo}`;
+                    indicator.className = 'live-indicator live';
+                } else {
+                    indicator.innerHTML = `<span class="offline-dot"></span> Offline · Retrying...`;
+                    indicator.className = 'live-indicator offline';
+                }
+            }
+        }
+        
         // Sentiment Labels
         function getSentimentInfo(value) {
             if (value <= 25) return { label: 'Extreme Fear', class: 'extreme-fear', labelClass: 'label-extreme-fear', description: 'Investors are extremely worried. This often indicates a buying opportunity.' };
@@ -1391,8 +1533,7 @@
         // Fetch Global Market Data
         async function fetchGlobalData() {
             try {
-                const response = await fetch(GLOBAL_API);
-                const data = await response.json();
+                const data = await fetchWithRetry(GLOBAL_API);
                 
                 if (data.data) {
                     const totalMarketCap = data.data.total_market_cap.usd;
@@ -1403,39 +1544,89 @@
                 }
             } catch (error) {
                 console.error('Global API Error:', error);
+                // Keep existing values if available
             }
         }
         
         // Fetch Fear & Greed Index
         async function fetchFearGreed() {
+            const sentimentEl = document.getElementById('sentimentDisplay');
+            
             try {
-                const response = await fetch(FEAR_GREED_API);
-                const data = await response.json();
+                // Show subtle loading state on refresh (not initial load)
+                if (lastSuccessfulFetch) {
+                    const refreshIcon = document.querySelector('.refresh-indicator');
+                    if (refreshIcon) refreshIcon.classList.add('refreshing');
+                }
+                
+                const data = await fetchWithRetry(FEAR_GREED_API);
                 
                 if (data.data && data.data.length > 0) {
                     const current = data.data[0];
                     const value = parseInt(current.value);
                     const sentiment = getSentimentInfo(value);
+                    const timestamp = parseInt(current.timestamp);
+                    
+                    // Update successful fetch time
+                    lastSuccessfulFetch = new Date();
+                    retryCount = 0;
                     
                     updateGauge(value);
                     animateFactors(value);
+                    updateLiveIndicator(true, timestamp);
                     
-                    document.getElementById('sentimentDisplay').innerHTML = `
+                    // Calculate time until next API update
+                    const timeUntilUpdate = parseInt(current.time_until_update || 0);
+                    const nextUpdate = timeUntilUpdate > 0 ? 
+                        new Date(Date.now() + timeUntilUpdate * 1000).toLocaleTimeString() : 'Soon';
+                    
+                    sentimentEl.innerHTML = `
                         <div class="sentiment-value ${sentiment.class}">${value}</div>
                         <div class="sentiment-label ${sentiment.labelClass}">${sentiment.label}</div>
                         <div class="sentiment-description">${sentiment.description}</div>
                     `;
                     
-                    const updateTime = new Date(current.timestamp * 1000);
-                    document.getElementById('lastUpdated').textContent = `Last updated: ${updateTime.toLocaleString()}`;
+                    const updateTime = new Date(timestamp * 1000);
+                    const formattedDate = updateTime.toLocaleDateString('en-US', { 
+                        weekday: 'short', 
+                        month: 'short', 
+                        day: 'numeric',
+                        year: 'numeric'
+                    });
+                    const formattedTime = updateTime.toLocaleTimeString('en-US', { 
+                        hour: '2-digit', 
+                        minute: '2-digit',
+                        hour12: true
+                    });
+                    
+                    document.getElementById('lastUpdated').innerHTML = `
+                        <span class="update-label">📊 Index data from: <strong>${formattedDate}</strong> at <strong>${formattedTime}</strong></span>
+                        <span class="next-update">Next API update: ~${nextUpdate}</span>
+                    `;
                     
                     displayHistory(data.data);
+                    
+                    // Remove refresh indicator
+                    const refreshIcon = document.querySelector('.refresh-indicator');
+                    if (refreshIcon) refreshIcon.classList.remove('refreshing');
                 }
             } catch (error) {
                 console.error('Fear & Greed API Error:', error);
-                document.getElementById('sentimentDisplay').innerHTML = `
-                    <div class="error-message">Unable to load sentiment data. Please refresh the page.</div>
-                `;
+                retryCount++;
+                updateLiveIndicator(false);
+                
+                if (retryCount >= MAX_RETRIES) {
+                    sentimentEl.innerHTML = `
+                        <div class="error-message">
+                            <p>⚠️ Unable to load sentiment data</p>
+                            <p style="font-size: 0.85rem; margin-top: 0.5rem;">The API might be temporarily unavailable. 
+                            <button onclick="location.reload()" style="background: #C9A227; border: none; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; margin-top: 0.5rem; font-weight: 600;">Retry Now</button></p>
+                        </div>
+                    `;
+                } else {
+                    // Auto retry after 5 seconds
+                    setTimeout(fetchFearGreed, 5000);
+                }
             }
         }
         
@@ -1479,8 +1670,7 @@
         // Fetch Crypto Prices
         async function fetchCryptoPrices() {
             try {
-                const response = await fetch(COINGECKO_API);
-                const data = await response.json();
+                const data = await fetchWithRetry(COINGECKO_API);
                 
                 let cryptoHTML = '';
                 let btcPrice = null;
@@ -1527,8 +1717,13 @@
             } catch (error) {
                 console.error('CoinGecko API Error:', error);
                 document.getElementById('cryptoList').innerHTML = `
-                    <div class="error-message">Unable to load crypto prices. Please refresh.</div>
+                    <div class="error-message">
+                        <p>⚠️ Rate limited by CoinGecko API</p>
+                        <p style="font-size: 0.8rem; margin-top: 0.5rem;">Free tier has request limits. Data will refresh automatically.</p>
+                    </div>
                 `;
+                // Retry after 30 seconds (CoinGecko rate limit window)
+                setTimeout(fetchCryptoPrices, 30000);
             }
         }
         
@@ -1560,6 +1755,24 @@
                     btn.innerHTML = originalText;
                     btn.style.background = 'linear-gradient(135deg, #C9A227 0%, #a68b1e 100%)';
                 }, 2000);
+            });
+        }
+        
+        // Manual refresh function
+        function manualRefresh() {
+            const refreshEl = document.querySelector('.refresh-indicator');
+            if (refreshEl) {
+                refreshEl.classList.add('refreshing');
+            }
+            
+            Promise.all([
+                fetchFearGreed(),
+                fetchCryptoPrices(),
+                fetchGlobalData()
+            ]).finally(() => {
+                setTimeout(() => {
+                    if (refreshEl) refreshEl.classList.remove('refreshing');
+                }, 1000);
             });
         }
         

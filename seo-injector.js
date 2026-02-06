@@ -455,10 +455,56 @@
             if (this.isArticle) {
                 const headers = document.querySelectorAll('h2');
                 if (headers.length >= 3) {
+                    // Create mobile toggle button
+                    const mobileToggle = document.createElement('button');
+                    mobileToggle.className = 'toc-mobile-toggle';
+                    mobileToggle.innerHTML = '<i class="fas fa-list-ul"></i>';
+                    mobileToggle.setAttribute('aria-label', 'Toggle Quick Navigation');
+                    mobileToggle.style.cssText = `
+                        position: fixed;
+                        right: 20px;
+                        bottom: 80px;
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;
+                        background: linear-gradient(135deg, ${CONFIG.themeColor} 0%, #a68820 100%);
+                        color: #000;
+                        border: none;
+                        cursor: pointer;
+                        z-index: 1001;
+                        display: none;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 18px;
+                        box-shadow: 0 4px 20px rgba(201, 162, 39, 0.4);
+                        transition: transform 0.3s, box-shadow 0.3s;
+                    `;
+
                     const tocContainer = document.createElement('nav');
                     tocContainer.className = 'article-toc';
                     tocContainer.setAttribute('aria-label', 'Table of Contents');
-                    tocContainer.innerHTML = '<h4 style="margin-bottom: 10px; color: ' + CONFIG.themeColor + ';"><i class="fas fa-list-ul"></i> Quick Navigation</h4>';
+                    
+                    // Header with close button
+                    const tocHeader = document.createElement('div');
+                    tocHeader.style.cssText = 'display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;';
+                    tocHeader.innerHTML = `
+                        <h4 style="margin: 0; color: ${CONFIG.themeColor}; font-size: 1rem;"><i class="fas fa-list-ul"></i> Quick Navigation</h4>
+                        <button class="toc-close-btn" aria-label="Close navigation" style="
+                            background: rgba(255, 255, 255, 0.1);
+                            border: 1px solid rgba(255, 255, 255, 0.2);
+                            color: #fff;
+                            width: 28px;
+                            height: 28px;
+                            border-radius: 50%;
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 14px;
+                            transition: all 0.3s;
+                        "><i class="fas fa-times"></i></button>
+                    `;
+                    tocContainer.appendChild(tocHeader);
                     
                     const tocList = document.createElement('ul');
                     tocList.style.cssText = 'list-style: none; padding: 0; margin: 0;';
@@ -470,23 +516,45 @@
                         }
 
                         const li = document.createElement('li');
-                        li.style.cssText = 'margin: 5px 0;';
+                        li.style.cssText = 'margin: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 8px;';
                         
                         const link = document.createElement('a');
                         link.href = '#' + header.id;
                         link.textContent = header.textContent;
                         link.style.cssText = `
-                            color: #888;
+                            color: #e0e0e0;
                             text-decoration: none;
                             font-size: 0.9rem;
-                            transition: color 0.3s;
+                            transition: color 0.3s, padding-left 0.3s;
+                            display: block;
+                            line-height: 1.5;
                         `;
-                        link.addEventListener('mouseenter', () => link.style.color = CONFIG.themeColor);
-                        link.addEventListener('mouseleave', () => link.style.color = '#888');
+                        link.addEventListener('mouseenter', () => {
+                            link.style.color = CONFIG.themeColor;
+                            link.style.paddingLeft = '8px';
+                        });
+                        link.addEventListener('mouseleave', () => {
+                            link.style.color = '#e0e0e0';
+                            link.style.paddingLeft = '0';
+                        });
+                        // Close TOC on mobile when link is clicked
+                        link.addEventListener('click', () => {
+                            if (window.innerWidth <= 1024) {
+                                tocContainer.style.display = 'none';
+                                mobileToggle.style.display = 'flex';
+                            }
+                        });
                         
                         li.appendChild(link);
                         tocList.appendChild(li);
                     });
+
+                    // Remove border from last item
+                    if (tocList.lastChild) {
+                        tocList.lastChild.style.borderBottom = 'none';
+                        tocList.lastChild.style.marginBottom = '0';
+                        tocList.lastChild.style.paddingBottom = '0';
+                    }
 
                     tocContainer.appendChild(tocList);
                     
@@ -500,27 +568,91 @@
                         right: ${rightOffset};
                         top: 50%;
                         transform: translateY(-50%);
-                        background: rgba(20, 20, 30, 0.95);
+                        background: rgba(15, 15, 25, 0.98);
+                        backdrop-filter: blur(20px);
+                        -webkit-backdrop-filter: blur(20px);
                         padding: 20px;
-                        border-radius: 10px;
-                        border: 1px solid rgba(201, 162, 39, 0.3);
-                        max-width: 250px;
-                        max-height: 60vh;
+                        border-radius: 12px;
+                        border: 1px solid rgba(201, 162, 39, 0.4);
+                        max-width: 280px;
+                        max-height: 70vh;
                         overflow-y: auto;
                         z-index: 1000;
                         display: none;
+                        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
                     `;
 
-                    // Only show on larger screens (larger threshold when sidebar exists)
-                    if (window.innerWidth > minScreenWidth) {
-                        tocContainer.style.display = 'block';
-                    }
+                    // Close button functionality
+                    const closeBtn = tocHeader.querySelector('.toc-close-btn');
+                    closeBtn.addEventListener('mouseenter', () => {
+                        closeBtn.style.background = 'rgba(239, 68, 68, 0.3)';
+                        closeBtn.style.borderColor = '#ef4444';
+                        closeBtn.style.color = '#ef4444';
+                    });
+                    closeBtn.addEventListener('mouseleave', () => {
+                        closeBtn.style.background = 'rgba(255, 255, 255, 0.1)';
+                        closeBtn.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                        closeBtn.style.color = '#fff';
+                    });
+                    closeBtn.addEventListener('click', () => {
+                        tocContainer.style.display = 'none';
+                        if (window.innerWidth <= 1024) {
+                            mobileToggle.style.display = 'flex';
+                        }
+                    });
 
-                    window.addEventListener('resize', () => {
-                        tocContainer.style.display = window.innerWidth > minScreenWidth ? 'block' : 'none';
+                    // Mobile toggle functionality
+                    mobileToggle.addEventListener('click', () => {
+                        tocContainer.style.display = 'block';
+                        tocContainer.style.right = '20px';
+                        tocContainer.style.top = '50%';
+                        tocContainer.style.transform = 'translateY(-50%)';
+                        mobileToggle.style.display = 'none';
+                    });
+                    mobileToggle.addEventListener('mouseenter', () => {
+                        mobileToggle.style.transform = 'scale(1.1)';
+                        mobileToggle.style.boxShadow = '0 6px 25px rgba(201, 162, 39, 0.6)';
+                    });
+                    mobileToggle.addEventListener('mouseleave', () => {
+                        mobileToggle.style.transform = 'scale(1)';
+                        mobileToggle.style.boxShadow = '0 4px 20px rgba(201, 162, 39, 0.4)';
+                    });
+
+                    // Handle screen resize
+                    const handleResize = () => {
+                        if (window.innerWidth > minScreenWidth) {
+                            // Desktop: show TOC, hide toggle
+                            tocContainer.style.display = 'block';
+                            tocContainer.style.right = rightOffset;
+                            mobileToggle.style.display = 'none';
+                        } else if (window.innerWidth > 768) {
+                            // Tablet: show toggle, hide TOC
+                            tocContainer.style.display = 'none';
+                            mobileToggle.style.display = 'flex';
+                        } else {
+                            // Mobile: show toggle, hide TOC
+                            tocContainer.style.display = 'none';
+                            mobileToggle.style.display = 'flex';
+                        }
+                    };
+
+                    // Initial check
+                    handleResize();
+                    window.addEventListener('resize', handleResize);
+
+                    // Close TOC when clicking outside on mobile
+                    document.addEventListener('click', (e) => {
+                        if (window.innerWidth <= 1024 && 
+                            !tocContainer.contains(e.target) && 
+                            !mobileToggle.contains(e.target) &&
+                            tocContainer.style.display === 'block') {
+                            tocContainer.style.display = 'none';
+                            mobileToggle.style.display = 'flex';
+                        }
                     });
 
                     document.body.appendChild(tocContainer);
+                    document.body.appendChild(mobileToggle);
                 }
             }
         }
