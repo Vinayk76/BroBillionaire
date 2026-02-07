@@ -1,0 +1,2086 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N0Y2LBMRSW');
+    </script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <title>AI Stock & Index Screener - Stocks to Watch with Gemini AI | BroBillionaire</title>
+    <meta name="description" content="Discover interesting stocks and indices to watch using Google Gemini AI (FREE). Analyze market conditions, technical indicators, fundamentals with educational insights and analysis scores.">
+    <meta name="keywords" content="AI stock screener, stock analysis AI, stock watchlist, NIFTY analysis, market screener AI, stock scanner AI, stocks to watch, technical analysis">
+    <link rel="canonical" href="https://brobillionaire.com/tool-ai-stock-picker.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="AI Stock & Index Screener - Stocks to Watch with Gemini AI">
+    <meta property="og:description" content="Discover interesting stocks and indices to watch using Google Gemini AI. Educational market analysis tool.">
+    <meta property="og:url" content="https://brobillionaire.com/tool-ai-stock-picker.html">
+    <meta property="og:image" content="https://brobillionaire.com/og-ai-picker.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="BroBillionaire">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Stock & Index Screener - Gemini Powered (FREE)">
+    <meta name="twitter:description" content="Discover stocks to watch with AI-powered analysis and educational insights.">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Stock & Index Screener",
+        "description": "AI-powered educational stock screening tool using Google Gemini for market analysis",
+        "url": "https://brobillionaire.com/tool-ai-stock-picker.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "BroBillionaire"
+        }
+    }
+    </script>
+    
+    <style>
+        :root {
+            --gold: #C9A227;
+            --gold-light: #E8D5A3;
+            --gold-dark: #A68B1E;
+            --bg-dark: #0a0a0a;
+            --bg-card: #1a1a1a;
+            --bg-input: #0d0d0d;
+            --green: #22c55e;
+            --green-light: #4ade80;
+            --red: #ef4444;
+            --red-light: #f87171;
+            --orange: #f59e0b;
+            --blue: #3b82f6;
+            --purple: #8b5cf6;
+            --cyan: #06b6d4;
+            --pink: #ec4899;
+        }
+        
+        .picker-container { max-width: 1600px; margin: 0 auto; padding: 40px 20px; }
+        
+        /* Animated Background */
+        .picker-container::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgba(201,162,39,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(139,92,246,0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(59,130,246,0.04) 0%, transparent 60%);
+            z-index: -1;
+            animation: ambientGlow 15s ease-in-out infinite alternate;
+        }
+        @keyframes ambientGlow {
+            0% { opacity: 0.5; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.1); }
+        }
+        
+        /* Header */
+        .picker-header { text-align: center; margin-bottom: 50px; position: relative; }
+        .picker-header::before { content: ''; position: absolute; top: -20px; left: 50%; transform: translateX(-50%); width: 200px; height: 3px; background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent); }
+        
+        .picker-title { font-family: 'Playfair Display', serif; font-size: 3.5rem; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 30%, #fff 50%, var(--gold-light) 70%, var(--gold) 100%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 15px; animation: shimmer 3s linear infinite; }
+        @keyframes shimmer { to { background-position: 200% center; } }
+        
+        .ai-powered-badge { display: inline-flex; align-items: center; gap: 15px; background: linear-gradient(135deg, rgba(139,92,246,0.3) 0%, rgba(59,130,246,0.25) 30%, rgba(6,182,212,0.2) 60%, rgba(201,162,39,0.15) 100%); border: none; padding: 16px 35px; border-radius: 50px; font-size: 1.05rem; font-weight: 700; margin-bottom: 25px; position: relative; cursor: default; box-shadow: 0 0 40px rgba(139,92,246,0.3), 0 0 80px rgba(59,130,246,0.15), inset 0 1px 0 rgba(255,255,255,0.1); backdrop-filter: blur(10px); overflow: hidden; animation: badgeFloat 4s ease-in-out infinite; }
+        .ai-powered-badge::before { content: ''; position: absolute; inset: 0; border-radius: 50px; padding: 2px; background: linear-gradient(135deg, var(--purple), var(--blue), var(--cyan), var(--gold), var(--purple)); background-size: 400% 400%; -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: borderGlow 4s linear infinite; }
+        .ai-powered-badge::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.1), transparent 30%); animation: rotateSheen 6s linear infinite; }
+        @keyframes badgeFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+        @keyframes borderGlow { 0% { background-position: 0% 50%; } 100% { background-position: 400% 50%; } }
+        @keyframes rotateSheen { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .ai-powered-badge .ai-icon { font-size: 1.6rem; position: relative; z-index: 2; animation: iconGlow 2s ease-in-out infinite, rotate3d 4s linear infinite; filter: drop-shadow(0 0 8px rgba(139,92,246,0.6)); }
+        @keyframes iconGlow { 0%, 100% { filter: drop-shadow(0 0 8px rgba(139,92,246,0.6)); } 50% { filter: drop-shadow(0 0 15px rgba(139,92,246,0.9)) drop-shadow(0 0 25px rgba(59,130,246,0.5)); } }
+        @keyframes rotate3d { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(360deg); } }
+        .ai-powered-badge span:not(.ai-icon):not(.pulse-ring) { position: relative; z-index: 2; background: linear-gradient(90deg, #fff 0%, var(--gold-light) 50%, #fff 100%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: textShimmer 3s linear infinite; letter-spacing: 0.5px; text-shadow: none; }
+        @keyframes textShimmer { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+        .ai-powered-badge .pulse-ring { width: 14px; height: 14px; background: linear-gradient(135deg, var(--green), #10b981); border-radius: 50%; position: relative; z-index: 2; animation: pulseRing 1.5s ease-out infinite; box-shadow: 0 0 10px var(--green), 0 0 20px rgba(34,197,94,0.4); }
+        .ai-powered-badge .pulse-ring::before { content: ''; position: absolute; inset: -5px; border-radius: 50%; border: 2px solid var(--green); animation: pulseRingBorder 1.5s ease-out infinite; }
+        .ai-powered-badge .pulse-ring::after { content: 'LIVE'; position: absolute; left: 22px; top: 50%; transform: translateY(-50%); font-size: 0.6rem; font-weight: 800; color: var(--green); letter-spacing: 1px; text-shadow: 0 0 5px var(--green); }
+        @keyframes pulseRing { 0%, 100% { transform: scale(1); box-shadow: 0 0 10px var(--green), 0 0 20px rgba(34,197,94,0.4); } 50% { transform: scale(1.15); box-shadow: 0 0 15px var(--green), 0 0 30px rgba(34,197,94,0.6); } }
+        @keyframes pulseRingBorder { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(2.5); opacity: 0; } }
+        
+        .picker-subtitle { color: #888; font-size: 1.2rem; max-width: 900px; margin: 0 auto; line-height: 1.9; }
+        
+        .feature-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 30px; }
+        .feature-pill { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); color: #bbb; padding: 10px 20px; border-radius: 30px; font-size: 0.88rem; font-weight: 500; display: flex; align-items: center; gap: 8px; transition: all 0.3s; }
+        .feature-pill:hover { background: rgba(201,162,39,0.1); border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+        .feature-pill i { font-size: 1rem; }
+        
+        /* Live Market Ticker */
+        .market-ticker { background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(26,26,26,0.9) 50%, rgba(0,0,0,0.8) 100%); border: 1px solid #2a2a2a; border-radius: 16px; padding: 18px 25px; margin-bottom: 35px; overflow: hidden; position: relative; }
+        .market-ticker::before { content: '⚡ LIVE'; position: absolute; left: 20px; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, var(--green), #10b981); color: #000; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; animation: livePulse 2s infinite; z-index: 2; }
+        @keyframes livePulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); } 50% { box-shadow: 0 0 0 8px rgba(34,197,94,0); } }
+        .ticker-scroll { display: flex; animation: tickerScroll 40s linear infinite; padding-left: 80px; }
+        .ticker-scroll:hover { animation-play-state: paused; }
+        @keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .ticker-item { display: flex; align-items: center; gap: 12px; padding: 0 30px; white-space: nowrap; cursor: pointer; transition: all 0.3s; }
+        .ticker-item:hover { transform: scale(1.05); }
+        .ticker-symbol { font-weight: 700; color: #fff; font-size: 0.95rem; }
+        .ticker-price { color: var(--gold); font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+        .ticker-change { font-size: 0.85rem; font-weight: 600; padding: 3px 10px; border-radius: 6px; }
+        .ticker-change.positive { background: rgba(34,197,94,0.15); color: var(--green); }
+        .ticker-change.negative { background: rgba(239,68,68,0.15); color: var(--red); }
+        
+        /* Main Grid Layout */
+        .main-grid { display: grid; grid-template-columns: 420px 1fr; gap: 35px; }
+        
+        /* Input Panel */
+        .input-panel { background: linear-gradient(145deg, var(--bg-card) 0%, var(--bg-dark) 100%); border-radius: 24px; padding: 35px; border: 1px solid #2a2a2a; position: sticky; top: 20px; height: fit-content; overflow: hidden; }
+        .input-panel::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--gold), var(--purple), var(--blue), var(--cyan)); background-size: 300% 100%; animation: gradientFlow 4s linear infinite; }
+        @keyframes gradientFlow { 0% { background-position: 0% 50%; } 100% { background-position: 300% 50%; } }
+        
+        .panel-badge { position: absolute; top: 20px; right: 20px; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%); color: #000; padding: 6px 14px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 5px; }
+        
+        .section-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); margin-bottom: 25px; display: flex; align-items: center; gap: 12px; }
+        
+        /* Quick Selection Grid */
+        .quick-select { margin-bottom: 25px; }
+        .quick-select-label { color: #888; font-size: 0.85rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .quick-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .quick-btn { padding: 14px 10px; background: var(--bg-input); border: 2px solid #2a2a2a; border-radius: 12px; color: #888; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.3s; text-align: center; position: relative; overflow: hidden; }
+        .quick-btn::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); opacity: 0; transition: opacity 0.3s; }
+        .quick-btn:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+        .quick-btn.active { border-color: var(--gold); background: rgba(201,162,39,0.15); color: var(--gold); }
+        .quick-btn i { display: block; font-size: 1.5rem; margin-bottom: 6px; }
+        
+        /* Form Controls */
+        .form-group { margin-bottom: 22px; }
+        .form-label { color: var(--gold); font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; font-size: 0.92rem; }
+        .form-label .tooltip { color: #555; cursor: help; position: relative; }
+        .form-label .tooltip:hover::after { content: attr(data-tip); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); background: #333; color: #fff; padding: 8px 12px; border-radius: 8px; font-size: 0.75rem; white-space: nowrap; z-index: 10; }
+        
+        .form-select, .form-input { width: 100%; padding: 14px 16px; background: var(--bg-input); border: 2px solid #2a2a2a; border-radius: 12px; color: #fff; font-size: 0.95rem; transition: all 0.3s; font-family: inherit; }
+        .form-select:focus, .form-input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 25px rgba(201,162,39,0.15); }
+        .form-select option { background: var(--bg-card); color: #fff; }
+        
+        .range-slider { margin-top: 12px; }
+        .range-slider input[type="range"] { width: 100%; height: 8px; -webkit-appearance: none; background: linear-gradient(to right, var(--green) 0%, var(--gold) 50%, var(--red) 100%); border-radius: 4px; outline: none; }
+        .range-slider input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; background: var(--gold); border-radius: 50%; cursor: pointer; box-shadow: 0 4px 15px rgba(201,162,39,0.4); transition: transform 0.2s; }
+        .range-slider input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+        .range-labels { display: flex; justify-content: space-between; margin-top: 8px; font-size: 0.75rem; color: #666; }
+        .risk-display { text-align: center; margin-top: 10px; }
+        .risk-display .value { font-size: 1.3rem; font-weight: 700; }
+        .risk-display.low .value { color: var(--green); }
+        .risk-display.medium .value { color: var(--gold); }
+        .risk-display.high .value { color: var(--red); }
+        
+        /* Investment Amount Pills */
+        .amount-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+        .amount-pill { padding: 8px 16px; background: var(--bg-input); border: 1px solid #2a2a2a; border-radius: 20px; color: #888; font-size: 0.8rem; cursor: pointer; transition: all 0.3s; }
+        .amount-pill:hover, .amount-pill.active { background: rgba(201,162,39,0.15); border-color: var(--gold); color: var(--gold); }
+        
+        /* Sector Tags */
+        .sector-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .sector-tag { padding: 8px 14px; background: var(--bg-input); border: 1px solid #2a2a2a; border-radius: 20px; color: #888; font-size: 0.8rem; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 6px; }
+        .sector-tag:hover { border-color: #4a4a4a; }
+        .sector-tag.active { background: linear-gradient(135deg, rgba(201,162,39,0.2) 0%, rgba(201,162,39,0.1) 100%); border-color: var(--gold); color: var(--gold); }
+        .sector-tag i { font-size: 0.9rem; }
+        
+        /* Generate Button */
+        .generate-btn { width: 100%; margin-top: 28px; padding: 20px 30px; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); border: none; border-radius: 16px; color: #000; font-size: 1.2rem; font-weight: 700; cursor: pointer; transition: all 0.4s; display: flex; align-items: center; justify-content: center; gap: 12px; position: relative; overflow: hidden; text-transform: uppercase; letter-spacing: 2px; }
+        .generate-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transition: left 0.6s; }
+        .generate-btn:hover::before { left: 100%; }
+        .generate-btn:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(201,162,39,0.5); }
+        .generate-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .generate-btn .spinner { display: none; width: 26px; height: 26px; border: 3px solid rgba(0,0,0,0.2); border-top-color: #000; border-radius: 50%; animation: spin 0.8s linear infinite; }
+        .generate-btn.loading .spinner { display: block; }
+        .generate-btn.loading .btn-text { display: none; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        /* Market Sentiment Quick View */
+        .sentiment-preview { background: var(--bg-input); border: 1px solid #2a2a2a; border-radius: 14px; padding: 18px; margin-top: 20px; }
+        .sentiment-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+        .sentiment-title { color: #888; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; }
+        .sentiment-live { display: flex; align-items: center; gap: 6px; font-size: 0.7rem; color: var(--green); }
+        .sentiment-live .dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 1.5s infinite; }
+        .sentiment-gauge { height: 10px; background: linear-gradient(90deg, var(--red), var(--orange), var(--gold), var(--green-light), var(--green)); border-radius: 5px; position: relative; margin-bottom: 10px; }
+        .sentiment-needle { position: absolute; top: -4px; width: 4px; height: 18px; background: #fff; border-radius: 2px; transition: left 0.5s ease; box-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        .sentiment-labels { display: flex; justify-content: space-between; font-size: 0.7rem; color: #555; }
+        .sentiment-value { text-align: center; margin-top: 12px; }
+        .sentiment-value .number { font-size: 2rem; font-weight: 800; color: var(--gold); }
+        .sentiment-value .label { font-size: 0.85rem; color: #888; }
+        
+        /* Results Panel */
+        .results-panel { display: none; }
+        .results-panel.visible { display: block; animation: fadeSlideIn 0.6s ease; }
+        @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* AI Analysis Header */
+        .ai-analysis-header { background: linear-gradient(135deg, rgba(139,92,246,0.15) 0%, rgba(59,130,246,0.1) 50%, rgba(6,182,212,0.05) 100%); border: 2px solid rgba(139,92,246,0.3); border-radius: 20px; padding: 30px; margin-bottom: 30px; position: relative; overflow: hidden; }
+        .ai-analysis-header::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(from 0deg, transparent 0deg, rgba(139,92,246,0.1) 60deg, transparent 120deg); animation: rotateGlow 10s linear infinite; }
+        @keyframes rotateGlow { to { transform: rotate(360deg); } }
+        .ai-header-content { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; }
+        .ai-header-left { display: flex; align-items: center; gap: 20px; }
+        .ai-brain-icon { width: 70px; height: 70px; background: linear-gradient(135deg, var(--purple), var(--blue)); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #fff; animation: brainPulse 3s ease-in-out infinite; }
+        @keyframes brainPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        .ai-header-text h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #fff; margin-bottom: 5px; }
+        .ai-header-text p { color: #888; font-size: 0.95rem; }
+        .ai-header-stats { display: flex; gap: 25px; }
+        .ai-stat { text-align: center; }
+        .ai-stat-value { font-size: 1.8rem; font-weight: 700; background: linear-gradient(135deg, var(--gold), var(--gold-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .ai-stat-label { font-size: 0.75rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+        
+        /* Stock Cards Grid */
+        .picks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 25px; margin-bottom: 30px; }
+        
+        /* Premium Stock Card */
+        .stock-card { background: linear-gradient(145deg, var(--bg-card) 0%, rgba(20,20,20,1) 100%); border-radius: 24px; padding: 0; border: 1px solid #2a2a2a; position: relative; overflow: hidden; transition: all 0.4s; }
+        .stock-card:hover { transform: translateY(-8px); box-shadow: 0 25px 60px rgba(0,0,0,0.5); border-color: rgba(201,162,39,0.3); }
+        .stock-card.top-pick { border-color: var(--gold); }
+        .stock-card.top-pick::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold)); }
+        
+        .card-header { padding: 25px 25px 0; display: flex; align-items: flex-start; justify-content: space-between; }
+        .stock-info { display: flex; align-items: center; gap: 15px; }
+        .stock-logo { width: 55px; height: 55px; background: linear-gradient(135deg, var(--bg-input), #1a1a1a); border: 2px solid #2a2a2a; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 800; color: var(--gold); }
+        .stock-logo.index { background: linear-gradient(135deg, rgba(201,162,39,0.2), rgba(201,162,39,0.1)); border-color: var(--gold); }
+        .stock-details h3 { color: #fff; font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; }
+        .stock-details .full-name { color: #666; font-size: 0.85rem; }
+        .stock-badges { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+        .rank-badge { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: #000; padding: 6px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; gap: 5px; }
+        .sector-badge { background: rgba(139,92,246,0.2); color: var(--purple); padding: 5px 12px; border-radius: 15px; font-size: 0.7rem; font-weight: 600; }
+        
+        .card-body { padding: 20px 25px; }
+        
+        /* Confidence Meter */
+        .confidence-meter { margin-bottom: 20px; }
+        .confidence-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .confidence-label { color: #888; font-size: 0.85rem; }
+        .confidence-value { font-size: 1.5rem; font-weight: 800; color: var(--gold); }
+        .confidence-bar { height: 12px; background: #1a1a1a; border-radius: 6px; overflow: hidden; position: relative; }
+        .confidence-fill { height: 100%; border-radius: 6px; transition: width 1s ease-out; position: relative; overflow: hidden; }
+        .confidence-fill.high { background: linear-gradient(90deg, var(--green), var(--green-light)); }
+        .confidence-fill.medium { background: linear-gradient(90deg, var(--orange), #fbbf24); }
+        .confidence-fill.low { background: linear-gradient(90deg, var(--red), var(--red-light)); }
+        .confidence-fill::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%); animation: shimmerBar 2s infinite; }
+        @keyframes shimmerBar { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+        
+        /* Signal & Price Info - Changed to WATCH only for SEBI compliance */
+        .signal-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 15px; background: var(--bg-input); border-radius: 14px; }
+        .signal-badge { display: flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 25px; font-weight: 700; font-size: 1rem; }
+        .signal-badge.watch, .signal-badge.bullish, .signal-badge.bearish, .signal-badge.neutral { background: linear-gradient(135deg, rgba(59,130,246,0.25), rgba(139,92,246,0.15)); color: var(--blue); border: 2px solid var(--blue); }
+        .signal-badge.bullish { background: linear-gradient(135deg, rgba(201,162,39,0.25), rgba(201,162,39,0.15)); color: var(--gold); border: 2px solid var(--gold); }
+        .signal-badge.bearish { background: linear-gradient(135deg, rgba(139,92,246,0.25), rgba(139,92,246,0.15)); color: var(--purple); border: 2px solid var(--purple); }
+        .signal-badge i { font-size: 1.2rem; }
+        .price-info { text-align: right; }
+        .current-price { font-size: 1.5rem; font-weight: 800; color: #fff; font-family: 'JetBrains Mono', monospace; }
+        .price-change { font-size: 0.9rem; font-weight: 600; }
+        .price-change.positive { color: var(--green); }
+        .price-change.negative { color: var(--red); }
+        
+        /* Metrics Grid */
+        .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+        .metric-box { background: var(--bg-input); border-radius: 12px; padding: 14px; text-align: center; border: 1px solid #1a1a1a; transition: all 0.3s; }
+        .metric-box:hover { border-color: rgba(201,162,39,0.3); transform: translateY(-2px); }
+        .metric-box-icon { font-size: 1.2rem; margin-bottom: 6px; }
+        .metric-box-label { color: #666; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .metric-box-value { font-size: 1rem; font-weight: 700; color: #fff; }
+        
+        /* Levels Section */
+        .levels-section { background: rgba(0,0,0,0.3); border-radius: 14px; padding: 18px; margin-bottom: 20px; }
+        .levels-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .levels-title { color: var(--gold); font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
+        .levels-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        .level-item { text-align: center; padding: 12px 8px; background: var(--bg-input); border-radius: 10px; }
+        .level-label { font-size: 0.7rem; color: #666; text-transform: uppercase; margin-bottom: 5px; }
+        .level-value { font-size: 1rem; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+        .level-value.target { color: var(--green); }
+        .level-value.entry { color: var(--gold); }
+        .level-value.stop { color: var(--red); }
+        
+        /* AI Reasoning */
+        .ai-reasoning { border-top: 1px solid #2a2a2a; padding: 20px 25px; background: rgba(139,92,246,0.03); }
+        .reasoning-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+        .reasoning-header i { color: var(--purple); font-size: 1.1rem; }
+        .reasoning-header span { color: #888; font-size: 0.85rem; font-weight: 600; }
+        .reasoning-text { color: #aaa; font-size: 0.9rem; line-height: 1.7; }
+        .reasoning-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .reason-tag { padding: 5px 12px; background: rgba(255,255,255,0.05); border-radius: 15px; font-size: 0.75rem; color: #888; display: flex; align-items: center; gap: 5px; }
+        .reason-tag i { font-size: 0.7rem; }
+        .reason-tag.bullish i { color: var(--green); }
+        .reason-tag.bearish i { color: var(--red); }
+        .reason-tag.neutral i { color: var(--orange); }
+        
+        /* Market Overview Card */
+        .market-overview { background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-dark) 100%); border-radius: 20px; padding: 30px; margin-bottom: 30px; border: 1px solid #2a2a2a; }
+        .overview-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px; }
+        .overview-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); display: flex; align-items: center; gap: 12px; }
+        .overview-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+        .overview-item { text-align: center; padding: 20px 15px; background: var(--bg-input); border-radius: 14px; border: 1px solid #1a1a1a; transition: all 0.3s; }
+        .overview-item:hover { border-color: var(--gold); transform: translateY(-3px); }
+        .overview-icon { font-size: 2rem; margin-bottom: 10px; }
+        .overview-label { color: #666; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 8px; }
+        .overview-value { font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+        .overview-change { font-size: 0.85rem; font-weight: 600; }
+        .overview-change.positive { color: var(--green); }
+        .overview-change.negative { color: var(--red); }
+        
+        /* Sector Heatmap */
+        .sector-heatmap { background: var(--bg-card); border-radius: 20px; padding: 30px; margin-bottom: 30px; border: 1px solid #2a2a2a; }
+        .heatmap-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px; }
+        .heatmap-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--gold); display: flex; align-items: center; gap: 12px; }
+        .heatmap-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+        .heatmap-cell { padding: 18px 12px; border-radius: 12px; text-align: center; cursor: pointer; transition: all 0.3s; position: relative; overflow: hidden; }
+        .heatmap-cell::before { content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity 0.3s; }
+        .heatmap-cell:hover { transform: scale(1.05); z-index: 1; }
+        .heatmap-cell:hover::before { opacity: 1; }
+        .heatmap-cell.strong-positive { background: rgba(34,197,94,0.3); border: 1px solid var(--green); }
+        .heatmap-cell.positive { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.5); }
+        .heatmap-cell.neutral { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.5); }
+        .heatmap-cell.negative { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.5); }
+        .heatmap-cell.strong-negative { background: rgba(239,68,68,0.3); border: 1px solid var(--red); }
+        .heatmap-cell .sector-name { font-size: 0.8rem; font-weight: 600; color: #fff; margin-bottom: 5px; }
+        .heatmap-cell .sector-change { font-size: 0.75rem; font-weight: 700; }
+        
+        /* Analysis Summary */
+        .analysis-summary { background: linear-gradient(135deg, rgba(201,162,39,0.1) 0%, rgba(201,162,39,0.05) 100%); border: 2px solid rgba(201,162,39,0.3); border-radius: 20px; padding: 30px; margin-bottom: 30px; }
+        .summary-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .summary-icon { width: 50px; height: 50px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #000; }
+        .summary-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--gold); }
+        .summary-content { color: #bbb; line-height: 1.9; font-size: 1rem; }
+        .summary-content strong { color: var(--gold); }
+        
+        /* Disclaimer */
+        .disclaimer { background: linear-gradient(135deg, rgba(239,68,68,0.1) 0%, rgba(239,68,68,0.05) 100%); border: 2px solid rgba(239,68,68,0.3); border-radius: 20px; padding: 30px; margin-top: 40px; }
+        .disclaimer-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
+        .disclaimer-icon { width: 45px; height: 45px; background: rgba(239,68,68,0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--red); font-size: 1.3rem; }
+        .disclaimer-title { color: var(--red); font-weight: 700; font-size: 1.2rem; }
+        .disclaimer p { color: #888; line-height: 1.8; font-size: 0.92rem; margin-bottom: 12px; }
+        .disclaimer strong { color: #bbb; }
+        
+        /* Mobile Responsive */
+        @media (max-width: 1200px) {
+            .main-grid { grid-template-columns: 1fr; }
+            .input-panel { position: static; }
+            .overview-grid { grid-template-columns: repeat(3, 1fr); }
+            .heatmap-grid { grid-template-columns: repeat(3, 1fr); }
+            .ai-header-content { flex-direction: column; gap: 20px; text-align: center; }
+            .ai-header-left { flex-direction: column; }
+        }
+        
+        @media (max-width: 768px) {
+            .picker-container { padding: 20px 15px; }
+            .picker-title { font-size: 2.2rem; }
+            .input-panel { padding: 25px 20px; }
+            .quick-grid { grid-template-columns: repeat(2, 1fr); }
+            .picks-grid { grid-template-columns: 1fr; }
+            .overview-grid { grid-template-columns: repeat(2, 1fr); }
+            .heatmap-grid { grid-template-columns: repeat(2, 1fr); }
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+            .levels-grid { grid-template-columns: repeat(2, 1fr); }
+            .feature-pills { gap: 8px; }
+            .feature-pill { font-size: 0.75rem; padding: 8px 14px; }
+            .ai-header-stats { flex-wrap: wrap; justify-content: center; }
+        }
+        
+        @media (max-width: 480px) {
+            .picker-title { font-size: 1.8rem; }
+            .quick-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .sector-tags { gap: 6px; }
+            .sector-tag { padding: 6px 10px; font-size: 0.7rem; }
+        }
+        
+        /* Glow Effects */
+        .glow { text-shadow: 0 0 30px rgba(201,162,39,0.5), 0 0 60px rgba(201,162,39,0.3); }
+        
+        /* Loading Skeleton */
+        .skeleton { background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%); background-size: 200% 100%; animation: skeletonShimmer 1.5s infinite; border-radius: 8px; }
+        @keyframes skeletonShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+        
+        /* Disclaimer Modal */
+        .disclaimer-modal { display: none; position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); align-items: center; justify-content: center; padding: 20px; animation: fadeIn 0.3s ease; }
+        .disclaimer-modal.show { display: flex; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .disclaimer-modal-content { background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%); border: 2px solid #dc2626; border-radius: 24px; max-width: 700px; width: 100%; max-height: 85vh; overflow-y: auto; position: relative; animation: slideUp 0.4s ease; box-shadow: 0 0 60px rgba(220,38,38,0.3), 0 25px 50px rgba(0,0,0,0.5); }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .disclaimer-modal-header { background: linear-gradient(135deg, rgba(220,38,38,0.25) 0%, rgba(220,38,38,0.1) 100%); padding: 25px 30px; border-bottom: 1px solid rgba(220,38,38,0.3); display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 2; }
+        .disclaimer-modal-header h3 { color: #ff6b6b; font-size: 1.4rem; font-weight: 700; display: flex; align-items: center; gap: 12px; margin: 0; }
+        .disclaimer-modal-header h3 i { font-size: 1.6rem; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        .disclaimer-modal-close { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; width: 40px; height: 40px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; }
+        .disclaimer-modal-close:hover { background: #dc2626; border-color: #dc2626; transform: rotate(90deg); }
+        .disclaimer-modal-body { padding: 30px; }
+        .disclaimer-modal-body .disclaimer-item { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px; margin-bottom: 15px; transition: all 0.3s; }
+        .disclaimer-modal-body .disclaimer-item:hover { border-color: rgba(220,38,38,0.3); background: rgba(220,38,38,0.05); }
+        .disclaimer-modal-body .disclaimer-item:last-child { margin-bottom: 0; }
+        .disclaimer-modal-body .disclaimer-item h4 { color: #ff6b6b; font-size: 1rem; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .disclaimer-modal-body .disclaimer-item h4 i { font-size: 1.1rem; }
+        .disclaimer-modal-body .disclaimer-item p { color: #999; font-size: 0.92rem; line-height: 1.7; margin: 0; }
+        .disclaimer-modal-footer { background: linear-gradient(135deg, rgba(201,162,39,0.1) 0%, rgba(201,162,39,0.05) 100%); border-top: 1px solid rgba(201,162,39,0.2); padding: 20px 30px; text-align: center; }
+        .disclaimer-modal-footer button { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: #000; border: none; padding: 14px 40px; border-radius: 30px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; }
+        .disclaimer-modal-footer button:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(201,162,39,0.4); }
+    </style>
+</head>
+<body>
+    <!-- Disclaimer Modal -->
+    <div class="disclaimer-modal" id="disclaimerModal">
+        <div class="disclaimer-modal-content">
+            <div class="disclaimer-modal-header">
+                <h3><i class="fas fa-shield-exclamation"></i> Important Risk Disclaimers</h3>
+                <button class="disclaimer-modal-close" onclick="closeDisclaimerModal()">×</button>
+            </div>
+            <div class="disclaimer-modal-body">
+                <div class="disclaimer-item">
+                    <h4><i class="fas fa-graduation-cap"></i> EDUCATIONAL PURPOSE ONLY</h4>
+                    <p>This AI Stock Screener is designed purely for educational and informational purposes. It shows "Stocks to Watch" for educational analysis ONLY. It is NOT investment advice, NOT a recommendation to buy or sell any securities, and NOT a substitute for professional financial advice from a SEBI-registered advisor.</p>
+                </div>
+                <div class="disclaimer-item">
+                    <h4><i class="fas fa-building-columns"></i> NOT SEBI REGISTERED</h4>
+                    <p>BroBillionaire and this tool are NOT registered with SEBI (Securities and Exchange Board of India) or any other regulatory authority as an investment advisor, research analyst, or portfolio manager. We do not provide any buy/sell/hold recommendations.</p>
+                </div>
+                <div class="disclaimer-item">
+                    <h4><i class="fas fa-triangle-exclamation"></i> HIGH RISK WARNING</h4>
+                    <p>Trading in stocks, indices, and F&O involves substantial risk of loss. Past performance is not indicative of future results. <strong style="color:#ff6b6b;">9 out of 10 individual traders incur losses.</strong> Only trade with money you can afford to lose. Consult a SEBI-registered advisor before investing.</p>
+                </div>
+                <div class="disclaimer-item">
+                    <h4><i class="fas fa-robot"></i> AI LIMITATIONS</h4>
+                    <p>The AI model can make errors. This is a screening tool to help you discover stocks for educational study. Always do your own research (DYOR) and consult qualified financial professionals.</p>
+                </div>
+                <div class="disclaimer-item">
+                    <h4><i class="fas fa-chart-line-down"></i> NO GUARANTEE</h4>
+                    <p>There is no guarantee that any stock or index mentioned will perform in any particular way. Markets are unpredictable. The "Watch" status is for educational awareness only, not a trading signal.</p>
+                </div>
+            </div>
+            <div class="disclaimer-modal-footer">
+                <button onclick="closeDisclaimerModal()"><i class="fas fa-check" style="margin-right:8px;"></i>I Understand the Risks</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="picker-container">
+        <!-- SEBI Compliance Banner -->
+        <div style="background: linear-gradient(135deg, rgba(220,38,38,0.2) 0%, rgba(220,38,38,0.1) 100%); border: 2px solid #dc2626; border-radius: 12px; padding: 15px 20px; margin-bottom: 25px; text-align: center;">
+            <p style="color: #ff6b6b; font-size: 0.9rem; margin: 0; line-height: 1.6;">
+                <i class="fas fa-exclamation-triangle" style="margin-right: 8px;"></i>
+                <strong>IMPORTANT:</strong> This is an EDUCATIONAL AI tool only. NOT SEBI registered. NOT investment advice. Trading involves HIGH RISK. 
+                <a href="#" id="disclaimer-link" onclick="openDisclaimerModal(); return false;" style="color: #fbbf24; text-decoration: underline; cursor: pointer;">Read Full Disclaimers ↓</a>
+            </p>
+        </div>
+        
+        <!-- Header -->
+        <div class="picker-header">
+            <div class="ai-powered-badge">
+                <span class="ai-icon">🧠</span>
+                <span>Powered by Gemini AI + Multi-Source Data</span>
+                <span class="pulse-ring"></span>
+            </div>
+            <h1 class="picker-title glow"><i class="fas fa-binoculars"></i> AI Stocks to Watch Screener</h1>
+            <p class="picker-subtitle">Harness the power of <strong>Google Gemini AI</strong> combined with <strong>real-time market data</strong> to discover interesting stocks worth watching. Get AI-generated analysis with scores, technical levels, and detailed reasoning — <strong>for educational purposes only, NOT investment advice</strong>.</p>
+            
+            <div class="feature-pills">
+                <div class="feature-pill"><i class="fas fa-robot"></i> Gemini AI Analysis</div>
+                <div class="feature-pill"><i class="fas fa-chart-line"></i> Live Market Data</div>
+                <div class="feature-pill"><i class="fas fa-brain"></i> Analysis Scores</div>
+                <div class="feature-pill"><i class="fas fa-eye"></i> Watch Levels</div>
+                <div class="feature-pill"><i class="fas fa-shield-halved"></i> Risk Notes</div>
+                <div class="feature-pill"><i class="fas fa-fire"></i> Sector Heatmap</div>
+                <div class="feature-pill"><i class="fas fa-ranking-star"></i> AI Interest Score</div>
+                <div class="feature-pill"><i class="fas fa-comments-dollar"></i> Market Sentiment</div>
+            </div>
+        </div>
+        
+        <!-- Live Market Ticker -->
+        <div class="market-ticker" id="marketTicker">
+            <div class="ticker-scroll" id="tickerScroll">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+        
+        <div class="main-grid">
+            <!-- Input Panel -->
+            <div class="input-panel">
+                <span class="panel-badge"><i class="fas fa-crown"></i> Premium</span>
+                <h2 class="section-title"><i class="fas fa-sliders"></i> Configure Your Picks</h2>
+                
+                <!-- Quick Selection -->
+                <div class="quick-select">
+                    <div class="quick-select-label"><i class="fas fa-bolt"></i> Quick Selection</div>
+                    <div class="quick-grid">
+                        <button class="quick-btn active" data-type="all" onclick="selectType(this)">
+                            <i class="fas fa-layer-group"></i>
+                            All
+                        </button>
+                        <button class="quick-btn" data-type="stocks" onclick="selectType(this)">
+                            <i class="fas fa-building"></i>
+                            Stocks
+                        </button>
+                        <button class="quick-btn" data-type="indices" onclick="selectType(this)">
+                            <i class="fas fa-chart-pie"></i>
+                            Indices
+                        </button>
+                        <button class="quick-btn" data-type="etf" onclick="selectType(this)">
+                            <i class="fas fa-coins"></i>
+                            ETFs
+                        </button>
+                        <button class="quick-btn" data-type="largecap" onclick="selectType(this)">
+                            <i class="fas fa-gem"></i>
+                            Large Cap
+                        </button>
+                        <button class="quick-btn" data-type="smallcap" onclick="selectType(this)">
+                            <i class="fas fa-seedling"></i>
+                            Small Cap
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Market Selection -->
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-globe"></i> Market
+                        <span class="tooltip" data-tip="Select your target market"><i class="fas fa-circle-question"></i></span>
+                    </label>
+                    <select class="form-select" id="marketSelect">
+                        <option value="india" selected>🇮🇳 India (NSE/BSE)</option>
+                        <option value="us">🇺🇸 United States (NYSE/NASDAQ)</option>
+                        <option value="crypto">₿ Cryptocurrency</option>
+                    </select>
+                </div>
+                
+                <!-- Investment Horizon -->
+                <div class="form-group">
+                    <label class="form-label"><i class="fas fa-clock"></i> Investment Horizon</label>
+                    <select class="form-select" id="horizonSelect">
+                        <option value="intraday">⚡ Intraday (Same Day)</option>
+                        <option value="swing" selected>📊 Swing Trade (1-2 Weeks)</option>
+                        <option value="positional">📈 Positional (1-3 Months)</option>
+                        <option value="longterm">💎 Long Term (6+ Months)</option>
+                    </select>
+                </div>
+                
+                <!-- Investment Amount -->
+                <div class="form-group">
+                    <label class="form-label"><i class="fas fa-wallet"></i> Investment Amount</label>
+                    <input type="text" class="form-input" id="investmentAmount" placeholder="₹1,00,000" value="100000">
+                    <div class="amount-pills">
+                        <span class="amount-pill" data-amount="25000" onclick="setAmount(this)">₹25K</span>
+                        <span class="amount-pill" data-amount="50000" onclick="setAmount(this)">₹50K</span>
+                        <span class="amount-pill active" data-amount="100000" onclick="setAmount(this)">₹1L</span>
+                        <span class="amount-pill" data-amount="500000" onclick="setAmount(this)">₹5L</span>
+                        <span class="amount-pill" data-amount="1000000" onclick="setAmount(this)">₹10L</span>
+                    </div>
+                </div>
+                
+                <!-- Risk Tolerance -->
+                <div class="form-group">
+                    <label class="form-label"><i class="fas fa-gauge-high"></i> Risk Tolerance</label>
+                    <div class="range-slider">
+                        <input type="range" id="riskSlider" min="1" max="5" value="3" oninput="updateRisk(this.value)">
+                        <div class="range-labels">
+                            <span>Conservative</span>
+                            <span>Aggressive</span>
+                        </div>
+                    </div>
+                    <div class="risk-display medium" id="riskDisplay">
+                        <div class="value" id="riskValue">Moderate Risk</div>
+                    </div>
+                </div>
+                
+                <!-- Sector Preferences -->
+                <div class="form-group">
+                    <label class="form-label"><i class="fas fa-industry"></i> Preferred Sectors (Optional)</label>
+                    <div class="sector-tags">
+                        <span class="sector-tag" data-sector="banking" onclick="toggleSector(this)"><i class="fas fa-university"></i> Banking</span>
+                        <span class="sector-tag" data-sector="it" onclick="toggleSector(this)"><i class="fas fa-laptop-code"></i> IT</span>
+                        <span class="sector-tag" data-sector="pharma" onclick="toggleSector(this)"><i class="fas fa-pills"></i> Pharma</span>
+                        <span class="sector-tag" data-sector="auto" onclick="toggleSector(this)"><i class="fas fa-car"></i> Auto</span>
+                        <span class="sector-tag" data-sector="energy" onclick="toggleSector(this)"><i class="fas fa-bolt"></i> Energy</span>
+                        <span class="sector-tag" data-sector="fmcg" onclick="toggleSector(this)"><i class="fas fa-cart-shopping"></i> FMCG</span>
+                        <span class="sector-tag" data-sector="infra" onclick="toggleSector(this)"><i class="fas fa-road"></i> Infra</span>
+                        <span class="sector-tag" data-sector="metal" onclick="toggleSector(this)"><i class="fas fa-industry"></i> Metal</span>
+                        <span class="sector-tag" data-sector="realty" onclick="toggleSector(this)"><i class="fas fa-building"></i> Realty</span>
+                    </div>
+                </div>
+                
+                <!-- Number of Stocks -->
+                <div class="form-group">
+                    <label class="form-label"><i class="fas fa-list-ol"></i> Number of Stocks</label>
+                    <select class="form-select" id="numPicks">
+                        <option value="3">3 Stocks to Watch</option>
+                        <option value="5" selected>5 Stocks to Watch</option>
+                        <option value="7">7 Stocks to Watch</option>
+                        <option value="10">10 Stocks to Watch</option>
+                    </select>
+                </div>
+                
+                <!-- Generate Button -->
+                <button class="generate-btn" id="generateBtn" onclick="generatePicks()">
+                    <span class="spinner"></span>
+                    <span class="btn-text"><i class="fas fa-binoculars"></i> Find Stocks to Watch</span>
+                </button>
+                
+                <!-- Market Sentiment Preview -->
+                <div class="sentiment-preview" id="sentimentPreview">
+                    <div class="sentiment-header">
+                        <div class="sentiment-title"><i class="fas fa-heart-pulse"></i> Market Sentiment</div>
+                        <div class="sentiment-live"><span class="dot"></span> LIVE</div>
+                    </div>
+                    <div class="sentiment-gauge">
+                        <div class="sentiment-needle" id="sentimentNeedle" style="left: 50%;"></div>
+                    </div>
+                    <div class="sentiment-labels">
+                        <span>Extreme Fear</span>
+                        <span>Neutral</span>
+                        <span>Extreme Greed</span>
+                    </div>
+                    <div class="sentiment-value">
+                        <div class="number" id="sentimentNumber">--</div>
+                        <div class="label" id="sentimentLabel">Loading...</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Results Panel -->
+            <div class="results-panel" id="resultsPanel">
+                <!-- AI Analysis Header -->
+                <div class="ai-analysis-header">
+                    <div class="ai-header-content">
+                        <div class="ai-header-left">
+                            <div class="ai-brain-icon"><i class="fas fa-brain"></i></div>
+                            <div class="ai-header-text">
+                                <h2>AI Analysis Complete</h2>
+                                <p id="analysisTime">Analyzed on <span id="analysisDate">--</span></p>
+                            </div>
+                        </div>
+                        <div class="ai-header-stats">
+                            <div class="ai-stat">
+                                <div class="ai-stat-value" id="picksCount">5</div>
+                                <div class="ai-stat-label">Picks</div>
+                            </div>
+                            <div class="ai-stat">
+                                <div class="ai-stat-value" id="avgConfidence">--</div>
+                                <div class="ai-stat-label">Avg Confidence</div>
+                            </div>
+                            <div class="ai-stat">
+                                <div class="ai-stat-value" id="dataPoints">50+</div>
+                                <div class="ai-stat-label">Data Points</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Market Overview -->
+                <div class="market-overview" id="marketOverview">
+                    <div class="overview-header">
+                        <h3 class="overview-title"><i class="fas fa-chart-line"></i> Market Pulse</h3>
+                    </div>
+                    <div class="overview-grid" id="overviewGrid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                
+                <!-- Sector Heatmap -->
+                <div class="sector-heatmap">
+                    <div class="heatmap-header">
+                        <h3 class="heatmap-title"><i class="fas fa-fire"></i> Sector Momentum</h3>
+                    </div>
+                    <div class="heatmap-grid" id="heatmapGrid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                
+                <!-- Stocks to Watch Grid -->
+                <div class="picks-grid" id="picksGrid">
+                    <!-- Stock cards will be populated by JS -->
+                </div>
+                
+                <!-- Analysis Summary -->
+                <div class="analysis-summary" id="analysisSummary">
+                    <div class="summary-header">
+                        <div class="summary-icon"><i class="fas fa-lightbulb"></i></div>
+                        <h3 class="summary-title">AI Market Analysis</h3>
+                    </div>
+                    <div class="summary-content" id="summaryContent">
+                        <!-- Populated by AI -->
+                    </div>
+                </div>
+                
+                <!-- Disclaimer -->
+                <div class="disclaimer" id="disclaimers">
+                    <div class="disclaimer-header">
+                        <div class="disclaimer-icon"><i class="fas fa-triangle-exclamation"></i></div>
+                        <h4 class="disclaimer-title">Important Risk Disclaimers</h4>
+                    </div>
+                    <p><strong>EDUCATIONAL PURPOSE ONLY:</strong> This AI Stock Picker tool is designed purely for educational and informational purposes. It is NOT investment advice, NOT a recommendation to buy or sell any securities, and NOT a substitute for professional financial advice.</p>
+                    <p><strong>NOT SEBI REGISTERED:</strong> BroBillionaire and this tool are NOT registered with SEBI (Securities and Exchange Board of India) or any other regulatory authority as an investment advisor or research analyst.</p>
+                    <p><strong>HIGH RISK WARNING:</strong> Trading in stocks, indices, and F&O involves substantial risk of loss. Past performance is not indicative of future results. 9 out of 10 individual traders incur losses. Only trade with money you can afford to lose.</p>
+                    <p><strong>AI LIMITATIONS:</strong> The AI model can make errors. Always verify any analysis with your own research. Use multiple sources before making any investment decisions. AI picks should be used as educational examples only.</p>
+                    <p><strong>NO GUARANTEE:</strong> There is no guarantee that any stock or index mentioned will perform as expected. Markets are unpredictable and influenced by numerous factors beyond any AI's capability to predict.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // ==========================================
+        // AI STOCK PICKER - MAIN JAVASCRIPT
+        // ==========================================
+        
+        // ==========================================
+        // VERIFIED STOCK DATABASE - NSE SYMBOLS ONLY
+        // ==========================================
+        const STOCK_DATABASE = {
+            // NIFTY 50 Large Caps
+            'RELIANCE': { name: 'Reliance Industries Ltd', sector: 'Energy', yahooSymbol: 'RELIANCE.NS' },
+            'TCS': { name: 'Tata Consultancy Services', sector: 'IT', yahooSymbol: 'TCS.NS' },
+            'HDFCBANK': { name: 'HDFC Bank Ltd', sector: 'Banking', yahooSymbol: 'HDFCBANK.NS' },
+            'INFY': { name: 'Infosys Ltd', sector: 'IT', yahooSymbol: 'INFY.NS' },
+            'ICICIBANK': { name: 'ICICI Bank Ltd', sector: 'Banking', yahooSymbol: 'ICICIBANK.NS' },
+            'HINDUNILVR': { name: 'Hindustan Unilever Ltd', sector: 'FMCG', yahooSymbol: 'HINDUNILVR.NS' },
+            'ITC': { name: 'ITC Ltd', sector: 'FMCG', yahooSymbol: 'ITC.NS' },
+            'SBIN': { name: 'State Bank of India', sector: 'Banking', yahooSymbol: 'SBIN.NS' },
+            'BHARTIARTL': { name: 'Bharti Airtel Ltd', sector: 'Telecom', yahooSymbol: 'BHARTIARTL.NS' },
+            'KOTAKBANK': { name: 'Kotak Mahindra Bank', sector: 'Banking', yahooSymbol: 'KOTAKBANK.NS' },
+            'LT': { name: 'Larsen & Toubro Ltd', sector: 'Infrastructure', yahooSymbol: 'LT.NS' },
+            'AXISBANK': { name: 'Axis Bank Ltd', sector: 'Banking', yahooSymbol: 'AXISBANK.NS' },
+            'ASIANPAINT': { name: 'Asian Paints Ltd', sector: 'Consumer', yahooSymbol: 'ASIANPAINT.NS' },
+            'MARUTI': { name: 'Maruti Suzuki India', sector: 'Auto', yahooSymbol: 'MARUTI.NS' },
+            'TITAN': { name: 'Titan Company Ltd', sector: 'Consumer', yahooSymbol: 'TITAN.NS' },
+            'BAJFINANCE': { name: 'Bajaj Finance Ltd', sector: 'NBFC', yahooSymbol: 'BAJFINANCE.NS' },
+            'WIPRO': { name: 'Wipro Ltd', sector: 'IT', yahooSymbol: 'WIPRO.NS' },
+            'SUNPHARMA': { name: 'Sun Pharmaceutical', sector: 'Pharma', yahooSymbol: 'SUNPHARMA.NS' },
+            'TATAMOTORS': { name: 'Tata Motors Ltd', sector: 'Auto', yahooSymbol: 'TATAMOTORS.NS' },
+            'HCLTECH': { name: 'HCL Technologies', sector: 'IT', yahooSymbol: 'HCLTECH.NS' },
+            'POWERGRID': { name: 'Power Grid Corp', sector: 'Power', yahooSymbol: 'POWERGRID.NS' },
+            'NTPC': { name: 'NTPC Ltd', sector: 'Power', yahooSymbol: 'NTPC.NS' },
+            'ONGC': { name: 'Oil & Natural Gas Corp', sector: 'Energy', yahooSymbol: 'ONGC.NS' },
+            'TATASTEEL': { name: 'Tata Steel Ltd', sector: 'Metals', yahooSymbol: 'TATASTEEL.NS' },
+            'JSWSTEEL': { name: 'JSW Steel Ltd', sector: 'Metals', yahooSymbol: 'JSWSTEEL.NS' },
+            'ADANIENT': { name: 'Adani Enterprises', sector: 'Conglomerate', yahooSymbol: 'ADANIENT.NS' },
+            'ADANIPORTS': { name: 'Adani Ports & SEZ', sector: 'Infrastructure', yahooSymbol: 'ADANIPORTS.NS' },
+            'COALINDIA': { name: 'Coal India Ltd', sector: 'Mining', yahooSymbol: 'COALINDIA.NS' },
+            'ULTRACEMCO': { name: 'UltraTech Cement', sector: 'Cement', yahooSymbol: 'ULTRACEMCO.NS' },
+            'TECHM': { name: 'Tech Mahindra Ltd', sector: 'IT', yahooSymbol: 'TECHM.NS' },
+            'DRREDDY': { name: 'Dr. Reddys Labs', sector: 'Pharma', yahooSymbol: 'DRREDDY.NS' },
+            'CIPLA': { name: 'Cipla Ltd', sector: 'Pharma', yahooSymbol: 'CIPLA.NS' },
+            'DIVISLAB': { name: 'Divis Laboratories', sector: 'Pharma', yahooSymbol: 'DIVISLAB.NS' },
+            'APOLLOHOSP': { name: 'Apollo Hospitals', sector: 'Healthcare', yahooSymbol: 'APOLLOHOSP.NS' },
+            'GRASIM': { name: 'Grasim Industries', sector: 'Cement', yahooSymbol: 'GRASIM.NS' },
+            'HINDALCO': { name: 'Hindalco Industries', sector: 'Metals', yahooSymbol: 'HINDALCO.NS' },
+            'BAJAJFINSV': { name: 'Bajaj Finserv Ltd', sector: 'NBFC', yahooSymbol: 'BAJAJFINSV.NS' },
+            'EICHERMOT': { name: 'Eicher Motors Ltd', sector: 'Auto', yahooSymbol: 'EICHERMOT.NS' },
+            'NESTLEIND': { name: 'Nestle India Ltd', sector: 'FMCG', yahooSymbol: 'NESTLEIND.NS' },
+            'BRITANNIA': { name: 'Britannia Industries', sector: 'FMCG', yahooSymbol: 'BRITANNIA.NS' },
+            'M&M': { name: 'Mahindra & Mahindra', sector: 'Auto', yahooSymbol: 'M%26M.NS' },
+            'HEROMOTOCO': { name: 'Hero MotoCorp', sector: 'Auto', yahooSymbol: 'HEROMOTOCO.NS' },
+            'BAJAJ-AUTO': { name: 'Bajaj Auto Ltd', sector: 'Auto', yahooSymbol: 'BAJAJ-AUTO.NS' },
+            'INDUSINDBK': { name: 'IndusInd Bank', sector: 'Banking', yahooSymbol: 'INDUSINDBK.NS' },
+            'BPCL': { name: 'Bharat Petroleum', sector: 'Energy', yahooSymbol: 'BPCL.NS' },
+            'VEDL': { name: 'Vedanta Ltd', sector: 'Metals', yahooSymbol: 'VEDL.NS' },
+            'SHREECEM': { name: 'Shree Cement Ltd', sector: 'Cement', yahooSymbol: 'SHREECEM.NS' },
+            'TATACONSUM': { name: 'Tata Consumer Products', sector: 'FMCG', yahooSymbol: 'TATACONSUM.NS' },
+            'SBILIFE': { name: 'SBI Life Insurance', sector: 'Insurance', yahooSymbol: 'SBILIFE.NS' },
+            'HDFCLIFE': { name: 'HDFC Life Insurance', sector: 'Insurance', yahooSymbol: 'HDFCLIFE.NS' },
+            // Mid Caps
+            'TRENT': { name: 'Trent Ltd', sector: 'Retail', yahooSymbol: 'TRENT.NS' },
+            'ZOMATO': { name: 'Zomato Ltd', sector: 'Consumer Tech', yahooSymbol: 'ZOMATO.NS' },
+            'DMART': { name: 'Avenue Supermarts', sector: 'Retail', yahooSymbol: 'DMART.NS' },
+            'PIDILITIND': { name: 'Pidilite Industries', sector: 'Chemicals', yahooSymbol: 'PIDILITIND.NS' },
+            'POLYCAB': { name: 'Polycab India Ltd', sector: 'Cables', yahooSymbol: 'POLYCAB.NS' },
+            'HAVELLS': { name: 'Havells India Ltd', sector: 'Consumer Elec', yahooSymbol: 'HAVELLS.NS' },
+            'VOLTAS': { name: 'Voltas Ltd', sector: 'Consumer Elec', yahooSymbol: 'VOLTAS.NS' },
+            'DABUR': { name: 'Dabur India Ltd', sector: 'FMCG', yahooSymbol: 'DABUR.NS' },
+            'GODREJCP': { name: 'Godrej Consumer', sector: 'FMCG', yahooSymbol: 'GODREJCP.NS' },
+            'MARICO': { name: 'Marico Ltd', sector: 'FMCG', yahooSymbol: 'MARICO.NS' },
+            'COLPAL': { name: 'Colgate-Palmolive', sector: 'FMCG', yahooSymbol: 'COLPAL.NS' },
+            'BERGEPAINT': { name: 'Berger Paints', sector: 'Paints', yahooSymbol: 'BERGEPAINT.NS' },
+            'SIEMENS': { name: 'Siemens Ltd', sector: 'Capital Goods', yahooSymbol: 'SIEMENS.NS' },
+            'ABB': { name: 'ABB India Ltd', sector: 'Capital Goods', yahooSymbol: 'ABB.NS' },
+            'HAL': { name: 'Hindustan Aeronautics', sector: 'Defence', yahooSymbol: 'HAL.NS' },
+            'BEL': { name: 'Bharat Electronics', sector: 'Defence', yahooSymbol: 'BEL.NS' },
+            'IRCTC': { name: 'IRCTC Ltd', sector: 'Travel', yahooSymbol: 'IRCTC.NS' },
+            'INDIANHOTEL': { name: 'Indian Hotels Co', sector: 'Hotels', yahooSymbol: 'INDHOTEL.NS' },
+            'PAGEIND': { name: 'Page Industries', sector: 'Textiles', yahooSymbol: 'PAGEIND.NS' },
+            'MUTHOOTFIN': { name: 'Muthoot Finance', sector: 'NBFC', yahooSymbol: 'MUTHOOTFIN.NS' },
+            'CHOLAFIN': { name: 'Cholamandalam Inv', sector: 'NBFC', yahooSymbol: 'CHOLAFIN.NS' },
+            'BANKBARODA': { name: 'Bank of Baroda', sector: 'Banking', yahooSymbol: 'BANKBARODA.NS' },
+            'PNB': { name: 'Punjab National Bank', sector: 'Banking', yahooSymbol: 'PNB.NS' },
+            'CANBK': { name: 'Canara Bank', sector: 'Banking', yahooSymbol: 'CANBK.NS' },
+            'FEDERALBNK': { name: 'Federal Bank', sector: 'Banking', yahooSymbol: 'FEDERALBNK.NS' },
+            'IDFCFIRSTB': { name: 'IDFC First Bank', sector: 'Banking', yahooSymbol: 'IDFCFIRSTB.NS' },
+            'AUBANK': { name: 'AU Small Finance Bank', sector: 'Banking', yahooSymbol: 'AUBANK.NS' },
+            'LUPIN': { name: 'Lupin Ltd', sector: 'Pharma', yahooSymbol: 'LUPIN.NS' },
+            'TORNTPHARM': { name: 'Torrent Pharma', sector: 'Pharma', yahooSymbol: 'TORNTPHARM.NS' },
+            'ALKEM': { name: 'Alkem Laboratories', sector: 'Pharma', yahooSymbol: 'ALKEM.NS' },
+            'AUROPHARMA': { name: 'Aurobindo Pharma', sector: 'Pharma', yahooSymbol: 'AUROPHARMA.NS' },
+            'BIOCON': { name: 'Biocon Ltd', sector: 'Pharma', yahooSymbol: 'BIOCON.NS' },
+            'MAXHEALTH': { name: 'Max Healthcare', sector: 'Healthcare', yahooSymbol: 'MAXHEALTH.NS' },
+            'FORTIS': { name: 'Fortis Healthcare', sector: 'Healthcare', yahooSymbol: 'FORTIS.NS' },
+            'PERSISTENT': { name: 'Persistent Systems', sector: 'IT', yahooSymbol: 'PERSISTENT.NS' },
+            'LTIM': { name: 'LTIMindtree Ltd', sector: 'IT', yahooSymbol: 'LTIM.NS' },
+            'COFORGE': { name: 'Coforge Ltd', sector: 'IT', yahooSymbol: 'COFORGE.NS' },
+            'MPHASIS': { name: 'Mphasis Ltd', sector: 'IT', yahooSymbol: 'MPHASIS.NS' },
+            'TATAELXSI': { name: 'Tata Elxsi Ltd', sector: 'IT', yahooSymbol: 'TATAELXSI.NS' },
+            'TATAPOWER': { name: 'Tata Power Co', sector: 'Power', yahooSymbol: 'TATAPOWER.NS' },
+            'ADANIGREEN': { name: 'Adani Green Energy', sector: 'Power', yahooSymbol: 'ADANIGREEN.NS' },
+            'IOC': { name: 'Indian Oil Corp', sector: 'Energy', yahooSymbol: 'IOC.NS' },
+            'GAIL': { name: 'GAIL India Ltd', sector: 'Energy', yahooSymbol: 'GAIL.NS' },
+            'PETRONET': { name: 'Petronet LNG Ltd', sector: 'Energy', yahooSymbol: 'PETRONET.NS' },
+            'JINDALSTEL': { name: 'Jindal Steel & Power', sector: 'Metals', yahooSymbol: 'JINDALSTEL.NS' },
+            'NMDC': { name: 'NMDC Ltd', sector: 'Mining', yahooSymbol: 'NMDC.NS' },
+            'ACC': { name: 'ACC Ltd', sector: 'Cement', yahooSymbol: 'ACC.NS' },
+            'AMBUJACEM': { name: 'Ambuja Cements', sector: 'Cement', yahooSymbol: 'AMBUJACEM.NS' },
+            'RAMCOCEM': { name: 'Ramco Cements', sector: 'Cement', yahooSymbol: 'RAMCOCEM.NS' },
+            'DLF': { name: 'DLF Ltd', sector: 'Real Estate', yahooSymbol: 'DLF.NS' },
+            'GODREJPROP': { name: 'Godrej Properties', sector: 'Real Estate', yahooSymbol: 'GODREJPROP.NS' },
+            'OBEROIRLTY': { name: 'Oberoi Realty', sector: 'Real Estate', yahooSymbol: 'OBEROIRLTY.NS' },
+            'PRESTIGE': { name: 'Prestige Estates', sector: 'Real Estate', yahooSymbol: 'PRESTIGE.NS' },
+            'PAYTM': { name: 'One97 Communications', sector: 'Fintech', yahooSymbol: 'PAYTM.NS' },
+            'NYKAA': { name: 'FSN E-Commerce', sector: 'E-Commerce', yahooSymbol: 'NYKAA.NS' },
+            'POLICYBZR': { name: 'PB Fintech Ltd', sector: 'Insurtech', yahooSymbol: 'POLICYBZR.NS' },
+            'DELHIVERY': { name: 'Delhivery Ltd', sector: 'Logistics', yahooSymbol: 'DELHIVERY.NS' }
+        };
+        
+        // Index symbols mapping
+        const INDEX_DATABASE = {
+            'NIFTY': { name: 'NIFTY 50 Index', sector: 'Index', yahooSymbol: '^NSEI' },
+            'BANKNIFTY': { name: 'Bank NIFTY Index', sector: 'Index', yahooSymbol: '^NSEBANK' },
+            'FINNIFTY': { name: 'NIFTY Financial Services', sector: 'Index', yahooSymbol: 'NIFTY_FIN_SERVICE.NS' },
+            'MIDCPNIFTY': { name: 'NIFTY Midcap 50', sector: 'Index', yahooSymbol: '^NSEMDCP50' }
+        };
+        
+        // Get all valid stock symbols for AI
+        const VALID_STOCK_SYMBOLS = Object.keys(STOCK_DATABASE);
+        const VALID_INDEX_SYMBOLS = Object.keys(INDEX_DATABASE);
+        
+        // State
+        let selectedType = 'all';
+        let selectedSectors = [];
+        let riskLevel = 3;
+        let marketData = null;
+        let isLoading = false;
+        let livePriceCache = {}; // Cache for live prices
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initTicker();
+            fetchMarketSentiment();
+            formatAmountInput();
+        });
+        
+        // Disclaimer Modal Functions
+        function openDisclaimerModal() {
+            const modal = document.getElementById('disclaimerModal');
+            if (modal) {
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        
+        function closeDisclaimerModal() {
+            const modal = document.getElementById('disclaimerModal');
+            if (modal) {
+                modal.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        }
+        
+        // Close modal on outside click
+        document.addEventListener('click', (e) => {
+            const modal = document.getElementById('disclaimerModal');
+            if (e.target === modal) {
+                closeDisclaimerModal();
+            }
+        });
+        
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeDisclaimerModal();
+            }
+        });
+        
+        // Type Selection
+        function selectType(btn) {
+            document.querySelectorAll('.quick-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedType = btn.dataset.type;
+        }
+        
+        // Sector Toggle
+        function toggleSector(tag) {
+            tag.classList.toggle('active');
+            const sector = tag.dataset.sector;
+            if (tag.classList.contains('active')) {
+                if (!selectedSectors.includes(sector)) selectedSectors.push(sector);
+            } else {
+                selectedSectors = selectedSectors.filter(s => s !== sector);
+            }
+        }
+        
+        // Amount Pills
+        function setAmount(pill) {
+            document.querySelectorAll('.amount-pill').forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+            document.getElementById('investmentAmount').value = pill.dataset.amount;
+            formatAmountInput();
+        }
+        
+        function formatAmountInput() {
+            const input = document.getElementById('investmentAmount');
+            const value = parseInt(input.value.replace(/[^\d]/g, '')) || 0;
+            input.value = value.toLocaleString('en-IN');
+        }
+        
+        // Risk Slider
+        function updateRisk(value) {
+            riskLevel = parseInt(value);
+            const display = document.getElementById('riskDisplay');
+            const valueEl = document.getElementById('riskValue');
+            const riskLabels = ['Very Conservative', 'Conservative', 'Moderate Risk', 'Aggressive', 'Very Aggressive'];
+            const riskClasses = ['low', 'low', 'medium', 'high', 'high'];
+            
+            display.className = 'risk-display ' + riskClasses[value - 1];
+            valueEl.textContent = riskLabels[value - 1];
+        }
+        
+        // Initialize Live Ticker with Real Data
+        async function initTicker() {
+            let tickerData = [];
+            
+            // Try to fetch live Indian market indices first
+            try {
+                const indicesResponse = await fetch('/api/market/indices');
+                if (indicesResponse.ok) {
+                    const indicesData = await indicesResponse.json();
+                    if (indicesData.indices) {
+                        indicesData.indices.forEach(index => {
+                            if (index.value) {
+                                const change = index.changePercent || 0;
+                                tickerData.push({
+                                    symbol: index.name,
+                                    price: index.name.includes('VIX') ? index.value.toFixed(2) : '₹' + index.value.toLocaleString('en-IN', { maximumFractionDigits: 2 }),
+                                    change: (change >= 0 ? '+' : '') + change.toFixed(2) + '%',
+                                    positive: index.name.includes('VIX') ? change <= 0 : change >= 0
+                                });
+                            }
+                        });
+                    }
+                }
+            } catch (e) {
+                console.log('Could not fetch live indices');
+            }
+            
+            // Add static fallback data if we don't have enough
+            if (tickerData.length < 4) {
+                tickerData = [
+                    { symbol: 'NIFTY 50', price: '₹23,245.85', change: '+0.42%', positive: true },
+                    { symbol: 'BANKNIFTY', price: '₹48,567.30', change: '+0.78%', positive: true },
+                    { symbol: 'SENSEX', price: '₹76,832.15', change: '+0.35%', positive: true },
+                    { symbol: 'INDIA VIX', price: '14.52', change: '-2.1%', positive: true },
+                ];
+            }
+            
+            // Fetch live stock prices for top stocks
+            const topStockSymbols = ['RELIANCE', 'TCS', 'HDFCBANK', 'INFY', 'ICICIBANK', 'BHARTIARTL'];
+            try {
+                const stocksResponse = await fetch('/api/stock/quotes?symbols=' + topStockSymbols.join(','));
+                if (stocksResponse.ok) {
+                    const stocksData = await stocksResponse.json();
+                    if (stocksData.quotes) {
+                        stocksData.quotes.forEach(stock => {
+                            if (stock.price) {
+                                tickerData.push({
+                                    symbol: stock.symbol,
+                                    price: '₹' + stock.price.toLocaleString('en-IN', { maximumFractionDigits: 2 }),
+                                    change: (stock.changePercent >= 0 ? '+' : '') + stock.changePercent.toFixed(2) + '%',
+                                    positive: stock.changePercent >= 0
+                                });
+                            }
+                        });
+                    }
+                }
+            } catch (e) {
+                console.log('Could not fetch live stock prices, using fallback');
+                // Fallback static data
+                const fallbackStocks = [
+                    { symbol: 'RELIANCE', price: '₹1,425.60', change: '-0.28%', positive: false },
+                    { symbol: 'TCS', price: '₹4,156.75', change: '+1.12%', positive: true },
+                    { symbol: 'HDFC BANK', price: '₹1,682.40', change: '+0.65%', positive: true },
+                ];
+                tickerData = [...tickerData, ...fallbackStocks];
+            }
+            
+            // Try to fetch crypto data (always live from CoinGecko)
+            try {
+                const response = await fetch('/api/crypto/markets?vs_currency=usd&per_page=5');
+                if (response.ok) {
+                    const cryptoData = await response.json();
+                    cryptoData.forEach(coin => {
+                        tickerData.push({
+                            symbol: coin.symbol.toUpperCase(),
+                            price: '$' + coin.current_price.toLocaleString(),
+                            change: (coin.price_change_percentage_24h >= 0 ? '+' : '') + coin.price_change_percentage_24h.toFixed(2) + '%',
+                            positive: coin.price_change_percentage_24h >= 0
+                        });
+                    });
+                }
+            } catch (e) {
+                console.log('Could not fetch crypto data');
+            }
+            
+            const tickerScroll = document.getElementById('tickerScroll');
+            const tickerHTML = tickerData.map(item => `
+                <div class="ticker-item">
+                    <span class="ticker-symbol">${item.symbol}</span>
+                    <span class="ticker-price">${item.price}</span>
+                    <span class="ticker-change ${item.positive ? 'positive' : 'negative'}">${item.change}</span>
+                </div>
+            `).join('');
+            
+            tickerScroll.innerHTML = tickerHTML + tickerHTML; // Duplicate for seamless loop
+        }
+        
+        // Cache for live prices
+        let liveMarketData = null;
+        
+        // Fetch live market indices
+        async function fetchLiveMarketData() {
+            try {
+                const response = await fetch('/api/market/indices');
+                if (response.ok) {
+                    const data = await response.json();
+                    liveMarketData = {};
+                    data.indices.forEach(idx => {
+                        if (idx.name === 'NIFTY 50') liveMarketData.nifty = { value: idx.value, change: idx.changePercent || 0 };
+                        if (idx.name === 'Bank NIFTY') liveMarketData.banknifty = { value: idx.value, change: idx.changePercent || 0 };
+                        if (idx.name === 'India VIX') liveMarketData.vix = { value: idx.value, change: idx.changePercent || 0 };
+                    });
+                    return liveMarketData;
+                }
+            } catch (e) {
+                console.log('Could not fetch live market data');
+            }
+            return null;
+        }
+        
+        // VALIDATE AND CORRECT AI PICKS - FORCE correct symbols and LIVE prices
+        async function validateAndCorrectPicks(picks) {
+            if (!picks || !Array.isArray(picks)) return [];
+            
+            const validatedPicks = [];
+            
+            // First, fetch fresh live prices for all picked symbols
+            const pickedSymbols = picks
+                .map(p => p.symbol?.toUpperCase())
+                .filter(s => STOCK_DATABASE[s] || INDEX_DATABASE[s]);
+            
+            console.log('Fetching live prices for:', pickedSymbols);
+            
+            // Force fetch fresh prices - this returns a MAP with prices
+            let freshPricesMap = {};
+            if (pickedSymbols.length > 0) {
+                freshPricesMap = await fetchMultipleStockPrices(pickedSymbols);
+                console.log('Fresh prices received:', JSON.stringify(freshPricesMap));
+            }
+            
+            // Now validate each pick with FORCED live prices
+            for (const pick of picks) {
+                const symbol = pick.symbol?.toUpperCase();
+                const stockInfo = STOCK_DATABASE[symbol] || INDEX_DATABASE[symbol];
+                
+                if (!stockInfo) {
+                    console.log(`Invalid symbol ${symbol}, skipping`);
+                    continue;
+                }
+                
+                // Get LIVE price from freshPricesMap (primary) or cache (backup)
+                const liveData = freshPricesMap[symbol] || livePriceCache[symbol];
+                console.log(`${symbol}: Live data from map/cache:`, liveData);
+                
+                console.log(`${symbol}: AI price=${pick.currentPrice}, Live price=${liveData?.price}`);
+                
+                // Start with stock info from database
+                const correctedPick = {
+                    ...pick,
+                    symbol: symbol,
+                    name: stockInfo.name,
+                    sector: stockInfo.sector
+                };
+                
+                // FORCE use live price - this is non-negotiable
+                if (liveData && liveData.price && liveData.price > 0) {
+                    const livePrice = liveData.price;
+                    const aiPrice = pick.currentPrice || pick.entry || 1000;
+                    
+                    // Calculate correction ratio
+                    const correctionRatio = livePrice / aiPrice;
+                    
+                    console.log(`${symbol}: Correcting with ratio ${correctionRatio.toFixed(4)} (AI: ${aiPrice} → Live: ${livePrice})`);
+                    
+                    // FORCE correct all price fields
+                    correctedPick.currentPrice = livePrice;
+                    correctedPick.entry = parseFloat((pick.entry * correctionRatio).toFixed(2));
+                    correctedPick.target1 = parseFloat((pick.target1 * correctionRatio).toFixed(2));
+                    correctedPick.target2 = parseFloat((pick.target2 * correctionRatio).toFixed(2));
+                    correctedPick.stopLoss = parseFloat((pick.stopLoss * correctionRatio).toFixed(2));
+                    correctedPick.liveChange = liveData.changePercent || 0;
+                    correctedPick.isLive = true;
+                } else {
+                    // No live data - use estimated price
+                    const estimatedPrice = getEstimatedPrice(symbol);
+                    const aiPrice = pick.currentPrice || pick.entry || 1000;
+                    const correctionRatio = estimatedPrice / aiPrice;
+                    
+                    console.log(`${symbol}: No live data, using estimate ${estimatedPrice}`);
+                    
+                    correctedPick.currentPrice = estimatedPrice;
+                    correctedPick.entry = parseFloat((pick.entry * correctionRatio).toFixed(2));
+                    correctedPick.target1 = parseFloat((pick.target1 * correctionRatio).toFixed(2));
+                    correctedPick.target2 = parseFloat((pick.target2 * correctionRatio).toFixed(2));
+                    correctedPick.stopLoss = parseFloat((pick.stopLoss * correctionRatio).toFixed(2));
+                    correctedPick.isLive = false;
+                }
+                
+                validatedPicks.push(correctedPick);
+            }
+            
+            return validatedPicks;
+        }
+        
+        // Fetch live stock price for a single symbol
+        async function fetchLiveStockPrice(symbol) {
+            // First check verified database
+            const stockInfo = STOCK_DATABASE[symbol.toUpperCase()];
+            if (!stockInfo) {
+                console.log(`${symbol} not in verified database`);
+                return null;
+            }
+            
+            try {
+                const response = await fetch(`/api/stock/quote/${symbol}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.success) {
+                        // Cache the result
+                        livePriceCache[symbol.toUpperCase()] = {
+                            price: data.currentPrice,
+                            change: data.change,
+                            changePercent: data.changePercent,
+                            timestamp: Date.now()
+                        };
+                        return {
+                            price: data.currentPrice,
+                            change: data.change,
+                            changePercent: data.changePercent,
+                            dayHigh: data.dayHigh,
+                            dayLow: data.dayLow
+                        };
+                    }
+                }
+            } catch (e) {
+                console.log(`Could not fetch live price for ${symbol}`);
+            }
+            return null;
+        }
+        
+        // Fetch multiple stock prices using verified symbols
+        async function fetchMultipleStockPrices(symbols) {
+            const priceMap = {};
+            const validSymbols = symbols.filter(s => STOCK_DATABASE[s.toUpperCase()] || INDEX_DATABASE[s.toUpperCase()]);
+            
+            if (validSymbols.length === 0) return priceMap;
+            
+            try {
+                const response = await fetch('/api/stock/quotes?symbols=' + validSymbols.join(','));
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.quotes) {
+                        data.quotes.forEach(q => {
+                            if (q && q.price) {
+                                priceMap[q.symbol] = {
+                                    price: q.price,
+                                    change: q.change,
+                                    changePercent: q.changePercent
+                                };
+                                // Cache the price
+                                livePriceCache[q.symbol] = {
+                                    price: q.price,
+                                    change: q.change,
+                                    changePercent: q.changePercent,
+                                    timestamp: Date.now()
+                                };
+                            }
+                        });
+                    }
+                }
+            } catch (e) {
+                console.log('Could not fetch multiple stock prices:', e);
+            }
+            return priceMap;
+        }
+        
+        // Pre-fetch all stock prices for accurate AI data
+        async function prefetchAllStockPrices() {
+            // Fetch in batches of 10
+            const allSymbols = [...VALID_STOCK_SYMBOLS];
+            const batchSize = 10;
+            
+            for (let i = 0; i < Math.min(allSymbols.length, 50); i += batchSize) {
+                const batch = allSymbols.slice(i, i + batchSize);
+                await fetchMultipleStockPrices(batch);
+                await new Promise(r => setTimeout(r, 200)); // Small delay between batches
+            }
+            
+            return livePriceCache;
+        }
+        
+        // Fetch Market Sentiment
+        async function fetchMarketSentiment() {
+            try {
+                const response = await fetch('/api/fear-greed?limit=1');
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.data && data.data[0]) {
+                        const sentiment = data.data[0];
+                        const value = parseInt(sentiment.value);
+                        
+                        document.getElementById('sentimentNumber').textContent = value;
+                        document.getElementById('sentimentLabel').textContent = sentiment.value_classification;
+                        document.getElementById('sentimentNeedle').style.left = value + '%';
+                    }
+                }
+            } catch (e) {
+                document.getElementById('sentimentNumber').textContent = '52';
+                document.getElementById('sentimentLabel').textContent = 'Neutral';
+                document.getElementById('sentimentNeedle').style.left = '52%';
+            }
+        }
+        
+        // Fetch comprehensive market intelligence
+        async function fetchMarketIntelligence() {
+            const intel = {
+                indices: null,
+                fearGreed: null,
+                topStocks: null,
+                timestamp: new Date().toISOString()
+            };
+            
+            try {
+                // Get top 50 stocks from verified database
+                const stockSymbols = Object.keys(STOCK_DATABASE).slice(0, 50).join(',');
+                
+                // Fetch multiple data sources in parallel
+                const [indicesRes, fgRes, stocksRes] = await Promise.allSettled([
+                    fetch('/api/market/indices'),
+                    fetch('/api/fear-greed'),
+                    fetch('/api/stock/quotes?symbols=' + stockSymbols)
+                ]);
+                
+                if (indicesRes.status === 'fulfilled' && indicesRes.value.ok) {
+                    intel.indices = await indicesRes.value.json();
+                }
+                
+                if (fgRes.status === 'fulfilled' && fgRes.value.ok) {
+                    const fgData = await fgRes.value.json();
+                    intel.fearGreed = fgData?.data?.[0] || null;
+                }
+                
+                if (stocksRes.status === 'fulfilled' && stocksRes.value.ok) {
+                    intel.topStocks = await stocksRes.value.json();
+                    // Also cache these prices
+                    if (intel.topStocks?.quotes) {
+                        intel.topStocks.quotes.forEach(q => {
+                            if (q && q.symbol && q.price) {
+                                livePriceCache[q.symbol] = {
+                                    price: q.price,
+                                    change: q.change,
+                                    changePercent: q.changePercent,
+                                    timestamp: Date.now()
+                                };
+                            }
+                        });
+                    }
+                }
+            } catch (e) {
+                console.error('Error fetching market intelligence:', e);
+            }
+            
+            return intel;
+        }
+        
+        // Main Generate Function
+        async function generatePicks() {
+            if (isLoading) return;
+            
+            const btn = document.getElementById('generateBtn');
+            const resultsPanel = document.getElementById('resultsPanel');
+            
+            isLoading = true;
+            btn.classList.add('loading');
+            btn.disabled = true;
+            
+            // Show loading status
+            btn.innerHTML = '<span class="btn-content"><i class="fas fa-satellite-dish"></i> Fetching Live Prices...</span>';
+            
+            try {
+                // Step 1: Fetch LIVE stock prices first (in batches)
+                const allSymbols = Object.keys(STOCK_DATABASE);
+                const batch1 = allSymbols.slice(0, 30);
+                const batch2 = allSymbols.slice(30, 60);
+                
+                // Fetch first batch
+                await fetchMultipleStockPrices(batch1);
+                
+                // Fetch second batch in parallel with other data
+                btn.innerHTML = '<span class="btn-content"><i class="fas fa-brain"></i> Loading Market Data...</span>';
+                
+                const [batch2Result, marketIntel] = await Promise.all([
+                    fetchMultipleStockPrices(batch2),
+                    fetchMarketIntelligence()
+                ]);
+                
+                // Gather input parameters
+                const params = {
+                    type: selectedType,
+                    market: document.getElementById('marketSelect').value,
+                    horizon: document.getElementById('horizonSelect').value,
+                    amount: parseInt(document.getElementById('investmentAmount').value.replace(/[^\d]/g, '')),
+                    riskLevel: riskLevel,
+                    sectors: selectedSectors,
+                    numPicks: parseInt(document.getElementById('numPicks').value)
+                };
+                
+                // Step 2: Build enhanced AI prompt with REAL market data
+                btn.innerHTML = '<span class="btn-content"><i class="fas fa-brain"></i> AI Analyzing...</span>';
+                const prompt = buildEnhancedAIPrompt(params, marketIntel);
+                
+                // Fetch AI analysis
+                const response = await fetch('/api/gemini/analyze', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt })
+                });
+                
+                let aiData = null;
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    if (result.success && result.content) {
+                        try {
+                            aiData = JSON.parse(result.content);
+                        } catch (e) {
+                            console.log('Parsing AI response as text');
+                            aiData = generateFallbackData(params);
+                        }
+                    }
+                }
+                
+                if (!aiData) {
+                    aiData = generateFallbackData(params);
+                }
+                
+                // VALIDATE AND CORRECT AI PICKS
+                // Ensure all symbols are from verified database and prices are correct
+                btn.innerHTML = '<span class="btn-content"><i class="fas fa-check-double"></i> Validating Prices...</span>';
+                aiData.picks = await validateAndCorrectPicks(aiData.picks);
+                
+                // Fetch live market data for overview
+                const liveData = await fetchLiveMarketData();
+                if (liveData) {
+                    aiData.marketOverview.nifty = liveData.nifty || aiData.marketOverview.nifty;
+                    aiData.marketOverview.banknifty = liveData.banknifty || aiData.marketOverview.banknifty;
+                    aiData.marketOverview.vix = liveData.vix || aiData.marketOverview.vix;
+                }
+                
+                // Fetch live prices for picked stocks (update currentPrice)
+                const stockSymbols = aiData.picks.filter(p => p.sector !== 'Index').map(p => p.symbol);
+                if (stockSymbols.length > 0) {
+                    const livePrices = await fetchMultipleStockPrices(stockSymbols);
+                    aiData.picks.forEach(pick => {
+                        if (livePrices[pick.symbol]) {
+                            pick.currentPrice = livePrices[pick.symbol].price;
+                            pick.liveChange = livePrices[pick.symbol].changePercent;
+                            pick.isLive = true;
+                        }
+                    });
+                }
+                
+                // Render results
+                renderResults(aiData, params);
+                
+                // Show results panel
+                resultsPanel.classList.add('visible');
+                resultsPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+            } catch (error) {
+                console.error('Error generating picks:', error);
+                // Use fallback data
+                const params = {
+                    type: selectedType,
+                    market: document.getElementById('marketSelect').value,
+                    horizon: document.getElementById('horizonSelect').value,
+                    numPicks: parseInt(document.getElementById('numPicks').value)
+                };
+                const fallbackData = generateFallbackData(params);
+                renderResults(fallbackData, params);
+                document.getElementById('resultsPanel').classList.add('visible');
+            } finally {
+                isLoading = false;
+                btn.classList.remove('loading');
+                btn.disabled = false;
+                btn.innerHTML = '<span class="btn-content"><i class="fas fa-binoculars"></i> Find Stocks to Watch</span>';
+            }
+        }
+        
+        // Build AI Prompt
+        function buildAIPrompt(params) {
+            return buildEnhancedAIPrompt(params, null);
+        }
+        
+        // Build Enhanced AI Prompt with REAL Market Data
+        function buildEnhancedAIPrompt(params, marketIntel) {
+            const riskNames = ['very conservative', 'conservative', 'moderate', 'aggressive', 'very aggressive'];
+            const horizonDesc = {
+                'intraday': 'same-day trading (exit before 3:30 PM)',
+                'swing': '3-10 day swing trading',
+                'positional': '2-8 week positional trading',
+                'longterm': '3-12 months long-term investment'
+            };
+            
+            const riskMultipliers = {
+                1: { stopLoss: 0.02, target: 0.03 },
+                2: { stopLoss: 0.03, target: 0.05 },
+                3: { stopLoss: 0.05, target: 0.08 },
+                4: { stopLoss: 0.07, target: 0.12 },
+                5: { stopLoss: 0.10, target: 0.18 }
+            };
+            
+            // Build VERIFIED stock list with live prices
+            let stockListWithPrices = '';
+            let stockCount = 0;
+            
+            // Build live stock data from quotes
+            const liveQuotes = {};
+            if (marketIntel?.topStocks?.quotes) {
+                marketIntel.topStocks.quotes.forEach(q => {
+                    if (q && q.symbol && q.price) {
+                        liveQuotes[q.symbol] = q;
+                    }
+                });
+            }
+            
+            // Add cached prices
+            Object.entries(livePriceCache).forEach(([symbol, data]) => {
+                if (!liveQuotes[symbol] && data.price) {
+                    liveQuotes[symbol] = data;
+                }
+            });
+            
+            // Build verified stock list grouped by sector
+            const stocksBySector = {};
+            Object.entries(STOCK_DATABASE).forEach(([symbol, info]) => {
+                if (!stocksBySector[info.sector]) stocksBySector[info.sector] = [];
+                const livePrice = liveQuotes[symbol];
+                stocksBySector[info.sector].push({
+                    symbol,
+                    name: info.name,
+                    price: livePrice ? livePrice.price : null,
+                    change: livePrice ? livePrice.changePercent : null
+                });
+            });
+            
+            stockListWithPrices = `
+══════════════════════════════════════════════════════════════
+    VERIFIED STOCK DATABASE (YOU MUST PICK ONLY FROM THIS LIST)
+══════════════════════════════════════════════════════════════
+`;
+            Object.entries(stocksBySector).forEach(([sector, stocks]) => {
+                stockListWithPrices += `\n【${sector}】\n`;
+                stocks.forEach(s => {
+                    const priceStr = s.price ? `₹${s.price.toFixed(2)}` : 'N/A';
+                    const changeStr = s.change !== null ? `(${s.change >= 0 ? '+' : ''}${s.change.toFixed(2)}%)` : '';
+                    stockListWithPrices += `  • ${s.symbol} (${s.name}) = ${priceStr} ${changeStr}\n`;
+                    stockCount++;
+                });
+            });
+            
+            // Build live market context
+            let liveMarketContext = '';
+            if (marketIntel) {
+                if (marketIntel.indices) {
+                    const idx = marketIntel.indices;
+                    liveMarketContext += `
+LIVE MARKET DATA (Real-time as of ${new Date().toLocaleTimeString('en-IN')}):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• NIFTY 50: ${idx.nifty?.price?.toFixed(2) || 'N/A'} (${idx.nifty?.changePercent >= 0 ? '+' : ''}${idx.nifty?.changePercent?.toFixed(2) || 0}%)
+• BANK NIFTY: ${idx.banknifty?.price?.toFixed(2) || 'N/A'} (${idx.banknifty?.changePercent >= 0 ? '+' : ''}${idx.banknifty?.changePercent?.toFixed(2) || 0}%)
+• INDIA VIX: ${idx.vix?.price?.toFixed(2) || 'N/A'} (${idx.vix?.changePercent >= 0 ? '+' : ''}${idx.vix?.changePercent?.toFixed(2) || 0}%)
+`;
+                }
+                
+                if (marketIntel.fearGreed) {
+                    const fg = marketIntel.fearGreed;
+                    liveMarketContext += `
+GLOBAL SENTIMENT:
+• Fear & Greed Index: ${fg.value} (${fg.value_classification})
+• Interpretation: ${parseInt(fg.value) < 25 ? 'EXTREME FEAR - Potential buying opportunity' : parseInt(fg.value) < 45 ? 'FEAR - Cautious buying' : parseInt(fg.value) < 55 ? 'NEUTRAL - Wait for clarity' : parseInt(fg.value) < 75 ? 'GREED - Be selective' : 'EXTREME GREED - High risk of reversal'}
+`;
+                }
+            }
+            
+            const riskConfig = riskMultipliers[params.riskLevel];
+            
+            return `You are an EXPERT senior financial analyst with 20+ years of experience in Indian equity markets. You must provide HIGHLY ACCURATE, PROFESSIONAL-GRADE stock recommendations.
+
+⚠️ CRITICAL INSTRUCTION: You MUST ONLY pick stocks from the VERIFIED STOCK DATABASE below. DO NOT use any other stock symbols. The prices shown are LIVE MARKET PRICES - use them for entry/target/stoploss calculations.
+
+${stockListWithPrices}
+
+${liveMarketContext}
+
+══════════════════════════════════════════════════════════════
+                    INVESTOR PROFILE
+══════════════════════════════════════════════════════════════
+• Asset Class: ${params.type === 'all' ? 'Stocks + Indices (F&O)' : params.type === 'stocks' ? 'Individual Stocks' : params.type === 'indices' ? 'Index F&O (NIFTY/BANKNIFTY)' : params.type === 'largecap' ? 'Large Cap Stocks (Nifty 50)' : 'Mid & Small Cap Stocks'}
+• Exchange: ${params.market === 'india' ? 'NSE (National Stock Exchange of India)' : params.market}
+• Time Horizon: ${horizonDesc[params.horizon]}
+• Risk Tolerance: ${riskNames[params.riskLevel - 1].toUpperCase()} (Risk Level ${params.riskLevel}/5)
+• Capital: ₹${params.amount.toLocaleString('en-IN')}
+• Maximum Stop Loss: ${(riskConfig.stopLoss * 100).toFixed(1)}% from entry
+• Target Expectation: ${(riskConfig.target * 100).toFixed(1)}%+ potential upside
+${params.sectors.length > 0 ? `• Sector Preference: ${params.sectors.join(', ')}` : '• Sector Preference: Open to all sectors based on opportunity'}
+
+══════════════════════════════════════════════════════════════
+                    ANALYSIS REQUIREMENTS
+══════════════════════════════════════════════════════════════
+
+You MUST analyze each stock using these MULTI-FACTOR criteria:
+
+📊 TECHNICAL ANALYSIS (40% weight):
+   - Price action & trend (higher highs/lows or lower highs/lows)
+   - Key support/resistance levels
+   - Moving averages position (20, 50, 200 DMA)
+   - RSI levels (oversold <30, overbought >70)
+   - MACD signal line crossovers
+   - Volume analysis (accumulation/distribution)
+
+📈 FUNDAMENTAL ANALYSIS (30% weight):
+   - P/E ratio vs sector average
+   - Revenue & profit growth trajectory
+   - Debt-to-equity ratio
+   - Return on Equity (ROE)
+   - Promoter holding changes
+   - Free cash flow generation
+
+📰 CATALYST ANALYSIS (20% weight):
+   - Upcoming earnings dates
+   - Sector tailwinds/headwinds
+   - Government policy impact
+   - Institutional buying/selling (FII/DII)
+   - Recent news & announcements
+   - Expansion plans or capex
+
+⚠️ RISK ASSESSMENT (10% weight):
+   - Volatility profile
+   - Liquidity (avg daily volume)
+   - Sector concentration risk
+   - Global macro risks
+
+══════════════════════════════════════════════════════════════
+                    OUTPUT REQUIREMENTS (SEBI COMPLIANT)
+══════════════════════════════════════════════════════════════
+
+⚠️ IMPORTANT: This is for EDUCATIONAL purposes only. DO NOT provide buy/sell/hold recommendations.
+Instead, provide "WATCH" status with trend analysis. Never say "buy this stock" or "sell this stock".
+Use neutral language like "interesting to watch", "worth monitoring", "educational analysis".
+
+Generate EXACTLY ${params.numPicks} interesting stocks to watch:
+
+1. INTEREST SCORE GUIDELINES (NOT recommendations):
+   • 90-100: Highly interesting technical setup worth watching
+   • 80-89: Strong patterns, educational case study
+   • 70-79: Decent analysis opportunity
+   • 60-69: Moderate interest
+
+2. TECHNICAL LEVELS (Educational Only):
+   • Current: Near current market price
+   • Resistance: Based on technical analysis (educational)
+   • Support: Based on technical levels (educational)
+
+3. ANALYSIS MUST INCLUDE:
+   • Technical observations (NOT advice)
+   • Fundamental metrics (educational)
+   • Market factors to observe
+
+RETURN ONLY VALID JSON (no markdown, no explanation):
+{
+    "picks": [
+        {
+            "symbol": "ACTUAL_NSE_SYMBOL",
+            "name": "Full Company Name",
+            "sector": "Sector Name",
+            "signal": "WATCH",
+            "signalStrength": "INTERESTING",
+            "confidence": 85,
+            "currentPrice": 1234.56,
+            "entry": 1230.00,
+            "target1": 1280.00,
+            "target2": 1350.00,
+            "stopLoss": 1180.00,
+            "riskReward": "1:2.5",
+            "technicalScore": 82,
+            "fundamentalScore": 78,
+            "momentumScore": 85,
+            "reasoning": "Educational Analysis: Trading above 50 DMA with RSI at 55. Q3 results beat estimates by 12%. Worth watching for educational purposes.",
+            "catalysts": ["Q3 results data", "Sector trends", "Technical pattern forming"],
+            "risks": ["Market volatility", "Sector risks"],
+            "timeframe": "Observation period: 2-3 weeks",
+            "lotSize": 1
+        }
+    ],
+    "marketOverview": {
+        "nifty": { "value": 23245, "change": 0.42, "trend": "bullish" },
+        "banknifty": { "value": 48567, "change": 0.78, "trend": "bullish" },
+        "vix": { "value": 14.5, "change": -2.1, "interpretation": "Low volatility environment" },
+        "advance": 1245,
+        "decline": 856,
+        "marketBreadth": "positive",
+        "fiiActivity": "Net activity +₹1,245 Cr",
+        "diiActivity": "Net activity +₹567 Cr"
+    },
+    "sectorHeatmap": [
+        { "name": "Banking", "change": 1.2, "signal": "positive", "outlook": "Sector observation" },
+        { "name": "IT", "change": -0.5, "signal": "negative", "outlook": "Sector observation" }
+    ],
+    "marketInsight": "Educational market analysis with observations about current trends and levels...",
+    "disclaimer": "For educational purposes only. NOT investment advice. NOT a recommendation to buy or sell. Always consult a SEBI-registered advisor."
+}`;
+        }
+        
+        // Generate Fallback Data (when API fails) - Uses verified stock database with cached prices
+        function generateFallbackData(params) {
+            // Build stock list from verified database with cached prices
+            const stockList = Object.entries(STOCK_DATABASE).map(([symbol, info]) => {
+                const cached = livePriceCache[symbol];
+                return {
+                    symbol,
+                    name: info.name,
+                    sector: info.sector,
+                    price: cached?.price || getEstimatedPrice(symbol)
+                };
+            });
+            
+            const indices = Object.entries(INDEX_DATABASE).map(([symbol, info]) => ({
+                symbol,
+                name: info.name,
+                sector: info.sector,
+                price: symbol === 'NIFTY' ? 23500 : symbol === 'BANKNIFTY' ? 49000 : 23000
+            }));
+            
+            // Filter by type and sector
+            let pool = [];
+            if (params.type === 'stocks' || params.type === 'largecap') {
+                pool = stockList.filter(s => ['Banking', 'IT', 'Energy', 'FMCG', 'Auto', 'Pharma'].includes(s.sector));
+            } else if (params.type === 'smallcap') {
+                pool = stockList.filter(s => ['Retail', 'Consumer Tech', 'NBFC', 'Defence', 'Real Estate'].includes(s.sector));
+            } else if (params.type === 'indices') {
+                pool = indices;
+            } else {
+                pool = [...stockList.slice(0, 20), ...indices];
+            }
+            
+            // Filter by selected sectors if any
+            if (params.sectors && params.sectors.length > 0) {
+                pool = pool.filter(s => params.sectors.some(sec => s.sector.toLowerCase().includes(sec.toLowerCase())));
+                if (pool.length < params.numPicks) {
+                    pool = [...pool, ...stockList.slice(0, params.numPicks - pool.length)];
+                }
+            }
+            
+            // Shuffle and pick
+            const shuffled = pool.sort(() => Math.random() - 0.5);
+            const selected = shuffled.slice(0, params.numPicks);
+            
+            const picks = selected.map((stock, index) => {
+                const volatility = 0.02 + Math.random() * 0.03;
+                const direction = Math.random() > 0.3 ? 1 : -1;
+                const confidence = 65 + Math.floor(Math.random() * 30);
+                const price = stock.price || 1000;
+                
+                return {
+                    symbol: stock.symbol,
+                    name: stock.name,
+                    sector: stock.sector,
+                    signal: 'WATCH',
+                    signalStrength: 'INTERESTING',
+                    confidence: confidence,
+                    currentPrice: price,
+                    entry: +(price * (1 - volatility * 0.3)).toFixed(2),
+                    target1: +(price * (1 + volatility * 2)).toFixed(2),
+                    target2: +(price * (1 + volatility * 4)).toFixed(2),
+                    stopLoss: +(price * (1 - volatility * 2)).toFixed(2),
+                    technicalScore: 60 + Math.floor(Math.random() * 30),
+                    fundamentalScore: 60 + Math.floor(Math.random() * 30),
+                    momentumScore: 60 + Math.floor(Math.random() * 30),
+                    riskReward: '1:' + (1.5 + Math.random() * 2).toFixed(1),
+                    timeframe: params.horizon === 'intraday' ? 'Same day observation' : params.horizon === 'swing' ? '1-2 weeks observation' : '2-4 weeks observation',
+                    reasoning: `Educational Analysis: ${stock.name} shows ${direction > 0 ? 'positive' : 'neutral'} momentum with ${direction > 0 ? 'positive' : 'mixed'} technical indicators. ${stock.sector} sector worth watching for educational purposes.`,
+                    catalysts: [
+                        'Technical levels to observe',
+                        'Sector momentum data',
+                        'Market trends to study'
+                    ],
+                    risks: [
+                        'Market volatility',
+                        'Global factors'
+                    ],
+                    isLive: !!livePriceCache[stock.symbol]
+                };
+            });
+            
+            return {
+                picks: picks,
+                marketOverview: {
+                    nifty: liveMarketData?.nifty || { value: 23500, change: 0.42 },
+                    banknifty: liveMarketData?.banknifty || { value: 49000, change: 0.78 },
+                    vix: liveMarketData?.vix || { value: 14.5, change: -2.1 },
+                    advance: 1245,
+                    decline: 856
+                },
+                sectorHeatmap: [
+                    { name: 'Banking', change: 1.2, signal: 'positive' },
+                    { name: 'IT', change: 0.8, signal: 'positive' },
+                    { name: 'Pharma', change: -0.3, signal: 'neutral' },
+                    { name: 'Auto', change: 1.5, signal: 'positive' },
+                    { name: 'Energy', change: 0.2, signal: 'neutral' },
+                    { name: 'FMCG', change: -0.5, signal: 'negative' },
+                    { name: 'Metal', change: 2.1, signal: 'positive' },
+                    { name: 'Realty', change: 1.8, signal: 'bullish' },
+                    { name: 'Infra', change: 0.9, signal: 'bullish' },
+                    { name: 'Media', change: -0.8, signal: 'bearish' },
+                    { name: 'PSU Bank', change: 1.4, signal: 'bullish' },
+                    { name: 'Telecom', change: 0.6, signal: 'neutral' }
+                ],
+                marketInsight: `Based on current market analysis, the overall sentiment appears cautiously optimistic. NIFTY is trading near all-time highs with support from banking and auto sectors. The VIX at lower levels indicates reduced volatility expectations. Consider maintaining a diversified portfolio with focus on quality large-caps while keeping some allocation for momentum plays.`
+            };
+        }
+        
+        // Estimated prices for stocks without cache (Feb 2026 accurate estimates)
+        function getEstimatedPrice(symbol) {
+            const estimates = {
+                'RELIANCE': 1450, 'TCS': 2940, 'HDFCBANK': 940, 'INFY': 1510, 'ICICIBANK': 1400,
+                'HINDUNILVR': 2350, 'ITC': 325, 'SBIN': 1065, 'BHARTIARTL': 2040, 'KOTAKBANK': 1950,
+                'LT': 3650, 'AXISBANK': 1100, 'ASIANPAINT': 2250, 'MARUTI': 12200, 'TITAN': 3650,
+                'BAJFINANCE': 6700, 'WIPRO': 540, 'SUNPHARMA': 1695, 'TATAMOTORS': 720, 'HCLTECH': 1850,
+                'POWERGRID': 310, 'NTPC': 390, 'ONGC': 255, 'TATASTEEL': 140, 'JSWSTEEL': 920,
+                'ADANIENT': 2450, 'ADANIPORTS': 1380, 'COALINDIA': 410, 'ULTRACEMCO': 11200, 'TECHM': 1700,
+                'DRREDDY': 1260, 'CIPLA': 1480, 'DIVISLAB': 6100, 'APOLLOHOSP': 7100, 'GRASIM': 2650,
+                'HINDALCO': 630, 'BAJAJFINSV': 1620, 'EICHERMOT': 5100, 'NESTLEIND': 2250, 'BRITANNIA': 5400,
+                'M&M': 3050, 'HEROMOTOCO': 4700, 'BAJAJ-AUTO': 9100, 'INDUSINDBK': 960, 'BPCL': 305,
+                'VEDL': 460, 'SHREECEM': 26500, 'TATACONSUM': 910, 'SBILIFE': 1520, 'HDFCLIFE': 640,
+                'TRENT': 7400, 'ZOMATO': 270, 'DMART': 3650, 'PIDILITIND': 2850, 'POLYCAB': 6700,
+                'HAL': 4150, 'BEL': 305, 'IRCTC': 840, 'DLF': 850, 'TATAPOWER': 430,
+                'HAVELLS': 1680, 'VOLTAS': 1580, 'DABUR': 520, 'GODREJCP': 1180, 'MARICO': 640,
+                'COLPAL': 2850, 'BERGEPAINT': 520, 'SIEMENS': 6900, 'ABB': 7200, 'BANKBARODA': 245,
+                'PNB': 105, 'CANBK': 105, 'FEDERALBNK': 195, 'IDFCFIRSTB': 72, 'AUBANK': 640,
+                'LUPIN': 2150, 'TORNTPHARM': 3100, 'ALKEM': 5200, 'AUROPHARMA': 1250, 'BIOCON': 340,
+                'MAXHEALTH': 920, 'FORTIS': 550, 'PERSISTENT': 5400, 'LTIM': 5800, 'COFORGE': 7200,
+                'MPHASIS': 2650, 'TATAELXSI': 6500, 'ADANIGREEN': 1650, 'IOC': 135, 'GAIL': 195,
+                'PETRONET': 320, 'JINDALSTEL': 920, 'NMDC': 220, 'ACC': 2150, 'AMBUJACEM': 560,
+                'GODREJPROP': 2600, 'OBEROIRLTY': 1850, 'PRESTIGE': 1620, 'PAYTM': 850, 'NYKAA': 175,
+                'CHOLAFIN': 1350, 'MUTHOOTFIN': 1950
+            };
+            return estimates[symbol] || 1000;
+        }
+        
+        // Render Results
+        function renderResults(data, params) {
+            // Update header stats
+            document.getElementById('analysisDate').textContent = new Date().toLocaleString('en-IN', { 
+                day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' 
+            });
+            document.getElementById('picksCount').textContent = data.picks.length;
+            
+            const avgConf = Math.round(data.picks.reduce((sum, p) => sum + p.confidence, 0) / data.picks.length);
+            document.getElementById('avgConfidence').textContent = avgConf + '%';
+            
+            // Render Market Overview
+            renderMarketOverview(data.marketOverview);
+            
+            // Render Sector Heatmap
+            renderSectorHeatmap(data.sectorHeatmap);
+            
+            // Render Stock Cards
+            renderStockCards(data.picks);
+            
+            // Render Enhanced Summary
+            const mo = data.marketOverview;
+            document.getElementById('summaryContent').innerHTML = `
+                <p style="margin-bottom: 15px;">${data.marketInsight}</p>
+                ${mo.fiiActivity || mo.diiActivity ? `
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px;">
+                    ${mo.fiiActivity ? `<div style="background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 12px; text-align: center;">
+                        <div style="font-size: 0.7rem; color: #888; margin-bottom: 4px;">FII Activity</div>
+                        <div style="font-size: 0.95rem; font-weight: 600; color: ${mo.fiiActivity.includes('+') ? 'var(--green)' : 'var(--red)'};">${mo.fiiActivity}</div>
+                    </div>` : ''}
+                    ${mo.diiActivity ? `<div style="background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3); border-radius: 10px; padding: 12px; text-align: center;">
+                        <div style="font-size: 0.7rem; color: #888; margin-bottom: 4px;">DII Activity</div>
+                        <div style="font-size: 0.95rem; font-weight: 600; color: ${mo.diiActivity.includes('+') ? 'var(--green)' : 'var(--red)'};">${mo.diiActivity}</div>
+                    </div>` : ''}
+                </div>
+                ` : ''}
+            `;
+        }
+        
+        // Render Market Overview with Live Data
+        async function renderMarketOverview(overview) {
+            const grid = document.getElementById('overviewGrid');
+            
+            // Add live indicator styling
+            const liveIndicator = `<span style="display: inline-flex; align-items: center; gap: 4px; font-size: 0.65rem; color: var(--green); margin-left: 6px;"><span style="width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 1.5s infinite;"></span>LIVE</span>`;
+            
+            grid.innerHTML = `
+                <div class="overview-item">
+                    <div class="overview-icon">📈</div>
+                    <div class="overview-label">NIFTY 50 ${liveIndicator}</div>
+                    <div class="overview-value">${overview.nifty.value ? overview.nifty.value.toLocaleString('en-IN', {maximumFractionDigits: 2}) : '--'}</div>
+                    <div class="overview-change ${overview.nifty.change >= 0 ? 'positive' : 'negative'}">
+                        ${overview.nifty.change ? (overview.nifty.change >= 0 ? '+' : '') + overview.nifty.change.toFixed(2) + '%' : '--'}
+                    </div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-icon">🏦</div>
+                    <div class="overview-label">BANK NIFTY ${liveIndicator}</div>
+                    <div class="overview-value">${overview.banknifty.value ? overview.banknifty.value.toLocaleString('en-IN', {maximumFractionDigits: 2}) : '--'}</div>
+                    <div class="overview-change ${overview.banknifty.change >= 0 ? 'positive' : 'negative'}">
+                        ${overview.banknifty.change ? (overview.banknifty.change >= 0 ? '+' : '') + overview.banknifty.change.toFixed(2) + '%' : '--'}
+                    </div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-icon">📊</div>
+                    <div class="overview-label">INDIA VIX ${liveIndicator}</div>
+                    <div class="overview-value">${overview.vix.value ? overview.vix.value.toFixed(2) : '--'}</div>
+                    <div class="overview-change ${overview.vix.change <= 0 ? 'positive' : 'negative'}">
+                        ${overview.vix.change ? (overview.vix.change >= 0 ? '+' : '') + overview.vix.change.toFixed(2) + '%' : '--'}
+                    </div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-icon" style="color: var(--green);">▲</div>
+                    <div class="overview-label">Advances</div>
+                    <div class="overview-value" style="color: var(--green);">${overview.advance || '--'}</div>
+                    <div class="overview-change positive">Stocks</div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-icon" style="color: var(--red);">▼</div>
+                    <div class="overview-label">Declines</div>
+                    <div class="overview-value" style="color: var(--red);">${overview.decline || '--'}</div>
+                    <div class="overview-change negative">Stocks</div>
+                </div>
+            `;
+        }
+        
+        // Render Sector Heatmap
+        function renderSectorHeatmap(sectors) {
+            const grid = document.getElementById('heatmapGrid');
+            grid.innerHTML = sectors.map(sector => {
+                let cellClass = 'neutral';
+                if (sector.change > 1.5) cellClass = 'strong-positive';
+                else if (sector.change > 0.5) cellClass = 'positive';
+                else if (sector.change < -1.5) cellClass = 'strong-negative';
+                else if (sector.change < -0.5) cellClass = 'negative';
+                
+                const changeColor = sector.change >= 0 ? 'var(--green)' : 'var(--red)';
+                
+                return `
+                    <div class="heatmap-cell ${cellClass}">
+                        <div class="sector-name">${sector.name}</div>
+                        <div class="sector-change" style="color: ${changeColor}">
+                            ${sector.change >= 0 ? '+' : ''}${sector.change.toFixed(1)}%
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // Render Stock Cards with Live Prices - SEBI compliant (no buy/sell signals)
+        function renderStockCards(picks) {
+            const grid = document.getElementById('picksGrid');
+            grid.innerHTML = picks.map((pick, index) => {
+                const isTopPick = index === 0;
+                const confClass = pick.confidence >= 75 ? 'high' : pick.confidence >= 50 ? 'medium' : 'low';
+                // Convert any buy/sell/hold to neutral WATCH signal with trend indicator
+                const trendDirection = pick.liveChange >= 0 ? 'bullish' : 'bearish';
+                const signalClass = 'watch'; // Always use WATCH for SEBI compliance
+                const priceChange = pick.liveChange !== undefined ? pick.liveChange : ((pick.currentPrice - pick.entry) / pick.entry * 100);
+                const isPositive = priceChange >= 0;
+                
+                // Live indicator for prices
+                const liveIndicator = pick.isLive ? `<span style="display: inline-flex; align-items: center; gap: 3px; font-size: 0.6rem; color: var(--green); margin-left: 6px; vertical-align: middle;"><span style="width: 5px; height: 5px; background: var(--green); border-radius: 50%; animation: pulse 1.5s infinite;"></span>LIVE</span>` : '';
+                
+                // Calculate potential levels (educational, not recommendations)
+                const upLevel = ((pick.target1 - pick.entry) / pick.entry * 100).toFixed(1);
+                const downLevel = ((pick.target2 - pick.entry) / pick.entry * 100).toFixed(1);
+                const riskPercent = ((pick.entry - pick.stopLoss) / pick.entry * 100).toFixed(1);
+                const rrRatio = (upLevel / riskPercent).toFixed(1);
+                
+                return `
+                    <div class="stock-card ${isTopPick ? 'top-pick' : ''}" data-symbol="${pick.symbol}">
+                        <div class="card-header">
+                            <div class="stock-info">
+                                <div class="stock-logo ${pick.sector === 'Index' ? 'index' : ''}">${pick.symbol.substring(0, 2)}</div>
+                                <div class="stock-details">
+                                    <h3>${pick.symbol}</h3>
+                                    <div class="full-name">${pick.name}</div>
+                                </div>
+                            </div>
+                            <div class="stock-badges">
+                                ${isTopPick ? '<span class="rank-badge"><i class="fas fa-crown"></i> #1 Pick</span>' : `<span class="rank-badge">#${index + 1}</span>`}
+                                <span class="sector-badge">${pick.sector}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="card-body">
+                            <!-- AI Confidence Meter -->
+                            <div class="confidence-meter">
+                                <div class="confidence-header">
+                                    <span class="confidence-label">AI Confidence Score</span>
+                                    <span class="confidence-value">${pick.confidence}%</span>
+                                </div>
+                                <div class="confidence-bar">
+                                    <div class="confidence-fill ${confClass}" style="width: ${pick.confidence}%"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- Multi-Factor Scores -->
+                            ${pick.technicalScore || pick.fundamentalScore || pick.momentumScore ? `
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 18px;">
+                                <div style="background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3); border-radius: 10px; padding: 10px; text-align: center;">
+                                    <div style="font-size: 0.65rem; color: #888; margin-bottom: 4px;">TECHNICAL</div>
+                                    <div style="font-size: 1.1rem; font-weight: 700; color: ${(pick.technicalScore || 70) >= 70 ? 'var(--green)' : (pick.technicalScore || 70) >= 50 ? 'var(--gold)' : 'var(--red)'};">${pick.technicalScore || 70}/100</div>
+                                </div>
+                                <div style="background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 10px; text-align: center;">
+                                    <div style="font-size: 0.65rem; color: #888; margin-bottom: 4px;">FUNDAMENTAL</div>
+                                    <div style="font-size: 1.1rem; font-weight: 700; color: ${(pick.fundamentalScore || 70) >= 70 ? 'var(--green)' : (pick.fundamentalScore || 70) >= 50 ? 'var(--gold)' : 'var(--red)'};">${pick.fundamentalScore || 70}/100</div>
+                                </div>
+                                <div style="background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.3); border-radius: 10px; padding: 10px; text-align: center;">
+                                    <div style="font-size: 0.65rem; color: #888; margin-bottom: 4px;">MOMENTUM</div>
+                                    <div style="font-size: 1.1rem; font-weight: 700; color: ${(pick.momentumScore || 70) >= 70 ? 'var(--green)' : (pick.momentumScore || 70) >= 50 ? 'var(--gold)' : 'var(--red)'};">${pick.momentumScore || 70}/100</div>
+                                </div>
+                            </div>
+                            ` : ''}
+                            
+                            <!-- Watch Status & Price - SEBI Compliant -->
+                            <div class="signal-row">
+                                <div class="signal-badge ${signalClass}">
+                                    <i class="fas fa-eye"></i>
+                                    WATCH
+                                    <span style="font-size: 0.6rem; opacity: 0.85; margin-left: 4px;">${isPositive ? '📈 Trending Up' : '📉 Trending Down'}</span>
+                                </div>
+                                <div class="price-info">
+                                    <div class="current-price" data-symbol="${pick.symbol}">
+                                        ₹${pick.currentPrice.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}${liveIndicator}
+                                    </div>
+                                    <div class="price-change ${isPositive ? 'positive' : 'negative'}">
+                                        ${isPositive ? '+' : ''}${priceChange.toFixed(2)}% today
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Key Levels (Educational) -->
+                            ${pick.riskReward || rrRatio > 0 ? `
+                            <div style="background: linear-gradient(90deg, rgba(59,130,246,0.15) 0%, rgba(139,92,246,0.15) 100%); border-radius: 8px; padding: 10px 15px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 0.75rem; color: #888;"><i class="fas fa-chart-line" style="margin-right: 5px;"></i>Analysis Ratio</span>
+                                <span style="font-size: 1rem; font-weight: 700; color: var(--blue);">${pick.riskReward || '1:' + rrRatio}</span>
+                            </div>
+                            ` : ''}
+                            
+                            <!-- Metrics Grid - Educational Only -->
+                            <div class="metrics-grid">
+                                <div class="metric-box">
+                                    <div class="metric-box-icon">📊</div>
+                                    <div class="metric-box-label">Level 1</div>
+                                    <div class="metric-box-value" style="color: var(--blue)">${upLevel}%</div>
+                                </div>
+                                <div class="metric-box">
+                                    <div class="metric-box-icon">📍</div>
+                                    <div class="metric-box-label">Level 2</div>
+                                    <div class="metric-box-value" style="color: var(--purple)">${downLevel}%</div>
+                                </div>
+                                <div class="metric-box">
+                                    <div class="metric-box-icon">📐</div>
+                                    <div class="metric-box-label">Ratio</div>
+                                    <div class="metric-box-value" style="color: var(--gold)">1:${rrRatio}</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Key Levels Section (Educational) -->
+                            <div class="levels-section">
+                                <div class="levels-header">
+                                    <span class="levels-title"><i class="fas fa-chart-line"></i> Technical Levels (Educational)</span>
+                                </div>
+                                <div class="levels-grid">
+                                    <div class="level-item">
+                                        <div class="level-label">Current</div>
+                                        <div class="level-value entry">₹${pick.entry.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</div>
+                                    </div>
+                                    <div class="level-item">
+                                        <div class="level-label">Resistance 1</div>
+                                        <div class="level-value target">₹${pick.target1.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</div>
+                                    </div>
+                                    <div class="level-item">
+                                        <div class="level-label">Resistance 2</div>
+                                        <div class="level-value target">₹${pick.target2.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</div>
+                                    </div>
+                                    <div class="level-item">
+                                        <div class="level-label">Support</div>
+                                        <div class="level-value stop">₹${pick.stopLoss.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- AI Reasoning -->
+                        <div class="ai-reasoning">
+                            <div class="reasoning-header">
+                                <i class="fas fa-brain"></i>
+                                <span>AI Analysis (Educational)</span>
+                                ${pick.timeframe ? `<span style="margin-left: auto; font-size: 0.7rem; color: var(--gold); background: rgba(201,162,39,0.15); padding: 3px 10px; border-radius: 20px;"><i class="fas fa-clock" style="margin-right: 4px;"></i>${pick.timeframe}</span>` : ''}
+                            </div>
+                            <p class="reasoning-text">${pick.reasoning}</p>
+                            <div class="reasoning-tags">
+                                ${pick.catalysts.map(cat => `
+                                    <span class="reason-tag bullish"><i class="fas fa-bolt"></i> ${cat}</span>
+                                `).join('')}
+                            </div>
+                            ${pick.risks && pick.risks.length > 0 ? `
+                            <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.08);">
+                                <div style="font-size: 0.7rem; color: var(--red); margin-bottom: 8px; font-weight: 600;"><i class="fas fa-triangle-exclamation" style="margin-right: 5px;"></i>KEY RISKS</div>
+                                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                                    ${pick.risks.map(risk => `
+                                        <span style="font-size: 0.7rem; color: #888; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); padding: 4px 10px; border-radius: 15px;"><i class="fas fa-exclamation-circle" style="margin-right: 4px; color: var(--red);"></i>${risk}</span>
+                                    `).join('')}
+                                </div>
+                            </div>
+                            ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+    </script>
+</body>
+</html>

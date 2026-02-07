@@ -790,6 +790,195 @@ app.post('/api/openai/chat', async (req, res) => {
     }
 });
 
+// ============================================
+// YAHOO FINANCE STOCK DATA API
+// For stock prices, quotes, and historical data
+// ============================================
+
+// Get stock quote from Yahoo Finance
+app.get('/api/stock/quote/:symbol', async (req, res) => {
+    try {
+        const symbol = req.params.symbol.toUpperCase();
+        // For Indian stocks, append .NS or .BO
+        let yahooSymbol = symbol;
+        if (!symbol.includes('.') && !symbol.startsWith('^')) {
+            yahooSymbol = symbol + '.NS'; // Default to NSE
+        }
+        
+        const url = `https://query1.finance.yahoo.com/v8/finance/chart/${yahooSymbol}?interval=1d&range=5d`;
+        
+        const response = await fetchWithTimeout(url, {
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+            }
+        }, 10000);
+        
+        const data = await response.json();
+        
+        if (data.chart && data.chart.result && data.chart.result[0]) {
+            const result = data.chart.result[0];
+            const meta = result.meta;
+            const quote = result.indicators.quote[0];
+            const closes = quote.close.filter(c => c !== null);
+            const prevClose = closes[closes.length - 2] || meta.previousClose;
+            const currentPrice = meta.regularMarketPrice || closes[closes.length - 1];
+            const change = currentPrice - prevClose;
+            const changePercent = (change / prevClose) * 100;
+            
+            res.json({
+                success: true,
+                symbol: symbol,
+                name: meta.longName || meta.shortName || symbol,
+                exchange: meta.exchangeName,
+                currency: meta.currency,
+                currentPrice: currentPrice,
+                previousClose: prevClose,
+                change: change,
+                changePercent: changePercent,
+                dayHigh: meta.regularMarketDayHigh,
+                dayLow: meta.regularMarketDayLow,
+                volume: meta.regularMarketVolume,
+                marketCap: meta.marketCap,
+                fiftyTwoWeekHigh: meta.fiftyTwoWeekHigh,
+                fiftyTwoWeekLow: meta.fiftyTwoWeekLow,
+                timestamp: new Date().toISOString()
+            });
+        } else {
+            res.status(404).json({ error: 'Symbol not found', symbol: symbol });
+        }
+    } catch (error) {
+        console.error('Yahoo Finance Quote Error:', error.message);
+        res.status(500).json({ error: 'Failed to fetch stock data' });
+    }
+});
+
+// Get multiple stock quotes
+app.get('/api/stock/quotes', async (req, res) => {
+    try {
+        const symbols = req.query.symbols?.split(',') || [];
+        if (symbols.length === 0) {
+            return res.status(400).json({ error: 'No symbols provided' });
+        }
+        
+        // Allow up to 30 symbols per request
+        const results = await Promise.all(
+            symbols.slice(0, 30).map(async (symbol) => {
+                try {
+                    let yahooSymbol = symbol.toUpperCase().trim();
+                    if (!yahooSymbol.includes('.') && !yahooSymbol.startsWith('^')) {
+                        yahooSymbol = yahooSymbol + '.NS';
+                    }
+                    
+                    const url = `https://query1.finance.yahoo.com/v8/finance/chart/${yahooSymbol}?interval=1d&range=2d`;
+                    const response = await fetchWithTimeout(url, {
+                        headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' }
+                    }, 8000);
+                    
+                    const data = await response.json();
+                    if (data.chart?.result?.[0]) {
+                        const result = data.chart.result[0];
+                        const meta = result.meta;
+                        const quote = result.indicators?.quote?.[0];
+                        
+                        // Get previous close from closes array or meta
+                        let prevClose = meta.previousClose;
+                        if (!prevClose && quote?.close) {
+                            const closes = quote.close.filter(c => c !== null);
+                            if (closes.length >= 2) {
+                                prevClose = closes[closes.length - 2];
+                            }
+                        }
+                        
+                        const currentPrice = meta.regularMarketPrice;
+                        const change = prevClose ? (currentPrice - prevClose) : 0;
+                        const changePercent = prevClose ? ((change / prevClose) * 100) : 0;
+                        
+                        return {
+                            symbol: symbol.toUpperCase(),
+                            price: currentPrice,
+                            change: change,
+                            changePercent: changePercent,
+                            previousClose: prevClose,
+                            dayHigh: meta.regularMarketDayHigh,
+                            dayLow: meta.regularMarketDayLow
+                        };
+                    }
+                    return null;
+                } catch (e) {
+                    console.log(`Error fetching ${symbol}:`, e.message);
+                    return null;
+                }
+            })
+        );
+        
+        res.json({ quotes: results.filter(r => r !== null), timestamp: new Date().toISOString() });
+    } catch (error) {
+        console.error('Yahoo Finance Quotes Error:', error.message);
+        res.status(500).json({ error: 'Failed to fetch stock quotes' });
+    }
+});
+
+// Get Indian market indices with proper change calculation
+app.get('/api/market/indices', async (req, res) => {
+    try {
+        const indices = [
+            { symbol: '^NSEI', name: 'NIFTY 50' },
+            { symbol: '^NSEBANK', name: 'Bank NIFTY' },
+            { symbol: '^BSESN', name: 'SENSEX' },
+            { symbol: '^INDIAVIX', name: 'India VIX' }
+        ];
+        
+        const results = await Promise.all(
+            indices.map(async (index) => {
+                try {
+                    const url = `https://query1.finance.yahoo.com/v8/finance/chart/${index.symbol}?interval=1d&range=5d`;
+                    const response = await fetchWithTimeout(url, {
+                        headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' }
+                    }, 10000);
+                    
+                    const data = await response.json();
+                    if (data.chart?.result?.[0]) {
+                        const result = data.chart.result[0];
+                        const meta = result.meta;
+                        const quote = result.indicators?.quote?.[0];
+                        
+                        // Get previous close from closes array or meta
+                        let prevClose = meta.previousClose;
+                        if (!prevClose && quote?.close) {
+                            const closes = quote.close.filter(c => c !== null);
+                            if (closes.length >= 2) {
+                                prevClose = closes[closes.length - 2];
+                            }
+                        }
+                        
+                        const currentPrice = meta.regularMarketPrice;
+                        const change = prevClose ? (currentPrice - prevClose) : 0;
+                        const changePercent = prevClose ? ((change / prevClose) * 100) : 0;
+                        
+                        return {
+                            symbol: index.symbol,
+                            name: index.name,
+                            value: currentPrice,
+                            previousClose: prevClose,
+                            change: change,
+                            changePercent: changePercent
+                        };
+                    }
+                    return { symbol: index.symbol, name: index.name, value: null, change: 0, changePercent: 0 };
+                } catch (e) {
+                    console.log(`Error fetching ${index.name}:`, e.message);
+                    return { symbol: index.symbol, name: index.name, value: null, change: 0, changePercent: 0 };
+                }
+            })
+        );
+        
+        res.json({ indices: results, timestamp: new Date().toISOString() });
+    } catch (error) {
+        console.error('Market Indices Error:', error.message);
+        res.status(500).json({ error: 'Failed to fetch market indices' });
+    }
+});
+
 // Config endpoint - serves non-sensitive config to frontend
 app.get('/api/config', (req, res) => {
     res.json({
@@ -820,6 +1009,9 @@ app.listen(PORT, () => {
     console.log('   /api/coingecko/*                   - Generic CoinGecko Proxy');
     console.log('   /api/nse/option-chain/:type/:sym   - NSE Option Chain (LIVE)');
     console.log('   /api/nse/market-status             - NSE Market Status');
+    console.log('   /api/stock/quote/:symbol           - Yahoo Finance Stock Quote (LIVE)');
+    console.log('   /api/stock/quotes                  - Multiple Stock Quotes (LIVE)');
+    console.log('   /api/market/indices                - Indian Market Indices (LIVE)');
     console.log('   /api/gemini/analyze                - Google Gemini AI (FREE vision)');
     console.log('   /api/openai/chat                   - OpenAI Chat Completions\n');
 });
