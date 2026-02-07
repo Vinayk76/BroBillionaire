@@ -252,6 +252,26 @@ app.get('/api/coingecko/*', async (req, res) => {
 });
 
 // ============================================
+// INDIA VIX PROXY (Yahoo Finance)
+// ============================================
+
+app.get('/api/indiavix', async (req, res) => {
+    try {
+        const url = 'https://query1.finance.yahoo.com/v8/finance/chart/%5EINDIAVIX?interval=1d&range=1d';
+        const response = await fetchWithTimeout(url, {
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+            }
+        });
+        const data = await response.json();
+        res.json(data);
+    } catch (error) {
+        console.error('India VIX API Error:', error.message);
+        res.status(500).json({ error: 'Failed to fetch India VIX data' });
+    }
+});
+
+// ============================================
 // AI API PROXIES
 // Supports: Google Gemini (FREE), OpenAI (Paid)
 // ============================================

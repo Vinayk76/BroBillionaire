@@ -1584,7 +1584,8 @@
         
         async function fetchIndiaVIX() {
             try {
-                const url = 'https://query1.finance.yahoo.com/v8/finance/chart/%5EINDIAVIX?interval=1d&range=1d';
+                // Use server proxy to avoid CORS issues
+                const url = '/api/indiavix';
                 const response = await fetch(url);
                 const data = await response.json();
                 if (data.chart?.result?.[0]) {
@@ -2074,7 +2075,7 @@
             const daysToExpiry = parseInt(document.getElementById('daysToExpiry').value) || 0;
             
             if (!referencePrice) {
-                alert('Please enter the Current Price from your chart for accurate analysis.\\n\\nLook at the last candle or the price line on the right side of your chart.');
+                alert('Please enter the Current Price from your chart for accurate analysis.\n\nLook at the last candle or the price line on the right side of your chart.');
                 analyzeBtn.classList.remove('loading');
                 analyzeBtn.disabled = false;
                 return;
@@ -2753,16 +2754,31 @@ IMPORTANT: Return ONLY valid JSON, no markdown, no code blocks, no explanation t
             document.getElementById('quickWinProb').textContent = analysis.winProbability || '--';
             
             const entry = parseFloat(analysis.entry) || 0;
+            const isShortTrade = analysis.tradeType === 'SHORT' || analysis.signal === 'BEARISH';
             if (entry > 0) {
                 const t1 = parseFloat(analysis.target1) || 0;
                 const t2 = parseFloat(analysis.target2) || 0;
                 const t3 = parseFloat(analysis.target3) || 0;
                 const sl = parseFloat(analysis.stopLoss) || 0;
                 
-                if (t1) document.getElementById('target1Pct').textContent = '+' + (((t1 - entry) / entry) * 100).toFixed(2) + '%';
-                if (t2) document.getElementById('target2Pct').textContent = '+' + (((t2 - entry) / entry) * 100).toFixed(2) + '%';
-                if (t3) document.getElementById('target3Pct').textContent = '+' + (((t3 - entry) / entry) * 100).toFixed(2) + '%';
-                if (sl) document.getElementById('stopPct').textContent = (((sl - entry) / entry) * 100).toFixed(2) + '%';
+                // For SHORT trades, targets are below entry but represent profit, so show as positive
+                if (t1) {
+                    const t1Pct = Math.abs((t1 - entry) / entry * 100).toFixed(2);
+                    document.getElementById('target1Pct').textContent = '+' + t1Pct + '%';
+                }
+                if (t2) {
+                    const t2Pct = Math.abs((t2 - entry) / entry * 100).toFixed(2);
+                    document.getElementById('target2Pct').textContent = '+' + t2Pct + '%';
+                }
+                if (t3) {
+                    const t3Pct = Math.abs((t3 - entry) / entry * 100).toFixed(2);
+                    document.getElementById('target3Pct').textContent = '+' + t3Pct + '%';
+                }
+                if (sl) {
+                    // Stop loss is always a loss, so show as negative
+                    const slPct = Math.abs((sl - entry) / entry * 100).toFixed(2);
+                    document.getElementById('stopPct').textContent = '-' + slPct + '%';
+                }
                 
                 // Adjust risk based on live India VIX
                 const adjustedRiskPercent = getVIXAdjustedRisk(riskPercent);
