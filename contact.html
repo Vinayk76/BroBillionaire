@@ -445,7 +445,7 @@
         
         <div class="contact-form-section">
             <h2>Send a Message</h2>
-            <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
+            <form class="contact-form" id="contactForm">
                 <div class="form-group">
                     <label for="name">Your Name</label>
                     <input type="text" id="name" name="name" required placeholder="Enter your name">
@@ -474,7 +474,8 @@
                     <textarea id="message" name="message" required placeholder="Write your message here..."></textarea>
                 </div>
                 
-                <button type="submit" class="submit-btn">Send Message</button>
+                <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
+                <div id="formMessage" style="margin-top: 15px; text-align: center; display: none;"></div>
             </form>
         </div>
     </div>
@@ -550,6 +551,60 @@
                 dropdown.classList.remove('active');
             }
         });
+    });
+    
+    // Contact Form Submission
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitBtn = document.getElementById('submitBtn');
+        const formMessage = document.getElementById('formMessage');
+        const originalText = submitBtn.textContent;
+        
+        // Show loading state
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+        formMessage.style.display = 'none';
+        
+        // Gather form data
+        const formData = {
+            name: document.getElementById('name').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            subject: document.getElementById('subject').value,
+            message: document.getElementById('message').value.trim()
+        };
+        
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+            
+            const result = await response.json();
+            
+            formMessage.style.display = 'block';
+            
+            if (result.success) {
+                formMessage.style.color = '#4ade80';
+                formMessage.innerHTML = '<i class="fas fa-check-circle"></i> ' + result.message;
+                // Reset form
+                document.getElementById('contactForm').reset();
+            } else {
+                formMessage.style.color = '#f87171';
+                formMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + result.message;
+            }
+        } catch (error) {
+            formMessage.style.display = 'block';
+            formMessage.style.color = '#f87171';
+            formMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> Network error. Please try again.';
+            console.error('Contact form error:', error);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+        }
     });
     </script>
 <script src="common-footer.js" defer></script>

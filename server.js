@@ -58,11 +58,48 @@ const subscriberSchema = new mongoose.Schema({
 // Create model with collection name 'subscribe_brobillionaire'
 const Subscriber = mongoose.model('Subscriber', subscriberSchema, 'subscribe_brobillionaire');
 
+// MongoDB Schema for Contact Messages
+const contactSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    email: {
+        type: String,
+        required: true,
+        lowercase: true,
+        trim: true
+    },
+    subject: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    message: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    status: {
+        type: String,
+        enum: ['new', 'read', 'replied', 'archived'],
+        default: 'new'
+    },
+    submittedAt: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+// Create model with collection name 'contacts_brobillionaire'
+const Contact = mongoose.model('Contact', contactSchema, 'contacts_brobillionaire');
+
 // Connect to MongoDB
 mongoose.connect(MONGODB_URI)
     .then(() => {
         console.log('✅ Connected to MongoDB Atlas');
-        console.log('📦 Collection: subscribe_brobillionaire');
+        console.log('📦 Collections: subscribe_brobillionaire, contacts_brobillionaire');
     })
     .catch(err => {
         console.error('❌ MongoDB connection error:', err.message);
@@ -112,6 +149,54 @@ app.post('/api/subscribe', async (req, res) => {
 
     } catch (error) {
         console.error('Subscription error:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Server error. Please try again later.'
+        });
+    }
+});
+
+// POST - Submit contact form
+app.post('/api/contact', async (req, res) => {
+    try {
+        const { name, email, subject, message } = req.body;
+
+        // Validate required fields
+        if (!name || !email || !subject || !message) {
+            return res.status(400).json({
+                success: false,
+                message: 'All fields are required'
+            });
+        }
+
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({
+                success: false,
+                message: 'Please provide a valid email address'
+            });
+        }
+
+        // Create new contact message
+        const contact = new Contact({
+            name,
+            email,
+            subject,
+            message
+        });
+
+        await contact.save();
+
+        console.log(`📩 New contact message from: ${email} - Subject: ${subject}`);
+
+        res.status(201).json({
+            success: true,
+            message: 'Thank you! Your message has been sent successfully.'
+        });
+
+    } catch (error) {
+        console.error('Contact form error:', error);
         res.status(500).json({
             success: false,
             message: 'Server error. Please try again later.'
