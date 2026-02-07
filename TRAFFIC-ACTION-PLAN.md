@@ -154,7 +154,7 @@ Subject: Guest Post Pitch - [Topic] for [Blog Name]
 
 Hi [Name],
 
-I'm [Your Name] from BroBillionaire, a trading education platform with 245+ free articles.
+I'm [Your Name] from BroBillionaire, a trading education platform with 247+ free articles.
 
 I'd love to contribute an article about [TOPIC] for your readers. 
 

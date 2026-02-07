@@ -246,7 +246,7 @@ QUICK COPY-PASTE TEMPLATES
 ${'='.repeat(60)}
 
 📱 TWITTER BIO:
-Free trading education | 245+ articles on options, psychology, legendary traders | No paywalls, just knowledge | brobillionaire.com
+Free trading education | 247+ articles on options, psychology, legendary traders | No paywalls, just knowledge | brobillionaire.com
 
 📱 INSTAGRAM BIO:
 📚 Free Trading Education
@@ -265,7 +265,7 @@ ${'-'.repeat(40)}
 → Risk Management: https://brobillionaire.com/article-risk-management.html
 
 📌 About BroBillionaire:
-Free trading education with 245+ articles. No courses to sell, no paywalls - just pure knowledge to help you master the markets.
+Free trading education with 247+ articles. No courses to sell, no paywalls - just pure knowledge to help you master the markets.
 
 #trading #stockmarket #options #investing
 
