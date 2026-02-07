@@ -272,10 +272,8 @@
         /*
          * LIVE API INTEGRATIONS:
          * 1. NSE India Option Chain API - Free, no API key required
-         *    NIFTY: https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY
-         *    BANKNIFTY: https://www.nseindia.com/api/option-chain-indices?symbol=BANKNIFTY
-         *    Stocks: https://www.nseindia.com/api/option-chain-equities?symbol={SYMBOL}
-         * 2. Multiple CORS Proxies for browser access (with fallbacks)
+         *    Served through our own backend proxy at /api/nse/option-chain/
+         *    This avoids CORS issues and handles NSE session cookies
          * 
          * Data is fetched LIVE from NSE. Updates every 30 seconds during market hours.
          */
@@ -285,71 +283,52 @@
         let lastUpdateTime = null;
         let dataSource = 'Loading...';
         
-        // Multiple CORS proxies for fallback
-        const CORS_PROXIES = [
-            'https://api.allorigins.win/raw?url=',
-            'https://corsproxy.io/?',
-            'https://api.codetabs.com/v1/proxy?quest='
-        ];
-        
-        async function fetchWithProxy(url, proxyIndex = 0) {
-            if (proxyIndex >= CORS_PROXIES.length) {
-                throw new Error('All CORS proxies failed');
-            }
-            
-            const proxy = CORS_PROXIES[proxyIndex];
-            try {
-                const response = await fetch(proxy + encodeURIComponent(url), {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
-                }
-                
-                const text = await response.text();
-                // Check if response is valid JSON
-                try {
-                    return JSON.parse(text);
-                } catch {
-                    throw new Error('Invalid JSON response');
-                }
-            } catch (error) {
-                console.warn(`Proxy ${proxyIndex + 1} failed:`, error.message);
-                // Try next proxy
-                return fetchWithProxy(url, proxyIndex + 1);
-            }
-        }
+        // API Base URL - uses our server proxy
+        const API_BASE = window.location.origin;
         
         async function fetchNSEOptionChain(symbol) {
             try {
                 // Determine if index or stock
                 const indices = ['NIFTY', 'BANKNIFTY', 'FINNIFTY', 'MIDCPNIFTY'];
-                let nseUrl;
+                const type = indices.includes(symbol) ? 'indices' : 'equities';
                 
-                if (indices.includes(symbol)) {
-                    nseUrl = `https://www.nseindia.com/api/option-chain-indices?symbol=${symbol}`;
-                } else {
-                    nseUrl = `https://www.nseindia.com/api/option-chain-equities?symbol=${symbol}`;
+                // Use our backend proxy to fetch NSE data
+                const response = await fetch(`${API_BASE}/api/nse/option-chain/${type}/${symbol}`, {
+                    method: 'GET',
+                    headers: { 'Accept': 'application/json' }
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData.message || `Server returned ${response.status}`);
                 }
                 
-                const data = await fetchWithProxy(nseUrl);
+                const data = await response.json();
                 
                 if (data && data.records && data.records.data) {
-                    dataSource = 'NSE Live Data';
+                    dataSource = data._source || 'NSE Live Data';
                     lastUpdateTime = new Date();
+                    
+                    // Show note if using simulated data
+                    if (data._note) {
+                        console.log('Note:', data._note);
+                    }
+                    
                     return {
                         spot: data.records.underlyingValue,
                         data: data.records.data,
                         expiryDates: data.records.expiryDates || [],
-                        timestamp: data.records.timestamp
+                        timestamp: data.records.timestamp,
+                        fetchedAt: data._fetchedAt,
+                        source: data._source,
+                        note: data._note
                     };
+                } else if (data.error) {
+                    throw new Error(data.error);
                 }
             } catch (error) {
                 console.error('NSE API error:', error);
+                throw error; // Re-throw to handle in calling function
             }
             return null;
         }
@@ -377,7 +356,19 @@
                     const filteredData = filterByExpiry(realData, expiry);
                     processRealNSEData(filteredData, strikeRange);
                     updateUI();
-                    updateDataStatus(`Live: ${symbol} | ${realData.timestamp || new Date().toLocaleTimeString()}`, 'success');
+                    
+                    // Show appropriate status based on data source
+                    const isSimulated = realData.source && realData.source.includes('Simulated');
+                    const statusType = isSimulated ? 'warning' : 'success';
+                    const statusMsg = isSimulated 
+                        ? `Demo Mode: ${symbol} | ${realData.timestamp || new Date().toLocaleTimeString()} (NSE unavailable)`
+                        : `Live: ${symbol} | ${realData.timestamp || new Date().toLocaleTimeString()}`;
+                    
+                    updateDataStatus(statusMsg, statusType);
+                    
+                    if (realData.note) {
+                        showDataNote(realData.note);
+                    }
                 } else {
                     throw new Error('No data received from NSE');
                 }
@@ -532,6 +523,7 @@
             const colors = {
                 loading: { bg: 'rgba(201, 162, 39, 0.1)', border: '#C9A227', text: '#C9A227' },
                 success: { bg: 'rgba(34, 197, 94, 0.1)', border: '#22c55e', text: '#22c55e' },
+                warning: { bg: 'rgba(251, 191, 36, 0.1)', border: '#fbbf24', text: '#fbbf24' },
                 error: { bg: 'rgba(239, 68, 68, 0.1)', border: '#ef4444', text: '#ef4444' }
             };
             
@@ -541,9 +533,23 @@
             statusEl.style.color = color.text;
             
             const icon = status === 'loading' ? 'fa-spinner fa-spin' : 
-                        status === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+                        status === 'success' ? 'fa-check-circle' : 
+                        status === 'warning' ? 'fa-exclamation-triangle' : 'fa-exclamation-circle';
             
             statusEl.innerHTML = `<i class="fas ${icon}"></i> ${message}`;
+        }
+        
+        function showDataNote(note) {
+            // Create or update note element
+            let noteEl = document.getElementById('dataNote');
+            if (!noteEl) {
+                const controlPanel = document.querySelector('.control-panel');
+                noteEl = document.createElement('div');
+                noteEl.id = 'dataNote';
+                noteEl.style.cssText = 'margin-top: 10px; padding: 12px; border-radius: 8px; text-align: center; font-size: 0.85rem; background: rgba(251, 191, 36, 0.1); border: 1px solid #fbbf24; color: #fbbf24;';
+                controlPanel.appendChild(noteEl);
+            }
+            noteEl.innerHTML = `<i class="fas fa-info-circle"></i> ${note}`;
         }
 
         function updateUI() {
@@ -639,8 +645,6 @@
             
             barsHTML += '</div>';
             chartContainer.innerHTML = barsHTML;
-        }
-            detectUnusualActivity();
         }
 
         function calculateMaxPain() {
