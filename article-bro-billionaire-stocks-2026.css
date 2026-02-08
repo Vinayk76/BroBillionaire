@@ -1,0 +1,313 @@
+/* =====================================
+   Article-Specific Styles
+   Bro Billionaire Stocks 2026 Analysis
+   ===================================== */
+
+/* Prevent horizontal overflow */
+html,
+body {
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
+/* Responsive containers */
+.article-content,
+.article-main,
+main {
+    max-width: 100%;
+    overflow-x: hidden;
+    padding-left: clamp(15px, 4vw, 60px);
+    padding-right: clamp(15px, 4vw, 60px);
+}
+
+/* Reading Progress Bar */
+#reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg, #C9A227 0%, #E8D5A3 50%, #F5E6C8 100%);
+    z-index: 10000;
+    transition: width 0.1s ease-out;
+    box-shadow: 0 0 20px rgba(201, 162, 39, 0.7);
+}
+
+/* Breadcrumb Navigation */
+.breadcrumb-nav {
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(201, 162, 39, 0.1);
+    padding: 0.75rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.breadcrumb {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 clamp(15px, 4vw, 2rem);
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.875rem;
+    flex-wrap: wrap;
+}
+
+.breadcrumb a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.breadcrumb a:hover {
+    color: #C9A227;
+}
+
+.breadcrumb-separator {
+    color: rgba(255, 255, 255, 0.3);
+    margin: 0 0.25rem;
+}
+
+.breadcrumb-current {
+    color: #C9A227;
+    font-weight: 500;
+}
+
+/* Enhanced table responsiveness */
+.cheat-table {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 2rem 0;
+    border-radius: 16px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0;
+}
+
+.data-table {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: clamp(0.8rem, 2vw, 1rem);
+}
+
+.data-table th {
+    padding: clamp(0.75rem, 2vw, 1.25rem) clamp(0.5rem, 2vw, 1.5rem);
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.data-table td {
+    padding: clamp(0.75rem, 2vw, 1.25rem) clamp(0.5rem, 2vw, 1.5rem);
+    word-wrap: break-word;
+}
+
+/* Stats Grid Enhancement */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin: 3rem 0;
+    padding: 0;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #C9A227, transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    to {
+        left: 100%;
+    }
+}
+
+.stat-value {
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    font-weight: 900;
+}
+
+.stat-label {
+    font-size: clamp(0.8rem, 2vw, 0.95rem);
+}
+
+/* Takeaway List Enhancement */
+.takeaway-list li::before {
+    content: '✦';
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.7;
+        transform: scale(1.1);
+    }
+}
+
+.takeaway-list li:hover {
+    transform: translateX(8px);
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* Warning Box Animation */
+.warning-box {
+    animation: warningGlow 2s infinite;
+}
+
+@keyframes warningGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(239, 68, 68, 0.4);
+    }
+}
+
+/* CTA Section Enhancement */
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(201, 162, 39, 0.1), transparent 70%);
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+}
+
+.cta-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.cta-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Text overflow fixes */
+p,
+li,
+td,
+th,
+div,
+span {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+a,
+code {
+    word-break: break-all;
+    overflow-wrap: anywhere;
+}
+
+/* Mobile Responsive Enhancements */
+@media (max-width: 768px) {
+
+    .article-content,
+    .article-main,
+    main {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .cheat-table {
+        margin: 1.5rem -15px;
+        border-radius: 0;
+        width: calc(100% + 30px);
+    }
+
+    .data-table {
+        min-width: 500px;
+        font-size: 0.85rem;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+    }
+
+    .cta-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .highlight-box,
+    .warning-box,
+    .key-takeaways-box,
+    .cta-section {
+        padding: 1.5rem;
+        margin: 2rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .data-table {
+        min-width: 400px;
+        font-size: 0.75rem;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: 0.5rem 0.75rem;
+    }
+}
+
+/* Ensure proper z-index layering */
+.breadcrumb-nav {
+    z-index: 999;
+}
+
+#reading-progress {
+    z-index: 10000;
+}

@@ -105,9 +105,675 @@
 </script> <!-- BreadcrumbList Schema -->
     <script
         type="application/ld+json"> { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [ { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://brobillionaire.com/" }, { "@type": "ListItem", "position": 2, "name": "Articles", "item": "https://brobillionaire.com/articles.html" }, { "@type": "ListItem", "position": 3, "name": "Fibonacci Retracement Trading Guide" } ] } </script>
-  
+
     <style>
-        /* Mobile Responsive Styles - Auto-generated fix */
+        /* ========================================
+           CREATIVE FIBONACCI-THEMED STYLES
+           Golden Ratio: 1.618 | 61.8%
+           ======================================== */
+
+        /* Animated gradient background for hero */
+        .article-hero {
+            background: linear-gradient(135deg,
+                    #0a0a0a 0%,
+                    #1a1a2e 25%,
+                    #16213e 50%,
+                    #0f3460 75%,
+                    #1a1a2e 100%);
+            background-size: 400% 400%;
+            animation: fibonacci-gradient 15s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Fibonacci spiral overlay effect */
+        .article-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle,
+                    rgba(201, 162, 39, 0.1) 0%,
+                    transparent 70%);
+            border-radius: 61.8% 38.2% 61.8% 38.2%;
+            animation: spiral-rotation 30s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes fibonacci-gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes spiral-rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Enhanced article title with golden ratio scaling */
+        .article-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            background: linear-gradient(135deg, #FFD700, #C9A227, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(201, 162, 39, 0.3);
+            animation: title-glow 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes title-glow {
+
+            0%,
+            100% {
+                filter: brightness(1);
+            }
+
+            50% {
+                filter: brightness(1.3);
+            }
+        }
+
+        /* Hot take box with creative design */
+        .hot-take-box {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border-left: 5px solid #C9A227;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 3rem auto;
+            max-width: 900px;
+            box-shadow: 0 10px 40px rgba(201, 162, 39, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hot-take-box::before {
+            content: '🔥';
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            font-size: 4rem;
+            opacity: 0.1;
+            transform: rotate(-15deg);
+        }
+
+        .hot-take-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(201, 162, 39, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .hot-take-box h4 {
+            color: #FFD700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        /* Enhanced data table with golden ratio proportions */
+        .data-table {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+        }
+
+        .data-table h4 {
+            color: #FFD700;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .data-table table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .data-table thead {
+            background: linear-gradient(135deg, #C9A227 0%, #8B7220 100%);
+        }
+
+        .data-table th {
+            padding: 1.2rem;
+            color: #000;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .data-table td {
+            padding: 1.2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #e0e0e0;
+            transition: background 0.3s ease;
+        }
+
+        .data-table tbody tr:hover td {
+            background: rgba(201, 162, 39, 0.1);
+        }
+
+        .data-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Creative insight boxes with glassmorphism */
+        .insight-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .insight-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #C9A227, #FFD700, #C9A227);
+            background-size: 200% 100%;
+            animation: gradient-shift 3s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .insight-box.success::before {
+            background: linear-gradient(90deg, #00ff88, #00cc6a, #00ff88);
+            background-size: 200% 100%;
+        }
+
+        .insight-box.danger::before {
+            background: linear-gradient(90deg, #ff3838, #cc0000, #ff3838);
+            background-size: 200% 100%;
+        }
+
+        .insight-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(201, 162, 39, 0.2);
+            border-color: rgba(201, 162, 39, 0.3);
+        }
+
+        .insight-box h4 {
+            color: #FFD700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .insight-box h4 i {
+            font-size: 1.8rem;
+            animation: icon-pulse 2s ease infinite;
+        }
+
+        @keyframes icon-pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* Strategy box with golden ratio design */
+        .strategy-box {
+            background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+            border: 2px solid #C9A227;
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2.5rem 0;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(201, 162, 39, 0.15);
+        }
+
+        .strategy-box::after {
+            content: '📈';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 3rem;
+            opacity: 0.15;
+        }
+
+        .strategy-box h4 {
+            color: #FFD700;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid rgba(201, 162, 39, 0.3);
+            padding-bottom: 0.8rem;
+        }
+
+        .strategy-box ul li {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .strategy-box ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #00ff88;
+            font-weight: bold;
+        }
+
+        .strategy-box ul li:has(⛔)::before {
+            content: '⛔';
+        }
+
+        /* Formula box with special styling */
+        .formula-box {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%);
+            border: 3px solid #C9A227;
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2.5rem 0;
+            box-shadow: 0 0 30px rgba(201, 162, 39, 0.3);
+            position: relative;
+        }
+
+        .formula-box::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #C9A227, #FFD700, #C9A227);
+            border-radius: 20px;
+            z-index: -1;
+            animation: border-glow 3s ease infinite;
+        }
+
+        @keyframes border-glow {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .formula-box h4 {
+            color: #FFD700;
+            font-size: 1.7rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        /* Comparison columns with modern design */
+        .comparison-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .comparison-columns .column {
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .comparison-columns .column:hover {
+            transform: translateY(-10px);
+        }
+
+        .comparison-columns .danger-bg {
+            background: linear-gradient(135deg, #2d1b1b 0%, #4a1f1f 100%);
+            border: 2px solid #ff3838;
+            box-shadow: 0 10px 30px rgba(255, 56, 56, 0.2);
+        }
+
+        .comparison-columns .success-bg {
+            background: linear-gradient(135deg, #1b2d1b 0%, #1f4a1f 100%);
+            border: 2px solid #00ff88;
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+        }
+
+        .comparison-columns .column h4 {
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .comparison-columns .danger-bg h4 {
+            color: #ff6b6b;
+        }
+
+        .comparison-columns .success-bg h4 {
+            color: #00ff88;
+        }
+
+        /* Key takeaway box */
+        .key-takeaway {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%);
+            background-size: 200% 200%;
+            animation: takeaway-gradient 10s ease infinite;
+            border-radius: 25px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            border: 3px solid #C9A227;
+            box-shadow: 0 15px 50px rgba(201, 162, 39, 0.25);
+        }
+
+        @keyframes takeaway-gradient {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .key-takeaway h3 {
+            color: #FFD700;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .key-takeaway h3 i {
+            font-size: 2.2rem;
+            animation: key-spin 4s ease-in-out infinite;
+        }
+
+        @keyframes key-spin {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(-15deg);
+            }
+
+            75% {
+                transform: rotate(15deg);
+            }
+        }
+
+        .key-takeaway li {
+            margin: 1.2rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .key-takeaway li::before {
+            content: '➤';
+            position: absolute;
+            left: 0;
+            color: #FFD700;
+            font-size: 1.2rem;
+        }
+
+        /* FAQ section enhancement */
+        .faq-section {
+            margin: 3rem 0;
+        }
+
+        .faq-item {
+            background: linear-gradient(135deg, rgba(30, 60, 114, 0.3) 0%, rgba(26, 26, 46, 0.3) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(201, 162, 39, 0.5);
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(201, 162, 39, 0.15);
+        }
+
+        .faq-item h4 {
+            color: #FFD700;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .faq-item h4::before {
+            content: 'Q';
+            background: linear-gradient(135deg, #C9A227, #FFD700);
+            color: #000;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* CTA box enhancement */
+        .cta-box {
+            background: linear-gradient(135deg, #C9A227 0%, #FFD700 50%, #C9A227 100%);
+            background-size: 200% 200%;
+            animation: cta-gradient 5s ease infinite;
+            border-radius: 25px;
+            padding: 3rem;
+            margin: 4rem 0;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(201, 162, 39, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes cta-gradient {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: cta-shine 3s ease-in-out infinite;
+        }
+
+        @keyframes cta-shine {
+
+            0%,
+            100% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            50% {
+                transform: translate(-50%, -50%) rotate(180deg);
+            }
+        }
+
+        .cta-box h3 {
+            color: #000;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-box p {
+            color: #1a1a1a;
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-btn-large {
+            background: #000;
+            color: #FFD700 !important;
+            padding: 1.5rem 3rem;
+            font-size: 1.3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-btn-large:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Related articles enhancement */
+        .related-articles {
+            padding: 5rem 0;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 100%);
+        }
+
+        .related-articles h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #fff;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .related-card {
+            background: linear-gradient(135deg, rgba(30, 60, 114, 0.5) 0%, rgba(26, 26, 46, 0.5) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .related-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .related-card:hover::before {
+            left: 100%;
+        }
+
+        .related-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(201, 162, 39, 0.6);
+            box-shadow: 0 15px 40px rgba(201, 162, 39, 0.3);
+        }
+
+        .related-card h3 {
+            color: #FFD700;
+            font-size: 1.4rem;
+            margin: 1rem 0;
+        }
+
+        .related-category {
+            background: rgba(201, 162, 39, 0.2);
+            color: #FFD700;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        /* ========================================
+           MOBILE RESPONSIVE STYLES
+           ======================================== */
         @media (max-width: 768px) {
             .article-header {
                 padding: 100px 20px 40px !important;
@@ -147,6 +813,10 @@
 
             .data-table {
                 font-size: 0.85rem !important;
+                padding: 1.5rem !important;
+            }
+
+            .data-table table {
                 display: block !important;
                 overflow-x: auto !important;
                 white-space: nowrap !important;
@@ -166,8 +836,28 @@
                 padding: 16px !important;
             }
 
-            .key-takeaways-box {
+            .key-takeaways-box,
+            .key-takeaway {
                 padding: 1.5rem !important;
+            }
+
+            .comparison-columns {
+                grid-template-columns: 1fr !important;
+            }
+
+            .hot-take-box,
+            .insight-box,
+            .strategy-box,
+            .formula-box {
+                padding: 1.5rem !important;
+            }
+
+            .cta-box {
+                padding: 2rem !important;
+            }
+
+            .cta-box h3 {
+                font-size: 1.8rem !important;
             }
         }
 
@@ -200,6 +890,15 @@
 
             .allocation-tier {
                 padding: 1.5rem !important;
+            }
+
+            .key-takeaway h3 {
+                font-size: 1.5rem !important;
+            }
+
+            .data-table h4,
+            .formula-box h4 {
+                font-size: 1.3rem !important;
             }
         }
     </style>
@@ -694,10 +1393,42 @@
             All Articles </a> </div> <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <img loading="lazy" src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                        <span class="logo-text">BroBillionaire</span>
+                    </div>
+                    <p>Free trading education for everyone. Master the markets with proven strategies.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Explore</h4>
+                        <a href="articles.html">All Articles</a>
+                        <a href="tools.html">Trading Tools</a>
+                        <a href="about.html">About Us</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Bro Billionaire Stocks</h4>
+                        <a href="article-nvidia-bro-billionaire-stock.html">Nvidia Analysis</a>
+                        <a href="article-tesla-bro-billionaire-basket.html">Tesla Analysis</a>
+                        <a href="article-meta-ai-spending-boom.html">Meta Analysis</a>
+                        <a href="article-coinbase-pro-crypto-policy.html">Coinbase Analysis</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <a href="disclaimer.html">Disclaimer</a>
+                        <a href="privacy.html">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 BroBillionaire. All rights reserved. Free trading education.</p>
-                <div class="social-links"> <a href="https://www.youtube.com/@RealBroBillionaire" target="_blank"><i
-                            class="fab fa-youtube"></i></a> </div>
+                <p>&copy; 2026 BroBillionaire. All rights reserved. Not investment advice. Do your own research.</p>
+                <div class="social-links">
+                    <a href="https://www.youtube.com/@RealBroBillionaire" target="_blank"><i
+                            class="fab fa-youtube"></i></a>
+                </div>
             </div>
         </div>
     </footer>

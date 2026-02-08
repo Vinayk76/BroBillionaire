@@ -104,7 +104,7 @@
 </script> <!-- BreadcrumbList Schema -->
     <script
         type="application/ld+json"> { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [ { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://brobillionaire.com/" }, { "@type": "ListItem", "position": 2, "name": "Articles", "item": "https://brobillionaire.com/articles.html" }, { "@type": "ListItem", "position": 3, "name": "Support and Resistance Masterclass" } ] } </script>
-  
+
     <style>
         /* Mobile Responsive Styles - Auto-generated fix */
         @media (max-width: 768px) {
@@ -201,6 +201,248 @@
                 padding: 1.5rem !important;
             }
         }
+
+        /* Additional Styles for Missing Components */
+        .comparison-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .column {
+            padding: 35px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .column.danger-bg {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(220, 38, 38, 0.08));
+            border: 2px solid rgba(239, 68, 68, 0.4);
+        }
+
+        .column.success-bg {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(22, 163, 74, 0.08));
+            border: 2px solid rgba(34, 197, 94, 0.4);
+        }
+
+        .column:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+        }
+
+        .column h4 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .column.danger-bg h4 {
+            color: #ef4444;
+        }
+
+        .column.success-bg h4 {
+            color: #22c55e;
+        }
+
+        .column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .column li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .column li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+        }
+
+        .column.danger-bg li::before {
+            color: #ef4444;
+        }
+
+        .column.success-bg li::before {
+            color: #22c55e;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.2), rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15));
+            border: 3px solid;
+            border-image: linear-gradient(135deg, #C9A227, #8b5cf6, #3b82f6) 1;
+            border-radius: 30px;
+            padding: 60px;
+            margin: 70px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(201, 162, 39, 0.1), transparent);
+            animation: rotateGradient 10s linear infinite;
+        }
+
+        @keyframes rotateGradient {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .cta-box h3 {
+            position: relative;
+            z-index: 2;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff, #C9A227, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-box p {
+            position: relative;
+            z-index: 2;
+            font-size: 1.3rem;
+            margin-bottom: 35px;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .cta-btn-large {
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+            padding: 20px 50px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #C9A227, #E8D5A3);
+            color: #0a0a0a;
+            text-decoration: none;
+            box-shadow: 0 10px 40px rgba(201, 162, 39, 0.4);
+            transition: all 0.4s ease;
+            border: none;
+        }
+
+        .cta-btn-large:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(201, 162, 39, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .comparison-columns {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .cta-box {
+                padding: 40px 30px;
+            }
+
+            .cta-box h3 {
+                font-size: 1.8rem;
+            }
+
+            .cta-box p {
+                font-size: 1.1rem;
+            }
+
+            .cta-btn-large {
+                padding: 15px 35px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Hot Take Box Container Fix */
+        body>.hot-take-box {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+
+        @media (max-width: 768px) {
+            body>.hot-take-box {
+                margin: 30px 20px;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+
+        /* Article Hero Content Fix */
+        .article-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Insight Box Modifiers */
+        .insight-box.danger {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(220, 38, 38, 0.06));
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        .insight-box.danger h4,
+        .insight-box.danger .insight-header {
+            color: #ef4444 !important;
+        }
+
+        .insight-box.danger .insight-header i {
+            color: #ef4444 !important;
+        }
+
+        .insight-box.success {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.12), rgba(22, 163, 74, 0.06));
+            border-color: rgba(34, 197, 94, 0.3);
+        }
+
+        .insight-box.success h4,
+        .insight-box.success .insight-header {
+            color: #22c55e !important;
+        }
+
+        .insight-box.success .insight-header i {
+            color: #22c55e !important;
+        }
+
+        .insight-box.warning {
+            background: linear-gradient(135deg, rgba(255, 165, 0, 0.12), rgba(255, 140, 0, 0.06));
+            border-color: rgba(255, 165, 0, 0.3);
+        }
+
+        .insight-box.warning h4,
+        .insight-box.warning .insight-header {
+            color: #ffa500 !important;
+        }
+
+        .insight-box.warning .insight-header i {
+            color: #ffa500 !important;
+        }
     </style>
     <link rel="stylesheet" href="humanized-content.css">
     <link rel="stylesheet" href="ultra-premium-articles.css">
@@ -218,7 +460,7 @@
     </nav> <!-- Article Hero -->
     <section class="article-hero">
         <div class="article-hero-content">
-            <div class="article-category">Technical Analysis</div>
+            <div class="article-category-badge">Technical Analysis</div>
             <h1 class="article-title">Support and Resistance Masterclass: The Levels That Make Millionaires</h1>
             <p class="article-subtitle">Why some traders make bank buying "the dip" while others get slaughtered. The
                 complete guide to identifying levels where price ACTUALLY turns around.</p>
@@ -234,10 +476,13 @@
     </div>
     <!-- Article Content -->
     <article class="article-content">
-        <div class="content-wrapper">
-            <div class="key-takeaway">
-                <h3><i class="fas fa-key"></i> Main points</h3>
-                <ul>
+        <div class="article-content-wrapper">
+            <div class="key-takeaways-box">
+                <div class="takeaway-header">
+                    <i class="fas fa-key"></i>
+                    <h3>Main points</h3>
+                </div>
+                <ul class="takeaway-list">
                     <li><strong>Support</strong> = price level where buying pressure overcomes selling (price bounces
                         UP)</li>
                     <li><strong>Resistance</strong> = price level where selling pressure overcomes buying (price gets
@@ -253,7 +498,8 @@
             <h2>The $237,000 Support Level That Changed Everything</h2>
             <p>November 22, 2025. Bitcoin at $95,000.</p>
             <p>After months of consolidation, every technical analyst on Crypto Twitter is watching ONE level:
-                <strong>$92,500.</strong></p>
+                <strong>$92,500.</strong>
+            </p>
             <p>Why? Because Bitcoin had tested that level FOUR times over 3 months and bounced every single time.</p>
             <p>November 23rd, 10:47 PM UTC: Bitcoin drops to $92,480. The internet holds its breath.</p>
             <p>What happened next separated winners from losers:</p>
@@ -772,10 +1018,42 @@
             All Articles </a> </div> <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <img loading="lazy" src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                        <span class="logo-text">BroBillionaire</span>
+                    </div>
+                    <p>Free trading education for everyone. Master the markets with proven strategies.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Explore</h4>
+                        <a href="articles.html">All Articles</a>
+                        <a href="tools.html">Trading Tools</a>
+                        <a href="about.html">About Us</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Bro Billionaire Stocks</h4>
+                        <a href="article-nvidia-bro-billionaire-stock.html">Nvidia Analysis</a>
+                        <a href="article-tesla-bro-billionaire-basket.html">Tesla Analysis</a>
+                        <a href="article-meta-ai-spending-boom.html">Meta Analysis</a>
+                        <a href="article-coinbase-pro-crypto-policy.html">Coinbase Analysis</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <a href="disclaimer.html">Disclaimer</a>
+                        <a href="privacy.html">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 BroBillionaire. All rights reserved. Free trading education.</p>
-                <div class="social-links"> <a href="https://www.youtube.com/@RealBroBillionaire" target="_blank"><i
-                            class="fab fa-youtube"></i></a> </div>
+                <p>&copy; 2026 BroBillionaire. All rights reserved. Not investment advice. Do your own research.</p>
+                <div class="social-links">
+                    <a href="https://www.youtube.com/@RealBroBillionaire" target="_blank"><i
+                            class="fab fa-youtube"></i></a>
+                </div>
             </div>
         </div>
     </footer>

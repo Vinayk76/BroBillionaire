@@ -45,12 +45,26 @@
     <meta name="twitter:description"
         content="Discover the top 10 most powerful political investment portfolios in 2026. Learn how world leaders and politicians are investing their wealth.">
     <style>
+        /* Prevent horizontal overflow */
+        html,
+        body {
+            overflow-x: hidden;
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         /* Article Header Styles */
         .article-header {
             background: linear-gradient(135deg, rgba(13, 13, 13, 1) 0%, rgba(26, 26, 26, 1) 50%, rgba(13, 13, 13, 1) 100%);
             padding: 120px 20px 60px;
             text-align: center;
             border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+            max-width: 100%;
         }
 
         .article-header-content {
@@ -188,6 +202,7 @@
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
             margin: 1.5rem 0;
+            max-width: 100%;
         }
 
         .holding-item {
@@ -276,6 +291,10 @@
             .value-amount {
                 font-size: 1.8rem;
             }
+
+            .holdings-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
     <link rel="stylesheet" href="humanized-content.css">
@@ -352,6 +371,8 @@
         .article-content {
             background: #0d0d0d;
             position: relative;
+            max-width: 100%;
+            overflow-x: hidden;
         }
 
         /* Better spacing for cards */
@@ -405,6 +426,20 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Ensure all containers are responsive */
+        section,
+        .trust-signals,
+        .political-card,
+        .hot-take-box,
+        .insight-box,
+        .warning-box {
+            max-width: 100%;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
         }
     </style>
 </head>
@@ -1021,6 +1056,50 @@
             </div>
         </div>
     </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <img loading="lazy" src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                        <span class="logo-text">BroBillionaire</span>
+                    </div>
+                    <p>Free trading education for everyone. Master the markets with proven strategies.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Explore</h4>
+                        <a href="articles.html">All Articles</a>
+                        <a href="tools.html">Trading Tools</a>
+                        <a href="about.html">About Us</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Bro Billionaire Stocks</h4>
+                        <a href="article-nvidia-bro-billionaire-stock.html">Nvidia Analysis</a>
+                        <a href="article-tesla-bro-billionaire-basket.html">Tesla Analysis</a>
+                        <a href="article-meta-ai-spending-boom.html">Meta Analysis</a>
+                        <a href="article-coinbase-pro-crypto-policy.html">Coinbase Analysis</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <a href="disclaimer.html">Disclaimer</a>
+                        <a href="privacy.html">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 BroBillionaire. All rights reserved. Not investment advice. Do your own research.</p>
+                <div class="social-links">
+                    <a href="https://www.youtube.com/@RealBroBillionaire" target="_blank"><i
+                            class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script src="mobile-nav.js"></script>
     <script src="mobile-menu.js"></script>
     <script src="add-breadcrumbs.js"></script>
