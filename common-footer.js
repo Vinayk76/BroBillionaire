@@ -2,58 +2,59 @@
 // This script injects a consistent footer across all article pages
 // SEBI Compliant Disclaimer Added
 
-(function() {
+(function () {
     'use strict';
 
     // Footer HTML template with comprehensive SEBI disclaimer
     const footerHTML = `
-    <!-- SEBI Compliance Disclaimer Section -->
-    <div class="sebi-disclaimer-section">
-        <div class="sebi-disclaimer-container">
-            <div class="sebi-disclaimer-header">
-                <div class="sebi-disclaimer-icon">
-                    ⚠️
+    <footer class="bro-footer">
+        <!-- SEBI Compliance Disclaimer Section -->
+        <div class="sebi-disclaimer-section">
+            <div class="sebi-disclaimer-container">
+                <div class="sebi-disclaimer-header">
+                    <div class="sebi-disclaimer-icon">
+                        ⚠️
+                    </div>
+                    <div class="sebi-disclaimer-title">Important SEBI Disclaimer & Risk Warning</div>
                 </div>
-                <div class="sebi-disclaimer-title">Important SEBI Disclaimer & Risk Warning</div>
-            </div>
-            <div class="sebi-disclaimer-content">
-                <p><strong>For Educational Purposes Only:</strong> All tools, calculators, articles, and content on BroBillionaire.com are designed for educational and informational purposes only. They do not constitute investment advice, financial advice, trading advice, or any other sort of advice.</p>
-                
-                <p><strong>No SEBI Registration:</strong> BroBillionaire is <strong>NOT</strong> a SEBI (Securities and Exchange Board of India) registered investment advisor, research analyst, or portfolio manager. We do not hold any SEBI registration or license to provide investment advisory services.</p>
-                
-                <p><strong>Risk Warning:</strong> Trading and investing in securities markets involves substantial risk of loss. According to SEBI's 2023 study, <strong>93% of individual F&O traders in India incurred net losses</strong> with an average loss of ₹1.81 lakh per trader. Past performance is not indicative of future results.</p>
-                
-                <p><strong>No Guarantee:</strong> Calculations, projections, and analysis provided by our tools are based on mathematical models and historical data. They do not guarantee future performance or protect against losses.</p>
-                
-                <p><strong>Consult Professionals:</strong> Before making any investment decisions, consult with a SEBI-registered investment advisor and/or a qualified financial professional who can assess your specific situation and risk tolerance.</p>
-            </div>
-            
-            <div class="sebi-disclaimer-badges">
-                <div class="sebi-badge-item">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>Not SEBI Registered</span>
+                <div class="sebi-disclaimer-content">
+                    <p><strong>For Educational Purposes Only:</strong> All tools, calculators, articles, and content on BroBillionaire.com are designed for educational and informational purposes only. They do not constitute investment advice, financial advice, trading advice, or any other sort of advice.</p>
+
+                    <p><strong>No SEBI Registration:</strong> BroBillionaire is <strong>NOT</strong> a SEBI (Securities and Exchange Board of India) registered investment advisor, research analyst, or portfolio manager. We do not hold any SEBI registration or license to provide investment advisory services.</p>
+
+                    <p><strong>Risk Warning:</strong> Trading and investing in securities markets involves substantial risk of loss. According to SEBI's 2023 study, <strong>93% of individual F&O traders in India incurred net losses</strong> with an average loss of ₹1.81 lakh per trader. Past performance is not indicative of future results.</p>
+
+                    <p><strong>No Guarantee:</strong> Calculations, projections, and analysis provided by our tools are based on mathematical models and historical data. They do not guarantee future performance or protect against losses.</p>
+
+                    <p><strong>Consult Professionals:</strong> Before making any investment decisions, consult with a SEBI-registered investment advisor and/or a qualified financial professional who can assess your specific situation and risk tolerance.</p>
                 </div>
-                <div class="sebi-badge-item">
-                    <i class="fas fa-graduation-cap"></i>
-                    <span>Educational Only</span>
+
+                <div class="sebi-disclaimer-badges">
+                    <div class="sebi-badge-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Not SEBI Registered</span>
+                    </div>
+                    <div class="sebi-badge-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Educational Only</span>
+                    </div>
+                    <div class="sebi-badge-item">
+                        <i class="fas fa-chart-line"></i>
+                        <span>No Investment Advice</span>
+                    </div>
+                    <div class="sebi-badge-item">
+                        <i class="fas fa-balance-scale"></i>
+                        <span>Consult SEBI RIA</span>
+                    </div>
                 </div>
-                <div class="sebi-badge-item">
-                    <i class="fas fa-chart-line"></i>
-                    <span>No Investment Advice</span>
+
+                <div class="sebi-disclaimer-footer">
+                    <p>📊 <strong>SEBI Reference:</strong> For registered investment advisors, visit <a href="https://www.sebi.gov.in/sebiweb/other/OtherAction.do?doRecognised=yes" target="_blank" rel="noopener">SEBI's Official Website</a></p>
                 </div>
-                <div class="sebi-badge-item">
-                    <i class="fas fa-balance-scale"></i>
-                    <span>Consult SEBI RIA</span>
-                </div>
-            </div>
-            
-            <div class="sebi-disclaimer-footer">
-                <p>📊 <strong>SEBI Reference:</strong> For registered investment advisors, visit <a href="https://www.sebi.gov.in/sebiweb/other/OtherAction.do?doRecognised=yes" target="_blank" rel="noopener">SEBI's Official Website</a></p>
             </div>
         </div>
-    </div>
-    
-    <footer class="bro-footer">
+
+        <!-- Footer Content -->
         <div class="bro-footer-content">
             <div class="bro-footer-brand">
                 <div class="bro-footer-logo-container">
@@ -78,7 +79,7 @@
     /* SEBI Disclaimer Section Styles - BroBillionaire Theme */
     .sebi-disclaimer-section {
         max-width: 1200px;
-        margin: 60px auto 0;
+        margin: 0 auto 40px;
         padding: 0 20px;
     }
     
@@ -397,11 +398,9 @@
 
     // Function to inject footer
     function injectFooter() {
-        // Remove existing article-footer if present
-        const existingFooter = document.querySelector('.article-footer');
-        if (existingFooter) {
-            existingFooter.remove();
-        }
+        // Remove ALL existing footers to prevent duplicates
+        const existingFooters = document.querySelectorAll('footer, .footer, .article-footer, .bro-footer');
+        existingFooters.forEach(footer => footer.remove());
 
         // Inject CSS into head
         document.head.insertAdjacentHTML('beforeend', footerCSS);
@@ -409,7 +408,7 @@
         // Find the best place to insert footer (before </body> or after main content)
         const body = document.body;
         const scripts = body.querySelectorAll('script');
-        
+
         // Insert before the first script tag in body, or at the end
         if (scripts.length > 0) {
             scripts[0].insertAdjacentHTML('beforebegin', footerHTML);
