@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Test Page</title>
+    <link rel="stylesheet" href="faq-common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            padding: 40px 20px;
+            margin: 0;
+        }
+
+        h1 {
+            color: #C9A227;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>FAQ Test Page</h1>
+
+    <section class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
+        <div class="faq-container">
+            <h2 class="faq-title">
+                <i class="fas fa-question-circle"></i> Frequently Asked Questions
+            </h2>
+            <div class="faq-list">
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(0)" aria-expanded="false">
+                        <span itemprop="name">Is the FAQ CSS working?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-0" itemscope itemprop="acceptedAnswer"
+                        itemtype="https://schema.org/Answer">
+                        <p itemprop="text">If you can see this text with proper styling after clicking the question,
+                            then yes! The FAQ CSS is working correctly.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(1)" aria-expanded="false">
+                        <span itemprop="name">Does the toggle animation work?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-1" itemscope itemprop="acceptedAnswer"
+                        itemtype="https://schema.org/Answer">
+                        <p itemprop="text">The chevron icon should rotate 180 degrees when you click, and the answer
+                            should smoothly slide open. Only one FAQ should be open at a time.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(2)" aria-expanded="false">
+                        <span itemprop="name">Are the styles correct?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-2" itemscope itemprop="acceptedAnswer"
+                        itemtype="https://schema.org/Answer">
+                        <p itemprop="text">You should see: Premium black/gold theme, gradient background, smooth
+                            transitions, hover effects on FAQ items, and the text should be clearly readable with proper
+                            spacing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // FAQ Toggle Function
+        function toggleFAQ(index) {
+            const items = document.querySelectorAll('.faq-section .faq-item');
+            if (!items || !items[index]) {
+                console.error('FAQ item not found at index:', index);
+                return;
+            }
+
+            const item = items[index];
+            const wasActive = item.classList.contains('active');
+
+            // Close all FAQs
+            items.forEach(faq => {
+                faq.classList.remove('active');
+                const btn = faq.querySelector('.faq-question');
+                if (btn) btn.setAttribute('aria-expanded', 'false');
+            });
+
+            // Open clicked one if it wasn't already open
+            if (!wasActive) {
+                item.classList.add('active');
+                const btn = item.querySelector('.faq-question');
+                if (btn) btn.setAttribute('aria-expanded', 'true');
+            }
+        }
+
+        // Log to console for debugging
+        console.log('FAQ test page loaded');
+        console.log('FAQ items found:', document.querySelectorAll('.faq-item').length);
+    </script>
+    <script src="faq-toggle.js"></script>
+</body>
+
+</html>

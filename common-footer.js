@@ -250,7 +250,10 @@
         padding: 60px 20px 40px;
         text-align: center;
         border-top: 3px solid #C9A227;
-        margin-top: 60px;
+        margin-top: auto;
+        flex-shrink: 0;
+        flex-grow: 0;
+        width: 100%;
     }
 
     .bro-footer-content {

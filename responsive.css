@@ -4,7 +4,9 @@
    ============================================ */
 
 /* Global Emoji Support for Responsive Styles */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     font-family: inherit, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
@@ -13,7 +15,7 @@
    ============================================ */
 
 /* Hide existing .mobile-menu when our toggle is present */
-.mobile-menu-toggle + .mobile-menu,
+.mobile-menu-toggle+.mobile-menu,
 .mobile-menu {
     display: none !important;
 }
@@ -30,7 +32,7 @@
     border-radius: 8px;
     cursor: pointer;
     gap: 5px;
-    padding: 8px;
+    padding: 0.5rem;
     transition: all 0.3s ease;
 }
 
@@ -90,7 +92,7 @@
     text-decoration: none;
     font-size: 1rem;
     font-weight: 500;
-    border-radius: 10px;
+    border-radius: 12px;
     transition: all 0.3s ease;
     border: 1px solid transparent;
 }
@@ -107,7 +109,8 @@
    ============================================ */
 
 /* Prevent horizontal scroll */
-html, body {
+html,
+body {
     overflow-x: hidden;
     max-width: 100%;
 }
@@ -119,13 +122,16 @@ img {
 }
 
 /* Responsive iframes and embeds */
-iframe, embed, object, video {
+iframe,
+embed,
+object,
+video {
     max-width: 100%;
 }
 
 /* Adjust mobile nav dropdown position when market ticker is present */
 body.has-ticker .mobile-nav-dropdown,
-.market-ticker ~ * .mobile-nav-dropdown {
+.market-ticker~* .mobile-nav-dropdown {
     top: 115px;
 }
 
@@ -133,6 +139,7 @@ body.has-ticker .mobile-nav-dropdown,
    LARGE DESKTOP (max-width: 1200px)
    ============================================ */
 @media (max-width: 1200px) {
+
     /* Container adjustments */
     .container,
     .section-container {
@@ -146,6 +153,7 @@ body.has-ticker .mobile-nav-dropdown,
    TABLET LANDSCAPE (max-width: 1024px)
    ============================================ */
 @media (max-width: 1024px) {
+
     /* Calculator containers */
     .calculator-container,
     .calc-container {
@@ -160,7 +168,7 @@ body.has-ticker .mobile-nav-dropdown,
         grid-template-columns: 1fr !important;
         flex-direction: column !important;
     }
-    
+
     /* Triple grids become double on tablets */
     .stats-showcase-triple {
         grid-template-columns: repeat(2, 1fr) !important;
@@ -171,11 +179,12 @@ body.has-ticker .mobile-nav-dropdown,
    TABLET PORTRAIT (max-width: 768px)
    ============================================ */
 @media (max-width: 768px) {
+
     /* Show mobile menu toggle */
     .mobile-menu-toggle {
         display: flex;
     }
-    
+
     /* Hide desktop nav links */
     .nav-links {
         display: none !important;
@@ -231,11 +240,12 @@ body.has-ticker .mobile-nav-dropdown,
     .panel,
     .card,
     .referral-card,
-    .leaderboard-section,
-    .faq-section {
+    .leaderboard-section {
         padding: 20px !important;
         border-radius: 16px !important;
     }
+
+    /* FAQ styles moved to faq-common.css */
 
     /* Chart containers */
     .chart-container {
@@ -329,7 +339,7 @@ body.has-ticker .mobile-nav-dropdown,
     }
 
     .leaderboard-tab {
-        padding: 8px 16px !important;
+        padding: 0.5rem 16px !important;
         font-size: 0.85rem !important;
     }
 
@@ -365,14 +375,7 @@ body.has-ticker .mobile-nav-dropdown,
         font-size: 1.4rem !important;
     }
 
-    /* FAQ */
-    .faq-section {
-        padding: 25px 15px !important;
-    }
-
-    .faq-question {
-        font-size: 0.95rem !important;
-    }
+    /* FAQ styles moved to faq-common.css */
 
     /* Quick amounts */
     .quick-amounts {
@@ -381,7 +384,7 @@ body.has-ticker .mobile-nav-dropdown,
     }
 
     .quick-btn {
-        padding: 8px 14px !important;
+        padding: 0.5rem 14px !important;
         font-size: 0.8rem !important;
     }
 
@@ -464,6 +467,7 @@ body.has-ticker .mobile-nav-dropdown,
    MOBILE (max-width: 576px)
    ============================================ */
 @media (max-width: 576px) {
+
     /* Smaller headings */
     .calc-hero h1,
     .page-hero h1,
@@ -517,7 +521,7 @@ body.has-ticker .mobile-nav-dropdown,
     .navbar .cta-btn,
     .navbar .cta-btn.gold-btn {
         width: auto !important;
-        padding: 8px 12px !important;
+        padding: 0.5rem 12px !important;
         font-size: 0.75rem !important;
     }
 
@@ -592,6 +596,7 @@ body.has-ticker .mobile-nav-dropdown,
    SMALL MOBILE (max-width: 400px)
    ============================================ */
 @media (max-width: 400px) {
+
     /* Extra small headings */
     .calc-hero h1,
     .page-hero h1,
@@ -644,6 +649,7 @@ body.has-ticker .mobile-nav-dropdown,
    LANDSCAPE MODE FIXES
    ============================================ */
 @media (max-height: 500px) and (orientation: landscape) {
+
     /* Reduce hero padding in landscape */
     .calc-hero,
     .page-hero,
@@ -668,6 +674,7 @@ body.has-ticker .mobile-nav-dropdown,
    TOUCH DEVICE OPTIMIZATIONS
    ============================================ */
 @media (hover: none) and (pointer: coarse) {
+
     /* Larger touch targets */
     .nav-link,
     .btn,
@@ -701,6 +708,7 @@ body.has-ticker .mobile-nav-dropdown,
    PRINT STYLES
    ============================================ */
 @media print {
+
     .navbar,
     .mobile-menu-toggle,
     .mobile-nav-dropdown,
@@ -726,6 +734,7 @@ body.has-ticker .mobile-nav-dropdown,
    ACCESSIBILITY IMPROVEMENTS
    ============================================ */
 @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
@@ -812,7 +821,8 @@ textarea:focus-visible {
     }
 
     /* Code blocks */
-    pre, code {
+    pre,
+    code {
         font-size: 0.85rem !important;
         padding: 15px !important;
         overflow-x: auto !important;
@@ -855,6 +865,7 @@ textarea:focus-visible {
 
 /* Mobile breakpoint */
 @media (max-width: 768px) {
+
     /* Calculator Hero */
     .calc-hero {
         padding: 120px 16px 40px !important;
@@ -871,7 +882,7 @@ textarea:focus-visible {
 
     /* Calculator Section */
     .calculator-section {
-        padding: 40px 16px 60px !important;
+        padding: 2.5rem 16px 60px !important;
     }
 
     .calculator-container {
@@ -893,7 +904,7 @@ textarea:focus-visible {
 
     .panel-title i {
         padding: 10px !important;
-        border-radius: 10px !important;
+        border-radius: 12px !important;
         font-size: 1rem !important;
     }
 
@@ -944,14 +955,14 @@ textarea:focus-visible {
     input[type="text"] {
         font-size: 16px !important;
         padding: 14px !important;
-        border-radius: 10px !important;
+        border-radius: 12px !important;
     }
 
     /* Select dropdowns */
     select {
         font-size: 16px !important;
         padding: 14px !important;
-        border-radius: 10px !important;
+        border-radius: 12px !important;
     }
 
     /* Chart Container */
@@ -1004,7 +1015,7 @@ textarea:focus-visible {
 
     .comparison-table th,
     .comparison-table td {
-        padding: 12px 10px !important;
+        padding: 0.75rem 10px !important;
         font-size: 0.85rem !important;
     }
 
@@ -1015,7 +1026,7 @@ textarea:focus-visible {
     }
 
     .yearly-breakdown .year-item {
-        padding: 12px !important;
+        padding: 0.75rem !important;
     }
 
     /* Info/Tips Cards */
@@ -1104,6 +1115,7 @@ textarea:focus-visible {
 
 /* Mobile breakpoint */
 @media (max-width: 768px) {
+
     /* Tools Page Header */
     .tools-header {
         padding: 80px 16px 30px !important;
@@ -1199,7 +1211,7 @@ textarea:focus-visible {
     .tool-cta {
         width: 100% !important;
         justify-content: center !important;
-        padding: 12px 20px !important;
+        padding: 0.75rem 20px !important;
         font-size: 0.85rem !important;
     }
 
@@ -1233,7 +1245,7 @@ textarea:focus-visible {
     }
 
     .calc-input-group input {
-        padding: 12px !important;
+        padding: 0.75rem !important;
         font-size: 1rem !important;
     }
 
@@ -1263,7 +1275,7 @@ textarea:focus-visible {
     }
 
     .stat-item {
-        padding: 8px !important;
+        padding: 0.5rem !important;
     }
 
     .stat-item .stat-value {
@@ -1331,7 +1343,7 @@ textarea:focus-visible {
     .back-btn {
         top: 15px !important;
         left: 15px !important;
-        padding: 8px 15px !important;
+        padding: 0.5rem 15px !important;
         font-size: 0.8rem !important;
     }
 
@@ -1348,6 +1360,7 @@ textarea:focus-visible {
 
 /* Small Mobile breakpoint */
 @media (max-width: 480px) {
+
     /* Tools Header */
     .tools-header h1,
     .pulse-header h1 {
@@ -1427,6 +1440,7 @@ textarea:focus-visible {
 
 /* Mobile breakpoint */
 @media (max-width: 768px) {
+
     /* Modal */
     .modal-overlay {
         padding: 10px !important;
@@ -1435,7 +1449,7 @@ textarea:focus-visible {
     }
 
     .modal {
-        border-radius: 20px !important;
+        border-radius: 16px !important;
         max-height: 85vh !important;
     }
 
@@ -1479,7 +1493,7 @@ textarea:focus-visible {
     .form-group textarea {
         padding: 14px 16px !important;
         font-size: 16px !important;
-        border-radius: 10px !important;
+        border-radius: 12px !important;
     }
 
     .form-row {
@@ -1608,13 +1622,13 @@ textarea:focus-visible {
     }
 
     .pnl-stat {
-        padding: 12px !important;
+        padding: 0.75rem !important;
     }
 
     .form-group input,
     .form-group select,
     .form-group textarea {
-        padding: 12px 14px !important;
+        padding: 0.75rem 14px !important;
     }
 }
 
@@ -1642,6 +1656,7 @@ textarea:focus-visible {
 
 /* Mobile breakpoint */
 @media (max-width: 768px) {
+
     /* Dashboard Grid - single column */
     .dashboard-grid {
         grid-template-columns: 1fr !important;
@@ -1754,7 +1769,7 @@ textarea:focus-visible {
     /* Setup/Analysis Cards */
     .setup-form input,
     .setup-form select {
-        padding: 12px !important;
+        padding: 0.75rem !important;
         font-size: 16px !important;
     }
 
@@ -1770,7 +1785,7 @@ textarea:focus-visible {
     }
 
     .timeframe-tab {
-        padding: 8px 14px !important;
+        padding: 0.5rem 14px !important;
         font-size: 0.8rem !important;
     }
 
@@ -1823,6 +1838,7 @@ textarea:focus-visible {
    COMMUNITY PAGE RESPONSIVE
    ============================================ */
 @media (max-width: 768px) {
+
     .community-card,
     .member-card {
         padding: 20px !important;
@@ -1863,7 +1879,7 @@ textarea:focus-visible {
     }
 
     .cta-section {
-        padding: 40px 30px !important;
+        padding: 2.5rem 30px !important;
     }
 
     .cta-section h2 {
@@ -1873,9 +1889,10 @@ textarea:focus-visible {
 
 /* Mobile breakpoint */
 @media (max-width: 768px) {
+
     /* Hero Section */
     .hero {
-        padding: 40px 0 !important;
+        padding: 2.5rem 0 !important;
     }
 
     .hero h1 {
@@ -1889,7 +1906,7 @@ textarea:focus-visible {
     }
 
     .hero-badge {
-        padding: 8px 18px !important;
+        padding: 0.5rem 18px !important;
         font-size: 0.85rem !important;
         margin-bottom: 20px !important;
     }
@@ -1926,9 +1943,9 @@ textarea:focus-visible {
     }
 
     .category-tab {
-        padding: 8px 16px !important;
+        padding: 0.5rem 16px !important;
         font-size: 0.8rem !important;
-        border-radius: 20px !important;
+        border-radius: 16px !important;
     }
 
     /* Viral Tool Card */
@@ -1947,7 +1964,7 @@ textarea:focus-visible {
     .generator-form select,
     .generator-form textarea {
         font-size: 16px !important;
-        padding: 12px !important;
+        padding: 0.75rem !important;
     }
 
     /* Generator Output */
@@ -1960,14 +1977,14 @@ textarea:focus-visible {
     .copy-btn {
         width: 100% !important;
         margin-top: 10px !important;
-        padding: 12px !important;
+        padding: 0.75rem !important;
     }
 
     /* CTA Section */
     .cta-section {
         margin-top: 50px !important;
-        padding: 40px 20px !important;
-        border-radius: 20px !important;
+        padding: 2.5rem 20px !important;
+        border-radius: 16px !important;
     }
 
     .cta-section h2 {
@@ -1996,7 +2013,7 @@ textarea:focus-visible {
     .navbar .cta-btn,
     .navbar .cta-btn.gold-btn {
         width: auto !important;
-        padding: 8px 14px !important;
+        padding: 0.5rem 14px !important;
         font-size: 0.75rem !important;
     }
 
@@ -2078,6 +2095,7 @@ textarea:focus-visible {
 
 /* Tablet breakpoint */
 @media (max-width: 992px) {
+
     .game-container,
     .quiz-container {
         padding: 30px 25px !important;
@@ -2096,6 +2114,7 @@ textarea:focus-visible {
 
 /* Mobile breakpoint */
 @media (max-width: 768px) {
+
     /* Container */
     .game-container,
     .quiz-container,
@@ -2105,7 +2124,7 @@ textarea:focus-visible {
 
     /* Start Screen */
     .start-screen {
-        padding: 40px 15px !important;
+        padding: 2.5rem 15px !important;
     }
 
     .start-screen h1 {
@@ -2245,7 +2264,7 @@ textarea:focus-visible {
     /* Form Card */
     .form-card {
         padding: 30px 20px !important;
-        border-radius: 20px !important;
+        border-radius: 16px !important;
         margin-bottom: 25px !important;
     }
 
@@ -2284,11 +2303,11 @@ textarea:focus-visible {
     /* Results Section */
     .results-card {
         padding: 35px 20px !important;
-        border-radius: 20px !important;
+        border-radius: 16px !important;
     }
 
     .rank-badge {
-        padding: 12px 30px !important;
+        padding: 0.75rem 30px !important;
         font-size: 1.2rem !important;
         margin-bottom: 25px !important;
     }
@@ -2368,14 +2387,14 @@ textarea:focus-visible {
     }
 
     .answer-option {
-        padding: 12px !important;
+        padding: 0.75rem !important;
         font-size: 0.9rem !important;
     }
 
     .timer,
     .game-timer {
         font-size: 1rem !important;
-        padding: 8px 15px !important;
+        padding: 0.5rem 15px !important;
     }
 
     .result-score {
@@ -2417,6 +2436,7 @@ textarea:focus-visible {
 
 /* Mobile breakpoint */
 @media (max-width: 768px) {
+
     /* Challenge Header */
     .challenge-header {
         padding: 20px 15px !important;
@@ -2487,7 +2507,7 @@ textarea:focus-visible {
     }
 
     .day-card {
-        padding: 8px 4px !important;
+        padding: 0.5rem 4px !important;
         font-size: 0.75rem !important;
     }
 
@@ -2509,7 +2529,18 @@ textarea:focus-visible {
 }
 
 /* Fix for long words */
-p, h1, h2, h3, h4, h5, h6, li, td, th, a, span {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+td,
+th,
+a,
+span {
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
 }
@@ -2648,6 +2679,7 @@ svg {
 
 /* Tablet and below */
 @media (max-width: 768px) {
+
     /* Battle Arena container */
     .battle-arena {
         padding: 2rem 1rem !important;
@@ -2812,17 +2844,17 @@ svg {
     }
 
     /* Legacy support - Final score display */
-    .scorecard > div:last-child {
+    .scorecard>div:last-child {
         flex-direction: row !important;
         gap: 1rem !important;
         padding: 1rem 0 !important;
     }
 
-    .scorecard > div:last-child > div span:first-child {
+    .scorecard>div:last-child>div span:first-child {
         font-size: 2rem !important;
     }
 
-    .scorecard > div:last-child > div p {
+    .scorecard>div:last-child>div p {
         font-size: 0.75rem !important;
     }
 
@@ -2912,6 +2944,7 @@ svg {
 
 /* Mobile small screens */
 @media (max-width: 480px) {
+
     /* Battle Arena */
     .battle-arena {
         padding: 1.5rem 0.75rem !important;
@@ -2967,7 +3000,7 @@ svg {
         font-size: 0.65rem !important;
     }
 
-    .scorecard > div:last-child > div span:first-child {
+    .scorecard>div:last-child>div span:first-child {
         font-size: 1.75rem !important;
     }
 
@@ -3011,12 +3044,13 @@ svg {
         font-size: 1rem !important;
     }
 }
+
 /* ============================================
    NAVIGATION BAR RESPONSIVE
    ============================================ */
 @media (max-width: 768px) {
     .nav-bar {
-        padding: 12px 0;
+        padding: 0.75rem 0;
     }
 
     .nav-container {
@@ -3070,7 +3104,7 @@ svg {
    ============================================ */
 @media (max-width: 768px) {
     .site-footer {
-        padding: 40px 0 20px;
+        padding: 2.5rem 0 20px;
     }
 
     .site-footer .footer-container {

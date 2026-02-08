@@ -11,6 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Top 10 Political Investment Portfolios in 2026 | BroBillionaire</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="article-common.css">
+    <link rel="stylesheet" href="footer-styles.css">
     <link rel="stylesheet" href="backlink-styles.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
@@ -277,57 +279,175 @@
         }
     </style>
     <link rel="stylesheet" href="humanized-content.css">
-  <!-- FAQPage Schema -->
-  <script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is Political Portfolios in simple terms?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Political Portfolios is a fundamental concept in trading/investing that affects how positions are valued, risk is managed, and strategies are executed. Understanding Political Portfolios is essential for making informed investment decisions and avoiding costly mistakes."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I learn Political Portfolios effectively?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Start with foundational concepts, practice with paper trading/simulations, study real-world examples, analyze historical data, join trading communities, and gradually implement strategies with small capital. Expect 6-12 months of learning before proficiency."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do I need to understand Political Portfolios to be a successful investor?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Understanding Political Portfolios provides a significant edge, especially for active traders. However, long-term investors can succeed with index fund strategies without deep knowledge. The more actively you trade, the more critical Political Portfolios becomes to your success."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What are common misconceptions about Political Portfolios?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Common misconceptions include oversimplifying complex mechanics, believing there's a 'secret strategy', expecting immediate profits, ignoring risk management, and following social media 'gurus' blindly. Success in Political Portfolios requires education, discipline, and consistent practice."
-      }
-    }
-  ]
-}</script>
+    <link rel="stylesheet" href="ultra-premium-articles.css">
+    <link rel="stylesheet" href="premium-enhancements.css">
+    <link rel="stylesheet" href="premium-article-enhancements.css">
+
+    <style>
+        /* Floating Share Buttons */
+        .floating-share-buttons {
+            position: fixed;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px) translateY(-50%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0) translateY(-50%);
+            }
+        }
+
+        .share-button {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(26, 26, 26, 0.95);
+            border: 2px solid rgba(201, 162, 39, 0.3);
+            color: #C9A227;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-size: 18px;
+        }
+
+        .share-button:hover {
+            background: linear-gradient(135deg, #C9A227, #D4AF37);
+            color: #000;
+            transform: scale(1.1);
+            border-color: #C9A227;
+            box-shadow: 0 8px 24px rgba(201, 162, 39, 0.5);
+        }
+
+        .share-button i {
+            transition: transform 0.3s ease;
+        }
+
+        .share-button:hover i {
+            transform: rotate(10deg);
+        }
+
+        /* Enhanced Article Container */
+        .content-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Premium Reading Experience */
+        .article-content {
+            background: #0d0d0d;
+            position: relative;
+        }
+
+        /* Better spacing for cards */
+        .political-card {
+            margin-bottom: 3rem;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 1200px) {
+            .floating-share-buttons {
+                left: 15px;
+            }
+
+            .share-button {
+                width: 42px;
+                height: 42px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .floating-share-buttons {
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                top: auto;
+                flex-direction: row;
+                background: rgba(13, 13, 13, 0.98);
+                padding: 12px;
+                border-radius: 50px;
+                border: 2px solid rgba(201, 162, 39, 0.3);
+                backdrop-filter: blur(15px);
+            }
+
+            .share-button {
+                width: 40px;
+                height: 40px;
+            }
+
+            .content-container {
+                padding: 2rem 1rem;
+            }
+        }
+
+        /* Article Navigation Enhancement */
+        .article-nav {
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201, 162, 39, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+    </style>
 </head>
 
-<body> <!-- Article Navigation -->
+<body>
+    <!-- Floating Share Buttons -->
+    <div class="floating-share-buttons">
+        <button class="share-button" onclick="shareOnTwitter()" title="Share on Twitter">
+            <i class="fab fa-twitter"></i>
+        </button>
+        <button class="share-button" onclick="shareOnFacebook()" title="Share on Facebook">
+            <i class="fab fa-facebook-f"></i>
+        </button>
+        <button class="share-button" onclick="shareOnLinkedIn()" title="Share on LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+        </button>
+        <button class="share-button" onclick="shareOnWhatsApp()" title="Share on WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </button>
+        <button class="share-button" onclick="copyLink()" title="Copy Link">
+            <i class="fas fa-link"></i>
+        </button>
+    </div>
+
+    <!-- Article Navigation -->
     <nav class="article-nav">
-        <div class="article-nav-container"> <a href="articles.html" class="back-link" style="margin-right:15px;"><i
-                    class="fas fa-th-large"></i><span>All Articles</span></a><a href="index.html" class="back-link"> <i
-                    class="fas fa-arrow-left"></i> <span>Back to Home</span> </a>
-            <div class="article-nav-center"> <a href="index.html"
-                    style="display: inline-flex; align-items: center;"><img loading="lazy" src="logo.jpg"
-                        alt="BroBillionaire" class="nav-logo-small"></a> </div>
-            <div class="article-share"> <button class="share-btn" onclick="shareArticle()"> <i
-                        class="fas fa-share-alt"></i> </button> </div>
+        <div class="article-nav-container">
+            <a href="articles.html" class="back-link" style="margin-right:15px;">
+                <i class="fas fa-th-large"></i><span>All Articles</span>
+            </a>
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> <span>Back to Home</span>
+            </a>
+            <div class="article-nav-center">
+                <a href="index.html" style="display: inline-flex; align-items: center;">
+                    <img loading="lazy" src="logo.jpg" alt="BroBillionaire" class="nav-logo-small">
+                </a>
+            </div>
+            <div class="article-share">
+                <button class="share-btn" onclick="shareArticle()">
+                    <i class="fas fa-share-alt"></i>
+                </button>
+            </div>
         </div>
         <div class="reading-progress-bar"></div>
     </nav>
@@ -372,10 +492,21 @@
                 <p> Let's examine the 10 most significant political portfolios—their holdings, performance, and the
                     controversies surrounding them. </p>
             </section>
-            <div class="hot-take-box">
-                <h4>Contrarian Take</h4>
-                <p>Everyone's worried about Meta's metaverse spending. They should be. But what they miss is that Meta's
-                    AI advertising engine is so far ahead, they can burn $10B yearly on moonshots and still dominate.
+            <div class="hot-take-box"
+                style="background: linear-gradient(135deg, rgba(201, 162, 39, 0.1), rgba(201, 162, 39, 0.05)); border: 2px solid rgba(201, 162, 39, 0.3); border-radius: 16px; padding: 2rem; margin: 2.5rem 0; position: relative; overflow: hidden;">
+                <div
+                    style="position: absolute; top: -50%; right: -10%; width: 200px; height: 200px; background: radial-gradient(circle, rgba(201, 162, 39, 0.1), transparent); border-radius: 50%; pointer-events: none;">
+                </div>
+                <h4
+                    style="color: #C9A227; font-size: 1.3rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-fire" style="color: #ff6b35;"></i> Hot Take
+                </h4>
+                <p
+                    style="color: rgba(255, 255, 255, 0.9); line-height: 1.8; font-size: 1.05rem; position: relative; z-index: 1;">
+                    Political portfolios don't outperform because politicians are better investors—they outperform
+                    because the game is rigged. When you write the rules, knowing where to bet becomes remarkably
+                    simple. The real scandal isn't the trading itself; it's that we pretend this is legal when anyone
+                    else would face prison time for the same actions.
                 </p>
             </div>
             <!-- Portfolio #1 -->
@@ -893,8 +1024,146 @@
     <script src="mobile-nav.js"></script>
     <script src="mobile-menu.js"></script>
     <script src="add-breadcrumbs.js"></script>
-    <script src="common-footer.js" defer></script> <!-- Common Header -->
+    <script src="common-footer.js" defer></script>
     <script src="common-header.js"></script>
+
+    <!-- Share Functionality -->
+    <script>
+        // Get current page info
+        const pageTitle = document.title;
+        const pageUrl = window.location.href;
+
+        // Twitter Share
+        function shareOnTwitter() {
+            const text = encodeURIComponent(pageTitle);
+            const url = encodeURIComponent(pageUrl);
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank', 'width=600,height=400');
+        }
+
+        // Facebook Share
+        function shareOnFacebook() {
+            const url = encodeURIComponent(pageUrl);
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'width=600,height=400');
+        }
+
+        // LinkedIn Share
+        function shareOnLinkedIn() {
+            const url = encodeURIComponent(pageUrl);
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank', 'width=600,height=400');
+        }
+
+        // WhatsApp Share
+        function shareOnWhatsApp() {
+            const text = encodeURIComponent(`${pageTitle} - ${pageUrl}`);
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+        }
+
+        // Copy Link
+        function copyLink() {
+            navigator.clipboard.writeText(pageUrl).then(() => {
+                // Show success feedback
+                const button = event.target.closest('.share-button');
+                const originalHTML = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i>';
+                button.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+
+                setTimeout(() => {
+                    button.innerHTML = originalHTML;
+                    button.style.background = '';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                alert('Failed to copy link');
+            });
+        }
+
+        // Generic share function for top nav button
+        function shareArticle() {
+            if (navigator.share) {
+                navigator.share({
+                    title: pageTitle,
+                    url: pageUrl
+                }).catch(err => console.log('Error sharing:', err));
+            } else {
+                copyLink();
+            }
+        }
+
+        // Smooth scroll reveal animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Apply animations when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animate political cards
+            document.querySelectorAll('.political-card').forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease';
+                card.style.transitionDelay = `${index * 0.1}s`;
+                observer.observe(card);
+            });
+
+            // Animate other elements
+            document.querySelectorAll('.warning-box, .insight-box, .key-stat').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
+        });
+
+        // Reading progress bar
+        window.addEventListener('scroll', () => {
+            const article = document.querySelector('.article-content');
+            const progressBar = document.querySelector('.reading-progress-bar');
+
+            if (article && progressBar) {
+                const articleTop = article.offsetTop;
+                const articleHeight = article.offsetHeight;
+                const windowHeight = window.innerHeight;
+                const scrolled = window.scrollY;
+
+                const progress = Math.min(
+                    Math.max((scrolled - articleTop + windowHeight) / articleHeight * 100, 0),
+                    100
+                );
+
+                progressBar.style.width = `${progress}%`;
+            }
+        });
+
+        // Hide floating buttons on mobile when scrolling down, show when scrolling up
+        let lastScrollTop = 0;
+        const floatingButtons = document.querySelector('.floating-share-buttons');
+
+        if (window.innerWidth <= 768) {
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+                if (scrollTop > lastScrollTop && scrollTop > 100) {
+                    // Scrolling down
+                    floatingButtons.style.transform = 'translateX(-50%) translateY(100px)';
+                } else {
+                    // Scrolling up
+                    floatingButtons.style.transform = 'translateX(-50%) translateY(0)';
+                }
+
+                lastScrollTop = scrollTop;
+            });
+        }
+    </script>
 </body>
 
 </html>
