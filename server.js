@@ -1,8 +1,30 @@
-// ============================================
-// BROBILLIONAIRE - Backend Server
-// MongoDB Integration for Newsletter Subscriptions
-// API Proxy for Crypto Data (with .env support)
-// ============================================
+/**
+ * BroBillionaire - Backend Express Server
+ *
+ * Features:
+ * - MongoDB Integration for Newsletter Subscriptions & Contact Forms
+ * - REST API Endpoints for subscriptions and contact submissions
+ * - API Proxy for Crypto Data (CoinGecko with optional Pro API support)
+ * - NSE India Option Chain & Market Data (Live + Simulated Fallback)
+ * - Yahoo Finance Stock Quotes & Indian Market Indices
+ * - AI Integration (Google Gemini FREE Vision API, OpenAI Chat)
+ * - Fear & Greed Index Proxy
+ * - India VIX Data Proxy
+ * - CORS-enabled static file serving
+ *
+ * Environment Variables (.env):
+ * - MONGODB_URI: MongoDB connection string
+ * - COINGECKO_API_KEY: Optional CoinGecko Pro API key
+ * - GEMINI_API_KEY: Google Gemini API key (FREE)
+ * - OPENAI_API_KEY: Optional OpenAI API key
+ * - PORT: Server port (default: 3000)
+ *
+ * @requires express
+ * @requires mongoose
+ * @requires cors
+ * @requires dotenv
+ * @requires undici
+ */
 
 require('dotenv').config();
 
@@ -222,7 +244,7 @@ app.get('/api/status', (req, res) => {
 async function fetchWithTimeout(url, options = {}, timeout = 10000) {
     const controller = new AbortController();
     const id = setTimeout(() => controller.abort(), timeout);
-    
+
     try {
         const response = await fetch(url, {
             ...options,
@@ -253,15 +275,15 @@ app.get('/api/fear-greed', async (req, res) => {
 app.get('/api/crypto/markets', async (req, res) => {
     try {
         const { vs_currency = 'usd', per_page = 8, page = 1 } = req.query;
-        
+
         let url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${vs_currency}&order=market_cap_desc&per_page=${per_page}&page=${page}&sparkline=false&price_change_percentage=24h`;
-        
+
         const headers = {};
         if (process.env.COINGECKO_API_KEY) {
             url = url.replace('api.coingecko.com', 'pro-api.coingecko.com');
             headers['x-cg-pro-api-key'] = process.env.COINGECKO_API_KEY;
         }
-        
+
         const response = await fetchWithTimeout(url, { headers });
         const data = await response.json();
         res.json(data);
@@ -275,13 +297,13 @@ app.get('/api/crypto/markets', async (req, res) => {
 app.get('/api/crypto/global', async (req, res) => {
     try {
         let url = 'https://api.coingecko.com/api/v3/global';
-        
+
         const headers = {};
         if (process.env.COINGECKO_API_KEY) {
             url = url.replace('api.coingecko.com', 'pro-api.coingecko.com');
             headers['x-cg-pro-api-key'] = process.env.COINGECKO_API_KEY;
         }
-        
+
         const response = await fetchWithTimeout(url, { headers });
         const data = await response.json();
         res.json(data);
@@ -295,15 +317,15 @@ app.get('/api/crypto/global', async (req, res) => {
 app.get('/api/crypto/price', async (req, res) => {
     try {
         const { ids = 'bitcoin', vs_currencies = 'usd' } = req.query;
-        
+
         let url = `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=${vs_currencies}`;
-        
+
         const headers = {};
         if (process.env.COINGECKO_API_KEY) {
             url = url.replace('api.coingecko.com', 'pro-api.coingecko.com');
             headers['x-cg-pro-api-key'] = process.env.COINGECKO_API_KEY;
         }
-        
+
         const response = await fetchWithTimeout(url, { headers });
         const data = await response.json();
         res.json(data);
@@ -318,15 +340,15 @@ app.get('/api/coingecko/*', async (req, res) => {
     try {
         const endpoint = req.params[0];
         const queryString = new URLSearchParams(req.query).toString();
-        
+
         let url = `https://api.coingecko.com/api/v3/${endpoint}${queryString ? '?' + queryString : ''}`;
-        
+
         const headers = {};
         if (process.env.COINGECKO_API_KEY) {
             url = url.replace('api.coingecko.com', 'pro-api.coingecko.com');
             headers['x-cg-pro-api-key'] = process.env.COINGECKO_API_KEY;
         }
-        
+
         const response = await fetchWithTimeout(url, { headers });
         const data = await response.json();
         res.json(data);
@@ -382,7 +404,7 @@ let nseSessionData = {
 function generateRealisticOptionChain(symbol) {
     const now = new Date();
     const isMarketHours = now.getUTCHours() >= 3 && now.getUTCHours() < 10; // 9 AM - 4 PM IST roughly
-    
+
     // Base prices for different symbols
     const basePrices = {
         'NIFTY': 23150 + Math.random() * 200 - 100,
@@ -394,7 +416,7 @@ function generateRealisticOptionChain(symbol) {
         'HDFC': 1680 + Math.random() * 25 - 12,
         'INFY': 1850 + Math.random() * 25 - 12
     };
-    
+
     const strikeGaps = {
         'NIFTY': 50,
         'BANKNIFTY': 100,
@@ -405,11 +427,11 @@ function generateRealisticOptionChain(symbol) {
         'HDFC': 20,
         'INFY': 20
     };
-    
+
     const spotPrice = basePrices[symbol] || 20000;
     const strikeGap = strikeGaps[symbol] || 50;
     const atmStrike = Math.round(spotPrice / strikeGap) * strikeGap;
-    
+
     // Generate expiry dates (Thursdays)
     const expiryDates = [];
     let date = new Date();
@@ -420,28 +442,28 @@ function generateRealisticOptionChain(symbol) {
         expiryDates.push(date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).replace(/ /g, '-'));
         date.setDate(date.getDate() + 7);
     }
-    
+
     // Generate strikes around ATM
     const data = [];
     for (let i = -15; i <= 15; i++) {
         const strike = atmStrike + (i * strikeGap);
         const moneyness = (spotPrice - strike) / spotPrice;
-        
+
         // Calculate realistic OI (higher at round numbers and ATM)
         const isRoundNumber = strike % (strikeGap * 5) === 0;
         const distanceFromATM = Math.abs(i);
         const baseOI = (Math.random() * 5000000 + 2000000) * (isRoundNumber ? 1.5 : 1) * Math.max(0.3, 1 - distanceFromATM * 0.05);
-        
+
         // Calculate IV (higher for OTM options and during volatile periods)
         const baseIV = symbol.includes('NIFTY') ? 12 : 18;
         const ivSkew = Math.abs(moneyness) * 50;
-        
+
         // Premium calculation using simple approximation
         const daysToExpiry = 7;
         const callIntrinsic = Math.max(0, spotPrice - strike);
         const putIntrinsic = Math.max(0, strike - spotPrice);
         const timeValue = spotPrice * (baseIV / 100) * Math.sqrt(daysToExpiry / 365) * 0.4;
-        
+
         data.push({
             strikePrice: strike,
             expiryDate: expiryDates[0],
@@ -489,7 +511,7 @@ function generateRealisticOptionChain(symbol) {
             }
         });
     }
-    
+
     return {
         records: {
             expiryDates: expiryDates,
@@ -513,10 +535,10 @@ async function initNSESession() {
     if (nseSessionData.cookies && Date.now() < nseSessionData.expiry) {
         return true;
     }
-    
+
     try {
         console.log('🔄 Initializing NSE session...');
-        
+
         const mainPageResponse = await undiciFetch('https://www.nseindia.com/', {
             dispatcher: nseAgent,
             headers: {
@@ -536,10 +558,10 @@ async function initNSESession() {
                 'Upgrade-Insecure-Requests': '1'
             }
         });
-        
+
         const cookies = [];
         const setCookieHeaders = mainPageResponse.headers.getSetCookie();
-        
+
         if (setCookieHeaders && setCookieHeaders.length > 0) {
             setCookieHeaders.forEach(cookie => {
                 if (cookie) {
@@ -550,19 +572,19 @@ async function initNSESession() {
                 }
             });
         }
-        
+
         await mainPageResponse.text();
-        
+
         if (cookies.length > 0) {
             nseSessionData.cookies = cookies.join('; ');
             nseSessionData.expiry = Date.now() + 3 * 60 * 1000;
             console.log('✅ NSE session initialized with', cookies.length, 'cookies');
             return true;
         }
-        
+
         console.warn('⚠️ No cookies received from NSE');
         return false;
-        
+
     } catch (error) {
         console.error('❌ Failed to initialize NSE session:', error.message);
         return false;
@@ -572,18 +594,18 @@ async function initNSESession() {
 // NSE Option Chain Proxy with Fallback
 app.get('/api/nse/option-chain/:type/:symbol', async (req, res) => {
     const { type, symbol } = req.params;
-    
+
     try {
         // Try to get real NSE data first
         await initNSESession();
-        
+
         let url;
         if (type === 'indices') {
             url = `https://www.nseindia.com/api/option-chain-indices?symbol=${symbol}`;
         } else {
             url = `https://www.nseindia.com/api/option-chain-equities?symbol=${symbol}`;
         }
-        
+
         const response = await undiciFetch(url, {
             dispatcher: nseAgent,
             headers: {
@@ -603,10 +625,10 @@ app.get('/api/nse/option-chain/:type/:symbol', async (req, res) => {
                 'Cookie': nseSessionData.cookies
             }
         });
-        
+
         if (response.ok) {
             const data = await response.json();
-            
+
             // Check if we got actual data
             if (data.records && data.records.data && data.records.data.length > 0) {
                 data._fetchedAt = new Date().toISOString();
@@ -615,17 +637,17 @@ app.get('/api/nse/option-chain/:type/:symbol', async (req, res) => {
                 return res.json(data);
             }
         }
-        
+
         // If NSE failed or returned empty, use simulated data
         throw new Error('NSE returned empty data');
-        
+
     } catch (error) {
         console.log(`⚠️ NSE unavailable for ${symbol}, using simulated data:`, error.message);
-        
+
         // Clear session on error
         nseSessionData.cookies = '';
         nseSessionData.expiry = 0;
-        
+
         // Return realistic simulated data
         const simulatedData = generateRealisticOptionChain(symbol);
         console.log(`📊 Simulated: ${symbol} - ${simulatedData.records.data.length} strikes`);
@@ -637,7 +659,7 @@ app.get('/api/nse/option-chain/:type/:symbol', async (req, res) => {
 app.get('/api/nse/market-status', async (req, res) => {
     try {
         await initNSESession();
-        
+
         const response = await undiciFetch('https://www.nseindia.com/api/marketStatus', {
             dispatcher: nseAgent,
             headers: {
@@ -647,17 +669,17 @@ app.get('/api/nse/market-status', async (req, res) => {
                 'Cookie': nseSessionData.cookies
             }
         });
-        
+
         const data = await response.json();
         res.json(data);
-        
+
     } catch (error) {
         console.error('NSE Market Status Error:', error.message);
         // Return simulated market status
         const now = new Date();
         const istHour = (now.getUTCHours() + 5.5) % 24;
         const isOpen = istHour >= 9.25 && istHour < 15.5 && now.getDay() > 0 && now.getDay() < 6;
-        
+
         res.json({
             marketState: [{
                 market: 'Capital Market',
@@ -682,22 +704,22 @@ app.get('/api/nse/market-status', async (req, res) => {
 app.post('/api/gemini/analyze', async (req, res) => {
     try {
         const geminiKey = process.env.GEMINI_API_KEY;
-        
+
         if (!geminiKey) {
-            return res.status(500).json({ 
-                error: 'Gemini API key not configured. Get a FREE key at https://aistudio.google.com/app/apikey' 
+            return res.status(500).json({
+                error: 'Gemini API key not configured. Get a FREE key at https://aistudio.google.com/app/apikey'
             });
         }
-        
+
         const { prompt, imageBase64 } = req.body;
-        
+
         if (!prompt) {
             return res.status(400).json({ error: 'Prompt is required' });
         }
-        
+
         // Use Gemini 1.5 Flash for vision (faster and free)
         const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiKey}`;
-        
+
         // Build request body
         const requestBody = {
             contents: [{
@@ -717,7 +739,7 @@ app.post('/api/gemini/analyze', async (req, res) => {
                 { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" }
             ]
         };
-        
+
         // Add image if provided
         if (imageBase64) {
             // Extract base64 data and mime type
@@ -731,35 +753,35 @@ app.post('/api/gemini/analyze', async (req, res) => {
                 });
             }
         }
-        
+
         // Add text prompt
         requestBody.contents[0].parts.push({ text: prompt });
-        
+
         const response = await fetchWithTimeout(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(requestBody)
         }, 90000); // 90 second timeout for AI vision
-        
+
         const data = await response.json();
-        
+
         if (data.error) {
             console.error('Gemini API Error:', data.error);
             return res.status(500).json({ error: data.error.message || 'Gemini API error' });
         }
-        
+
         // Extract the generated text
         if (data.candidates && data.candidates[0] && data.candidates[0].content) {
             const generatedText = data.candidates[0].content.parts[0].text;
-            res.json({ 
-                success: true, 
+            res.json({
+                success: true,
                 content: generatedText,
                 model: 'gemini-1.5-flash'
             });
         } else {
             res.status(500).json({ error: 'No response generated' });
         }
-        
+
     } catch (error) {
         console.error('Gemini API Error:', error.message);
         res.status(500).json({ error: 'Failed to get AI response: ' + error.message });
@@ -772,7 +794,7 @@ app.post('/api/openai/chat', async (req, res) => {
         if (!process.env.OPENAI_API_KEY) {
             return res.status(500).json({ error: 'OpenAI API key not configured' });
         }
-        
+
         const response = await fetchWithTimeout('https://api.openai.com/v1/chat/completions', {
             method: 'POST',
             headers: {
@@ -781,7 +803,7 @@ app.post('/api/openai/chat', async (req, res) => {
             },
             body: JSON.stringify(req.body)
         }, 60000); // 60 second timeout for AI
-        
+
         const data = await response.json();
         res.json(data);
     } catch (error) {
@@ -804,17 +826,17 @@ app.get('/api/stock/quote/:symbol', async (req, res) => {
         if (!symbol.includes('.') && !symbol.startsWith('^')) {
             yahooSymbol = symbol + '.NS'; // Default to NSE
         }
-        
+
         const url = `https://query1.finance.yahoo.com/v8/finance/chart/${yahooSymbol}?interval=1d&range=5d`;
-        
+
         const response = await fetchWithTimeout(url, {
             headers: {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
             }
         }, 10000);
-        
+
         const data = await response.json();
-        
+
         if (data.chart && data.chart.result && data.chart.result[0]) {
             const result = data.chart.result[0];
             const meta = result.meta;
@@ -824,7 +846,7 @@ app.get('/api/stock/quote/:symbol', async (req, res) => {
             const currentPrice = meta.regularMarketPrice || closes[closes.length - 1];
             const change = currentPrice - prevClose;
             const changePercent = (change / prevClose) * 100;
-            
+
             res.json({
                 success: true,
                 symbol: symbol,
@@ -859,7 +881,7 @@ app.get('/api/stock/quotes', async (req, res) => {
         if (symbols.length === 0) {
             return res.status(400).json({ error: 'No symbols provided' });
         }
-        
+
         // Allow up to 30 symbols per request
         const results = await Promise.all(
             symbols.slice(0, 30).map(async (symbol) => {
@@ -874,7 +896,7 @@ app.get('/api/stock/quotes', async (req, res) => {
                     }
 
                     // List of common US stocks - don't add .NS suffix
-                    const usStocks = ['AAPL','MSFT','GOOGL','GOOG','META','NVDA','TSLA','AMZN','PLTR','BRK.B','BRK.A','BRK-B','BRK-A','BAC','AXP','KO','SPY','QQQ','DIA','IWM','VTI','VOO','JPM','V','MA','WMT','JNJ','PG','UNH','HD','DIS','NFLX','ADBE','CRM','ORCL','INTC','CSCO','PEP','T','VZ','PYPL','CMCSA','ABT','TMO','NKE','MCD','COST','CVX','XOM','DHR'];
+                    const usStocks = ['AAPL', 'MSFT', 'GOOGL', 'GOOG', 'META', 'NVDA', 'TSLA', 'AMZN', 'PLTR', 'BRK.B', 'BRK.A', 'BRK-B', 'BRK-A', 'BAC', 'AXP', 'KO', 'SPY', 'QQQ', 'DIA', 'IWM', 'VTI', 'VOO', 'JPM', 'V', 'MA', 'WMT', 'JNJ', 'PG', 'UNH', 'HD', 'DIS', 'NFLX', 'ADBE', 'CRM', 'ORCL', 'INTC', 'CSCO', 'PEP', 'T', 'VZ', 'PYPL', 'CMCSA', 'ABT', 'TMO', 'NKE', 'MCD', 'COST', 'CVX', 'XOM', 'DHR'];
 
                     if (!yahooSymbol.includes('.') && !yahooSymbol.startsWith('^') && !yahooSymbol.includes('-')) {
                         // Only add .NS if it's not a US stock
@@ -882,18 +904,18 @@ app.get('/api/stock/quotes', async (req, res) => {
                             yahooSymbol = yahooSymbol + '.NS';
                         }
                     }
-                    
+
                     const url = `https://query1.finance.yahoo.com/v8/finance/chart/${yahooSymbol}?interval=1d&range=2d`;
                     const response = await fetchWithTimeout(url, {
                         headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' }
                     }, 8000);
-                    
+
                     const data = await response.json();
                     if (data.chart?.result?.[0]) {
                         const result = data.chart.result[0];
                         const meta = result.meta;
                         const quote = result.indicators?.quote?.[0];
-                        
+
                         // Get previous close from closes array or meta
                         let prevClose = meta.previousClose;
                         if (!prevClose && quote?.close) {
@@ -902,7 +924,7 @@ app.get('/api/stock/quotes', async (req, res) => {
                                 prevClose = closes[closes.length - 2];
                             }
                         }
-                        
+
                         const currentPrice = meta.regularMarketPrice;
                         const change = prevClose ? (currentPrice - prevClose) : 0;
                         const changePercent = prevClose ? ((change / prevClose) * 100) : 0;
@@ -926,7 +948,7 @@ app.get('/api/stock/quotes', async (req, res) => {
                 }
             })
         );
-        
+
         res.json({ quotes: results.filter(r => r !== null), timestamp: new Date().toISOString() });
     } catch (error) {
         console.error('Yahoo Finance Quotes Error:', error.message);
@@ -943,7 +965,7 @@ app.get('/api/market/indices', async (req, res) => {
             { symbol: '^BSESN', name: 'SENSEX' },
             { symbol: '^INDIAVIX', name: 'India VIX' }
         ];
-        
+
         const results = await Promise.all(
             indices.map(async (index) => {
                 try {
@@ -951,13 +973,13 @@ app.get('/api/market/indices', async (req, res) => {
                     const response = await fetchWithTimeout(url, {
                         headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' }
                     }, 10000);
-                    
+
                     const data = await response.json();
                     if (data.chart?.result?.[0]) {
                         const result = data.chart.result[0];
                         const meta = result.meta;
                         const quote = result.indicators?.quote?.[0];
-                        
+
                         // Get previous close from closes array or meta
                         let prevClose = meta.previousClose;
                         if (!prevClose && quote?.close) {
@@ -966,11 +988,11 @@ app.get('/api/market/indices', async (req, res) => {
                                 prevClose = closes[closes.length - 2];
                             }
                         }
-                        
+
                         const currentPrice = meta.regularMarketPrice;
                         const change = prevClose ? (currentPrice - prevClose) : 0;
                         const changePercent = prevClose ? ((change / prevClose) * 100) : 0;
-                        
+
                         return {
                             symbol: index.symbol,
                             name: index.name,
@@ -987,7 +1009,7 @@ app.get('/api/market/indices', async (req, res) => {
                 }
             })
         );
-        
+
         res.json({ indices: results, timestamp: new Date().toISOString() });
     } catch (error) {
         console.error('Market Indices Error:', error.message);
