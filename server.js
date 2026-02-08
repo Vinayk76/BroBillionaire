@@ -865,8 +865,22 @@ app.get('/api/stock/quotes', async (req, res) => {
             symbols.slice(0, 30).map(async (symbol) => {
                 try {
                     let yahooSymbol = symbol.toUpperCase().trim();
-                    if (!yahooSymbol.includes('.') && !yahooSymbol.startsWith('^')) {
-                        yahooSymbol = yahooSymbol + '.NS';
+
+                    // Special handling for BRK.B - Yahoo uses BRK-B
+                    if (yahooSymbol === 'BRK.B') {
+                        yahooSymbol = 'BRK-B';
+                    } else if (yahooSymbol === 'BRK.A') {
+                        yahooSymbol = 'BRK-A';
+                    }
+
+                    // List of common US stocks - don't add .NS suffix
+                    const usStocks = ['AAPL','MSFT','GOOGL','GOOG','META','NVDA','TSLA','AMZN','PLTR','BRK.B','BRK.A','BRK-B','BRK-A','BAC','AXP','KO','SPY','QQQ','DIA','IWM','VTI','VOO','JPM','V','MA','WMT','JNJ','PG','UNH','HD','DIS','NFLX','ADBE','CRM','ORCL','INTC','CSCO','PEP','T','VZ','PYPL','CMCSA','ABT','TMO','NKE','MCD','COST','CVX','XOM','DHR'];
+
+                    if (!yahooSymbol.includes('.') && !yahooSymbol.startsWith('^') && !yahooSymbol.includes('-')) {
+                        // Only add .NS if it's not a US stock
+                        if (!usStocks.includes(yahooSymbol)) {
+                            yahooSymbol = yahooSymbol + '.NS';
+                        }
                     }
                     
                     const url = `https://query1.finance.yahoo.com/v8/finance/chart/${yahooSymbol}?interval=1d&range=2d`;
@@ -892,7 +906,7 @@ app.get('/api/stock/quotes', async (req, res) => {
                         const currentPrice = meta.regularMarketPrice;
                         const change = prevClose ? (currentPrice - prevClose) : 0;
                         const changePercent = prevClose ? ((change / prevClose) * 100) : 0;
-                        
+
                         return {
                             symbol: symbol.toUpperCase(),
                             price: currentPrice,
@@ -900,7 +914,9 @@ app.get('/api/stock/quotes', async (req, res) => {
                             changePercent: changePercent,
                             previousClose: prevClose,
                             dayHigh: meta.regularMarketDayHigh,
-                            dayLow: meta.regularMarketDayLow
+                            dayLow: meta.regularMarketDayLow,
+                            volume: meta.regularMarketVolume || 0,
+                            marketCap: meta.marketCap || 0
                         };
                     }
                     return null;

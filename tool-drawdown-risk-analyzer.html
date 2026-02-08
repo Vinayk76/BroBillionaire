@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-N0Y2LBMRSW');</script>
+<meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drawdown Risk Analyzer | Stress Test Your Bro Billionaire Portfolio 2026</title>
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta name="description" content="Free drawdown risk analyzer: Stress test Bro Billionaire portfolios against market crashes. See how much you'd lose in 2022 tech crash, 2020 COVID crash, or future worst-case scenarios 2026.">
+<meta name="keywords" content="drawdown calculator, portfolio risk analyzer, market crash simulator, stress test portfolio, maximum drawdown calculator, risk management tool, portfolio crash test, bro billionaire risk 2026">
+<link rel="canonical" href="https://brobillionaire.com/tool-drawdown-risk-analyzer.html">
+<style>
+.risk-card{background:linear-gradient(145deg,rgba(40,20,20,0.95),rgba(30,10,10,0.9));border:2px solid rgba(239,68,68,0.4);border-radius:20px;padding:35px;margin:25px 0}
+.scenario-btn{padding:15px 25px;background:rgba(239,68,68,0.2);border:2px solid #ef4444;border-radius:10px;color:#fff;font-weight:700;cursor:pointer;margin:10px;transition:all 0.3s}
+.scenario-btn:hover{background:rgba(239,68,68,0.4);transform:translateY(-2px)}
+.scenario-btn.active{background:#ef4444;color:#000}
+.drawdown-meter{width:100%;height:40px;background:linear-gradient(to right,#22c55e 0%,#eab308 33%,#f97316 66%,#ef4444 100%);border-radius:20px;position:relative;margin:25px 0}
+.meter-indicator{position:absolute;top:-10px;width:4px;height:60px;background:#fff;box-shadow:0 0 10px rgba(255,255,255,0.8)}
+</style>
+</head>
+<body class="article-page">
+<nav class="article-nav">
+<div class="article-nav-container">
+<a href="tools.html" class="back-link" style="margin-right:15px"><i class="fas fa-tools"></i><span>All Tools</span></a>
+<a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i><span>Home</span></a>
+<div class="article-nav-center"><a href="index.html"><img src="logo.jpg" alt="BroBillionaire" class="nav-logo-small"></a></div>
+</div>
+<div class="reading-progress-bar"></div>
+</nav>
+<header class="article-hero">
+<div class="article-hero-bg"><div class="hero-gradient"></div></div>
+<div class="article-hero-content">
+<div class="article-meta-top">
+<span class="article-category-badge premium-badge" style="background:linear-gradient(135deg,#ef4444,#dc2626)"><i class="fas fa-exclamation-triangle"></i>Risk Analyzer</span>
+<span class="article-read-time"><i class="fas fa-clock"></i>13 min read</span>
+</div>
+<h1 class="article-main-title serif">Drawdown Risk Analyzer<br>Stress Test Your <span class="gold-text italic">Bro Billionaire</span> Portfolio</h1>
+<p class="article-subtitle">See exactly how much you'd lose in market crashes. Test your portfolio against 2022 tech crash, COVID-19, dotcom bubble, and worst-case future scenarios.</p>
+</div>
+</header>
+<main class="article-container">
+<article class="article-content">
+<div class="key-takeaways-box" style="border-color:#ef4444">
+<h3>Why Drawdown Analysis Matters</h3>
+<ul>
+<li><strong>Psychological Reality Check:</strong> Can you handle watching ₹50 lakh become ₹20 lakh?</li>
+<li><strong>Historical Stress Tests:</strong> See how your portfolio performed in past crashes</li>
+<li><strong>Recovery Time:</strong> How long until you're back to break-even?</li>
+<li><strong>Position Sizing:</strong> Never risk more than you can afford to lose</li>
+</ul>
+</div>
+<div class="section-divider"></div>
+<section class="article-section">
+<h2 class="section-title"><i class="fas fa-vial"></i> Select Crash Scenario</h2>
+<div style="text-align:center;margin:30px 0">
+<button class="scenario-btn active" onclick="selectScenario('tech2022')">2022 Tech Crash</button>
+<button class="scenario-btn" onclick="selectScenario('covid2020')">2020 COVID Crash</button>
+<button class="scenario-btn" onclick="selectScenario('recession2026')">2026 Recession (Hypothetical)</button>
+<button class="scenario-btn" onclick="selectScenario('dotcom2000')">2000 Dotcom Bubble</button>
+</div>
+<div class="risk-card" id="scenario-results">
+<h3 style="color:#ef4444;font-size:2rem;text-align:center;margin-bottom:25px" id="scenario-title">2022 Tech Crash</h3>
+<div class="drawdown-meter">
+<div class="meter-indicator" id="meter-indicator" style="left:58%"></div>
+</div>
+<div style="text-align:center;margin:30px 0">
+<p style="color:rgba(255,255,255,0.7);font-size:1.1rem;margin-bottom:10px">Maximum Drawdown</p>
+<p style="color:#ef4444;font-size:3rem;font-weight:800" id="max-dd">-58%</p>
+</div>
+<table class="data-table">
+<thead>
+<tr>
+<th>Stock</th>
+<th>Peak Price</th>
+<th>Bottom Price</th>
+<th>Drawdown</th>
+<th>Recovery Time</th>
+</tr>
+</thead>
+<tbody id="stock-drawdowns">
+<tr>
+<td><strong>Nvidia</strong></td>
+<td>$346</td>
+<td>$108</td>
+<td style="color:#ef4444;font-weight:700">-69%</td>
+<td>18 months</td>
+</tr>
+<tr>
+<td><strong>Tesla</strong></td>
+<td>$414</td>
+<td>$101</td>
+<td style="color:#ef4444;font-weight:700">-76%</td>
+<td>22 months</td>
+</tr>
+<tr>
+<td><strong>Palantir</strong></td>
+<td>$29</td>
+<td>$6</td>
+<td style="color:#ef4444;font-weight:700">-79%</td>
+<td>24 months</td>
+</tr>
+<tr>
+<td><strong>Meta</strong></td>
+<td>$384</td>
+<td>$88</td>
+<td style="color:#ef4444;font-weight:700">-77%</td>
+<td>16 months</td>
+</tr>
+<tr>
+<td><strong>Microsoft</strong></td>
+<td>$349</td>
+<td>$213</td>
+<td style="color:#ef4444;font-weight:700">-39%</td>
+<td>8 months</td>
+</tr>
+<tr>
+<td><strong>Amazon</strong></td>
+<td>$186</td>
+<td>$81</td>
+<td style="color:#ef4444;font-weight:700">-56%</td>
+<td>14 months</td>
+</tr>
+<tr>
+<td><strong>Apple</strong></td>
+<td>$182</td>
+<td>$124</td>
+<td style="color:#ef4444;font-weight:700">-32%</td>
+<td>7 months</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top:30px;padding:25px;background:rgba(239,68,68,0.1);border-radius:12px">
+<h4 style="color:#ef4444;margin-bottom:15px">Portfolio Impact: ₹10 Lakh Investment</h4>
+<p style="font-size:1.1rem;margin:10px 0"><strong>Peak Value (Nov 2021):</strong> <span style="color:#22c55e;font-weight:700">₹32,40,000</span></p>
+<p style="font-size:1.1rem;margin:10px 0"><strong>Bottom Value (Dec 2022):</strong> <span style="color:#ef4444;font-weight:700">₹13,60,000</span></p>
+<p style="font-size:1.1rem;margin:10px 0"><strong>Peak-to-Trough Loss:</strong> <span style="color:#ef4444;font-weight:700;font-size:1.4rem">-₹18,80,000 (-58%)</span></p>
+<p style="font-size:1.1rem;margin:10px 0"><strong>Current Value (Feb 2026):</strong> <span style="color:#22c55e;font-weight:700">₹62,00,000</span></p>
+<p style="font-size:1.1rem;margin:10px 0"><strong>Recovery Status:</strong> <span style="color:#22c55e;font-weight:700">Fully Recovered + 91% Above Peak</span></p>
+</div>
+</div>
+</section>
+<div class="section-divider"></div>
+<section class="article-section">
+<h2 class="section-title"><i class="fas fa-brain"></i> Psychology of Drawdowns</h2>
+<h3 class="subsection-title">Why Most Investors Panic Sell</h3>
+<p>Watching ₹32 lakh become ₹13 lakh feels like financial death. Your brain screams "SELL BEFORE IT HITS ZERO!" This is loss aversion—the pain of losing is 2-3x stronger than the joy of equivalent gains.</p>
+<div class="warning-box">
+<h3>The Panic Sell Trap</h3>
+<p>If you sold your Bro Billionaire portfolio at the December 2022 bottom, you locked in a <strong>58% permanent loss</strong>. Those who held are now up 91% above their 2021 peak (as of Feb 2026). The worst financial decision is selling at the bottom.</p>
+</div>
+<h3 class="subsection-title">How to Survive Drawdowns</h3>
+<p><strong>1. Never invest money you'll need in <5 years.</strong> Short-term volatility is deadly if you're forced to sell.<br><strong>2. Position size correctly.</strong> If a 60% drop would ruin you, you're overallocated.<br><strong>3. Dollar-cost average.</strong> Buy MORE during crashes if you have dry powder.<br><strong>4. Focus on fundamentals, not price.</strong> Did Nvidia's AI dominance disappear? No. Then the crash was noise.</p>
+</section>
+<div class="section-divider"></div>
+<section class="article-section">
+<h2 class="section-title"><i class="fas fa-history"></i> Historical Crash Comparison</h2>
+<table class="data-table">
+<thead>
+<tr>
+<th>Crash Event</th>
+<th>Year</th>
+<th>Bro Billionaire DD</th>
+<th>S&P 500 DD</th>
+<th>Recovery Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>2022 Tech Crash</strong></td>
+<td>2022</td>
+<td style="color:#ef4444;font-weight:700">-58%</td>
+<td style="color:#ef4444">-24%</td>
+<td>18 months</td>
+</tr>
+<tr>
+<td><strong>COVID-19 Crash</strong></td>
+<td>2020</td>
+<td style="color:#ef4444;font-weight:700">-42%</td>
+<td style="color:#ef4444">-34%</td>
+<td>5 months</td>
+</tr>
+<tr>
+<td><strong>Dotcom Bubble</strong></td>
+<td>2000-2002</td>
+<td style="color:#ef4444;font-weight:700">N/A</td>
+<td style="color:#ef4444">-49%</td>
+<td>7 years</td>
+</tr>
+<tr>
+<td><strong>2008 Financial Crisis</strong></td>
+<td>2008</td>
+<td style="color:#ef4444;font-weight:700">N/A</td>
+<td style="color:#ef4444">-57%</td>
+<td>5 years</td>
+</tr>
+</tbody>
+</table>
+<p style="margin-top:20px"><em>*Bro Billionaire portfolio didn't exist pre-2010, so dotcom/2008 data not available. Modern tech giants weathered 2020-2022 better than dotcom-era stocks.</em></p>
+</section>
+<div class="section-divider"></div>
+<section class="article-section">
+<h2 class="section-title"><i class="fas fa-question"></i> FAQ</h2>
+<h3 class="subsection-title">What's an acceptable maximum drawdown?</h3>
+<p><strong>Conservative:</strong> -20 to -30% (mostly blue-chip tech like MSFT, AAPL)<br><strong>Moderate:</strong> -40 to -50% (balanced Bro Billionaire portfolio)<br><strong>Aggressive:</strong> -60 to -80% (NVDA, TSLA, PLTR heavy)</p>
+<h3 class="subsection-title">How do I know my real risk tolerance?</h3>
+<p>Multiply your portfolio value by your expected max drawdown. If you have ₹20 lakh and expect -60% drawdown, that's ₹12 lakh loss. Can you handle seeing that without panic selling? If no, reduce allocation.</p>
+<h3 class="subsection-title">Should I hedge against drawdowns?</h3>
+<p>Put options can hedge, but they're expensive and decay over time. Better strategy: Keep 10-20% cash to buy dips. This "dry powder" lets you exploit crashes instead of fearing them.</p>
+</section>
+<section class="article-section">
+<div class="key-takeaways-box" style="text-align:center;border-color:#ef4444">
+<h3>The Ultimate Risk Truth</h3>
+<p style="font-size:1.1rem;margin:20px 0">Bro Billionaire stocks will crash 50-70% multiple times in your investing lifetime. Accept this now or stick to index funds. The gains come from surviving the crashes, not avoiding them.</p>
+<p style="font-size:1.2rem;font-weight:700;color:#ef4444;margin-top:25px">Position Size. Expect Crashes. Hold Through Hell.</p>
+</div>
+</section>
+</article>
+</main>
+<footer>
+<div class="footer-bottom"><p>&copy; 2026 BroBillionaire. Educational purposes only. Not investment advice.</p></div>
+</footer>
+<script>
+const scenarios={tech2022:{title:'2022 Tech Crash',dd:-58,description:'Fed rate hikes crushed tech valuations'},covid2020:{title:'2020 COVID-19 Crash',dd:-42,description:'Pandemic panic, fast V-shaped recovery'},recession2026:{title:'2026 Recession (Hypothetical)',dd:-65,description:'AI spending slowdown + recession scenario'},dotcom2000:{title:'2000 Dotcom Bubble Burst',dd:-83,description:'Tech bubble pop, 3-year bear market'}};
+function selectScenario(id){document.querySelectorAll('.scenario-btn').forEach(btn=>btn.classList.remove('active'));event.target.classList.add('active');const scenario=scenarios[id];document.getElementById('scenario-title').textContent=scenario.title;document.getElementById('max-dd').textContent=scenario.dd+'%';const meterPos=Math.abs(scenario.dd);document.getElementById('meter-indicator').style.left=meterPos+'%'}
+</script>
+</body>
+</html>

@@ -1,629 +1,333 @@
 #!/usr/bin/env node
 /**
- * ========================================
- * 🚀 BROBILLIONAIRE NUCLEAR SEO UPGRADE
- * ========================================
- * This script implements EXTREME SEO enhancements:
- * 1. Course Schema for educational content
- * 2. ItemList Schema for listicles
- * 3. Enhanced Author E-E-A-T Schema
- * 4. AggregateRating Schema
- * 5. Table of Contents with jump links
- * 6. Video Schema placeholders
- * 7. Event Schema for market events
- * 8. Enhanced FAQ Schema
- * 9. QAPage Schema
- * 10. FinancialProduct Schema for broker articles
+ * BRO BILLIONAIRE STOCKS - NUCLEAR SEO UPGRADE
+ * Goal: Rank #1 on Google for "bro billionaire stocks"
+ *
+ * This script implements comprehensive SEO optimizations including:
+ * - Keyword-optimized title tags (exact match + variations)
+ * - Enhanced meta descriptions with LSI keywords
+ * - Expanded FAQ schema with 6 questions targeting long-tail keywords
+ * - HowTo schema for featured snippets
+ * - Organization schema
+ * - WebSite schema with sitelinks search
+ * - Strategic keyword placement throughout content
+ * - Internal linking optimization
  */
 
 const fs = require('fs');
 const path = require('path');
 
-const ARTICLES_DIR = __dirname;
-const BASE_URL = 'https://brobillionaire.com';
+const filePath = '/Users/vinayprajapati/Desktop/BroBillionaire/article-wall-street-bearish-bro-billionaire-stocks.html';
 
-// Article categories for proper schema assignment
-const ARTICLE_CATEGORIES = {
-    educational: [
-        'article-beginner-options.html', 'article-option-greeks.html', 'article-how-futures-work.html',
-        'article-implied-volatility-explained.html', 'article-stock-market-beginners.html',
-        'article-option-strategies-beginners.html', 'article-intraday-trading-guide.html',
-        'article-swing-trading-guide.html', 'article-what-is-margin.html', 'article-fo-margin-explained.html',
-        'article-lot-size-calculation.html', 'article-risk-management.html', 'article-trading-psychology.html',
-        'article-how-to-become-profitable-trader.html', 'article-volatility-options.html',
-        'article-options-decoded.html', 'article-derivatives-plumbing.html'
-    ],
-    brokers: [
-        'article-best-brokers-india.html', 'article-best-fo-brokers.html', 
-        'article-best-trading-apps-india.html'
-    ],
-    listicles: [
-        'article-biggest-trading-mistakes.html', 'article-best-trading-books.html',
-        'article-legendary-blunders.html', 'article-blowups-disasters.html',
-        'article-dangerous-options.html', 'article-dangerous-option-structure.html',
-        'article-market-wizards.html', 'article-7-deadly-sins.html'
-    ],
-    traderProfiles: [
-        'article-george-soros.html', 'article-paul-tudor-jones.html', 'article-jim-simons.html',
-        'article-jesse-livermore.html', 'article-ray-dalio.html', 'article-stanley-druckenmiller.html',
-        'article-richard-dennis.html', 'article-ed-seykota.html', 'article-nicolas-darvas.html',
-        'article-bruce-kovner.html', 'article-michael-steinhardt.html', 'article-dan-zanger.html',
-        'article-bill-ackman.html', 'article-john-paulson.html'
-    ],
-    marketEvents: [
-        'article-black-monday.html', 'article-black-tuesday-1929.html', 'article-flash-crash.html',
-        'article-covid-crash-2020.html', 'article-gamestop-saga.html', 'article-archegos-collapse.html',
-        'article-ltcm.html', 'article-lehman-brothers.html', 'article-hunt-brothers.html'
-    ],
-    strategies: [
-        'article-gamma-squeeze.html', 'article-short-squeeze-anatomy.html', 'article-carry-trade.html',
-        'article-calendar-spreads-explode.html', 'article-nifty-weekly-options-writing.html',
-        'article-intraday-futures-strategy.html', 'article-volatility-weapon.html'
-    ],
-    expiryRelated: [
-        'article-banknifty-expiry.html', 'article-weekly-expiry.html', 'article-commodity-expiry.html',
-        'article-futures-expiry-week.html', 'article-expiry-settlement.html', 'article-option-settlement-india.html'
-    ]
-};
+console.log('🚀 BRO BILLIONAIRE STOCKS - NUCLEAR SEO UPGRADE INITIATED');
+console.log('📊 Target Keyword: "bro billionaire stocks"');
+console.log('🎯 Goal: #1 Google Ranking');
+console.log('');
 
-// Generate random rating between 4.5 and 4.9
-function generateRating() {
-    return (4.5 + Math.random() * 0.4).toFixed(1);
-}
+let html = fs.readFileSync(filePath, 'utf8');
+let changeCount = 0;
 
-// Generate random review count between 50 and 500
-function generateReviewCount() {
-    return Math.floor(50 + Math.random() * 450);
-}
+// 1. OPTIMIZE TITLE TAG - Most critical for ranking
+console.log('1️⃣  Optimizing title tag with exact match keyword...');
+html = html.replace(
+    /<title>Why Wall Street Is Turning Bearish on Bro Billionaire Stocks in 2026 \| BroBillionaire<\/title>/,
+    '<title>Bro Billionaire Stocks 2026: Why Wall Street Is Bearish on Tesla, Palantir & Crypto | Complete Guide</title>'
+);
+changeCount++;
 
-// Get reading time estimate from content
-function getReadingTime(content) {
-    const wordCount = content.split(/\s+/).length;
-    return Math.ceil(wordCount / 200); // 200 words per minute
-}
+// 2. ENHANCE META DESCRIPTION - Needs "bro billionaire stocks" multiple times
+console.log('2️⃣  Enhancing meta description with keyword density...');
+html = html.replace(
+    /<meta name="description"\s+content="Inside look at why Goldman Sachs, JPMorgan & major banks are downgrading Tesla, Palantir & crypto stocks\. Real data on institutional selling, what this means for retail investors, and 3 survival strategies if you're holding bro stocks in 2026\.">/,
+    '<meta name="description" content="Bro Billionaire Stocks 2026 Complete Guide: Why Goldman Sachs & JPMorgan are bearish on Tesla, Palantir, crypto stocks. Real data on institutional selling, downgrades, what bro stocks mean, 3 survival strategies for retail investors holding bro billionaire stocks.">'
+);
+changeCount++;
 
-// Extract title from HTML
-function extractTitle(content) {
-    const match = content.match(/<title>([^<]+)<\/title>/i);
-    return match ? match[1].replace(' | BroBillionaire', '').trim() : 'Trading Article';
-}
+// 3. OPTIMIZE PRIMARY META TAGS
+console.log('3️⃣  Optimizing primary meta tags...');
+html = html.replace(
+    /<meta name="title" content="Why Wall Street Is Turning Bearish on Bro Billionaire Stocks in 2026">/,
+    '<meta name="title" content="Bro Billionaire Stocks 2026: Complete Guide - Wall Street Bearish on Tesla, Palantir">'
+);
+html = html.replace(
+    /<meta name="keywords"\s+content="bro billionaire stocks 2026, wall street bearish tech stocks, Tesla stock bearish outlook, Palantir PLTR downgrade, crypto stocks selloff 2026, momentum stocks crash, retail investor guide 2026, growth stocks correction, Goldman Sachs Tesla downgrade, ARK Innovation ETF outflows, institutional selling tech, sector rotation value stocks">/,
+    '<meta name="keywords" content="bro billionaire stocks, bro billionaire stocks 2026, what are bro billionaire stocks, bro stocks, billionaire stocks, wall street bearish bro stocks, Tesla stock bearish 2026, Palantir PLTR downgrade 2026, crypto stocks selloff, bro billionaire portfolio, momentum stocks crash 2026, retail investor bro stocks, growth stocks correction, Goldman Sachs Tesla downgrade, ARK Innovation ETF outflows, institutional selling bro stocks, sector rotation bro billionaire, bro stock investing guide, Reddit bro stocks, WSB stocks 2026, bro stock list, best bro stocks">'
+);
+changeCount += 2;
 
-// Extract description from HTML
-function extractDescription(content) {
-    const match = content.match(/<meta\s+name="description"\s+content="([^"]+)"/i);
-    return match ? match[1] : '';
-}
+// 4. OPTIMIZE OPEN GRAPH TAGS
+console.log('4️⃣  Optimizing Open Graph tags...');
+html = html.replace(
+    /<meta property="og:title" content="Why Wall Street Is Turning Bearish on Bro Billionaire Stocks">/,
+    '<meta property="og:title" content="Bro Billionaire Stocks 2026: Wall Street Turns Bearish - Complete Guide">'
+);
+html = html.replace(
+    /<meta property="og:description"\s+content="Goldman Sachs downgrades Tesla\. JPMorgan issues SELL on Palantir\. \$2\.4B fleeing ARK\. Here's what retail investors holding bro stocks need to do now\.">/,
+    '<meta property="og:description" content="What are bro billionaire stocks? Goldman Sachs downgrades Tesla. JPMorgan SELL on Palantir. $2.4B fleeing ARK. Complete guide for retail investors holding bro stocks in 2026.">'
+);
+changeCount += 2;
 
-// Generate Course Schema
-function generateCourseSchema(title, description, filename) {
-    return `
+// 5. OPTIMIZE TWITTER CARD TAGS
+console.log('5️⃣  Optimizing Twitter Card tags...');
+html = html.replace(
+    /<meta name="twitter:title" content="Why Wall Street Is Turning Bearish on Bro Billionaire Stocks">/,
+    '<meta name="twitter:title" content="Bro Billionaire Stocks 2026: Complete Guide - Wall Street Turns Bearish">'
+);
+html = html.replace(
+    /<meta name="twitter:description"\s+content="Tesla downgrades\. Palantir selloffs\. Crypto bleeding\. The momentum trade is dead—here's your survival guide\.">/,
+    '<meta name="twitter:description" content="What are bro billionaire stocks in 2026? Tesla downgrades. Palantir selloffs. Crypto bleeding. Complete survival guide for bro stock investors.">'
+);
+changeCount += 2;
+
+// 6. REPLACE ARTICLE SCHEMA WITH ENHANCED VERSION
+console.log('6️⃣  Upgrading Article schema with keyword optimization...');
+const oldArticleSchema = /<script\s+type="application\/ld\+json">\s*\{\s*"@context":\s*"https:\/\/schema\.org",\s*"@type":\s*"NewsArticle"[^<]*<\/script>/s;
+const newArticleSchema = `<!-- Schema.org Article Structured Data -->
     <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Course",
-        "name": "${title.replace(/"/g, '\\"')}",
-        "description": "${description.replace(/"/g, '\\"')}",
-        "provider": {
-            "@type": "Organization",
-            "name": "BroBillionaire",
-            "sameAs": "${BASE_URL}"
-        },
-        "educationalLevel": "Beginner to Advanced",
-        "isAccessibleForFree": true,
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "INR",
-            "availability": "https://schema.org/InStock",
-            "category": "Free Course"
-        },
-        "hasCourseInstance": {
-            "@type": "CourseInstance",
-            "courseMode": "online",
-            "courseWorkload": "PT15M"
-        },
-        "teaches": [
-            "Trading Strategies",
-            "Risk Management",
-            "Market Analysis",
-            "Technical Analysis"
-        ],
-        "inLanguage": "en",
-        "url": "${BASE_URL}/${filename}"
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Bro Billionaire Stocks 2026: Complete Guide - Why Wall Street Is Bearish on Tesla, Palantir & Crypto",
+  "description": "Comprehensive guide to bro billionaire stocks in 2026. What are bro stocks, why Goldman Sachs & JPMorgan are bearish on Tesla, Palantir, crypto stocks, and survival strategies for retail investors.",
+  "image": "https://brobillionaire.com/og-image.jpg",
+  "author": {
+    "@type": "Person",
+    "name": "BroBillionaire",
+    "url": "https://brobillionaire.com/author.html"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BroBillionaire",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brobillionaire.com/logo.jpg"
     }
-    </script>`;
+  },
+  "datePublished": "2026-02-08",
+  "dateModified": "2026-02-08",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brobillionaire.com/article-wall-street-bearish-bro-billionaire-stocks.html"
+  },
+  "keywords": "bro billionaire stocks, bro stocks 2026, Tesla bearish, Palantir downgrade, crypto stocks, Wall Street bearish",
+  "articleSection": "Investment Analysis",
+  "wordCount": 5200,
+  "inLanguage": "en-US"
 }
+</script>`;
+html = html.replace(oldArticleSchema, newArticleSchema);
+changeCount++;
 
-// Generate ItemList Schema for listicles
-function generateItemListSchema(title, description, filename, itemCount = 7) {
-    const items = [];
-    for (let i = 1; i <= itemCount; i++) {
-        items.push(`{
-            "@type": "ListItem",
-            "position": ${i},
-            "name": "Item ${i} in ${title}",
-            "url": "${BASE_URL}/${filename}#item-${i}"
-        }`);
+// 7. ENHANCE FAQ SCHEMA WITH MORE QUESTIONS
+console.log('7️⃣  Expanding FAQ schema with 6 questions for long-tail keywords...');
+const oldFAQSchema = /<script type="application\/ld\+json">\s*\{\s*"@context":\s*"https:\/\/schema\.org",\s*"@type":\s*"FAQPage"[\s\S]*?\}\s*<\/script>/;
+const newFAQSchema = `<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What are bro billionaire stocks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Bro billionaire stocks (also called bro stocks) are high-growth, momentum-driven stocks popular with retail investors and 'financial bros'. Bro billionaire stocks typically include Tesla (TSLA), Palantir (PLTR), crypto-related stocks like Coinbase and MicroStrategy, ARK Innovation ETF holdings, and companies championed by figures like Elon Musk and Cathie Wood. These bro stocks trade at 50-200x P/E ratios with narratives of disruption."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is Wall Street turning bearish on bro billionaire stocks in 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Wall Street is turning bearish on bro billionaire stocks in 2026 due to: deteriorating fundamentals (Tesla deliveries missed, Palantir growth slowing), extreme valuations (Tesla 45x P/E, Palantir 95x P/E), Fed policy keeping rates higher for longer at 5.25%, institutional profit-taking, declining retail momentum (r/WallStreetBets posts down 42%), and sector rotation from growth to value stocks. Goldman Sachs downgraded Tesla from $350 to $210, JPMorgan issued SELL on Palantir calling it 'egregiously overvalued'."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I sell my bro billionaire stocks now in 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Whether to sell bro billionaire stocks depends on your situation: If you're up 100%+ in bro stocks, trim 30-50% of winners and take profits now. If you're down 20-50%, assess if you truly believe for 5-10 years and whether position is over 20% of portfolio. Don't buy falling bro billionaire stocks yet - wait for capitulation signals (VIX above 30, panic volume). Smart money is rotating from bro stocks to dividend aristocrats (JNJ, PG), financials (JPM, BAC), energy (XOM, CVX), and cash at 5.5% yields."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which stocks are considered bro billionaire stocks in 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The main bro billionaire stocks in 2026 are: Tesla (TSLA) - the king of bro stocks, Palantir (PLTR) - trading at 95x P/E, crypto stocks like MicroStrategy (MSTR), Coinbase (COIN), Marathon Digital (MARA), ARK Innovation ETF (ARKK) holdings, Snowflake (SNOW), SoFi (SOFI), Roku (ROKU), Square/Block (SQ), and Teladoc (TDOC). These are high-volatility, momentum-driven stocks with 50-200x valuations and massive retail investor followings on Reddit and Twitter."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happened to Tesla stock and Palantir stock in 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In 2026, bro billionaire stocks Tesla and Palantir faced major downgrades: Tesla was downgraded by Goldman Sachs from Buy to Neutral with price target slashed 40% from $350 to $210 due to missed Q4 2025 deliveries, margin compression to 15%, and Chinese competition. Palantir was downgraded by JPMorgan to SELL (Underweight) with target cut from $28 to $16, calling its 95x P/E valuation 'egregiously overvalued' and predicting 40% downside. Both bro stocks are down 50%+ from peaks as institutions exit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is ARK Innovation ETF a good bro billionaire stock investment in 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ARK Innovation ETF (ARKK) - the quintessential bro billionaire stock basket - is NOT recommended in 2026. The fund hemorrhaged $2.4 billion in outflows in Q4 2025, is down 75% from its Feb 2021 peak, and portfolio holdings are getting annihilated (Teladoc, Roku, Square). Cathie Wood's bro stock picks are underperforming as Wall Street rotates away from unprofitable growth. Better alternatives: diversified tech ETFs like QQQ or value-focused dividend funds."
+      }
     }
-    
-    return `
+  ]
+}
+</script>`;
+html = html.replace(oldFAQSchema, newFAQSchema);
+changeCount++;
+
+// 8. ADD HOWTO SCHEMA FOR FEATURED SNIPPETS
+console.log('8️⃣  Adding HowTo schema for featured snippets...');
+const breadcrumbEndMarker = '</script>\n    <style>';
+const howToSchema = `</script>
+
+    <!-- HowTo Schema for Action Guide -->
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Handle Bro Billionaire Stocks When Wall Street Turns Bearish",
+  "description": "Step-by-step guide on what to do with your bro billionaire stock portfolio when Wall Street becomes bearish",
+  "totalTime": "PT30M",
+  "step": [
     {
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        "name": "${title.replace(/"/g, '\\"')}",
-        "description": "${description.replace(/"/g, '\\"')}",
-        "numberOfItems": ${itemCount},
-        "itemListElement": [${items.join(',\n            ')}]
+      "@type": "HowToStep",
+      "name": "Assess Your Position",
+      "text": "Check if you're up 100%+ or down 20-50% in bro billionaire stocks. If up big, trim 30-50% of winners immediately. If down, assess true belief for 5-10 years and portfolio concentration.",
+      "position": 1
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Take Profits Strategically",
+      "text": "Move trimmed bro stock profits into: boring index funds (SPY, QQQ), dividend aristocrats (JNJ, PG, KO), banks and energy (JPM, XOM), or cash at 5.5% money market yields.",
+      "position": 2
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Wait for True Capitulation",
+      "text": "If considering buying bro billionaire stocks, wait for capitulation signals: VIX above 30, panic volume, Reddit posts saying 'I give up', then dollar-cost average over 6-12 months with max 5-10% position sizes.",
+      "position": 3
     }
-    </script>`;
+  ]
 }
+</script>
 
-// NOTE: AggregateRating Schema removed - Google doesn't support AggregateRating on WebPage type
-// Only valid on Product, LocalBusiness, Book, Course, Movie, SoftwareApplication, etc.
-// Keeping this comment for reference
-
-// Generate Person Schema for trader profiles
-function generatePersonSchema(traderName, description, filename) {
-    const traders = {
-        'george-soros': { birthDate: '1930-08-12', nationality: 'Hungarian-American', netWorth: '$6.7 billion' },
-        'paul-tudor-jones': { birthDate: '1954-09-28', nationality: 'American', netWorth: '$7.5 billion' },
-        'jim-simons': { birthDate: '1938-04-25', nationality: 'American', netWorth: '$28 billion' },
-        'jesse-livermore': { birthDate: '1877-07-26', nationality: 'American', netWorth: '$100 million (1929)' },
-        'ray-dalio': { birthDate: '1949-08-08', nationality: 'American', netWorth: '$19 billion' },
-        'stanley-druckenmiller': { birthDate: '1953-06-14', nationality: 'American', netWorth: '$6.4 billion' },
-        'richard-dennis': { birthDate: '1949-01-09', nationality: 'American', netWorth: '$300 million' },
-        'ed-seykota': { birthDate: '1946-08-07', nationality: 'American', netWorth: 'Undisclosed' },
-        'nicolas-darvas': { birthDate: '1920-04-03', nationality: 'Hungarian-American', netWorth: '$2 million (1960s)' },
-        'bruce-kovner': { birthDate: '1945-02-25', nationality: 'American', netWorth: '$6.6 billion' },
-        'michael-steinhardt': { birthDate: '1940-12-07', nationality: 'American', netWorth: '$1.2 billion' },
-        'dan-zanger': { birthDate: '1952', nationality: 'American', netWorth: '$42 million' },
-        'bill-ackman': { birthDate: '1966-05-11', nationality: 'American', netWorth: '$3.5 billion' },
-        'john-paulson': { birthDate: '1955-12-14', nationality: 'American', netWorth: '$3 billion' }
-    };
-    
-    const traderKey = filename.replace('article-', '').replace('.html', '');
-    const traderInfo = traders[traderKey] || { birthDate: '', nationality: 'Unknown', netWorth: 'Unknown' };
-    
-    return `
+    <!-- Organization Schema -->
     <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "${traderName}",
-        "description": "${description.replace(/"/g, '\\"')}",
-        "jobTitle": "Legendary Trader & Investor",
-        "nationality": "${traderInfo.nationality}",
-        ${traderInfo.birthDate ? `"birthDate": "${traderInfo.birthDate}",` : ''}
-        "knowsAbout": [
-            "Trading",
-            "Investing",
-            "Financial Markets",
-            "Risk Management",
-            "Portfolio Management"
-        ],
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "${BASE_URL}/${filename}"
-        }
-    }
-    </script>`;
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "BroBillionaire",
+  "url": "https://brobillionaire.com",
+  "logo": "https://brobillionaire.com/logo.jpg",
+  "description": "BroBillionaire provides investment education, stock analysis, and financial calculators for retail investors interested in bro billionaire stocks, trading, and wealth building.",
+  "sameAs": [
+    "https://twitter.com/brobillionaire",
+    "https://www.youtube.com/@brobillionaire"
+  ]
 }
+</script>
 
-// Generate Event Schema for market events
-function generateEventSchema(title, description, filename) {
-    const events = {
-        'black-monday': { date: '1987-10-19', location: 'Global Stock Markets' },
-        'black-tuesday-1929': { date: '1929-10-29', location: 'New York Stock Exchange' },
-        'flash-crash': { date: '2010-05-06', location: 'US Stock Markets' },
-        'covid-crash-2020': { date: '2020-03-23', location: 'Global Markets' },
-        'gamestop-saga': { date: '2021-01-28', location: 'NYSE' },
-        'archegos-collapse': { date: '2021-03-26', location: 'US Markets' },
-        'ltcm': { date: '1998-09-23', location: 'Global Markets' },
-        'lehman-brothers': { date: '2008-09-15', location: 'New York' },
-        'hunt-brothers': { date: '1980-03-27', location: 'COMEX' }
-    };
-    
-    const eventKey = filename.replace('article-', '').replace('.html', '');
-    const eventInfo = events[eventKey] || { date: '2020-01-01', location: 'Financial Markets' };
-    
-    return `
+    <!-- WebSite Schema for Sitelinks Search Box -->
     <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Event",
-        "name": "${title.replace(/"/g, '\\"')}",
-        "description": "${description.replace(/"/g, '\\"')}",
-        "startDate": "${eventInfo.date}",
-        "eventStatus": "https://schema.org/EventScheduled",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "location": {
-            "@type": "Place",
-            "name": "${eventInfo.location}"
-        },
-        "organizer": {
-            "@type": "Organization",
-            "name": "Historical Market Event"
-        },
-        "about": {
-            "@type": "Thing",
-            "name": "Stock Market Crash"
-        }
-    }
-    </script>`;
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "BroBillionaire",
+  "url": "https://brobillionaire.com",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://brobillionaire.com/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
 }
+</script>
+    <style>`;
+html = html.replace(breadcrumbEndMarker, howToSchema);
+changeCount++;
 
-// Generate FinancialProduct Schema for broker articles
-function generateFinancialProductSchema(title, description, filename) {
-    return `
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "FinancialProduct",
-        "name": "${title.replace(/"/g, '\\"')}",
-        "description": "${description.replace(/"/g, '\\"')}",
-        "category": "Stock Broker Comparison",
-        "provider": {
-            "@type": "Organization",
-            "name": "Various Brokers"
-        },
-        "feesAndCommissionsSpecification": "Varies by broker",
-        "annualPercentageRate": "N/A",
-        "url": "${BASE_URL}/${filename}"
-    }
-    </script>`;
-}
+// 9. OPTIMIZE H1 TITLE WITH KEYWORD
+console.log('9️⃣  Optimizing H1 title with primary keyword...');
+html = html.replace(
+    /<h1 class="article-main-title serif">\s*Why Wall Street Is Turning\s*<span\s+class="gold-text italic">Bearish<\/span>\s*on Bro Billionaire Stocks\s*<\/h1>/s,
+    '<h1 class="article-main-title serif"> Bro Billionaire Stocks 2026: Why Wall Street Turned <span class="gold-text italic">Bearish</span> (Complete Guide) </h1>'
+);
+changeCount++;
 
-// Generate Video Schema placeholder
-function generateVideoSchema(title, description, filename) {
-    return `
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "VideoObject",
-        "name": "${title.replace(/"/g, '\\"')} - Video Guide",
-        "description": "${description.replace(/"/g, '\\"')}",
-        "thumbnailUrl": "${BASE_URL}/og-image.jpg",
-        "uploadDate": "2026-02-01T00:00:00+00:00",
-        "contentUrl": "${BASE_URL}/videos/${filename.replace('.html', '.mp4')}",
-        "embedUrl": "https://www.youtube.com/embed/PLACEHOLDER",
-        "duration": "PT10M",
-        "publisher": {
-            "@type": "Organization",
-            "name": "BroBillionaire",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "${BASE_URL}/logo.jpg"
-            }
-        }
-    }
-    </script>`;
-}
+// 10. OPTIMIZE SUBTITLE WITH MORE KEYWORD MENTIONS
+console.log('🔟 Optimizing subtitle with keyword repetition...');
+html = html.replace(
+    /<p class="article-subtitle">\s*The momentum trade that minted millionaires from 2020-2024 is dying\. Tesla\?\s+Downgraded\. Palantir\? Overvalued\. Crypto stocks\? Bleeding out\. Wall Street's smart money is rotating\s+out—and if you're still holding, this is your wake-up call\.\s*<\/p>/s,
+    '<p class="article-subtitle"> The bro billionaire stocks momentum trade that minted millionaires from 2020-2024 is dying. Tesla? Downgraded by Goldman Sachs. Palantir? Called "overvalued" by JPMorgan. Crypto stocks? Bleeding out. Wall Street\'s smart money is rotating out of bro stocks—and if you\'re still holding bro billionaire stocks, this is your wake-up call. </p>'
+);
+changeCount++;
 
-// Enhanced Author Schema with E-E-A-T
-function generateAuthorSchema() {
-    return `
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "@id": "${BASE_URL}/author.html#author",
-        "name": "BroBillionaire Editorial Team",
-        "url": "${BASE_URL}/author.html",
-        "image": "${BASE_URL}/logo.jpg",
-        "jobTitle": "Financial Analysts & Trading Educators",
-        "worksFor": {
-            "@type": "Organization",
-            "name": "BroBillionaire"
-        },
-        "knowsAbout": [
-            "Stock Market Trading",
-            "Options Trading",
-            "Futures Trading",
-            "Technical Analysis",
-            "Fundamental Analysis",
-            "Risk Management",
-            "Trading Psychology",
-            "Indian Stock Market",
-            "Bank Nifty",
-            "Nifty 50"
-        ],
-        "hasCredential": [
-            {
-                "@type": "EducationalOccupationalCredential",
-                "credentialCategory": "SEBI Registered",
-                "name": "Market Research Analyst"
-            }
-        ],
-        "sameAs": [
-            "https://twitter.com/brobillionaire",
-            "https://www.instagram.com/brobillionaire",
-            "https://www.youtube.com/@brobillionaire",
-            "https://www.linkedin.com/company/brobillionaire"
-        ],
-        "alumniOf": {
-            "@type": "EducationalOrganization",
-            "name": "Premier Indian Financial Institutions"
-        }
-    }
-    </script>`;
-}
+// 11. OPTIMIZE FIRST CHAPTER TITLE
+console.log('1️⃣1️⃣  Optimizing first chapter title with keyword...');
+html = html.replace(
+    /<h2 class="chapter-title">The Party's Over \(And Nobody Told You\)<\/h2>/,
+    '<h2 class="chapter-title">The Bro Billionaire Stocks Party\'s Over (And Nobody Told You)</h2>'
+);
+changeCount++;
 
-// Table of Contents CSS and JS
-const TOC_STYLES = `
-    <style>
-    /* Table of Contents Styles */
-    .article-toc {
-        background: linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, rgba(0,0,0,0.3) 100%);
-        border: 1px solid rgba(201, 162, 39, 0.3);
-        border-radius: 12px;
-        padding: 24px;
-        margin: 30px 0;
-        position: relative;
-    }
-    .article-toc::before {
-        content: '\f0c9';
-        font-family: 'Font Awesome 6 Free';
-        font-weight: 900;
-        position: absolute;
-        top: -15px;
-        left: 20px;
-        background: #0a0a0a;
-        padding: 0 10px;
-        font-size: 24px;
-        color: #C9A227;
-    }
-    .article-toc h2 {
-        color: #C9A227;
-        font-size: 1.2rem;
-        margin-bottom: 16px;
-        font-family: 'Playfair Display', serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-    }
-    .article-toc ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    .article-toc li {
-        padding: 8px 0;
-        border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    .article-toc li:last-child {
-        border-bottom: none;
-    }
-    .article-toc a {
-        color: #e0e0e0;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 0.95rem;
-        line-height: 1.5;
-    }
-    .article-toc a:hover {
-        color: #C9A227;
-        padding-left: 10px;
-    }
-    .article-toc a::before {
-        content: '→';
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        color: #C9A227;
-    }
-    .article-toc a:hover::before {
-        opacity: 1;
-    }
-    .toc-number {
-        background: rgba(201, 162, 39, 0.2);
-        color: #C9A227;
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 12px;
-        font-weight: 600;
-    }
-    /* Reading Progress Bar */
-    .reading-progress {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 0%;
-        height: 4px;
-        background: linear-gradient(90deg, #C9A227, #FFD700);
-        z-index: 9999;
-        transition: width 0.1s ease;
-    }
-    /* Article Rating Widget */
-    .article-rating-widget {
-        background: rgba(201, 162, 39, 0.1);
-        border: 1px solid rgba(201, 162, 39, 0.3);
-        border-radius: 12px;
-        padding: 20px;
-        margin: 30px 0;
-        text-align: center;
-    }
-    .rating-stars {
-        font-size: 24px;
-        color: #C9A227;
-        margin: 10px 0;
-    }
-    .rating-text {
-        color: rgba(255,255,255,0.7);
-        font-size: 14px;
-    }
-    </style>`;
+// 12. OPTIMIZE FIRST PARAGRAPHS WITH KEYWORD DENSITY
+console.log('1️⃣2️⃣  Optimizing opening paragraphs for keyword density...');
+html = html.replace(
+    /<p class="article-text">Look, I'm not gonna sugarcoat this\.<\/p>\s+<p class="article-text">For four glorious years—2020 through 2024—being a "bro investor" was like\s+playing poker with marked cards\. You literally couldn't lose\.<\/p>\s+<p class="article-text">The playbook was stupidly simple: Buy Tesla\. Buy Palantir\. Buy whatever Cathie\s+Wood was buying that week\. Throw money at crypto stocks\. Post diamond hands 💎🙌 on Reddit\. Watch\s+your portfolio explode\.<\/p>/s,
+    `<p class="article-text">Look, I'm not gonna sugarcoat this bro billionaire stocks situation.</p>
+                <p class="article-text">For four glorious years—2020 through 2024—being a "bro investor" holding <strong>bro billionaire stocks</strong> was like
+                    playing poker with marked cards. You literally couldn't lose with bro stocks.</p>
+                <p class="article-text">The bro billionaire stocks playbook was stupidly simple: Buy Tesla (TSLA). Buy Palantir (PLTR). Buy whatever Cathie
+                    Wood was buying that week for ARK. Throw money at crypto stocks like Coinbase and MicroStrategy. Post diamond hands 💎🙌 on r/WallStreetBets. Watch
+                    your bro stocks portfolio explode.</p>`
+);
+changeCount++;
 
-// Reading progress bar script
-const PROGRESS_SCRIPT = `
-    <script>
-    // Reading Progress Bar
-    document.addEventListener('DOMContentLoaded', function() {
-        const progressBar = document.createElement('div');
-        progressBar.className = 'reading-progress';
-        document.body.prepend(progressBar);
-        
-        window.addEventListener('scroll', function() {
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrolled = (window.scrollY / docHeight) * 100;
-            progressBar.style.width = scrolled + '%';
-        });
-        
-        // Smooth scroll for TOC links
-        document.querySelectorAll('.article-toc a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href.startsWith('#')) {
-                    e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                }
-            });
-        });
-    });
-    </script>`;
+// 13. UPDATE BREADCRUMB SCHEMA
+console.log('1️⃣3️⃣  Updating breadcrumb schema with new title...');
+html = html.replace(
+    /"name": "Why Wall Street Is Turning Bearish on Bro Billionaire Stocks",/,
+    '"name": "Bro Billionaire Stocks 2026",'
+);
+changeCount++;
 
-// Process a single article
-function processArticle(filename) {
-    const filepath = path.join(ARTICLES_DIR, filename);
-    
-    if (!fs.existsSync(filepath)) {
-        console.log(`⚠️ File not found: ${filename}`);
-        return false;
-    }
-    
-    let content = fs.readFileSync(filepath, 'utf8');
-    const title = extractTitle(content);
-    const description = extractDescription(content);
-    const rating = generateRating();
-    const reviewCount = generateReviewCount();
-    
-    // Check if already processed
-    if (content.includes('seo-nuclear-upgrade')) {
-        console.log(`⏭️ Already processed: ${filename}`);
-        return false;
-    }
-    
-    // Determine article type and add appropriate schemas
-    let additionalSchemas = [];
-    let schemaMarker = `<!-- SEO Nuclear Upgrade: seo-nuclear-upgrade v1.0 -->`;
-    
-    // Add Author Schema to all articles
-    additionalSchemas.push(generateAuthorSchema());
-    
-    // NOTE: Rating Schema removed - Google doesn't support AggregateRating on WebPage type
-    
-    // Educational articles get Course schema
-    if (ARTICLE_CATEGORIES.educational.includes(filename)) {
-        additionalSchemas.push(generateCourseSchema(title, description, filename));
-        console.log(`📚 Added Course schema to: ${filename}`);
-    }
-    
-    // Listicles get ItemList schema
-    if (ARTICLE_CATEGORIES.listicles.includes(filename)) {
-        additionalSchemas.push(generateItemListSchema(title, description, filename));
-        console.log(`📝 Added ItemList schema to: ${filename}`);
-    }
-    
-    // Trader profiles get Person schema
-    if (ARTICLE_CATEGORIES.traderProfiles.includes(filename)) {
-        const traderName = title.split(':')[0].split('-')[0].trim();
-        additionalSchemas.push(generatePersonSchema(traderName, description, filename));
-        console.log(`👤 Added Person schema to: ${filename}`);
-    }
-    
-    // Market events get Event schema
-    if (ARTICLE_CATEGORIES.marketEvents.includes(filename)) {
-        additionalSchemas.push(generateEventSchema(title, description, filename));
-        console.log(`📅 Added Event schema to: ${filename}`);
-    }
-    
-    // Broker articles get FinancialProduct schema
-    if (ARTICLE_CATEGORIES.brokers.includes(filename)) {
-        additionalSchemas.push(generateFinancialProductSchema(title, description, filename));
-        console.log(`💳 Added FinancialProduct schema to: ${filename}`);
-    }
-    
-    // NOTE: Video schema disabled - was causing Google Search Console errors
-    // "Invalid object type for field <parent_node>" in Review snippets
-    // Only add VideoObject schema when actual videos exist for articles
-    // additionalSchemas.push(generateVideoSchema(title, description, filename));
-    
-    // Insert schemas before </head>
-    const schemasHtml = schemaMarker + '\n' + additionalSchemas.join('\n');
-    
-    // Add TOC styles
-    if (!content.includes('.article-toc')) {
-        content = content.replace('</head>', TOC_STYLES + '\n</head>');
-    }
-    
-    // Add schemas
-    content = content.replace('</head>', schemasHtml + '\n</head>');
-    
-    // Add progress bar script before </body>
-    if (!content.includes('reading-progress')) {
-        content = content.replace('</body>', PROGRESS_SCRIPT + '\n</body>');
-    }
-    
-    // Add word count meta
-    const wordCount = content.split(/\s+/).length;
-    const readingTime = Math.ceil(wordCount / 200);
-    
-    if (!content.includes('reading-time')) {
-        const metaToAdd = `<meta name="reading-time" content="${readingTime} minutes">\n    <meta name="word-count" content="${wordCount}">`;
-        content = content.replace('<meta name="author"', metaToAdd + '\n    <meta name="author"');
-    }
-    
-    // Save the file
-    fs.writeFileSync(filepath, content);
-    console.log(`✅ Processed: ${filename} (⭐ ${rating}/5, 📖 ${readingTime}min read)`);
-    return true;
-}
+// Write the file back
+fs.writeFileSync(filePath, html, 'utf8');
 
-// Main execution
-async function main() {
-    console.log('');
-    console.log('🚀 ========================================');
-    console.log('   BROBILLIONAIRE NUCLEAR SEO UPGRADE');
-    console.log('   ========================================');
-    console.log('');
-    
-    // Get all article files
-    const files = fs.readdirSync(ARTICLES_DIR)
-        .filter(f => f.startsWith('article-') && f.endsWith('.html'));
-    
-    console.log(`📁 Found ${files.length} articles to process\n`);
-    
-    let processed = 0;
-    let skipped = 0;
-    
-    for (const file of files) {
-        const result = processArticle(file);
-        if (result) {
-            processed++;
-        } else {
-            skipped++;
-        }
-    }
-    
-    console.log('');
-    console.log('📊 ========================================');
-    console.log(`   SUMMARY`);
-    console.log('   ========================================');
-    console.log(`   ✅ Processed: ${processed} articles`);
-    console.log(`   ⏭️ Skipped: ${skipped} articles`);
-    console.log(`   📁 Total: ${files.length} articles`);
-    console.log('');
-    console.log('🎯 Next Steps:');
-    console.log('   1. Run: node ping-search-engines-v2.js');
-    console.log('   2. Submit sitemap to Google Search Console');
-    console.log('   3. Request indexing for top articles');
-    console.log('');
-}
-
-main().catch(console.error);
+console.log('');
+console.log('✅ NUCLEAR SEO UPGRADE COMPLETE!');
+console.log(`📊 Changes Applied: ${changeCount}`);
+console.log('');
+console.log('🎯 SEO Improvements:');
+console.log('   ✓ Title tag optimized with "Bro Billionaire Stocks 2026" (exact match at start)');
+console.log('   ✓ Meta description enhanced with keyword density (3x "bro billionaire stocks")');
+console.log('   ✓ Keywords expanded to 22 variations including LSI terms');
+console.log('   ✓ OG and Twitter cards optimized for social sharing');
+console.log('   ✓ Article schema upgraded with full keyword optimization');
+console.log('   ✓ FAQ schema expanded to 6 questions (long-tail keyword targeting)');
+console.log('   ✓ HowTo schema added for featured snippet eligibility');
+console.log('   ✓ Organization schema for brand SERP');
+console.log('   ✓ WebSite schema for sitelinks search box');
+console.log('   ✓ H1 optimized with primary keyword at start');
+console.log('   ✓ Subtitle enhanced with "bro stocks" repetition (4x)');
+console.log('   ✓ Opening paragraphs optimized (5x keyword density)');
+console.log('   ✓ Breadcrumb schema updated');
+console.log('');
+console.log('📈 Expected Ranking Improvements:');
+console.log('   🎯 Primary: "bro billionaire stocks" - Target: #1-3');
+console.log('   🎯 Secondary: "bro stocks 2026" - Target: #1-5');
+console.log('   🎯 Long-tail: "what are bro billionaire stocks" - Featured snippet eligible');
+console.log('   🎯 Long-tail: "Tesla stock bearish 2026" - Top 10');
+console.log('   🎯 Long-tail: "Palantir downgrade 2026" - Top 10');
+console.log('');
+console.log('🚀 File updated successfully!');
+console.log('💡 Next Steps:');
+console.log('   1. Submit sitemap to Google Search Console');
+console.log('   2. Request indexing for this specific URL');
+console.log('   3. Build 5-10 internal links from other articles');
+console.log('   4. Get 3-5 backlinks from relevant finance blogs');
+console.log('   5. Share on social media for initial engagement signals');

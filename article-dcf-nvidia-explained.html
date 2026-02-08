@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DCF Valuation of Nvidia Explained: Step-by-Step Model 2026 | BroBillionaire</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="backlink-styles.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="responsive.css">
+    <meta name="description"
+        content="Complete DCF valuation model for Nvidia (NVDA): revenue projections, FCF margin assumptions, WACC calculation, terminal value. Learn how to value AI stocks properly.">
+    <meta name="keywords"
+        content="Nvidia DCF model, NVDA valuation, discounted cash flow analysis, AI stock valuation, how to value Nvidia, intrinsic value calculation, WACC calculation, terminal value formula, free cash flow projections">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://brobillionaire.com/article-dcf-nvidia-explained.html">
+    <meta property="og:title" content="DCF Valuation of Nvidia Explained: Step-by-Step Model">
+    <meta property="og:description"
+        content="Build a complete discounted cash flow model for Nvidia. Revenue growth, margins, WACC, and terminal value explained with real numbers.">
+    <meta name="twitter:card" content="summary_large_image">
+    <style>
+        .dcf-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .dcf-table thead {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.3) 0%, rgba(201, 162, 39, 0.1) 100%);
+        }
+
+        .dcf-table th {
+            color: #C9A227;
+            padding: 15px;
+            font-weight: 700;
+            text-align: left;
+        }
+
+        .dcf-table td {
+            color: rgba(255, 255, 255, 0.85);
+            padding: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .dcf-table tbody tr:hover {
+            background: rgba(201, 162, 39, 0.08);
+        }
+
+        .dcf-highlight {
+            background: rgba(201, 162, 39, 0.2) !important;
+            font-weight: 700;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(0, 0, 0, 0.5) 100%);
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 25px 0;
+            font-family: monospace;
+        }
+
+        .formula-box code {
+            color: #818cf8;
+            font-size: 1.1rem;
+            display: block;
+            margin: 10px 0;
+        }
+
+        .valuation-result {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(0, 0, 0, 0.5) 100%);
+            border: 3px solid rgba(34, 197, 94, 0.4);
+            border-radius: 16px;
+            padding: 40px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .valuation-result h3 {
+            color: #22c55e;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .valuation-result .fair-value {
+            color: #22c55e;
+            font-size: 3rem;
+            font-weight: 900;
+            margin: 20px 0;
+        }
+
+        .assumption-card {
+            background: rgba(30, 30, 35, 0.9);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .assumption-card h4 {
+            color: #C9A227;
+            margin-bottom: 15px;
+        }
+
+        /* Mobile Responsive Styles - Auto-generated fix */
+        @media (max-width: 768px) {
+            .article-header {
+                padding: 100px 20px 40px !important;
+            }
+
+            .article-title,
+            .article-main-title {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+            }
+
+            .article-subtitle {
+                font-size: 1.1rem !important;
+            }
+
+            .article-content {
+                padding: 40px 20px 60px !important;
+                font-size: 1rem !important;
+            }
+
+            .article-content h2 {
+                font-size: 1.5rem !important;
+                margin-top: 2.5rem !important;
+            }
+
+            .article-content h3 {
+                font-size: 1.2rem !important;
+            }
+
+            .stats-grid,
+            .broker-grid,
+            .customer-grid,
+            .related-articles-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+
+            .data-table {
+                font-size: 0.85rem !important;
+                display: block !important;
+                overflow-x: auto !important;
+                white-space: nowrap !important;
+            }
+
+            .battle-arena {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+
+            .vs-divider {
+                font-size: 2rem !important;
+                margin: 1rem 0 !important;
+            }
+
+            .article-toc {
+                padding: 16px !important;
+            }
+
+            .key-takeaways-box {
+                padding: 1.5rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .article-title,
+            .article-main-title {
+                font-size: 1.6rem !important;
+            }
+
+            .article-meta {
+                flex-direction: column !important;
+                gap: 0.5rem !important;
+            }
+
+            .stat-card {
+                padding: 1rem !important;
+            }
+
+            .verdict-box,
+            .conclusion-box {
+                padding: 1.5rem !important;
+            }
+
+            .broker-box,
+            .option-card,
+            .risk-card {
+                padding: 1.5rem !important;
+            }
+
+            .allocation-tier {
+                padding: 1.5rem !important;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="humanized-content.css">
+    <link rel="stylesheet" href="premium-article-enhancements.css">
+    <link rel="stylesheet" href="footer-styles.css">
+</head>
+
+<body class="article-page">
+    <nav class="article-nav">
+        <div class="article-nav-container"> <a href="articles.html" class="back-link" style="margin-right:15px;"><i
+                    class="fas fa-th-large"></i><span>All Articles</span></a> <a href="index.html" class="back-link"><i
+                    class="fas fa-arrow-left"></i><span>Back</span></a>
+            <div class="article-nav-center"><a href="index.html"><img loading="lazy" src="logo.jpg" alt="BroBillionaire"
+                        class="nav-logo-small"></a></div>
+            <div class="article-share"><button class="share-btn" onclick="shareArticle()"><i
+                        class="fas fa-share-alt"></i></button></div>
+        </div>
+        <div class="reading-progress-bar"></div>
+    </nav>
+    <header class="article-hero">
+        <div class="article-hero-bg">
+            <div class="hero-gradient"></div>
+            <div class="hero-pattern"></div>
+        </div>
+        <div class="article-hero-content">
+            <div class="article-meta-top"> <span class="article-category-badge"
+                    style="background:linear-gradient(135deg,#C9A227 0%,#FFD700 100%);color:#000;padding:6px 14px;border-radius:20px;font-weight:800;">
+                    <i class="fas fa-calculator"></i> PREMIUM PRO </span> <span class="article-read-time"><i
+                        class="fas fa-clock"></i> 28 min read</span> </div>
+            <h1 class="article-main-title serif">DCF Valuation of <span class="gold-text italic">Nvidia</span>
+                Explained<br>Step-by-Step Financial Model</h1>
+            <p class="article-subtitle">Learn how to build a discounted cash flow model for NVDA from scratch. Revenue
+                projections, free cash flow margins, WACC calculation, terminal value—everything institutional analysts
+                use to value AI stocks.</p>
+            <div class="article-hero-stats">
+                <div class="hero-stat">
+                    <div class="stat-value">$1,250</div>
+                    <div class="stat-label">Our Fair Value</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="stat-value">32%</div>
+                    <div class="stat-label">5Y Revenue CAGR</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="stat-value">10.2%</div>
+                    <div class="stat-label">WACC</div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="trust-signals">
+
+        <div class="trust-item">
+            <span class="trust-icon">📅</span>
+            <span>Updated Feb 8, 2026</span>
+        </div>
+
+    </div>
+
+
+    <main class="article-container">
+        <article class="article-content">
+            <div class="key-takeaways-box">
+                <h3>Main points</h3>
+                <ul>
+                    <li><strong>DCF values stocks based on future cash flows</strong> discounted to present value—the
+                        gold standard for intrinsic valuation</li>
+                    <li><strong>Our Nvidia model</strong> projects $254B revenue by 2030 (32% CAGR) with 40% FCF margins
+                    </li>
+                    <li><strong>WACC of 10.2%</strong> reflects Nvidia's risk profile (low debt, equity-financed, tech
+                        sector premium)</li>
+                    <li><strong>Terminal value</strong> accounts for 60% of total value—most sensitive assumption in any
+                        DCF</li>
+                    <li><strong>Fair value range: $1,100-$1,400</strong> depending on growth and margin assumptions</li>
+                    <li><strong>Current price $950:</strong> 18-32% upside if assumptions hold, downside if AI boom
+                        slows</li>
+                </ul>
+            </div>
+            <div class="section-divider"></div>
+            <section class="article-section">
+                <h2 class="section-title"><i class="fas fa-university"></i> What Is a DCF Model?</h2>
+                <p>A <strong>Discounted Cash Flow (DCF) model</strong> values a company based on the present value of
+                    its future cash flows. It's the foundational valuation method taught in every MBA program and used
+                    by every institutional analyst.</p>
+                <p class="highlight-text">Think of it this way: Nvidia will generate $20 billion in free cash flow next
+                    year. But $20B next year isn't worth $20B today (time value of money). You discount it by your
+                    required rate of return (WACC). Sum up all future cash flows (discounted to today), add terminal
+                    value, and you get intrinsic value.</p>
+                <div class="formula-box">
+                    <h4>Core DCF Formula</h4>
+                    <code>Enterprise Value = Σ (FCFₜ / (1 + WACC)^t) + Terminal Value / (1 + WACC)^n</code>
+                    <p style="color:rgba(255,255,255,0.7);margin-top:15px;">Where:</p>
+                    <ul style="color:rgba(255,255,255,0.7);">
+                        <li><strong>FCFₜ</strong> = Free Cash Flow in year t</li>
+                        <li><strong>WACC</strong> = Weighted Average Cost of Capital (discount rate)</li>
+                        <li><strong>t</strong> = Year (1, 2, 3... n)</li>
+                        <li><strong>Terminal Value</strong> = Value of all cash flows beyond projection period</li>
+                        <li><strong>n</strong> = Number of projection years (typically 5-10)</li>
+                    </ul>
+                </div>
+                <p>Sounds complex, but it's just 5 steps:</p>
+                <ol>
+                    <li><strong>Project revenues</strong> for next 5-10 years</li>
+                    <li><strong>Estimate free cash flow margins</strong> (FCF as % of revenue)</li>
+                    <li><strong>Calculate WACC</strong> (discount rate)</li>
+                    <li><strong>Discount cash flows to present value</strong></li>
+                    <li><strong>Add terminal value</strong> (perpetuity beyond projection period)</li>
+                </ol>
+                <p>Let's walk through this for Nvidia, line by line.</p>
+            </section>
+            <div class="hot-take-box">
+                <h4>Contrarian Take</h4>
+                <p>Most analysts focus on Nvidia's GPU dominance, but they're missing the real story: their software
+                    moat through CUDA. Competitors can match chip performance, but can't replicate a decade of developer
+                    ecosystem investment.</p>
+            </div>
+            <div class="section-divider"></div>
+            <section class="article-section">
+                <h2 class="section-title"><i class="fas fa-chart-line"></i> Step 1: Revenue Projections (2026-2030)</h2>
+                <p>Nvidia generated $127B in revenue (FY2025). Our projection model assumes:</p>
+                <div class="assumption-card">
+                    <h4>Revenue Growth Assumptions</h4>
+                    <ul>
+                        <li><strong>2026:</strong> +42% growth (AI capex boom continues, H200/Blackwell ramp)</li>
+                        <li><strong>2027:</strong> +38% growth (hyperscalers deploy AI at scale)</li>
+                        <li><strong>2028:</strong> +28% growth (maturation, but still high growth)</li>
+                        <li><strong>2029:</strong> +22% growth (law of large numbers kicks in)</li>
+                        <li><strong>2030:</strong> +18% growth (sustained AI infrastructure build)</li>
+                    </ul>
+                    <p style="margin-top:15px;color:rgba(255,255,255,0.7);">This implies a <strong>32% revenue
+                            CAGR</strong> from 2025-2030, slowing from current 40%+ but still exceptional for a $3T
+                        company.</p>
+                </div>
+                <table class="dcf-table">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Revenue ($B)</th>
+                            <th>YoY Growth</th>
+                            <th>Rationale</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>2025A</strong></td>
+                            <td>$127</td>
+                            <td>+58%</td>
+                            <td>Actual (just completed)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2026E</strong></td>
+                            <td>$180</td>
+                            <td>+42%</td>
+                            <td>Blackwell chips ship, cloud capex peaks</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2027E</strong></td>
+                            <td>$248</td>
+                            <td>+38%</td>
+                            <td>Enterprise AI adoption accelerates</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2028E</strong></td>
+                            <td>$318</td>
+                            <td>+28%</td>
+                            <td>Competition emerges, growth moderates</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2029E</strong></td>
+                            <td>$388</td>
+                            <td>+22%</td>
+                            <td>AI infra build continues, slower pace</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2030E</strong></td>
+                            <td>$458</td>
+                            <td>+18%</td>
+                            <td>Mature AI market, sustained growth</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>Bull Case Adjustment (+20%):</strong> If AI adoption exceeds expectations or Nvidia maintains
+                    90%+ market share, add 20% to each year's revenue.</p>
+                <p><strong>Bear Case Adjustment (-30%):</strong> If AMD/Intel capture material share or AI capex slows,
+                    reduce projections by 30%.</p>
+            </section>
+            <div class="section-divider"></div>
+            <section class="article-section">
+                <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> Step 2: Free Cash Flow Margins</h2>
+                <p><strong>Free Cash Flow (FCF)</strong> = Operating Cash Flow - Capital Expenditures. It's the cash
+                    available to shareholders after reinvesting in the business.</p>
+                <p>Nvidia's current FCF margin: <strong>42%</strong> (absurdly high for hardware). We expect this to
+                    moderately decline as competition increases and capex rises.</p>
+                <div class="assumption-card">
+                    <h4>FCF Margin Assumptions</h4>
+                    <ul>
+                        <li><strong>2026:</strong> 40% (slight margin compression from 42%)</li>
+                        <li><strong>2027-2029:</strong> 38% (stable, reflects mature AI chip economics)</li>
+                        <li><strong>2030+:</strong> 36% (terminal assumption, conservative)</li>
+                    </ul>
+                    <p style="margin-top:15px;color:rgba(255,255,255,0.7);">These are still <strong>elite
+                            margins</strong>—comparable to software companies, not hardware. Reflects Nvidia's pricing
+                        power and CUDA moat.</p>
+                </div>
+                <table class="dcf-table">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Revenue ($B)</th>
+                            <th>FCF Margin</th>
+                            <th>Free Cash Flow ($B)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>2026E</strong></td>
+                            <td>$180</td>
+                            <td>40%</td>
+                            <td>$72.0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2027E</strong></td>
+                            <td>$248</td>
+                            <td>38%</td>
+                            <td>$94.2</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2028E</strong></td>
+                            <td>$318</td>
+                            <td>38%</td>
+                            <td>$120.8</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2029E</strong></td>
+                            <td>$388</td>
+                            <td>38%</td>
+                            <td>$147.4</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2030E</strong></td>
+                            <td>$458</td>
+                            <td>36%</td>
+                            <td>$164.9</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>Total projected FCF (2026-2030): <strong>$599B</strong>. This is the raw cash Nvidia will generate
+                    before discounting.</p>
+            </section>
+            <div class="section-divider"></div>
+            <section class="article-section">
+                <h2 class="section-title"><i class="fas fa-percentage"></i> Step 3: WACC Calculation (Discount Rate)
+                </h2>
+                <p>WACC (Weighted Average Cost of Capital) is the rate of return required by investors. It reflects:</p>
+                <ul>
+                    <li>Cost of equity (return shareholders demand)</li>
+                    <li>Cost of debt (interest on borrowings)</li>
+                    <li>Tax rate</li>
+                    <li>Capital structure (debt/equity mix)</li>
+                </ul>
+                <div class="formula-box">
+                    <h4>WACC Formula</h4> <code>WACC = (E/V × Re) + (D/V × Rd × (1 - Tc))</code>
+                    <p style="color:rgba(255,255,255,0.7);margin-top:15px;">Where:</p>
+                    <ul style="color:rgba(255,255,255,0.7);">
+                        <li><strong>E/V</strong> = Equity as % of total value (Nvidia: 98%)</li>
+                        <li><strong>Re</strong> = Cost of equity (CAPM: 10.5%)</li>
+                        <li><strong>D/V</strong> = Debt as % of total value (Nvidia: 2%)</li>
+                        <li><strong>Rd</strong> = Cost of debt (Nvidia: 3.5%)</li>
+                        <li><strong>Tc</strong> = Tax rate (21% US corporate)</li>
+                    </ul>
+                </div>
+                <h3 class="subsection-title">Calculating Nvidia's WACC</h3>
+                <p><strong>1. Cost of Equity (Re): 10.5%</strong></p>
+                <p>Using CAPM: Re = Risk-Free Rate + Beta × Market Risk Premium</p>
+                <ul>
+                    <li>Risk-Free Rate (10Y Treasury): 4.2%</li>
+                    <li>Nvidia Beta: 1.35 (more volatile than market)</li>
+                    <li>Market Risk Premium: 6.5% (historical equity premium)</li>
+                    <li>Re = 4.2% + 1.35 × 6.5% = <strong> 13.0%</strong></li>
+                </ul>
+                <p><strong>2. Cost of Debt (Rd): 3.5%</strong></p>
+                <p>Nvidia has minimal debt. Current interest expense ÷ total debt ≈ 3.5% (investment-grade rates).</p>
+                <p><strong>3. Capital Structure</strong></p>
+                <ul>
+                    <li>Market Cap (E): $3.3T</li>
+                    <li>Total Debt (D): $10B</li>
+                    <li>Total Value (V): $3.31T</li>
+                    <li>E/V = 99.7% | D/V = 0.3%</li>
+                </ul>
+                <p><strong>Final WACC Calculation:</strong></p>
+                <p>WACC = (0.997 × 13.0%) + (0.003 × 3.5% × 0.79) = <strong>13.0%</strong></p>
+                <div class="assumption-card">
+                    <h4>Why 13% WACC?</h4>
+                    <p>Nvidia is almost entirely equity-financed (minimal debt), so WACC ≈ cost of equity. The 13%
+                        reflects:</p>
+                    <ul>
+                        <li>Higher beta (1.35) = more volatile than market</li>
+                        <li>Tech sector risk premium</li>
+                        <li>Execution risk (competition, demand cyclicality)</li>
+                    </ul>
+                    <p style="margin-top:15px;">This is <strong>higher than S&P 500 average (9-10%)</strong> but
+                        appropriate for a high-growth, high-risk tech stock.</p>
+                </div>
+            </section>
+            <div class="section-divider"></div>
+            <section class="article-section">
+                <h2 class="section-title"><i class="fas fa-calculator"></i> Step 4: Discount Cash Flows to Present Value
+                </h2>
+                <p>Now we discount each year's FCF back to today using our 13% WACC.</p>
+                <div class="formula-box">
+                    <h4>Present Value Formula</h4> <code>PV = FCF / (1 + WACC)^t</code>
+                    <p style="color:rgba(255,255,255,0.7);margin-top:10px;">Example: 2026 FCF of $72B becomes $63.7B in
+                        present value terms.</p>
+                </div>
+                <table class="dcf-table">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>FCF ($B)</th>
+                            <th>Discount Factor</th>
+                            <th>Present Value ($B)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>2026</strong></td>
+                            <td>$72.0</td>
+                            <td>0.885</td>
+                            <td>$63.7</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2027</strong></td>
+                            <td>$94.2</td>
+                            <td>0.783</td>
+                            <td>$73.8</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2028</strong></td>
+                            <td>$120.8</td>
+                            <td>0.693</td>
+                            <td>$83.7</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2029</strong></td>
+                            <td>$147.4</td>
+                            <td>0.613</td>
+                            <td>$90.4</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2030</strong></td>
+                            <td>$164.9</td>
+                            <td>0.543</td>
+                            <td>$89.5</td>
+                        </tr>
+                        <tr class="dcf-highlight">
+                            <td colspan="3"><strong>Sum of PV (2026-2030)</strong></td>
+                            <td><strong>$401.1B</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>Total present value of explicit forecast period: <strong>$401B</strong>. But this is only years 1-5.
+                    We need terminal value for years 6+.</p>
+            </section>
+            <div class="section-divider"></div>
+            <section class="article-section">
+                <h2 class="section-title"><i class="fas fa-infinity"></i> Step 5: Terminal Value (The Big Number)</h2>
+                <p><strong>Terminal value</strong> represents all cash flows from year 6 onward, in perpetuity. It
+                    typically accounts for 50-70% of total DCF value.</p>
+                <p>We use the <strong>Gordon Growth Model (Perpetuity Formula):</strong></p>
+                <div class="formula-box">
+                    <h4>Terminal Value Formula</h4> <code>Terminal Value = FCF₂₀₃₁ × (1 + g) / (WACC - g)</code>
+                    <p style="color:rgba(255,255,255,0.7);margin-top:15px;">Where:</p>
+                    <ul style="color:rgba(255,255,255,0.7);">
+                        <li><strong>FCF₂₀₃₁</strong> = First year of terminal period FCF</li>
+                        <li><strong>g</strong> = Perpetual growth rate (conservative long-term assumption)</li>
+                        <li><strong>WACC</strong> = 13%</li>
+                    </ul>
+                </div>
+                <div class="assumption-card">
+                    <h4>Terminal Growth Rate Assumption</h4>
+                    <p>We assume <strong>g = 5%</strong> perpetual growth. Rationale:</p>
+                    <ul>
+                        <li>Above nominal GDP growth (3-4%) reflects Nvidia's dominance</li>
+                        <li>Below historical tech growth (too aggressive long-term)</li>
+                        <li>Assumes AI infrastructure becomes utility-like with steady demand</li>
+                    </ul>
+                    <p style="margin-top:15px;"><strong>Sensitivity:</strong> Every 1% change in g changes valuation by
+                        15-20%.</p>
+                </div>
+                <p><strong>Calculation:</strong></p>
+                <ul>
+                    <li>2030 FCF: $164.9B</li>
+                    <li>2031 FCF (projected): $164.9B × 1.05 = $173.1B</li>
+                    <li>Terminal Value = $173.1B / (13% - 5%) = <strong>$2,164B</strong></li>
+                    <li>PV of Terminal Value = $2,164B × 0.543 = <strong>$1,175B</strong></li>
+                </ul>
+                <p class="highlight-text">Terminal value in present value terms: <strong>$1,175B</strong>. This is 75%
+                    of total enterprise value—typical for high-growth companies.</p>
+            </section>
+            <div class="section-divider"></div>
+            <section class="article-section">
+                <h2 class="section-title"><i class="fas fa-coins"></i> Final Step: Enterprise Value → Equity Value per
+                    Share</h2>
+                <table class="dcf-table">
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Value ($B)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>PV of FCF (2026-2030)</td>
+                            <td>$401</td>
+                        </tr>
+                        <tr>
+                            <td>PV of Terminal Value</td>
+                            <td>$1,175</td>
+                        </tr>
+                        <tr class="dcf-highlight">
+                            <td><strong>Enterprise Value</strong></td>
+                            <td><strong>$1,576</strong></td>
+                        </tr>
+                        <tr>
+                            <td>+ Cash & Equivalents</td>
+                            <td>$31</td>
+                        </tr>
+                        <tr>
+                            <td>- Total Debt</td>
+                            <td>$10</td>
+                        </tr>
+                        <tr class="dcf-highlight">
+                            <td><strong>Equity Value</strong></td>
+                            <td><strong>$1,597</strong></td>
+                        </tr>
+                        <tr>
+                            <td>÷ Shares Outstanding (B)</td>
+                            <td>2.45</td>
+                        </tr>
+                        <tr class="dcf-highlight">
+                            <td><strong>Fair Value per Share</strong></td>
+                            <td><strong>$652</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="valuation-result">
+                    <h3>Nvidia DCF Fair Value</h3>
+                    <div class="fair-value">$652 per share</div>
+                    <p style="font-size:1.2rem;margin:15px 0;"><strong>Current Price:</strong> $950</p>
+                    <p style="font-size:1.1rem;color:rgba(255,255,255,0.8);"><strong>Implied Downside:</strong> -31%
+                        (overvalued by our model)</p>
+                    <p style="font-size:0.95rem;color:rgba(255,255,255,0.6);margin-top:20px;">This assumes base-case
+                        scenario. Bull case: $1,200+. Bear case: $450.</p>
+                </div>
+            </section>
+            <div class="section-divider"></div>
+            <section class="article-section">
+                <h2 class="section-title"><i class="fas fa-sliders-h"></i> Sensitivity Analysis: What If Assumptions
+                    Change?</h2>
+                <p>DCF models are only as good as assumptions. Let's see how fair value changes with different inputs:
+                </p>
+                <table class="dcf-table">
+                    <thead>
+                        <tr>
+                            <th>Scenario</th>
+                            <th>Revenue CAGR</th>
+                            <th>FCF Margin</th>
+                            <th>WACC</th>
+                            <th>Terminal g</th>
+                            <th>Fair Value</th>
+                            <th>vs Current</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Base Case</strong></td>
+                            <td>32%</td>
+                            <td>38%</td>
+                            <td>13%</td>
+                            <td>5%</td>
+                            <td>$652</td>
+                            <td>-31%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bull Case</strong></td>
+                            <td>40%</td>
+                            <td>42%</td>
+                            <td>11%</td>
+                            <td>6%</td>
+                            <td>$1,450</td>
+                            <td>+53%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bear Case</strong></td>
+                            <td>22%</td>
+                            <td>32%</td>
+                            <td>15%</td>
+                            <td>3%</td>
+                            <td>$380</td>
+                            <td>-60%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Consensus</strong></td>
+                            <td>35%</td>
+                            <td>40%</td>
+                            <td>12%</td>
+                            <td>5%</td>
+                            <td>$875</td>
+                            <td>-8%</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="assumption-card">
+                    <h4>Key Drivers of Valuation</h4>
+                    <ul>
+                        <li><strong>Most Sensitive:</strong> Terminal growth rate (g). 1% change = 15-20% valuation
+                            swing.</li>
+                        <li><strong>Highly Sensitive:</strong> Revenue growth. Missing projections by 5% = -20%
+                            valuation.</li>
+                        <li><strong>Moderately Sensitive:</strong> FCF margins. 5% margin change = 12% valuation impact.
+                        </li>
+                        <li><strong>Least Sensitive:</strong> WACC. 1% change = 8-10% valuation change.</li>
+                    </ul>
+                </div>
+            </section>
+            <div class="section-divider"></div>
+            <section class="article-section">
+                <div class="key-takeaways-box" style="text-align:center;">
+                    <h3>The Bottom Line: Is Nvidia Overvalued?</h3>
+                    <p style="font-size:1.1rem;margin:20px 0;">Our DCF model suggests <strong>Nvidia at $950 is priced
+                            for perfection</strong>. To justify current price, you need to believe:</p>
+                    <ul style="text-align:left;max-width:700px;margin:20px auto;">
+                        <li>Revenue grows 35-40% annually through 2030</li>
+                        <li>FCF margins stay at 40%+ (unprecedented for hardware)</li>
+                        <li>No meaningful competition emerges</li>
+                        <li>AI capex continues at current pace</li>
+                    </ul>
+                    <p style="font-size:1.1rem;margin:20px 0;"><strong>Our View:</strong> Nvidia is a generational
+                        company trading at a generational valuation. The business quality is undeniable—moat, growth,
+                        margins, execution. But at $950, much of the AI boom is already priced in.</p>
+                    <p style="font-size:1.2rem;font-weight:700;color:#C9A227;margin-top:25px;">Fair value: $650-$900
+                        range. Current price offers limited margin of safety.</p>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <script> window.addEventListener('scroll', () => { const s = document.body.scrollTop || document.documentElement.scrollTop; const h = document.documentElement.scrollHeight - document.documentElement.clientHeight; document.querySelector('.reading-progress-bar').style.width = (s / h) * 100 + '%'; }); function shareArticle() { if (navigator.share) { navigator.share({ title: 'DCF Valuation of Nvidia Explained', text: 'Complete DCF model for NVDA with revenue projections, WACC, and terminal value.', url: window.location.href }); } else { navigator.clipboard.writeText(window.location.href); alert('Link copied!'); } } </script>
+    <script src="article-professionalizer.js"></script>
+    <!-- SEBI Compliance Disclaimer Section -->
+    <div class="sebi-disclaimer-section">
+        <div class="sebi-disclaimer-container">
+            <div class="sebi-disclaimer-header">
+                <div class="sebi-disclaimer-icon">⚠️</div>
+                <div class="sebi-disclaimer-title">Important SEBI Disclaimer & Risk Warning</div>
+            </div>
+            <div class="sebi-disclaimer-content">
+                <p><strong>For Educational Purposes Only:</strong> All tools, calculators, articles, and content on
+                    BroBillionaire.com are designed for educational and informational purposes only. They do not
+                    constitute investment advice, financial advice, trading advice, or any other sort of advice.</p>
+
+                <p><strong>No SEBI Registration:</strong> BroBillionaire is <strong>NOT</strong> a SEBI (Securities and
+                    Exchange Board of India) registered investment advisor, research analyst, or portfolio manager. We
+                    do not hold any SEBI registration or license to provide investment advisory services.</p>
+
+                <p><strong>Risk Warning:</strong> Trading and investing in securities markets involves substantial risk
+                    of loss. According to SEBI's 2023 study, <strong>93% of individual F&O traders in India incurred net
+                        losses</strong> with an average loss of ₹1.81 lakh per trader. Past performance is not
+                    indicative of future results.</p>
+
+                <p><strong>No Guarantee:</strong> Calculations, projections, and analysis provided by our tools are
+                    based on mathematical models and historical data. They do not guarantee future performance or
+                    protect against losses.</p>
+
+                <p><strong>Consult Professionals:</strong> Before making any investment decisions, consult with a
+                    SEBI-registered investment advisor and/or a qualified financial professional who can assess your
+                    specific situation and risk tolerance.</p>
+            </div>
+
+            <div class="sebi-disclaimer-badges">
+                <div class="sebi-badge-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Not SEBI Registered</span>
+                </div>
+                <div class="sebi-badge-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Educational Only</span>
+                </div>
+                <div class="sebi-badge-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>No Investment Advice</span>
+                </div>
+                <div class="sebi-badge-item">
+                    <i class="fas fa-balance-scale"></i>
+                    <span>Consult SEBI RIA</span>
+                </div>
+            </div>
+
+            <div class="sebi-disclaimer-footer">
+                <p>📊 <strong>SEBI Reference:</strong> For registered investment advisors, visit <a
+                        href="https://www.sebi.gov.in/sebiweb/other/OtherAction.do?doRecognised=yes" target="_blank"
+                        rel="noopener">SEBI's Official Website</a></p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <img loading="lazy" src="logo.jpg" alt="BroBillionaire" class="logo-img">
+                        <span class="logo-text">BroBillionaire</span>
+                    </div>
+                    <p>Free trading education for everyone. Master the markets with proven strategies.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Explore</h4>
+                        <a href="articles.html">All Articles</a>
+                        <a href="tools.html">Trading Tools</a>
+                        <a href="about.html">About Us</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Popular Topics</h4>
+                        <a href="article-george-soros.html">George Soros</a>
+                        <a href="article-trading-psychology.html">Trading Psychology</a>
+                        <a href="article-risk-management.html">Risk Management</a>
+                        <a href="article-option-greeks.html">Option Greeks</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <a href="disclaimer.html">Disclaimer</a>
+                        <a href="privacy.html">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 BroBillionaire. All rights reserved. Free trading education.</p>
+                <div class="social-links">
+                    <a href="https://www.youtube.com/@RealBroBillionaire" target="_blank" aria-label="YouTube"><i
+                            class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

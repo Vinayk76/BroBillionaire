@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-N0Y2LBMRSW');</script>
+<meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tech Stock Risk Analyzer | Portfolio Risk Calculator 2026</title>
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta name="description" content="Free tech stock risk analyzer. Calculate portfolio volatility, beta, drawdown risk, concentration risk. Analyze Nvidia, Tesla, Palantir risk 2026.">
+<meta name="keywords" content="portfolio risk calculator, tech stock risk analyzer, volatility calculator, beta calculator, drawdown risk tool, concentration risk analysis, investment risk calculator free 2026">
+<link rel="canonical" href="https://brobillionaire.com/tool-tech-stock-risk-analyzer.html">
+<style>
+.stock-checkbox-card{background:linear-gradient(145deg,rgba(30,30,35,0.95),rgba(20,20,25,0.9));border:2px solid rgba(201,162,39,0.3);border-radius:16px;padding:20px;margin:15px 0;cursor:pointer;transition:all 0.3s}
+.stock-checkbox-card:hover{transform:translateY(-3px);border-color:rgba(201,162,39,0.5)}
+.stock-checkbox-card.selected{border-color:#C9A227;background:rgba(201,162,39,0.1)}
+.stock-checkbox-card input[type="checkbox"]{display:none}
+.stock-checkbox-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.check-indicator{width:24px;height:24px;border:2px solid rgba(255,255,255,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.3s}
+.stock-checkbox-card.selected .check-indicator{background:#C9A227;border-color:#C9A227}
+.stock-checkbox-card.selected .check-indicator::after{content:'✓';color:#000;font-weight:700}
+.risk-metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;margin:30px 0}
+.risk-metric-card{background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:30px;text-align:center}
+.risk-gauge{width:150px;height:150px;margin:20px auto;position:relative;border-radius:50%;background:conic-gradient(from 0deg,#4ade80 0% 33%,#eab308 33% 66%,#ef4444 66% 100%);display:flex;align-items:center;justify-content:center}
+.risk-gauge-inner{width:120px;height:120px;background:rgba(15,15,25,0.95);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.risk-score{font-size:2.5rem;font-weight:700;font-family:'Playfair Display',serif}
+.risk-level-low{color:#4ade80}
+.risk-level-medium{color:#eab308}
+.risk-level-high{color:#ef4444}
+.risk-breakdown{background:rgba(0,0,0,0.3);border-radius:16px;padding:25px;margin:30px 0}
+.risk-breakdown-item{display:flex;justify-content:space-between;padding:15px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+.allocation-bar{background:rgba(0,0,0,0.3);border-radius:12px;padding:15px;margin:10px 0}
+.allocation-header{display:flex;justify-content:space-between;margin-bottom:10px}
+.allocation-progress{height:8px;background:rgba(255,255,255,0.1);border-radius:10px;overflow:hidden}
+.allocation-progress-fill{height:100%;background:linear-gradient(90deg,#C9A227,#FFD700);border-radius:10px;transition:width 0.6s}
+.recommendation-item{display:flex;gap:15px;padding:15px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+</style>
+</head>
+<body class="article-page">
+<nav class="article-nav">
+<div class="article-nav-container">
+<a href="tools.html" class="back-link" style="margin-right:15px"><i class="fas fa-tools"></i><span>All Tools</span></a>
+<a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i><span>Home</span></a>
+<div class="article-nav-center"><a href="index.html"><img src="logo.jpg" alt="BroBillionaire" class="nav-logo-small"></a></div>
+</div>
+<div class="reading-progress-bar"></div>
+</nav>
+<header class="article-hero">
+<div class="article-hero-bg"><div class="hero-gradient"></div></div>
+<div class="article-hero-content">
+<div class="article-meta-top">
+<span class="article-category-badge premium-badge" style="background:linear-gradient(135deg,#ef4444,#dc2626)"><i class="fas fa-shield-alt"></i>Risk Tool</span>
+<span class="article-read-time"><i class="fas fa-clock"></i>14 min read</span>
+</div>
+<h1 class="article-main-title serif">Tech Stock <span class="gold-text italic">Risk Analyzer</span><br>Know Your Enemy Before It Destroys You</h1>
+<p class="article-subtitle">Professional-grade risk analysis in 60 seconds. Calculate volatility, beta, drawdown risk, and concentration for your high-growth tech portfolio. The calculator institutions use.</p>
+</div>
+</header>
+<main class="article-container">
+<article class="article-content">
+<div class="key-takeaways-box" style="border-color:#ef4444">
+<h3>Risk Management Essentials</h3>
+<ul>
+<li><strong>Volatility Kills:</strong> 50% annual volatility means your portfolio swings ±50% in normal years (can hit -70% in crashes)</li>
+<li><strong>Beta Amplifies Pain:</strong> 1.8x beta = when S&P drops 10%, you drop 18%. Most can't stomach this.</li>
+<li><strong>Concentration = Russian Roulette:</strong> 3 stocks = high risk. 6+ stocks = manageable risk. 10+ = diversified.</li>
+<li><strong>Drawdown Reality:</strong> High-growth portfolios average -50% to -60% max drawdown every 5 years</li>
+<li><strong>Time Heals (Maybe):</strong> Recovery time from -50% crash: 12-24 months if held, never if panic-sold</li>
+</ul>
+</div>
+<div class="section-divider"></div>
+
+<!-- CALCULATOR SECTION -->
+<section class="article-section">
+<h2 class="section-title"><i class="fas fa-calculator"></i> Portfolio Risk Calculator</h2>
+<p>Select your holdings and enter allocation percentages. The calculator will show your overall risk score, volatility, beta, and personalized risk management recommendations.</p>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px;margin:25px 0">
+<label class="stock-checkbox-card" onclick="toggleStock(this)">
+<input type="checkbox" data-stock="NVDA" data-volatility="45" data-beta="1.8">
+<div class="stock-checkbox-header">
+<span style="font-weight:700;color:#C9A227">Nvidia (NVDA)</span>
+<div class="check-indicator"></div>
+</div>
+<div class="input-group">
+<label class="input-label">% of Portfolio</label>
+<input type="number" class="input-field" placeholder="20" onclick="event.stopPropagation()">
+</div>
+</label>
+
+<label class="stock-checkbox-card" onclick="toggleStock(this)">
+<input type="checkbox" data-stock="TSM" data-volatility="35" data-beta="1.3">
+<div class="stock-checkbox-header">
+<span style="font-weight:700;color:#C9A227">TSMC (TSM)</span>
+<div class="check-indicator"></div>
+</div>
+<div class="input-group">
+<label class="input-label">% of Portfolio</label>
+<input type="number" class="input-field" placeholder="15" onclick="event.stopPropagation()">
+</div>
+</label>
+
+<label class="stock-checkbox-card" onclick="toggleStock(this)">
+<input type="checkbox" data-stock="PLTR" data-volatility="55" data-beta="2.1">
+<div class="stock-checkbox-header">
+<span style="font-weight:700;color:#C9A227">Palantir (PLTR)</span>
+<div class="check-indicator"></div>
+</div>
+<div class="input-group">
+<label class="input-label">% of Portfolio</label>
+<input type="number" class="input-field" placeholder="10" onclick="event.stopPropagation()">
+</div>
+</label>
+
+<label class="stock-checkbox-card" onclick="toggleStock(this)">
+<input type="checkbox" data-stock="TSLA" data-volatility="60" data-beta="2.3">
+<div class="stock-checkbox-header">
+<span style="font-weight:700;color:#C9A227">Tesla (TSLA)</span>
+<div class="check-indicator"></div>
+</div>
+<div class="input-group">
+<label class="input-label">% of Portfolio</label>
+<input type="number" class="input-field" placeholder="15" onclick="event.stopPropagation()">
+</div>
+</label>
+
+<label class="stock-checkbox-card" onclick="toggleStock(this)">
+<input type="checkbox" data-stock="MSFT" data-volatility="28" data-beta="1.1">
+<div class="stock-checkbox-header">
+<span style="font-weight:700;color:#C9A227">Microsoft (MSFT)</span>
+<div class="check-indicator"></div>
+</div>
+<div class="input-group">
+<label class="input-label">% of Portfolio</label>
+<input type="number" class="input-field" placeholder="20" onclick="event.stopPropagation()">
+</div>
+</label>
+
+<label class="stock-checkbox-card" onclick="toggleStock(this)">
+<input type="checkbox" data-stock="META" data-volatility="42" data-beta="1.6">
+<div class="stock-checkbox-header">
+<span style="font-weight:700;color:#C9A227">Meta (META)</span>
+<div class="check-indicator"></div>
+</div>
+<div class="input-group">
+<label class="input-label">% of Portfolio</label>
+<input type="number" class="input-field" placeholder="20" onclick="event.stopPropagation()">
+</div>
+</label>
+</div>
+
+<button class="calc-btn" onclick="analyzeRisk()" style="background:linear-gradient(135deg,#ef4444,#dc2626)"><i class="fas fa-shield-alt"></i> Analyze My Risk</button>
+
+<div id="results" style="display:none;margin-top:40px">
+<h3 class="section-title" style="margin-bottom:30px"><i class="fas fa-exclamation-triangle"></i> Your Risk Profile</h3>
+
+<div class="risk-metrics-grid">
+<div class="risk-metric-card">
+<h4 style="color:rgba(255,255,255,0.8);font-size:1.1rem;margin-bottom:15px">Overall Risk Score</h4>
+<div class="risk-gauge">
+<div class="risk-gauge-inner">
+<div class="risk-score" id="overall-risk-score">7.2</div>
+<div style="font-size:0.75rem;color:rgba(255,255,255,0.6)">/ 10</div>
+</div>
+</div>
+<div style="font-size:1.1rem;font-weight:600;margin-top:15px" id="overall-risk-label">Medium Risk</div>
+</div>
+
+<div class="risk-metric-card">
+<h4 style="color:rgba(255,255,255,0.8);font-size:1.1rem;margin-bottom:15px">Portfolio Volatility</h4>
+<div class="risk-gauge">
+<div class="risk-gauge-inner">
+<div class="risk-score" id="volatility-score">38%</div>
+<div style="font-size:0.75rem;color:rgba(255,255,255,0.6)">Annual</div>
+</div>
+</div>
+<div style="font-size:0.9rem;color:rgba(255,255,255,0.6);margin-top:15px">Expected price swings</div>
+</div>
+
+<div class="risk-metric-card">
+<h4 style="color:rgba(255,255,255,0.8);font-size:1.1rem;margin-bottom:15px">Max Drawdown Risk</h4>
+<div class="risk-gauge">
+<div class="risk-gauge-inner">
+<div class="risk-score risk-level-high" id="drawdown-score">-42%</div>
+<div style="font-size:0.75rem;color:rgba(255,255,255,0.6)">Potential</div>
+</div>
+</div>
+<div style="font-size:0.9rem;color:rgba(255,255,255,0.6);margin-top:15px">Worst-case scenario</div>
+</div>
+</div>
+
+<div class="risk-breakdown">
+<h4 style="color:#C9A227;margin-bottom:20px;font-family:'Playfair Display',serif;font-size:1.3rem">Risk Breakdown</h4>
+<div class="risk-breakdown-item">
+<span style="color:rgba(255,255,255,0.7)">Concentration Risk</span>
+<span style="font-weight:700;font-size:1.2rem" class="risk-level-medium" id="concentration-risk">Medium</span>
+</div>
+<div class="risk-breakdown-item">
+<span style="color:rgba(255,255,255,0.7)">Sector Exposure</span>
+<span style="font-weight:700;font-size:1.2rem;color:#eab308" id="sector-exposure">100%</span>
+</div>
+<div class="risk-breakdown-item">
+<span style="color:rgba(255,255,255,0.7)">Portfolio Beta</span>
+<span style="font-weight:700;font-size:1.2rem;color:#8b5cf6" id="portfolio-beta">1.6x</span>
+</div>
+</div>
+
+<div id="allocation-display"></div>
+
+<div style="background:linear-gradient(135deg,rgba(59,130,246,0.1),rgba(0,0,0,0.3));border:1px solid rgba(59,130,246,0.3);border-radius:20px;padding:30px;margin-top:30px">
+<h4 style="color:#3b82f6;margin-bottom:20px;font-family:'Playfair Display',serif;font-size:1.3rem"><i class="fas fa-lightbulb"></i> Risk Management Recommendations</h4>
+<div id="recommendations-list"></div>
+</div>
+</div>
+</section>
+
+<div class="section-divider"></div>
+<section class="article-section">
+<h2 class="section-title"><i class="fas fa-brain"></i> Understanding Portfolio Risk: The 4 Pillars</h2>
+
+<h3 class="subsection-title">1. Volatility: The Wild Swings Nobody Prepares For</h3>
+<p>Volatility measures how violently your portfolio bounces around. Here's what the numbers really mean:</p>
+<table class="data-table">
+<thead>
+<tr>
+<th>Volatility Level</th>
+<th>Annual Swings</th>
+<th>95% Range</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Low (15-25%)</strong></td>
+<td style="color:#4ade80;font-weight:700">Manageable</td>
+<td>±30% to ±50%</td>
+<td>S&P 500, Diversified ETFs</td>
+</tr>
+<tr>
+<td><strong>Medium (25-40%)</strong></td>
+<td style="color:#eab308;font-weight:700">Painful</td>
+<td>±50% to ±80%</td>
+<td>Microsoft, Apple, Amazon</td>
+</tr>
+<tr>
+<td><strong>High (40-60%)</strong></td>
+<td style="color:#ef4444;font-weight:700">Brutal</td>
+<td>±80% to ±120%</td>
+<td>Nvidia, Palantir, Tesla</td>
+</tr>
+</tbody>
+</table>
+<p style="margin-top:20px"><strong>Real Talk:</strong> If your portfolio has 50% volatility, a -50% crash isn't "bad luck"—it's statistically EXPECTED once every 4-6 years. Most investors don't prepare mentally for this.</p>
+
+<h3 class="subsection-title">2. Beta: Your Market Sensitivity Multiplier</h3>
+<p>Beta tells you how much your portfolio amplifies market moves:</p>
+<ul style="margin:20px 0;line-height:1.8">
+<li><strong>Beta = 1.0:</strong> You move exactly with the market (S&P 500 up 10% = you up 10%)</li>
+<li><strong>Beta = 1.5:</strong> You move 50% MORE than market (S&P 500 down 20% = you down 30%)</li>
+<li><strong>Beta = 2.0:</strong> Double market swings (S&P 500 down 10% = you down 20%)</li>
+</ul>
+<p><strong>The Catch:</strong> High beta works both ways. Palantir's 2.1x beta crushed in 2023 (+200% when S&P did +24%) but got obliterated in 2022 (-64% when S&P did -18%).</p>
+
+<h3 class="subsection-title">3. Concentration Risk: How Many Eggs in One Basket?</h3>
+<table class="data-table">
+<thead>
+<tr>
+<th>Number of Stocks</th>
+<th>Risk Level</th>
+<th>What Happens If One Fails</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="font-weight:700">1-2 stocks</td>
+<td style="color:#ef4444;font-weight:700">Extreme</td>
+<td>Portfolio drops 50-100%</td>
+</tr>
+<tr>
+<td style="font-weight:700">3-5 stocks</td>
+<td style="color:#eab308;font-weight:700">High</td>
+<td>Portfolio drops 20-33%</td>
+</tr>
+<tr>
+<td style="font-weight:700">6-10 stocks</td>
+<td style="color:#4ade80;font-weight:700">Moderate</td>
+<td>Portfolio drops 10-17%</td>
+</tr>
+<tr style="background:rgba(201,162,39,0.1)">
+<td style="font-weight:700">10+ stocks</td>
+<td style="color:#4ade80;font-weight:700">Diversified</td>
+<td>Portfolio drops <10%</td>
+</tr>
+</tbody>
+</table>
+<p style="margin-top:20px"><strong>Sweet Spot:</strong> 6-8 positions for high-growth portfolios. More diversification = lower returns. Less = emotional panic selling during crashes.</p>
+
+<h3 class="subsection-title">4. Drawdown Risk: The Crash You Must Survive</h3>
+<p>Drawdown = peak-to-trough decline. Here's the brutal math:</p>
+<ul style="margin:20px 0;line-height:1.8">
+<li>Down 20% → Need +25% to recover</li>
+<li>Down 33% → Need +50% to recover</li>
+<li>Down 50% → Need +100% to recover (double your money!)</li>
+<li>Down 70% → Need +233% to recover (nearly impossible)</li>
+</ul>
+<div class="warning-box">
+<h3>The Psychology Trap</h3>
+<p>Most investors can't stomach watching ₹50 lakh become ₹25 lakh. They sell at the bottom, locking in permanent losses. This is why MEASURING risk BEFORE investing is critical—know what you're signing up for.</p>
+</div>
+</section>
+
+<div class="section-divider"></div>
+<section class="article-section">
+<h2 class="section-title"><i class="fas fa-fire"></i> Real Portfolio Risk Examples (2021-2026)</h2>
+<table class="data-table">
+<thead>
+<tr>
+<th>Portfolio Strategy</th>
+<th>5Y Return</th>
+<th>Volatility</th>
+<th>Max Drawdown</th>
+<th>Recovery Time</th>
+</tr>
+</thead>
+<tbody>
+<tr style="background:rgba(239,68,68,0.1)">
+<td><strong>100% Nvidia</strong></td>
+<td style="color:#22c55e;font-weight:700">+2,100%</td>
+<td style="color:#ef4444;font-weight:700">68%</td>
+<td style="color:#ef4444;font-weight:700">-66%</td>
+<td>22 months</td>
+</tr>
+<tr>
+<td><strong>Bro Billionaire Equal-Weight</strong></td>
+<td style="color:#22c55e;font-weight:700">+847%</td>
+<td style="color:#eab308;font-weight:700">57%</td>
+<td style="color:#ef4444;font-weight:700">-58%</td>
+<td>18 months</td>
+</tr>
+<tr>
+<td><strong>50% Tech / 50% Index</strong></td>
+<td style="color:#22c55e;font-weight:700">+312%</td>
+<td style="color:#4ade80;font-weight:700">32%</td>
+<td style="color:#eab308;font-weight:700">-35%</td>
+<td>11 months</td>
+</tr>
+<tr style="background:rgba(74,222,128,0.1)">
+<td><strong>100% S&P 500</strong></td>
+<td style="color:#22c55e;font-weight:700">+87%</td>
+<td style="color:#4ade80;font-weight:700">21%</td>
+<td style="color:#4ade80;font-weight:700">-24%</td>
+<td>8 months</td>
+</tr>
+</tbody>
+</table>
+<p style="margin-top:25px"><strong>The Trade-Off:</strong> Higher returns = higher risk. Always. The question isn't \"which returns more\"—it's \"which volatility can YOU actually hold through without panic selling?\"</p>
+</section>
+
+<div class="section-divider"></div>
+<section class="article-section">
+<h2 class="section-title"><i class="fas fa-question"></i> FAQ</h2>
+
+<h3 class="subsection-title">What's a good overall risk score?</h3>
+<p><strong>0-3:</strong> Very conservative (index funds, bonds)<br>
+<strong>4-6:</strong> Moderate (balanced tech + diversification)<br>
+<strong>7-8:</strong> Aggressive (concentrated high-growth)<br>
+<strong>9-10:</strong> Extreme (single-stock concentrated or leveraged positions)<br>
+Most Bro Billionaire portfolios score 6.5-8.5 depending on concentration.</p>
+
+<h3 class="subsection-title">How much volatility can I handle?</h3>
+<p>Ask yourself: "Can I watch my portfolio drop 50% and NOT sell?" If no, keep volatility under 35%. If yes (young, high income, long time horizon), 40-60% volatility is acceptable.</p>
+
+<h3 class="subsection-title">What's the ideal portfolio beta?</h3>
+<p><strong>Conservative:</strong> 0.8-1.2x (moves with market)<br>
+<strong>Moderate:</strong> 1.2-1.6x (30-60% more volatile than market)<br>
+<strong>Aggressive:</strong> 1.6-2.2x (60-120% more volatile, most Bro Billionaire portfolios)<br>
+Above 2.2x beta = extremely high risk territory.</p>
+
+<h3 class="subsection-title">How do I reduce concentration risk without sacrificing returns?</h3>
+<p>Add 2-3 uncorrelated positions. Instead of 100% tech, go 70% tech + 15% healthcare + 15% financials. Reduces correlation without killing upside.</p>
+
+<h3 class="subsection-title">What drawdown should I expect?</h3>
+<p>High-growth portfolios experience -40% to -60% drawdowns every 5-7 years. It's not "if," it's "when." Plan for it psychologically and financially (keep cash buffer, never invest money you need in <5 years).</p>
+
+<h3 class="subsection-title">Should I hedge my high-risk portfolio?</h3>
+<p>If volatility >45% and beta >1.7x, consider buying 5-10% portfolio value in VIX calls or SPY puts as crash insurance. Costs 2-4% annually but caps downside at -30% instead of -60%.</p>
+
+<h3 class="subsection-title">What's the #1 risk management mistake?</h3>
+<p>Not position sizing. Never put >20% in a single stock. Never go 100% equities without cash buffer. The math is simple: diversification reduces risk more than you think, and concentration hurts more than you expect.</p>
+</section>
+
+<section class="article-section">
+<div class="key-takeaways-box" style="text-align:center;border-color:#ef4444">
+<h3>Risk Management: The Bottom Line</h3>
+<p style="font-size:1.1rem;margin:20px 0">You can't predict returns. But you CAN measure and manage risk. Know your volatility (>40% = brutal swings). Know your beta (>1.8x = amplified pain). Diversify (6-8 stocks minimum). Expect drawdowns (-50% every 5 years). Hold cash (10-20%). Set stop losses (-15% to -20%).</p>
+<p style="font-size:1.2rem;font-weight:700;color:#ef4444;margin-top:25px">Risk Is Real. Returns Are Not Guaranteed. Measure First. Invest Second.</p>
+</div>
+</section>
+</article>
+</main>
+<footer>
+<div class="footer-bottom"><p>&copy; 2026 BroBillionaire. Educational purposes only.</p></div>
+</footer>
+<script>
+function toggleStock(e){e.classList.toggle('selected')}
+function analyzeRisk(){
+const selected=document.querySelectorAll('.stock-checkbox-card.selected');
+if(selected.length===0){alert('Select at least one stock');return}
+let totalAlloc=0,weightedVol=0,weightedBeta=0,allocs=[];
+selected.forEach(card=>{
+const input=card.querySelector('input.input-field');
+const alloc=parseFloat(input.value)||0;
+const checkbox=card.querySelector('input[type="checkbox"]');
+const vol=parseFloat(checkbox.dataset.volatility);
+const beta=parseFloat(checkbox.dataset.beta);
+const stock=checkbox.dataset.stock;
+if(alloc>0){
+totalAlloc+=alloc;
+weightedVol+=(alloc/100)*vol;
+weightedBeta+=(alloc/100)*beta;
+allocs.push({name:stock,allocation:alloc});
+}
+});
+if(totalAlloc===0){alert('Enter allocation percentages');return}
+if(Math.abs(totalAlloc-100)>1){
+const factor=100/totalAlloc;
+allocs.forEach(a=>a.allocation*=factor);
+weightedVol*=factor;
+weightedBeta*=factor;
+}
+const volScore=Math.min(weightedVol/6,10);
+const betaScore=Math.min(weightedBeta*5,10);
+const concScore=allocs.length<4?8:allocs.length<6?6:4;
+const overallRisk=((volScore+betaScore+concScore)/3).toFixed(1);
+let riskLevel,riskClass;
+if(overallRisk<4){riskLevel='Low Risk';riskClass='risk-level-low'}
+else if(overallRisk<7){riskLevel='Medium Risk';riskClass='risk-level-medium'}
+else{riskLevel='High Risk';riskClass='risk-level-high'}
+document.getElementById('overall-risk-score').textContent=overallRisk;
+document.getElementById('overall-risk-score').className='risk-score '+riskClass;
+document.getElementById('overall-risk-label').textContent=riskLevel;
+document.getElementById('overall-risk-label').className=riskClass;
+document.getElementById('volatility-score').textContent=weightedVol.toFixed(1)+'%';
+document.getElementById('drawdown-score').textContent='-'+(weightedVol*1.1).toFixed(0)+'%';
+let concRisk=allocs.length<4?'High':allocs.length<6?'Medium':'Low';
+let concClass=allocs.length<4?'risk-level-high':allocs.length<6?'risk-level-medium':'risk-level-low';
+document.getElementById('concentration-risk').textContent=concRisk;
+document.getElementById('concentration-risk').className='risk-breakdown-value '+concClass;
+document.getElementById('sector-exposure').textContent='100%';
+document.getElementById('portfolio-beta').textContent=weightedBeta.toFixed(2)+'x';
+let allocHTML='';
+allocs.sort((a,b)=>b.allocation-a.allocation);
+allocs.forEach(s=>{
+allocHTML+=`<div class="allocation-bar"><div class="allocation-header"><span style="color:rgba(255,255,255,0.8);font-weight:600">${s.name}</span><span style="color:#C9A227;font-weight:700">${s.allocation.toFixed(1)}%</span></div><div class="allocation-progress"><div class="allocation-progress-fill" style="width:${s.allocation}%"></div></div></div>`;
+});
+document.getElementById('allocation-display').innerHTML=allocHTML;
+let recHTML='';
+if(allocs.length<5){
+recHTML+=`<div class="recommendation-item"><div style="font-size:1.8rem">📊</div><div><h4 style="color:#3b82f6;margin-bottom:8px">Increase Diversification</h4><p style="color:rgba(255,255,255,0.7);line-height:1.6">Add 2-3 more positions to reduce concentration risk.</p></div></div>`;
+}
+if(weightedVol>40){
+recHTML+=`<div class="recommendation-item"><div style="font-size:1.8rem">⚠️</div><div><h4 style="color:#3b82f6;margin-bottom:8px">High Volatility Portfolio</h4><p style="color:rgba(255,255,255,0.7);line-height:1.6">Your portfolio has ${weightedVol.toFixed(1)}% volatility. Consider adding stable mega-caps.</p></div></div>`;
+}
+if(weightedBeta>1.5){
+recHTML+=`<div class="recommendation-item"><div style="font-size:1.8rem">📈</div><div><h4 style="color:#3b82f6;margin-bottom:8px">High Market Sensitivity</h4><p style="color:rgba(255,255,255,0.7);line-height:1.6">Beta ${weightedBeta.toFixed(2)}x. When markets drop 10%, expect -${(weightedBeta*10).toFixed(1)}%.</p></div></div>`;
+}
+recHTML+=`<div class="recommendation-item"><div style="font-size:1.8rem">💎</div><div><h4 style="color:#3b82f6;margin-bottom:8px">Position Sizing</h4><p style="color:rgba(255,255,255,0.7);line-height:1.6">Keep high-volatility positions at 5-15% each, stable positions at 15-25%.</p></div></div>`;
+recHTML+=`<div class="recommendation-item"><div style="font-size:1.8rem">🛡️</div><div><h4 style="color:#3b82f6;margin-bottom:8px">Stop Loss Strategy</h4><p style="color:rgba(255,255,255,0.7);line-height:1.6">Set stop losses at -15% to -20%. With ${weightedVol.toFixed(1)}% volatility, expect large swings.</p></div></div>`;
+document.getElementById('recommendations-list').innerHTML=recHTML;
+document.getElementById('results').style.display='block';
+setTimeout(()=>{document.getElementById('results').scrollIntoView({behavior:'smooth',block:'nearest'})},200);
+}
+window.addEventListener('scroll',()=>{const winScroll=document.body.scrollTop||document.documentElement.scrollTop;const height=document.documentElement.scrollHeight-document.documentElement.clientHeight;const scrolled=(winScroll/height)*100;document.querySelector('.reading-progress-bar').style.width=scrolled+'%'});
+</script>
+</body>
+</html>
