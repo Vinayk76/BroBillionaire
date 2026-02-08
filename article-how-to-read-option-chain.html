@@ -1947,25 +1947,6 @@
         font-weight: 400;
       }
     }
-
-    /* FAQ Active State for Toggle Functionality */
-    .faq-item.active .faq-answer {
-      max-height: 1000px !important;
-      padding: 18px 24px !important;
-      opacity: 1;
-    }
-
-    .faq-item.active .faq-icon {
-      transform: rotate(180deg);
-    }
-
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      padding: 0 24px;
-      transition: all 0.4s ease;
-      opacity: 0;
-    }
   </style> <!-- Author Schema -->
   <script
     type="application/ld+json"> { "@context": "https://schema.org", "@type": "Person", "@id": "https://brobillionaire.com/author.html#author", "name": "BroBillionaire Editorial Team", "url": "https://brobillionaire.com/author.html", "image": "https://brobillionaire.com/logo.jpg", "jobTitle": "Financial Analysts & Trading Educators", "worksFor": { "@type": "Organization", "name": "BroBillionaire" }, "knowsAbout": [ "Option Chain Analysis", "Options Trading", "Open Interest Analysis", "Technical Analysis", "Risk Management", "Indian Stock Market", "Bank Nifty", "Nifty 50" ] } </script>
@@ -2842,66 +2823,72 @@
             class="share-button copy" onclick="copyLink()"> <i class="fas fa-link"></i> <span>Copy Link</span> </button>
         </div>
       </div> <!-- Enhanced FAQ Section for AEO (Answer Engine Optimization) -->
-      <section class="faq-section">
+      <section class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
         <div class="faq-container">
           <h2 class="faq-title"><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
           <div class="faq-list">
-            <div class="faq-item"> <button
-                class="faq-question" onclick="toggleFAQ(0)" aria-expanded="false"> <span>What is an
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"> <button
+                class="faq-question" onclick="toggleFAQ(0)" aria-expanded="false"> <span itemprop="name">What is an
                   option chain and why is it important?</span> <i class="fas fa-chevron-down faq-icon"></i> </button>
-              <div class="faq-answer" id="faq-answer-0">
-                <p>An option chain is a live table showing all available options for an underlying asset
+              <div class="faq-answer" id="faq-answer-0" itemscope itemprop="acceptedAnswer"
+                itemtype="https://schema.org/Answer">
+                <p itemprop="text">An option chain is a live table showing all available options for an underlying asset
                   (like Nifty or Bank Nifty). It displays strike prices, Call and Put data, Open Interest, Volume,
                   Premium, and IV. It's important because it reveals where big players are positioned, shows
                   support/resistance levels, and helps predict price movement based on real money flow.</p>
               </div>
             </div>
-            <div class="faq-item"> <button
-                class="faq-question" onclick="toggleFAQ(1)" aria-expanded="false"> <span>How to identify
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"> <button
+                class="faq-question" onclick="toggleFAQ(1)" aria-expanded="false"> <span itemprop="name">How to identify
                   support and resistance using option chain?</span> <i class="fas fa-chevron-down faq-icon"></i>
               </button>
-              <div class="faq-answer" id="faq-answer-1">
-                <p>Look for the strike with highest Put OI — this is support (put sellers will defend
+              <div class="faq-answer" id="faq-answer-1" itemscope itemprop="acceptedAnswer"
+                itemtype="https://schema.org/Answer">
+                <p itemprop="text">Look for the strike with highest Put OI — this is support (put sellers will defend
                   this level). Look for the strike with highest Call OI — this is resistance (call sellers will defend
                   this level). These are more reliable than chart-based support/resistance because real money is at
                   stake.</p>
               </div>
             </div>
-            <div class="faq-item"> <button
-                class="faq-question" onclick="toggleFAQ(2)" aria-expanded="false"> <span>What is PCR and
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"> <button
+                class="faq-question" onclick="toggleFAQ(2)" aria-expanded="false"> <span itemprop="name">What is PCR and
                   how to interpret it?</span> <i class="fas fa-chevron-down faq-icon"></i> </button>
-              <div class="faq-answer" id="faq-answer-2">
-                <p>PCR (Put-Call Ratio) = Total Put OI ÷ Total Call OI. Counter-intuitively, PCR > 1.0
+              <div class="faq-answer" id="faq-answer-2" itemscope itemprop="acceptedAnswer"
+                itemtype="https://schema.org/Answer">
+                <p itemprop="text">PCR (Put-Call Ratio) = Total Put OI ÷ Total Call OI. Counter-intuitively, PCR > 1.0
                   is bullish (more put selling by institutions = they expect market to stay up). PCR < 0.7 is bearish
                     (more call selling=they expect market to stay down). Extreme PCR values (>1.5 or <0.5) often signal
                       reversal.</p>
               </div>
             </div>
-            <div class="faq-item"> <button
-                class="faq-question" onclick="toggleFAQ(3)" aria-expanded="false"> <span>What is Max
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"> <button
+                class="faq-question" onclick="toggleFAQ(3)" aria-expanded="false"> <span itemprop="name">What is Max
                   Pain and does it really work?</span> <i class="fas fa-chevron-down faq-icon"></i> </button>
-              <div class="faq-answer" id="faq-answer-3">
-                <p>Max Pain is the strike price where option writers collectively lose minimum money if
+              <div class="faq-answer" id="faq-answer-3" itemscope itemprop="acceptedAnswer"
+                itemtype="https://schema.org/Answer">
+                <p itemprop="text">Max Pain is the strike price where option writers collectively lose minimum money if
                   market closes there. Markets often gravitate towards max pain on expiry day (works about 60-70% of
                   time). It's useful as a reference but not guaranteed. Use it along with OI analysis, not as standalone
                   strategy.</p>
               </div>
             </div>
-            <div class="faq-item"> <button
-                class="faq-question" onclick="toggleFAQ(4)" aria-expanded="false"> <span>What's the
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"> <button
+                class="faq-question" onclick="toggleFAQ(4)" aria-expanded="false"> <span itemprop="name">What's the
                   difference between OI and OI Change?</span> <i class="fas fa-chevron-down faq-icon"></i> </button>
-              <div class="faq-answer" id="faq-answer-4">
-                <p>OI (Open Interest) shows total active contracts — it's a snapshot. OI Change shows
+              <div class="faq-answer" id="faq-answer-4" itemscope itemprop="acceptedAnswer"
+                itemtype="https://schema.org/Answer">
+                <p itemprop="text">OI (Open Interest) shows total active contracts — it's a snapshot. OI Change shows
                   how many new contracts were created or closed today — it's the trend. OI Change is MORE important
                   because it shows live money flow. Positive OI change = new positions building. Negative = positions
                   closing.</p>
               </div>
             </div>
-            <div class="faq-item"> <button
-                class="faq-question" onclick="toggleFAQ(5)" aria-expanded="false"> <span>Where can I
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"> <button
+                class="faq-question" onclick="toggleFAQ(5)" aria-expanded="false"> <span itemprop="name">Where can I
                   check the option chain for NSE?</span> <i class="fas fa-chevron-down faq-icon"></i> </button>
-              <div class="faq-answer" id="faq-answer-5">
-                <p>Official NSE website (nseindia.com) provides free option chain data with 3-minute
+              <div class="faq-answer" id="faq-answer-5" itemscope itemprop="acceptedAnswer"
+                itemtype="https://schema.org/Answer">
+                <p itemprop="text">Official NSE website (nseindia.com) provides free option chain data with 3-minute
                   delay. Most trading platforms (Zerodha, Upstox, Angel One) show option chain in Sensibull integration.
                   For advanced analysis with auto-calculated PCR and max pain, use our NSE Option Chain Analyzer tool on
                   BroBillionaire.</p>
