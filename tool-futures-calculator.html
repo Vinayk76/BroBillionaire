@@ -1,352 +1,172 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-N0Y2LBMRSW');
-    </script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
     <meta charset="UTF-8">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    
-    <!-- Primary Meta Tags -->
-    <title>Futures Calculator - Fair Value & Basis Calculator | BroBillionaire</title>
-    <meta name="title" content="Futures Calculator - Fair Value & Basis Calculator | BroBillionaire">
-    <meta name="description" content="Calculate futures fair value, cost of carry, basis, and expected futures price. Essential tool for futures trading in India.">
-    <meta name="keywords" content="futures calculator, fair value calculator, cost of carry, basis calculator, futures pricing, Nifty futures calculator, Bank Nifty futures">
+    <title>Futures Calculator FREE - P&L Margin Leverage Calculator 2026 | BroBillionaire</title>
+    <meta name="description" content="FREE Futures Calculator - Calculate P&L, margin requirements, point value and leverage for futures trading. Advanced tool for Nifty, Bank Nifty futures!">
+    <meta name="keywords" content="futures calculator, futures trading calculator, margin calculator, leverage calculator, futures P&L calculator India 2026">
     <meta name="author" content="BroBillionaire">
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://brobillionaire.com/tool-futures-calculator.html">
-    
-    <!-- BreadcrumbList Schema -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://brobillionaire.com/"},
-            {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://brobillionaire.com/tools.html"},
-            {"@type": "ListItem", "position": 3, "name": "Futures Calculator"}
-        ]
-    }
-    </script>
-    
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="footer-styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://brobillionaire.com/tool-futures-calculator.html">
+    <meta property="og:title" content="FREE Futures Calculator">
+    <meta property="og:description" content="Calculate futures P&L, margin and leverage!">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    <meta name="theme-color" content="#C9A227">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --gold: #C9A227;
-            --gold-dark: #8B7520;
-            --bg-primary: #0d0d0d;
-            --bg-secondary: #1a1a1a;
-            --text-primary: #fff;
-            --text-secondary: #999;
-            --border-color: #2a2a2a;
-        }
-        
+        :root { --gold: #C9A227; --gold-dark: #a68b1e; --bg-primary: #0a0a0a; --bg-secondary: #0d0d0d; --bg-card: #1a1a1a; --text-primary: #ffffff; --text-secondary: #a0a0a0; --text-muted: #666666; --border-color: rgba(201, 162, 39, 0.2); --success: #4ade80; --danger: #ef4444; --warning: #fbbf24; --info: #60a5fa; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            padding-top: 80px;
-        }
-        
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 15px 0;
-            background: rgba(13, 13, 13, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-        .logo-img { width: 40px; height: 40px; border-radius: 10px; }
-        .logo-text { font-size: 1.25rem; font-weight: 600; color: var(--text-primary); }
-        
-        .nav-links { display: flex; gap: 35px; }
-        .nav-link { color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.2s ease; }
-        .nav-link:hover, .nav-link.active { color: var(--gold); }
-        
-        .mobile-menu-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; }
-        
-        .breadcrumb-nav { background: var(--bg-secondary); padding: 12px 0; border-bottom: 1px solid var(--border-color); }
-        .breadcrumb-container { max-width: 1200px; margin: 0 auto; padding: 0 40px; font-size: 0.85rem; color: var(--text-secondary); }
-        .breadcrumb-container a { color: var(--gold); text-decoration: none; }
-        
-        .calculator-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
-        .calculator-card { background: var(--bg-secondary); border-radius: 16px; padding: 40px; margin-bottom: 30px; border: 1px solid var(--border-color); }
-        .calculator-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--gold); margin-bottom: 10px; }
-        .calculator-subtitle { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 40px; }
-        .input-group { margin-bottom: 25px; }
-        .input-label { display: block; color: var(--gold); font-weight: 600; margin-bottom: 10px; }
-        .input-field { width: 100%; padding: 15px; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 8px; color: #fff; font-size: 1rem; }
-        .calculate-btn { background: linear-gradient(135deg, #C9A227 0%, #8B7520 100%); color: #000; font-weight: 700; padding: 18px; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; }
-        .results-section { display: none; margin-top: 40px; }
-        .result-card { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 30px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid #C9A227; text-align: center; }
-        .result-value { color: #fff; font-size: 3rem; font-weight: 700; margin: 15px 0; }
-        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .premium-card { border-left-color: #2ecc71; }
-        .discount-card { border-left-color: #e74c3c; }
-        .fair-card { border-left-color: #3498db; }
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, var(--bg-primary) 0%, #1a1a2e 100%); color: var(--text-primary); line-height: 1.6; min-height: 100vh; overflow-x: hidden; }
+        .tool-container { max-width: 1400px; margin: 0 auto; padding: 40px 20px 80px; }
+        .tool-hero { text-align: center; margin-bottom: 60px; position: relative; padding: 40px 20px; }
+        .tool-hero::before { content: ''; position: absolute; top: -150px; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(201, 162, 39, 0.15) 0%, transparent 70%); pointer-events: none; z-index: 0; animation: pulse 4s ease-in-out infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); } 50% { opacity: 1; transform: translateX(-50%) scale(1.1); } }
+        .tool-badge { display: inline-block; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: #000; padding: 10px 24px; border-radius: 50px; font-size: 0.8rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 25px; text-transform: uppercase; box-shadow: 0 5px 20px rgba(201, 162, 39, 0.4); position: relative; z-index: 1; }
+        .tool-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 6vw, 5rem); font-weight: 800; color: var(--gold); margin-bottom: 20px; text-shadow: 0 5px 30px rgba(201, 162, 39, 0.3); position: relative; z-index: 1; }
+        .tool-subtitle { color: var(--text-secondary); font-size: 1.25rem; max-width: 800px; margin: 0 auto; line-height: 1.8; position: relative; z-index: 1; }
+        .calc-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px; }
+        @media (max-width: 1100px) { .calc-wrapper { grid-template-columns: 1fr; } }
+        .calc-card { background: linear-gradient(145deg, var(--bg-card), var(--bg-secondary)); border: 1px solid var(--border-color); border-radius: 24px; padding: 40px; position: relative; overflow: hidden; transition: all 0.4s ease; }
+        .calc-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at top right, rgba(201, 162, 39, 0.05), transparent); pointer-events: none; }
+        .calc-card:hover { transform: translateY(-5px); box-shadow: 0 20px 60px rgba(201, 162, 39, 0.2); border-color: var(--gold); }
+        .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 30px; position: relative; }
+        .card-icon { width: 50px; height: 50px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #000; box-shadow: 0 5px 20px rgba(201, 162, 39, 0.3); }
+        .card-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--gold); }
+        .input-group { margin-bottom: 25px; position: relative; }
+        .input-label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.95rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; }
+        .input-hint { font-size: 0.75rem; color: var(--text-muted); font-weight: 400; text-transform: none; letter-spacing: 0; }
+        .input-field { width: 100%; background: var(--bg-secondary); border: 2px solid var(--border-color); border-radius: 12px; padding: 16px 20px; color: var(--text-primary); font-size: 1.1rem; font-family: 'Inter', sans-serif; font-weight: 500; transition: all 0.3s ease; }
+        .input-field:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.15); background: #1a1a1a; }
+        .input-field:hover { border-color: rgba(201, 162, 39, 0.4); }
+        .calculate-btn { width: 100%; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: #000; border: none; padding: 20px 40px; border-radius: 14px; font-size: 1.2rem; font-weight: 800; cursor: pointer; transition: all 0.4s ease; text-transform: uppercase; letter-spacing: 2px; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(201, 162, 39, 0.4); margin-top: 30px; }
+        .calculate-btn::before { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.3); transform: translate(-50%, -50%); transition: width 0.6s, height 0.6s; }
+        .calculate-btn:hover::before { width: 400px; height: 400px; }
+        .calculate-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(201, 162, 39, 0.6); }
+        .calculate-btn:active { transform: translateY(-1px); }
+        .btn-text { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; gap: 12px; }
+        .results-section { background: linear-gradient(145deg, var(--bg-card), var(--bg-secondary)); border: 2px solid var(--gold); border-radius: 24px; padding: 40px; position: relative; overflow: hidden; }
+        .results-section::before { content: ''; position: absolute; top: 0; right: 0; width: 400px; height: 400px; background: radial-gradient(circle, rgba(201, 162, 39, 0.1), transparent); pointer-events: none; }
+        .main-result { text-align: center; padding: 50px 30px; background: linear-gradient(145deg, var(--bg-secondary), #0a0a0a); border-radius: 20px; margin-bottom: 30px; position: relative; border: 1px solid var(--border-color); }
+        .result-label { font-size: 1rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; font-weight: 600; }
+        .result-value { font-size: 4rem; font-weight: 800; color: var(--success); line-height: 1; margin-bottom: 10px; text-shadow: 0 5px 30px rgba(74, 222, 128, 0.5); font-family: 'Playfair Display', serif; }
+        .result-subtitle { font-size: 1.1rem; color: var(--text-secondary); }
+        .result-badge { display: inline-block; background: rgba(74, 222, 128, 0.15); border: 1px solid var(--success); color: var(--success); padding: 8px 20px; border-radius: 50px; font-size: 0.9rem; font-weight: 700; margin-top: 15px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .stat-card { background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 16px; padding: 25px; text-align: center; transition: all 0.3s ease; position: relative; overflow: hidden; }
+        .stat-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--gold), transparent); }
+        .stat-card:hover { transform: translateY(-3px); border-color: var(--gold); box-shadow: 0 10px 30px rgba(201, 162, 39, 0.2); }
+        .stat-icon { font-size: 2rem; margin-bottom: 12px; }
+        .stat-label { font-size: 0.85rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .stat-value { font-size: 1.8rem; font-weight: 700; color: var(--gold); font-family: 'Playfair Display', serif; }
+        .price-scenarios { background: var(--bg-secondary); border-radius: 16px; padding: 35px; margin-bottom: 30px; }
+        .chart-title { font-size: 1.3rem; font-weight: 700; color: var(--gold); margin-bottom: 25px; display: flex; align-items: center; gap: 10px; font-family: 'Playfair Display', serif; }
+        .scenario-row { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: rgba(0, 0, 0, 0.3); border-radius: 10px; margin-bottom: 10px; border-left: 4px solid var(--gold); }
+        .scenario-label { font-weight: 700; color: var(--text-primary); }
+        .scenario-value { font-size: 1.2rem; font-weight: 700; font-family: 'Playfair Display', serif; }
+        .analysis-section { background: linear-gradient(145deg, rgba(201, 162, 39, 0.1), rgba(201, 162, 39, 0.05)); border: 2px solid var(--gold); border-radius: 16px; padding: 30px; position: relative; }
+        .analysis-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .analysis-icon { font-size: 2rem; }
+        .analysis-title { font-size: 1.5rem; font-weight: 700; color: var(--gold); font-family: 'Playfair Display', serif; }
+        .analysis-list { list-style: none; display: flex; flex-direction: column; gap: 15px; }
+        .analysis-item { display: flex; align-items: flex-start; gap: 12px; padding: 15px; background: rgba(0, 0, 0, 0.3); border-radius: 10px; border-left: 4px solid var(--gold); }
+        .analysis-item i { font-size: 1.3rem; margin-top: 2px; }
+        .analysis-text { flex: 1; line-height: 1.7; color: var(--text-secondary); }
+        .analysis-text strong { color: var(--text-primary); font-weight: 700; }
+        .info-box { background: linear-gradient(145deg, rgba(96, 165, 250, 0.1), rgba(59, 130, 246, 0.05)); border: 2px solid var(--info); border-radius: 16px; padding: 25px; margin-top: 30px; }
+        .info-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; color: var(--info); font-weight: 700; font-size: 1.1rem; }
+        .info-content { color: var(--text-secondary); line-height: 1.8; }
+        @media (max-width: 768px) { .tool-container { padding: 20px 15px 60px; } .tool-title { font-size: 2.5rem; } .tool-subtitle { font-size: 1rem; } .calc-card { padding: 25px; } .result-value { font-size: 2.5rem; } .stats-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-
-<!-- Navbar -->
-<nav class="navbar">
-    <div class="nav-container">
-        <a href="index.html" class="logo">
-            <img src="logo.jpg" alt="BroBillionaire" class="logo-img">
-            <span class="logo-text">BroBillionaire</span>
-        </a>
-        <div class="nav-links">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="articles.html" class="nav-link">Articles</a>
-            <a href="tools.html" class="nav-link active">Tools</a>
-            <a href="about.html" class="nav-link">About</a>
+    <div class="tool-container">
+        <div class="tool-hero">
+            <div class="tool-badge"><i class="fas fa-chart-area"></i> Professional Futures Trading</div>
+            <h1 class="tool-title">Futures Calculator</h1>
+            <p class="tool-subtitle">Calculate P&L, margin requirements, point value and leverage for futures trading. Advanced calculator for Nifty, Bank Nifty and stock futures.</p>
         </div>
-        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-            <i class="fas fa-bars"></i>
-        </button>
-    </div>
-</nav>
-
-<!-- Breadcrumb -->
-<div class="breadcrumb-nav">
-    <div class="breadcrumb-container">
-        <a href="index.html">Home</a> / 
-        <a href="tools.html">Tools</a> / 
-        <span>Futures Calculator</span>
-    </div>
-</div>
-
-    <div class="calculator-container">
-        <div class="calculator-card">
-            <h1 class="calculator-title">Futures Fair Value Calculator</h1>
-            <p class="calculator-subtitle">Calculate theoretical futures price, basis, and cost of carry for index and stock futures.</p>
-            
-            <div class="input-group">
-                <label class="input-label">Spot Price (₹)</label>
-                <input type="number" id="spotPrice" class="input-field" placeholder="50000" step="0.01">
-                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Current index/stock price</div>
+        <div class="calc-wrapper">
+            <div class="calc-card">
+                <div class="card-header"><div class="card-icon"><i class="fas fa-calculator"></i></div><h2 class="card-title">Futures Setup</h2></div>
+                <div class="input-group"><div class="input-label"><span><i class="fas fa-rupee-sign"></i> Futures Price</span><span class="input-hint">Current price</span></div><input type="number" class="input-field" id="futuresPrice" value="18500" step="0.5" oninput="calculate()"></div>
+                <div class="input-group"><div class="input-label"><span><i class="fas fa-layer-group"></i> Lot Size</span><span class="input-hint">Contracts per lot</span></div><input type="number" class="input-field" id="lotSize" value="50" step="1" oninput="calculate()"></div>
+                <div class="input-group"><div class="input-label"><span><i class="fas fa-boxes"></i> Number of Lots</span><span class="input-hint">Quantity</span></div><input type="number" class="input-field" id="numLots" value="1" step="1" oninput="calculate()"></div>
+                <div class="input-group"><div class="input-label"><span><i class="fas fa-percentage"></i> Margin Required</span><span class="input-hint">% of value</span></div><input type="number" class="input-field" id="marginPercent" value="15" step="0.5" oninput="calculate()"></div>
+                <div class="input-group"><div class="input-label"><span><i class="fas fa-rupee-sign"></i> Point Value</span><span class="input-hint">Per point</span></div><input type="number" class="input-field" id="pointValue" value="1" step="0.01" oninput="calculate()"></div>
+                <div class="input-group"><div class="input-label"><span><i class="fas fa-chart-line"></i> Price Movement</span><span class="input-hint">Points change</span></div><input type="number" class="input-field" id="priceMove" value="100" step="1" oninput="calculate()"></div>
+                <button class="calculate-btn" onclick="calculate()"><span class="btn-text"><i class="fas fa-calculator"></i> Calculate Futures</span></button>
             </div>
-            
-            <div class="input-group">
-                <label class="input-label">Actual Futures Price (₹)</label>
-                <input type="number" id="futuresPrice" class="input-field" placeholder="50150" step="0.01">
-                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Current futures contract price</div>
-            </div>
-            
-            <div class="input-group">
-                <label class="input-label">Days to Expiry</label>
-                <input type="number" id="daysToExpiry" class="input-field" placeholder="15" min="1">
-            </div>
-            
-            <div class="input-group">
-                <label class="input-label">Risk-Free Rate (%)</label>
-                <input type="number" id="riskFreeRate" class="input-field" placeholder="6.5" value="6.5" step="0.01">
-                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Annual interest rate (India: ~6-7%)</div>
-            </div>
-            
-            <div class="input-group">
-                <label class="input-label">Dividend Yield (%) - Optional</label>
-                <input type="number" id="dividendYield" class="input-field" placeholder="0" value="0" step="0.01">
-                <div style="color: #666; font-size: 0.85rem; margin-top: 5px;">Expected dividend during contract period (0 for indices)</div>
-            </div>
-            
-            <button class="calculate-btn" onclick="calculateFutures()">
-                <i class="fas fa-calculator"></i> Calculate Fair Value
-            </button>
-        </div>
-        
-        <div class="results-section" id="resultsSection">
-            <div class="calculator-card">
-                <h2 style="color: #C9A227; margin-bottom: 30px; font-family: 'Playfair Display', serif;">Futures Valuation</h2>
-                
-                <div class="result-card fair-card">
-                    <div style="color: #3498db; font-size: 1.2rem; font-weight: 600;">Theoretical Fair Value</div>
-                    <div class="result-value" id="fairValue">-</div>
-                    <div style="color: #999;">Expected futures price</div>
+            <div class="calc-card results-section">
+                <div class="card-header"><div class="card-icon"><i class="fas fa-chart-bar"></i></div><h2 class="card-title">Results</h2></div>
+                <div class="main-result"><div class="result-label">Contract Value</div><div class="result-value" id="contractValue">₹9,25,000</div><div class="result-subtitle">Total Position Size</div><div class="result-badge">Futures Position</div></div>
+                <div class="stats-grid">
+                    <div class="stat-card"><div class="stat-icon">💰</div><div class="stat-label">Margin Required</div><div class="stat-value" id="marginRequired">₹1,38,750</div></div>
+                    <div class="stat-card"><div class="stat-icon">📊</div><div class="stat-label">Leverage</div><div class="stat-value" id="leverage">6.7x</div></div>
+                    <div class="stat-card"><div class="stat-icon">📈</div><div class="stat-label">P&L Per Point</div><div class="stat-value" id="plPerPoint">₹50</div></div>
+                    <div class="stat-card"><div class="stat-icon">💵</div><div class="stat-label">P&L for Movement</div><div class="stat-value" id="plForMove">₹5,000</div></div>
                 </div>
-                
-                <div class="grid-2">
-                    <div class="result-card">
-                        <div style="color: #C9A227; font-weight: 600;">Basis</div>
-                        <div style="color: #fff; font-size: 2.5rem; font-weight: 700; margin-top: 10px;" id="basis">-</div>
-                        <div style="color: #666; margin-top: 5px;">Futures - Spot</div>
-                    </div>
-                    
-                    <div class="result-card">
-                        <div style="color: #C9A227; font-weight: 600;">Cost of Carry</div>
-                        <div style="color: #fff; font-size: 2.5rem; font-weight: 700; margin-top: 10px;" id="costOfCarry">-</div>
-                        <div style="color: #666; margin-top: 5px;">Theoretical basis</div>
-                    </div>
-                    
-                    <div class="result-card" id="misPricingCard">
-                        <div style="color: #C9A227; font-weight: 600;">Mis-Pricing</div>
-                        <div style="color: #fff; font-size: 2.5rem; font-weight: 700; margin-top: 10px;" id="misPricing">-</div>
-                        <div style="color: #666; margin-top: 5px;">Actual vs Fair value</div>
-                    </div>
-                    
-                    <div class="result-card">
-                        <div style="color: #C9A227; font-weight: 600;">Premium/Discount</div>
-                        <div style="color: #fff; font-size: 2.5rem; font-weight: 700; margin-top: 10px;" id="premiumDiscount">-</div>
-                        <div style="color: #666; margin-top: 5px;">% over/under spot</div>
-                    </div>
+                <div class="price-scenarios">
+                    <div class="chart-title"><i class="fas fa-chart-line"></i> Price Scenarios</div>
+                    <div class="scenario-row"><span class="scenario-label">100 points profit</span><span class="scenario-value" style="color: var(--success);" id="profit100">+₹5,000</span></div>
+                    <div class="scenario-row"><span class="scenario-label">50 points profit</span><span class="scenario-value" style="color: var(--success);" id="profit50">+₹2,500</span></div>
+                    <div class="scenario-row"><span class="scenario-label">Breakeven</span><span class="scenario-value" style="color: var(--warning);">₹0</span></div>
+                    <div class="scenario-row"><span class="scenario-label">50 points loss</span><span class="scenario-value" style="color: var(--danger);" id="loss50">-₹2,500</span></div>
+                    <div class="scenario-row"><span class="scenario-label">100 points loss</span><span class="scenario-value" style="color: var(--danger);" id="loss100">-₹5,000</span></div>
                 </div>
-                
-                <div style="padding: 20px; border-radius: 12px; margin-top: 30px;" id="arbitrageBox">
-                    <strong><i class="fas fa-info-circle"></i> <span id="arbitrageTitle">Market Analysis</span></strong>
-                    <p style="color: #999; margin-top: 10px;" id="arbitrageText">-</p>
+                <div class="analysis-section">
+                    <div class="analysis-header"><div class="analysis-icon">🎯</div><h3 class="analysis-title">Futures Analysis</h3></div>
+                    <ul class="analysis-list" id="analysisList">
+                        <li class="analysis-item"><i class="fas fa-layer-group" style="color: var(--gold);"></i><div class="analysis-text"><strong>Total contracts:</strong> <span id="totalContracts">50</span> units</div></li>
+                        <li class="analysis-item"><i class="fas fa-chart-line" style="color: var(--success);"></i><div class="analysis-text"><strong>Leverage used:</strong> <span id="leverageText">6.7x</span> of margin</div></li>
+                        <li class="analysis-item"><i class="fas fa-coins" style="color: var(--info);"></i><div class="analysis-text"><strong>Value per point:</strong> ₹<span id="pointValueText">50</span> profit/loss</div></li>
+                    </ul>
+                </div>
+                <div class="info-box">
+                    <div class="info-header"><i class="fas fa-lightbulb"></i><span>Futures Trading Tips</span></div>
+                    <div class="info-content"><strong>Understand leverage risks.</strong> Futures use margin, amplifying both profits and losses. Always use stop losses. Monitor margin requirements daily. Futures expire monthly. Roll over positions before expiry. Higher leverage means higher risk management.</div>
                 </div>
             </div>
         </div>
     </div>
-    
     <script>
-        function calculateFutures() {
-            const spot = parseFloat(document.getElementById('spotPrice').value);
-            const futuresPrice = parseFloat(document.getElementById('futuresPrice').value);
-            const days = parseFloat(document.getElementById('daysToExpiry').value);
-            const rate = parseFloat(document.getElementById('riskFreeRate').value) / 100;
-            const dividend = parseFloat(document.getElementById('dividendYield').value) / 100;
-            
-            if (!spot || !futuresPrice || !days || isNaN(rate)) {
-                alert('Please fill in all required fields');
-                return;
-            }
-            
-            const T = days / 365;
-            
-            // Fair Value = Spot * e^((r - d) * T)
-            const fairValue = spot * Math.exp((rate - dividend) * T);
-            
-            // Cost of Carry = Fair Value - Spot
-            const costOfCarry = fairValue - spot;
-            
-            // Basis = Actual Futures - Spot
-            const basis = futuresPrice - spot;
-            
-            // Mis-pricing = Actual Futures - Fair Value
-            const misPricing = futuresPrice - fairValue;
-            
-            // Premium/Discount %
-            const premiumDiscount = ((futuresPrice - spot) / spot) * 100;
-            
-            document.getElementById('fairValue').textContent = '₹' + fairValue.toFixed(2);
-            document.getElementById('basis').textContent = (basis >= 0 ? '+' : '') + '₹' + basis.toFixed(2);
-            document.getElementById('costOfCarry').textContent = '₹' + costOfCarry.toFixed(2);
-            document.getElementById('misPricing').textContent = (misPricing >= 0 ? '+' : '') + '₹' + misPricing.toFixed(2);
-            document.getElementById('premiumDiscount').textContent = (premiumDiscount >= 0 ? '+' : '') + premiumDiscount.toFixed(3) + '%';
-            
-            // Colorize mis-pricing card
-            const misPricingCard = document.getElementById('misPricingCard');
-            misPricingCard.className = 'result-card';
-            if (Math.abs(misPricing) < spot * 0.002) {
-                misPricingCard.classList.add('fair-card');
-            } else if (misPricing > 0) {
-                misPricingCard.classList.add('premium-card');
-            } else {
-                misPricingCard.classList.add('discount-card');
-            }
-            
-            // Arbitrage analysis
-            const arbitrageBox = document.getElementById('arbitrageBox');
-            const arbitrageTitle = document.getElementById('arbitrageTitle');
-            const arbitrageText = document.getElementById('arbitrageText');
-            
-            const misPricingPercent = (misPricing / spot) * 100;
-            
-            if (Math.abs(misPricingPercent) < 0.2) {
-                arbitrageBox.style.background = 'rgba(52, 152, 219, 0.1)';
-                arbitrageBox.style.border = '2px solid #3498db';
-                arbitrageTitle.textContent = '✅ Fair Pricing';
-                arbitrageText.textContent = `Futures are fairly priced relative to spot. Mis-pricing is ${Math.abs(misPricingPercent).toFixed(3)}%, which is within normal trading ranges. No significant arbitrage opportunity.`;
-            } else if (misPricing > 0) {
-                arbitrageBox.style.background = 'rgba(46, 204, 113, 0.1)';
-                arbitrageBox.style.border = '2px solid #2ecc71';
-                arbitrageTitle.textContent = '📈 Futures at Premium';
-                arbitrageText.textContent = `Futures are trading ${Math.abs(misPricingPercent).toFixed(3)}% above fair value. This indicates bullish sentiment. Potential cash-futures arbitrage: Sell futures + Buy spot if spread is wide enough to cover transaction costs.`;
-            } else {
-                arbitrageBox.style.background = 'rgba(231, 76, 60, 0.1)';
-                arbitrageBox.style.border = '2px solid #e74c3c';
-                arbitrageTitle.textContent = '📉 Futures at Discount';
-                arbitrageText.textContent = `Futures are trading ${Math.abs(misPricingPercent).toFixed(3)}% below fair value. This indicates bearish sentiment. Potential cash-futures arbitrage: Buy futures + Sell spot if spread is wide enough to cover transaction costs.`;
-            }
-            
-            document.getElementById('resultsSection').style.display = 'block';
-            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        function calculate() {
+            const futuresPrice = parseFloat(document.getElementById('futuresPrice').value) || 0;
+            const lotSize = parseFloat(document.getElementById('lotSize').value) || 0;
+            const numLots = parseFloat(document.getElementById('numLots').value) || 0;
+            const marginPercent = parseFloat(document.getElementById('marginPercent').value) || 0;
+            const pointValue = parseFloat(document.getElementById('pointValue').value) || 1;
+            const priceMove = parseFloat(document.getElementById('priceMove').value) || 0;
+            if (futuresPrice <= 0 || lotSize <= 0 || numLots <= 0) return;
+            const totalContracts = lotSize * numLots;
+            const contractValue = futuresPrice * totalContracts;
+            const marginRequired = (contractValue * marginPercent) / 100;
+            const leverage = contractValue / marginRequired;
+            const plPerPoint = totalContracts * pointValue;
+            const plForMove = plPerPoint * priceMove;
+            document.getElementById('contractValue').textContent = '₹' + contractValue.toLocaleString('en-IN', { maximumFractionDigits: 0 });
+            document.getElementById('marginRequired').textContent = '₹' + marginRequired.toLocaleString('en-IN', { maximumFractionDigits: 0 });
+            document.getElementById('leverage').textContent = leverage.toFixed(1) + 'x';
+            document.getElementById('plPerPoint').textContent = '₹' + plPerPoint.toLocaleString('en-IN', { maximumFractionDigits: 0 });
+            document.getElementById('plForMove').textContent = (plForMove >= 0 ? '+' : '') + '₹' + plForMove.toLocaleString('en-IN', { maximumFractionDigits: 0 });
+            document.getElementById('profit100').textContent = '+₹' + (100 * plPerPoint).toLocaleString('en-IN', { maximumFractionDigits: 0 });
+            document.getElementById('profit50').textContent = '+₹' + (50 * plPerPoint).toLocaleString('en-IN', { maximumFractionDigits: 0 });
+            document.getElementById('loss50').textContent = '-₹' + (50 * plPerPoint).toLocaleString('en-IN', { maximumFractionDigits: 0 });
+            document.getElementById('loss100').textContent = '-₹' + (100 * plPerPoint).toLocaleString('en-IN', { maximumFractionDigits: 0 });
+            document.getElementById('totalContracts').textContent = totalContracts.toLocaleString('en-IN');
+            document.getElementById('leverageText').textContent = leverage.toFixed(1) + 'x';
+            document.getElementById('pointValueText').textContent = plPerPoint.toLocaleString('en-IN', { maximumFractionDigits: 0 });
         }
+        document.addEventListener('DOMContentLoaded', function () { calculate(); });
     </script>
-
-    <!-- Related Articles Section -->
-    <section style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border-radius: 16px; padding: 2.5rem; margin: 3rem 0; border: 2px solid #C9A227; max-width: 1200px; margin-left: auto; margin-right: auto;">
-        <h2 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #C9A227; margin-bottom: 1.5rem; text-align: center;">
-            📚 Learn More: Essential Reading
-        </h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
-            <div style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
-                <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
-                    <span style="font-size: 2rem; margin-right: 0.5rem;">📖</span>
-                    <h3 style="color: #C9A227; font-size: 1.1rem; margin: 0;">How Futures Work</h3>
-                </div>
-                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 0.9rem;">
-                    Master the fundamentals with expert insights and real-world examples
-                </p>
-                <a href="article-how-futures-work.html" style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
-                    Read Article →
-                </a>
-            </div>
-            <div style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
-                <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
-                    <span style="font-size: 2rem; margin-right: 0.5rem;">💡</span>
-                    <h3 style="color: #C9A227; font-size: 1.1rem; margin: 0;">Volatile Futures</h3>
-                </div>
-                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 0.9rem;">
-                    Deep dive into advanced strategies used by professional traders
-                </p>
-                <a href="article-volatile-futures.html" style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
-                    Read Article →
-                </a>
-            </div>
-            <div style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
-                <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
-                    <span style="font-size: 2rem; margin-right: 0.5rem;">🎓</span>
-                    <h3 style="color: #C9A227; font-size: 1.1rem; margin: 0;">Intraday Futures Strategy</h3>
-                </div>
-                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 0.9rem;">
-                    Learn from market history and avoid costly mistakes
-                </p>
-                <a href="article-intraday-futures-strategy.html" style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
-                    Read Article →
-                </a>
-            </div>
-        </div>
-    </section>
-<script src="common-footer.js" defer></script>
+    <script src="common-footer.js" defer></script>
 </body>
 </html>
