@@ -1,40 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- Primary Meta Tags -->
     <title>Options & Futures Margin Calculator - NSE F&O SPAN Margin Calculator India 2026</title>
     <meta name="title" content="Options & Futures Margin Calculator - NSE F&O SPAN Margin Calculator India 2026">
-    <meta name="description" content="Calculate exact margin requirements for NSE Options & Futures trading in India. SPAN margin calculator with real-time rates for Nifty, Bank Nifty, Stocks. Find margins for hedged & unhedged positions, spread strategies, and total capital needed including brokerage charges.">
-    <meta name="keywords" content="margin calculator, option margin calculator, futures margin calculator, SPAN margin calculator, NSE margin calculator, option margin, futures margin, nifty option margin, bank nifty margin, margin requirement calculator, trading margin calculator India, F&O margin calculator, derivatives margin calculator, hedged margin calculator, spread margin calculator, option selling margin, option buying margin">
+    <meta name="description"
+        content="Calculate exact margin requirements for NSE Options & Futures trading in India. SPAN margin calculator with real-time rates for Nifty, Bank Nifty, Stocks. Find margins for hedged & unhedged positions, spread strategies, and total capital needed including brokerage charges.">
+    <meta name="keywords"
+        content="margin calculator, option margin calculator, futures margin calculator, SPAN margin calculator, NSE margin calculator, option margin, futures margin, nifty option margin, bank nifty margin, margin requirement calculator, trading margin calculator India, F&O margin calculator, derivatives margin calculator, hedged margin calculator, spread margin calculator, option selling margin, option buying margin">
     <meta name="author" content="BroBillionaire">
     <meta name="robots" content="index, follow">
-    
+
     <!-- Canonical URL -->
     <link rel="canonical" href="https://brobillionaire.com/tool-margin-calculator.html">
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://brobillionaire.com/tool-margin-calculator.html">
     <meta property="og:title" content="Options & Futures Margin Calculator - NSE F&O SPAN Margin Calculator India">
-    <meta property="og:description" content="Calculate exact margin requirements for NSE F&O trading. SPAN margin calculator with hedged positions, spread strategies & total capital analysis.">
+    <meta property="og:description"
+        content="Calculate exact margin requirements for NSE F&O trading. SPAN margin calculator with hedged positions, spread strategies & total capital analysis.">
     <meta property="og:image" content="https://brobillionaire.com/og-image-margin-calculator.jpg">
     <meta property="og:site_name" content="BroBillionaire">
     <meta property="og:locale" content="en_IN">
-    
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://brobillionaire.com/tool-margin-calculator.html">
     <meta property="twitter:title" content="Options & Futures Margin Calculator - NSE F&O SPAN Margin">
-    <meta property="twitter:description" content="Calculate exact margin requirements for NSE Options & Futures. Free SPAN margin calculator for Indian traders.">
+    <meta property="twitter:description"
+        content="Calculate exact margin requirements for NSE Options & Futures. Free SPAN margin calculator for Indian traders.">
     <meta property="twitter:image" content="https://brobillionaire.com/og-image-margin-calculator.jpg">
     <meta property="twitter:creator" content="@BroBillionaire">
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
-    
+
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
     {
@@ -57,7 +62,7 @@
         }
     }
     </script>
-    
+
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -81,19 +86,50 @@
     }
     </script>
 
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
     <style>
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
-            color: #e0e0e0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #000000;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(201, 162, 39, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(201, 162, 39, 0.02) 0%, transparent 50%),
+                linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+            color: #e8e8e8;
             line-height: 1.6;
             min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                repeating-linear-gradient(0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(201, 162, 39, 0.01) 2px,
+                    rgba(201, 162, 39, 0.01) 4px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        body>* {
+            position: relative;
+            z-index: 2;
         }
 
         /* Tool-specific styles */
@@ -105,56 +141,110 @@
 
         .tool-header {
             text-align: center;
-            padding: 3rem 2rem;
-            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 50%, #1a1a1a 100%);
-            border-radius: 20px;
+            padding: 4rem 2rem;
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
             margin-bottom: 3rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            border-bottom: 1px solid #C9A227;
+            box-shadow:
+                0 0 0 1px rgba(201, 162, 39, 0.2),
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(201, 162, 39, 0.3);
             position: relative;
+            overflow: hidden;
         }
 
         .tool-header::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #C9A227, transparent);
+            left: -100%;
+            right: -100%;
+            height: 2px;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(201, 162, 39, 0.5),
+                #D4AF37,
+                rgba(201, 162, 39, 0.5),
+                transparent
+            );
+            animation: shimmer 8s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(50%); }
+        }
+
+        .tool-header::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(201, 162, 39, 0.08) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
         }
 
         .tool-category {
             display: inline-block;
-            background: rgba(201, 162, 39, 0.15);
-            color: #C9A227;
-            padding: 0.5rem 1.5rem;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            margin-bottom: 1rem;
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.2), rgba(201, 162, 39, 0.1));
+            color: #FFD700;
+            padding: 0.6rem 2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
             text-transform: uppercase;
-            border: 1px solid #C9A227;
+            border: 1.5px solid rgba(201, 162, 39, 0.5);
+            box-shadow:
+                0 4px 15px rgba(201, 162, 39, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
         }
 
         .tool-title {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
             font-family: 'Playfair Display', serif;
-            background: linear-gradient(135deg, #C9A227 0%, #e6c35c 50%, #C9A227 100%);
+            background: linear-gradient(135deg,
+                #FFD700 0%,
+                #FDB931 25%,
+                #FFD700 50%,
+                #FFED4E 75%,
+                #FFD700 100%
+            );
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: goldShine 3s linear infinite;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes goldShine {
+            to { background-position: 200% center; }
         }
 
         .tool-subtitle {
-            font-size: 1.25rem;
-            color: #aaa;
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.7);
             max-width: 900px;
             margin: 0 auto;
-            line-height: 1.8;
+            line-height: 1.9;
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
         }
 
         .calculator-grid {
@@ -165,20 +255,40 @@
         }
 
         .calc-section {
-            background: linear-gradient(135deg, #1e1e2f 0%, #2a2a3f 100%);
+            background: rgba(15, 15, 20, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             padding: 2.5rem;
             border-radius: 20px;
-            border: 1px solid #333;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            box-shadow:
+                0 0 0 1px rgba(201, 162, 39, 0.1),
+                0 15px 40px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.03);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .calc-section:hover {
+            border-color: rgba(201, 162, 39, 0.4);
+            transform: translateY(-2px);
+            box-shadow:
+                0 0 0 1px rgba(201, 162, 39, 0.2),
+                0 20px 50px rgba(0, 0, 0, 0.7),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
 
         .calc-section h2 {
-            font-size: 1.8rem;
-            color: #C9A227;
-            margin-bottom: 1.5rem;
+            font-size: 1.9rem;
+            background: linear-gradient(135deg, #FFD700, #FDB931);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.8rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
         }
 
         .input-group {
@@ -187,10 +297,11 @@
 
         .input-group label {
             display: block;
-            margin-bottom: 0.5rem;
-            color: #a0a0b0;
+            margin-bottom: 0.6rem;
+            color: rgba(255, 255, 255, 0.8);
             font-weight: 600;
             font-size: 0.95rem;
+            letter-spacing: 0.3px;
         }
 
         .input-wrapper {
@@ -202,20 +313,30 @@
         .input-group input,
         .input-group select {
             width: 100%;
-            padding: 1rem 1.2rem;
-            background: #16161f;
-            border: 2px solid #333;
-            border-radius: 12px;
+            padding: 1.1rem 1.3rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1.5px solid rgba(201, 162, 39, 0.2);
+            border-radius: 14px;
             color: #fff;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
+            font-size: 1.05rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Inter', sans-serif;
         }
 
         .input-group input:focus,
         .input-group select:focus {
             outline: none;
-            border-color: #C9A227;
-            box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.1);
+            border-color: #FFD700;
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow:
+                0 0 0 3px rgba(255, 215, 0, 0.1),
+                inset 0 1px 3px rgba(0, 0, 0, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
         }
 
         .input-prefix {
@@ -245,45 +366,87 @@
 
         .btn {
             flex: 1;
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
+            padding: 1.2rem 2.5rem;
+            font-size: 1rem;
             font-weight: 700;
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #C9A227, #a68b1e);
+            background: linear-gradient(135deg, #FFD700 0%, #FDB931 50%, #FFD700 100%);
+            background-size: 200% 100%;
             color: #000;
-            box-shadow: 0 4px 15px rgba(201, 162, 39, 0.4);
+            box-shadow:
+                0 4px 15px rgba(255, 215, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            font-weight: 800;
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(201, 162, 39, 0.6);
+            background-position: right center;
+            transform: translateY(-3px);
+            box-shadow:
+                0 8px 25px rgba(255, 215, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(-1px);
+            box-shadow:
+                0 4px 15px rgba(255, 215, 0, 0.4),
+                inset 0 1px 3px rgba(0, 0, 0, 0.2);
         }
 
         .btn-secondary {
-            background: #2a2a3f;
-            color: #fff;
-            border: 2px solid #444;
+            background: rgba(20, 20, 30, 0.8);
+            color: #FFD700;
+            border: 1.5px solid rgba(201, 162, 39, 0.3);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
 
         .btn-secondary:hover {
-            background: #333;
-            border-color: #555;
+            background: rgba(30, 30, 40, 0.95);
+            border-color: rgba(201, 162, 39, 0.6);
+            transform: translateY(-2px);
+            box-shadow:
+                0 4px 15px rgba(201, 162, 39, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
         }
 
         .results-section {
-            background: linear-gradient(135deg, #1e1e2f 0%, #2a2a3f 100%);
-            padding: 2.5rem;
+            background: rgba(15, 15, 20, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 3rem;
             border-radius: 20px;
-            border: 1px solid #333;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            box-shadow:
+                0 0 0 1px rgba(201, 162, 39, 0.1),
+                0 20px 50px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
             display: none;
         }
 
@@ -297,6 +460,7 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -309,9 +473,14 @@
         }
 
         .results-header h2 {
-            font-size: 2rem;
-            color: #C9A227;
+            font-size: 2.3rem;
+            background: linear-gradient(135deg, #FFD700, #FDB931);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 0.5rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
         }
 
         .results-grid {
@@ -322,62 +491,111 @@
         }
 
         .result-card {
-            background: #16161f;
-            padding: 1.5rem;
-            border-radius: 15px;
-            border: 2px solid #333;
-            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2rem 1.8rem;
+            border-radius: 18px;
+            border: 1.5px solid rgba(201, 162, 39, 0.25);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #FFD700, transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
         }
 
         .result-card:hover {
-            border-color: #4da6ff;
-            transform: translateY(-2px);
+            border-color: rgba(201, 162, 39, 0.6);
+            transform: translateY(-4px);
+            box-shadow:
+                0 8px 30px rgba(255, 215, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .result-card:hover::before {
+            opacity: 1;
         }
 
         .result-label {
-            font-size: 0.9rem;
-            color: #888;
-            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            font-weight: 700;
         }
 
         .result-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #4da6ff;
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #4da6ff, #3b8ed9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Inter', sans-serif;
         }
 
         .result-value.highlight {
-            color: #f59e0b;
+            background: linear-gradient(135deg, #FFD700, #FDB931);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .result-value.success {
-            color: #10b981;
+            background: linear-gradient(135deg, #10b981, #059669);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .result-value.danger {
-            color: #ef4444;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .breakdown-section {
-            background: #16161f;
-            padding: 2rem;
-            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            padding: 2.5rem;
+            border-radius: 16px;
             margin-top: 2rem;
+            border: 1px solid rgba(201, 162, 39, 0.2);
         }
 
         .breakdown-section h3 {
-            font-size: 1.5rem;
-            color: #4da6ff;
-            margin-bottom: 1.5rem;
+            font-size: 1.6rem;
+            background: linear-gradient(135deg, #4da6ff, #3b8ed9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.8rem;
+            font-weight: 800;
+            font-family: 'Playfair Display', serif;
         }
 
         .breakdown-item {
             display: flex;
             justify-content: space-between;
-            padding: 1rem;
-            border-bottom: 1px solid #2a2a3f;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.15);
+            transition: all 0.3s;
+        }
+
+        .breakdown-item:hover {
+            padding-left: 8px;
+            border-color: rgba(201, 162, 39, 0.3);
         }
 
         .breakdown-item:last-child {
@@ -385,73 +603,108 @@
         }
 
         .breakdown-label {
-            color: #a0a0b0;
+            color: rgba(255, 255, 255, 0.7);
             font-weight: 600;
+            font-size: 0.98rem;
         }
 
         .breakdown-value {
-            font-weight: 700;
+            font-weight: 800;
             color: #fff;
+            font-size: 1.05rem;
         }
 
         .info-box {
-            background: rgba(77, 166, 255, 0.1);
+            background: rgba(77, 166, 255, 0.08);
             border-left: 4px solid #4da6ff;
-            padding: 1.5rem;
-            border-radius: 10px;
+            padding: 2rem;
+            border-radius: 14px;
             margin-top: 2rem;
+            border: 1px solid rgba(77, 166, 255, 0.2);
+            box-shadow: 0 4px 20px rgba(77, 166, 255, 0.08);
         }
 
         .info-box h4 {
-            color: #C9A227;
-            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #FFD700, #FDB931);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.8rem;
+            font-weight: 800;
+            font-size: 1.1rem;
         }
 
         .info-box p {
-            color: #b0b0b0;
-            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            font-size: 0.98rem;
         }
 
         .strategy-tabs {
             display: flex;
             gap: 1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             flex-wrap: wrap;
         }
 
         .strategy-tab {
-            padding: 1rem 2rem;
-            background: #2a2a3f;
-            border: 2px solid #333;
-            border-radius: 12px;
+            padding: 1.1rem 2rem;
+            background: rgba(20, 20, 30, 0.7);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1.5px solid rgba(201, 162, 39, 0.25);
+            border-radius: 14px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.8);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
 
         .strategy-tab:hover {
-            border-color: #C9A227;
+            border-color: rgba(201, 162, 39, 0.5);
+            background: rgba(30, 30, 40, 0.8);
+            transform: translateY(-2px);
+            box-shadow:
+                0 4px 15px rgba(201, 162, 39, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
         }
 
         .strategy-tab.active {
-            background: linear-gradient(135deg, #C9A227, #a68b1e);
-            border-color: #C9A227;
+            background: linear-gradient(135deg, #FFD700 0%, #FDB931 100%);
+            border-color: transparent;
             color: #000;
+            font-weight: 800;
+            box-shadow:
+                0 6px 20px rgba(255, 215, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
         }
 
         .educational-section {
-            background: linear-gradient(135deg, #1e1e2f 0%, #2a2a3f 100%);
-            padding: 3rem;
+            background: rgba(15, 15, 20, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 3.5rem 3rem;
             border-radius: 20px;
             margin-top: 3rem;
-            border: 1px solid #333;
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            box-shadow:
+                0 0 0 1px rgba(201, 162, 39, 0.1),
+                0 15px 40px rgba(0, 0, 0, 0.5);
         }
 
         .educational-section h2 {
-            font-size: 2rem;
-            color: #C9A227;
-            margin-bottom: 2rem;
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, #FFD700, #FDB931);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2.5rem;
             text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
         }
 
         .faq-container {
@@ -460,32 +713,39 @@
         }
 
         .faq-item {
-            background: #16161f;
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            border: 1px solid #333;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            padding: 1.8rem 2rem;
+            border-radius: 14px;
+            margin-bottom: 1.2rem;
+            border: 1px solid rgba(201, 162, 39, 0.2);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .faq-item:hover {
-            border-color: #C9A227;
+            border-color: rgba(201, 162, 39, 0.4);
+            background: rgba(0, 0, 0, 0.5);
+            transform: translateX(4px);
+            box-shadow: 0 4px 20px rgba(201, 162, 39, 0.1);
         }
 
         .faq-question {
             font-weight: 700;
-            color: #fff;
+            color: rgba(255, 255, 255, 0.95);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-size: 1.05rem;
         }
 
         .faq-answer {
-            color: #b0b0b0;
-            margin-top: 1rem;
-            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 1.2rem;
+            line-height: 1.9;
             display: none;
+            font-size: 0.98rem;
         }
 
         .faq-item.active .faq-answer {
@@ -493,9 +753,13 @@
         }
 
         .faq-toggle {
-            font-size: 1.5rem;
-            color: #C9A227;
-            transition: transform 0.3s ease;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #FFD700, #FDB931);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 800;
         }
 
         .faq-item.active .faq-toggle {
@@ -525,85 +789,147 @@
         }
 
         .highlight-banner {
-            background: linear-gradient(135deg, #C9A227, #a68b1e);
-            padding: 1.5rem;
-            border-radius: 15px;
+            background: linear-gradient(135deg, #FFD700 0%, #FDB931 50%, #FFD700 100%);
+            background-size: 200% 100%;
+            padding: 2rem 2.5rem;
+            border-radius: 20px;
             text-align: center;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 15px rgba(201, 162, 39, 0.3);
+            margin-bottom: 2.5rem;
+            box-shadow:
+                0 8px 30px rgba(255, 215, 0, 0.35),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: gradientShift 6s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: left center; }
+            50% { background-position: right center; }
+        }
+
+        .highlight-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmerBanner 3s infinite;
+        }
+
+        @keyframes shimmerBanner {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
 
         .highlight-banner h3 {
             color: #000;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
+            font-size: 1.6rem;
+            margin-bottom: 0.6rem;
+            font-weight: 900;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
         }
 
         .highlight-banner p {
             color: #000;
-            opacity: 0.9;
+            opacity: 0.95;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+            font-size: 1.05rem;
         }
 
         .comparison-table {
             width: 100%;
             margin-top: 2rem;
             border-collapse: collapse;
+            border-radius: 14px;
+            overflow: hidden;
         }
 
         .comparison-table th,
         .comparison-table td {
-            padding: 1rem;
+            padding: 1.3rem 1.2rem;
             text-align: left;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.15);
         }
 
         .comparison-table th {
-            background: #2a2a3f;
-            color: #4da6ff;
-            font-weight: 700;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            font-weight: 800;
+            background: linear-gradient(135deg, #4da6ff, #3b8ed9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.05rem;
         }
 
         .comparison-table td {
-            color: #b0b0b0;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.98rem;
+        }
+
+        .comparison-table tr {
+            transition: all 0.3s;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: rgba(201, 162, 39, 0.05);
         }
 
         .chart-container {
             margin-top: 2rem;
-            padding: 2rem;
-            background: #16161f;
-            border-radius: 15px;
+            padding: 2.5rem;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-radius: 16px;
+            border: 1px solid rgba(201, 162, 39, 0.2);
         }
 
         .margin-bar {
             width: 100%;
-            height: 40px;
-            background: #2a2a3f;
-            border-radius: 10px;
+            height: 45px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 12px;
             overflow: hidden;
             position: relative;
             margin-top: 1rem;
+            border: 1px solid rgba(201, 162, 39, 0.2);
         }
 
         .margin-fill {
             height: 100%;
-            background: linear-gradient(90deg, #10b981, #059669);
-            transition: width 0.5s ease;
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: 700;
+            font-weight: 800;
+            font-size: 0.95rem;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
-    </style>    <link rel="stylesheet" href="faq-common.css">
+    </style>
+    <link rel="stylesheet" href="faq-common.css">
 
 </head>
+
 <body>
     <header class="tool-header">
         <div class="tool-container">
             <div class="tool-category">💰 FREE MARGIN CALCULATOR</div>
             <h1 class="tool-title">Options & Futures Margin Calculator</h1>
-            <p class="tool-subtitle">Calculate exact margin requirements for NSE F&O trading in India. Get SPAN margins for Nifty, Bank Nifty, stocks with hedged & unhedged positions. Know your exact capital requirement before placing any trade.</p>
+            <p class="tool-subtitle">Calculate exact margin requirements for NSE F&O trading in India. Get SPAN margins
+                for Nifty, Bank Nifty, stocks with hedged & unhedged positions. Know your exact capital requirement
+                before placing any trade.</p>
         </div>
     </header>
 
@@ -676,7 +1002,7 @@
 
             <div class="calc-section">
                 <h2>⚙️ Margin Parameters</h2>
-                
+
                 <div class="input-group">
                     <label for="spanMargin">SPAN Margin (%)</label>
                     <div class="input-wrapper">
@@ -786,7 +1112,8 @@
                     <span class="breakdown-label">Transaction Charges</span>
                     <span class="breakdown-value" id="transactionDetail">₹0</span>
                 </div>
-                <div class="breakdown-item" style="border-top: 2px solid #4da6ff; padding-top: 1.5rem; margin-top: 1rem;">
+                <div class="breakdown-item"
+                    style="border-top: 2px solid #4da6ff; padding-top: 1.5rem; margin-top: 1rem;">
                     <span class="breakdown-label" style="font-size: 1.2rem; color: #4da6ff;">Total Capital Needed</span>
                     <span class="breakdown-value" style="font-size: 1.5rem; color: #f59e0b;" id="totalCapital">₹0</span>
                 </div>
@@ -794,13 +1121,15 @@
 
             <div class="info-box">
                 <h4>💡 Important Notes</h4>
-                <p id="marginNote">Margins are indicative and may vary based on market volatility and broker policies. Always maintain extra buffer capital for intraday volatility. For hedged positions, margin benefit is usually provided by the broker automatically.</p>
+                <p id="marginNote">Margins are indicative and may vary based on market volatility and broker policies.
+                    Always maintain extra buffer capital for intraday volatility. For hedged positions, margin benefit
+                    is usually provided by the broker automatically.</p>
             </div>
         </div>
 
         <div class="educational-section">
             <h2>📚 Understanding Margin Requirements</h2>
-            
+
             <div class="faq-container">
                 <div class="faq-item" onclick="toggleFaq(this)">
                     <div class="faq-question">
@@ -808,7 +1137,10 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        SPAN (Standard Portfolio Analysis of Risk) Margin is the minimum margin required by exchanges (NSE/BSE) to hold an F&O position overnight. It's calculated based on the worst-case loss scenario using sophisticated risk models. SPAN margin typically ranges from 8% to 20% of the contract value depending on the instrument's volatility.
+                        SPAN (Standard Portfolio Analysis of Risk) Margin is the minimum margin required by exchanges
+                        (NSE/BSE) to hold an F&O position overnight. It's calculated based on the worst-case loss
+                        scenario using sophisticated risk models. SPAN margin typically ranges from 8% to 20% of the
+                        contract value depending on the instrument's volatility.
                     </div>
                 </div>
 
@@ -818,7 +1150,10 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        Exposure margin is an additional margin charged by exchanges over and above SPAN margin as an extra cushion against potential losses. For equity F&O, it's typically 3% of the contract value. This margin is mandatory and is separate from SPAN margin. Total margin = SPAN Margin + Exposure Margin.
+                        Exposure margin is an additional margin charged by exchanges over and above SPAN margin as an
+                        extra cushion against potential losses. For equity F&O, it's typically 3% of the contract value.
+                        This margin is mandatory and is separate from SPAN margin. Total margin = SPAN Margin + Exposure
+                        Margin.
                     </div>
                 </div>
 
@@ -828,7 +1163,11 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        When you take opposite positions (like buying and selling options at different strikes), exchanges recognize the reduced risk and provide margin benefit. For example, in a Bull Call Spread (buy lower strike call, sell higher strike call), the maximum loss is limited, so margin requirement is significantly lower than a naked position. Margin benefit can be 60-80% in many spread strategies.
+                        When you take opposite positions (like buying and selling options at different strikes),
+                        exchanges recognize the reduced risk and provide margin benefit. For example, in a Bull Call
+                        Spread (buy lower strike call, sell higher strike call), the maximum loss is limited, so margin
+                        requirement is significantly lower than a naked position. Margin benefit can be 60-80% in many
+                        spread strategies.
                     </div>
                 </div>
 
@@ -838,7 +1177,10 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        No, you don't need margin to buy options (calls or puts). You only need to pay the premium amount upfront. For example, if you buy 1 lot of Nifty 23500 CE at ₹150 premium, and lot size is 50, you need ₹7,500 (150 × 50) plus brokerage. Margin is required only when selling/writing options or trading futures.
+                        No, you don't need margin to buy options (calls or puts). You only need to pay the premium
+                        amount upfront. For example, if you buy 1 lot of Nifty 23500 CE at ₹150 premium, and lot size is
+                        50, you need ₹7,500 (150 × 50) plus brokerage. Margin is required only when selling/writing
+                        options or trading futures.
                     </div>
                 </div>
 
@@ -848,7 +1190,10 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        Bank Nifty is more volatile than Nifty 50, which means higher risk and potential for larger price swings. Exchanges calculate margins based on volatility - higher volatility means higher margin requirements. Bank Nifty SPAN margin is typically 12-15% while Nifty is around 10-12%. Additionally, Bank Nifty has higher contract value which also increases absolute margin amount.
+                        Bank Nifty is more volatile than Nifty 50, which means higher risk and potential for larger
+                        price swings. Exchanges calculate margins based on volatility - higher volatility means higher
+                        margin requirements. Bank Nifty SPAN margin is typically 12-15% while Nifty is around 10-12%.
+                        Additionally, Bank Nifty has higher contract value which also increases absolute margin amount.
                     </div>
                 </div>
 
@@ -858,7 +1203,11 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        If you don't have sufficient margin, you cannot place the order - it will be rejected by your broker. If margin falls below required levels after taking a position (due to MTM losses), you'll receive a margin call to add funds. If you don't add margin, your broker can square off your position to limit risk. SEBI also imposes margin penalties ranging from 0.5% to 5% per day for shortfall, which can add up quickly.
+                        If you don't have sufficient margin, you cannot place the order - it will be rejected by your
+                        broker. If margin falls below required levels after taking a position (due to MTM losses),
+                        you'll receive a margin call to add funds. If you don't add margin, your broker can square off
+                        your position to limit risk. SEBI also imposes margin penalties ranging from 0.5% to 5% per day
+                        for shortfall, which can add up quickly.
                     </div>
                 </div>
 
@@ -868,7 +1217,11 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        For multiple positions, exchanges use portfolio-level margining. If positions are in the same underlying and form a recognized spread strategy, you get margin benefits. Use SPAN calculators on NSE/broker websites for accurate multi-leg strategy margins. Generally: Naked positions = Sum of individual margins, Hedged positions = Significantly lower due to portfolio margining benefits.
+                        For multiple positions, exchanges use portfolio-level margining. If positions are in the same
+                        underlying and form a recognized spread strategy, you get margin benefits. Use SPAN calculators
+                        on NSE/broker websites for accurate multi-leg strategy margins. Generally: Naked positions = Sum
+                        of individual margins, Hedged positions = Significantly lower due to portfolio margining
+                        benefits.
                     </div>
                 </div>
 
@@ -878,7 +1231,11 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        Intraday margin (MIS - Margin Intraday Square-off) is lower as positions must be squared off by end of day. Brokers typically offer 3-5x leverage for intraday F&O trades. Overnight margin (NRML - Normal) requires full SPAN + Exposure margin as you hold positions overnight, exposing them to gap risk and overnight volatility. Always use NRML margins for position planning to avoid surprises.
+                        Intraday margin (MIS - Margin Intraday Square-off) is lower as positions must be squared off by
+                        end of day. Brokers typically offer 3-5x leverage for intraday F&O trades. Overnight margin
+                        (NRML - Normal) requires full SPAN + Exposure margin as you hold positions overnight, exposing
+                        them to gap risk and overnight volatility. Always use NRML margins for position planning to
+                        avoid surprises.
                     </div>
                 </div>
 
@@ -888,7 +1245,11 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        Margins are dynamic and can change daily based on market volatility. NSE/BSE review and update SPAN parameters regularly. During high volatility events (like results, policy decisions, global crises), exchanges can increase margins intraday. Brokers also have the discretion to charge higher margins than exchange minimums. Always check current margin files on NSE/broker websites before trading.
+                        Margins are dynamic and can change daily based on market volatility. NSE/BSE review and update
+                        SPAN parameters regularly. During high volatility events (like results, policy decisions, global
+                        crises), exchanges can increase margins intraday. Brokers also have the discretion to charge
+                        higher margins than exchange minimums. Always check current margin files on NSE/broker websites
+                        before trading.
                     </div>
                 </div>
 
@@ -898,7 +1259,11 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        Yes! You can pledge your stock holdings as collateral margin with your broker. Approved stocks get haircut-based margin value (typically 50-85% of stock value depending on liquidity). This allows you to trade F&O without keeping cash idle. However, if your positions go against you and pledge value falls below required margin, you'll still need to add cash or stocks. Check your broker's approved collateral list and haircut percentages.
+                        Yes! You can pledge your stock holdings as collateral margin with your broker. Approved stocks
+                        get haircut-based margin value (typically 50-85% of stock value depending on liquidity). This
+                        allows you to trade F&O without keeping cash idle. However, if your positions go against you and
+                        pledge value falls below required margin, you'll still need to add cash or stocks. Check your
+                        broker's approved collateral list and haircut percentages.
                     </div>
                 </div>
             </div>
@@ -967,13 +1332,18 @@
                 </tbody>
             </table>
             <p style="color: #888; margin-top: 1rem; text-align: center; font-size: 0.9rem;">
-                * Margins are approximate and vary based on volatility, strikes selected, and broker policies. Always verify current margins before trading.
+                * Margins are approximate and vary based on volatility, strikes selected, and broker policies. Always
+                verify current margins before trading.
             </p>
         </div>
 
         <div class="info-box" style="margin-top: 3rem;">
             <h4>⚠️ Risk Disclaimer</h4>
-            <p>This calculator provides indicative margin requirements based on standard parameters. Actual margins may vary based on market volatility, broker policies, and regulatory changes. Margin requirements can change intraday during extreme market conditions. Always maintain adequate buffer capital beyond minimum margin requirements. F&O trading involves substantial risk of loss. Please consult with your broker for exact margin requirements before trading.</p>
+            <p>This calculator provides indicative margin requirements based on standard parameters. Actual margins may
+                vary based on market volatility, broker policies, and regulatory changes. Margin requirements can change
+                intraday during extreme market conditions. Always maintain adequate buffer capital beyond minimum margin
+                requirements. F&O trading involves substantial risk of loss. Please consult with your broker for exact
+                margin requirements before trading.</p>
         </div>
     </main>
 
@@ -989,7 +1359,7 @@
         };
 
         // Update instrument parameters
-        document.getElementById('instrument').addEventListener('change', function() {
+        document.getElementById('instrument').addEventListener('change', function () {
             const instrument = instrumentData[this.value];
             document.getElementById('lotSize').value = instrument.lotSize;
             document.getElementById('spanMargin').value = instrument.spanMargin;
@@ -998,10 +1368,10 @@
 
         // Strategy tabs
         document.querySelectorAll('.strategy-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
+            tab.addEventListener('click', function () {
                 document.querySelectorAll('.strategy-tab').forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
-                
+
                 const strategy = this.dataset.strategy;
                 updateForStrategy(strategy);
             });
@@ -1011,8 +1381,8 @@
             const strikeInput = document.getElementById('strikePrice');
             const premiumInput = document.getElementById('premium');
             const optionTypeSelect = document.getElementById('optionType');
-            
-            switch(strategy) {
+
+            switch (strategy) {
                 case 'futures':
                     strikeInput.disabled = true;
                     premiumInput.disabled = true;
@@ -1042,19 +1412,19 @@
             const premium = parseFloat(document.getElementById('premium').value) || 0;
             const isHedged = document.getElementById('hedged').value === 'yes';
             const broker = document.getElementById('broker').value;
-            
+
             const strategy = document.querySelector('.strategy-tab.active').dataset.strategy;
-            
+
             // Calculate values
             const totalQty = quantity * lotSize;
             let contractValue = spotPrice * totalQty;
-            
+
             // Calculate margins based on strategy
             let spanMargin = 0;
             let exposureMargin = 0;
             let premiumAmount = 0;
             let totalMargin = 0;
-            
+
             if (strategy === 'futures') {
                 spanMargin = (contractValue * spanMarginPct) / 100;
                 exposureMargin = (contractValue * exposureMarginPct) / 100;
@@ -1077,7 +1447,7 @@
                 exposureMargin = (contractValue * exposureMarginPct) / 100;
                 premiumAmount = premium * totalQty;
                 totalMargin = spanMargin + exposureMargin;
-                
+
                 // Apply hedging benefit (40-60% reduction)
                 if (isHedged) {
                     totalMargin *= 0.5;
@@ -1085,38 +1455,38 @@
                     exposureMargin *= 0.5;
                 }
             }
-            
+
             // Calculate charges
             const brokerage = broker === 'discount' ? 20 * quantity : contractValue * 0.0003;
             const transactionCharges = contractValue * 0.00053;
             const totalCharges = brokerage + transactionCharges;
-            
+
             // Total capital needed
             const totalCapitalNeeded = Math.max(totalMargin, 0) + totalCharges;
-            
+
             // Display results
             document.getElementById('totalMargin').textContent = `₹${formatNumber(Math.round(totalMargin))}`;
             document.getElementById('spanMarginValue').textContent = `₹${formatNumber(Math.round(spanMargin))}`;
             document.getElementById('exposureMarginValue').textContent = `₹${formatNumber(Math.round(exposureMargin))}`;
             document.getElementById('premiumAmount').textContent = `₹${formatNumber(Math.round(premiumAmount))}`;
-            
+
             // Breakdown
             document.getElementById('contractValue').textContent = `₹${formatNumber(Math.round(contractValue))}`;
             document.getElementById('totalQuantity').textContent = `${totalQty} shares`;
             document.getElementById('spanDetail').textContent = `₹${formatNumber(Math.round(spanMargin))}`;
             document.getElementById('exposureDetail').textContent = `₹${formatNumber(Math.round(exposureMargin))}`;
-            document.getElementById('premiumDetail').textContent = strategy === 'option-sell' 
-                ? `₹${formatNumber(Math.round(premiumAmount))} (Received)` 
+            document.getElementById('premiumDetail').textContent = strategy === 'option-sell'
+                ? `₹${formatNumber(Math.round(premiumAmount))} (Received)`
                 : `₹${formatNumber(Math.round(premiumAmount))}`;
             document.getElementById('brokerageDetail').textContent = `₹${formatNumber(Math.round(brokerage))}`;
             document.getElementById('transactionDetail').textContent = `₹${formatNumber(Math.round(transactionCharges))}`;
             document.getElementById('totalCapital').textContent = `₹${formatNumber(Math.round(totalCapitalNeeded))}`;
-            
+
             // Update margin bar
             const marginPercent = ((totalMargin / contractValue) * 100).toFixed(1);
             document.getElementById('marginBar').style.width = `${Math.min(marginPercent, 100)}%`;
             document.getElementById('marginBar').textContent = `${marginPercent}% of Contract Value`;
-            
+
             // Update info note
             let noteText = '';
             if (strategy === 'option-buy') {
@@ -1129,7 +1499,7 @@
                 noteText = 'Margins shown are for overnight positions (NRML). Intraday margins (MIS) may be lower but require square-off by EOD.';
             }
             document.getElementById('marginNote').textContent = noteText;
-            
+
             // Show results section
             document.getElementById('resultsSection').classList.add('active');
             document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -1155,12 +1525,12 @@
 
         function toggleFaq(element) {
             const isActive = element.classList.contains('active');
-            
+
             // Close all FAQs
             document.querySelectorAll('.faq-item').forEach(item => {
                 item.classList.remove('active');
             });
-            
+
             // Open clicked FAQ if it wasn't active
             if (!isActive) {
                 element.classList.add('active');
@@ -1172,12 +1542,15 @@
     </script>
 
     <!-- Related Articles Section -->
-    <section style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border-radius: 16px; padding: 2.5rem; margin: 3rem 0; border: 2px solid #C9A227; max-width: 1200px; margin-left: auto; margin-right: auto;">
-        <h2 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #C9A227; margin-bottom: 1.5rem; text-align: center;">
+    <section
+        style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border-radius: 16px; padding: 2.5rem; margin: 3rem 0; border: 2px solid #C9A227; max-width: 1200px; margin-left: auto; margin-right: auto;">
+        <h2
+            style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #C9A227; margin-bottom: 1.5rem; text-align: center;">
             📚 Learn More: Essential Reading
         </h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
-            <div style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
+            <div
+                style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
                 <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
                     <span style="font-size: 2rem; margin-right: 0.5rem;">📖</span>
                     <h3 style="color: #C9A227; font-size: 1.1rem; margin: 0;">Margin Rules</h3>
@@ -1185,11 +1558,13 @@
                 <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 0.9rem;">
                     Master the fundamentals with expert insights and real-world examples
                 </p>
-                <a href="article-margin-rules.html" style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
+                <a href="article-margin-rules.html"
+                    style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
                     Read Article →
                 </a>
             </div>
-            <div style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
+            <div
+                style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
                 <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
                     <span style="font-size: 2rem; margin-right: 0.5rem;">💡</span>
                     <h3 style="color: #C9A227; font-size: 1.1rem; margin: 0;">Sebi Margin Rules</h3>
@@ -1197,11 +1572,13 @@
                 <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 0.9rem;">
                     Deep dive into advanced strategies used by professional traders
                 </p>
-                <a href="article-sebi-margin-rules.html" style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
+                <a href="article-sebi-margin-rules.html"
+                    style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
                     Read Article →
                 </a>
             </div>
-            <div style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
+            <div
+                style="background: rgba(201,162,39,0.05); border: 2px solid rgba(201,162,39,0.3); border-radius: 12px; padding: 1.5rem;">
                 <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
                     <span style="font-size: 2rem; margin-right: 0.5rem;">🎓</span>
                     <h3 style="color: #C9A227; font-size: 1.1rem; margin: 0;">Intraday Margin Rules</h3>
@@ -1209,12 +1586,14 @@
                 <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 0.9rem;">
                     Learn from market history and avoid costly mistakes
                 </p>
-                <a href="article-intraday-margin-rules.html" style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
+                <a href="article-intraday-margin-rules.html"
+                    style="color: #C9A227; text-decoration: none; font-weight: 600; display: inline-block; border-bottom: 2px solid #C9A227; padding-bottom: 2px;">
                     Read Article →
                 </a>
             </div>
         </div>
     </section>
-<script src="common-footer.js" defer></script>
+    <script src="common-footer.js" defer></script>
 </body>
+
 </html>

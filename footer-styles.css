@@ -1,221 +1,39 @@
 /* Body Layout Fix - Ensures Footer Stays at Bottom */
 html {
-    height: 100% !important;
+    height: 100%;
 }
 
 body {
     display: flex !important;
     flex-direction: column !important;
     min-height: 100vh !important;
-    height: auto !important;
-    position: relative;
+}
+
+/* Main content should expand to push footer down */
+body > *:not(.bro-footer):not(script):not(style):not(.sebi-disclaimer-section) {
+    flex: 1 0 auto;
 }
 
 /* Override any conflicting overflow that might break flex */
 body {
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 /* Fixed positioned elements don't affect flex layout */
 .reading-progress,
-.article-nav {
+.article-nav,
+.navbar {
     position: fixed !important;
 }
 
-/* Main content should expand to push footer down */
-article.article-content,
-main,
-.tool-container,
-.calculator-container {
-    flex: 1 0 auto !important;
-    width: 100%;
-    min-height: fit-content;
-    display: block !important;
-}
-
-/* Footer and disclaimer container - should stack at bottom */
+/* Ensure SEBI disclaimer and footer stack properly at bottom */
 .sebi-disclaimer-section,
 .footer,
 .bro-footer {
     flex-shrink: 0 !important;
-    flex-grow: 0 !important;
-    margin-top: 0;
-}
-
-/* SEBI Disclaimer Section Styles - BroBillionaire Theme */
-.sebi-disclaimer-section {
     width: 100%;
-    max-width: 100%;
-    padding: 0 20px;
-    margin: 60px auto 0;
-}
-
-.sebi-disclaimer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0a0a0a 100%);
-    border: 2px solid rgba(201, 162, 39, 0.3);
-    border-radius: 16px;
-    padding: 35px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    position: relative;
-    overflow: hidden;
-}
-
-.sebi-disclaimer-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #C9A227, #E5B946, #C9A227);
-}
-
-.sebi-disclaimer-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 25px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid rgba(201, 162, 39, 0.15);
-}
-
-.sebi-disclaimer-icon {
-    width: 55px;
-    height: 55px;
-    background: linear-gradient(135deg, rgba(201, 162, 39, 0.2) 0%, rgba(201, 162, 39, 0.1) 100%);
-    border: 1px solid rgba(201, 162, 39, 0.3);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.8rem;
-    box-shadow: 0 4px 15px rgba(201, 162, 39, 0.15);
-}
-
-.sebi-disclaimer-title {
-    color: #C9A227;
-    font-size: 1.3rem;
-    font-weight: 700;
-    font-family: 'Playfair Display', Georgia, serif;
-    letter-spacing: 0.5px;
-}
-
-.sebi-disclaimer-content {
-    margin-bottom: 30px;
-}
-
-.sebi-disclaimer-content p {
-    color: #b8b8b8;
-    line-height: 1.9;
-    margin-bottom: 18px;
-    font-size: 0.95rem;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-.sebi-disclaimer-content strong {
-    color: #C9A227;
-    font-weight: 600;
-}
-
-.sebi-disclaimer-content p strong:first-child {
-    display: inline-block;
-    margin-right: 3px;
-}
-
-.sebi-disclaimer-badges {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    margin-bottom: 25px;
-}
-
-.sebi-badge-item {
-    background: linear-gradient(135deg, rgba(201, 162, 39, 0.08) 0%, rgba(201, 162, 39, 0.03) 100%);
-    border: 1px solid rgba(201, 162, 39, 0.2);
-    border-radius: 12px;
-    padding: 18px 15px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    transition: all 0.3s ease;
-}
-
-.sebi-badge-item:hover {
-    background: linear-gradient(135deg, rgba(201, 162, 39, 0.15) 0%, rgba(201, 162, 39, 0.08) 100%);
-    border-color: rgba(201, 162, 39, 0.4);
-    transform: translateY(-2px);
-}
-
-.sebi-badge-item i {
-    color: #C9A227;
-    font-size: 1.3rem;
-}
-
-.sebi-badge-item span {
-    color: #e0e0e0;
-    font-size: 0.85rem;
-    font-weight: 600;
-    font-family: 'Inter', sans-serif;
-}
-
-.sebi-disclaimer-footer {
-    background: linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, rgba(201, 162, 39, 0.05) 100%);
-    border: 1px solid rgba(201, 162, 39, 0.2);
-    border-radius: 12px;
-    padding: 20px 25px;
-}
-
-.sebi-disclaimer-footer p {
-    color: #d0d0d0;
-    font-size: 0.9rem;
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-}
-
-.sebi-disclaimer-footer a {
-    color: #C9A227;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.sebi-disclaimer-footer a:hover {
-    color: #E5B946;
-    text-decoration: underline;
-}
-
-@media (max-width: 768px) {
-    .sebi-disclaimer-badges {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .sebi-disclaimer-header {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .sebi-disclaimer-container {
-        padding: 25px 20px;
-    }
-
-    .sebi-disclaimer-title {
-        font-size: 1.15rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .sebi-disclaimer-badges {
-        grid-template-columns: 1fr;
-    }
-
-    .sebi-disclaimer-content p {
-        font-size: 0.9rem;
-    }
+    margin-top: auto;
 }
 
 /* Footer Styles */
@@ -223,7 +41,6 @@ main,
     background: linear-gradient(180deg, #0a0a0a 0%, #111111 100%);
     padding: 60px 20px 40px;
     border-top: 3px solid #C9A227;
-    margin-top: 60px;
     position: relative;
     width: 100%;
 }

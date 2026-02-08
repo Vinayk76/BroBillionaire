@@ -76,6 +76,22 @@
     // Footer CSS styles
     const footerCSS = `
     <style>
+    /* Body Layout Fix - Ensures Footer Stays at Bottom */
+    html {
+        height: 100%;
+    }
+
+    body {
+        display: flex !important;
+        flex-direction: column !important;
+        min-height: 100vh !important;
+    }
+
+    /* Main content should expand to push footer down */
+    body > *:not(.bro-footer):not(script):not(style) {
+        flex: 1 0 auto;
+    }
+
     /* SEBI Disclaimer Section Styles - BroBillionaire Theme */
     .sebi-disclaimer-section {
         max-width: 1200px;
@@ -408,15 +424,13 @@
         // Inject CSS into head
         document.head.insertAdjacentHTML('beforeend', footerCSS);
 
-        // Find the best place to insert footer (before </body> or after main content)
-        const body = document.body;
-        const scripts = body.querySelectorAll('script');
+        // Insert footer at the absolute end of body
+        document.body.insertAdjacentHTML('beforeend', footerHTML);
 
-        // Insert before the first script tag in body, or at the end
-        if (scripts.length > 0) {
-            scripts[0].insertAdjacentHTML('beforebegin', footerHTML);
-        } else {
-            body.insertAdjacentHTML('beforeend', footerHTML);
+        // Ensure footer is the last element (move it after scripts)
+        const footer = document.querySelector('.bro-footer');
+        if (footer) {
+            document.body.appendChild(footer);
         }
     }
 
