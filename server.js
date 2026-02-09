@@ -718,7 +718,7 @@ app.post('/api/gemini/analyze', async (req, res) => {
         }
 
         // Use Gemini 1.5 Flash for vision (faster and free)
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiKey}`;
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiKey}`;
 
         // Build request body
         const requestBody = {
@@ -776,7 +776,7 @@ app.post('/api/gemini/analyze', async (req, res) => {
             res.json({
                 success: true,
                 content: generatedText,
-                model: 'gemini-1.5-flash'
+                model: 'gemini-2.0-flash'
             });
         } else {
             res.status(500).json({ error: 'No response generated' });
