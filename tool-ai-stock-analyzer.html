@@ -8981,13 +8981,29 @@
             const holdTotal = data.hold;
             const sellTotal = data.sell + data.strongSell;
 
-            document.getElementById('recBuyBar').style.width = (buyTotal / totalRecs * 100) + '%';
-            document.getElementById('recHoldBar').style.width = (holdTotal / totalRecs * 100) + '%';
-            document.getElementById('recSellBar').style.width = (sellTotal / totalRecs * 100) + '%';
+            document.getElementById('recBuyBar').style.width = (totalRecs > 0 ? buyTotal / totalRecs * 100 : 0) + '%';
+            document.getElementById('recHoldBar').style.width = (totalRecs > 0 ? holdTotal / totalRecs * 100 : 0) + '%';
+            document.getElementById('recSellBar').style.width = (totalRecs > 0 ? sellTotal / totalRecs * 100 : 0) + '%';
 
             document.getElementById('recBuyCount').textContent = buyTotal;
             document.getElementById('recHoldCount').textContent = holdTotal;
             document.getElementById('recSellCount').textContent = sellTotal;
+        }
+
+        function renderAnalystUnavailable() {
+            document.getElementById('analystBadge').textContent = 'N/A';
+            document.getElementById('analystBadge').className = 'card-badge badge-neutral';
+            document.getElementById('avgTargetPrice').textContent = 'Unavailable';
+            document.getElementById('targetUpside').textContent = 'Live data not available';
+            document.getElementById('targetUpside').className = 'target-upside';
+            document.getElementById('highTarget').textContent = '-';
+            document.getElementById('lowTarget').textContent = '-';
+            document.getElementById('recBuyBar').style.width = '0%';
+            document.getElementById('recHoldBar').style.width = '0%';
+            document.getElementById('recSellBar').style.width = '0%';
+            document.getElementById('recBuyCount').textContent = '-';
+            document.getElementById('recHoldCount').textContent = '-';
+            document.getElementById('recSellCount').textContent = '-';
         }
 
         // Generate stock fundamentals with sector-specific accuracy
@@ -9249,8 +9265,12 @@
                 // Render news feed
                 renderNewsFeed(newsData);
 
-                // Render analyst data
-                renderAnalystData(analystData, stockData.price);
+                // Render analyst data only if real API data is available
+                if (analystData) {
+                    renderAnalystData(analystData, stockData.price);
+                } else {
+                    renderAnalystUnavailable();
+                }
 
                 // Update news score based on sentiment analysis
                 updateNewsScore(newsData);
@@ -9276,9 +9296,7 @@
 
             } catch (error) {
                 console.error('News/Analyst fetch error:', error);
-                // Show error message - NO fallback data
-                console.warn('⚠️ Unable to load news and analyst data - showing stock price data only');
-                // Don't render fake data - let the displayed data be empty or show a message
+                renderAnalystUnavailable();
             }
         }
 
