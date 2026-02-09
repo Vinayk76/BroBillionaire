@@ -6698,8 +6698,9 @@
             'ZUDIO': { name: 'Trent Ltd', sector: 'Retail', yahooSymbol: 'TRENT' },
             'VEDL': { name: 'Vedanta Ltd', sector: 'Metals & Mining' },
             'VEDANTA': { name: 'Vedanta Ltd', sector: 'Metals & Mining', yahooSymbol: 'VEDL' },
-            'ZOMATO': { name: 'Zomato Ltd', sector: 'Internet' },
-            'ZOMATOLIMITED': { name: 'Zomato Ltd', sector: 'Internet', yahooSymbol: 'ZOMATO' },
+            'ETERNAL': { name: 'Eternal Ltd', sector: 'Internet' },
+            'ZOMATO': { name: 'Eternal Ltd', sector: 'Internet', yahooSymbol: 'ETERNAL' },
+            'ZOMATOLIMITED': { name: 'Eternal Ltd', sector: 'Internet', yahooSymbol: 'ETERNAL' },
             'PAYTM': { name: 'One97 Communications', sector: 'Fintech' },
             'ONE97': { name: 'One97 Communications', sector: 'Fintech', yahooSymbol: 'PAYTM' },
             'NYKAA': { name: 'FSN E-Commerce Ventures', sector: 'E-commerce' },
@@ -7152,7 +7153,28 @@
                             const meta = result.meta;
                             const quote = result.indicators.quote[0];
 
-                            const currentPrice = meta.regularMarketPrice || meta.previousClose;
+                            // Get the most accurate current price with multiple fallbacks
+                            // Priority: regularMarketPrice (real-time) > latest quote close > previousClose
+                            let currentPrice = null;
+
+                            // 1. regularMarketPrice is the real-time price from Yahoo Finance
+                            if (meta.regularMarketPrice && meta.regularMarketPrice > 0) {
+                                currentPrice = meta.regularMarketPrice;
+                            }
+
+                            // 2. Fallback to latest quote close (may lag during market hours)
+                            if (!currentPrice && quote.close && Array.isArray(quote.close)) {
+                                const closePrices = quote.close.filter(p => p !== null && p > 0);
+                                if (closePrices.length > 0) {
+                                    currentPrice = closePrices[closePrices.length - 1];
+                                }
+                            }
+
+                            // 3. Final fallback to previousClose
+                            if (!currentPrice && meta.previousClose && meta.previousClose > 0) {
+                                currentPrice = meta.previousClose;
+                            }
+
                             const previousClose = meta.chartPreviousClose || meta.previousClose;
 
                             // STRICT VALIDATION: Ensure we have real, accurate price data
@@ -9071,8 +9093,9 @@
 
             // Generate values with wider variance - can go outside "typical" ranges
             // Use skewed distribution to create more realistic outliers
+            let skewCounter = 0;
             const skewRandom = () => {
-                const r = Math.random();
+                const r = seededRandom(symbolSeed, ++skewCounter);
                 // Creates distribution that sometimes produces extreme values
                 return r < 0.15 ? r * 0.5 : r > 0.85 ? 0.5 + r * 0.6 : r;
             };
