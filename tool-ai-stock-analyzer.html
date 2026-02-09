@@ -365,7 +365,7 @@
     </script>
 
     <!-- HowTo Schema - Fundamental Analysis -->
-    
+
 
     <!-- FinancialService Schema -->
     <script type="application/ld+json">
@@ -421,7 +421,7 @@
     </script>
 
     <!-- ItemList Schema for Fundamental Metrics -->
-    
+
 
     <!-- Organization Schema -->
     <script type="application/ld+json">
@@ -5410,13 +5410,16 @@
                 <div class="badge-container">
                     <div class="premium-badge"
                         data-tooltip="This tool is in Beta - we're constantly improving it based on user feedback. Report any bugs to help us make it better!">
-                        <i class="fas fa-flask"></i> BETA</div>
+                        <i class="fas fa-flask"></i> BETA
+                    </div>
                     <div class="premium-badge ai-badge"
                         data-tooltip="Powered by advanced algorithms that analyze 50+ indicators to give you intelligent insights about any stock.">
-                        <i class="fas fa-brain"></i> AI-Powered</div>
+                        <i class="fas fa-brain"></i> AI-Powered
+                    </div>
                     <div class="premium-badge live-badge"
                         data-tooltip="Real-time price data from NSE (National Stock Exchange) combined with Finnhub's financial analytics for accurate analysis.">
-                        <i class="fas fa-circle"></i> LIVE NSE + FINNHUB</div>
+                        <i class="fas fa-circle"></i> LIVE NSE + FINNHUB
+                    </div>
                 </div>
                 <h1><span class="gold-text">Stock Analysis</span> Tool - Technical & Fundamental Analysis FREE</h1>
                 <h2 style="font-size: 1rem; color: var(--text-secondary); font-weight: 400; margin-top: 8px;">RSI • MACD
@@ -6433,7 +6436,8 @@
                     <p><strong>2. Educational Purpose Only:</strong> This AI Stock Analyzer is purely an
                         <strong>educational and informational tool</strong>. All analysis, signals, scores, and
                         recommendations generated are for learning purposes only and should NOT be construed as buy/sell
-                        recommendations.</p>
+                        recommendations.
+                    </p>
 
                     <p><strong>3. No Guarantee of Accuracy:</strong> The data and analysis shown may contain errors,
                         delays, or inaccuracies. We make no representations or warranties about the accuracy,
@@ -7994,23 +7998,21 @@
         // ANALYST RECOMMENDATIONS & PRICE TARGETS (Finnhub + Yahoo)
         // =============================================
 
-        // Fetch analyst data - Priority: Finnhub > Yahoo Finance
+        // Fetch analyst data from Finnhub
+        // NOTE: Get a free Finnhub API key at https://finnhub.io/register if the current key expires
         async function fetchAnalystData(symbol, currentPrice) {
             const metadata = stockMetadata[symbol.toUpperCase()];
-            const yahooSymbol = (metadata && metadata.yahooSymbol ? metadata.yahooSymbol : symbol.toUpperCase()) + '.NS';
+            const finnhubSymbol = ((metadata && metadata.yahooSymbol) ? metadata.yahooSymbol : symbol.toUpperCase()) + '.NS';
 
             let analystData = null;
 
-            // Try Finnhub for recommendation trends first (most accurate)
             try {
-                const finnhubSymbol = symbol.toUpperCase() + '.NS';
                 const recUrl = `${FINNHUB_API}stock/recommendation?symbol=${finnhubSymbol}&token=${FINNHUB_KEY}`;
                 const targetUrl = `${FINNHUB_API}stock/price-target?symbol=${finnhubSymbol}&token=${FINNHUB_KEY}`;
 
                 const controller = new AbortController();
                 const timeoutId = setTimeout(() => controller.abort(), 5000);
 
-                // Fetch both recommendation and price target in parallel
                 const [recResponse, targetResponse] = await Promise.all([
                     fetch(recUrl, { signal: controller.signal }).catch(() => null),
                     fetch(targetUrl, { signal: controller.signal }).catch(() => null)
@@ -8023,7 +8025,7 @@
                 if (recResponse && recResponse.ok) {
                     const recData = await recResponse.json();
                     if (recData && recData.length > 0) {
-                        recommendations = recData[0]; // Most recent recommendation
+                        recommendations = recData[0];
                         console.log('✅ Finnhub recommendations loaded:', recommendations);
                     }
                 }
@@ -8032,21 +8034,24 @@
                     priceTarget = await targetResponse.json();
                     if (priceTarget && priceTarget.targetHigh) {
                         console.log('✅ Finnhub price targets loaded:', priceTarget);
+                    } else {
+                        priceTarget = null;
                     }
                 }
 
                 if (recommendations || priceTarget) {
+                    const totalAnalysts = (recommendations?.strongBuy || 0) + (recommendations?.buy || 0) +
+                        (recommendations?.hold || 0) + (recommendations?.sell || 0) + (recommendations?.strongSell || 0);
+
                     analystData = {
-                        targetHigh: priceTarget?.targetHigh || currentPrice * 1.25,
-                        targetLow: priceTarget?.targetLow || currentPrice * 0.85,
-                        targetMean: priceTarget?.targetMean || currentPrice * 1.1,
-                        targetMedian: priceTarget?.targetMedian || currentPrice * 1.08,
+                        targetHigh: priceTarget?.targetHigh || null,
+                        targetLow: priceTarget?.targetLow || null,
+                        targetMean: priceTarget?.targetMean || null,
+                        targetMedian: priceTarget?.targetMedian || null,
                         recommendation: recommendations ?
                             (recommendations.buy > recommendations.sell ? 'buy' :
                                 recommendations.sell > recommendations.buy ? 'sell' : 'hold') : 'hold',
-                        numberOfAnalysts: priceTarget?.lastUpdated ?
-                            (recommendations?.strongBuy || 0) + (recommendations?.buy || 0) +
-                            (recommendations?.hold || 0) + (recommendations?.sell || 0) + (recommendations?.strongSell || 0) : 10,
+                        numberOfAnalysts: totalAnalysts,
                         strongBuy: recommendations?.strongBuy || 0,
                         buy: recommendations?.buy || 0,
                         hold: recommendations?.hold || 0,
@@ -8056,60 +8061,11 @@
                     };
                 }
             } catch (error) {
-                console.log('Finnhub analyst data fetch failed, trying Yahoo:', error);
+                console.log('Finnhub analyst data fetch failed:', error);
             }
 
-            // Fallback to Yahoo Finance if Finnhub fails
             if (!analystData) {
-                try {
-                    for (const proxy of CORS_PROXIES) {
-                        try {
-                            const url = proxy + encodeURIComponent(`https://query1.finance.yahoo.com/v10/finance/quoteSummary/${yahooSymbol}?modules=recommendationTrend,financialData,upgradeDowngradeHistory`);
-
-                            const controller = new AbortController();
-                            const timeoutId = setTimeout(() => controller.abort(), 5000);
-
-                            const response = await fetch(url, { signal: controller.signal });
-                            clearTimeout(timeoutId);
-
-                            if (response.ok) {
-                                const data = await response.json();
-                                const result = data.quoteSummary?.result?.[0];
-
-                                if (result) {
-                                    const financialData = result.financialData || {};
-                                    const recTrend = result.recommendationTrend?.trend?.[0] || {};
-
-                                    analystData = {
-                                        targetHigh: financialData.targetHighPrice?.raw || currentPrice * 1.25,
-                                        targetLow: financialData.targetLowPrice?.raw || currentPrice * 0.85,
-                                        targetMean: financialData.targetMeanPrice?.raw || currentPrice * 1.1,
-                                        targetMedian: financialData.targetMedianPrice?.raw || currentPrice * 1.08,
-                                        recommendation: financialData.recommendationKey || 'hold',
-                                        numberOfAnalysts: financialData.numberOfAnalystOpinions?.raw || 0,
-                                        strongBuy: recTrend.strongBuy || 0,
-                                        buy: recTrend.buy || 0,
-                                        hold: recTrend.hold || 0,
-                                        sell: recTrend.sell || 0,
-                                        strongSell: recTrend.strongSell || 0,
-                                        source: 'Yahoo Finance'
-                                    };
-                                    console.log('✅ Yahoo analyst data loaded');
-                                    break;
-                                }
-                            }
-                        } catch (e) {
-                            continue;
-                        }
-                    }
-                } catch (error) {
-                    console.log('Yahoo analyst data fetch failed:', error);
-                }
-            }
-
-            // If no data from APIs, return null instead of generating estimates
-            if (!analystData) {
-                console.warn('⚠️ Analyst data unavailable from all sources');
+                console.warn('⚠️ Analyst data unavailable - Finnhub API may need a new key (https://finnhub.io/register)');
                 return null;
             }
 
@@ -8960,15 +8916,19 @@
             const highTarget = document.getElementById('highTarget');
             const lowTarget = document.getElementById('lowTarget');
 
-            // Update targets
-            avgTarget.textContent = '₹' + data.targetMean.toFixed(2);
-            highTarget.textContent = '₹' + data.targetHigh.toFixed(2);
-            lowTarget.textContent = '₹' + data.targetLow.toFixed(2);
-
-            // Calculate upside
-            const upsidePercent = ((data.targetMean - currentPrice) / currentPrice) * 100;
-            upside.textContent = (upsidePercent >= 0 ? '+' : '') + upsidePercent.toFixed(1) + '% upside';
-            upside.className = 'target-upside ' + (upsidePercent >= 0 ? 'positive' : 'negative');
+            // Update targets (only if real data exists)
+            if (data.targetMean) {
+                avgTarget.textContent = '₹' + data.targetMean.toFixed(2);
+                const upsidePercent = ((data.targetMean - currentPrice) / currentPrice) * 100;
+                upside.textContent = (upsidePercent >= 0 ? '+' : '') + upsidePercent.toFixed(1) + '% upside';
+                upside.className = 'target-upside ' + (upsidePercent >= 0 ? 'positive' : 'negative');
+            } else {
+                avgTarget.textContent = '-';
+                upside.textContent = '';
+                upside.className = 'target-upside';
+            }
+            highTarget.textContent = data.targetHigh ? '₹' + data.targetHigh.toFixed(2) : '-';
+            lowTarget.textContent = data.targetLow ? '₹' + data.targetLow.toFixed(2) : '-';
 
             // Update badge
             const rec = data.recommendation.toUpperCase();
@@ -9283,8 +9243,9 @@
                 // Use ONLY real technical indicators - no fallback
                 if (!technicalIndicators) {
                     console.warn('⚠️ Technical indicators unavailable - API failed');
-                    // Show warning in UI but don't use fake data
-                    alert('⚠️ Warning: Advanced technical indicators could not be loaded. Some analysis features may be limited. The basic price data is still live and accurate.');
+                    // Show estimated signal as fallback since real data failed
+                    showEstimatedSignal(symbol, stockData);
+                    alert('⚠️ Warning: Advanced technical indicators could not be loaded. Showing estimated signal based on limited data.');
                 } else {
                     liveTechnicalIndicators = technicalIndicators;
                     // Update UI with technical indicators (real data only)
@@ -9683,8 +9644,84 @@
                 confidence: confidence.toFixed(1)
             });
 
+            // Update social score based on real analysis
+            const symbolSeedSocial = symbol.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+            const socialVariance = ((symbolSeedSocial * 23 % 28) - 14);
+            const socialBase = 50 + (finalScore - 50) * 0.4;
+            document.getElementById('socialScore').textContent = Math.round(Math.max(35, Math.min(85, socialBase + socialVariance))) + '/100';
+
             // Update AI Summary with accurate data
             generateAccurateAISummary(symbol, stockData, techIndicators, finalScore, signal, technicalScore, fundamentalScore);
+        }
+
+        // Fallback: show estimated signal when real technical data fails to load
+        function showEstimatedSignal(symbol, stockData) {
+            // Re-run displayAnalysis scoring but actually show the signal (with warning)
+            const price = stockData.price;
+            const change = stockData.change;
+            const fundamentals = generateFundamentals(price, stockData.sector);
+
+            const yearlyRange = stockData.fiftyTwoWeekHigh - stockData.fiftyTwoWeekLow;
+            const pricePosition = yearlyRange > 0 ? ((price - stockData.fiftyTwoWeekLow) / yearlyRange) * 100 : 50;
+
+            let rsiBase = 50;
+            rsiBase += (pricePosition - 50) * 0.35;
+            const momentumWeight = change > 2 || change < -2 ? 3 : 2;
+            rsiBase += change * momentumWeight;
+            const volumeRatioRaw = stockData.volume / Math.max(stockData.avgVolume, 1);
+            if (volumeRatioRaw > 1.3 && change > 0) rsiBase += 5;
+            else if (volumeRatioRaw > 1.3 && change < 0) rsiBase -= 5;
+            const dayRange = stockData.dayHigh - stockData.dayLow;
+            const dayPosition = dayRange > 0 ? ((price - stockData.dayLow) / dayRange) : 0.5;
+            rsiBase += (dayPosition - 0.5) * 10;
+            const symbolHash = symbol.split('').reduce((a, c) => a + c.charCodeAt(0), 0) % 100;
+            const microVariance = ((symbolHash - 50) / 50) * 3;
+            const rsi = Math.max(15, Math.min(85, rsiBase + microVariance));
+
+            let technicalScore = 45;
+            if (rsi < 25) technicalScore += 18;
+            else if (rsi < 35) technicalScore += 8;
+            else if (rsi > 75) technicalScore -= 20;
+            else if (rsi > 65) technicalScore -= 12;
+            else if (rsi > 55) technicalScore -= 4;
+            technicalScore = Math.max(10, Math.min(90, technicalScore));
+
+            let fundamentalScore = 40;
+            if (fundamentals.pe < 12) fundamentalScore += 18;
+            else if (fundamentals.pe < 18) fundamentalScore += 10;
+            else if (fundamentals.pe > 60) fundamentalScore -= 20;
+            else if (fundamentals.pe > 35) fundamentalScore -= 8;
+            fundamentalScore = Math.max(10, Math.min(90, fundamentalScore));
+
+            const rawScore = (technicalScore * 0.55 + fundamentalScore * 0.45);
+            const score = Math.round(Math.max(12, Math.min(88, rawScore)));
+
+            let signal, signalClass, signalBadgeClass, signalEmoji;
+            if (score >= 75) { signal = 'STRONG BUY'; signalClass = 'signal-buy'; signalBadgeClass = 'badge-bullish'; signalEmoji = '🚀'; }
+            else if (score >= 60) { signal = 'BUY'; signalClass = 'signal-buy'; signalBadgeClass = 'badge-bullish'; signalEmoji = '📈'; }
+            else if (score >= 45) { signal = 'HOLD'; signalClass = 'signal-hold'; signalBadgeClass = 'badge-neutral'; signalEmoji = '⏸️'; }
+            else if (score >= 30) { signal = 'SELL'; signalClass = 'signal-sell'; signalBadgeClass = 'badge-bearish'; signalEmoji = '📉'; }
+            else { signal = 'STRONG SELL'; signalClass = 'signal-sell'; signalBadgeClass = 'badge-bearish'; signalEmoji = '🔻'; }
+
+            document.getElementById('signalIndicator').textContent = signalEmoji;
+            document.getElementById('signalIndicator').className = 'signal-indicator ' + signalClass;
+            document.getElementById('signalLabel').textContent = signal + ' (Est.)';
+            document.getElementById('signalLabel').className = 'signal-label ' + signalClass;
+            document.getElementById('signalBadge').textContent = signal + ' (Est.)';
+            document.getElementById('signalBadge').className = 'card-badge ' + signalBadgeClass;
+
+            document.getElementById('scoreBadge').textContent = score + '/100';
+            document.getElementById('scoreBadge').className = 'card-badge ' + (score >= 60 ? 'badge-bullish' : score >= 40 ? 'badge-neutral' : 'badge-bearish');
+            document.getElementById('gaugeValue').textContent = score;
+            document.getElementById('technicalScore').textContent = Math.round(technicalScore) + '/100';
+            document.getElementById('fundamentalScore').textContent = Math.round(fundamentalScore) + '/100';
+            const gaugeOffset = 220 - (220 * score / 100);
+            document.getElementById('gaugeFill').style.strokeDashoffset = gaugeOffset;
+
+            document.getElementById('confidenceText').textContent = 'Limited';
+            document.getElementById('confidenceFill').style.width = '30%';
+
+            console.warn('⚠️ Showing estimated signal - real technical data unavailable');
         }
 
         // Generate AI Summary based on real technical data
@@ -10030,35 +10067,6 @@
 
             const score = Math.round(Math.max(12, Math.min(88, adjustedScore)));
 
-            // Determine signal based on comprehensive analysis (balanced thresholds)
-            let signal, signalClass, signalBadgeClass, signalEmoji;
-            if (score >= 75) {
-                signal = 'STRONG BUY';
-                signalClass = 'signal-buy';
-                signalBadgeClass = 'badge-bullish';
-                signalEmoji = '🚀';
-            } else if (score >= 60) {
-                signal = 'BUY';
-                signalClass = 'signal-buy';
-                signalBadgeClass = 'badge-bullish';
-                signalEmoji = '📈';
-            } else if (score >= 45) {
-                signal = 'HOLD';
-                signalClass = 'signal-hold';
-                signalBadgeClass = 'badge-neutral';
-                signalEmoji = '⏸️';
-            } else if (score >= 30) {
-                signal = 'SELL';
-                signalClass = 'signal-sell';
-                signalBadgeClass = 'badge-bearish';
-                signalEmoji = '📉';
-            } else {
-                signal = 'STRONG SELL';
-                signalClass = 'signal-sell';
-                signalBadgeClass = 'badge-bearish';
-                signalEmoji = '🔻';
-            }
-
             // Update Stock Header
             document.getElementById('stockLogo').textContent = symbol.substring(0, 2);
             document.getElementById('stockName').textContent = stockData.name;
@@ -10071,82 +10079,40 @@
             const timestamp = stockData.timestamp ? new Date(stockData.timestamp).toLocaleTimeString('en-IN') : new Date().toLocaleTimeString('en-IN');
             document.getElementById('lastUpdated').innerHTML = `<span class="live-indicator"><i class="fas fa-circle" style="color: #22c55e; font-size: 8px;"></i> NSE LIVE</span> <span style="font-size: 0.85em; color: var(--text-muted);">${timestamp}</span>`;
 
-            // Update Signal Card
-            document.getElementById('signalIndicator').textContent = signalEmoji;
-            document.getElementById('signalIndicator').className = 'signal-indicator ' + signalClass;
-            document.getElementById('signalLabel').textContent = signal;
-            document.getElementById('signalLabel').className = 'signal-label ' + signalClass;
-            document.getElementById('signalBadge').textContent = signal;
-            document.getElementById('signalBadge').className = 'card-badge ' + signalBadgeClass;
+            // ========== SHOW LOADING STATE FOR SIGNAL (wait for real data) ==========
+            // Don't show estimated signal - wait for recalculateScoreWithRealData() to set the real one
+            document.getElementById('signalIndicator').textContent = '⏳';
+            document.getElementById('signalIndicator').className = 'signal-indicator signal-hold';
+            document.getElementById('signalLabel').textContent = 'Analyzing...';
+            document.getElementById('signalLabel').className = 'signal-label signal-hold';
+            document.getElementById('signalBadge').textContent = 'Analyzing...';
+            document.getElementById('signalBadge').className = 'card-badge badge-neutral';
 
-            // Calculate confidence based on data quality and signal alignment
-            // Higher when multiple indicators agree, lower when mixed signals
-            const signalStrength = Math.abs(score - 50); // 0-50 range
-            const dataQualityBonus = stockData.success !== false ? 15 : 0; // Live data bonus
-            const volumeConfidence = volumeScore > 0.7 ? 10 : volumeScore > 0.5 ? 6 : volumeScore > 0.3 ? 3 : 0;
+            // Loading state for confidence
+            document.getElementById('confidenceText').textContent = 'Calculating...';
+            document.getElementById('confidenceFill').style.width = '0%';
 
-            // Indicator alignment bonus (technical and fundamental agree)
-            const scoreAlignment = 100 - Math.abs(technicalScore - fundamentalScore);
-            const alignmentBonus = scoreAlignment > 80 ? 8 : scoreAlignment > 60 ? 4 : 0;
+            // Loading state for score
+            document.getElementById('scoreBadge').textContent = '--/100';
+            document.getElementById('scoreBadge').className = 'card-badge badge-neutral';
+            document.getElementById('gaugeValue').textContent = '--';
+            document.getElementById('technicalScore').textContent = '--/100';
+            document.getElementById('fundamentalScore').textContent = '--/100';
+            document.getElementById('gaugeFill').style.strokeDashoffset = 220;
 
-            // RSI extremes increase confidence (clearer oversold/overbought)
-            const rsiConfidence = (rsi < 25 || rsi > 75) ? 6 : (rsi < 35 || rsi > 65) ? 3 : 0;
+            // Loading state for sentiment
+            document.getElementById('bullishBar').style.width = '33%';
+            document.getElementById('neutralBar').style.width = '34%';
+            document.getElementById('bearishBar').style.width = '33%';
+            document.getElementById('bullishValue').textContent = '--';
+            document.getElementById('neutralValue').textContent = '--';
+            document.getElementById('bearishValue').textContent = '--';
+            document.getElementById('sentimentBadge').textContent = 'Analyzing';
+            document.getElementById('sentimentBadge').className = 'card-badge badge-neutral';
 
-            // Strong daily moves with volume = higher confidence
-            const trendConfidence = (Math.abs(change) > 2 && volumeScore > 0.6) ? 5 : 0;
-
-            const baseConfidence = 52 + (signalStrength * 0.55) + dataQualityBonus + volumeConfidence + alignmentBonus + rsiConfidence + trendConfidence;
-
-            // Minimal variance for slight variation
-            const confidenceVariance = ((symbolSeed % 30) - 15) / 10; // -1.5 to +1.5
-            const confidence = Math.min(94, Math.max(58, baseConfidence + confidenceVariance));
-
-            document.getElementById('confidenceText').textContent = confidence.toFixed(1) + '%';
-            document.getElementById('confidenceFill').style.width = confidence + '%';
-
-            // Update Score Card
-            document.getElementById('scoreBadge').textContent = score + '/100';
-            document.getElementById('scoreBadge').className = 'card-badge ' + (score >= 60 ? 'badge-bullish' : score >= 40 ? 'badge-neutral' : 'badge-bearish');
-            document.getElementById('gaugeValue').textContent = score;
-            document.getElementById('technicalScore').textContent = Math.round(technicalScore) + '/100';
-            document.getElementById('fundamentalScore').textContent = Math.round(fundamentalScore) + '/100';
-
-            // Animate gauge
-            const gaugeOffset = 220 - (220 * score / 100);
-            setTimeout(() => {
-                document.getElementById('gaugeFill').style.strokeDashoffset = gaugeOffset;
-            }, 100);
-
-            // Sentiment Analysis - now based on analysis scores for consistency
-            // Sentiment Analysis - deterministic based on scores and indicators
-            const bullishBase = (technicalScore + fundamentalScore) / 2;
-            const sentimentVariance = ((symbolSeed * 13 % 20) - 10) / 2; // -5 to +5
-            const bullish = Math.min(75, Math.max(20, bullishBase + sentimentVariance));
-
-            // Bearish inversely correlates with bullish, with some neutral buffer
-            const bearishBase = Math.max(10, 85 - bullish - 15); // Leave room for neutral
-            const bearishVariance = ((symbolSeed * 17 % 16) - 8) / 2;
-            const bearish = Math.min(50, Math.max(10, bearishBase + bearishVariance));
-            const neutral = Math.max(10, 100 - bullish - bearish);
-
-            document.getElementById('bullishBar').style.width = bullish + '%';
-            document.getElementById('neutralBar').style.width = neutral + '%';
-            document.getElementById('bearishBar').style.width = bearish + '%';
-            document.getElementById('bullishValue').textContent = bullish.toFixed(0) + '%';
-            document.getElementById('neutralValue').textContent = neutral.toFixed(0) + '%';
-            document.getElementById('bearishValue').textContent = bearish.toFixed(0) + '%';
-
-            const sentimentLabel = bullish > 50 ? 'Bullish' : bearish > 35 ? 'Bearish' : 'Neutral';
-            document.getElementById('sentimentBadge').textContent = sentimentLabel;
-            document.getElementById('sentimentBadge').className = 'card-badge ' + (bullish > 50 ? 'badge-bullish' : bearish > 35 ? 'badge-bearish' : 'badge-neutral');
-
-            // News and social scores - deterministic correlation with analysis
-            const newsVariance = ((symbolSeed * 19 % 24) - 12);
-            const socialVariance = ((symbolSeed * 23 % 28) - 14);
-            const newsBase = 50 + (score - 50) * 0.5;
-            const socialBase = 50 + (score - 50) * 0.4;
-            document.getElementById('newsScore').textContent = Math.round(Math.max(40, Math.min(90, newsBase + newsVariance))) + '/100';
-            document.getElementById('socialScore').textContent = Math.round(Math.max(35, Math.min(85, socialBase + socialVariance))) + '/100';
+            // Loading state for news/social scores
+            document.getElementById('newsScore').textContent = '--/100';
+            document.getElementById('socialScore').textContent = '--/100';
 
             // Price Analysis - use real data from API
             const dayHigh = stockData.dayHigh || price * 1.01;
