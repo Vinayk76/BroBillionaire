@@ -10076,6 +10076,17 @@
 
             const score = Math.round(Math.max(12, Math.min(88, adjustedScore)));
 
+            // Derive signal from score
+            let signal, signalClass, signalBadgeClass, signalEmoji;
+            if (score >= 75) { signal = 'STRONG BUY'; signalClass = 'signal-buy'; signalBadgeClass = 'badge-bullish'; signalEmoji = '🚀'; }
+            else if (score >= 60) { signal = 'BUY'; signalClass = 'signal-buy'; signalBadgeClass = 'badge-bullish'; signalEmoji = '📈'; }
+            else if (score >= 45) { signal = 'HOLD'; signalClass = 'signal-hold'; signalBadgeClass = 'badge-neutral'; signalEmoji = '⏸️'; }
+            else if (score >= 30) { signal = 'SELL'; signalClass = 'signal-sell'; signalBadgeClass = 'badge-bearish'; signalEmoji = '📉'; }
+            else { signal = 'STRONG SELL'; signalClass = 'signal-sell'; signalBadgeClass = 'badge-bearish'; signalEmoji = '🔻'; }
+
+            // Calculate bullish sentiment percentage from score and momentum
+            const bullish = Math.max(10, Math.min(90, score + (change > 0 ? 5 : -5)));
+
             // Update Stock Header
             document.getElementById('stockLogo').textContent = symbol.substring(0, 2);
             document.getElementById('stockName').textContent = stockData.name;
