@@ -817,6 +817,28 @@ app.post('/api/openai/chat', async (req, res) => {
 // For stock prices, quotes, and historical data
 // ============================================
 
+// Yahoo Finance Chart Proxy - avoids CORS issues for frontend tools
+app.get('/api/yahoo/chart/:symbol', async (req, res) => {
+    try {
+        const symbol = req.params.symbol;
+        const interval = req.query.interval || '1d';
+        const range = req.query.range || '1d';
+        const url = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=${interval}&range=${range}`;
+
+        const response = await fetchWithTimeout(url, {
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+            }
+        }, 15000);
+
+        const data = await response.json();
+        res.json(data);
+    } catch (error) {
+        console.error('Yahoo Chart Proxy Error:', error.message);
+        res.status(500).json({ error: 'Failed to fetch chart data' });
+    }
+});
+
 // Get stock quote from Yahoo Finance
 app.get('/api/stock/quote/:symbol', async (req, res) => {
     try {

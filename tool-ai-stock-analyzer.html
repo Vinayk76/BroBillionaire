@@ -7138,13 +7138,17 @@
                 const timeout = INITIAL_TIMEOUT + (retry * 5000); // Progressive timeout: 10s, 15s, 20s, 25s, 30s
                 console.log(`🔍 Attempt ${retry + 1}/${MAX_RETRIES} to fetch ACCURATE data for ${symbol}... (timeout: ${timeout}ms)`);
 
-                // Try all proxies in parallel for speed
-                const fetchPromises = CORS_PROXIES.map(async (proxy) => {
+                // Try backend proxy FIRST, then CORS proxies as fallback
+                const sources = [
+                    `/api/yahoo/chart/${yahooSymbol}?interval=1d&range=1d`,
+                    ...CORS_PROXIES.map(proxy => proxy + encodeURIComponent(YAHOO_FINANCE_API + yahooSymbol + '?interval=1d&range=1d'))
+                ];
+
+                const fetchPromises = sources.map(async (url) => {
                     const controller = new AbortController();
                     const timeoutId = setTimeout(() => controller.abort(), timeout);
 
                     try {
-                        const url = proxy + encodeURIComponent(YAHOO_FINANCE_API + yahooSymbol + '?interval=1d&range=1d');
                         const response = await fetch(url, { signal: controller.signal });
                         clearTimeout(timeoutId);
 
@@ -8239,14 +8243,19 @@
 
             try {
                 // Fetch 3 months of daily data for accurate indicator calculations
-                const fetchPromises = CORS_PROXIES.map(async (proxy) => {
+                // Try backend proxy FIRST, then CORS proxies as fallback
+                const sources = [
+                    `/api/yahoo/chart/${yahooSymbol}?interval=1d&range=3mo`,
+                    ...CORS_PROXIES.map(proxy => proxy + encodeURIComponent(
+                        `${YAHOO_FINANCE_API}${yahooSymbol}?interval=1d&range=3mo`
+                    ))
+                ];
+
+                const fetchPromises = sources.map(async (url) => {
                     const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 8000); // Increased timeout
+                    const timeoutId = setTimeout(() => controller.abort(), 8000);
 
                     try {
-                        const url = proxy + encodeURIComponent(
-                            `${YAHOO_FINANCE_API}${yahooSymbol}?interval=1d&range=3mo`
-                        );
                         const response = await fetch(url, { signal: controller.signal });
                         clearTimeout(timeoutId);
 
