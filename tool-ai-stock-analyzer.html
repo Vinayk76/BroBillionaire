@@ -8076,8 +8076,51 @@
             return analystData;
         }
 
-        // Fetch basic financials from Finnhub (PE, EPS, etc.)
+        // Fetch real fundamentals from server (Yahoo Finance quoteSummary)
+        async function fetchRealFundamentals(symbol) {
+            try {
+                const metadata = stockMetadata[symbol.toUpperCase()];
+                const yahooSymbol = (metadata && metadata.yahooSymbol ? metadata.yahooSymbol : symbol.toUpperCase());
+
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+                const response = await fetch(`/api/stock/fundamentals/${yahooSymbol}`, { signal: controller.signal });
+                clearTimeout(timeoutId);
+
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data && data.success) {
+                        console.log('✅ Real fundamentals loaded from Yahoo Finance:', data);
+                        return {
+                            pe: data.pe || null,
+                            pb: data.pb || null,
+                            eps: data.eps || null,
+                            roe: data.roe || null,
+                            debtEquity: data.debtEquity || null,
+                            divYield: data.divYield || null,
+                            beta: data.beta || null,
+                            bookValue: data.bookValue || null,
+                            marketCap: data.marketCap || null,
+                            fiftyTwoWeekHigh: data.fiftyTwoWeekHigh || null,
+                            fiftyTwoWeekLow: data.fiftyTwoWeekLow || null,
+                            source: 'Yahoo Finance'
+                        };
+                    }
+                }
+            } catch (error) {
+                console.log('Yahoo Finance fundamentals fetch failed:', error.message);
+            }
+            return null;
+        }
+
+        // Fetch basic financials from Finnhub (PE, EPS, etc.) - fallback source
         async function fetchFinnhubFinancials(symbol) {
+            // Try Yahoo Finance endpoint first (more reliable for Indian stocks)
+            const yahooData = await fetchRealFundamentals(symbol);
+            if (yahooData) return yahooData;
+
+            // Fallback to Finnhub
             try {
                 const finnhubSymbol = symbol.toUpperCase() + '.NS';
                 const url = `${FINNHUB_API}stock/metric?symbol=${finnhubSymbol}&metric=all&token=${FINNHUB_KEY}`;
@@ -9064,6 +9107,111 @@
                     pe: { min: 35, max: 90 }, roe: { min: 8, max: 18 },
                     de: { min: 0.2, max: 0.6 }, div: { min: 0.2, max: 0.8 },
                     pb: { min: 3, max: 10 }, beta: { min: 0.8, max: 1.2 }
+                },
+                'Media': {
+                    pe: { min: 20, max: 50 }, roe: { min: 8, max: 20 },
+                    de: { min: 0.3, max: 1.2 }, div: { min: 0.2, max: 1.5 },
+                    pb: { min: 2, max: 6 }, beta: { min: 1.0, max: 1.5 }
+                },
+                'Healthcare': {
+                    pe: { min: 25, max: 50 }, roe: { min: 10, max: 22 },
+                    de: { min: 0.2, max: 0.8 }, div: { min: 0.3, max: 1.2 },
+                    pb: { min: 3, max: 8 }, beta: { min: 0.5, max: 0.9 }
+                },
+                'Insurance': {
+                    pe: { min: 15, max: 35 }, roe: { min: 12, max: 22 },
+                    de: { min: 0.1, max: 0.5 }, div: { min: 0.5, max: 1.5 },
+                    pb: { min: 3, max: 8 }, beta: { min: 0.7, max: 1.1 }
+                },
+                'Real Estate': {
+                    pe: { min: 15, max: 40 }, roe: { min: 8, max: 18 },
+                    de: { min: 0.5, max: 1.5 }, div: { min: 0.3, max: 1.0 },
+                    pb: { min: 1.5, max: 4 }, beta: { min: 1.1, max: 1.6 }
+                },
+                'Chemicals': {
+                    pe: { min: 20, max: 45 }, roe: { min: 12, max: 25 },
+                    de: { min: 0.2, max: 0.8 }, div: { min: 0.5, max: 1.5 },
+                    pb: { min: 3, max: 8 }, beta: { min: 0.8, max: 1.3 }
+                },
+                'Consumer Durables': {
+                    pe: { min: 30, max: 60 }, roe: { min: 15, max: 30 },
+                    de: { min: 0.1, max: 0.5 }, div: { min: 0.5, max: 1.5 },
+                    pb: { min: 5, max: 15 }, beta: { min: 0.7, max: 1.1 }
+                },
+                'Hotels': {
+                    pe: { min: 30, max: 70 }, roe: { min: 8, max: 18 },
+                    de: { min: 0.3, max: 1.0 }, div: { min: 0.2, max: 1.0 },
+                    pb: { min: 3, max: 8 }, beta: { min: 1.0, max: 1.4 }
+                },
+                'Retail': {
+                    pe: { min: 40, max: 100 }, roe: { min: 8, max: 20 },
+                    de: { min: 0.2, max: 0.8 }, div: { min: 0.1, max: 0.5 },
+                    pb: { min: 5, max: 15 }, beta: { min: 0.9, max: 1.3 }
+                },
+                'E-commerce': {
+                    pe: { min: 50, max: 200 }, roe: { min: 2, max: 15 },
+                    de: { min: 0.05, max: 0.3 }, div: { min: 0.0, max: 0.1 },
+                    pb: { min: 4, max: 20 }, beta: { min: 1.1, max: 1.6 }
+                },
+                'Internet': {
+                    pe: { min: 50, max: 200 }, roe: { min: 2, max: 15 },
+                    de: { min: 0.05, max: 0.3 }, div: { min: 0.0, max: 0.1 },
+                    pb: { min: 4, max: 20 }, beta: { min: 1.1, max: 1.6 }
+                },
+                'Fintech': {
+                    pe: { min: 40, max: 150 }, roe: { min: 5, max: 18 },
+                    de: { min: 0.05, max: 0.4 }, div: { min: 0.0, max: 0.3 },
+                    pb: { min: 4, max: 15 }, beta: { min: 1.0, max: 1.5 }
+                },
+                'Defence': {
+                    pe: { min: 25, max: 55 }, roe: { min: 12, max: 22 },
+                    de: { min: 0.1, max: 0.5 }, div: { min: 0.5, max: 1.5 },
+                    pb: { min: 4, max: 10 }, beta: { min: 0.7, max: 1.1 }
+                },
+                'Logistics': {
+                    pe: { min: 20, max: 40 }, roe: { min: 12, max: 22 },
+                    de: { min: 0.3, max: 1.0 }, div: { min: 0.5, max: 1.5 },
+                    pb: { min: 3, max: 7 }, beta: { min: 0.8, max: 1.2 }
+                },
+                'Travel': {
+                    pe: { min: 35, max: 80 }, roe: { min: 15, max: 30 },
+                    de: { min: 0.1, max: 0.5 }, div: { min: 0.2, max: 1.0 },
+                    pb: { min: 5, max: 15 }, beta: { min: 0.9, max: 1.3 }
+                },
+                'Textiles': {
+                    pe: { min: 10, max: 25 }, roe: { min: 8, max: 18 },
+                    de: { min: 0.4, max: 1.2 }, div: { min: 1.0, max: 3.0 },
+                    pb: { min: 1.5, max: 4 }, beta: { min: 0.8, max: 1.3 }
+                },
+                'Sugar': {
+                    pe: { min: 8, max: 20 }, roe: { min: 10, max: 20 },
+                    de: { min: 0.3, max: 1.0 }, div: { min: 1.0, max: 3.0 },
+                    pb: { min: 1.5, max: 3.5 }, beta: { min: 0.9, max: 1.4 }
+                },
+                'Building Materials': {
+                    pe: { min: 25, max: 50 }, roe: { min: 12, max: 22 },
+                    de: { min: 0.2, max: 0.8 }, div: { min: 0.5, max: 1.5 },
+                    pb: { min: 3, max: 8 }, beta: { min: 0.8, max: 1.2 }
+                },
+                'Electric Vehicles': {
+                    pe: { min: 50, max: 150 }, roe: { min: 5, max: 15 },
+                    de: { min: 0.2, max: 0.8 }, div: { min: 0.0, max: 0.5 },
+                    pb: { min: 5, max: 15 }, beta: { min: 1.1, max: 1.5 }
+                },
+                'Gaming': {
+                    pe: { min: 30, max: 80 }, roe: { min: 5, max: 15 },
+                    de: { min: 0.1, max: 0.4 }, div: { min: 0.0, max: 0.5 },
+                    pb: { min: 4, max: 12 }, beta: { min: 1.0, max: 1.5 }
+                },
+                'Industrial': {
+                    pe: { min: 20, max: 40 }, roe: { min: 12, max: 22 },
+                    de: { min: 0.3, max: 1.0 }, div: { min: 0.5, max: 2.0 },
+                    pb: { min: 3, max: 7 }, beta: { min: 0.9, max: 1.3 }
+                },
+                'Mining': {
+                    pe: { min: 5, max: 14 }, roe: { min: 12, max: 28 },
+                    de: { min: 0.3, max: 1.2 }, div: { min: 1.5, max: 4.5 },
+                    pb: { min: 0.8, max: 2.5 }, beta: { min: 1.2, max: 1.8 }
                 }
             };
 
@@ -9179,8 +9327,11 @@
             }, 120000); // 2 minutes for accuracy-first approach
 
             try {
-                // Fetch live data from API
-                const stockData = await fetchLiveStockData(input);
+                // Fetch live data AND real fundamentals in parallel
+                const [stockData, realFundamentals] = await Promise.all([
+                    fetchLiveStockData(input),
+                    fetchRealFundamentals(input).catch(() => null)
+                ]);
 
                 // Validate the fetched data for accuracy
                 const validation = validateStockData(stockData, input);
@@ -9195,7 +9346,7 @@
 
                 clearTimeout(failsafeTimeout);
                 clearInterval(loadingInterval);
-                displayAnalysis(input, stockData);
+                displayAnalysis(input, stockData, realFundamentals);
                 document.getElementById('loadingOverlay').classList.remove('active');
                 document.getElementById('resultsSection').classList.remove('hidden');
 
@@ -9794,11 +9945,17 @@
             if (data.eps && data.eps > 0) {
                 document.getElementById('eps').textContent = '₹' + data.eps.toFixed(2);
             }
-            if (data.divYield && data.divYield > 0) {
+            if (data.divYield != null && data.divYield >= 0) {
                 document.getElementById('divYield').textContent = data.divYield.toFixed(2) + '%';
             }
             if (data.beta && data.beta > 0) {
                 document.getElementById('beta').textContent = data.beta.toFixed(2);
+            }
+            if (data.debtEquity != null && data.debtEquity >= 0) {
+                document.getElementById('debtEquity').textContent = data.debtEquity.toFixed(2);
+            }
+            if (data.bookValue && data.bookValue > 0) {
+                document.getElementById('bookValue').textContent = '₹' + data.bookValue.toFixed(0);
             }
             if (data.marketCap && data.marketCap > 0) {
                 document.getElementById('marketCap').textContent = formatNumber(data.marketCap);
@@ -9810,7 +9967,7 @@
             if (data.fiftyTwoWeekLow) {
                 document.getElementById('week52Low').textContent = '₹' + data.fiftyTwoWeekLow.toFixed(2);
             }
-            console.log('✅ Fundamentals updated from Finnhub API');
+            console.log('✅ Fundamentals updated from', data.source || 'API');
         }
 
         // Update news score in sentiment card based on real news
@@ -9875,14 +10032,24 @@
             }
         }
 
-        function displayAnalysis(symbol, stockData) {
+        function displayAnalysis(symbol, stockData, realFundamentals = null) {
             // Use real price data from API or fallback
             const price = stockData.price;
             const change = stockData.change;
             const changeAmount = price * (change / 100);
 
-            // Generate fundamentals for analysis (API doesn't provide these for free)
-            const fundamentals = generateFundamentals(price, stockData.sector);
+            // Use real fundamentals from Yahoo Finance if available, otherwise fall back to generated
+            const generatedFallback = generateFundamentals(price, stockData.sector);
+            const fundamentals = realFundamentals ? {
+                pe: realFundamentals.pe || generatedFallback.pe,
+                pb: realFundamentals.pb || generatedFallback.pb,
+                divYield: realFundamentals.divYield != null ? realFundamentals.divYield : generatedFallback.divYield,
+                beta: realFundamentals.beta || generatedFallback.beta,
+                roe: realFundamentals.roe || generatedFallback.roe,
+                eps: realFundamentals.eps || (realFundamentals.pe ? price / realFundamentals.pe : generatedFallback.eps),
+                debtEquity: realFundamentals.debtEquity != null ? realFundamentals.debtEquity : generatedFallback.debtEquity,
+                bookValue: realFundamentals.bookValue || (realFundamentals.pb ? price / realFundamentals.pb : generatedFallback.bookValue)
+            } : generatedFallback;
 
             // Show data source indicator
             const dataSourceBadge = stockData.success !== false ?

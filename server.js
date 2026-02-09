@@ -896,6 +896,112 @@ app.get('/api/stock/quote/:symbol', async (req, res) => {
     }
 });
 
+// Yahoo Finance crumb/cookie cache for quoteSummary API
+let yahooCrumb = null;
+let yahooCookies = null;
+let yahooCrumbExpiry = 0;
+
+async function getYahooCrumb() {
+    if (yahooCrumb && yahooCookies && Date.now() < yahooCrumbExpiry) {
+        return { crumb: yahooCrumb, cookies: yahooCookies };
+    }
+    try {
+        const consentResp = await fetchWithTimeout('https://fc.yahoo.com', {
+            headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' },
+            redirect: 'manual'
+        }, 5000);
+        const setCookies = consentResp.headers.get('set-cookie') || '';
+        const crumbResp = await fetchWithTimeout('https://query2.finance.yahoo.com/v1/test/getcrumb', {
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                'Cookie': setCookies
+            }
+        }, 5000);
+        const crumb = await crumbResp.text();
+        if (crumb && !crumb.includes('{') && !crumb.includes('<')) {
+            yahooCrumb = crumb;
+            yahooCookies = setCookies;
+            yahooCrumbExpiry = Date.now() + 3600000;
+            return { crumb: yahooCrumb, cookies: yahooCookies };
+        }
+    } catch (error) {
+        console.error('Yahoo crumb fetch failed:', error.message);
+    }
+    return { crumb: null, cookies: null };
+}
+
+// Get real fundamental data from Yahoo Finance quoteSummary API
+app.get('/api/stock/fundamentals/:symbol', async (req, res) => {
+    try {
+        const symbol = req.params.symbol.toUpperCase();
+        let yahooSymbol = symbol;
+        if (!symbol.includes('.') && !symbol.startsWith('^')) {
+            yahooSymbol = symbol + '.NS';
+        }
+
+        const { crumb, cookies } = await getYahooCrumb();
+        const modules = 'defaultKeyStatistics,financialData,summaryDetail';
+        let url = `https://query2.finance.yahoo.com/v10/finance/quoteSummary/${yahooSymbol}?modules=${modules}`;
+        if (crumb) url += `&crumb=${encodeURIComponent(crumb)}`;
+
+        const headers = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' };
+        if (cookies) headers['Cookie'] = cookies;
+
+        const response = await fetchWithTimeout(url, { headers }, 10000);
+        const data = await response.json();
+
+        if (data.quoteSummary && data.quoteSummary.result && data.quoteSummary.result[0]) {
+            const result = data.quoteSummary.result[0];
+            const keyStats = result.defaultKeyStatistics || {};
+            const fin = result.financialData || {};
+            const summary = result.summaryDetail || {};
+
+            const val = (obj) => {
+                if (!obj) return null;
+                if (typeof obj === 'number') return obj;
+                if (obj.raw !== undefined && obj.raw !== null) return obj.raw;
+                return null;
+            };
+
+            const pe = val(summary.trailingPE) || val(keyStats.trailingPE);
+            const roeRaw = val(fin.returnOnEquity);
+            const divYieldRaw = val(summary.dividendYield);
+            const deRaw = val(fin.debtToEquity);
+            const profitMarginRaw = val(fin.profitMargins);
+            const opMarginRaw = val(fin.operatingMargins);
+
+            res.json({
+                success: true,
+                symbol: symbol,
+                pe: pe,
+                forwardPE: val(keyStats.forwardPE) || val(summary.forwardPE),
+                pb: val(keyStats.priceToBook),
+                eps: val(keyStats.trailingEps),
+                roe: roeRaw !== null ? roeRaw * 100 : null,
+                debtEquity: deRaw !== null ? deRaw / 100 : null,
+                divYield: divYieldRaw !== null ? divYieldRaw * 100 : null,
+                beta: val(keyStats.beta),
+                bookValue: val(keyStats.bookValue),
+                marketCap: val(summary.marketCap),
+                fiftyTwoWeekHigh: val(summary.fiftyTwoWeekHigh),
+                fiftyTwoWeekLow: val(summary.fiftyTwoWeekLow),
+                profitMargin: profitMarginRaw !== null ? profitMarginRaw * 100 : null,
+                operatingMargin: opMarginRaw !== null ? opMarginRaw * 100 : null,
+                source: 'Yahoo Finance'
+            });
+        } else {
+            // Invalidate crumb cache and retry without crumb
+            yahooCrumb = null;
+            yahooCookies = null;
+            yahooCrumbExpiry = 0;
+            res.status(404).json({ error: 'Fundamentals not found', symbol });
+        }
+    } catch (error) {
+        console.error('Yahoo Finance Fundamentals Error:', error.message);
+        res.status(500).json({ error: 'Failed to fetch fundamentals' });
+    }
+});
+
 // Get multiple stock quotes
 app.get('/api/stock/quotes', async (req, res) => {
     try {
