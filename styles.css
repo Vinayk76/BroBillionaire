@@ -13030,7 +13030,43 @@ div.footer-disclaimer p {
     }
 
     .hero-features {
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
         gap: 10px;
+        padding-bottom: 4px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .hero-features::-webkit-scrollbar {
+        display: none;
+    }
+
+    .hero-feature {
+        min-width: 150px;
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+        padding: 12px 14px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .feature-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 0.8rem;
+        border-radius: 8px;
+    }
+
+    .feature-text strong {
+        font-size: 0.82rem;
+    }
+
+    .feature-text span {
+        font-size: 0.72rem;
     }
 }
 
