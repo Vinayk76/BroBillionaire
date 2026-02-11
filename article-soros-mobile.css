@@ -1,0 +1,1159 @@
+/* ============================================================
+   COMPLETE MOBILE RESPONSIVE — George Soros Article
+   Comprehensive responsive coverage: 1024px → 320px
+   Loads LAST to override all inline styles and external CSS
+   ============================================================ */
+
+/* ---- GLOBAL SAFETY NET ---- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body.article-page {
+    overflow-x: hidden !important;
+    -webkit-text-size-adjust: 100%;
+}
+
+/* Force ALL inline-styled containers to respect viewport */
+.article-chapter div[style],
+.article-content-wrapper div[style],
+.article-main div[style],
+section[style],
+main div[style] {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Force all images/SVGs responsive */
+.article-chapter img,
+.article-chapter svg,
+.pattern-svg-large,
+section img,
+section svg {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+/* ---- TABLET: 1024px ---- */
+@media (max-width: 1024px) {
+    .article-main {
+        grid-template-columns: 1fr !important;
+        padding: 50px 30px !important;
+    }
+
+    .article-sidebar {
+        display: none !important;
+    }
+
+    .article-hero-content {
+        padding: 0 30px !important;
+    }
+
+    .article-content-wrapper {
+        max-width: 100% !important;
+    }
+}
+
+/* ---- MOBILE: 768px ---- */
+@media (max-width: 768px) {
+
+    /* Prevent ANY horizontal overflow */
+    html,
+    body,
+    body.article-page {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
+
+    /* --- Core Layout --- */
+    .article-header {
+        padding: 90px 16px 30px !important;
+    }
+
+    .article-hero {
+        min-height: 45vh !important;
+        padding: 80px 16px 50px !important;
+    }
+
+    .article-hero-content {
+        padding: 0 16px !important;
+        text-align: center !important;
+    }
+
+    .article-title,
+    .article-main-title {
+        font-size: 1.85rem !important;
+        line-height: 1.25 !important;
+        word-break: break-word !important;
+    }
+
+    .article-subtitle {
+        font-size: 1rem !important;
+        line-height: 1.55 !important;
+    }
+
+    .article-main {
+        padding: 30px 16px 50px !important;
+        grid-template-columns: 1fr !important;
+    }
+
+    .article-content,
+    .article-content-wrapper {
+        padding: 0 !important;
+        font-size: 1rem !important;
+        max-width: 100% !important;
+    }
+
+    .article-content h2,
+    .article-content-wrapper h2,
+    .chapter-title {
+        font-size: 1.4rem !important;
+        margin-top: 2rem !important;
+        line-height: 1.3 !important;
+    }
+
+    .article-content h3,
+    .article-content-wrapper h3 {
+        font-size: 1.15rem !important;
+    }
+
+    /* --- Hero Stats → Vertical Stack --- */
+    .article-hero-stats {
+        flex-direction: column !important;
+        gap: 12px !important;
+        align-items: center !important;
+        width: 100% !important;
+    }
+
+    .hero-stat {
+        width: 100% !important;
+        max-width: 300px !important;
+        text-align: center !important;
+        padding: 15px 20px !important;
+    }
+
+    .hero-stat-arrow {
+        transform: rotate(90deg) !important;
+        display: block !important;
+        font-size: 1rem !important;
+    }
+
+    .hero-stat .stat-value {
+        font-size: 1.3rem !important;
+    }
+
+    /* --- Meta / Breadcrumbs --- */
+    .article-meta-top {
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        justify-content: center !important;
+    }
+
+    .article-meta {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+    }
+
+    /* --- Key Takeaways --- */
+    .key-takeaways-box {
+        padding: 18px !important;
+    }
+
+    .key-takeaways-box h3 {
+        font-size: 1.1rem !important;
+    }
+
+    /* --- ALL Class-Based Grids → Single Column --- */
+    .stats-grid,
+    .broker-grid,
+    .customer-grid,
+    .related-articles-grid,
+    .info-cards-grid,
+    .rules-premium-grid,
+    .secret-cards,
+    .stats-showcase,
+    .stats-showcase-triple,
+    .philanthropy-stats {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    /* --- Force ALL inline grids to single column --- */
+    .article-chapter div[style*="grid-template-columns: repeat"],
+    .article-content-wrapper div[style*="grid-template-columns: repeat"],
+    main.article-main div[style*="grid-template-columns: repeat"],
+    section[style] div[style*="grid-template-columns: repeat"],
+    div[style*="minmax(300px"],
+    div[style*="minmax(280px"],
+    div[style*="minmax(250px"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Reflexivity 4-card Grid → 2 columns on tablet-mobile */
+    .article-chapter div[style*="minmax(200px"] {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+    }
+
+    /* --- Trade Anatomy 7-element rows: stack vertically --- */
+    .article-chapter div[style*="grid-template-columns: 60px"] {
+        grid-template-columns: 1fr !important;
+        padding: 16px !important;
+        gap: 8px !important;
+        text-align: center !important;
+    }
+
+    .article-chapter div[style*="grid-template-columns: 60px"]>div[style*="width: 50px"] {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 1rem !important;
+        margin: 0 auto 8px !important;
+    }
+
+    .article-chapter div[style*="grid-template-columns: 60px"]>div:last-child {
+        text-align: left !important;
+    }
+
+    /* --- Trade Setup Cards Inner Padding --- */
+    .article-chapter div[style*="border-radius: 16px; padding: 25px; position: relative"],
+    div[style*="border-radius: 16px; padding: 25px; position: relative"] {
+        padding: 18px 14px !important;
+        margin-top: 12px !important;
+    }
+
+    /* --- Bordered Container Boxes --- */
+    .article-chapter div[style*="border: 2px solid"][style*="padding: 30px"],
+    .article-chapter div[style*="border: 2px solid"][style*="padding: 25px"],
+    div[style*="border: 2px solid"][style*="padding: 30px"],
+    div[style*="border: 2px solid"][style*="padding: 25px"] {
+        padding: 16px !important;
+    }
+
+    /* --- Section Titles in Boxes --- */
+    .article-chapter h3[style*="font-size: 1.4rem"],
+    .article-chapter h3[style*="font-size: 1.5rem"],
+    .article-chapter h3[style] {
+        font-size: 1.1rem !important;
+        margin-bottom: 14px !important;
+    }
+
+    /* --- Tables: horizontal scroll --- */
+    .data-table,
+    .comparison-table,
+    .matrix-table,
+    table,
+    .article-chapter table {
+        font-size: 0.82rem !important;
+        display: block !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        max-width: 100% !important;
+    }
+
+    .article-chapter table thead,
+    .article-chapter table tbody,
+    table thead,
+    table tbody {
+        display: table !important;
+        width: 100% !important;
+    }
+
+    .article-chapter table th,
+    .article-chapter table td,
+    table th,
+    table td {
+        padding: 8px 10px !important;
+        font-size: 0.82rem !important;
+    }
+
+    /* Allow text wrap in body cells for readability */
+    .article-chapter table tbody td,
+    table tbody td {
+        white-space: normal !important;
+        min-width: 90px !important;
+    }
+
+    /* Keep header cells from wrapping for layout */
+    .article-chapter table th,
+    table th {
+        white-space: nowrap !important;
+    }
+
+    /* --- Checklist Items --- */
+    .soros-checklist-item {
+        padding: 12px !important;
+        gap: 10px !important;
+    }
+
+    .soros-checklist-item strong {
+        font-size: 0.92rem !important;
+    }
+
+    .soros-checklist-item p {
+        font-size: 0.82rem !important;
+    }
+
+    .soros-checkbox {
+        min-width: 24px !important;
+        height: 24px !important;
+    }
+
+    .soros-checkbox .checkmark {
+        width: 24px !important;
+        height: 24px !important;
+        font-size: 14px !important;
+    }
+
+    /* Checklist container */
+    div[style*="border: 2px solid rgba(34,197,94"] {
+        padding: 16px !important;
+    }
+
+    /* --- Article TOC --- */
+    .article-toc {
+        padding: 16px !important;
+    }
+
+    /* --- FAQ Section --- */
+    .faq-section {
+        padding: 20px 16px !important;
+    }
+
+    .faq-answer p {
+        font-size: 0.9rem !important;
+        line-height: 1.6 !important;
+    }
+
+    .faq-question span {
+        font-size: 0.95rem !important;
+    }
+
+    /* --- Hot Take / Trader Takeaway Boxes --- */
+    .hot-take-box {
+        padding: 16px !important;
+    }
+
+    .hot-take-box h4 {
+        font-size: 1rem !important;
+    }
+
+    .hot-take-box p {
+        font-size: 0.9rem !important;
+        line-height: 1.6 !important;
+    }
+
+    /* --- Achievement Badge --- */
+    .achievement-badge {
+        flex-direction: column !important;
+        text-align: center !important;
+        padding: 16px !important;
+        gap: 12px !important;
+    }
+
+    .achievement-badge .badge-icon {
+        margin: 0 auto !important;
+    }
+
+    /* --- Rule Premium Cards --- */
+    .rule-premium-card {
+        padding: 16px !important;
+    }
+
+    .rule-premium-card h4 {
+        font-size: 1rem !important;
+    }
+
+    .rule-premium-card p {
+        font-size: 0.88rem !important;
+    }
+
+    .rule-premium-card p[style*="font-size: 0.85rem"] {
+        font-size: 0.8rem !important;
+    }
+
+    /* --- Battle Arena Layout --- */
+    .battle-arena {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+
+    .vs-divider {
+        font-size: 2rem !important;
+        margin: 1rem 0 !important;
+    }
+
+    /* --- Transformation Visual → Stack --- */
+    .transformation-visual {
+        flex-direction: column !important;
+        gap: 16px !important;
+        align-items: center !important;
+    }
+
+    .transform-arrow {
+        transform: rotate(90deg) !important;
+    }
+
+    .transform-box {
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    /* --- Pattern Showcase (SVG diagrams) --- */
+    .pattern-showcase {
+        flex-direction: column !important;
+        grid-template-columns: 1fr !important;
+    }
+
+    .pattern-visual-large {
+        max-width: 100% !important;
+    }
+
+    /* SVG text labels — make readable on mobile */
+    .pattern-svg-large text {
+        font-size: 9px !important;
+    }
+
+    /* --- Power Tools Section at Bottom (outside article-main) --- */
+    section[style*="padding: 2.5rem"] {
+        padding: 1.2rem !important;
+        margin-left: 16px !important;
+        margin-right: 16px !important;
+        border-radius: 12px !important;
+    }
+
+    section[style*="padding: 2.5rem"] h2 {
+        font-size: 1.3rem !important;
+    }
+
+    section[style*="padding: 2.5rem"] h3 {
+        font-size: 1rem !important;
+    }
+
+    section[style*="padding: 2.5rem"] p {
+        font-size: 0.88rem !important;
+    }
+
+    section[style*="padding: 2.5rem"] div[style*="minmax(280px"],
+    section[style*="padding: 2.5rem"] div[style*="minmax(300px"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Power Tools CTA buttons */
+    section[style*="padding: 2.5rem"] a[style*="inline-block"] {
+        display: block !important;
+        text-align: center !important;
+        width: 100% !important;
+    }
+
+    /* --- Related Articles Section --- */
+    .related-articles-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .related-articles-section {
+        padding: 40px 16px !important;
+    }
+
+    /* --- Blockquotes --- */
+    .article-quote,
+    .featured-quote {
+        padding: 16px 18px 16px 24px !important;
+        font-size: 1rem !important;
+        margin: 20px 0 !important;
+    }
+
+    .article-quote p {
+        font-size: 1rem !important;
+        line-height: 1.55 !important;
+        padding-left: 20px !important;
+    }
+
+    .article-quote cite {
+        padding-left: 20px !important;
+        font-size: 0.85rem !important;
+    }
+
+    .article-quote .quote-icon {
+        font-size: 1.3rem !important;
+    }
+
+    /* --- CTA Section --- */
+    .article-cta-section {
+        padding: 40px 16px !important;
+    }
+
+    .article-cta-section h2 {
+        font-size: 1.4rem !important;
+    }
+
+    .article-cta-section p {
+        font-size: 0.95rem !important;
+    }
+
+    /* --- Trust Signals --- */
+    .trust-signals {
+        padding: 10px 16px !important;
+        flex-wrap: wrap !important;
+    }
+
+    /* --- Chapter Number Badge --- */
+    .chapter-number {
+        font-size: 2.5rem !important;
+    }
+
+    /* --- Final Message Box --- */
+    .final-message-box {
+        padding: 18px !important;
+    }
+
+    .final-message-box p {
+        font-size: 0.92rem !important;
+        line-height: 1.6 !important;
+    }
+
+    /* --- Info Cards --- */
+    .info-card {
+        padding: 16px !important;
+    }
+
+    .info-card h4 {
+        font-size: 0.95rem !important;
+    }
+
+    .info-card p {
+        font-size: 0.85rem !important;
+    }
+
+    /* --- Inline paragraph text overrides --- */
+    .article-chapter div[style] p[style*="font-size: 0.9rem"] {
+        font-size: 0.85rem !important;
+    }
+
+    .article-chapter div[style] p[style*="font-size: 0.85rem"] {
+        font-size: 0.8rem !important;
+    }
+
+    /* --- Word-wrap safety for all inline content --- */
+    .article-chapter>div[style],
+    .article-content-wrapper>div[style],
+    main.article-main div[style] {
+        overflow-wrap: break-word !important;
+        word-wrap: break-word !important;
+    }
+
+    /* Inline centered paragraphs */
+    .article-chapter p[style*="text-align: center"] {
+        font-size: 0.88rem !important;
+    }
+
+    /* Nav adjustments */
+    .article-nav {
+        height: 60px !important;
+    }
+
+    .article-nav-container {
+        padding: 0 12px !important;
+    }
+
+    .back-link span {
+        display: none !important;
+    }
+
+    .back-link i {
+        font-size: 1.1rem !important;
+    }
+
+    .share-btn {
+        width: 36px !important;
+        height: 36px !important;
+    }
+
+    .nav-logo-small {
+        width: 28px !important;
+        height: 28px !important;
+    }
+}
+
+/* ---- SMALL MOBILE: 600px ---- */
+@media (max-width: 600px) {
+
+    /* Reflexivity 4-card grid → single column */
+    .article-chapter div[style*="minmax(200px"] {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+
+    .article-chapter div[style*="minmax(200px"]>div {
+        padding: 14px !important;
+    }
+
+    /* Trade Anatomy: pure flex stack */
+    .article-chapter div[style*="grid-template-columns: 60px"] {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        padding: 14px !important;
+    }
+
+    .article-chapter div[style*="grid-template-columns: 60px"]>div:last-child {
+        text-align: center !important;
+    }
+
+    /* Tighter headings */
+    .article-title,
+    .article-main-title {
+        font-size: 1.65rem !important;
+    }
+
+    .chapter-title {
+        font-size: 1.25rem !important;
+        padding-left: 40px !important;
+    }
+
+    /* Power Tools: add more margin */
+    section[style*="padding: 2.5rem"] {
+        margin-left: 12px !important;
+        margin-right: 12px !important;
+    }
+
+    /* FAQ */
+    .faq-section {
+        padding: 20px 12px !important;
+    }
+}
+
+/* ---- EXTRA SMALL MOBILE: 480px ---- */
+@media (max-width: 480px) {
+
+    /* --- Core Layout --- */
+    .article-header {
+        padding: 80px 12px 24px !important;
+    }
+
+    .article-main {
+        padding: 20px 12px 40px !important;
+    }
+
+    .article-hero {
+        min-height: 40vh !important;
+        padding: 70px 12px 40px !important;
+    }
+
+    .article-hero-content {
+        padding: 0 12px !important;
+    }
+
+    .article-title,
+    .article-main-title {
+        font-size: 1.45rem !important;
+        line-height: 1.25 !important;
+    }
+
+    .article-subtitle {
+        font-size: 0.92rem !important;
+    }
+
+    .hero-stat .stat-value {
+        font-size: 1.15rem !important;
+    }
+
+    .hero-stat .stat-label {
+        font-size: 0.72rem !important;
+    }
+
+    .hero-stat {
+        padding: 12px 16px !important;
+    }
+
+    /* --- Chapter --- */
+    .chapter-title {
+        font-size: 1.15rem !important;
+        padding-left: 35px !important;
+    }
+
+    .chapter-number {
+        font-size: 2rem !important;
+    }
+
+    .article-text {
+        font-size: 0.95rem !important;
+        line-height: 1.65 !important;
+    }
+
+    /* --- Key Takeaways --- */
+    .key-takeaways-box {
+        padding: 14px !important;
+    }
+
+    .takeaway-list li {
+        font-size: 0.9rem !important;
+        padding-left: 2rem !important;
+    }
+
+    /* --- Stat Cards --- */
+    .stat-card {
+        padding: 1rem !important;
+    }
+
+    /* --- Verdict / Conclusion / Misc Boxes --- */
+    .verdict-box,
+    .conclusion-box,
+    .broker-box,
+    .option-card,
+    .risk-card,
+    .allocation-tier {
+        padding: 1.2rem !important;
+    }
+
+    /* --- Reflexivity Loop Cards --- */
+    .article-chapter div[style*="minmax(200px"]>div {
+        padding: 12px !important;
+    }
+
+    .article-chapter div[style*="minmax(200px"] h4 {
+        font-size: 0.85rem !important;
+    }
+
+    .article-chapter div[style*="minmax(200px"] p {
+        font-size: 0.78rem !important;
+    }
+
+    .article-chapter div[style*="minmax(200px"] div[style*="font-size: 2rem"] {
+        font-size: 1.5rem !important;
+    }
+
+    /* --- Trade Anatomy Elements --- */
+    .article-chapter div[style*="grid-template-columns: 60px"] {
+        padding: 10px !important;
+    }
+
+    .article-chapter div[style*="grid-template-columns: 60px"] h4 {
+        font-size: 0.9rem !important;
+    }
+
+    .article-chapter div[style*="grid-template-columns: 60px"] p {
+        font-size: 0.82rem !important;
+    }
+
+    .article-chapter div[style*="grid-template-columns: 60px"]>div[style*="width: 50px"] {
+        width: 36px !important;
+        height: 36px !important;
+        font-size: 0.9rem !important;
+    }
+
+    /* --- Trade Setup Cards --- */
+    .article-chapter div[style*="border-radius: 16px; padding: 25px; position: relative"] {
+        padding: 14px 12px !important;
+    }
+
+    .article-chapter div[style*="border-radius: 16px; padding: 25px; position: relative"] h4 {
+        font-size: 0.95rem !important;
+    }
+
+    .article-chapter div[style*="border-radius: 16px; padding: 25px; position: relative"] p {
+        font-size: 0.82rem !important;
+    }
+
+    /* --- Container Boxes --- */
+    .article-chapter div[style*="border: 2px solid"][style*="padding: 30px"],
+    .article-chapter div[style*="border: 2px solid"][style*="padding: 25px"],
+    div[style*="border: 2px solid"][style*="padding: 30px"],
+    div[style*="border: 2px solid"][style*="padding: 25px"] {
+        padding: 12px !important;
+    }
+
+    /* --- Section Titles --- */
+    .article-chapter h3[style*="font-size: 1.4rem"],
+    .article-chapter h3[style*="font-size: 1.5rem"],
+    .article-chapter h3[style] {
+        font-size: 1rem !important;
+    }
+
+    /* --- Tables --- */
+    .article-chapter table th,
+    .article-chapter table td,
+    table th,
+    table td {
+        padding: 6px 8px !important;
+        font-size: 0.75rem !important;
+    }
+
+    /* --- Checklist Items --- */
+    .soros-checklist-item {
+        padding: 10px !important;
+        gap: 8px !important;
+    }
+
+    .soros-checklist-item strong {
+        font-size: 0.85rem !important;
+    }
+
+    .soros-checklist-item p {
+        font-size: 0.78rem !important;
+    }
+
+    .soros-checkbox,
+    .soros-checkbox .checkmark {
+        min-width: 22px !important;
+        width: 22px !important;
+        height: 22px !important;
+    }
+
+    .soros-checkbox input[type="checkbox"] {
+        width: 22px !important;
+        height: 22px !important;
+    }
+
+    .soros-checklist-status {
+        font-size: 0.78rem !important;
+    }
+
+    /* Checklist container */
+    div[style*="border: 2px solid rgba(34,197,94"] {
+        padding: 12px !important;
+    }
+
+    /* --- Hot Take / Takeaway --- */
+    .hot-take-box {
+        padding: 14px !important;
+    }
+
+    .hot-take-box h4 {
+        font-size: 0.95rem !important;
+    }
+
+    .hot-take-box p {
+        font-size: 0.85rem !important;
+    }
+
+    /* --- Achievement Badge --- */
+    .achievement-badge {
+        padding: 14px !important;
+    }
+
+    .achievement-badge h4 {
+        font-size: 0.95rem !important;
+    }
+
+    .achievement-badge p {
+        font-size: 0.82rem !important;
+    }
+
+    /* --- Rule Premium Cards --- */
+    .rules-premium-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    .rule-premium-card {
+        padding: 14px !important;
+    }
+
+    .rule-premium-card h4 {
+        font-size: 0.95rem !important;
+    }
+
+    .rule-premium-card p {
+        font-size: 0.82rem !important;
+    }
+
+    /* --- Power Tools Section --- */
+    section[style*="padding: 2.5rem"] {
+        padding: 1rem !important;
+        margin-left: 12px !important;
+        margin-right: 12px !important;
+    }
+
+    section[style*="padding: 2.5rem"] h2 {
+        font-size: 1.1rem !important;
+    }
+
+    /* --- Blockquotes --- */
+    .article-quote,
+    .featured-quote {
+        padding: 14px 16px 14px 20px !important;
+    }
+
+    .article-quote p {
+        font-size: 0.92rem !important;
+        padding-left: 16px !important;
+    }
+
+    .article-quote cite {
+        font-size: 0.8rem !important;
+        padding-left: 16px !important;
+    }
+
+    .article-quote::before {
+        font-size: 3rem !important;
+        left: 8px !important;
+        top: 8px !important;
+    }
+
+    /* --- CTA --- */
+    .article-cta-section {
+        padding: 30px 12px !important;
+    }
+
+    .article-cta-section h2 {
+        font-size: 1.2rem !important;
+    }
+
+    /* --- FAQ --- */
+    .faq-section {
+        padding: 16px 10px !important;
+    }
+
+    .faq-title {
+        font-size: 1.2rem !important;
+    }
+
+    .faq-question span {
+        font-size: 0.88rem !important;
+    }
+
+    .faq-answer p {
+        font-size: 0.82rem !important;
+    }
+
+    /* --- Related Articles --- */
+    .related-articles-section {
+        padding: 30px 12px !important;
+    }
+
+    .related-article-card h3 {
+        font-size: 1rem !important;
+    }
+
+    .related-article-card p {
+        font-size: 0.82rem !important;
+    }
+
+    /* --- Final Message Box --- */
+    .final-message-box {
+        padding: 14px !important;
+    }
+
+    .final-message-box p {
+        font-size: 0.88rem !important;
+    }
+
+    /* --- Transformation Visual --- */
+    .transform-amount {
+        font-size: 1.2rem !important;
+    }
+
+    .transform-label,
+    .transform-date {
+        font-size: 0.8rem !important;
+    }
+
+    /* --- Pattern Description --- */
+    .pattern-description h4 {
+        font-size: 1rem !important;
+    }
+
+    .pattern-description p {
+        font-size: 0.85rem !important;
+    }
+
+    /* SVG text smaller */
+    .pattern-svg-large text {
+        font-size: 8px !important;
+    }
+
+    /* Nav tighter */
+    .article-nav-container {
+        padding: 0 10px !important;
+    }
+}
+
+/* ---- ULTRA SMALL MOBILE: 360px ---- */
+@media (max-width: 360px) {
+    .article-main {
+        padding: 16px 8px 32px !important;
+    }
+
+    .article-hero-content {
+        padding: 0 8px !important;
+    }
+
+    .article-hero {
+        padding: 65px 8px 35px !important;
+    }
+
+    .article-title,
+    .article-main-title {
+        font-size: 1.3rem !important;
+    }
+
+    .article-subtitle {
+        font-size: 0.85rem !important;
+    }
+
+    .chapter-title {
+        font-size: 1.05rem !important;
+        padding-left: 30px !important;
+    }
+
+    .chapter-number {
+        font-size: 1.8rem !important;
+    }
+
+    .article-text {
+        font-size: 0.9rem !important;
+    }
+
+    .key-takeaways-box {
+        padding: 10px !important;
+    }
+
+    .takeaway-list li {
+        font-size: 0.82rem !important;
+        padding-left: 1.5rem !important;
+    }
+
+    /* Tighter spacing everywhere */
+    .article-chapter div[style*="border: 2px solid"],
+    div[style*="border: 2px solid"] {
+        padding: 10px !important;
+    }
+
+    .article-chapter div[style*="minmax(200px"]>div {
+        padding: 10px !important;
+    }
+
+    .soros-checklist-item {
+        padding: 8px !important;
+    }
+
+    .hot-take-box {
+        padding: 10px !important;
+    }
+
+    .rule-premium-card {
+        padding: 10px !important;
+    }
+
+    section[style*="padding: 2.5rem"] {
+        padding: 0.8rem !important;
+        margin-left: 8px !important;
+        margin-right: 8px !important;
+    }
+
+    .faq-section {
+        padding: 12px 8px !important;
+    }
+
+    /* Badge labels on trade setup cards */
+    .article-chapter div[style*="position: absolute; top: -12px"],
+    div[style*="position: absolute; top: -12px"] {
+        font-size: 0.65rem !important;
+        padding: 3px 10px !important;
+    }
+
+    /* Nav ultra-tight */
+    .article-nav-container {
+        padding: 0 8px !important;
+    }
+
+    .article-nav {
+        height: 55px !important;
+    }
+
+    /* SVG text on tiny screens */
+    .pattern-svg-large text {
+        font-size: 7px !important;
+    }
+
+    /* Hero stat */
+    .hero-stat {
+        padding: 10px 14px !important;
+    }
+
+    .hero-stat .stat-value {
+        font-size: 1.05rem !important;
+    }
+
+    .hero-stat .stat-label {
+        font-size: 0.65rem !important;
+    }
+
+    /* Related & CTA */
+    .related-articles-section {
+        padding: 25px 8px !important;
+    }
+
+    .article-cta-section {
+        padding: 25px 8px !important;
+    }
+}
+
+/* ---- MINIMUM WIDTH: 320px ---- */
+@media (max-width: 320px) {
+
+    .article-title,
+    .article-main-title {
+        font-size: 1.15rem !important;
+    }
+
+    .chapter-title {
+        font-size: 0.95rem !important;
+    }
+
+    .article-text {
+        font-size: 0.85rem !important;
+    }
+
+    .hero-stat .stat-value {
+        font-size: 1rem !important;
+    }
+
+    .hero-stat {
+        padding: 8px 10px !important;
+    }
+
+    /* Tables: even tighter */
+    .article-chapter table th,
+    .article-chapter table td,
+    table th,
+    table td {
+        padding: 5px 6px !important;
+        font-size: 0.7rem !important;
+    }
+}
+
+/* ---- LANDSCAPE ON SMALL SCREENS ---- */
+@media (max-height: 500px) and (orientation: landscape) {
+    .article-hero {
+        min-height: 60vh !important;
+    }
+
+    .article-hero-stats {
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 10px !important;
+        justify-content: center !important;
+    }
+
+    .hero-stat-arrow {
+        transform: none !important;
+    }
+
+    .hero-stat {
+        max-width: 200px !important;
+    }
+}
+
+/* ---- PRINT SAFETY ---- */
+@media print {
+
+    .article-nav,
+    .reading-progress-bar,
+    .article-cta-section,
+    .share-btn {
+        display: none !important;
+    }
+}
