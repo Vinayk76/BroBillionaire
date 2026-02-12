@@ -1,0 +1,2786 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0Y2LBMRSW"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-N0Y2LBMRSW');</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Jane Street Makes Money Without Doing "Anything" | BroBillionaire</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="article-common.css">
+    <link rel="stylesheet" href="footer-styles.css">
+    <link rel="stylesheet" href="backlink-styles.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="faq-common.css">
+    <meta name="description"
+        content="How Jane Street quietly makes $20+ billion per year without managing anyone's money. The market-making machine explained: arbitrage, ETF creation, and why they profit whether markets go up or down.">
+    <meta name="title" content="How Jane Street Makes Money Without Doing 'Anything' | BroBillionaire">
+    <meta name="keywords"
+        content="Jane Street, how Jane Street makes money, market making explained, Jane Street trading, ETF arbitrage, quantitative trading firm, Jane Street Capital, market maker profit, bid ask spread, high frequency trading, Jane Street salary, how market makers work, Jane Street revenue, proprietary trading firm">
+    <meta name="reading-time" content="35 minutes">
+    <meta name="word-count" content="8500">
+    <meta name="author" content="BroBillionaire">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <meta name="bingbot" content="index, follow">
+    <link rel="canonical" href="https://brobillionaire.com/article-jane-street-how-they-make-money.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://brobillionaire.com/article-jane-street-how-they-make-money.html">
+    <meta property="og:title" content="How Jane Street Makes Money Without Doing 'Anything'">
+    <meta property="og:description"
+        content="$20+ billion in annual revenue. No clients. No fund. No IPO. Just pure market-making math. Here's exactly how Jane Street prints money while you sleep.">
+    <meta property="og:image" content="https://brobillionaire.com/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-02-13T00:00:00+05:30">
+    <meta property="article:modified_time" content="2026-02-13T00:00:00+05:30">
+    <meta property="article:author" content="https://brobillionaire.com/about.html">
+    <meta property="og:site_name" content="BroBillionaire">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:publisher" content="https://brobillionaire.com">
+    <meta property="article:section" content="Quantitative Trading">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://brobillionaire.com/article-jane-street-how-they-make-money.html">
+    <meta name="twitter:title" content="How Jane Street Makes Money Without Doing 'Anything'">
+    <meta name="twitter:description"
+        content="$20+ billion in annual revenue. No clients. No fund. No IPO. Just pure market-making math.">
+    <meta name="twitter:image" content="https://brobillionaire.com/og-image.jpg">
+    <meta name="twitter:site" content="@brobillionaire">
+    <meta name="twitter:creator" content="@brobillionaire">
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#C9A227">
+    <meta name="msapplication-TileColor" content="#C9A227">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="BroBillionaire">
+    <meta name="application-name" content="BroBillionaire">
+    <meta name="format-detection" content="telephone=no">
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "speakable": {
+            "@type": "SpeakableSpecification",
+            "cssSelector": [".article-main-title", ".article-subtitle", ".key-takeaways-box"]
+        },
+        "url": "https://brobillionaire.com/article-jane-street-how-they-make-money.html"
+    }
+    </script>
+    <style>
+        /* Table of Contents */
+        .article-toc {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .article-toc::before {
+            content: '\f0c9';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: #0a0a0a;
+            padding: 0 10px;
+            font-size: 24px;
+        }
+
+        .article-toc h2 {
+            color: #C9A227;
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .article-toc ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .article-toc li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .article-toc li:last-child {
+            border-bottom: none;
+        }
+
+        .article-toc a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .article-toc a:hover {
+            color: #C9A227;
+            padding-left: 10px;
+        }
+
+        .article-toc a::before {
+            content: '→';
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .article-toc a:hover::before {
+            opacity: 1;
+        }
+
+        .toc-number {
+            background: rgba(201, 162, 39, 0.2);
+            color: #C9A227;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Reading Progress Bar */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #C9A227, #FFD700);
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
+
+        /* === HERO SECTION === */
+        .js-hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 120px 24px 60px;
+            overflow: hidden;
+            background: linear-gradient(180deg, #0a0a0a 0%, #0d1117 50%, #0a0a0a 100%);
+        }
+
+        .js-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(201, 162, 39, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(96, 165, 250, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .js-grid-bg {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(201, 162, 39, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(201, 162, 39, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        .js-floating-numbers {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .js-float-num {
+            position: absolute;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: rgba(201, 162, 39, 0.12);
+            animation: floatUp 15s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .js-hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .js-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(201, 162, 39, 0.12);
+            border: 1px solid rgba(201, 162, 39, 0.25);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: #C9A227;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        .js-badge .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: #4CAF50;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(1.5);
+            }
+        }
+
+        .js-main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.8rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .js-main-title .title-line {
+            display: block;
+        }
+
+        .js-main-title .gold-line {
+            color: #C9A227;
+            font-style: italic;
+        }
+
+        .js-tagline {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .js-tagline .highlight {
+            color: #C9A227;
+            font-weight: 600;
+        }
+
+        /* Stats Bar */
+        .js-stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .js-stat {
+            text-align: center;
+            padding: 16px 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(201, 162, 39, 0.15);
+            border-radius: 12px;
+            min-width: 140px;
+            transition: all 0.3s ease;
+        }
+
+        .js-stat:hover {
+            border-color: rgba(201, 162, 39, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(201, 162, 39, 0.1);
+        }
+
+        .js-stat-value {
+            display: block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #C9A227;
+        }
+
+        .js-stat-label {
+            display: block;
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.8rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(10px);
+            }
+        }
+
+        /* === MONEY FLOW CARDS === */
+        .money-flow-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .money-flow-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 32px 24px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .money-flow-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #C9A227, transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .money-flow-card:hover {
+            border-color: rgba(201, 162, 39, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .money-flow-card:hover::before {
+            opacity: 1;
+        }
+
+        .mf-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background: rgba(201, 162, 39, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            color: #C9A227;
+        }
+
+        .money-flow-card h3 {
+            color: #fff;
+            font-size: 1.15rem;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 12px;
+        }
+
+        .money-flow-card p {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .mf-stat {
+            display: inline-block;
+            margin-top: 16px;
+            background: rgba(201, 162, 39, 0.1);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: #C9A227;
+            font-weight: 600;
+        }
+
+        /* === SPREAD VISUALIZER === */
+        .spread-visualizer {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 16px;
+            padding: 40px;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .spread-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .spread-header h3 {
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .spread-header p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        .spread-demo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .spread-side {
+            text-align: center;
+            padding: 24px 40px;
+            border-radius: 12px;
+            min-width: 180px;
+        }
+
+        .spread-side.bid {
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        .spread-side.ask {
+            background: rgba(255, 71, 87, 0.1);
+            border: 1px solid rgba(255, 71, 87, 0.3);
+        }
+
+        .spread-side-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .spread-side.bid .spread-side-label {
+            color: #4CAF50;
+        }
+
+        .spread-side.ask .spread-side-label {
+            color: #ff4757;
+        }
+
+        .spread-side-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .spread-side.bid .spread-side-price {
+            color: #4CAF50;
+        }
+
+        .spread-side.ask .spread-side-price {
+            color: #ff4757;
+        }
+
+        .spread-arrow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            color: #C9A227;
+        }
+
+        .spread-arrow i {
+            font-size: 1.5rem;
+        }
+
+        .spread-profit-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #C9A227;
+            background: rgba(201, 162, 39, 0.15);
+            padding: 4px 12px;
+            border-radius: 6px;
+        }
+
+        .spread-math {
+            text-align: center;
+            padding: 20px;
+            background: rgba(201, 162, 39, 0.05);
+            border-radius: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            line-height: 2;
+        }
+
+        .spread-math strong {
+            color: #C9A227;
+        }
+
+        /* === COMPARISON TABLE === */
+        .comparison-table-wrap {
+            overflow-x: auto;
+            margin: 40px 0;
+            border-radius: 12px;
+            border: 1px solid rgba(201, 162, 39, 0.2);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table thead {
+            background: rgba(201, 162, 39, 0.12);
+        }
+
+        .comparison-table th {
+            padding: 16px 20px;
+            text-align: left;
+            color: #C9A227;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+        }
+
+        .comparison-table td {
+            padding: 14px 20px;
+            color: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .comparison-table tbody tr:hover {
+            background: rgba(201, 162, 39, 0.05);
+        }
+
+        .comparison-table .highlight-row td {
+            background: rgba(201, 162, 39, 0.08);
+            font-weight: 600;
+            color: #fff;
+        }
+
+        /* === TIMELINE === */
+        .js-timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .js-timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #C9A227, rgba(201, 162, 39, 0.1));
+        }
+
+        .js-timeline-item {
+            position: relative;
+            padding: 24px 0 24px 30px;
+        }
+
+        .js-timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 32px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #0a0a0a;
+            border: 3px solid #C9A227;
+            z-index: 1;
+        }
+
+        .js-timeline-year {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: #C9A227;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .js-timeline-item h4 {
+            color: #fff;
+            font-size: 1.1rem;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 8px;
+        }
+
+        .js-timeline-item p {
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* === HOW IT WORKS STEPS === */
+        .hiw-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .hiw-step {
+            display: flex;
+            gap: 24px;
+            padding: 32px 24px;
+            border-left: 3px solid rgba(201, 162, 39, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .hiw-step:hover {
+            background: rgba(201, 162, 39, 0.04);
+            border-left-color: #C9A227;
+        }
+
+        .hiw-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #C9A227;
+            min-width: 60px;
+            opacity: 0.8;
+        }
+
+        .hiw-content h4 {
+            color: #fff;
+            font-size: 1.15rem;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 10px;
+        }
+
+        .hiw-content p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .hiw-content code {
+            background: rgba(201, 162, 39, 0.15);
+            color: #FFD700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+        }
+
+        .hiw-highlight {
+            background: rgba(201, 162, 39, 0.08);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+        }
+
+        .hiw-highlight i {
+            color: #C9A227;
+            margin-right: 6px;
+        }
+
+        /* === REVENUE BREAKDOWN === */
+        .revenue-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .revenue-bar-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .revenue-bar-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .revenue-bar-name {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .revenue-bar-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .revenue-bar-track {
+            height: 12px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .revenue-bar-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 1.5s ease;
+            width: 0;
+        }
+
+        .revenue-bar-fill.market-making {
+            background: linear-gradient(90deg, #C9A227, #FFD700);
+        }
+
+        .revenue-bar-fill.etf-arb {
+            background: linear-gradient(90deg, #60a5fa, #93c5fd);
+        }
+
+        .revenue-bar-fill.prop-trading {
+            background: linear-gradient(90deg, #c084fc, #d8b4fe);
+        }
+
+        .revenue-bar-fill.crypto-mm {
+            background: linear-gradient(90deg, #4CAF50, #81c784);
+        }
+
+        .revenue-bar-fill.tech-infra {
+            background: linear-gradient(90deg, #ff4757, #ff6b81);
+        }
+
+        /* === KEY INSIGHT BOX === */
+        .insight-box {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.08) 0%, rgba(0, 0, 0, 0.3) 100%);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-left: 4px solid #C9A227;
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin: 30px 0;
+        }
+
+        .insight-box h4 {
+            color: #C9A227;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .insight-box p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        /* === CONSOLE BOX === */
+        .js-console-box {
+            background: #0d1117;
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 30px 0;
+        }
+
+        .js-console-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot.red {
+            background: #ff5f57;
+        }
+
+        .dot.yellow {
+            background: #febc2e;
+        }
+
+        .dot.green {
+            background: #28c840;
+        }
+
+        .js-console-title {
+            margin-left: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .js-console-body {
+            padding: 20px 24px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.88rem;
+            line-height: 2;
+        }
+
+        .c-comment {
+            color: #6a737d;
+        }
+
+        .c-key {
+            color: #79c0ff;
+        }
+
+        .c-string {
+            color: #a5d6ff;
+        }
+
+        .c-number {
+            color: #C9A227;
+        }
+
+        .c-output {
+            background: rgba(201, 162, 39, 0.1);
+            color: #C9A227;
+            padding: 10px 16px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-weight: 700;
+            display: block;
+        }
+
+        /* === WHY IT MATTERS LIST === */
+        .why-matters-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .why-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 28px;
+            transition: all 0.3s;
+        }
+
+        .why-card:hover {
+            border-color: rgba(201, 162, 39, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .why-card .why-icon {
+            font-size: 2rem;
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        .why-card h4 {
+            color: #fff;
+            font-size: 1.05rem;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 10px;
+        }
+
+        .why-card p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           ULTRA RESPONSIVE - JANE STREET ARTICLE
+           Comprehensive Mobile-First Responsive Styles
+           ============================================ */
+
+        /* === TABLET RESPONSIVE (768px-1024px) === */
+        @media (max-width: 1024px) {
+            .money-flow-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+
+            .why-matters-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+
+            .js-stats-bar {
+                gap: 20px !important;
+            }
+
+            .js-main-title {
+                font-size: 3rem !important;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 12px 14px !important;
+            }
+        }
+
+        /* === MOBILE RESPONSIVE (max-width: 768px) === */
+        @media (max-width: 768px) {
+
+            /* Prevent horizontal overflow */
+            html,
+            body {
+                overflow-x: hidden !important;
+                max-width: 100vw !important;
+            }
+
+            /* Safe area for iOS notch devices */
+            body {
+                padding-left: env(safe-area-inset-left) !important;
+                padding-right: env(safe-area-inset-right) !important;
+            }
+
+            /* --- Hero Section Mobile --- */
+            .js-hero {
+                min-height: 85vh !important;
+                padding: 80px 16px 40px !important;
+            }
+
+            .js-main-title {
+                font-size: 2.2rem !important;
+                line-height: 1.15 !important;
+            }
+
+            .js-main-title .title-line {
+                font-size: 2.2rem !important;
+                display: block !important;
+            }
+
+            .js-main-title .gold-line {
+                font-size: 1.9rem !important;
+            }
+
+            .js-tagline {
+                font-size: 1rem !important;
+                line-height: 1.6 !important;
+                padding: 0 10px !important;
+                max-width: 100% !important;
+            }
+
+            .js-badge {
+                font-size: 0.7rem !important;
+                padding: 6px 14px !important;
+            }
+
+            .js-stats-bar {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 12px !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            .js-stat {
+                min-width: unset !important;
+                padding: 12px 10px !important;
+            }
+
+            .js-stat-value {
+                font-size: 1.3rem !important;
+            }
+
+            .js-stat-label {
+                font-size: 0.65rem !important;
+            }
+
+            .scroll-indicator {
+                bottom: 15px !important;
+                font-size: 0.75rem !important;
+            }
+
+            .js-floating-numbers {
+                opacity: 0.4 !important;
+            }
+
+            /* --- Decoder Sections Mobile --- */
+            .decoder-section {
+                padding: 40px 16px !important;
+            }
+
+            .decoder-container {
+                padding: 0 !important;
+                max-width: 100% !important;
+            }
+
+            .section-badge {
+                font-size: 0.7rem !important;
+                padding: 6px 14px !important;
+                margin-bottom: 16px !important;
+            }
+
+            .section-title-large {
+                font-size: 1.7rem !important;
+                line-height: 1.25 !important;
+                margin-bottom: 20px !important;
+            }
+
+            .section-title-large .gold-text {
+                display: inline !important;
+            }
+
+            /* --- Timeline Mobile --- */
+            .js-timeline {
+                padding-left: 30px !important;
+            }
+
+            .js-timeline::before {
+                left: 10px !important;
+            }
+
+            .js-timeline-item {
+                padding: 20px 0 20px 20px !important;
+            }
+
+            .js-timeline-item::before {
+                left: -27px !important;
+                top: 28px !important;
+                width: 13px !important;
+                height: 13px !important;
+            }
+
+            .js-timeline-year {
+                font-size: 0.75rem !important;
+            }
+
+            .js-timeline-item h4 {
+                font-size: 1.05rem !important;
+            }
+
+            .js-timeline-item p {
+                font-size: 0.9rem !important;
+                line-height: 1.7 !important;
+            }
+
+            /* --- Spread Visualizer Mobile --- */
+            .spread-visualizer {
+                padding: 24px 16px !important;
+            }
+
+            .spread-header h3 {
+                font-size: 1.15rem !important;
+            }
+
+            .spread-demo {
+                flex-direction: column !important;
+                gap: 16px !important;
+            }
+
+            .spread-side {
+                min-width: unset !important;
+                width: 100% !important;
+                padding: 20px !important;
+            }
+
+            .spread-side-price {
+                font-size: 1.6rem !important;
+            }
+
+            .spread-arrow {
+                transform: rotate(90deg);
+            }
+
+            .spread-math {
+                font-size: 0.8rem !important;
+                padding: 16px !important;
+                line-height: 2.2 !important;
+            }
+
+            /* --- Money Flow Grid Mobile --- */
+            .money-flow-grid {
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
+            }
+
+            .money-flow-card {
+                padding: 24px 20px !important;
+            }
+
+            .money-flow-card h3 {
+                font-size: 1.05rem !important;
+            }
+
+            .money-flow-card p {
+                font-size: 0.9rem !important;
+            }
+
+            .mf-icon {
+                width: 48px !important;
+                height: 48px !important;
+                font-size: 1.2rem !important;
+            }
+
+            /* --- Comparison Table Mobile --- */
+            .comparison-table-wrap {
+                margin: 30px -8px !important;
+                border-radius: 8px !important;
+            }
+
+            .comparison-table {
+                font-size: 0.78rem !important;
+                display: block !important;
+                overflow-x: auto !important;
+                -webkit-overflow-scrolling: touch !important;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 10px 10px !important;
+                white-space: nowrap !important;
+            }
+
+            .comparison-table th:first-child,
+            .comparison-table td:first-child {
+                position: sticky !important;
+                left: 0 !important;
+                background: #0d1117 !important;
+                z-index: 1 !important;
+            }
+
+            .comparison-table .highlight-row td:first-child {
+                background: rgba(15, 15, 20, 0.98) !important;
+            }
+
+            /* --- How It Works Steps Mobile --- */
+            .hiw-step {
+                flex-direction: column !important;
+                gap: 10px !important;
+                padding: 24px 16px !important;
+                border-left-width: 3px !important;
+            }
+
+            .hiw-number {
+                font-size: 1.5rem !important;
+                min-width: auto !important;
+            }
+
+            .hiw-content h4 {
+                font-size: 1.05rem !important;
+            }
+
+            .hiw-content p {
+                font-size: 0.9rem !important;
+                line-height: 1.7 !important;
+            }
+
+            .hiw-content code {
+                font-size: 0.75rem !important;
+                padding: 2px 6px !important;
+                word-break: break-word !important;
+            }
+
+            .hiw-highlight {
+                font-size: 0.85rem !important;
+                padding: 12px !important;
+                line-height: 1.6 !important;
+            }
+
+            /* --- Revenue Bars Mobile --- */
+            .revenue-bars {
+                gap: 16px !important;
+            }
+
+            .revenue-bar-name {
+                font-size: 0.82rem !important;
+            }
+
+            .revenue-bar-value {
+                font-size: 0.82rem !important;
+            }
+
+            .revenue-bar-track {
+                height: 10px !important;
+            }
+
+            /* --- Why Matters Grid Mobile --- */
+            .why-matters-grid {
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
+            }
+
+            .why-card {
+                padding: 22px !important;
+            }
+
+            .why-card .why-icon {
+                font-size: 1.6rem !important;
+            }
+
+            .why-card h4 {
+                font-size: 1rem !important;
+            }
+
+            .why-card p {
+                font-size: 0.88rem !important;
+            }
+
+            /* --- Insight Box Mobile --- */
+            .insight-box {
+                padding: 20px !important;
+                border-left-width: 3px !important;
+            }
+
+            .insight-box h4 {
+                font-size: 0.95rem !important;
+            }
+
+            .insight-box p {
+                font-size: 0.9rem !important;
+                line-height: 1.7 !important;
+            }
+
+            /* --- Console Box Mobile --- */
+            .js-console-box {
+                margin: 24px -4px !important;
+                border-radius: 10px !important;
+            }
+
+            .js-console-header {
+                padding: 10px 14px !important;
+            }
+
+            .js-console-title {
+                font-size: 0.7rem !important;
+            }
+
+            .js-console-body {
+                padding: 16px !important;
+                font-size: 0.75rem !important;
+                overflow-x: auto !important;
+                -webkit-overflow-scrolling: touch !important;
+            }
+
+            .js-console-body div {
+                white-space: nowrap !important;
+            }
+
+            .c-output {
+                font-size: 0.75rem !important;
+                padding: 8px 12px !important;
+                white-space: normal !important;
+                word-break: break-word !important;
+            }
+
+            /* --- FAQ Section Mobile --- */
+            .faq-section {
+                padding: 30px 16px !important;
+            }
+
+            .faq-container {
+                padding: 0 !important;
+            }
+
+            .faq-question {
+                padding: 16px !important;
+                font-size: 0.95rem !important;
+                text-align: left !important;
+            }
+
+            .faq-answer p {
+                font-size: 0.9rem !important;
+                line-height: 1.7 !important;
+                padding: 16px !important;
+            }
+
+            /* --- Related Articles Mobile --- */
+            .related-articles-section {
+                padding: 40px 16px !important;
+            }
+
+            .related-container {
+                padding: 0 !important;
+            }
+
+            .related-title {
+                font-size: 1.4rem !important;
+            }
+
+            .related-articles-grid {
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
+            }
+
+            .related-article-card {
+                padding: 20px !important;
+            }
+
+            .related-article-card h3 {
+                font-size: 1.05rem !important;
+            }
+
+            .related-article-card p {
+                font-size: 0.85rem !important;
+            }
+
+            /* --- CTA Section Mobile --- */
+            .article-cta-section {
+                padding: 50px 16px !important;
+            }
+
+            .cta-container h2 {
+                font-size: 1.5rem !important;
+            }
+
+            .cta-container p {
+                font-size: 0.95rem !important;
+            }
+
+            .cta-btn.large {
+                padding: 14px 28px !important;
+                font-size: 0.95rem !important;
+            }
+
+            /* --- Trust Signals Mobile --- */
+            .trust-signals {
+                padding: 12px 16px !important;
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+                gap: 10px !important;
+            }
+
+            .trust-item {
+                font-size: 0.75rem !important;
+            }
+
+            /* --- Article Navigation Mobile --- */
+            .article-nav-container {
+                padding: 8px 12px !important;
+            }
+
+            .back-link span {
+                display: none !important;
+            }
+
+            .back-link i {
+                font-size: 1.1rem !important;
+            }
+
+            .nav-logo-small {
+                height: 28px !important;
+            }
+
+            /* --- TOC Mobile --- */
+            .article-toc {
+                padding: 18px !important;
+                margin: 20px 0 !important;
+            }
+
+            .article-toc h2 {
+                font-size: 1.05rem !important;
+            }
+
+            .article-toc li {
+                padding: 6px 0 !important;
+            }
+
+            .article-toc a {
+                font-size: 0.9rem !important;
+            }
+
+            .toc-number {
+                width: 22px !important;
+                height: 22px !important;
+                font-size: 11px !important;
+            }
+
+            /* --- Code Quote Mobile --- */
+            .code-quote,
+            [class*="code-quote"] {
+                padding: 20px !important;
+                margin: 24px 0 !important;
+            }
+
+            /* Fix code blocks overflow */
+            pre,
+            code {
+                max-width: 100% !important;
+                word-wrap: break-word !important;
+                overflow-wrap: break-word !important;
+            }
+        }
+
+        /* === SMALL MOBILE (max-width: 480px) === */
+        @media (max-width: 480px) {
+
+            /* Hero even smaller */
+            .js-main-title {
+                font-size: 1.8rem !important;
+            }
+
+            .js-main-title .gold-line {
+                font-size: 1.6rem !important;
+            }
+
+            .js-tagline {
+                font-size: 0.9rem !important;
+            }
+
+            .js-stats-bar {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 8px !important;
+            }
+
+            .js-stat {
+                padding: 10px 8px !important;
+            }
+
+            .js-stat-value {
+                font-size: 1.15rem !important;
+            }
+
+            .js-stat-label {
+                font-size: 0.6rem !important;
+            }
+
+            .js-badge {
+                font-size: 0.65rem !important;
+                padding: 5px 12px !important;
+                letter-spacing: 1.5px !important;
+            }
+
+            /* Sections smaller */
+            .section-title-large {
+                font-size: 1.4rem !important;
+            }
+
+            .decoder-section {
+                padding: 30px 12px !important;
+            }
+
+            /* Spread visualizer smaller */
+            .spread-side-price {
+                font-size: 1.4rem !important;
+            }
+
+            .spread-side-label {
+                font-size: 0.65rem !important;
+            }
+
+            .spread-math {
+                font-size: 0.72rem !important;
+            }
+
+            /* Timeline smaller */
+            .js-timeline-item h4 {
+                font-size: 0.95rem !important;
+            }
+
+            .js-timeline-item p {
+                font-size: 0.85rem !important;
+            }
+
+            /* HIW steps smaller */
+            .hiw-content h4 {
+                font-size: 0.95rem !important;
+            }
+
+            .hiw-content p {
+                font-size: 0.85rem !important;
+            }
+
+            /* Table smaller */
+            .comparison-table {
+                font-size: 0.72rem !important;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 8px 8px !important;
+            }
+
+            /* Console smaller */
+            .js-console-body {
+                font-size: 0.68rem !important;
+                padding: 12px !important;
+            }
+
+            /* Money flow cards */
+            .money-flow-card {
+                padding: 20px 16px !important;
+            }
+
+            /* Why matters cards */
+            .why-card {
+                padding: 18px !important;
+            }
+
+            /* FAQ smaller */
+            .faq-question {
+                font-size: 0.88rem !important;
+                padding: 14px !important;
+            }
+
+            .faq-answer p {
+                font-size: 0.85rem !important;
+                padding: 14px !important;
+            }
+
+            /* CTA smaller */
+            .cta-container h2 {
+                font-size: 1.3rem !important;
+            }
+
+            /* Revenue bars */
+            .revenue-bar-name {
+                font-size: 0.78rem !important;
+            }
+
+            .revenue-bar-value {
+                font-size: 0.78rem !important;
+            }
+
+            /* Ensure inputs don't zoom on iOS */
+            input,
+            select,
+            textarea {
+                font-size: 16px !important;
+            }
+        }
+
+        /* === EXTRA SMALL MOBILE (max-width: 360px) === */
+        @media (max-width: 360px) {
+            .js-main-title {
+                font-size: 1.5rem !important;
+            }
+
+            .js-main-title .gold-line {
+                font-size: 1.35rem !important;
+            }
+
+            .js-stats-bar {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 6px !important;
+            }
+
+            .js-stat-value {
+                font-size: 1.05rem !important;
+            }
+
+            .section-title-large {
+                font-size: 1.25rem !important;
+            }
+
+            .spread-side-price {
+                font-size: 1.2rem !important;
+            }
+
+            .money-flow-card h3 {
+                font-size: 0.95rem !important;
+            }
+
+            .hiw-number {
+                font-size: 1.3rem !important;
+            }
+
+            .insight-box {
+                padding: 16px !important;
+            }
+
+            .faq-question {
+                font-size: 0.82rem !important;
+            }
+        }
+
+        /* === LANDSCAPE MOBILE FIX === */
+        @media (max-width: 900px) and (orientation: landscape) {
+            .js-hero {
+                min-height: 120vh !important;
+                padding-top: 60px !important;
+            }
+
+            .js-stats-bar {
+                display: flex !important;
+                flex-wrap: wrap !important;
+                gap: 10px !important;
+            }
+
+            .js-stat {
+                flex: 1 1 auto !important;
+                min-width: 120px !important;
+            }
+        }
+
+        /* === TOUCH DEVICE OPTIMIZATIONS === */
+        @media (hover: none) and (pointer: coarse) {
+
+            /* Larger touch targets */
+            .faq-question {
+                min-height: 56px !important;
+            }
+
+            .article-toc a {
+                padding: 10px 0 !important;
+            }
+
+            .related-article-card {
+                padding: 24px !important;
+            }
+
+            .why-card {
+                padding: 26px !important;
+            }
+
+            /* Remove hover effects on touch devices */
+            .money-flow-card:hover,
+            .js-stat:hover,
+            .why-card:hover {
+                transform: none !important;
+            }
+
+            /* Keep border glow on touch but remove translate */
+            .money-flow-card:active {
+                border-color: rgba(201, 162, 39, 0.4) !important;
+            }
+
+            .why-card:active {
+                border-color: rgba(201, 162, 39, 0.3) !important;
+            }
+        }
+
+        /* === PRINT STYLES === */
+        @media print {
+
+            .js-hero,
+            .js-floating-numbers,
+            .js-grid-bg,
+            .scroll-indicator,
+            .article-nav,
+            .reading-progress-bar,
+            .article-cta-section,
+            .related-articles-section {
+                display: none !important;
+            }
+
+            .decoder-section,
+            .faq-section {
+                page-break-inside: avoid !important;
+            }
+
+            body {
+                background: #fff !important;
+                color: #000 !important;
+            }
+
+            .section-title-large,
+            .section-title-large .gold-text {
+                color: #000 !important;
+            }
+        }
+
+        /* === REDUCED MOTION === */
+        @media (prefers-reduced-motion: reduce) {
+
+            .js-float-num,
+            .scroll-indicator,
+            .pulse-dot,
+            .revenue-bar-fill,
+            .money-flow-card,
+            .js-stat,
+            .why-card {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+        /* === FIX FOR iOS SAFARI 100vh ISSUE === */
+        @supports (-webkit-touch-callout: none) {
+            .js-hero {
+                min-height: -webkit-fill-available !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="article-page">
+    <!-- Article Navigation -->
+    <nav class="article-nav">
+        <div class="article-nav-container">
+            <a href="articles.html" class="back-link" style="margin-right:15px;"><i
+                    class="fas fa-th-large"></i><span>All Articles</span></a>
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> <span>Back to Home</span></a>
+            <div class="article-nav-center">
+                <a href="index.html" style="display: inline-flex; align-items: center;">
+                    <img loading="lazy" src="logo.jpg" alt="BroBillionaire" class="nav-logo-small">
+                </a>
+            </div>
+            <div class="article-share">
+                <button class="share-btn" onclick="shareArticle()"><i class="fas fa-share-alt"></i></button>
+            </div>
+        </div>
+        <div class="reading-progress-bar"></div>
+    </nav>
+
+    <!-- Background Grid -->
+    <div class="js-grid-bg"></div>
+
+    <!-- Hero Section -->
+    <header class="js-hero">
+        <div class="js-floating-numbers" id="floatingNumbers"></div>
+        <div class="js-hero-content">
+            <div class="js-badge">
+                <span class="pulse-dot"></span>
+                <span>Deep Dive</span>
+            </div>
+            <h1 class="js-main-title">
+                <span class="title-line">How Jane Street</span>
+                <span class="title-line gold-line">Makes Money</span>
+                <span class="title-line">Without Doing "Anything"</span>
+            </h1>
+            <p class="js-tagline">
+                $20+ billion in annual revenue. No clients. No fund. No products.
+                They don't predict markets — they <span class="highlight">ARE the market</span>.
+                Here's why they profit no matter what happens.
+            </p>
+            <div class="js-stats-bar">
+                <div class="js-stat">
+                    <span class="js-stat-value">$21.9B</span>
+                    <span class="js-stat-label">Revenue (2024)</span>
+                </div>
+                <div class="js-stat">
+                    <span class="js-stat-value">2,600+</span>
+                    <span class="js-stat-label">Employees</span>
+                </div>
+                <div class="js-stat">
+                    <span class="js-stat-value">$72B+</span>
+                    <span class="js-stat-label">Daily Trading Volume</span>
+                </div>
+                <div class="js-stat">
+                    <span class="js-stat-value">200+</span>
+                    <span class="js-stat-label">Markets Traded</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll to Decode</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </header>
+
+    <div class="trust-signals">
+        <div class="trust-item">
+            <span class="trust-icon">📅</span>
+            <span>Updated Feb 13, 2026</span>
+        </div>
+    </div>
+
+    <!-- TABLE OF CONTENTS -->
+    <section class="decoder-section">
+        <div class="decoder-container">
+            <div class="article-toc">
+                <h2><i class="fas fa-list-ul"></i> What You'll Learn</h2>
+                <ul>
+                    <li><a href="#ch1"><span class="toc-number">1</span> What Jane Street Actually Is (And Isn't)</a>
+                    </li>
+                    <li><a href="#ch2"><span class="toc-number">2</span> The Origin Story — From a Small Desk to Wall
+                            Street's Shadow King</a></li>
+                    <li><a href="#ch3"><span class="toc-number">3</span> The Bid-Ask Spread — The Simplest Way to Print
+                            Money</a></li>
+                    <li><a href="#ch4"><span class="toc-number">4</span> ETF Arbitrage — Their Secret Cash Cow</a></li>
+                    <li><a href="#ch5"><span class="toc-number">5</span> All 5 Ways Jane Street Makes Money</a></li>
+                    <li><a href="#ch6"><span class="toc-number">6</span> The Tech & Culture That Makes It Possible</a>
+                    </li>
+                    <li><a href="#ch7"><span class="toc-number">7</span> Jane Street vs The World — How They Compare</a>
+                    </li>
+                    <li><a href="#ch8"><span class="toc-number">8</span> Why This Matters to You</a></li>
+                    <li><a href="#faq"><span class="toc-number">9</span> Frequently Asked Questions</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHAPTER 1: What Jane Street Actually Is -->
+    <section class="decoder-section" id="ch1">
+        <div class="decoder-container">
+            <div class="section-badge">Chapter 01</div>
+            <h2 class="section-title-large">
+                What Jane Street <span class="gold-text">Actually Is</span> (And Isn't)
+            </h2>
+            <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.9; margin-bottom: 30px;">
+                Let's kill the confusion first. Jane Street is <strong>NOT</strong> a hedge fund. They don't manage your
+                money. They don't have "clients." They don't launch IPOs. They don't give stock tips.
+            </p>
+            <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.9; margin-bottom: 30px;">
+                Jane Street is a <strong>proprietary trading firm</strong> — meaning they trade <em>their own
+                    money</em>. Every single dollar of profit comes from their own capital, their own algorithms, and
+                their own risk.
+            </p>
+            <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.9; margin-bottom: 30px;">
+                More specifically, they are a <strong>market maker</strong>. Think of them as the shopkeeper of Wall
+                Street. When you want to buy a stock and nobody is selling, Jane Street steps in and sells it to you.
+                When you want to sell and nobody is buying, Jane Street buys it from you. They are always on the other
+                side of your trade — and they get paid for providing that service.
+            </p>
+
+            <div class="insight-box">
+                <h4><i class="fas fa-lightbulb"></i> The Core Insight</h4>
+                <p>Jane Street doesn't care if markets go up or down. They don't need to be right about direction. They
+                    make money on the <strong>spread</strong> — the tiny gap between buy and sell prices — millions of
+                    times per day. It's like being the casino, not the gambler.</p>
+            </div>
+
+            <div class="js-console-box">
+                <div class="js-console-header">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                    <span class="js-console-title">jane_street_identity.py</span>
+                </div>
+                <div class="js-console-body">
+                    <div><span class="c-comment"># What Jane Street actually is</span></div>
+                    <div><span class="c-key">is_hedge_fund</span> = <span class="c-number">False</span></div>
+                    <div><span class="c-key">manages_client_money</span> = <span class="c-number">False</span></div>
+                    <div><span class="c-key">has_external_investors</span> = <span class="c-number">False</span></div>
+                    <div><span class="c-key">is_publicly_traded</span> = <span class="c-number">False</span></div>
+                    <div>&nbsp;</div>
+                    <div><span class="c-key">is_market_maker</span> = <span class="c-number">True</span></div>
+                    <div><span class="c-key">trades_own_capital</span> = <span class="c-number">True</span></div>
+                    <div><span class="c-key">profits_in_any_market</span> = <span class="c-number">True</span></div>
+                    <div><span class="c-key">revenue_2024</span> = <span class="c-string">"$21.9 billion"</span></div>
+                    <div><span class="c-key">net_trading_revenue</span> = <span class="c-string">"$14.2 billion"</span>
+                    </div>
+                    <div><span class="c-output">>>> Status: Printing money. Quietly.</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHAPTER 2: Origin Story -->
+    <section class="decoder-section" id="ch2" style="padding-top: 0;">
+        <div class="decoder-container">
+            <div class="section-badge">Chapter 02</div>
+            <h2 class="section-title-large">
+                The <span class="gold-text">Origin Story</span>
+            </h2>
+            <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.9; margin-bottom: 40px;">
+                From a small options desk in Manhattan to the most profitable trading firm you've never heard of.
+            </p>
+            <div class="js-timeline">
+                <div class="js-timeline-item">
+                    <div class="js-timeline-year">2000 — The Beginning</div>
+                    <h4>Four Traders + One Idea</h4>
+                    <p>Jane Street was founded in New York City by a small group of traders who came from Susquehanna
+                        International Group (SIG). Their idea was simple: use mathematics, technology, and probability
+                        theory to be the best market maker on Earth. While everyone else was chasing dot-com stocks,
+                        these guys were quietly building infrastructure.</p>
+                </div>
+                <div class="js-timeline-item">
+                    <div class="js-timeline-year">2000-2008 — The Silent Build</div>
+                    <h4>Mastering ETF Market Making</h4>
+                    <p>Jane Street became one of the dominant market makers in Exchange-Traded Funds (ETFs). ETFs were
+                        growing explosively, and someone needed to keep them priced correctly. Jane Street built systems
+                        to do this faster and more accurately than anyone. While hedge funds blew up in the 2008 crash,
+                        Jane Street <em>thrived</em> — because volatility is a market maker's best friend.</p>
+                </div>
+                <div class="js-timeline-item">
+                    <div class="js-timeline-year">2010-2017 — Going Global</div>
+                    <h4>Expansion Into Everything</h4>
+                    <p>Jane Street expanded from ETFs into equities, bonds, currencies, commodities, and options across
+                        markets in the US, Europe, and Asia. They opened offices in London and Hong Kong. Their
+                        technology infrastructure reached a point where they could price and trade thousands of
+                        instruments simultaneously in microseconds.</p>
+                </div>
+                <div class="js-timeline-item">
+                    <div class="js-timeline-year">2018-2021 — The Crypto Play</div>
+                    <h4>Quietly Dominating Crypto</h4>
+                    <p>When crypto markets exploded, Jane Street moved in. They became one of the largest crypto market
+                        makers, providing liquidity on major exchanges. The spreads in crypto were wider than
+                        traditional markets — meaning even more profit per trade. Some estimates suggest they made
+                        billions from crypto market making alone.</p>
+                </div>
+                <div class="js-timeline-item">
+                    <div class="js-timeline-year">2022-2024 — $21.9 Billion Revenue</div>
+                    <h4>The Money Machine Hits Overdrive</h4>
+                    <p>In 2024, Jane Street reported a staggering $21.9 billion in gross revenue and $14.2 billion in
+                        net trading revenue. To put this in perspective — that's more revenue than Goldman Sachs' entire
+                        trading division. They did this with roughly 2,600 employees. That's over $5 million in net
+                        revenue per employee per year.</p>
+                </div>
+                <div class="js-timeline-item">
+                    <div class="js-timeline-year">2025 — Present Day</div>
+                    <h4>The Most Profitable Firm Nobody Talks About</h4>
+                    <p>Jane Street now trades over $72 billion per day. They're one of the largest ETF market makers in
+                        the world, one of the biggest crypto market makers, and one of the most technologically advanced
+                        trading firms on Earth. And they're still private. Still quiet. Still printing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHAPTER 3: The Bid-Ask Spread -->
+    <section class="decoder-section" id="ch3" style="padding-top: 0;">
+        <div class="decoder-container">
+            <div class="section-badge">Chapter 03</div>
+            <h2 class="section-title-large">
+                The <span class="gold-text">Bid-Ask Spread</span> — The Simplest Way to Print Money
+            </h2>
+            <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.9; margin-bottom: 30px;">
+                This is the most fundamental concept in understanding how Jane Street makes money. It's so simple that
+                most people overlook it. But this one mechanism generates billions.
+            </p>
+
+            <div class="spread-visualizer">
+                <div class="spread-header">
+                    <h3>How the Spread Works — Live Example</h3>
+                    <p>Imagine you want to buy shares of Apple (AAPL)</p>
+                </div>
+                <div class="spread-demo">
+                    <div class="spread-side bid">
+                        <div class="spread-side-label">Bid Price (They Buy)</div>
+                        <div class="spread-side-price">$184.99</div>
+                    </div>
+                    <div class="spread-arrow">
+                        <i class="fas fa-arrows-alt-h"></i>
+                        <span class="spread-profit-tag">$0.02 SPREAD</span>
+                    </div>
+                    <div class="spread-side ask">
+                        <div class="spread-side-label">Ask Price (They Sell)</div>
+                        <div class="spread-side-price">$185.01</div>
+                    </div>
+                </div>
+                <div class="spread-math">
+                    <strong>Profit per share:</strong> $0.02<br>
+                    <strong>Shares traded per day:</strong> ~50,000,000 (across all instruments)<br>
+                    <strong>Daily spread profit:</strong> ~ <strong style="color: #4CAF50;">$1,000,000+</strong> on
+                    Apple alone<br>
+                    <strong>Multiply by 200+ markets:</strong> You do the math. 🏦
+                </div>
+            </div>
+
+            <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.9; margin-bottom: 20px;">
+                Here's the beauty: Jane Street doesn't care if Apple goes to $200 or drops to $150. Either way, they're
+                collecting that $0.02 spread on every trade. They buy from one trader at $184.99 and sell to another at
+                $185.01 — pocketing the difference.
+            </p>
+            <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.9; margin-bottom: 20px;">
+                $0.02 sounds like nothing. But multiply it by millions of shares, across thousands of instruments, every
+                single trading day — and you get billions in pure profit.
+            </p>
+
+            <div class="insight-box">
+                <h4><i class="fas fa-brain"></i> Why Most People Can't Do This</h4>
+                <p>Being a market maker sounds easy — just buy low and sell high, right? Wrong. The risk is enormous. If
+                    the price moves against you before you can sell, you lose money instantly. Jane Street manages this
+                    risk with algorithms that can adjust positions in <strong>microseconds</strong>. They process
+                    petabytes of data to determine the exact right price at every moment. One wrong calculation =
+                    millions in losses. The technology required costs hundreds of millions to build and maintain.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHAPTER 4: ETF Arbitrage -->
+    <section class="decoder-section" id="ch4" style="padding-top: 0;">
+        <div class="decoder-container">
+            <div class="section-badge">Chapter 04</div>
+            <h2 class="section-title-large">
+                <span class="gold-text">ETF Arbitrage</span> — Their Secret Cash Cow
+            </h2>
+            <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.9; margin-bottom: 30px;">
+                ETF arbitrage is Jane Street's crown jewel. This is where they became kings, and most people don't even
+                understand what it means.
+            </p>
+
+            <div class="hiw-steps">
+                <div class="hiw-step">
+                    <div class="hiw-number">01</div>
+                    <div class="hiw-content">
+                        <h4>What Is an ETF?</h4>
+                        <p>An ETF (Exchange-Traded Fund) is a basket of stocks bundled into one tradable unit. For
+                            example, the SPY ETF contains all 500 stocks in the S&P 500. Instead of buying all 500
+                            individually, you just buy one share of SPY. There are ETFs for everything — bonds, gold,
+                            tech stocks, crypto, Indian markets, you name it.</p>
+                    </div>
+                </div>
+                <div class="hiw-step">
+                    <div class="hiw-number">02</div>
+                    <div class="hiw-content">
+                        <h4>The Price Gap Problem</h4>
+                        <p>Here's the thing — an ETF has <em>two</em> prices at any given time. There's the
+                            <strong>market price</strong> (what people are actually trading it for) and the <strong>NAV
+                                price</strong> (what the underlying stocks are actually worth). These two prices should
+                            be the same. But they're not — because supply and demand in the ETF market creates tiny
+                            mismatches.</p>
+                        <div class="hiw-highlight">
+                            <i class="fas fa-chart-line"></i> <strong>Example:</strong> SPY trades at $502.50 on the
+                            exchange, but the 500 stocks inside it are actually worth $502.55. That $0.05 gap = free
+                            money for someone fast enough.
+                        </div>
+                    </div>
+                </div>
+                <div class="hiw-step">
+                    <div class="hiw-number">03</div>
+                    <div class="hiw-content">
+                        <h4>How Jane Street Exploits the Gap</h4>
+                        <p>When the ETF trades <strong>below</strong> its NAV: Jane Street buys the cheap ETF shares and
+                            simultaneously sells the underlying stocks. Instant profit.</p>
+                        <p>When the ETF trades <strong>above</strong> its NAV: Jane Street buys the underlying stocks,
+                            creates new ETF shares (yes, they can literally create and destroy ETF shares as an
+                            "Authorized Participant"), and sells them at the higher price.</p>
+                        <div class="hiw-highlight">
+                            <i class="fas fa-lock"></i> <strong>Key point:</strong> This trade is essentially
+                            <em>risk-free</em>. They're buying and selling the same thing in two different forms. The
+                            profit is locked in before they even place the order.
+                        </div>
+                    </div>
+                </div>
+                <div class="hiw-step">
+                    <div class="hiw-number">04</div>
+                    <div class="hiw-content">
+                        <h4>Why Only Jane Street Can Do This</h4>
+                        <p>The gaps are microscopic — often less than $0.01. And they last for milliseconds. To capture
+                            them, you need:</p>
+                        <p>1. Supercomputers that can calculate the NAV of hundreds of ETFs in real-time.<br>
+                            2. Direct market access to dozens of exchanges simultaneously.<br>
+                            3. Algorithms that execute trades in microseconds.<br>
+                            4. "Authorized Participant" status with ETF issuers (only ~50 firms have this globally).<br>
+                            5. Enough capital to buy millions of dollars of stocks in an instant.</p>
+                        <div class="hiw-highlight">
+                            <i class="fas fa-bolt"></i> <strong>Scale:</strong> Jane Street is the largest ETF market
+                            maker in the world. They handle a significant percentage of all ETF trading globally. That's
+                            a LOT of tiny spreads adding up.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="js-console-box">
+                <div class="js-console-header">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                    <span class="js-console-title">etf_arbitrage_simplified.py</span>
+                </div>
+                <div class="js-console-body">
+                    <div><span class="c-comment"># Jane Street ETF Arbitrage (simplified)</span></div>
+                    <div>&nbsp;</div>
+                    <div><span class="c-key">spy_market_price</span> = <span class="c-number">502.50</span></div>
+                    <div><span class="c-key">spy_nav_price</span> = <span class="c-number">502.55</span> <span
+                            class="c-comment"># actual value of underlying stocks</span></div>
+                    <div><span class="c-key">gap</span> = spy_nav_price - spy_market_price</div>
+                    <div>&nbsp;</div>
+                    <div><span class="c-comment"># gap = $0.05 → ETF is trading BELOW fair value</span></div>
+                    <div><span class="c-comment"># Action: Buy cheap ETF, sell expensive underlying stocks</span></div>
+                    <div>&nbsp;</div>
+                    <div><span class="c-key">shares_traded</span> = <span class="c-number">1_000_000</span></div>
+                    <div><span class="c-key">profit</span> = gap * shares_traded</div>
+                    <div><span class="c-output">>>> Profit: $50,000 in ~0.3 seconds. Risk: ≈ 0.</span></div>
+                    <div>&nbsp;</div>
+                    <div><span class="c-comment"># Repeat 100+ times per day across 200+ ETFs...</span></div>
+                    <div><span class="c-output">>>> Annual ETF Arb Revenue: Billions. 💰</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHAPTER 5: All 5 Revenue Streams -->
+    <section class="decoder-section" id="ch5" style="padding-top: 0;">
+        <div class="decoder-container">
+            <div class="section-badge">Chapter 05</div>
+            <h2 class="section-title-large">
+                All 5 Ways Jane Street <span class="gold-text">Makes Money</span>
+            </h2>
+            <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.9; margin-bottom: 20px;">
+                Market making and ETF arbitrage are the big two. But Jane Street has diversified across five main
+                revenue streams:
+            </p>
+
+            <div class="revenue-bars">
+                <div class="revenue-bar-item">
+                    <div class="revenue-bar-label">
+                        <span class="revenue-bar-name"><i class="fas fa-exchange-alt"
+                                style="color:#C9A227; margin-right:8px;"></i>Market Making (Stocks, Options,
+                            Bonds)</span>
+                        <span class="revenue-bar-value" style="color:#C9A227;">~40%</span>
+                    </div>
+                    <div class="revenue-bar-track">
+                        <div class="revenue-bar-fill market-making" data-width="40"></div>
+                    </div>
+                </div>
+                <div class="revenue-bar-item">
+                    <div class="revenue-bar-label">
+                        <span class="revenue-bar-name"><i class="fas fa-layer-group"
+                                style="color:#60a5fa; margin-right:8px;"></i>ETF Arbitrage & Creation</span>
+                        <span class="revenue-bar-value" style="color:#60a5fa;">~30%</span>
+                    </div>
+                    <div class="revenue-bar-track">
+                        <div class="revenue-bar-fill etf-arb" data-width="30"></div>
+                    </div>
+                </div>
+                <div class="revenue-bar-item">
+                    <div class="revenue-bar-label">
+                        <span class="revenue-bar-name"><i class="fas fa-chart-bar"
+                                style="color:#c084fc; margin-right:8px;"></i>Proprietary/Statistical Arbitrage</span>
+                        <span class="revenue-bar-value" style="color:#c084fc;">~15%</span>
+                    </div>
+                    <div class="revenue-bar-track">
+                        <div class="revenue-bar-fill prop-trading" data-width="15"></div>
+                    </div>
+                </div>
+                <div class="revenue-bar-item">
+                    <div class="revenue-bar-label">
+                        <span class="revenue-bar-name"><i class="fab fa-bitcoin"
+                                style="color:#4CAF50; margin-right:8px;"></i>Crypto Market Making</span>
+                        <span class="revenue-bar-value" style="color:#4CAF50;">~10%</span>
+                    </div>
+                    <div class="revenue-bar-track">
+                        <div class="revenue-bar-fill crypto-mm" data-width="10"></div>
+                    </div>
+                </div>
+                <div class="revenue-bar-item">
+                    <div class="revenue-bar-label">
+                        <span class="revenue-bar-name"><i class="fas fa-globe"
+                                style="color:#ff4757; margin-right:8px;"></i>Cross-Asset & FX Trading</span>
+                        <span class="revenue-bar-value" style="color:#ff4757;">~5%</span>
+                    </div>
+                    <div class="revenue-bar-track">
+                        <div class="revenue-bar-fill tech-infra" data-width="5"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="money-flow-grid">
+                <div class="money-flow-card">
+                    <div class="mf-icon"><i class="fas fa-exchange-alt"></i></div>
+                    <h3>Market Making</h3>
+                    <p>Jane Street posts bid and ask prices for thousands of financial instruments — stocks, options,
+                        bonds, currencies. Every time someone buys or sells, Jane Street profits from the spread.
+                        They're the house. The house always wins.</p>
+                    <span class="mf-stat">~$8.8B/year</span>
+                </div>
+                <div class="money-flow-card">
+                    <div class="mf-icon"><i class="fas fa-layer-group"></i></div>
+                    <h3>ETF Arbitrage</h3>
+                    <p>As an Authorized Participant, Jane Street can create and redeem ETF shares directly with issuers
+                        like BlackRock and Vanguard. They exploit price gaps between ETFs and their underlying assets —
+                        essentially risk-free profit at massive scale.</p>
+                    <span class="mf-stat">~$6.6B/year</span>
+                </div>
+                <div class="money-flow-card">
+                    <div class="mf-icon"><i class="fas fa-chart-bar"></i></div>
+                    <h3>Statistical Arbitrage</h3>
+                    <p>They identify statistical relationships between correlated assets. If Stock A and Stock B
+                        historically move together and suddenly diverge, Jane Street bets on them converging again. This
+                        is pure quant — math over gut feeling.</p>
+                    <span class="mf-stat">~$3.3B/year</span>
+                </div>
+                <div class="money-flow-card">
+                    <div class="mf-icon"><i class="fab fa-bitcoin"></i></div>
+                    <h3>Crypto Market Making</h3>
+                    <p>Crypto markets have wider spreads and less competition than traditional markets. Jane Street
+                        provides liquidity on major crypto exchanges, profiting from the larger bid-ask gaps. They were
+                        early movers and built deep infrastructure.</p>
+                    <span class="mf-stat">~$2.2B/year</span>
+                </div>
+                <div class="money-flow-card">
+                    <div class="mf-icon"><i class="fas fa-globe"></i></div>
+                    <h3>Cross-Asset Trading</h3>
+                    <p>When the price of oil moves in Japan but hasn't yet moved in London, Jane Street trades the gap
+                        across currencies, time zones, and asset classes. Their global infrastructure lets them see
+                        price changes before local traders react.</p>
+                    <span class="mf-stat">~$1.1B/year</span>
+                </div>
+                <div class="money-flow-card">
+                    <div class="mf-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Volatility Harvesting</h3>
+                    <p>When markets panic, spreads widen. When spreads widen, market makers make <em>more</em> per
+                        trade. The 2020 COVID crash? The 2022 crypto crash? Jane Street's best revenue years. Chaos =
+                        profit for market makers.</p>
+                    <span class="mf-stat">Scales with volatility</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHAPTER 6: Tech & Culture -->
+    <section class="decoder-section" id="ch6" style="padding-top: 0;">
+        <div class="decoder-container">
+            <div class="section-badge">Chapter 06</div>
+            <h2 class="section-title-large">
+                The Tech & Culture That <span class="gold-text">Makes It Possible</span>
+            </h2>
+            <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.9; margin-bottom: 40px;">
+                Jane Street isn't just a trading firm — it's a technology company disguised as a trading firm. Their
+                competitive edge isn't just algorithms. It's their entire tech stack and culture.
+            </p>
+
+            <div class="hiw-steps">
+                <div class="hiw-step">
+                    <div class="hiw-number">01</div>
+                    <div class="hiw-content">
+                        <h4>OCaml — The Secret Weapon</h4>
+                        <p>While Goldman uses Java and Citadel uses C++, Jane Street built their entire infrastructure
+                            on <strong>OCaml</strong> — an obscure functional programming language. Why? OCaml catches
+                            bugs <em>at compile time</em> that other languages miss at runtime. In trading, one bug =
+                            millions in losses. OCaml makes bugs nearly impossible.</p>
+                        <div class="hiw-highlight">
+                            <i class="fas fa-code"></i> <strong>Fun fact:</strong> Jane Street is the world's largest
+                            commercial user of OCaml. They contributed so much to the language that they practically own
+                            the ecosystem (their open-source library 'Base' is widely used).
+                        </div>
+                    </div>
+                </div>
+                <div class="hiw-step">
+                    <div class="hiw-number">02</div>
+                    <div class="hiw-content">
+                        <h4>Microsecond Execution</h4>
+                        <p>Jane Street's systems can receive a market data update, calculate the correct price for
+                            thousands of instruments, determine whether to trade, and execute — all in under 10
+                            microseconds. For reference, a human eye blink takes 300,000 microseconds. Their algorithms
+                            trade 30,000x faster than you can blink.</p>
+                    </div>
+                </div>
+                <div class="hiw-step">
+                    <div class="hiw-number">03</div>
+                    <div class="hiw-content">
+                        <h4>Flat Hierarchy — No Titles, No Politics</h4>
+                        <p>There are no VPs, no MDs, no directors. A new hire can push ideas directly to senior
+                            leadership. Decisions are made based on math, not seniority. If an intern proves their
+                            strategy is better, it goes live. This meritocratic culture attracts the smartest people on
+                            the planet.</p>
+                    </div>
+                </div>
+                <div class="hiw-step">
+                    <div class="hiw-number">04</div>
+                    <div class="hiw-content">
+                        <h4>Insane Compensation</h4>
+                        <p>Jane Street is legendary for its pay. New grad software engineers and traders reportedly
+                            start at $300,000-$450,000+ total compensation. Senior traders and developers can make
+                            $2-10+ million per year. Interns — yes, <em>interns</em> — are paid $16,000-$20,000+ per
+                            month.</p>
+                        <div class="hiw-highlight">
+                            <i class="fas fa-money-bill-wave"></i> <strong>Why so much?</strong> Because one good trader
+                            or developer at Jane Street can generate $50-100+ million in annual revenue. Paying them
+                            $5M/year is a bargain.
+                        </div>
+                    </div>
+                </div>
+                <div class="hiw-step">
+                    <div class="hiw-number">05</div>
+                    <div class="hiw-content">
+                        <h4>Problem-Solving Interviews (Not LeetCode)</h4>
+                        <p>Jane Street doesn't ask typical coding interviews. They test your ability to think under
+                            uncertainty — probability puzzles, game theory, market scenarios. They want people who can
+                            make $1,000 decisions in 100ms while managing risk. The interview process has a notoriously
+                            low acceptance rate — reportedly under 1%.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHAPTER 7: Comparison Table -->
+    <section class="decoder-section" id="ch7" style="padding-top: 0;">
+        <div class="decoder-container">
+            <div class="section-badge">Chapter 07</div>
+            <h2 class="section-title-large">
+                Jane Street vs <span class="gold-text">The World</span>
+            </h2>
+            <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.9; margin-bottom: 30px;">
+                To truly appreciate how insane Jane Street is, let's compare them with other financial giants:
+            </p>
+
+            <div class="comparison-table-wrap">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Jane Street</th>
+                            <th>Citadel Securities</th>
+                            <th>Goldman Sachs</th>
+                            <th>Bridgewater</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Type</strong></td>
+                            <td>Market Maker</td>
+                            <td>Market Maker</td>
+                            <td>Investment Bank</td>
+                            <td>Hedge Fund</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Net Trading Rev</strong></td>
+                            <td style="color: #C9A227; font-weight: 700;">$14.2B</td>
+                            <td>~$7-8B</td>
+                            <td>~$10B (trading div)</td>
+                            <td>~$2-3B</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Employees</strong></td>
+                            <td>~2,600</td>
+                            <td>~4,000</td>
+                            <td>~45,000</td>
+                            <td>~1,500</td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td><strong>Rev per Employee</strong></td>
+                            <td style="color: #C9A227; font-weight: 700;">~$5.5M</td>
+                            <td>~$1.8M</td>
+                            <td>~$222K</td>
+                            <td>~$1.7M</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Client Money?</strong></td>
+                            <td>No</td>
+                            <td>No (Securities arm)</td>
+                            <td>Yes</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Public/Private</strong></td>
+                            <td>Private</td>
+                            <td>Private</td>
+                            <td>Public (NYSE: GS)</td>
+                            <td>Private</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Primary Language</strong></td>
+                            <td>OCaml</td>
+                            <td>C++</td>
+                            <td>Java/Python</td>
+                            <td>Python/R</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Core Edge</strong></td>
+                            <td>ETF arb + market making</td>
+                            <td>Equity market making</td>
+                            <td>Relationships + capital</td>
+                            <td>Macro bets</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="insight-box">
+                <h4><i class="fas fa-crown"></i> The Revenue-Per-Employee King</h4>
+                <p>Jane Street generates roughly <strong>$5.5 million in net revenue per employee</strong> — that's 25x
+                    more than Goldman Sachs. This is possible because their business is algorithm-first. The code runs
+                    24/7. It doesn't take vacation. It doesn't get emotional. And it doesn't need a corner office.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHAPTER 8: Why This Matters -->
+    <section class="decoder-section" id="ch8" style="padding-top: 0;">
+        <div class="decoder-container">
+            <div class="section-badge">Chapter 08</div>
+            <h2 class="section-title-large">
+                Why This <span class="gold-text">Matters to You</span>
+            </h2>
+            <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.9; margin-bottom: 30px;">
+                You might think: "Cool, but I'm not starting a market-making firm." Fair. But Jane Street's story
+                teaches some brutal truths about money, markets, and career strategy.
+            </p>
+
+            <div class="why-matters-grid">
+                <div class="why-card">
+                    <span class="why-icon">🏦</span>
+                    <h4>Every Time You Place a Trade...</h4>
+                    <p>A firm like Jane Street is on the other side. They're not smarter than you about where the stock
+                        is going — they don't need to be. They make money from the spread. You're paying an invisible
+                        tax every time you trade. Understanding this changes how you think about transaction costs.</p>
+                </div>
+                <div class="why-card">
+                    <span class="why-icon">🧮</span>
+                    <h4>Systems Beat Emotion — Always</h4>
+                    <p>Jane Street's $21 billion in revenue comes from systems, not gut feelings. The biggest lesson for
+                        retail traders: your "feeling" about a stock is worth exactly $0. Build a system. Test the
+                        system. Trust the system. That's how real money is made in markets.</p>
+                </div>
+                <div class="why-card">
+                    <span class="why-icon">📈</span>
+                    <h4>Volatility is Not Your Enemy</h4>
+                    <p>When your portfolio drops 5% and you panic — Jane Street is celebrating. They make more money
+                        when markets are chaotic. The takeaway: learn to see volatility as opportunity, not disaster.
+                        The best investors buy fear and sell greed.</p>
+                </div>
+                <div class="why-card">
+                    <span class="why-icon">💼</span>
+                    <h4>The Highest-Paying Career You Never Considered</h4>
+                    <p>If you're good at math, coding, and probability — quantitative trading firms like Jane Street are
+                        potentially the most lucrative career path on Earth. New grads earning $400K+. No MBA needed.
+                        Pure skill-based meritocracy. Worth exploring if you have the aptitude.</p>
+                </div>
+                <div class="why-card">
+                    <span class="why-icon">🔇</span>
+                    <h4>Real Money is Quiet Money</h4>
+                    <p>Jane Street doesn't have a Twitter account. They don't do press conferences. They don't produce
+                        YouTube content. They just quietly generate more revenue than most Fortune 500 companies. The
+                        lesson: the richest companies and investors rarely make noise.</p>
+                </div>
+                <div class="why-card">
+                    <span class="why-icon">⚡</span>
+                    <h4>Technology Eats Everything</h4>
+                    <p>Jane Street replaced thousands of human traders with algorithms. The old Wall Street of suits,
+                        handshakes, and gut feelings is dead. The new Wall Street runs on code, data, and microseconds.
+                        This isn't just a finance lesson — it's a lesson for every industry.</p>
+                </div>
+            </div>
+
+            <div class="code-quote"
+                style="background: linear-gradient(135deg, rgba(201, 162, 39, 0.08) 0%, rgba(0, 0, 0, 0.3) 100%); border: 1px solid rgba(201, 162, 39, 0.3); border-radius: 12px; padding: 30px; margin-top: 40px; text-align: center;">
+                <p
+                    style="font-family: 'Playfair Display', serif; font-size: 1.3rem; color: rgba(255,255,255,0.9); font-style: italic; line-height: 1.6; margin-bottom: 12px;">
+                    "We don't have a view on the market. We have a view on the price."
+                </p>
+                <span style="color: #C9A227; font-size: 0.9rem; font-weight: 600;">— Jane Street Trading
+                    Philosophy</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq" itemscope itemtype="https://schema.org/FAQPage">
+        <div class="faq-container">
+            <div class="section-badge" style="text-align:center; display:block; margin-bottom: 20px;">FAQ</div>
+            <h2 class="section-title-large" style="text-align:center; margin-bottom: 40px;">
+                Frequently Asked <span class="gold-text">Questions</span>
+            </h2>
+            <div class="faq-list">
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(0)" aria-expanded="false">
+                        <span itemprop="name">Is Jane Street a hedge fund?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-0" itemscope itemprop="acceptedAnswer"
+                        itemtype="https://schema.org/Answer">
+                        <p itemprop="text">No. Jane Street is a <strong>proprietary trading firm</strong>, not a hedge
+                            fund. The key difference: hedge funds manage other people's money and charge management fees
+                            (typically 2% of assets + 20% of profits). Jane Street trades exclusively with its own
+                            capital. They have no external investors, no clients, and no fund products. They make money
+                            purely from trading — specifically market making and arbitrage. Think of it this way: a
+                            hedge fund is like a taxi driver (driving clients' money around). Jane Street is like Uber
+                            itself (owning the platform and profiting from every ride).</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(1)" aria-expanded="false">
+                        <span itemprop="name">How does Jane Street make money if the profit per trade is so
+                            small?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-1" itemscope itemprop="acceptedAnswer"
+                        itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Volume. Sheer, staggering volume. Jane Street trades over <strong>$72 billion
+                                per day</strong>. If they make even $0.01 on average per $100 traded, that's $7.2
+                            million per day in profit. Over 252 trading days, that's $1.8 billion per year — just from
+                            that tiny edge. In reality, their edge is likely larger than $0.01 per $100, and they trade
+                            across thousands of instruments. The math is simple:
+                            <code>tiny profit × enormous volume = massive revenue</code>. It's the same principle as how
+                            Visa makes money — they take a tiny cut of every transaction, but there are billions of
+                            transactions.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(2)" aria-expanded="false">
+                        <span itemprop="name">Can Jane Street lose money?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-2" itemscope itemprop="acceptedAnswer"
+                        itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Yes, but it's rare at the annual level. On any given <em>trade</em>, Jane
+                            Street can absolutely lose money — if the price moves against them before they can close
+                            their position. In volatile, fast-moving markets, individual trades can go wrong. However,
+                            their risk management systems are designed to cut losses instantly and ensure that winning
+                            trades far outnumber losers. Over the course of a day, week, or year, their statistical edge
+                            plays out. Think of it like a casino: any individual hand of blackjack can go against the
+                            house, but over millions of hands, the math guarantees the house wins. Jane Street's 2024
+                            net trading revenue of $14.2 billion suggests they win overwhelmingly more than they lose.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(3)" aria-expanded="false">
+                        <span itemprop="name">Why doesn't everyone just become a market maker?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-3" itemscope itemprop="acceptedAnswer"
+                        itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Because the barriers to entry are astronomical. To be a competitive market
+                            maker, you need: (1) <strong>Hundreds of millions in capital</strong> — you need enough
+                            money to hold positions in thousands of instruments simultaneously. (2) <strong>World-class
+                                technology</strong> — your systems need to process data and execute in microseconds.
+                            Building this infrastructure costs $100M+. (3) <strong>Regulatory licenses</strong> — you
+                            need to be registered with exchanges and regulators. (4) <strong>Top-tier talent</strong> —
+                            PhDs in math, physics, and computer science who'd rather work for you than Google. (5)
+                            <strong>Authorized Participant status</strong> — for ETF arbitrage, only ~50 firms globally
+                            have this. Even then, the competition with firms like Citadel, Virtu, and Jane Street is so
+                            intense that margins are razor-thin. It's a winner-takes-most game.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(4)" aria-expanded="false">
+                        <span itemprop="name">How much do Jane Street employees earn?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-4" itemscope itemprop="acceptedAnswer"
+                        itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Jane Street is one of the highest-paying companies on Earth. Reported
+                            compensation ranges: <strong>Interns:</strong> $16,000-$20,000+/month (plus housing).
+                            <strong>New grad traders:</strong> $300,000-$450,000+ total compensation. <strong>New grad
+                                software engineers:</strong> $300,000-$400,000+ total comp. <strong>Senior
+                                traders/developers (5+ years):</strong> $2-10+ million/year. <strong>Top
+                                performers:</strong> $20M+ (estimated). The reason they pay this much is simple math:
+                            one great hire can generate $50-100M+ in annual revenue. Paying them $5M is a 10-20x return
+                            on that investment. Jane Street's compensation philosophy is: hire the best, pay them
+                            generously, and let the algorithms do the heavy lifting.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(5)" aria-expanded="false">
+                        <span itemprop="name">What is ETF arbitrage in simple terms?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-5" itemscope itemprop="acceptedAnswer"
+                        itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Imagine a gift basket worth ₹1,000 (that's the NAV — the actual value of
+                            everything inside). Now imagine someone is selling that exact basket on Amazon for ₹995.
+                            You'd buy the basket for ₹995 and immediately sell the items inside for ₹1,000, pocketing
+                            ₹5. That's ETF arbitrage in a nutshell. An ETF is essentially a "basket" of stocks.
+                            Sometimes the basket (ETF price) trades slightly cheaper or more expensive than the stocks
+                            inside it. Jane Street notices these tiny price gaps — often lasting mere milliseconds — and
+                            instantly trades to capture the difference. The "arbitrage" part means it's nearly risk-free
+                            because they're buying and selling the same thing in two different forms simultaneously.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(6)" aria-expanded="false">
+                        <span itemprop="name">Is market making legal? Is it fair?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-6" itemscope itemprop="acceptedAnswer"
+                        itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Yes, market making is completely legal and actually <em>essential</em> for
+                            healthy markets. Without market makers, you might not be able to buy or sell a stock when
+                            you want to — there might be no one on the other side of your trade. Market makers ensure
+                            there's always someone willing to buy and someone willing to sell. In exchange for providing
+                            this liquidity, they earn the spread. Is it "fair"? That's debatable. Critics argue that
+                            firms like Jane Street have technological advantages that regular traders can't match.
+                            Supporters argue that market makers have dramatically <em>reduced</em> trading costs — the
+                            bid-ask spread on major stocks has shrunk from $0.25+ in the 1990s to often less than $0.01
+                            today. That benefits every retail trader. Regulators (SEC, FINRA) actively monitor market
+                            makers to prevent manipulation and ensure fair markets.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button class="faq-question" onclick="toggleFAQ(7)" aria-expanded="false">
+                        <span itemprop="name">How does Jane Street compare to high-frequency trading (HFT) firms?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-7" itemscope itemprop="acceptedAnswer"
+                        itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Jane Street often gets lumped with HFT firms like Virtu Financial or Jump
+                            Trading, but they're somewhat different. Pure HFT firms focus almost entirely on speed —
+                            being the fastest to react to market data. Jane Street <em>uses</em> high-speed technology
+                            but their primary edge is in <strong>pricing accuracy and risk management</strong>, not raw
+                            speed. Their biggest money-maker — ETF arbitrage — requires deep understanding of how
+                            hundreds of instruments relate to each other, not just being the fastest. Jane Street holds
+                            positions for longer than typical HFT firms (seconds to minutes vs. microseconds). Think of
+                            HFT firms as Formula 1 cars — built purely for speed. Jane Street is more like a Swiss Army
+                            knife — fast enough to compete, but their real edge is versatility, intelligence, and risk
+                            management across many different strategies.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Articles -->
+    <section class="related-articles-section">
+        <div class="related-container">
+            <h2 class="related-title">Continue Reading</h2>
+            <div class="related-articles-grid">
+                <a href="article-jim-simons.html" class="related-article-card">
+                    <div class="related-category">Legendary Trader</div>
+                    <h3>Jim Simons: The Quant King</h3>
+                    <p>66% annual returns for 30 years. The mathematician who cracked Wall Street.</p>
+                    <span class="related-read-more">Read Story <i class="fas fa-arrow-right"></i></span>
+                </a>
+                <a href="article-george-soros.html" class="related-article-card">
+                    <div class="related-category">Legendary Trader</div>
+                    <h3>George Soros: The Man Who Broke the Bank</h3>
+                    <p>Made $1 billion in a single day betting against Britain</p>
+                    <span class="related-read-more">Read Story <i class="fas fa-arrow-right"></i></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <section class="article-cta-section">
+        <div class="cta-container">
+            <h2>Ready to Decode the Markets?</h2>
+            <p>Learn the strategies that turned regular people into legendary traders</p>
+            <a href="index.html#join" class="cta-btn gold-btn large">
+                <span>Join Free</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <script src="mobile-nav.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Reading progress bar
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.querySelector('.reading-progress-bar').style.width = scrollPercent + '%';
+        });
+
+        // Share function
+        function shareArticle() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'How Jane Street Makes Money Without Doing "Anything"',
+                    text: '$21.9B in revenue. No clients. No fund. Just pure market-making math.',
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('Link copied to clipboard!');
+            }
+        }
+
+        // Floating numbers animation
+        function createFloatingNumbers() {
+            const container = document.getElementById('floatingNumbers');
+            if (!container) return;
+            const numbers = ['$0.02', '0.01%', 'BID', 'ASK', '$184.99', '$185.01', 'ETF', 'NAV', 'ARB', '$72B', '0.003s', 'OCaml', 'μs', '>>>', 'FILL', 'HEDGE', '200+', '$14.2B'];
+            for (let i = 0; i < 25; i++) {
+                const el = document.createElement('div');
+                el.className = 'js-float-num';
+                el.textContent = numbers[Math.floor(Math.random() * numbers.length)];
+                el.style.left = `${Math.random() * 100}%`;
+                el.style.animationDuration = `${12 + Math.random() * 18}s`;
+                el.style.animationDelay = `${Math.random() * 15}s`;
+                el.style.fontSize = `${10 + Math.random() * 8}px`;
+                container.appendChild(el);
+            }
+        }
+        createFloatingNumbers();
+
+        // Animate revenue bars on scroll
+        const revObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.revenue-bar-fill').forEach(bar => {
+                        const width = bar.getAttribute('data-width');
+                        bar.style.width = width + '%';
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('.revenue-bars').forEach(el => {
+            revObserver.observe(el);
+        });
+
+        // Smooth scroll for TOC links
+        document.querySelectorAll('.article-toc a').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+    <script src="seo-injector.js" defer></script>
+    <script src="social-share-buttons.js" defer></script>
+    <script src="article-backlinks-data.js" defer></script>
+    <script src="backlink-injector.js" defer></script>
+    <script>
+        // FAQ Toggle Function
+        function toggleFAQ(index) {
+            const items = document.querySelectorAll('.faq-section .faq-item');
+            if (!items || !items[index]) return;
+            const item = items[index];
+            const wasActive = item.classList.contains('active');
+            items.forEach(faq => {
+                faq.classList.remove('active');
+                const btn = faq.querySelector('.faq-question');
+                if (btn) btn.setAttribute('aria-expanded', 'false');
+            });
+            if (!wasActive) {
+                item.classList.add('active');
+                const btn = item.querySelector('.faq-question');
+                if (btn) btn.setAttribute('aria-expanded', 'true');
+            }
+        }
+    </script>
+    <script src="common-footer.js" defer></script>
+    <script src="common-header.js"></script>
+    <script src="faq-toggle.js"></script>
+</body>
+
+</html>
